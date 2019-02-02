@@ -36,11 +36,11 @@
 
 	# pull and prune
 	pp = "!f(){ \
-    git co ${1:-master} && \
-    git pull && \
-    git rpo && \
-    git dmb; \
-  };f"
+		git co ${1:-master} && \
+		git pull && \
+		git rpo && \
+		git dmb; \
+	};f"
 
 [push]
 	default = current
