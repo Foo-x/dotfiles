@@ -19,6 +19,7 @@
 	ps = push
 	s = status -sb
 	r = reset
+	dc = diff --cached
 	chp = cherry-pick
 	amend = commit --amend --no-edit
 	rs = remote show origin
