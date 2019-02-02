@@ -1,0 +1,35 @@
+# use in your .gitconfig like below
+# [include]
+# 	path = /path/to/dotfiles/.gitconfig
+
+[color]
+	ui = auto
+[alias]
+	# log
+	l0 = log --oneline --all --decorate --graph
+	l1 = log --oneline --all --decorate --graph --name-status
+	l2 = log -p --decorate --all
+
+	a = add
+	b = branch
+	c = commit
+	d = diff
+	co = checkout
+	p = pull
+	ps = push
+	s = status -sb
+	chp = cherry-pick
+	amend = commit --amend --no-edit
+	rs = remote show origin
+	rpo = remote prune origin
+	rb = rebase
+	sta = !git stash && git stash apply
+
+	# set upstream of current branch to the same name in origin
+	sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
+
+	alias = config --get-regexp alias.*
+[push]
+	default = current
+[core]
+	excludesfile = ~/.gitignore_global

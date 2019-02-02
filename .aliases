@@ -1,0 +1,21 @@
+# use in your .bash_profile or .bashrc like below
+# . /path/to/dotfiles/.aliases
+
+# cd
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias doc='cd ~/Documents'
+alias dl='cd ~/Downloads'
+alias ws='cd ~/Documents/workspace'
+
+alias g=git
+alias ll='ls -la'
+alias ls='ls -F --color=auto'
+alias vi=vim
+
+# Uncomment after downloading git-prompt and git-completion
+# complete -F _git g
+# source ~/git-prompt.sh
+# source ~/git-completion.bash
