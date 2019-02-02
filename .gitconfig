@@ -18,6 +18,7 @@
 	p = pull
 	ps = push
 	s = status -sb
+	r = reset
 	chp = cherry-pick
 	amend = commit --amend --no-edit
 	rs = remote show origin
@@ -29,6 +30,18 @@
 	sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
 
 	alias = config --get-regexp alias.*
+
+	# delete merged branch
+	dmb = !git b --merged | egrep -v '*|develop|master' | xargs git b -d
+
+	# pull and prune
+	pp = "!f(){ \
+    git co ${1:-master}; \
+    git pull; \
+    git rpo; \
+    git dmb; \
+  };f"
+
 [push]
 	default = current
 [core]
