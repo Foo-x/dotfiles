@@ -1,0 +1,6 @@
+# download git-prompt and git-completion, and use in your .bash_profile or .bashrc like below
+# . /path/to/dotfiles/.git-completion
+
+complete -F _git g
+source ~/git-prompt.sh
+source ~/git-completion.bash

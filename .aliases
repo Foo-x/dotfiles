@@ -14,8 +14,3 @@ alias g=git
 alias ll='ls -lah'
 alias ls='ls -F --color=auto'
 alias vi=vim
-
-# Uncomment after downloading git-prompt and git-completion
-# complete -F _git g
-# source ~/git-prompt.sh
-# source ~/git-completion.bash
