@@ -11,7 +11,7 @@ alias dl='cd ~/Downloads'
 alias ws='cd ~/Documents/workspace'
 
 alias g=git
-alias ll='ls -la'
+alias ll='ls -lah'
 alias ls='ls -F --color=auto'
 alias vi=vim
 
