@@ -26,7 +26,7 @@
 	rpo = remote prune origin
 	rb = rebase
 	sta = !git stash && git stash apply
-	ic = commit --allow-empty -m "Initial Commit"
+	ic = commit --allow-empty -m \"Initial Commit\"
 
 	# set upstream of current branch to the same name in origin
 	sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
