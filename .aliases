@@ -1,6 +1,9 @@
 # use in your .bash_profile or .bashrc like below
 # . /path/to/dotfiles/.aliases
 
+alias sudo='sudo '
+alias _=sudo
+
 # cd
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -10,7 +13,27 @@ alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias ws='cd ~/Documents/workspace'
 
-alias g=git
-alias ll='ls -lah'
+# confirm
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ln='ln -i'
+
+# override for convenience
 alias ls='ls -F --color=auto'
+alias ll='ls -lah'
 alias vi=vim
+alias mkdir='mkdir -p'
+alias md=mkdir
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+alias grep='grep --color=auto -En'
+alias gr=grep
+
+# shorten
+alias g=git
+alias h=history
+alias j=jobs
+
+alias reload='. ~/.bash_profile; . ~/.bashrc'
