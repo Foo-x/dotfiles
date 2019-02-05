@@ -6,41 +6,65 @@
 	ui = auto
 [alias]
 	# log
-	l0 = log --oneline --all --decorate --graph
-	l1 = log --oneline --all --decorate --graph --name-status
-	l2 = log -p --decorate --all
+	l0 = log --oneline --all --decorate --graph               # 1行
+	l1 = log --oneline --all --decorate --graph --name-status # 1行+変更ファイル
+	l2 = log -p --decorate --all                              # 詳細
 
 	a = add
+	s = status -sb
+
+	# branch
 	b = branch
-	c = commit
-	d = diff
+	ba = branch -a
+	bm = branch --merged
 	co = checkout
+	cb = checkout -b
+	rb = rebase
+	rbm = rebase master
+	rbc = rebase --continue
+	rba = rebase --abort
+	rbi = rebase -i
+	rbim = rebase -i master
+
+	# commit
+	c = commit
+	cm = commit -m
+	ca = commit --amend --no-edit
+	ic = commit --allow-empty -m \"Initial Commit\"
+	chp = cherry-pick
+
+	# remote
 	p = pull
 	ps = push
-	s = status -sb
-	r = reset
+	psf = push -f
+	ft = fetch
 	dc = diff --cached
-	chp = cherry-pick
-	amend = commit --amend --no-edit
 	rs = remote show origin
 	rpo = remote prune origin
-	rb = rebase
-	sta = !git stash && git stash apply
-	ic = commit --allow-empty -m \"Initial Commit\"
+
+	# reset
+	re = reset
+	res = reset --soft
+	reh = reset --hard
+
+	# diff
+	d = diff
+	dc = diff --cached
+
+	save = !git stash && git stash apply
+	alias = config --get-regexp alias.*
 
 	# set upstream of current branch to the same name in origin
 	sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
 
-	alias = config --get-regexp alias.*
-
 	# delete merged branch
-	dmb = !git b --merged | egrep -v '*|develop|master' | xargs git b -d
+	dmb = !git branch --merged | egrep -v '*|develop|master' | xargs git branch -d
 
 	# pull and prune
 	pp = "!f(){ \
-		git co ${1:-master} && \
+		git checkout ${1:-master} && \
 		git pull && \
-		git rpo && \
+		git remote prune origin && \
 		git dmb; \
 	};f"
 
