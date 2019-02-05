@@ -5,3 +5,4 @@ export HISTCONTROL=ignoreboth
 export LC_ALL='ja_JP.utf8'
 export EDITOR='vim'
 
+stty stop ''
