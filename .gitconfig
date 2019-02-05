@@ -11,18 +11,22 @@
 	l2 = log -p --decorate --all                              # 詳細
 
 	a = add
+	aa = add --all
 	s = status -sb
 
 	# branch
 	b = branch
 	ba = branch -a
 	bm = branch --merged
+	bd = branch -d
+	bD = branch -D
 	co = checkout
 	cb = checkout -b
 	rb = rebase
 	rbm = rebase master
 	rbc = rebase --continue
 	rba = rebase --abort
+	rbs = rebase --skip
 	rbi = rebase -i
 	rbim = rebase -i master
 
@@ -37,10 +41,11 @@
 	p = pull
 	ps = push
 	psf = push -f
-	ft = fetch
+	f = fetch
 	dc = diff --cached
 	rs = remote show origin
 	rpo = remote prune origin
+	cl = clone
 
 	# reset
 	re = reset
@@ -50,8 +55,16 @@
 	# diff
 	d = diff
 	dc = diff --cached
+	da = diff @
 
+	# stash
+	ss = stash
+	sl = stash list
+	sa = stash apply
+	sd = stash drop
+	sp = stash pop
 	save = !git stash && git stash apply
+
 	alias = config --get-regexp alias.*
 
 	# set upstream of current branch to the same name in origin
