@@ -19,7 +19,7 @@
 	ba = branch -a
 	bm = branch --merged
 	bd = branch -d
-	bD = branch -D
+	bdd = branch -D
 	co = checkout
 	cb = checkout -b
 	rb = rebase
@@ -42,7 +42,6 @@
 	ps = push
 	psf = push -f
 	f = fetch
-	dc = diff --cached
 	rs = remote show origin
 	rpo = remote prune origin
 	cl = clone
@@ -71,7 +70,7 @@
 	sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
 
 	# delete merged branch
-	dmb = !git branch --merged | egrep -v '*|develop|master' | xargs git branch -d
+	dmb = !git branch --merged | egrep -v '\\*|develop|master' | xargs git branch -d
 
 	# pull and prune
 	pp = "!f(){ \
