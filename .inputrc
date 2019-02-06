@@ -1,0 +1,30 @@
+# use in your .includerc like below
+# $include /path/to/dotfiles/.inputrc
+
+set editing-mode vi
+$if mode=vi
+	set show-mode-in-prompt on
+	set vi-ins-mode-string \1\e[34;1m\2(ins) \1\e[0m\2
+	set vi-cmd-mode-string \1\e[31;1m\2(cmd) \1\e[0m\2
+
+	set keymap vi-command
+	j: history-search-forward
+	k: history-search-backward
+
+	set keymap vi-insert
+	"\C-h": backward-char
+	"\C-l": forward-char
+	"\C-j": vi-movement-mode
+$endif
+
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set visible-stats on
+set mark-symlinked-directories on
+
+set colored-stats on
+set colored-completion-prefix on
+set menu-complete-display-prefix on
+
+"\C-p": history-search-backward
+"\C-n": history-search-forward
