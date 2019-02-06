@@ -12,6 +12,8 @@ $if mode=vi
 	k: reverse-search-history
 
 	set keymap vi-insert
+	"\C-a": beginning-of-line
+	"\C-e": end-of-line
 	"\C-h": backward-char
 	"\C-l": forward-char
 	"\C-j": vi-movement-mode
