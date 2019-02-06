@@ -31,6 +31,8 @@ set clipboard+=unnamed
 set clipboard=unnamed
 
 " move on normal mode
+nnoremap j gj
+nnoremap k gk
 nmap 1 0
 nmap 0 ^
 nmap 9 $
