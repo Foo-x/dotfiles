@@ -7,7 +7,7 @@
 [alias]
 	# log
 	l0 = log --oneline --all --decorate --graph               # 1行
-	l1 = log --oneline --all --decorate --graph --name-status # 1行+変更ファイル
+	l1 = log --oneline --all --decorate --graph --name-status # 1行 + 変更ファイル
 	l2 = log -p --decorate --all                              # 詳細
 
 	a = add
