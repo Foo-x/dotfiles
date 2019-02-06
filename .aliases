@@ -2,7 +2,7 @@
 # . /path/to/dotfiles/.aliases
 
 alias sudo='sudo '
-alias _=sudo
+alias _='sudo '
 
 # cd
 alias ..='cd ..'
@@ -36,4 +36,4 @@ alias vi=vim
 alias md=mkdir
 alias gr=grep
 
-alias reload='. ~/.bash_profile; . ~/.bashrc'
+alias reload='. ~/.bash_profile; . ~/.bashrc; bind -f ~/.inputrc'
