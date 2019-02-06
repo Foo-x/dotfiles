@@ -84,3 +84,5 @@
 	default = current
 [core]
 	excludesfile = ~/.gitignore_global
+[help]
+	autocorrect = -1
