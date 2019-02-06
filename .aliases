@@ -22,18 +22,18 @@ alias ln='ln -i'
 # override for convenience
 alias ls='ls -F --color=auto'
 alias ll='ls -lah'
-alias vi=vim
 alias mkdir='mkdir -p'
-alias md=mkdir
 alias df='df -h'
 alias du='du -h'
 alias free='free -h'
 alias grep='grep --color=auto -En'
-alias gr=grep
 
 # shorten
 alias g=git
 alias h=history
 alias j=jobs
+alias vi=vim
+alias md=mkdir
+alias gr=grep
 
 alias reload='. ~/.bash_profile; . ~/.bashrc'
