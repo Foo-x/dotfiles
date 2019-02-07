@@ -17,7 +17,8 @@
 	# branch
 	b = branch
 	ba = branch -a
-	bm = branch --merged
+	bm = branch -m
+	bmg = branch --merged
 	bd = branch -d
 	bdd = branch -D
 	co = checkout
