@@ -1,5 +1,6 @@
 # use in your .includerc like below
 # $include /path/to/dotfiles/.inputrc
+# bash version should be >= 4.4
 
 set editing-mode vi
 $if mode=vi
