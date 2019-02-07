@@ -22,6 +22,8 @@ set clipboard+=unnamed
 set clipboard=unnamed
 
 " source settings in this directory
-set runtimepath+=<sfile>:h
-source .vimrc.search
-source .vimrc.keymap
+let this_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let vimfiles = glob(this_path . '/.vimrc.*')
+for vimfile in split(vimfiles, '\n')
+	execute 'source ' . vimfile
+endfor
