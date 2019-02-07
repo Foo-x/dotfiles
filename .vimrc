@@ -47,8 +47,8 @@ inoremap <C-l> <Right>
 
 " select on visual mode
 set selection=exclusive
-vnoremap * "zy:let @/ = @z<CR>
-vnoremap # "zy:let @/ = @z<CR>
+vnoremap * "zy:let @/ = @z<CR>n
+vnoremap # "zy:let @/ = @z<CR>N
 
 syntax on
 
