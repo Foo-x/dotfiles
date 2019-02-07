@@ -1,11 +1,18 @@
 " normal mode
+"
+" j -> gj: down in same line
+" k -> gk: up in same line
+" x -> "_x: not to yunk
+" 1 -> 0: start of line (after indent by next)
+" 0 -> ^: start of line after indent
+" 9 -> $: end of line
+" Esc,Esc -> nohlsearch: disable highlight
 nnoremap j gj
 nnoremap k gk
+nnoremap x "_x
 nmap 1 0
 nmap 0 ^
 nmap 9 $
-
-"" disable highlight by double esc
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " insert mode
@@ -17,6 +24,8 @@ inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
 " visual mode
-"" search selected
+"
+" * -> search selected and go next
+" # -> search selected and go previous
 vnoremap * "zy:let @/ = @z<CR>n
 vnoremap # "zy:let @/ = @z<CR>N
