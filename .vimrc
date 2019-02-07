@@ -45,5 +45,10 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+" select on visual mode
+set selection=exclusive
+vnoremap * "zy:let @/ = @z<CR>
+vnoremap # "zy:let @/ = @z<CR>
+
 syntax on
 
