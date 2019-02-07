@@ -1,6 +1,7 @@
 " use in your .vimrc like below
 " source /path/to/dotfiles/.vimrc
 
+syntax on
 set nocompatible
 set backspace=indent,eol,start
 set encoding=utf-8
@@ -10,17 +11,7 @@ set shiftwidth=2
 set tabstop=2
 set noerrorbells
 set number
-
-" highlight searches
-set hlsearch
-
-set ignorecase
-set smartcase
-set incsearch
-set wrapscan
-
-" disable highlight by double esc
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+set selection=exclusive
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -30,25 +21,7 @@ set list
 set clipboard+=unnamed
 set clipboard=unnamed
 
-" move on normal mode
-nnoremap j gj
-nnoremap k gk
-nmap 1 0
-nmap 0 ^
-nmap 9 $
-
-" move on insert mode
-inoremap <C-e> <END>
-inoremap <C-a> <HOME>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-
-" select on visual mode
-set selection=exclusive
-vnoremap * "zy:let @/ = @z<CR>n
-vnoremap # "zy:let @/ = @z<CR>N
-
-syntax on
-
+" source settings in this directory
+set runtimepath+=<sfile>:h
+source .vimrc.search
+source .vimrc.keymap
