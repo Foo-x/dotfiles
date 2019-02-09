@@ -1,11 +1,11 @@
 " normal mode
 "
-" j -> gj: down in same line
-" k -> gk: up in same line
-" x -> "_x: not to yunk
-" 1 -> 0: start of line (after indent by next)
-" 0 -> ^: start of line after indent
-" 9 -> $: end of line
+" j -> gj              : down in same line
+" k -> gk              : up in same line
+" x -> "_x             : not to yunk
+" 1 -> 0               : start of line (after indent by next)
+" 0 -> ^               : start of line after indent
+" 9 -> $               : end of line
 " Esc,Esc -> nohlsearch: disable highlight
 nnoremap j gj
 nnoremap k gk
