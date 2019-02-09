@@ -20,6 +20,7 @@ set completion-ignore-case on
 set show-all-if-ambiguous on
 set visible-stats on
 set mark-symlinked-directories on
+set expand-tilde on
 
 set colored-stats on
 set colored-completion-prefix on
