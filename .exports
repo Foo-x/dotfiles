@@ -2,7 +2,12 @@
 # . /path/to/dotfiles/.exports
 
 export HISTCONTROL=ignoreboth
-export LC_ALL='ja_JP.utf8'
 export EDITOR='vim'
+
+if [ "$(uname)" = 'Darwin' ]; then
+  export LC_ALL='ja_JP.UTF-8'
+else
+  export LC_ALL='ja_JP.utf8'
+fi
 
 stty stop ''

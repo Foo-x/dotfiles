@@ -20,7 +20,11 @@ alias mv='mv -i'
 alias ln='ln -i'
 
 # override for convenience
-alias ls='ls -F --color=auto'
+if [ "$(uname)" = 'Darwin' ]; then
+  alias ls='ls -FG'
+else
+  alias ls='ls -F --color=auto'
+fi
 alias ll='ls -lah'
 alias mkdir='mkdir -p'
 alias df='df -h'
