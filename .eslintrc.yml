@@ -1,0 +1,74 @@
+# use in your .eslintrc.* by "extends" property
+# install deps before using:
+# - eslint
+# - eslint-config-airbnb-base
+# - eslint-plugin-import
+
+extends:
+ - airbnb-base
+env:
+ node: true
+ browser: false
+ es6: true
+ jest: true
+rules:
+ # Possible Errors
+ no-console: off
+ no-template-curly-in-string: off
+
+ # Best Practices
+ curly:
+   - error
+   - multi
+ no-multi-spaces: off
+
+ # Node.js and CommonJS
+ global-require: off
+
+ # Stylistic Issues
+ array-bracket-spacing:
+   - error
+   - always
+ comma-dangle:
+   - error
+   - only-multiline
+   - functions: never
+ indent:
+   - error
+   - 2
+   - VariableDeclarator:
+       var: 2
+       let: 2
+       const: 3
+     ignoredNodes:
+       - ConditionalExpression
+ key-spacing:
+   - error
+   - align: colon
+ max-len:
+   - error
+   - code: 120
+     ignoreStrings: true
+ no-multiple-empty-lines:
+   - error
+   - max: 1
+     maxBOF: 0
+     maxEOF: 0
+ no-nested-ternary: off
+ no-underscore-dangle: off
+ no-whitespace-before-property: off
+ nonblock-statement-body-position:
+   - error
+   - below
+ one-var: off
+ space-before-function-paren:
+   - error
+   - always
+
+ # ECMAScript 6
+ arrow-parens:
+   - error
+   - as-needed
+
+ # import
+ import/no-unresolved: off
