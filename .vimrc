@@ -18,8 +18,8 @@ set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
 
 " clipboard
-set clipboard+=unnamed
-set clipboard=unnamed
+set clipboard&
+set clipboard^=unnamedplus
 
 " source settings in this directory
 let this_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
