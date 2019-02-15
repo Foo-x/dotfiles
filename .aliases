@@ -12,6 +12,7 @@ alias .....='cd ../../../..'
 alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias ws='cd ~/Documents/workspace'
+function mkcd() { mkdir -p "$1" && cd "$1"; }
 
 # confirm
 alias rm='rm -i'
