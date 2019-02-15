@@ -1,19 +1,65 @@
+let mapleader = "\<Space>"
+
 " normal mode
-"
-" j -> gj              : down in same line
-" k -> gk              : up in same line
-" x -> "_x             : not to yunk
-" 1 -> 0               : start of line (after indent by next)
-" 0 -> ^               : start of line after indent
-" 9 -> $               : end of line
-" Esc,Esc -> nohlsearch: disable highlight
+"" display lines downward
 nnoremap j gj
+
+"" display lines upward
 nnoremap k gk
-nnoremap x "_x
+
 nmap 1 0
 nmap 0 ^
 nmap 9 $
+noremap <CR> G
+noremap <BS> gg
+
+noremap <Leader>h ^
+noremap <Leader>l $
+noremap <Leader>m %
+nnoremap <Leader>/ *
+
+nnoremap <Leader>j <C-f>
+nnoremap <Leader>k <C-b>
+
+nmap <Leader>w [window]
+nnoremap [window]s :<C-u>split<CR>
+nnoremap [window]v :<C-u>vsplit<CR>
+nnoremap [window]h <C-w>h
+nnoremap [window]j <C-w>j
+nnoremap [window]k <C-w>k
+nnoremap [window]l <C-w>l
+nnoremap [window]H <C-w>H
+nnoremap [window]J <C-w>J
+nnoremap [window]K <C-w>K
+nnoremap [window]L <C-w>L
+nnoremap [window]= <C-w>=
+nnoremap [window]> <C-w>>
+nnoremap [window]< <C-w><
+nnoremap [window]+ <C-w>+
+nnoremap [window]- <C-w>-
+
+nmap <Leader>t [tab]
+nnoremap [tab]t :<C-u>tabnew<CR>
+nnoremap [tab]h gT
+nnoremap [tab]j gT
+nnoremap [tab]k gt
+nnoremap [tab]l gt
+
+"" not to yunk
+nnoremap x "_x
+
+"" format all lines
+nnoremap <Leader>= gg=G
+
+nnoremap <silent> p p`]
+
+nnoremap <Leader>s :%s/
+
+"" disable highlight
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+"" correct quit
+nnoremap q: :q
 
 " insert mode
 inoremap <C-e> <END>
@@ -22,10 +68,14 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
+inoremap jj    <Esc>
 
 " visual mode
-"
-" * -> search selected and go next
-" # -> search selected and go previous
+"" search selected and go next
 vnoremap * "zy:let @/ = @z<CR>n
+
+"" search selected and go previous
 vnoremap # "zy:let @/ = @z<CR>N
+
+vnoremap <silent> y y`]
+
