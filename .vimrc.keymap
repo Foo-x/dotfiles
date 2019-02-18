@@ -77,6 +77,11 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 inoremap jj    <Esc>
+inoremap {     {}<LEFT>
+inoremap [     []<LEFT>
+inoremap (     ()<LEFT>
+inoremap "     ""<LEFT>
+inoremap '     ''<LEFT>
 
 " visual mode
 "" search selected and go next
