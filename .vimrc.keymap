@@ -12,6 +12,10 @@ nmap 0 ^
 nmap 9 $
 noremap <CR> G
 noremap <BS> gg
+noremap Y y$
+
+nnoremap + <C-a>
+nnoremap - <C-x>
 
 noremap <Leader>h ^
 noremap <Leader>l $
@@ -47,6 +51,9 @@ nnoremap [tab]l gt
 
 "" not to yunk
 nnoremap x "_x
+nnoremap X "_X
+nnoremap s "_s
+nnoremap S "_S
 
 "" format all lines
 nnoremap <Leader>= gg=G
