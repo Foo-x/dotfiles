@@ -1,4 +1,4 @@
-let mapleader = "\<Space>"
+let mapleader = " "
 
 " normal mode
 "" display lines downward
