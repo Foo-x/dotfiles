@@ -19,7 +19,7 @@ set list
 
 " clipboard
 set clipboard&
-set clipboard^=unnamedplus
+set clipboard^=unnamedplus,unnamed
 
 " source settings in this directory
 let this_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')

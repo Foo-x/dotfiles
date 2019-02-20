@@ -22,6 +22,9 @@ noremap <Leader>l $
 noremap <Leader>m %
 nnoremap <Leader>/ *
 
+nnoremap <Leader>o o<Esc>
+nnoremap <Leader>O O<Esc>
+
 nnoremap <Leader>j <C-f>
 nnoremap <Leader>k <C-b>
 
@@ -82,6 +85,8 @@ inoremap [     []<LEFT>
 inoremap (     ()<LEFT>
 inoremap "     ""<LEFT>
 inoremap '     ''<LEFT>
+inoremap {<Enter> {}<Left><CR><Esc>O
+inoremap [<Enter> []<Left><CR><Esc>O
 
 " visual mode
 "" search selected and go next
@@ -93,3 +98,9 @@ vnoremap # "zy:let @/ = @z<CR>N
 "" move to end after yank
 vnoremap <silent> y y`]
 
+vnoremap <Leader>s( da()<Esc>P
+vnoremap <Leader>s{ da{}<Esc>P
+vnoremap <Leader>s[ da[]<Esc>P
+vnoremap <Leader>s< da<><Esc>P
+vnoremap <Leader>s" da""<Esc>P
+vnoremap <Leader>s' da''<Esc>P
