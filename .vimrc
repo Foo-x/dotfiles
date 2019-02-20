@@ -21,6 +21,12 @@ set list
 set clipboard&
 set clipboard^=unnamedplus,unnamed
 
+" cursor shape
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+
 " source settings in this directory
 let this_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let vimfiles = glob(this_path . '/.vimrc.*')
