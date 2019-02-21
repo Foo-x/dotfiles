@@ -7,7 +7,6 @@ nnoremap j gj
 "" display lines upward
 nnoremap k gk
 
-nmap 1 0
 nmap 0 ^
 nmap 9 $
 noremap <CR> G
