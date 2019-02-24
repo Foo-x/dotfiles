@@ -361,12 +361,54 @@
         },
         {
             "before": [
+                "<leader>",
+                "y"
+            ],
+            "after": [
+                "g",
+                "g",
+                "y",
+                "G"
+            ]
+        },
+        {
+            "before": [
                 "x"
             ],
             "after": [
                 "\"",
                 "_",
                 "x"
+            ]
+        },
+        {
+            "before": [
+                "X"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "X"
+            ]
+        },
+        {
+            "before": [
+                "s"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "s"
+            ]
+        },
+        {
+            "before": [
+                "S"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "S"
             ]
         }
     ],
@@ -382,10 +424,86 @@
         },
         {
             "before": [
+                "<C-a>"
+            ],
+            "after": [
+                "<HOME>"
+            ]
+        },
+        {
+            "before": [
                 "<C-e>"
             ],
             "after": [
                 "<END>"
+            ]
+        },
+        {
+            "before": [
+                "<C-j>"
+            ],
+            "after": [
+                "<DOWN>"
+            ]
+        },
+        {
+            "before": [
+                "<C-k>"
+            ],
+            "after": [
+                "<UP>"
+            ]
+        },
+        {
+            "before": [
+                "<C-h>"
+            ],
+            "after": [
+                "<LEFT>"
+            ]
+        },
+        {
+            "before": [
+                "<C-l>"
+            ],
+            "after": [
+                "<RIGHT>"
+            ]
+        },
+        {
+            "before": [
+                "<C-u>"
+            ],
+            "after": [
+                "<BS>"
+            ]
+        },
+        {
+            "before": [
+                "<C-i>"
+            ],
+            "after": [
+                // don't know why but, cannot bind <Del>
+                "<RIGHT>",
+                "<BS>"
+            ]
+        },
+        {
+            "before": [
+                "<C-o>"
+            ],
+            "after": [
+                "<Esc>",
+                "o"
+            ]
+        },
+        {
+            "before": [
+                "<C-O>"
+            ],
+            "after": [
+                "<Esc>",
+                "O"
             ]
         }
     ],
@@ -441,6 +559,96 @@
             ],
             "after": [
                 "%"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "s",
+                "("
+            ],
+            "after": [
+                "d",
+                "i",
+                "(",
+                ")",
+                "<Esc>",
+                "P"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "s",
+                "{"
+            ],
+            "after": [
+                "d",
+                "i",
+                "{",
+                "}",
+                "<Esc>",
+                "P"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "s",
+                "["
+            ],
+            "after": [
+                "d",
+                "i",
+                "[",
+                "]",
+                "<Esc>",
+                "P"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "s",
+                "<"
+            ],
+            "after": [
+                "d",
+                "i",
+                "<",
+                ">",
+                "<Esc>",
+                "P"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "s",
+                "\""
+            ],
+            "after": [
+                "d",
+                "i",
+                "\"",
+                "\"",
+                "<Esc>",
+                "P"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "s",
+                "'"
+            ],
+            "after": [
+                "d",
+                "i",
+                "'",
+                "'",
+                "<Esc>",
+                "P"
             ]
         }
     ]

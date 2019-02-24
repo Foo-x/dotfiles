@@ -104,9 +104,9 @@ vnoremap # "zy:let @/ = @z<CR>N
 "" move to end after yank
 vnoremap <silent> y y`]
 
-vnoremap <Leader>s( da()<Esc>P
-vnoremap <Leader>s{ da{}<Esc>P
-vnoremap <Leader>s[ da[]<Esc>P
-vnoremap <Leader>s< da<><Esc>P
-vnoremap <Leader>s" da""<Esc>P
-vnoremap <Leader>s' da''<Esc>P
+vnoremap <Leader>s( di()<Esc>P
+vnoremap <Leader>s{ di{}<Esc>P
+vnoremap <Leader>s[ di[]<Esc>P
+vnoremap <Leader>s< di<><Esc>P
+vnoremap <Leader>s" di""<Esc>P
+vnoremap <Leader>s' di''<Esc>P
