@@ -6,9 +6,10 @@ set nocompatible
 set backspace=indent,eol,start
 set encoding=utf-8
 set cursorline
-set smartindent
+set cindent
 set shiftwidth=2
 set tabstop=2
+set expandtab
 set noerrorbells
 set number
 set selection=exclusive
