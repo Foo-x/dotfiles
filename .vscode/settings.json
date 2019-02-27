@@ -172,7 +172,7 @@
                 "j"
             ],
             "commands": [
-                "scrollPageDown"
+                "cursorPageDown"
             ]
         },
         {
@@ -181,7 +181,7 @@
                 "k"
             ],
             "commands": [
-                "scrollPageUp"
+                "cursorPageUp"
             ]
         },
         {
