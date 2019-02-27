@@ -373,6 +373,26 @@
         },
         {
             "before": [
+                "<leader>",
+                "o"
+            ],
+            "after": [
+                "<Esc>",
+                "o"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "O"
+            ],
+            "after": [
+                "<Esc>",
+                "O"
+            ]
+        },
+        {
+            "before": [
                 "x"
             ],
             "after": [
