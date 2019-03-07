@@ -46,14 +46,6 @@
     "vim.normalModeKeyBindings": [
         {
             "before": [
-                "1"
-            ],
-            "after": [
-                "0"
-            ]
-        },
-        {
-            "before": [
                 "0"
             ],
             "after": [
@@ -132,6 +124,16 @@
         },
         {
             "before": [
+                "<C-j>"
+            ],
+            "after": [
+                "i",
+                "<CR>",
+                "<Esc>"
+            ]
+        },
+        {
+            "before": [
                 "<leader>",
                 "h"
             ],
@@ -182,6 +184,18 @@
             ],
             "commands": [
                 "cursorPageUp"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "i"
+            ],
+            "commands": [
+                "i",
+                "_",
+                "<Esc>",
+                "r"
             ]
         },
         {
@@ -444,6 +458,15 @@
         },
         {
             "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<CR>"
+            ]
+        },
+        {
+            "before": [
                 "<C-a>"
             ],
             "after": [
@@ -506,24 +529,6 @@
                 // don't know why but, cannot bind <Del>
                 "<RIGHT>",
                 "<BS>"
-            ]
-        },
-        {
-            "before": [
-                "<C-o>"
-            ],
-            "after": [
-                "<Esc>",
-                "o"
-            ]
-        },
-        {
-            "before": [
-                "<C-O>"
-            ],
-            "after": [
-                "<Esc>",
-                "O"
             ]
         }
     ],

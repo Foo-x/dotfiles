@@ -12,6 +12,7 @@ nmap 9 $
 noremap <CR> G
 noremap <BS> gg
 noremap Y y$
+nnoremap <C-j> i<CR><Esc>
 
 nnoremap + <C-a>
 nnoremap - <C-x>
@@ -26,6 +27,9 @@ nnoremap <Leader>O O<Esc>
 
 nnoremap <Leader>j <C-f>
 nnoremap <Leader>k <C-b>
+
+"" insert only one character
+nnoremap <Leader>i i_<Esc>r
 
 nmap <Leader>w [window]
 nnoremap [window]s :<C-u>split<CR>
@@ -83,16 +87,8 @@ inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 inoremap <C-u> <BS>
 inoremap <C-i> <Del>
-inoremap <C-o> <Esc>o
-inoremap <C-O> <Esc>O
 inoremap jj    <Esc>
-inoremap {     {}<LEFT>
-inoremap [     []<LEFT>
-inoremap (     ()<LEFT>
-inoremap "     ""<LEFT>
-inoremap '     ''<LEFT>
-inoremap {<Enter> {}<Left><CR><Esc>O
-inoremap [<Enter> []<Left><CR><Esc>O
+inoremap jk    <CR>
 
 " visual mode
 "" search selected and go next
