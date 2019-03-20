@@ -1,4 +1,4 @@
-# use in your .includerc like below
+# use in your .inputrc like below
 # $include /path/to/dotfiles/.inputrc
 # bash version should be >= 4.4
 
