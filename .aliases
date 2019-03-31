@@ -42,3 +42,27 @@ alias md=mkdir
 alias gr=grep
 
 alias reload='. ~/.bash_profile; . ~/.bashrc; bind -f ~/.inputrc'
+
+function open() {
+  if which open &> /dev/null; then
+    open "$@"
+  elif which xdg-open &> /dev/null; then
+    xdg-open "$@"
+  fi
+}
+
+function open-http() {
+  if which open &> /dev/null; then
+    open http://$1
+  elif which xdg-open &> /dev/null; then
+    xdg-open http://$1
+  fi
+}
+
+function open-https() {
+  if which open &> /dev/null; then
+    open https://$1
+  elif which xdg-open &> /dev/null; then
+    xdg-open https://$1
+  fi
+}
