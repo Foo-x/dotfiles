@@ -48,6 +48,8 @@ function open() {
     open "$@"
   elif which xdg-open &> /dev/null; then
     xdg-open "$@"
+  elif which explorer &> /dev/null; then
+    explorer "$@"
   fi
 }
 
@@ -56,6 +58,8 @@ function open-http() {
     open http://$1
   elif which xdg-open &> /dev/null; then
     xdg-open http://$1
+  elif which explorer &> /dev/null; then
+    explorer http://$1
   fi
 }
 
@@ -64,5 +68,7 @@ function open-https() {
     open https://$1
   elif which xdg-open &> /dev/null; then
     xdg-open https://$1
+  elif which explorer &> /dev/null; then
+    explorer https://$1
   fi
 }
