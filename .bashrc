@@ -10,6 +10,6 @@ shopt -s nocasematch
 shopt -s nullglob
 
 # set CapsLock to Ctrl
-if type setxkbmap >/dev/null 2>&1; then
+if type setxkbmap &> /dev/null; then
   setxkbmap -option ctrl:nocaps
 fi
