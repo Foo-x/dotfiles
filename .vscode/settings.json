@@ -36,7 +36,6 @@
     ],
     "todohighlight.toggleURI": true,
     "workbench.startupEditor": "newUntitledFile",
-    "window.zoomLevel": 1,
     "terminal.integrated.splitCwd": "workspaceRoot",
     "vim.useSystemClipboard": true,
     "eslint.autoFixOnSave": true,
