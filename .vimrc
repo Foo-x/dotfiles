@@ -13,6 +13,7 @@ set expandtab
 set noerrorbells
 set number
 set selection=exclusive
+set visualbell t_vb=
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_

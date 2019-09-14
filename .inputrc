@@ -30,6 +30,7 @@ set expand-tilde on
 set colored-stats on
 set colored-completion-prefix on
 set menu-complete-display-prefix on
+set bell-style none
 
 "\C-p": reverse-search-history
 "\C-n": forward-search-history
