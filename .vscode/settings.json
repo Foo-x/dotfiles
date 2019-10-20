@@ -42,24 +42,6 @@
     "eslint.alwaysShowStatus": true,
     "vim.leader": "<space>",
     "vim.hlsearch": true,
-    "vim.normalModeKeyBindings": [
-        {
-            "before": [
-                "0"
-            ],
-            "after": [
-                "^"
-            ]
-        },
-        {
-            "before": [
-                "9"
-            ],
-            "after": [
-                "$"
-            ]
-        }
-    ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [
