@@ -13,6 +13,7 @@
 	a = add
 	aa = add --all
 	s = status -sb
+	rev = rev-parse --short @
 
 	# branch
 	b = branch

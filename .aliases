@@ -12,7 +12,38 @@ alias .....='cd ../../../..'
 alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias ws='cd ~/Documents/workspace'
+alias cdg='cd $(git rev-parse --show-toplevel)'
 function mkcd() { mkdir -p "$1" && cd "$1"; }
+function cdh() {
+  local dirnum
+  dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | head -n $(( LINES - 3 ))
+  read -p "select number: " dirnum
+  if [ -z "$dirnum" ] ; then
+    echo "$FUNCNAME: Abort." 1>&2
+  elif ( echo $dirnum | egrep '^[[:digit:]]+$' > /dev/null ) ; then
+    cd "$( echo ${DIRSTACK[$dirnum]} | sed -e "s;^~;$HOME;" )"
+  else
+    echo "$FUNCNAME: Wrong." 1>&2
+  fi
+}
+function cdl() {
+  local i dirnum
+  declare -a dirlist=( $(echo {.,}?*/) )
+
+  for i in "${!dirlist[@]}"
+  do
+    echo "$i  ${dirlist[$i]}"
+  done
+
+  read -p "select number: " dirnum
+  if [ -z "$dirnum" ] ; then
+    echo "$FUNCNAME: Abort." 1>&2
+  elif ( echo $dirnum | egrep '^[[:digit:]]+$' > /dev/null ) ; then
+    cd "$( echo ${dirlist[$dirnum]} | sed -e "s;^~;$HOME;" )"
+  else
+    echo "$FUNCNAME: Wrong." 1>&2
+  fi
+}
 
 # confirm
 alias rm='rm -i'
@@ -32,6 +63,8 @@ alias df='df -h'
 alias du='du -h'
 alias free='free -h'
 alias grep='grep --color=auto -En'
+alias cd='pushd > /dev/null'
+alias dirs='dirs -v'
 
 # shorten
 alias g=git
@@ -40,6 +73,7 @@ alias j=jobs
 alias vi=vim
 alias md=mkdir
 alias gr=grep
+alias dirsc='dirs -c'
 
 alias reload='. ~/.bash_profile; . ~/.bashrc; bind -f ~/.inputrc'
 
