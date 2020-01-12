@@ -101,7 +101,7 @@ function cdm() {
       "h"|$'\x5b\x44')
         if [ $page_pos -gt 0 ]; then
           # previous page
-          pos=$(($height - 1))
+          pos=0
           let page_pos--
         fi
         ;;
