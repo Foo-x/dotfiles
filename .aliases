@@ -26,24 +26,6 @@ function cdh() {
     echo "$FUNCNAME: Wrong." 1>&2
   fi
 }
-function cdl() {
-  local i dirnum
-  declare -a dirlist=( $(echo {.,}?*/) )
-
-  for i in "${!dirlist[@]}"
-  do
-    echo "$i  ${dirlist[$i]}"
-  done
-
-  read -p "select number: " dirnum
-  if [ -z "$dirnum" ] ; then
-    echo "$FUNCNAME: Abort." 1>&2
-  elif ( echo $dirnum | egrep '^[[:digit:]]+$' > /dev/null ) ; then
-    cd ${dirlist[$dirnum]}
-  else
-    echo "$FUNCNAME: Wrong." 1>&2
-  fi
-}
 function cdm() {
   # ref: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
 
