@@ -15,24 +15,51 @@ alias ws='cd ~/Documents/workspace'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 function mkcd() { mkdir -p "$1" && cd "$1"; }
 function cdh() {
-  local dirnum
-  dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | head -n $(( LINES - 3 ))
-  read -p "select number: " dirnum
-  if [ -z "$dirnum" ] ; then
-    echo "$FUNCNAME: Abort." 1>&2
-  elif ( echo $dirnum | egrep '^[[:digit:]]+$' > /dev/null ) ; then
-    cd "$( echo ${DIRSTACK[$dirnum]} | sed -e "s;^~;$HOME;" )"
-  else
-    echo "$FUNCNAME: Wrong." 1>&2
-  fi
+  _select_cur <(\dirs | tr " " "\n" | sort | uniq | head -n $(( LINES - 3 )))
 }
 function cdm() {
+  _select_cur <(echo {.,}?*/)
+}
+
+# confirm
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ln='ln -i'
+
+# override for convenience
+if [ "$(uname)" = 'Darwin' ]; then
+  alias ls='ls -FG'
+else
+  alias ls='ls -F --color=auto'
+fi
+alias ll='ls -lah'
+alias mkdir='mkdir -p'
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+alias grep='grep --color=auto -En'
+alias cd='pushd > /dev/null'
+alias dirs='dirs -v'
+
+# shorten
+alias g=git
+alias h=history
+alias j=jobs
+alias vi=vim
+alias md=mkdir
+alias gr=grep
+alias dirsc='dirs -c'
+
+alias reload='. ~/.bash_profile; . ~/.bashrc; bind -f ~/.inputrc'
+
+function _select_cur() {
   # ref: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
 
   local pos=0 page_pos=0 list i input
   local height=$(($(tput lines) - 3))
 
-  declare -a menu=($(echo {.,}?*/))
+  declare -a menu=($(cat $1))
   local pages=$(((${#menu[@]} + $height - 1) / $height))
 
   # save top position
@@ -105,38 +132,6 @@ function cdm() {
     esac
   done
 }
-
-# confirm
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-alias ln='ln -i'
-
-# override for convenience
-if [ "$(uname)" = 'Darwin' ]; then
-  alias ls='ls -FG'
-else
-  alias ls='ls -F --color=auto'
-fi
-alias ll='ls -lah'
-alias mkdir='mkdir -p'
-alias df='df -h'
-alias du='du -h'
-alias free='free -h'
-alias grep='grep --color=auto -En'
-alias cd='pushd > /dev/null'
-alias dirs='dirs -v'
-
-# shorten
-alias g=git
-alias h=history
-alias j=jobs
-alias vi=vim
-alias md=mkdir
-alias gr=grep
-alias dirsc='dirs -c'
-
-alias reload='. ~/.bash_profile; . ~/.bashrc; bind -f ~/.inputrc'
 
 function open() {
   if which open &> /dev/null; then
