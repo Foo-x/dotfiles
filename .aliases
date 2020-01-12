@@ -15,10 +15,91 @@ alias ws='cd ~/Documents/workspace'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 function mkcd() { mkdir -p "$1" && cd "$1"; }
 function cdh() {
-  _select_cur <(\dirs | tr " " "\n" | sort | uniq | head -n $(( LINES - 3 )))
+  _cdl <(\dirs | tr " " "\n" | sort | uniq)
 }
 function cdm() {
-  _select_cur <(echo {.,}?*/)
+  _cdl <(echo {.,}?*/)
+}
+function _cdl() {
+  # ref: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
+
+  local pos=0 page_pos=0 list i input
+  local height=$((LINES - 3))
+
+  declare -a menu=($(cat $1))
+  local pages=$(((${#menu[@]} + height - 1) / height))
+
+  # save top position
+  printf "\e[s\e[m" >&2
+
+  # hide the cursor and trap to restore at the end
+  trap "tput cnorm; trap - RETURN INT; return" RETURN INT
+  tput civis
+
+  while true; do
+    # move to top position
+    printf "\e[u\e[m" >&2
+
+    printf "pages: $((page_pos + 1))/$pages (h/j/k/l/←/↓/↑/→/Enter/Space/q)\n\n\e[J" >&2
+
+    list=(${menu[@]:$((page_pos * height)):$height})
+
+    for i in ${!list[@]};do
+      if [ $pos = $i ]; then
+        printf "\e[1;31m>\e[m \e[1;4m" >&2
+      else
+        printf "  " >&2
+      fi
+      printf "${list[$i]}\e[m\n" >&2
+    done
+
+    read -sn1 input
+    if [ "$input" = $'\x1b' ]; then
+      read -sn2 input
+    fi
+    case $input in
+      "h"|$'\x5b\x44')
+        if [ $page_pos -gt 0 ]; then
+          # previous page
+          pos=0
+          let page_pos--
+        fi
+        ;;
+      "j"|$'\x5b\x42')
+        if [ $pos -lt $((${#list[@]} - 1)) ]; then
+          pos=$((pos + 1))
+        elif [ $pos = $((${#list[@]} - 1)) ] && [ $page_pos -lt $((pages - 1)) ]; then
+          # next page
+          pos=0
+          let page_pos++
+        fi
+        ;;
+      "k"|$'\x5b\x41')
+        if [ $pos -gt 0 ]; then
+          pos=$((pos - 1))
+        elif [ $pos = 0 ] && [ $page_pos -gt 0 ]; then
+          # previous page
+          pos=$((height - 1))
+          let page_pos--
+        fi
+        ;;
+      "l"|$'\x5b\x43')
+        if [ $page_pos -lt $((pages - 1)) ]; then
+          # next page
+          pos=0
+          let page_pos++
+        fi
+        ;;
+      "")
+        cd ${list[$pos]}
+        return
+        ;;
+      "q")
+        printf "\nAbort.\n" >&2
+        return
+        ;;
+    esac
+  done
 }
 
 # confirm
@@ -52,86 +133,6 @@ alias gr=grep
 alias dirsc='dirs -c'
 
 alias reload='. ~/.bash_profile; . ~/.bashrc; bind -f ~/.inputrc'
-
-function _select_cur() {
-  # ref: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
-
-  local pos=0 page_pos=0 list i input
-  local height=$(($(tput lines) - 3))
-
-  declare -a menu=($(cat $1))
-  local pages=$(((${#menu[@]} + $height - 1) / $height))
-
-  # save top position
-  printf "\e[s\e[m" >&2
-
-  while true; do
-    # move to top position
-    printf "\e[u\e[m" >&2
-
-    echo "pages: $(($page_pos + 1))/$pages"
-    echo ""
-
-    list=(${menu[@]:$(($page_pos * $height)):$height})
-    tput ed
-
-    for i in ${!list[@]};do
-      if [ $pos = $i ]; then
-        printf "\e[1;31m>\e[m \e[1;4m" >&2
-      else
-        printf "  " >&2
-      fi
-      printf "${list[$i]}\e[m\n" >&2
-    done
-
-    read -sn1 input
-    if [ "$input" = $'\x1b' ]; then
-      read -sn2 input
-    fi
-    case $input in
-      "j"|$'\x5b\x42')
-        if [ $pos -lt $((${#list[@]} - 1)) ]; then
-          pos=$(($pos + 1))
-        elif [ $pos = $((${#list[@]} - 1)) ] && [ $page_pos -lt $(($pages - 1)) ]; then
-          # next page
-          pos=0
-          let page_pos++
-        fi
-        ;;
-      "k"|$'\x5b\x41')
-        if [ $pos -gt 0 ]; then
-          pos=$(($pos - 1))
-        elif [ $pos = 0 ] && [ $page_pos -gt 0 ]; then
-          # previous page
-          pos=$(($height - 1))
-          let page_pos--
-        fi
-        ;;
-      "h"|$'\x5b\x44')
-        if [ $page_pos -gt 0 ]; then
-          # previous page
-          pos=0
-          let page_pos--
-        fi
-        ;;
-      "l"|$'\x5b\x43')
-        if [ $page_pos -lt $(($pages - 1)) ]; then
-          # next page
-          pos=0
-          let page_pos++
-        fi
-        ;;
-      "")
-        cd ${list[$pos]}
-        return
-        ;;
-      "q")
-        echo "Abort."
-        return
-        ;;
-    esac
-  done
-}
 
 function open() {
   if which open &> /dev/null; then
