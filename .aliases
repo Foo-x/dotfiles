@@ -27,6 +27,8 @@ function _cdl() {
   local height=$((LINES - 3))
 
   declare -a menu=($(cat $1))
+  
+  # ceil
   local pages=$(((${#menu[@]} + height - 1) / height))
 
   # save top position
