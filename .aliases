@@ -15,7 +15,8 @@ alias ws='cd ~/Documents/workspace'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 function mkcd() { mkdir -p "$1" && cd "$1"; }
 function cdh() {
-  # ref: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
+  # ref-1: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
+  # ref-2: https://qiita.com/xtetsuji/items/31bc53e92d94b1602b5d
 
   local pos=0 page_pos=0 list i input
   local height=$((LINES - 3))
@@ -107,7 +108,8 @@ function cdh() {
   done
 }
 function cdm() {
-  # ref: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
+  # ref-1: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
+  # ref-2: https://qiita.com/xtetsuji/items/31bc53e92d94b1602b5d
 
   local pos page_pos cur=`pwd` list i input
   local height=$((LINES - 4))
