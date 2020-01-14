@@ -27,9 +27,11 @@ function _cdl() {
   local height=$((LINES - 3))
 
   declare -a menu=($(cat $1))
-  
+
   # ceil
   local pages=$(((${#menu[@]} + height - 1) / height))
+
+  clear
 
   # save top position
   printf "\e[s\e[m" >&2
