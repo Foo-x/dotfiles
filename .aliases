@@ -34,7 +34,7 @@ function cdh() {
 
   while true; do
     # move to origin and clear
-    printf "\e[H\e[2J" >&2
+    printf "\e[H\e[J" >&2
 
     printf "pages: $((page_pos + 1))/$pages (? to help)\n\n" >&2
 
@@ -91,7 +91,7 @@ function cdh() {
         return
         ;;
       "?")
-        printf "\e[H\e[2J" >&2
+        printf "\e[H\e[J" >&2
         echo "j/k/↓/↑     : move cursor"
         echo "h/l/←/→     : move page"
         echo "Enter/Space : cd and end"
@@ -131,7 +131,7 @@ function cdm() {
 
     while true; do
       # move to origin and clear
-      printf "\e[H\e[2J" >&2
+      printf "\e[H\e[J" >&2
 
       echo $cur
       printf "pages: $((page_pos + 1))/$pages (? to help)\n\n" >&2
@@ -189,7 +189,7 @@ function cdm() {
           break
           ;;
         $'\x7f')
-          cur=$(cd "$(bash -c "echo $cur/.."))"; pwd)
+          cur=$(cd "$(bash -c "echo $cur/..")"; pwd)
           break
           ;;
         "")
@@ -197,7 +197,7 @@ function cdm() {
           return
           ;;
         "?")
-          printf "\e[H\e[2J" >&2
+          printf "\e[H\e[J" >&2
           echo "j/k/↓/↑   : move cursor"
           echo "h/l/←/→   : move page"
           echo "Enter     : cd and end"
