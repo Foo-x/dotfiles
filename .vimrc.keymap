@@ -3,9 +3,11 @@ let mapleader = " "
 " normal mode
 "" display lines downward
 nnoremap j gj
+nnoremap <Down> gj
 
 "" display lines upward
 nnoremap k gk
+nnoremap <Up> gk
 
 noremap <CR> G
 noremap <BS> gg
