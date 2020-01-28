@@ -22,6 +22,7 @@
 	bmg = branch --merged
 	bd = branch -d
 	bdd = branch -D
+	bv = branch -vv
 	co = checkout
 	cb = checkout -b
 	rb = rebase
@@ -47,7 +48,7 @@
 	rs = remote show origin
 	rpo = remote prune origin
 	cl = clone
-	ood = !git remote show origin | grep 'out of date'
+	fbv = !git fetch && git branch -vv
 
 	# reset
 	re = reset
