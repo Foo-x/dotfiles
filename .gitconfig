@@ -47,6 +47,7 @@
 	rs = remote show origin
 	rpo = remote prune origin
 	cl = clone
+	ood = !git remote show origin | grep 'out of date'
 
 	# reset
 	re = reset
