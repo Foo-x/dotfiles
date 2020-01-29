@@ -32,6 +32,7 @@
 	rbs = rebase --skip
 	rbi = rebase -i
 	rbim = rebase -i master
+	usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
 
 	# commit
 	c = commit
@@ -48,7 +49,7 @@
 	rs = remote show origin
 	rpo = remote prune origin
 	cl = clone
-	fbv = !git fetch && git branch -vv
+	fusi = !git fetch && git usi
 
 	# reset
 	re = reset
