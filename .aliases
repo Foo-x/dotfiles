@@ -14,208 +14,41 @@ alias dl='cd ~/Downloads'
 alias ws='cd ~/Documents/workspace'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 function mkcd() { mkdir -p "$1" && cd "$1"; }
+
 function cdh() {
-  # ref-1: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
-  # ref-2: https://qiita.com/xtetsuji/items/31bc53e92d94b1602b5d
+  local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | cut -d" " -f3- | sed 's/^ *//' | fzf --bind "shift-up:page-up,shift-down:page-down")
 
-  local pos=0 page_pos=0 list i input
-  local height=$((LINES - 3))
-
-  clear
-
-  # hide the cursor and trap to restore at the end
-  trap "tput cnorm; trap - RETURN INT; return" RETURN INT
-  tput civis
-
-  readarray -t menu < <(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | cut -d" " -f3-4)
-
-  # ceil
-  local pages=$(((${#menu[@]} + height - 1) / height))
-
-  while true; do
-    # move to origin and clear
-    printf "\e[H\e[J" >&2
-
-    printf "pages: $((page_pos + 1))/$pages (? to help)\n\n" >&2
-
-    list=("${menu[@]:$((page_pos * height)):$height}")
-
-    for i in ${!list[@]};do
-      if [ $pos = $i ]; then
-        printf "\e[1;31m>\e[m \e[1;4m" >&2
-      else
-        printf "  " >&2
-      fi
-      printf "${list[$i]}\e[m\n" >&2
-    done
-
-    read -sn1 input
-    if [ "$input" = $'\x1b' ]; then
-      read -sn2 input
-    fi
-    case $input in
-      "h"|$'\x5b\x44')
-        if [ $page_pos -gt 0 ]; then
-          # previous page
-          pos=0
-          let page_pos--
-        fi
-        ;;
-      "j"|$'\x5b\x42')
-        if [ $pos -lt $((${#list[@]} - 1)) ]; then
-          pos=$((pos + 1))
-        elif [ $pos = $((${#list[@]} - 1)) ] && [ $page_pos -lt $((pages - 1)) ]; then
-          # next page
-          pos=0
-          let page_pos++
-        fi
-        ;;
-      "k"|$'\x5b\x41')
-        if [ $pos -gt 0 ]; then
-          pos=$((pos - 1))
-        elif [ $pos = 0 ] && [ $page_pos -gt 0 ]; then
-          # previous page
-          pos=$((height - 1))
-          let page_pos--
-        fi
-        ;;
-      "l"|$'\x5b\x43')
-        if [ $page_pos -lt $((pages - 1)) ]; then
-          # next page
-          pos=0
-          let page_pos++
-        fi
-        ;;
-      "")
-        cd "$(bash -c "echo ${list[$pos]}")"
-        return
-        ;;
-      "?")
-        printf "\e[H\e[J" >&2
-        echo "j/k/↓/↑     : move cursor"
-        echo "h/l/←/→     : move page"
-        echo "Enter/Space : cd and end"
-        echo "q           : abort"
-        echo "?           : show this help"
-        echo ""
-        read -rsn1 -p "Press any key to continue."
-        ;;
-      "q")
-        printf "\nAbort.\n" >&2
-        return
-        ;;
-    esac
-  done
+  if [ -n "$target" ]; then
+    cd "$(echo "$target" | sed "s;^~;$HOME;")"
+  fi
 }
-function cdm() {
-  # ref-1: https://gist.github.com/matsub/8454ddda75bbe1039dc3af8d6638be60
-  # ref-2: https://qiita.com/xtetsuji/items/31bc53e92d94b1602b5d
 
-  local pos page_pos cur=`pwd` list i input
-  local height=$((LINES - 4))
+function cdi() {
+  case $1 in
+    help|--help|-h)
+      echo "cd interactively."
+      echo ""
+      echo "  Ctrl-k/Ctrl-p/up      : up"
+      echo "  Ctrl-j/Ctrl-n/down    : down"
+      echo "  PgUp/Shift-up         : page up"
+      echo "  PgDn/Shift-down       : page down"
+      echo "  Space/Shift-right     : cd and continue"
+      echo "  Ctrl-Space/Shift-left : cd to parent and continue"
+      echo "  Enter                 : cd and exit"
+      echo "  Esc                   : abort"
+      return
+      ;;
+  esac
 
-  clear
+  local cd_and_continue='execute-silent@cd "`cat /tmp/fzf_cur | sed "s/^ *//"`" && cd {} && pwd > /tmp/fzf_cur@+top+clear-query+reload@cd "`cat /tmp/fzf_cur`" && echo "`pwd`" && printf "%s\n" {./,{.,}?*/} | grep -v "*"@'
+  local cd_to_parent_and_continue=${cd_and_continue/\{\}/..}
 
-  # hide the cursor and trap to restore at the end
-  trap "tput cnorm; trap - RETURN INT; return" RETURN INT
-  tput civis
+  pwd > /tmp/fzf_cur
+  local target=$((echo "`pwd`" && printf "%s\n" {./,{.,}?*/}) | fzf --header-lines=1 --bind "space:${cd_and_continue},ctrl-space:${cd_to_parent_and_continue},shift-right:${cd_and_continue},shift-left:${cd_to_parent_and_continue},shift-up:page-up,shift-down:page-down")
 
-  while true; do
-    pos=0
-    page_pos=0
-
-    readarray -t menu < <(cd "$(bash -c "echo $cur")"; printf "%s\n" {./,{.,}?*/})
-
-    # ceil
-    local pages=$(((${#menu[@]} + height - 1) / height))
-
-    while true; do
-      # move to origin and clear
-      printf "\e[H\e[J" >&2
-
-      echo $cur
-      printf "pages: $((page_pos + 1))/$pages (? to help)\n\n" >&2
-
-      list=("${menu[@]:$((page_pos * height)):$height}")
-
-      for i in ${!list[@]};do
-        if [ $pos = $i ]; then
-          printf "\e[1;31m>\e[m \e[1;4m" >&2
-        else
-          printf "  " >&2
-        fi
-        printf "${list[$i]}\e[m\n" >&2
-      done
-
-      IFS="\n" read -sn1 input
-      if [ "$input" = $'\x1b' ]; then
-        read -sn2 input
-      fi
-      case $input in
-        "h"|$'\x5b\x44')
-          if [ $page_pos -gt 0 ]; then
-            # previous page
-            pos=0
-            let page_pos--
-          fi
-          ;;
-        "j"|$'\x5b\x42')
-          if [ $pos -lt $((${#list[@]} - 1)) ]; then
-            pos=$((pos + 1))
-          elif [ $pos = $((${#list[@]} - 1)) ] && [ $page_pos -lt $((pages - 1)) ]; then
-            # next page
-            pos=0
-            let page_pos++
-          fi
-          ;;
-        "k"|$'\x5b\x41')
-          if [ $pos -gt 0 ]; then
-            pos=$((pos - 1))
-          elif [ $pos = 0 ] && [ $page_pos -gt 0 ]; then
-            # previous page
-            pos=$((height - 1))
-            let page_pos--
-          fi
-          ;;
-        "l"|$'\x5b\x43')
-          if [ $page_pos -lt $((pages - 1)) ]; then
-            # next page
-            pos=0
-            let page_pos++
-          fi
-          ;;
-        " ")
-          cur=$(cd "$(bash -c "echo $cur/${list[$pos]}")"; pwd)
-          break
-          ;;
-        $'\x7f')
-          cur=$(cd "$(bash -c "echo $cur/..")"; pwd)
-          break
-          ;;
-        "")
-          cd "$(bash -c "echo $cur/${list[$pos]}")"
-          return
-          ;;
-        "?")
-          printf "\e[H\e[J" >&2
-          echo "j/k/↓/↑   : move cursor"
-          echo "h/l/←/→   : move page"
-          echo "Enter     : cd and end"
-          echo "Space     : cd and continue"
-          echo "Backspace : cd to parent"
-          echo "q         : abort"
-          echo "?         : show this help"
-          echo ""
-          read -rsn1 -p "Press any key to continue."
-          break
-          ;;
-        "q")
-          printf "\nAbort.\n" >&2
-          return
-          ;;
-      esac
-    done
-  done
+  if [ -n "$target" ]; then
+    cd "$(echo "$(cat /tmp/fzf_cur)"/"$target")"
+  fi
 }
 
 # confirm

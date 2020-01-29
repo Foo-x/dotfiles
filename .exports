@@ -11,3 +11,5 @@ else
 fi
 
 stty stop ''
+
+export FZF_DEFAULT_OPTS='--reverse --cycle'
