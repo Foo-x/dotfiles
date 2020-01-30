@@ -52,11 +52,10 @@ function fco() {
 }
 
 function flco() {
-  git log --graph --color=always \
+  local target=$(git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  local target=$(
     fzf --ansi --no-sort --reverse --tiebreak=index \
-      --preview="echo {} | grep -Eo \"[a-z0-9]+\" | head -1 | xargs -I % bash -c 'git show --color %'" \
+      --preview="echo {} | \grep -Eo \"[a-z0-9]+\" | head -1 | xargs -I % bash -c 'git show --color %'" \
       --bind="?:toggle-preview")
-  git checkout $(echo "$target" | grep -Eo "[a-z0-9]+" | head -1)
+  git checkout "$(echo "$target" | \grep -Eo "[a-z0-9]+" | head -1)"
 }
