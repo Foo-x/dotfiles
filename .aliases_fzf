@@ -51,7 +51,7 @@ function fe() {
 
 # fh - repeat history
 function fh() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
+  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sort -k 2 | uniq -f 1 | sort -n | fzf --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
 }
 
 # gfco - checkout branch
