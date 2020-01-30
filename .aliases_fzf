@@ -9,32 +9,24 @@ function cdh() {
   fi
 }
 
-function cdi() {
-  case $1 in
-    help|--help|-h)
-      echo "cd interactively."
-      echo ""
-      echo "  Ctrl-k/Ctrl-p/up      : up"
-      echo "  Ctrl-j/Ctrl-n/down    : down"
-      echo "  PgUp/Shift-up         : page up"
-      echo "  PgDn/Shift-down       : page down"
-      echo "  Space/Shift-right     : cd and continue"
-      echo "  Ctrl-Space/Shift-left : cd to parent and continue"
-      echo "  Enter                 : cd and exit"
-      echo "  Esc                   : abort"
-      return
-      ;;
-  esac
-
-  local cd_and_continue='execute-silent@cd "`cat /tmp/fzf_cur | sed "s/^ *//"`" && cd {} && pwd > /tmp/fzf_cur@+top+clear-query+reload@cd "`cat /tmp/fzf_cur`" && echo "`pwd`" && printf "%s\n" {./,{.,}?*/} | grep -v "*"@'
-  local cd_to_parent_and_continue=${cd_and_continue/\{\}/..}
-
-  pwd > /tmp/fzf_cur
-  local target=$((echo "`pwd`" && printf "%s\n" {./,{.,}?*/}) | fzf --header-lines=1 --bind "space:${cd_and_continue},ctrl-space:${cd_to_parent_and_continue},shift-right:${cd_and_continue},shift-left:${cd_to_parent_and_continue},shift-up:page-up,shift-down:page-down")
-
-  if [ -n "$target" ]; then
-    cd "$(echo "$(cat /tmp/fzf_cur)"/"$target")"
-  fi
+# fd - cd to selected directory
+# sort by depth
+function fd() {
+  local dir ignore_ptn='.git|node_modules'
+  dir=$(
+    find ${1:-.} -type d -printf "%d %p\n" 2> /dev/null |
+    sed "1d" |
+    \grep -Ev "${ignore_ptn}" |
+    sort -n |
+    cut -d" " -f2- |
+    sed "s|^./||" |
+    fzf +m +s --preview '
+        __cd_nxt="$(echo {})";
+        __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
+        echo $__cd_path;
+        echo;
+        ls -p --group-directories-first --color=always "${__cd_path}";'
+  ) && cd "$dir"
 }
 
 function gfco() {
