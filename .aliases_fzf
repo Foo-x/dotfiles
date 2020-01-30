@@ -37,7 +37,7 @@ function cdi() {
   fi
 }
 
-function fco() {
+function gfco() {
   local tags branches target
   branches=$(
     git --no-pager branch --all \
@@ -51,7 +51,7 @@ function fco() {
   git checkout $(awk '{print $2}' <<<"$target" )
 }
 
-function fshow() {
+function gfshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --tiebreak=index \
