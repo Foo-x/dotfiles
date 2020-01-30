@@ -12,4 +12,4 @@ fi
 
 stty stop ''
 
-export FZF_DEFAULT_OPTS='--reverse --cycle'
+export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top"'

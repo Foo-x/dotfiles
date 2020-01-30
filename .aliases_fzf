@@ -41,7 +41,7 @@ function fe() {
     sort -n |
     cut -d" " -f2- |
     sed "s|^./||" |
-    fzf -m +s --preview="echo 'Tab: toggle'"
+    fzf -m +s --header "Tab: toggle"
   ))
   if [[ -n "$files" ]]; then
     local files_str="$(printf '"%s" ' "${files[@]}")"
@@ -51,7 +51,7 @@ function fe() {
 
 # fh - repeat history
 function fh() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
+  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
 }
 
 # gfco - checkout branch
