@@ -1,0 +1,38 @@
+# use in your .bash_profile or .bashrc like below
+# . /path/to/dotfiles/.aliases_fzf
+
+function cdh() {
+  local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | cut -d" " -f3- | sed 's/^ *//' | fzf --bind "shift-up:page-up,shift-down:page-down")
+
+  if [ -n "$target" ]; then
+    cd "$(echo "$target" | sed "s;^~;$HOME;")"
+  fi
+}
+
+function cdi() {
+  case $1 in
+    help|--help|-h)
+      echo "cd interactively."
+      echo ""
+      echo "  Ctrl-k/Ctrl-p/up      : up"
+      echo "  Ctrl-j/Ctrl-n/down    : down"
+      echo "  PgUp/Shift-up         : page up"
+      echo "  PgDn/Shift-down       : page down"
+      echo "  Space/Shift-right     : cd and continue"
+      echo "  Ctrl-Space/Shift-left : cd to parent and continue"
+      echo "  Enter                 : cd and exit"
+      echo "  Esc                   : abort"
+      return
+      ;;
+  esac
+
+  local cd_and_continue='execute-silent@cd "`cat /tmp/fzf_cur | sed "s/^ *//"`" && cd {} && pwd > /tmp/fzf_cur@+top+clear-query+reload@cd "`cat /tmp/fzf_cur`" && echo "`pwd`" && printf "%s\n" {./,{.,}?*/} | grep -v "*"@'
+  local cd_to_parent_and_continue=${cd_and_continue/\{\}/..}
+
+  pwd > /tmp/fzf_cur
+  local target=$((echo "`pwd`" && printf "%s\n" {./,{.,}?*/}) | fzf --header-lines=1 --bind "space:${cd_and_continue},ctrl-space:${cd_to_parent_and_continue},shift-right:${cd_and_continue},shift-left:${cd_to_parent_and_continue},shift-up:page-up,shift-down:page-down")
+
+  if [ -n "$target" ]; then
+    cd "$(echo "$(cat /tmp/fzf_cur)"/"$target")"
+  fi
+}
