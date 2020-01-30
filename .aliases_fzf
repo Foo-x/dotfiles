@@ -50,3 +50,12 @@ function fco() {
         --ansi --preview="git --no-pager log -150 --color --pretty=format:\"%s %C(black)%C(bold)%cr\" '..{2}'") || return
   git checkout $(awk '{print $2}' <<<"$target" )
 }
+
+function fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index \
+      --bind "ctrl-m:execute:
+                (echo {} | grep -Eo '[a-f0-9]+' | head -1 |
+                xargs -I % bash -c 'git show --color=always % | less -R')"
+}
