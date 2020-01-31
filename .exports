@@ -3,7 +3,6 @@
 
 export HISTCONTROL=ignoreboth
 export EDITOR='vim'
-export PROMPT_COMMAND='history -a'
 
 if [ "$(uname)" = 'Darwin' ]; then
   export LC_ALL='ja_JP.UTF-8'
@@ -14,3 +13,13 @@ fi
 stty stop ''
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top"'
+
+function dispatch_prompt_command() {
+  local f
+  for f in ${!PROMPT_COMMAND_*}; do
+    eval "${!f}"
+  done
+}
+export PROMPT_COMMAND='dispatch_prompt_command'
+
+export PROMPT_COMMAND_HISTSAVE='history -a'
