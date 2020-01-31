@@ -25,7 +25,7 @@ export PROMPT_COMMAND='dispatch_prompt_command'
 export PROMPT_COMMAND_HISTSAVE='history -a'
 
 function auto_pushd() {
-  [[ ${AUTO_PUSHD_DIR:-${PWD}} != ${PWD} ]] && pushd -n "${PWD}" > /dev/null
+  [[ ${AUTO_PUSHD_DIR} != ${PWD} ]] && pushd -n "${PWD}" > /dev/null
   AUTO_PUSHD_DIR="${PWD}"
 }
 export PROMPT_COMMAND_AUTO_PUSHD='auto_pushd'
