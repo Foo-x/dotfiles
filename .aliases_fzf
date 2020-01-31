@@ -10,6 +10,17 @@ function f-() {
   fi
 }
 
+# f.. - cd parent directory
+function f..() {
+  local paths=$(cd .. && pwd | tr "/" "\n" | sed -e "1s|^|/|" -e '$d' | \grep -n "^")
+
+  local selected="$(echo "${paths}" | fzf)"
+
+  if [[ "$selected" ]]; then
+    cd "$(echo "${paths}" | head -n"${selected%%:*}" | sed -E "s|[0-9]+:/?||" | tr "\n" "/")"
+  fi
+}
+
 # fd - cd to selected directory
 # sort by depth
 function fd() {
@@ -106,7 +117,7 @@ function gfa() {
 function gfus() {
   local selected
   selected=$(git -c color.status=always status -s |
-    fzf -m --ansi --preview "echo {2} | xargs git diff --color" |
+    fzf -m --ansi --preview "echo {2} | xargs git diff --cached --color" |
     awk '{print $2}')
 
   if [[ "${selected}" ]]; then
