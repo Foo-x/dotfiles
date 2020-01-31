@@ -13,9 +13,11 @@ function cdh() {
 # fd - cd to selected directory
 # sort by depth
 function fd() {
-  local dir ignore_ptn='.git|node_modules'
+  local dir maxdepth ignore_ptn='.git|node_modules'
+  [[ "$1" =~ ^[0-9]+$ ]] && maxdepth="-maxdepth $1"
+
   dir=$(
-    find ${1:-.} -type d -printf "%d %p\n" 2> /dev/null |
+    find . "$1" -type d -printf "%d %p\n" 2> /dev/null |
     sed "1d" |
     \grep -Ev "${ignore_ptn}" |
     sort -n |
@@ -31,11 +33,13 @@ function fd() {
 }
 
 # fe - open the selected files
-# open with command passed as arguments
+# open with command of EDITOR variable
 function fe() {
-  local files ignore_ptn='.git|node_modules'
+  local files maxdepth ignore_ptn='.git|node_modules'
+  [[ "$1" =~ ^[0-9]+$ ]] && maxdepth="-maxdepth $1"
+
   files=($(
-    find . -type f -printf "%d %p\n" 2> /dev/null |
+    find . "$1" -type f -printf "%d %p\n" 2> /dev/null |
     sed "1d" |
     \grep -Ev "${ignore_ptn}" |
     sort -n |
@@ -45,7 +49,7 @@ function fe() {
   ))
   if [[ -n "$files" ]]; then
     local files_str="$(printf '"%s" ' "${files[@]}")"
-    eval "${@:-vim -p} ${files_str}"
+    eval "${EDITOR:-vim -p} ${files_str}"
   fi
 }
 
