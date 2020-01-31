@@ -92,5 +92,6 @@
 	default = current
 [core]
 	excludesfile = ~/.gitignore_global
+	quotePath = false
 [help]
 	autocorrect = -1
