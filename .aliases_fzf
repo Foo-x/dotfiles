@@ -1,8 +1,8 @@
 # use in your .bash_profile or .bashrc like below
 # . /path/to/dotfiles/.aliases_fzf
 
-# cdh - cd from history
-function cdh() {
+# f- - cd from history
+function f-() {
   local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | cut -d" " -f3- | sed 's/^ *//' | fzf --bind "shift-up:page-up,shift-down:page-down")
 
   if [ -n "$target" ]; then
