@@ -4,10 +4,10 @@
 shopt -s autocd
 shopt -s extglob
 shopt -s globstar
-shopt -s histappend
 shopt -s nocaseglob
 shopt -s nocasematch
 shopt -s nullglob
+shopt -u histappend
 
 # set CapsLock to Ctrl
 if [ "$(uname)" != 'Darwin' ] && type setxkbmap &> /dev/null; then
