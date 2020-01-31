@@ -3,6 +3,7 @@
 
 export HISTCONTROL=ignoreboth
 export EDITOR='vim'
+export PROMPT_COMMAND='history -a'
 
 if [ "$(uname)" = 'Darwin' ]; then
   export LC_ALL='ja_JP.UTF-8'
