@@ -3,7 +3,7 @@
 
 # f- - cd from history
 function f-() {
-  local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | cut -d" " -f3- | sed 's/^ *//' | fzf --bind "shift-up:page-up,shift-down:page-down")
+  local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | tail -n +2 | awk '{print $2}' | fzf)
 
   if [ -n "$target" ]; then
     cd "$(echo "$target" | sed "s;^~;$HOME;")"
