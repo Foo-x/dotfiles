@@ -12,7 +12,7 @@ fi
 
 stty stop ''
 
-export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top"'
+export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
 
 function dispatch_prompt_command() {
   local f
