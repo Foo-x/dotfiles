@@ -33,7 +33,6 @@ alias df='df -h'
 alias du='du -h'
 alias free='free -h'
 alias grep='grep --color=auto -En'
-alias cd='pushd > /dev/null'
 alias dirs='dirs -v'
 
 # shorten
