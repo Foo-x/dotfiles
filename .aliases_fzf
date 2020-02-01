@@ -12,18 +12,18 @@ function f-() {
 
 # f.. - cd parent directory
 function f..() {
-  local paths=$(pwd | tr "/" "\n" | sed -e "1s|^|/|" -e '$d' | sed '1!G;h;$!d' | \grep -n "^")
+  local paths=$(cd .. && pwd | tr "/" "\n")
 
-  local selected="$(echo "${paths}" |
-    fzf --preview "
-      __selected="$(echo {})";
-      __path=\$(echo -e '${paths}' | tail -n +\${__selected%%:*} | sed -E 's|[0-9]+:/?||' | sed '1!G;h;\$!d' | tr '\n' '/');
-      echo \${__path};
-      echo;
-      ls -p --group-directories-first --color=always \${__path} 2> /dev/null;")"
+  local selected="$(
+    (
+    for i in $(seq 1 $(echo "${paths}" | wc -l)); do
+      echo "${paths}" | head -n $i | tr "\n" "/"
+      echo
+    done
+    ) | sed '1!G;h;$!d' | fzf --preview "ls -p --group-directories-first --color=always {} 2> /dev/null;")"
 
   if [[ "$selected" ]]; then
-    cd "$(echo "${paths}" | tail -n +"${selected%%:*}" | sed -E "s|[0-9]+:/?||" | sed '1!G;h;$!d' | tr "\n" "/")"
+    cd "${selected}"
   fi
 }
 
