@@ -30,7 +30,8 @@ function f..() {
 # fd - cd to selected directory
 # sort by depth
 function fd() {
-  local dir ignore_ptn='.git|node_modules'
+  local dir query ignore_ptn='.git|node_modules'
+  [[ -n "$1" ]] && query="-q $1"
 
   dir=$(
     {
@@ -46,7 +47,7 @@ function fd() {
     } |
     \grep -Ev "${ignore_ptn}" |
     sed "s|^./||" |
-    fzf +m +s --preview '
+    fzf +m +s ${query} --preview '
         __cd_nxt="$(echo {})";
         __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
         echo $__cd_path;
@@ -58,7 +59,8 @@ function fd() {
 # fe - open the selected files
 # open with command of EDITOR variable
 function fe() {
-  local files ignore_ptn='.git|node_modules'
+  local files query ignore_ptn='.git|node_modules'
+  [[ -n "$1" ]] && query="-q $1"
 
   files=($(
     {
@@ -67,7 +69,7 @@ function fe() {
     } |
     \grep -Ev "${ignore_ptn}" |
     sed "s|^./||" |
-    fzf -m --header "Tab: toggle"
+    fzf -m ${query} --header "Tab: toggle"
   ))
   if [[ -n "$files" ]]; then
     local files_str="$(printf '"%s" ' "${files[@]}")"
