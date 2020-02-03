@@ -30,15 +30,21 @@ function f..() {
 # fd - cd to selected directory
 # sort by depth
 function fd() {
-  local dir maxdepth ignore_ptn='.git|node_modules'
-  [[ "$1" =~ ^[0-9]+$ ]] && maxdepth="-maxdepth $1"
+  local dir ignore_ptn='.git|node_modules'
 
   dir=$(
-    find . ${maxdepth} -type d -printf "%d %p\n" 2> /dev/null |
-    sed "1d" |
+    {
+      local c=1
+      while :; do
+        local out=$(find . -maxdepth $c -mindepth $c -type d 2> /dev/null)
+        if [[ -z "$out" ]]; then
+          break
+        fi
+        echo "$out"
+        let c++
+      done
+    } |
     \grep -Ev "${ignore_ptn}" |
-    sort -n |
-    cut -d" " -f2- |
     sed "s|^./||" |
     fzf +m +s --preview '
         __cd_nxt="$(echo {})";
@@ -52,17 +58,16 @@ function fd() {
 # fe - open the selected files
 # open with command of EDITOR variable
 function fe() {
-  local files maxdepth ignore_ptn='.git|node_modules'
-  [[ "$1" =~ ^[0-9]+$ ]] && maxdepth="-maxdepth $1"
+  local files ignore_ptn='.git|node_modules'
 
   files=($(
-    find . "$1" -type f -printf "%d %p\n" 2> /dev/null |
-    sed "1d" |
+    {
+      find . -maxdepth 1 -type f 2> /dev/null;
+      find . -mindepth 2 -type f 2> /dev/null;
+    } |
     \grep -Ev "${ignore_ptn}" |
-    sort -n |
-    cut -d" " -f2- |
     sed "s|^./||" |
-    fzf -m +s --header "Tab: toggle"
+    fzf -m --header "Tab: toggle"
   ))
   if [[ -n "$files" ]]; then
     local files_str="$(printf '"%s" ' "${files[@]}")"
