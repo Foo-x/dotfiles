@@ -34,7 +34,7 @@ function fd() {
   [[ "$1" =~ ^[0-9]+$ ]] && maxdepth="-maxdepth $1"
 
   dir=$(
-    find . "$1" -type d -printf "%d %p\n" 2> /dev/null |
+    find . ${maxdepth} -type d -printf "%d %p\n" 2> /dev/null |
     sed "1d" |
     \grep -Ev "${ignore_ptn}" |
     sort -n |
@@ -99,10 +99,10 @@ function gfshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --tiebreak=index \
-      --preview "echo {} | bash -c \"\grep -Eo '[a-f0-9]+' | head -1 |
+      --preview "echo {} | bash -c \"\grep -Eo '[a-f0-9]+' | head -1 | \
                 xargs -I % git diff-tree --no-commit-id --name-status -r %\"" \
-      --bind "ctrl-m:execute:
-                (echo {} | bash -c \"\grep -Eo '[a-f0-9]+' | head -1 |
+      --bind "ctrl-m:execute: \
+                (echo {} | bash -c \"\grep -Eo '[a-f0-9]+' | head -1 | \
                 xargs -I % bash -c 'export TERM=xterm; git show --color=always % | less -R'\")"
 }
 
