@@ -130,7 +130,7 @@ function gfco() {
     (echo "$branches"; echo "$tags") | sed '/^$/d' |
     fzf --no-hscroll --no-multi -n 2 --header="current: [$(git symbolic-ref --short HEAD 2> /dev/null || echo 'detached HEAD')]" \
         --ansi --preview="git --no-pager log -150 --color --pretty=format:\"%s %C(black)%C(bold)%cr%C(reset)\" ..{2}") || return
-  git checkout $(awk '{print $2}' <<<"$target" )
+  { git checkout -t $(awk '{print $2}' <<< "$target") || git checkout $(awk '{print $2}' <<< "$target"); } 2> /dev/null
 }
 
 # gfshow - show commit
