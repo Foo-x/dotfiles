@@ -88,11 +88,9 @@ function fd() {
   dir=$(
     __bfs_dir |
     fzf +m +s ${query} --preview '
-        __cd_nxt="$(echo {})";
-        __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
-        echo $__cd_path;
+        echo "$(pwd)/$(echo {})";
         echo;
-        ls -p --group-directories-first --color=always "${__cd_path}";'
+        echo "$(pwd)/$(echo {})" | xargs ls -p --group-directories-first --color=always'
   ) && cd "$dir"
 }
 
