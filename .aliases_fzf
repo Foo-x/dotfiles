@@ -1,6 +1,57 @@
 # use in your .bash_profile or .bashrc like below
 # . /path/to/dotfiles/.aliases_fzf
 
+# __bfs_dir - breadth-first search for directories
+function __bfs_dir() {
+  local ignore_ptn="\.git|node_modules"
+
+  python -c "
+import os
+import re
+from collections import deque
+
+pattern = re.compile('${ignore_ptn}')
+
+q = deque([c for c in os.listdir('.') if os.path.isdir(c) and not pattern.match(c)])
+
+while len(q) > 0:
+    p = q.popleft()
+    print(p)
+    for c in os.listdir(p):
+        if pattern.match(c):
+            continue
+        child_path = p + '/' + c
+        if os.path.isdir(child_path):
+            q.append(child_path)
+  "
+}
+
+# __bfs_file - breadth-first search for files
+function __bfs_file() {
+  local ignore_ptn="\.git|node_modules"
+
+  python -c "
+import os
+import re
+from collections import deque
+
+pattern = re.compile('${ignore_ptn}')
+
+q = deque([c for c in os.listdir('.') if os.path.isdir(c) and not pattern.match(c)])
+
+while len(q) > 0:
+    p = q.popleft()
+    for c in os.listdir(p):
+        if pattern.match(c):
+            continue
+        child_path = p + '/' + c
+        if os.path.isdir(child_path):
+            q.append(child_path)
+        if os.path.isfile(child_path):
+            print(child_path)
+  "
+}
+
 # f- - cd from history
 function f-() {
   local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | tail -n +2 | awk '{print $2}' | fzf)
@@ -30,23 +81,11 @@ function f..() {
 # fd - cd to selected directory
 # sort by depth
 function fd() {
-  local dir query ignore_ptn='.git|node_modules'
+  local dir query
   [[ -n "$1" ]] && query="-q $1"
 
   dir=$(
-    {
-      local c=1
-      while :; do
-        local out=$(find . -maxdepth $c -mindepth $c -type d 2> /dev/null)
-        if [[ -z "$out" ]]; then
-          break
-        fi
-        echo "$out"
-        let c++
-      done
-    } |
-    \grep -Ev "${ignore_ptn}" |
-    sed "s|^./||" |
+    __bfs_dir |
     fzf +m +s ${query} --preview '
         __cd_nxt="$(echo {})";
         __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
@@ -59,16 +98,11 @@ function fd() {
 # fe - open the selected files
 # open with command of EDITOR variable
 function fe() {
-  local files query ignore_ptn='.git|node_modules'
+  local files query
   [[ -n "$1" ]] && query="-q $1"
 
   files=($(
-    {
-      find . -maxdepth 1 -type f 2> /dev/null;
-      find . -mindepth 2 -type f 2> /dev/null;
-    } |
-    \grep -Ev "${ignore_ptn}" |
-    sed "s|^./||" |
+    __bfs_file |
     fzf -m ${query} --header "Tab: toggle"
   ))
   if [[ -n "$files" ]]; then
