@@ -120,7 +120,9 @@ function fh() {
 
 # gfco - checkout branch
 function gfco() {
-  local tags branches target
+  local tags branches target query
+  [[ -n "$1" ]] && query="-q $1"
+
   branches=$(
     git --no-pager branch --all \
       --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)") || return
@@ -128,7 +130,7 @@ function gfco() {
     git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
   target=$(
     (echo "$branches"; echo "$tags") | sed '/^$/d' |
-    fzf --no-hscroll --no-multi -n 2 --header="current: [$(git symbolic-ref --short HEAD 2> /dev/null || echo 'detached HEAD')]" \
+    fzf --no-hscroll --no-multi -n 2 ${query} --header="current: [$(git symbolic-ref --short HEAD 2> /dev/null || echo 'detached HEAD')]" \
         --ansi --preview="git --no-pager log -150 --color --pretty=format:\"%s %C(black)%C(bold)%cr%C(reset)\" ..{2}") || return
   { git checkout -t $(awk '{print $2}' <<< "$target") || git checkout $(awk '{print $2}' <<< "$target"); } 2> /dev/null
 }
