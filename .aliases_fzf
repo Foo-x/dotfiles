@@ -63,7 +63,8 @@ function f-() {
 
 # f.. - cd parent directory
 function f..() {
-  local paths=$(cd .. && pwd | tr "/" "\n")
+  local paths=$(cd .. && pwd | tr "/" "\n") null="/dev/null"
+  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && null="nul"
 
   local selected="$(
     (
@@ -71,7 +72,7 @@ function f..() {
       echo "${paths}" | head -n $i | tr "\n" "/"
       echo
     done
-    ) | sed '1!G;h;$!d' | fzf --preview "ls -p --group-directories-first --color=always {} 2> /dev/null;")"
+    ) | sed '1!G;h;$!d' | fzf --preview "ls -p --group-directories-first --color=always {} 2> ${null}")"
 
   if [[ "$selected" ]]; then
     cd "${selected}"
