@@ -35,6 +35,10 @@ import os
 import re
 from collections import deque
 
+for c in os.listdir('.'):
+    if os.path.isfile(c):
+        print(c)
+
 pattern = re.compile('${ignore_ptn}')
 
 q = deque([c for c in os.listdir('.') if os.path.isdir(c) and not pattern.match(c)])
@@ -82,26 +86,27 @@ function f..() {
 # fd - cd to selected directory
 # sort by depth
 function fd() {
-  local dir query
+  local dir query null="/dev/null" conv="cat -" sh
   [[ -n "$1" ]] && query="-q $1"
+  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && null="nul" && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
 
   dir=$(
-    __bfs_dir |
-    fzf +m +s ${query} --preview '
-        echo "$(pwd)/$(echo {})";
-        echo;
-        echo "$(pwd)/$(echo {})" | xargs ls -p --group-directories-first --color=always'
+    ${sh} __bfs_dir 2> ${null} |
+    ${conv} |
+    fzf +m +s ${query} --preview "ls -p --group-directories-first --color=always {} 2> ${null}"
   ) && cd "$dir"
 }
 
 # fe - open the selected files
 # open with command of EDITOR variable
 function fe() {
-  local files query
+  local files query null="/dev/null" conv="cat -" sh
   [[ -n "$1" ]] && query="-q $1"
+  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && null="nul" && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
 
   files=($(
-    __bfs_file |
+    ${sh} __bfs_file 2> ${null} |
+    ${conv} |
     fzf -m ${query} --header "Tab: toggle"
   ))
   if [[ -n "$files" ]]; then
