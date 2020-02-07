@@ -91,7 +91,7 @@ function fd() {
   [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && null="nul" && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
 
   dir=$(
-    ${sh} __bfs_dir 2> ${null} |
+    ${sh} __bfs_dir 2> /dev/null |
     ${conv} |
     fzf +m +s ${query} --preview "ls -p --group-directories-first --color=always {} 2> ${null}"
   ) && cd "$dir"
@@ -100,12 +100,12 @@ function fd() {
 # fe - open the selected files
 # open with command of EDITOR variable
 function fe() {
-  local files query null="/dev/null" conv="cat -" sh
+  local files query conv="cat -" sh
   [[ -n "$1" ]] && query="-q $1"
-  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && null="nul" && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
+  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
 
   files=($(
-    ${sh} __bfs_file 2> ${null} |
+    ${sh} __bfs_file 2> /dev/null |
     ${conv} |
     fzf -m ${query} --header "Tab: toggle"
   ))
