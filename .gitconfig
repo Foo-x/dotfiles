@@ -69,7 +69,7 @@
 	sp = stash pop
 	save = !git stash && git stash apply
 
-	alias = config --get-regexp alias.*
+	al = config --get-regexp alias.*
 
 	# set upstream of current branch to the same name in origin
 	sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
