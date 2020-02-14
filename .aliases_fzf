@@ -166,7 +166,7 @@ function gfshow() {
 function gfa() {
   local selected
   selected=$(git -c color.status=always status -s |
-    fzf -m --ansi -q ${1:-''} --preview "echo {2} | xargs git diff --color" |
+    fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "echo {2} | xargs git diff --color" |
     awk '{print $2}')
 
   if [[ "${selected}" ]]; then
@@ -179,7 +179,7 @@ function gfa() {
 function gfus() {
   local selected
   selected=$(git -c color.status=always status -s |
-    fzf -m --ansi -q ${1:-''} --preview "echo {2} | xargs git diff --cached --color" |
+    fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "echo {2} | xargs git diff --cached --color" |
     awk '{print $2}')
 
   if [[ "${selected}" ]]; then
