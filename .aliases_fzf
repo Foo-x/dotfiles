@@ -165,7 +165,8 @@ function gfshow() {
 # gfa - add selected
 function gfa() {
   local selected
-  selected=$(git -c color.status=always status -s |
+  selected=$(git status -s |
+    \grep "^.[^ ]" |
     fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "echo {2} | xargs git diff --color" |
     awk '{print $2}')
 
@@ -178,7 +179,8 @@ function gfa() {
 # gfus - unstage selected
 function gfus() {
   local selected
-  selected=$(git -c color.status=always status -s |
+  selected=$(git status -s |
+    \grep "^[^ ?]" |
     fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "echo {2} | xargs git diff --cached --color" |
     awk '{print $2}')
 
