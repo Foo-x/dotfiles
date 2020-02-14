@@ -58,7 +58,7 @@ while len(q) > 0:
 
 # f- - cd from history
 function f-() {
-  local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | tail -n +2 | awk '{print $2}' | fzf)
+  local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | tail -n +2 | awk '{print $2}' | fzf -q ${1:-''})
 
   if [ -n "$target" ]; then
     cd "$(echo "$target" | sed "s;^~;$HOME;")"
@@ -76,7 +76,7 @@ function f..() {
       echo "${paths}" | head -n $i | tr "\n" "/"
       echo
     done
-    ) | sed '1!G;h;$!d' | fzf --preview "ls -p --group-directories-first --color=always {} 2> ${null}")"
+    ) | sed '1!G;h;$!d' | fzf -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> ${null}")"
 
   if [[ "$selected" ]]; then
     cd "${selected}"
@@ -86,28 +86,26 @@ function f..() {
 # fd - cd to selected directory
 # sort by depth
 function fd() {
-  local dir query null="/dev/null" conv="cat -" sh
-  [[ -n "$1" ]] && query="-q $1"
+  local dir null="/dev/null" conv="cat -" sh
   [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && null="nul" && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
 
   dir=$(
     ${sh} __bfs_dir 2> /dev/null |
     ${conv} |
-    fzf +m +s ${query} --preview "ls -p --group-directories-first --color=always {} 2> ${null}"
+    fzf +m +s -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> ${null}"
   ) && cd "$dir"
 }
 
 # fe - open the selected files
 # open with command of EDITOR variable
 function fe() {
-  local files query conv="cat -" sh
-  [[ -n "$1" ]] && query="-q $1"
+  local files conv="cat -" sh
   [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
 
   files=($(
     ${sh} __bfs_file 2> /dev/null |
     ${conv} |
-    fzf -m ${query} --header "Tab: toggle"
+    fzf -m ${1:-''} --header "Tab: toggle"
   ))
   if [[ -n "$files" ]]; then
     local files_str="$(printf '"%s" ' "${files[@]}")"
@@ -117,7 +115,7 @@ function fe() {
 
 # fh - repeat history
 function fh() {
-  local command=$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sort -k 2 -k 1rn | uniq -f 1 | sort -n | fzf --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
+  local command=$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sort -k 2 -k 1rn | uniq -f 1 | sort -n | fzf ${1:-''} --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
   history -s "${command}"
   history -s "${FUNCNAME[0]}"
   eval "${command}"
@@ -125,8 +123,7 @@ function fh() {
 
 # gfco - checkout branch
 function gfco() {
-  local tags branches target query
-  [[ -n "$1" ]] && query="-q $1"
+  local tags branches target
 
   branches=$(
     git --no-pager branch --all \
@@ -135,21 +132,20 @@ function gfco() {
     git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
   target=$(
     (echo "$branches"; echo "$tags") | sed '/^$/d' |
-    fzf --no-hscroll --no-multi -n 2 ${query} --header="current: [$(git symbolic-ref --short HEAD 2> /dev/null || echo 'detached HEAD')]" \
+    fzf --no-hscroll --no-multi -n 2 ${1:-''} --header="current: [$(git symbolic-ref --short HEAD 2> /dev/null || echo 'detached HEAD')]" \
         --ansi --preview="git --no-pager log -150 --color --pretty=format:\"%s %C(black)%C(bold)%cr%C(reset)\" ..{2}") || return
   { git checkout -t $(awk '{print $2}' <<< "$target") || git checkout $(awk '{print $2}' <<< "$target"); } 2> /dev/null
 }
 
 # gfbd - delete branches
 function gfbd() {
-  local tags branches target query
-  [[ -n "$1" ]] && query="-q $1"
+  local tags branches target
 
   target=$(
     git --no-pager branch \
         --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%(refname:short)%(end)%(end)" |
     sed '/^$/d' |
-    fzf -m --no-hscroll ${query} --header="Tab: toggle") || return
+    fzf -m --no-hscroll ${1:-''} --header="Tab: toggle") || return
   git branch -D ${target}
 }
 
@@ -170,7 +166,7 @@ function gfshow() {
 function gfa() {
   local selected
   selected=$(git -c color.status=always status -s |
-    fzf -m --ansi --preview "echo {2} | xargs git diff --color" |
+    fzf -m --ansi ${1:-''} --preview "echo {2} | xargs git diff --color" |
     awk '{print $2}')
 
   if [[ "${selected}" ]]; then
@@ -183,7 +179,7 @@ function gfa() {
 function gfus() {
   local selected
   selected=$(git -c color.status=always status -s |
-    fzf -m --ansi --preview "echo {2} | xargs git diff --cached --color" |
+    fzf -m --ansi ${1:-''} --preview "echo {2} | xargs git diff --cached --color" |
     awk '{print $2}')
 
   if [[ "${selected}" ]]; then
