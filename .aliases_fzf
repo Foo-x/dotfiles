@@ -111,6 +111,75 @@ function fe() {
   fi
 }
 
+# fb - cd to bookmark
+function fb() {
+  local bfile=~/.fb dir matched usage OPT OPTARG OPTIND
+  touch ${bfile}
+
+  usage=$(
+    echo "Usage:"
+    echo "  fb [-a NAME | -u NAME | -d NAME | -l | -e | QUERY]"
+    echo ""
+    echo "Description:"
+    echo "  Save and jump to bookmarks."
+    echo ""
+    echo "Options:"
+    echo "  -a NAME  Save the current dir as NAME"
+    echo "  -u NAME  Save or Update the current dir as NAME"
+    echo "  -d NAME  Delete NAME from bookmarks"
+    echo "  -l       List all bookmarks"
+    echo "  -e       Edit bookmarks-file"
+    echo "  QUERY    Jump to bookmark filtered with QUERY (optional)"
+  )
+
+  while getopts -- ":-:a:u:d:le" OPT; do
+    case $OPT in
+      a)
+        if matched=$(\grep "^$OPTARG=" ${bfile}); then
+          echo "'$OPTARG' is already saved: $(echo ${matched} | cut -d '=' -f2)"
+          return 1
+        fi
+        echo "$OPTARG=$(pwd)" >> ${bfile}
+        echo "Saved: $OPTARG=$(pwd)"
+        return
+        ;;
+      u)
+        sed -i "/^$OPTARG=/d" ${bfile}
+        echo "$OPTARG=$(pwd)" >> ${bfile}
+        echo "Saved: $OPTARG=$(pwd)"
+        return
+        ;;
+      d)
+        if ! \grep "^$OPTARG=" ${bfile} > /dev/null; then
+          echo "'$OPTARG' is not saved yet."
+          return 1
+        fi
+        sed -i "/^$OPTARG=/d" ${bfile}
+        echo "Deleted: $OPTARG"
+        return
+        ;;
+      l)
+        cat ${bfile} | awk -F '=' '{printf "\033[34m%-20s\033[0m %s\n", $1, $2}'
+        return
+        ;;
+      e)
+        eval "${EDITOR} ${bfile}"
+        return
+        ;;
+      *)
+        echo -e "${usage}"
+        return
+        ;;
+    esac
+  done
+
+  if [[ $OPTIND == 1 ]]; then
+    dir=$(
+      cat ${bfile} | awk -F '=' '{printf "\033[34m%-20s\033[0m %s\n", $1, $2}' | fzf +m --ansi -q ${1:-''} -n1 -1
+    ) && cd "$(echo "${dir}" | cut -d ' ' -f2- | sed "s/^ *//")"
+  fi
+}
+
 # fh - repeat history
 function fh() {
   local command=$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sort -k 2 -k 1rn | uniq -f 1 | sort -n | fzf -q ${1:-''} --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
