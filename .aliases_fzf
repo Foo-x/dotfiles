@@ -231,9 +231,10 @@ function gfshow() {
 
 # gfa - add selected
 function gfa() {
-  local selected
-  selected=$(git status -s |
-    \grep "^.[^ ]" |
+  local selected unstaged
+  unstaged=$(git status -s | \grep "^.[^ ]" | awk '{print $2}')
+  selected=$(git -c color.status=always status -s |
+    \grep -f <(echo -e "${unstaged}") |
     fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "echo {2} | xargs git diff --color" |
     awk '{print $2}')
 
@@ -245,9 +246,10 @@ function gfa() {
 
 # gfus - unstage selected
 function gfus() {
-  local selected
-  selected=$(git status -s |
-    \grep "^[^ ?]" |
+  local selected staged
+  staged=$(git status -s | \grep "^[^ ?]" | awk '{print $2}')
+  selected=$(git -c color.status=always status -s |
+    \grep -f <(echo -e "${staged}") |
     fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "echo {2} | xargs git diff --cached --color" |
     awk '{print $2}')
 
