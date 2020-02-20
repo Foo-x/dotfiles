@@ -231,30 +231,32 @@ function gfshow() {
 
 # gfa - add selected
 function gfa() {
-  local selected unstaged
+  local selected unstaged preview="echo {2} | xargs git diff --color"
+  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && preview=""
   unstaged=$(git status -s | \grep "^.[^ ]" | awk '{print $2}')
   selected=$(git -c color.status=always status -s |
     \grep -f <(echo -e "${unstaged}") |
-    fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "echo {2} | xargs git diff --color" |
+    fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "${preview}" |
     awk '{print $2}')
 
   if [[ "${selected}" ]]; then
     echo "${selected}" | xargs git add
-    echo "Completed: git add $(echo ${selected})"
+    echo -e "git add:\n$(echo -e "${selected}")"
   fi
 }
 
 # gfus - unstage selected
 function gfus() {
-  local selected staged
+  local selected staged preview="echo {2} | xargs git diff --cached --color"
+  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && preview=""
   staged=$(git status -s | \grep "^[^ ?]" | awk '{print $2}')
   selected=$(git -c color.status=always status -s |
     \grep -f <(echo -e "${staged}") |
-    fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "echo {2} | xargs git diff --cached --color" |
+    fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "${preview}" |
     awk '{print $2}')
 
   if [[ "${selected}" ]]; then
     echo "${selected}" | xargs git reset -q HEAD
-    echo "Completed: git unstage $(echo ${selected})"
+    echo -e "git unstage:\n$(echo -e "${selected}")"
   fi
 }
