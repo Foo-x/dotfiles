@@ -233,7 +233,12 @@ function gfshow() {
 function gfa() {
   local selected unstaged preview="echo {2} | xargs git diff --color"
   [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && preview=""
+
   unstaged=$(git status -s | \grep "^.[^ ]" | awk '{print $2}')
+  if [[ ! ${unstaged} ]]; then
+    return
+  fi
+
   selected=$(git -c color.status=always status -s |
     \grep -f <(echo -e "${unstaged}") |
     fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "${preview}" |
@@ -249,7 +254,12 @@ function gfa() {
 function gfus() {
   local selected staged preview="echo {2} | xargs git diff --cached --color"
   [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && preview=""
+
   staged=$(git status -s | \grep "^[^ ?]" | awk '{print $2}')
+  if [[ ! ${staged} ]]; then
+    return
+  fi
+
   selected=$(git -c color.status=always status -s |
     \grep -f <(echo -e "${staged}") |
     fzf -m --ansi -q ${1:-''} --header "Tab: toggle" --preview "${preview}" |
