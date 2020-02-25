@@ -1,0 +1,6 @@
+# execute fetch_yarn_completions.sh, and use in your .bash_profile or .bashrc like below
+# . /path/to/dotfiles/.yarn-completion
+
+SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
+
+. ${SCRIPT_DIR}/yarn-completion.bash
