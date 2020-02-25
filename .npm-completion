@@ -1,0 +1,4 @@
+# use in your .bash_profile or .bashrc like below
+# . /path/to/dotfiles/.npm-completion
+
+. <(npm completion)
