@@ -192,7 +192,8 @@ function fh() {
 writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
 
 fhe() {
-  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | writecmd
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sort -k 2 -k 1rn | uniq -f 1 | sort -n | fzf -q ${1:-''} --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g' | writecmd
+  history -s "${FUNCNAME[0]}"
 }
 
 # gfco - checkout branch
