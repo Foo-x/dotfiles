@@ -12,7 +12,7 @@ alias .....='cd ../../../..'
 alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias ws='cd ~/Documents/workspace'
-alias cdg='cd $(git rev-parse --show-toplevel)'
+alias cdg='cd $(git rev-parse --show-toplevel)'  # cd to toplevel of git repo
 function mkcd() { mkdir -p "$1" && cd "$1"; }
 
 # confirm
@@ -32,7 +32,7 @@ alias mkdir='mkdir -p'
 alias df='df -h'
 alias du='du -h'
 alias free='free -h'
-alias grep='grep --color=auto -En'
+alias grep='grep --color=auto -En'  # use regexp and show line numbers
 alias dirs='dirs -v'
 
 # shorten

@@ -6,13 +6,14 @@
 	ui = auto
 [alias]
 	# log
-	l0 = log --oneline --all --decorate --graph               # 1行
-	l1 = log --oneline --all --decorate --graph --name-status # 1行 + 変更ファイル
-	l2 = log -p --decorate --all                              # 詳細
+	l0 = log --oneline --all --decorate --graph                # oneline
+	l1 = log --oneline --all --decorate --graph --name-status  # oneline + changed files
+	l2 = log -p --decorate --all                               # description
 
 	a = add
 	aa = add --all
 	s = status -sb
+	# show short commit hash
 	rev = rev-parse --short @
 
 	# branch
@@ -32,6 +33,7 @@
 	rbs = rebase --skip
 	rbi = rebase -i
 	rbim = rebase -i master
+	# show branches with relationship to upstream
 	usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
 
 	# commit
@@ -39,6 +41,7 @@
 	cm = commit -m
 	ca = commit --amend --no-edit
 	ic = commit --allow-empty -m \"Initial Commit\"
+	cf = commit --fixup
 	chp = cherry-pick
 
 	# remote
@@ -67,9 +70,10 @@
 	sa = stash apply
 	sd = stash drop
 	sp = stash pop
-	save = !git stash && git stash apply
+	save = stash save
+	ssa = !git stash && git stash apply
 
-	al = config --get-regexp alias.*
+	al = config --get-regexp alias.*  # show aliases
 
 	# set upstream of current branch to the same name in origin
 	sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
