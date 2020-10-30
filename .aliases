@@ -11,7 +11,7 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
-alias ws='cd ~/Documents/workspace'
+alias ws='cd ~/workspace'
 alias cdg='cd $(git rev-parse --show-toplevel)'  # cd to toplevel of git repo
 function mkcd() { mkdir -p "$1" && cd "$1"; }
 
