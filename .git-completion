@@ -5,7 +5,7 @@ SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
 . ${SCRIPT_DIR}/git-prompt.sh
 
-if [[ ! $(uname -a) =~ "Microsoft" ]]; then
+if [[ ! $(uname -a) =~ "Microsoft|microsoft" ]]; then
   . ${SCRIPT_DIR}/git-completion.bash
 fi
 
