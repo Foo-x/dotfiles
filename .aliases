@@ -81,3 +81,11 @@ function open-https() {
   fi
 }
 
+function with_env() {
+  (
+    set -a
+    . .env
+    set +a
+    "$@"
+  )
+}
