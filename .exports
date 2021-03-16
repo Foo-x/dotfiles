@@ -1,6 +1,8 @@
 # use in your .bash_profile or .bashrc like below
 # . /path/to/dotfiles/.exports
 
+export HISTSIZE=100000
+export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignoreboth  # not save commands that space-beginned and duplicated to history
 export EDITOR='vim -p'
 
