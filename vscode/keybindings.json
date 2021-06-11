@@ -32,5 +32,23 @@
     "key": "ctrl+e",
     "command": "cursorLineEnd",
     "when": "textInputFocus && vim.mode == 'Insert'"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quickOpenView"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "workbench.action.quickOpenView",
+    "when": "!terminalFocus"
   }
 ]

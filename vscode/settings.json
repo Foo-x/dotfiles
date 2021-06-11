@@ -31,7 +31,8 @@
     "vim.easymotionMarkerForegroundColorTwoCharFirst": "#f00",
     "vim.handleKeys": {
         "<C-b>": false,
-        "<C-f>": false
+        "<C-f>": false,
+        "<C-k>": false
     },
     "vim.hlsearch": true,
     "vim.leader": "<space>",
@@ -593,6 +594,17 @@
             "after": [
                 "g",
                 "g"
+            ]
+        },
+        {
+            "before": [
+                "y"
+            ],
+            "after": [
+                "y",
+                "g",
+                "v",
+                "<Esc>"
             ]
         },
         {
