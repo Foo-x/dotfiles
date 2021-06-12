@@ -33,7 +33,11 @@ RUN useradd -s /bin/bash -m ${USER} \
 USER ${USER}
 WORKDIR ${HOME}
 
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
+    && ~/.fzf/install
+
 COPY .aliases \
+    .aliases_fzf \
     .bashrc \
     .exports \
     .git-completion \
@@ -45,8 +49,11 @@ COPY --from=fetch /ws/git* /ws/hub* ${DOTFILES}
 
 RUN echo ". ~/dotfiles/.bashrc" >> .bashrc \
     && echo ". ~/dotfiles/.aliases" >> .bashrc \
+    && echo ". ~/dotfiles/.aliases_fzf" >> .bashrc \
     && echo ". ~/dotfiles/.exports" >> .bashrc \
     && echo ". ~/dotfiles/.git-completion" >> .bashrc \
+    && echo "alias python=python3" >> .bashrc \
+    && echo "alias pip=pip3" >> .bashrc \
     && printf "[include]\n\tpath = ~/dotfiles/.gitconfig" >> .gitconfig \
     && echo '$include ~/dotfiles/.inputrc' >> .inputrc \
     && echo "source ~/dotfiles/.vimrc" >> .vimrc

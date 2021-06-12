@@ -3,9 +3,9 @@
 
 # __bfs_dir - breadth-first search for directories
 function __bfs_dir() {
-  local ignore_ptn="\.git|node_modules"
+  local cmd ignore_ptn="\.git|node_modules"
 
-  python -c "
+  cmd="
 import os
 import re
 from collections import deque
@@ -23,14 +23,19 @@ while len(q) > 0:
         child_path = p + '/' + c
         if os.path.isdir(child_path):
             q.append(child_path)
-  "
+"
+  if which python &> /dev/null; then
+    python -c "$cmd"
+  else
+    python3 -c "$cmd"
+  fi
 }
 
 # __bfs_file - breadth-first search for files
 function __bfs_file() {
-  local ignore_ptn="\.git|node_modules"
+  local cmd ignore_ptn="\.git|node_modules"
 
-  python -c "
+  cmd="
 import os
 import re
 from collections import deque
@@ -53,7 +58,12 @@ while len(q) > 0:
             q.append(child_path)
         if os.path.isfile(child_path):
             print(child_path)
-  "
+"
+  if which python &> /dev/null; then
+    python -c "$cmd"
+  else
+    python3 -c "$cmd"
+  fi
 }
 
 # f- - cd to history
