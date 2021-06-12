@@ -44,7 +44,7 @@ alias md=mkdir
 alias gr=grep
 alias dirsc='dirs -c && pushd -n ${PWD} > /dev/null'
 
-alias reload='{ . ~/.bash_profile; . ~/.bashrc ; bind -f ~/.inputrc; } 2> /dev/null'
+alias reload='{ . ~/.bash_profile; . ~/.bashrc ; . ~/.bash_completion ; bind -f ~/.inputrc; } 2> /dev/null'
 
 alias osver='cat /etc/os-release'
 
