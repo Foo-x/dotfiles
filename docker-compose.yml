@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  dotfiles:
+    image: dotfiles
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - workspace:/workspace
+    tty: true
+
+volumes:
+  workspace:
