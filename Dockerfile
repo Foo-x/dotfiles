@@ -21,6 +21,10 @@ RUN apt update \
     language-pack-ja \
     vim \
     wget \
+    && apt install --no-install-recommends -y \
+    python3.8 \
+    python3-pip \
+    python3.8-dev \
     && rm -rf /var/lib/apt/lists/*
 RUN useradd -s /bin/bash -m ${USER} \
     && mkdir ${DOTFILES} \
