@@ -3,3 +3,4 @@
 /git-completion.bash
 /hub.bash_completion.sh
 /yarn-completion.bash
+/.env

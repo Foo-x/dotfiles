@@ -46,6 +46,7 @@ COPY .aliases \
     .vimrc* \
     ${DOTFILES}
 COPY --from=fetch /ws/git* /ws/hub* ${DOTFILES}
+COPY docker/git-credential-github-token /usr/local/bin
 
 RUN echo ". ~/dotfiles/.bashrc" >> .bashrc \
     && echo ". ~/dotfiles/.aliases" >> .bashrc \
@@ -56,6 +57,8 @@ RUN echo ". ~/dotfiles/.bashrc" >> .bashrc \
     && echo "alias pip=pip3" >> .bashrc \
     && printf "[include]\n\tpath = ~/dotfiles/.gitconfig" >> .gitconfig \
     && echo '$include ~/dotfiles/.inputrc' >> .inputrc \
-    && echo "source ~/dotfiles/.vimrc" >> .vimrc
+    && echo "source ~/dotfiles/.vimrc" >> .vimrc \
+    && git config --global url."https://github.com/".insteadOf ssh://git@github.com/ \
+    && git config --global credential.helper github-token
 
 WORKDIR ${WORKSPACE}
