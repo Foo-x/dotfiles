@@ -1,3 +1,5 @@
+ARG BUILD_TARGET=base
+
 # fetch
 FROM alpine as fetch
 WORKDIR /ws
@@ -7,11 +9,10 @@ RUN sh fetch_git_completions.sh
 
 
 # base
-FROM ubuntu:20.04
+FROM ubuntu:20.04 as image_base
 
 ARG USER=foo
 ARG HOME=/home/${USER}
-ARG WORKSPACE=/workspace
 ARG DOTFILES=${HOME}/dotfiles
 
 RUN apt update \
@@ -29,6 +30,20 @@ RUN apt update \
 RUN useradd -s /bin/bash -m ${USER} \
     && mkdir ${DOTFILES} \
     && chown -R ${USER}:${USER} ${HOME}
+
+
+# nodejs
+FROM image_base as image_nodejs
+
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+    && apt install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# build
+FROM image_${BUILD_TARGET}
+
+ARG WORKSPACE=/workspace
 
 USER ${USER}
 WORKDIR ${HOME}

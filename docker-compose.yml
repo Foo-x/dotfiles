@@ -6,6 +6,9 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+      args:
+        # base|nodejs
+        BUILD_TARGET: ${BUILD_TARGET:-base}
     env_file: .env
     environment:
       GIT_AUTHOR_NAME: ${GIT_NAME}
@@ -13,6 +16,7 @@ services:
       GIT_COMMITTER_NAME: ${GIT_NAME}
       GIT_COMMITTER_EMAIL: ${GIT_EMAIL}
       GITHUB_USERNAME:
+      # only token
       GITHUB_PASSWORD:
     volumes:
       - workspace:/workspace
