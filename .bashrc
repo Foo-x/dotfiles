@@ -1,6 +1,8 @@
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
 shopt -s autocd
+shopt -s cdspell
+shopt -s dirspell
 shopt -s extglob
 shopt -s globstar
 shopt -s nocaseglob
