@@ -12,4 +12,5 @@ curl -fsSL https://raw.githubusercontent.com/Foo-x/dotfiles/master/install.sh | 
 
 ```bash
 bash ~/.dotfiles/install.sh
+. ~/.bashrc
 ```
