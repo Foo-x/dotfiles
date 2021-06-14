@@ -1,7 +1,3 @@
-# use in your .gitconfig like below
-# [include]
-# 	path = /path/to/dotfiles/.gitconfig
-
 [color]
 	ui = auto
 [alias]

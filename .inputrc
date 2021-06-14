@@ -1,7 +1,3 @@
-# use in your .inputrc like below
-# $include /path/to/dotfiles/.inputrc
-# bash version should be >= 4.4
-
 set completion-ignore-case on
 set show-all-if-ambiguous on
 set visible-stats on

@@ -1,4 +1,1 @@
-# use in your .bash_profile or .bashrc like below
-# . /path/to/dotfiles/.aliases_arch
-
 alias p=pacman

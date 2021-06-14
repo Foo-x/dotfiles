@@ -1,5 +1,4 @@
-# use in your .bashrc or .bash_profile like below
-# . /path/to/dotfiles/.bashrc
+SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
 shopt -s autocd
 shopt -s extglob
@@ -13,3 +12,12 @@ shopt -u histappend
 if [ "$(uname)" != 'Darwin' ] && type setxkbmap &> /dev/null; then
   setxkbmap -option ctrl:nocaps
 fi
+
+umask 022
+
+. ${SCRIPT_DIR}/.aliases
+. ${SCRIPT_DIR}/.aliases_arch
+. ${SCRIPT_DIR}/.aliases_fzf
+. ${SCRIPT_DIR}/.exports
+. ${SCRIPT_DIR}/.git-completion
+. ${SCRIPT_DIR}/complete_alias

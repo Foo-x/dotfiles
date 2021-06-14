@@ -1,6 +1,3 @@
-" use in your .vimrc like below
-" source /path/to/dotfiles/.vimrc
-
 syntax on
 set nocompatible
 set backspace=indent,eol,start
