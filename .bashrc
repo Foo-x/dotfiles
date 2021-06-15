@@ -18,8 +18,14 @@ fi
 umask 022
 
 . ${SCRIPT_DIR}/.aliases
-. ${SCRIPT_DIR}/.aliases_arch
-. ${SCRIPT_DIR}/.aliases_fzf
 . ${SCRIPT_DIR}/.exports
 . ${SCRIPT_DIR}/.git-completion
 . ${SCRIPT_DIR}/complete_alias
+
+if type pacman &> /dev/null; then
+  . ${SCRIPT_DIR}/.aliases_arch
+fi
+
+if type fzf &> /dev/null; then
+  . ${SCRIPT_DIR}/.aliases_fzf
+fi
