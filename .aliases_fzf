@@ -187,22 +187,6 @@ function fb() {
   fi
 }
 
-# fh - repeat history
-function fh() {
-  local command=$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sort -k 2 -k 1rn | uniq -f 1 | sort -n | fzf -q ${1:-''} --tac | sed -r 's/ *[-0-9 :]*\*? *//' | sed -r 's/\\/\\\\/g')
-  history -s "${command}"
-  history -s "${FUNCNAME[0]}"
-  eval "${command}"
-}
-
-# fhe - repeat history edit
-writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
-
-fhe() {
-  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sort -k 2 -k 1rn | uniq -f 1 | sort -n | fzf -q ${1:-''} --tac | sed -r 's/ *[-0-9 :]*\*? *//' | sed -r 's/\\/\\\\/g' | writecmd
-  history -s "${FUNCNAME[0]}"
-}
-
 # gfco - checkout branch
 function gfco() {
   local tags branches target
