@@ -60,7 +60,7 @@ echo "${exe_files}" | xargs -I{} bash ${DOT_DIR}/{}
 
 if has git && [[ ! -d ${HOME}/.fzf ]]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
-    ${HOME}/.fzf/install --no-key-bindings --no-completion --update-rc
+    ${HOME}/.fzf/install --key-bindings --no-completion --update-rc
 fi
 
 echo "Done."
