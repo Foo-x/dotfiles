@@ -29,4 +29,4 @@ if type fzf &> /dev/null; then
 fi
 
 # remove duplicates in PATH
-export PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!arr[$0]++')
+export PATH=$(printf "$PATH" | awk -v RS=: -v ORS=: '!arr[$0]++')
