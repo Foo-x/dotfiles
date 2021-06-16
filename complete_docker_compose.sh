@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMPLETION_DIR=${HOME}/.local/share/bash-completion/completions
+COMPLETION_DIR=${BASH_COMPLETION_USER_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion}/completions
 
 if [[ -f ${COMPLETION_DIR}/docker-compose ]]; then
     exit 0
