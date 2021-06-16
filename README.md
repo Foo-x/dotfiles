@@ -4,7 +4,7 @@
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Foo-x/dotfiles/master/install.sh | bash
-exec bash
+exec $SHELL -l
 ```
 
 
@@ -12,5 +12,5 @@ exec bash
 
 ```bash
 bash ~/.dotfiles/install.sh
-exec bash
+exec $SHELL -l
 ```
