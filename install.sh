@@ -34,21 +34,18 @@ if ! \grep -q "${source_bashrc}" ${HOME}/.bashrc; then
     echo "${source_bashrc}" >> ${HOME}/.bashrc
 fi
 
-# include .profile
-touch ${HOME}/.profile
-source_profile=". ${DOT_DIR}/.profile"
-if ! \grep -q "${source_profile}" ${HOME}/.profile; then
-    echo "${source_profile}" >> ${HOME}/.profile
-fi
-
 # include .gitconfig
 touch ${HOME}/.gitconfig
 if has git && ! git config --global include.path &> /dev/null; then
     git config --global include.path ${DOT_DIR}/.gitconfig
 fi
 
+touch ${HOME}/.user_profile
+
 files="
+.bash_profile
 .inputrc
+.profile
 .vimrc
 .vimrc.keymap
 .vimrc.search
