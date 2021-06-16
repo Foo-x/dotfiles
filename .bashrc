@@ -27,6 +27,3 @@ fi
 if type fzf &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_fzf
 fi
-
-# remove duplicates in PATH
-export PATH=$(printf "$PATH" | awk -v RS=: -v ORS=: '!arr[$0]++')
