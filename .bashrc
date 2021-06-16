@@ -15,8 +15,6 @@ if [ "$(uname)" != 'Darwin' ] && type setxkbmap &> /dev/null; then
   setxkbmap -option ctrl:nocaps
 fi
 
-umask 022
-
 . ${SCRIPT_DIR}/.aliases
 . ${SCRIPT_DIR}/.exports
 . ${SCRIPT_DIR}/.git-completion
@@ -29,3 +27,6 @@ fi
 if type fzf &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_fzf
 fi
+
+# remove duplicates in PATH
+export PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!arr[$0]++')
