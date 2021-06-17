@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if ! type git &> /dev/null; then
+    return
+fi
+
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
 if [[ ! -f ${SCRIPT_DIR}/git-prompt.sh ]]; then
