@@ -9,8 +9,11 @@ set colored-completion-prefix on
 set menu-complete-display-prefix on
 set bell-style none
 
-# quiet
-"\C-q": " &> /dev/null"
+# null
+"\C-n": " &> /dev/null"
 
-"\C-n": "\C-anohup \C-e &> log &"
+# background
+"\C-b": "\C-anohup \C-e &> log &"
+
+# sudo
 "\C-s": "\C-asudo \C-e"
