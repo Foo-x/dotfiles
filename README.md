@@ -1,5 +1,11 @@
 # dotfiles
 
+## Requirements
+
+- curl
+- git (optional)
+
+
 ## Installation
 
 ```bash
