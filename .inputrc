@@ -10,7 +10,7 @@ set menu-complete-display-prefix on
 set bell-style none
 
 # quiet
-"\C-q": "&> /dev/null"
+"\C-q": " &> /dev/null"
 
-"\C-n": "\C-anohup \C-e&> log &"
+"\C-n": "\C-anohup \C-e &> log &"
 "\C-s": "\C-asudo \C-e"
