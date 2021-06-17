@@ -3,9 +3,10 @@ export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignoreboth  # not save commands that space-beginned and duplicated to history
 export EDITOR='vim -p'
 
-if [ "$(uname)" = 'Darwin' ]; then
+LOCALE_LIST="$(locale -a)"
+if [[ "${LOCALE_LIST}" == *ja_JP.UTF-8* ]]; then
   export LC_ALL='ja_JP.UTF-8'
-else
+elif [[ "${LOCALE_LIST}" == *ja_JP.utf8* ]]; then
   export LC_ALL='ja_JP.utf8'
 fi
 
