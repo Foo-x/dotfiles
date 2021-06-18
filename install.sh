@@ -47,10 +47,15 @@ files="
 .inputrc
 .profile
 .vimrc
-.vimrc.keymap
-.vimrc.search
 "
 echo "${files}" | xargs -I{} ln -sf ${DOT_DIR}/{} ${HOME}/{}
+
+mkdir -p ${HOME}/.vim
+vimrc_files="
+keymap.vimrc
+search.vimrc
+"
+echo "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.vim/{} ${HOME}/.vim/{}
 
 exe_files="
 complete_docker_compose.sh

@@ -1,5 +1,3 @@
-let mapleader = " "
-
 " normal mode
 "" display lines downward
 nnoremap j gj
@@ -17,21 +15,21 @@ nnoremap <C-j> i<CR><Esc>
 nnoremap + <C-a>
 nnoremap - <C-x>
 
-noremap <Leader>h ^
-noremap <Leader>l $
-noremap <Leader>m %
-nnoremap <Leader>/ *
+noremap <Space>h ^
+noremap <Space>l $
+noremap <Space>m %
+nnoremap <Space>/ *
 
-nnoremap <Leader>o o<Esc>
-nnoremap <Leader>O O<Esc>
+nnoremap <Space>o o<Esc>
+nnoremap <Space>O O<Esc>
 
-nnoremap <Leader>j <C-f>
-nnoremap <Leader>k <C-b>
+nnoremap <Space>j <C-f>
+nnoremap <Space>k <C-b>
 
 "" insert only one character
-nnoremap <Leader>i i_<Esc>r
+nnoremap <Space>i i_<Esc>r
 
-nmap <Leader>w [window]
+nmap <Space>w [window]
 nnoremap [window]s :<C-u>split<CR>
 nnoremap [window]v :<C-u>vsplit<CR>
 nnoremap [window]h <C-w>h
@@ -48,7 +46,7 @@ nnoremap [window]< <C-w><
 nnoremap [window]+ <C-w>+
 nnoremap [window]- <C-w>-
 
-nmap <Leader>t [tab]
+nmap <Space>t [tab]
 nnoremap [tab]t :<C-u>tabnew<CR>
 nnoremap [tab]h gT
 nnoremap [tab]j gT
@@ -62,15 +60,15 @@ nnoremap s "_s
 nnoremap S "_S
 
 "" format all lines
-nnoremap <Leader>= gg=G
+nnoremap <Space>= gg=G
 
 "" yank all lines
-nnoremap <Leader>y ggyG
+nnoremap <Space>y ggyG
 
 "" move to end after pasting
 nnoremap <silent> p p`]
 
-nnoremap <Leader>s :%s/
+nnoremap <Space>s :%s/
 
 "" disable highlight
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
@@ -100,9 +98,9 @@ vnoremap # "zy:let @/ = @z<CR>N
 "" move to end after yank
 vnoremap <silent> y y`]
 
-vnoremap <Leader>s( di()<Esc>P
-vnoremap <Leader>s{ di{}<Esc>P
-vnoremap <Leader>s[ di[]<Esc>P
-vnoremap <Leader>s< di<><Esc>P
-vnoremap <Leader>s" di""<Esc>P
-vnoremap <Leader>s' di''<Esc>P
+vnoremap <Space>s( di()<Esc>P
+vnoremap <Space>s{ di{}<Esc>P
+vnoremap <Space>s[ di[]<Esc>P
+vnoremap <Space>s< di<><Esc>P
+vnoremap <Space>s" di""<Esc>P
+vnoremap <Space>s' di''<Esc>P

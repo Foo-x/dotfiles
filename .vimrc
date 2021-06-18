@@ -1,4 +1,3 @@
-syntax on
 set nocompatible
 set backspace=indent,eol,start
 set encoding=utf-8
@@ -12,6 +11,7 @@ set number
 set selection=exclusive
 set visualbell t_vb=
 set shellcmdflag=-ic
+set runtimepath+=$HOME/.vim
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -20,6 +20,13 @@ set list
 " clipboard
 set clipboard&
 set clipboard^=unnamedplus,unnamed
+
+runtime! *.vimrc
+
+" finish on vim-tiny
+if !1 | finish | endif
+
+syntax on
 
 " cursor shape
 let &t_ti.="\e[1 q"
@@ -33,10 +40,3 @@ let g:netrw_sizestyle="H"
 let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
 let g:netrw_altv = 1
 let g:netrw_alto = 1
-
-" source settings in this directory
-let this_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-let vimfiles = glob(this_path . '/.vimrc.*')
-for vimfile in split(vimfiles, '\n')
-	execute 'source ' . vimfile
-endfor
