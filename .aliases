@@ -36,7 +36,11 @@ alias dirs='dirs -v'
 alias g=git
 alias h=history
 alias j=jobs
-alias vi=vim
+
+if type vim &> /dev/null; then
+  alias vi=vim
+fi
+
 alias md=mkdir
 alias gr=grep
 alias dirsc='dirs -c && pushd -n ${PWD} > /dev/null'
