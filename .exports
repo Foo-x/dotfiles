@@ -1,7 +1,12 @@
 export HISTSIZE=100000
 export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignoreboth  # not save commands that space-beginned and duplicated to history
-export EDITOR='vim -p'
+
+if type vim &> /dev/null; then
+  export EDITOR='vim -p'
+else
+  export EDITOR='vi -p'
+fi
 
 export LC_ALL='C'
 LOCALE_LIST="$(locale -a)"
