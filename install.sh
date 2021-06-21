@@ -41,8 +41,8 @@ if has git && ! git config --global include.path &> /dev/null; then
 fi
 
 # include alacritty.yml
-is_docker=$([[ -f /.dockerenv ]] || \grep -Eq '(lxc|docker)' /proc/1/cgroup)
-if ! is_docker && [[ $(uname -a) =~ Microsoft|microsoft ]]; then
+is_docker=$([[ -f /.dockerenv ]] || \grep -Eq '(lxc|docker)' /proc/1/cgroup; echo $?)
+if [[ ${is_docker} != 0 ]] && [[ $(uname -a) =~ Microsoft|microsoft ]]; then
     alacritty_config=$(wslpath "$(wslvar APPDATA)")/alacritty/alacritty.yml
     dotdir_alacritty_config=$(wslpath -m ${DOT_DIR}/alacritty.yml)
 else
