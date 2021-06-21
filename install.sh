@@ -43,7 +43,7 @@ fi
 # include alacritty.yml
 if [[ ! $(uname -a) =~ "Microsoft|microsoft" ]]; then
     alacritty_config=$(wslpath "$(wslvar APPDATA)")/alacritty/alacritty.yml
-    dotdir_alacritty_config=$(wslpath -w ${DOT_DIR}/alacritty.yml)
+    dotdir_alacritty_config=$(wslpath -m ${DOT_DIR}/alacritty.yml)
 else
     alacritty_config=${HOME}/.alacritty.yml
     dotdir_alacritty_config=${DOT_DIR}/alacritty.yml
