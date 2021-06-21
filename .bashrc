@@ -28,6 +28,6 @@ if type fzf &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_fzf
 fi
 
-if [[ type tmux &> /dev/null && ${SHLVL} == 1 && ${TERM_PROGRAM} != "vscode" ]];
+if type tmux &> /dev/null && [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != "vscode" ]]; then
   tmux
 fi
