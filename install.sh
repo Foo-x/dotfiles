@@ -41,7 +41,7 @@ if has git && ! git config --global include.path &> /dev/null; then
 fi
 
 # include alacritty.yml
-if [[ ! $(uname -a) =~ "Microsoft|microsoft" ]]; then
+if [[ $(uname -a) =~ Microsoft|microsoft ]]; then
     alacritty_config=$(wslpath "$(wslvar APPDATA)")/alacritty/alacritty.yml
     dotdir_alacritty_config=$(wslpath -m ${DOT_DIR}/alacritty.yml)
 else
