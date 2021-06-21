@@ -61,6 +61,7 @@ files="
 .inputrc
 .profile
 .vimrc
+.tmux.conf
 "
 echo "${files}" | xargs -I{} ln -sf ${DOT_DIR}/{} ${HOME}/{}
 

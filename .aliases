@@ -79,6 +79,17 @@ alias dcr='docker-compose run'
 alias dcu='docker-compose up -d'
 alias dcub='docker-compose up -d --build'
 
+alias tm='tmux'
+alias tma='tmux attach'
+alias tmd='tmux detach'
+alias tmkill='tmux kill'
+alias tmkillw='tmux killw'
+alias tml='tmux ls'
+alias tmn='tmux new'
+alias tmnw='tmux neww'
+alias tmr='tmux rename'
+alias tmreload='tmux source-file ~/.tmux.conf'
+
 function open() {
   if which open &> /dev/null; then
     open "$@"
