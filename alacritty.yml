@@ -1,0 +1,4 @@
+background_opacity: 0.75
+key_bindings:
+  - { key: Up, mods: Shift|Control, mode: ~Vi|~Search, action: ScrollHalfPageUp }
+  - { key: Down, mods: Shift|Control, mode: ~Vi|~Search, action: ScrollHalfPageDown }
