@@ -29,5 +29,5 @@ if type fzf &> /dev/null; then
 fi
 
 if type tmux &> /dev/null && [[ ${SHLVL} == 1 ]]; then
-  tmux
+  tmux new -A -s $(basename $(pwd) | tr -d .)
 fi
