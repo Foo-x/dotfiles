@@ -546,4 +546,6 @@ _complete_alias() {
 #complete -F _complete_alias myalias2
 #complete -F _complete_alias myalias3
 
-complete -F _complete_alias $(alias | cut -c7- | \grep docker | cut -d= -f1)
+for cmd in {docker,git,tmux}; do
+    complete -F _complete_alias $(alias | cut -c7- | \grep =\'${cmd} | cut -d= -f1)
+done

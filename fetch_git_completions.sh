@@ -12,7 +12,6 @@ fi
 
 if [[ ! -f git-completion.bash ]]; then
     curl -fsSLO https://github.com/git/git/raw/master/contrib/completion/git-completion.bash
-    echo "__git_complete g __git_main" >> ${SCRIPT_DIR}/git-completion.bash
 fi
 
 if [[ ! -f hub.bash_completion.sh ]]; then

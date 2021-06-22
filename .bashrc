@@ -18,7 +18,6 @@ fi
 . ${SCRIPT_DIR}/.aliases
 . ${SCRIPT_DIR}/.exports
 . ${SCRIPT_DIR}/.git-completion
-. ${SCRIPT_DIR}/complete_alias
 
 if type pacman &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_arch
@@ -28,6 +27,12 @@ if type fzf &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_fzf
 fi
 
-if type tmux &> /dev/null && [[ ${SHLVL} == 1 ]]; then
-  tmux new -A -s $(basename $(pwd) | tr -d .)
+if type tmux &> /dev/null; then
+  . ${SCRIPT_DIR}/tmux.completion.bash
+
+  if [[ ${SHLVL} == 1 ]]; then
+    tmux new -A -s $(basename $(pwd) | tr -d .)
+  fi
 fi
+
+. ${SCRIPT_DIR}/complete_alias
