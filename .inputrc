@@ -17,6 +17,3 @@ set bell-style none
 
 # output
 "\C-o": " &> out"
-
-# sudo
-"\C-s": "\C-asudo \C-e"
