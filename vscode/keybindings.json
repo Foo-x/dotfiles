@@ -43,6 +43,27 @@
     "when": "textInputFocus && vim.mode == 'Insert'"
   },
   {
+    "key": "alt+w",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+oem_1",
+    "command": "workbench.action.terminal.new"
+  },
+  {
+    "key": "ctrl+shift+oem_3",
+    "command": "-workbench.action.terminal.new"
+  },
+  {
+    "key": "ctrl+oem_1",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+oem_3",
+    "command": "-workbench.action.terminal.toggleTerminal"
+  },
+  {
     "key": "ctrl+p",
     "command": "-workbench.action.quickOpen"
   },
@@ -59,5 +80,70 @@
     "key": "ctrl+q",
     "command": "workbench.action.quickOpenView",
     "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+alt+c",
+    "command": "-rest-client.generate-codesnippet",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "ctrl+alt+c",
+    "command": "-rest-client.generate-codesnippet",
+    "when": "editorTextFocus && editorLangId == 'plaintext'"
+  },
+  {
+    "key": "alt+c",
+    "command": "-workbench.action.terminal.toggleFindCaseSensitive",
+    "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "alt+w",
+    "command": "-workbench.action.terminal.toggleFindWholeWord",
+    "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "alt+h",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+l",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+oem_5",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+g l",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+g h",
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+g shift+h",
+    "command": "workbench.action.terminal.resizePaneLeft",
+    "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+g shift+l",
+    "command": "workbench.action.terminal.resizePaneRight",
+    "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+g shift+j",
+    "command": "workbench.action.terminal.resizePaneDown",
+    "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+g shift+k",
+    "command": "workbench.action.terminal.resizePaneUp",
+    "when": "terminalFocus && terminalProcessSupported"
   }
 ]
