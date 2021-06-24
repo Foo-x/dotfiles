@@ -30,7 +30,7 @@ fi
 if type tmux &> /dev/null; then
   . ${SCRIPT_DIR}/tmux.completion.bash
 
-  if [[ ${SHLVL} == 1 ]]; then
+  if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
     tmux new -A -s $(basename $(pwd) | tr -d .)
   fi
 fi
