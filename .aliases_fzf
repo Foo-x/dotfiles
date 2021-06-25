@@ -162,7 +162,7 @@ import json
 with open('${conf}') as f:
     conf = json.load(f)
 
-if 'types' not in conf or 'scopes' not in conf:
+if 'types' not in conf or len(conf['types']) == 0 or 'scopes' not in conf:
     exit(1)
 
 print('\t'.join(f'{k}@ {v}' for k, v in conf['types'].items()))
@@ -176,6 +176,11 @@ print('\t'.join(f'{k}@ {v}' for k, v in conf['scopes'].items()))
         python3 -c "$cmd"
     fi
   )
+
+  if [[ $? == 1 ]]; then
+    echo "invalid .gfc.json"
+    return 1
+  fi
 
   type=$(echo "${types_scopes}" | sed -n 1P | tr "\t" "\n" | column -s@ -t | fzf -n1 +s +m --prompt="${type_q}" | cut -f1 -d" ")
   result="${type}"
