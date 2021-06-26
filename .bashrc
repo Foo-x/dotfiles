@@ -17,7 +17,6 @@ fi
 
 . ${SCRIPT_DIR}/.aliases
 . ${SCRIPT_DIR}/.exports
-. ${SCRIPT_DIR}/.git-completion
 
 if type pacman &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_arch
@@ -27,13 +26,11 @@ if type fzf &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_fzf
 fi
 
-if type cht.sh &> /dev/null; then
-  . ${SCRIPT_DIR}/cht.sh.completion.bash
-fi
+for completion in ${SCRIPT_DIR}/completion/*; do
+  . ${completion}
+done
 
 if type tmux &> /dev/null; then
-  . ${SCRIPT_DIR}/tmux.completion.bash
-
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
     tmux new -A -s $(basename $(pwd) | tr -d .)
   fi

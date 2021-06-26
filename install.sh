@@ -3,7 +3,7 @@
 DOT_DIR="${HOME}/.dotfiles"
 
 has() {
-    type "$1" > /dev/null 2>&1
+    type "$1" &> /dev/null
 }
 
 if has git; then
@@ -76,8 +76,8 @@ search.vimrc
 echo "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.vim/{} ${HOME}/.vim/{}
 
 exe_files="
-complete_docker_compose.sh
-fetch_git_completions.sh
+fetch_completions.sh
+fetch_git_prompt.sh
 "
 echo "${exe_files}" | xargs -I{} bash ${DOT_DIR}/{}
 
