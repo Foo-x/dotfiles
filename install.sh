@@ -86,6 +86,7 @@ if has git && [[ ! -d ${HOME}/.fzf ]]; then
     ${HOME}/.fzf/install --key-bindings --completion --update-rc
 fi
 
+mkdir -p ${HOME}/.local/bin
 if [[ ! -f ${HOME}/.local/bin/cht.sh ]]; then
     curl https://cht.sh/:cht.sh > ${HOME}/.local/bin/cht.sh
     chmod +x ${HOME}/.local/bin/cht.sh
