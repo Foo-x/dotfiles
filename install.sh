@@ -55,6 +55,19 @@ if ! \grep -Fq "${source_alacritty_config}" ${alacritty_config}; then
     echo "${source_alacritty_config}" >> ${alacritty_config}
 fi
 
+# install fzf
+if has git && [[ ! -d ${HOME}/.fzf ]]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
+    ${HOME}/.fzf/install --key-bindings --completion --update-rc
+fi
+
+# install cht.sh
+mkdir -p ${HOME}/.local/bin
+if [[ ! -f ${HOME}/.local/bin/cht.sh ]]; then
+    curl https://cht.sh/:cht.sh > ${HOME}/.local/bin/cht.sh
+    chmod +x ${HOME}/.local/bin/cht.sh
+fi
+
 touch ${HOME}/.user_profile
 
 files="
@@ -80,16 +93,5 @@ fetch_completions.sh
 fetch_git_prompt.sh
 "
 echo "${exe_files}" | xargs -I{} bash ${DOT_DIR}/{}
-
-if has git && [[ ! -d ${HOME}/.fzf ]]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
-    ${HOME}/.fzf/install --key-bindings --completion --update-rc
-fi
-
-mkdir -p ${HOME}/.local/bin
-if [[ ! -f ${HOME}/.local/bin/cht.sh ]]; then
-    curl https://cht.sh/:cht.sh > ${HOME}/.local/bin/cht.sh
-    chmod +x ${HOME}/.local/bin/cht.sh
-fi
 
 echo "Done."
