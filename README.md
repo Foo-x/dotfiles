@@ -3,7 +3,20 @@
 ## Requirements
 
 - curl
-- git (optional)
+
+
+### Optional
+
+- [bash-completion](https://github.com/scop/bash-completion)
+    - aliases
+        - cht.sh
+        - hub
+        - each shortened
+- git
+    - fzf
+    - PS1
+- tmux
+    - auto-attach
 
 
 ## Installation
