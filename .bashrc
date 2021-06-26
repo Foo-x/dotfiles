@@ -27,6 +27,10 @@ if type fzf &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_fzf
 fi
 
+if type cht.sh &> /dev/null; then
+  . ${SCRIPT_DIR}/cht.sh.completion.bash
+fi
+
 if type tmux &> /dev/null; then
   . ${SCRIPT_DIR}/tmux.completion.bash
 
