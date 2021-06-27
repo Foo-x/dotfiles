@@ -97,31 +97,25 @@ alias tmr='tmux rename'
 alias tmreload='tmux source-file ~/.tmux.conf'
 
 function open() {
-  if which open &> /dev/null; then
+  if [[ "${WSL_DISTRO_NAME}" ]]; then
+    open-http "$@"
+  elif type open &> /dev/null; then
     open "$@"
-  elif which xdg-open &> /dev/null; then
+  elif type xdg-open &> /dev/null; then
     xdg-open "$@"
-  elif which explorer &> /dev/null; then
+  elif type explorer &> /dev/null; then
     explorer "$@"
   fi
 }
 
 function open-http() {
-  if which open &> /dev/null; then
-    open http://$1
-  elif which xdg-open &> /dev/null; then
-    xdg-open http://$1
-  elif which explorer &> /dev/null; then
-    explorer http://$1
-  fi
-}
-
-function open-https() {
-  if which open &> /dev/null; then
+  if [[ "${WSL_DISTRO_NAME}" ]]; then
+    wslview https://$1
+  elif type open &> /dev/null; then
     open https://$1
-  elif which xdg-open &> /dev/null; then
+  elif type xdg-open &> /dev/null; then
     xdg-open https://$1
-  elif which explorer &> /dev/null; then
+  elif type explorer &> /dev/null; then
     explorer https://$1
   fi
 }
