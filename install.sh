@@ -40,8 +40,7 @@ if has git && git config --global --list &> /dev/null && ! git config --global i
 fi
 
 # include alacritty.yml
-is_docker=$([[ -f /.dockerenv ]] || \grep -Eq '(lxc|docker)' /proc/1/cgroup; echo $?)
-if [[ ${is_docker} != 0 ]] && [[ $(uname -a) =~ Microsoft|microsoft ]]; then
+if [[ "${WSL_DISTRO_NAME}" ]]; then
     alacritty_config=$(wslpath "$(wslvar APPDATA)")/alacritty/alacritty.yml
     dotdir_alacritty_config=$(wslpath -m ${DOT_DIR}/alacritty.yml)
 else
