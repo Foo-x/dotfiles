@@ -35,7 +35,6 @@ if ! \grep -q "${source_bashrc}" ${HOME}/.bashrc; then
 fi
 
 # include .gitconfig
-touch ${HOME}/.gitconfig
 if has git && ! git config --global include.path &> /dev/null; then
     git config --global include.path ${DOT_DIR}/.gitconfig
 fi
