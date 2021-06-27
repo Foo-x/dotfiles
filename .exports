@@ -8,6 +8,8 @@ else
   export EDITOR='vi -p'
 fi
 
+[[ "${WSL_DISTRO_NAME}" ]] && export BROWSER=wslview
+
 export LANG=C
 LOCALE_LIST="$(locale -a)"
 if [[ "${LOCALE_LIST}" == *C.UTF-8* ]]; then
