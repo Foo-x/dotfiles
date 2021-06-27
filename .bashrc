@@ -29,6 +29,10 @@ fi
 for completion in ${SCRIPT_DIR}/completion/*; do
   . ${completion}
 done
+if type rustup &> /dev/null; then
+  eval "$(rustup completions bash)"
+  eval "$(rustup completions bash cargo)"
+fi
 
 if type tmux &> /dev/null; then
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
