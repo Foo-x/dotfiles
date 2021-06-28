@@ -53,6 +53,18 @@ if ! \grep -Fq "${source_alacritty_config}" ${alacritty_config}; then
     echo "${source_alacritty_config}" >> ${alacritty_config}
 fi
 
+# setup gh
+if type gh &> /dev/null; then
+    {
+        gh alias set cl 'repo clone'
+        gh alias set cr 'repo create'
+        gh alias set il 'issue list'
+        gh alias set openr 'repo view -w'
+        gh alias set openi 'issue view -w'
+        gh alias set openp 'pr view -w'
+    } &> /dev/null
+fi
+
 # install fzf
 if has git && [[ ! -d ${HOME}/.fzf ]]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf

@@ -33,6 +33,9 @@ if type rustup &> /dev/null; then
   eval "$(rustup completions bash)"
   eval "$(rustup completions bash cargo)"
 fi
+if type gh &> /dev/null; then
+  eval "$(gh completion -s bash)"
+fi
 
 if type tmux &> /dev/null; then
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
