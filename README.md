@@ -10,7 +10,6 @@
 - [bash-completion](https://github.com/scop/bash-completion)
     - aliases
         - cht.sh
-        - hub
         - each shortened
 - git
     - fzf

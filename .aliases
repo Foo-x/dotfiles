@@ -41,10 +41,6 @@ if type vim &> /dev/null; then
   alias vi=vim
 fi
 
-if type hub &> /dev/null; then
-  alias git=hub
-fi
-
 alias md=mkdir
 alias gr=grep
 alias dirsc='dirs -c && pushd -n ${PWD} > /dev/null'
