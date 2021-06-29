@@ -63,33 +63,6 @@ while len(q) > 0:
   fi
 }
 
-# f- - cd to history
-function f-() {
-  local target=$(dirs -v | sort -k 2 | uniq -f 1 | sort -n -k 1 | tail -n +2 | awk '{print $2}' | fzf -q ${1:-''})
-
-  if [ -n "$target" ]; then
-    cd "$(echo "$target" | sed "s;^~;$HOME;")"
-  fi
-}
-
-# f.. - cd to parent
-function f..() {
-  local paths=$(cd .. && pwd | tr "/" "\n") null="/dev/null"
-  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && null="nul"
-
-  local selected="$(
-    (
-    for i in $(seq 1 $(echo "${paths}" | wc -l)); do
-      echo "${paths}" | head -n $i | tr "\n" "/"
-      echo
-    done
-    ) | sed '1!G;h;$!d' | fzf -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> ${null}")"
-
-  if [[ "$selected" ]]; then
-    cd "${selected}"
-  fi
-}
-
 # fd - cd sorted by depth
 function fd() {
   local dir null="/dev/null" conv="cat -" sh

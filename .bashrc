@@ -26,6 +26,10 @@ if type fzf &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_fzf
 fi
 
+if [[ -d $HOME/enhancd ]]; then
+  . $HOME/enhancd/init.sh
+fi
+
 for completion in ${SCRIPT_DIR}/completion/*; do
   . ${completion}
 done

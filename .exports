@@ -20,6 +20,8 @@ stty stop ''
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
 
+export ENHANCD_DOT_ARG=...
+
 # exec commands after each commands
 function dispatch_prompt_command() {
   local f
@@ -30,12 +32,6 @@ function dispatch_prompt_command() {
 export PROMPT_COMMAND='dispatch_prompt_command'
 
 export PROMPT_COMMAND_HISTSAVE='history -a'
-
-function auto_pushd() {
-  [[ ${AUTO_PUSHD_DIR} != ${PWD} ]] && pushd -n "${PWD}" > /dev/null
-  AUTO_PUSHD_DIR="${PWD}"
-}
-export PROMPT_COMMAND_AUTO_PUSHD='auto_pushd'
 
 # prompt
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
