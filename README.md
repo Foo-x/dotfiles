@@ -12,6 +12,7 @@
         - cht.sh
         - each shortened
 - git
+    - enhancd
     - fzf
     - PS1
 - tmux
