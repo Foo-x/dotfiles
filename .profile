@@ -16,7 +16,7 @@ fi
 # remove duplicates
 export PATH=$(printf "${PATH}" | awk -v RS=: -v ORS=: '!arr[$0]++')
 
-if type ssh-agent &> /dev/null && [[ -z "${SSH_AUTH_SOCK}" ]]; then
+if type ssh-agent &> /dev/null && [[ -d "$HOME/.ssh/" && -z "${SSH_AUTH_SOCK}" ]]; then
     # Check for a currently running instance of the agent
     RUNNING_AGENT="`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
     if [ "$RUNNING_AGENT" = "0" ]; then
