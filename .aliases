@@ -31,6 +31,7 @@ alias du='du -h'
 alias free='free -h'
 alias grep='grep --color=auto -En'  # use regexp and show line numbers
 alias dirs='dirs -v'
+alias rsync='rsync -aPv'
 
 # shorten
 alias g=git
