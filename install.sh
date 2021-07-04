@@ -39,20 +39,6 @@ if has git && git config --global --list &> /dev/null && ! git config --global i
     git config --global include.path ${DOT_DIR}/.gitconfig
 fi
 
-# include alacritty.yml
-if [[ "${WSL_DISTRO_NAME}" ]]; then
-    alacritty_config=$(wslpath "$(wslvar APPDATA)")/alacritty/alacritty.yml
-    dotdir_alacritty_config=$(wslpath -m ${DOT_DIR}/alacritty.yml)
-else
-    alacritty_config=${HOME}/.alacritty.yml
-    dotdir_alacritty_config=${DOT_DIR}/alacritty.yml
-fi
-touch ${alacritty_config}
-source_alacritty_config="import: [\"${dotdir_alacritty_config}\"]"
-if ! \grep -Fq "${source_alacritty_config}" ${alacritty_config}; then
-    echo "${source_alacritty_config}" >> ${alacritty_config}
-fi
-
 # setup gh
 if type gh &> /dev/null; then
     {
