@@ -145,5 +145,15 @@
     "key": "ctrl+g shift+k",
     "command": "workbench.action.terminal.resizePaneUp",
     "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "shift+up",
+    "command": "workbench.action.terminal.scrollUpPage",
+    "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive"
+  },
+  {
+    "key": "shift+down",
+    "command": "workbench.action.terminal.scrollDownPage",
+    "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive"
   }
 ]
