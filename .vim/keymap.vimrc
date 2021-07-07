@@ -30,8 +30,9 @@ nnoremap <Space>k <C-b>
 nnoremap <Space>i i_<Esc>r
 
 nmap <Space>w [window]
-nnoremap [window]s :<C-u>split<CR>
-nnoremap [window]v :<C-u>vsplit<CR>
+nnoremap [window]- :<C-u>split<CR>
+nnoremap [window]\ :<C-u>vsplit<CR>
+nnoremap [window]c <C-w>c
 nnoremap [window]h <C-w>h
 nnoremap [window]j <C-w>j
 nnoremap [window]k <C-w>k
