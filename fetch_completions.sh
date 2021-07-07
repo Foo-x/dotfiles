@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 
 fetchf() {
-    if [[ ! -f "$1" ]]; then
+    if [ ! -f "$1" ]; then
         curl -fsSL "$2" -o "$1.completion.bash"
     fi
 }
 
 fetch() {
-    if type "$1" &> /dev/null; then
+    if type "$1" > /dev/null 2>&1; then
         fetchf "$@"
     fi
 }
@@ -20,6 +20,6 @@ fetch git https://github.com/git/git/raw/master/contrib/completion/git-completio
 fetch docker-compose https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose
 fetch tmux https://raw.githubusercontent.com/Bash-it/bash-it/master/completion/available/tmux.completion.bash
 
-if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+if [ -f /usr/share/bash-completion/bash_completion ]; then
     fetchf cht.sh https://cht.sh/:bash_completion
 fi

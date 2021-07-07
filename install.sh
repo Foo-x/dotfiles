@@ -1,20 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 
 DOT_DIR="${HOME}/.dotfiles"
 
 has() {
-    type "$1" &> /dev/null
+    type "$1" > /dev/null 2>&1
 }
 
 if has git; then
-    if [[ -d ${DOT_DIR} ]]; then
+    if [ -d ${DOT_DIR} ]; then
         git -C ${DOT_DIR} pull
     else
         git clone --depth 1 https://github.com/Foo-x/dotfiles.git ${DOT_DIR}
     fi
 elif has curl || has wget; then
     TARBALL="https://github.com/Foo-x/dotfiles/archive/master.tar.gz"
-    if has "curl"; then
+    if has curl; then
         curl -L ${TARBALL} -o master.tar.gz
     else
         wget ${TARBALL}
@@ -35,12 +35,12 @@ if ! \grep -q "${source_bashrc}" ${HOME}/.bashrc; then
 fi
 
 # include .gitconfig
-if has git && git config --global --list &> /dev/null && ! git config --global include.path &> /dev/null; then
+if has git && git config --global --list > /dev/null 2>&1 && ! git config --global include.path > /dev/null 2>&1; then
     git config --global include.path ${DOT_DIR}/.gitconfig
 fi
 
 # setup gh
-if type gh &> /dev/null; then
+if type gh > /dev/null 2>&1; then
     {
         gh alias set cl 'repo clone'
         gh alias set cr 'repo create'
@@ -52,19 +52,19 @@ if type gh &> /dev/null; then
 fi
 
 # install fzf
-if has git && [[ ! -d ${HOME}/.fzf ]]; then
+if has git && [ ! -d ${HOME}/.fzf ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
     ${HOME}/.fzf/install --key-bindings --completion --update-rc
 fi
 
 # install enhancd
-if has git && [[ ! -d ${HOME}/enhancd ]]; then
+if has git && [ ! -d ${HOME}/enhancd ]; then
     git clone --depth 1 https://github.com/b4b4r07/enhancd ${HOME}/enhancd
 fi
 
 # install cht.sh
 mkdir -p ${HOME}/.local/bin
-if [[ ! -f ${HOME}/.local/bin/cht.sh ]]; then
+if [ ! -f ${HOME}/.local/bin/cht.sh ]; then
     curl https://cht.sh/:cht.sh > ${HOME}/.local/bin/cht.sh
     chmod +x ${HOME}/.local/bin/cht.sh
 fi
@@ -93,6 +93,6 @@ exe_files="
 fetch_completions.sh
 fetch_git_prompt.sh
 "
-echo "${exe_files}" | xargs -I{} bash ${DOT_DIR}/{}
+echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 
 echo "Done."
