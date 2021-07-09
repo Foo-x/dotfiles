@@ -70,7 +70,7 @@
     "editor.tabSize": 2
   },
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "files.trimTrailingWhitespace": false
   },
   "[nim]": {
     "editor.defaultFormatter": "kosz78.nim",
