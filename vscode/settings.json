@@ -94,6 +94,7 @@
   "conventionalCommits.gitmoji": false,
   "conventionalCommits.lineBreak": "\\n",
   "markdown.extension.toc.updateOnSave": false,
+  "markdown-preview-enhanced.mermaidTheme": "dark",
   "markdown-preview-enhanced.previewTheme": "one-dark.css",
   "nim.nimsuggestRestartTimeout": 1,
   "sync.gist": "a546a2bbd1739a568924794ad9bc65b6",
