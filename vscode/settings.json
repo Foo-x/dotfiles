@@ -1,4 +1,5 @@
 {
+  "diffEditor.ignoreTrimWhitespace": false,
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorSurroundingLines": 5,
   "editor.detectIndentation": false,
