@@ -1,0 +1,13 @@
+{
+  "RUN apt install": {
+    "prefix": "aptinstall",
+    "body": [
+      "RUN apt update && export DEBIAN_FRONTEND=noninteractive \\",
+      "    && apt install -y --no-install-recommends \\",
+      "    $1 \\",
+      "    && apt clean \\",
+      "    && rm -rf /var/lib/apt/lists/*"
+    ],
+    "description": "RUN apt install"
+  }
+}
