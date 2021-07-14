@@ -98,7 +98,7 @@
   "fn": {
     "prefix": "fn",
     "body": [
-      "fn ${1:fn_name}(${2:arg}) -> ${3:return_type} {",
+      "fn ${1:fn_name}(${2:arg}) ${3:-> ${4:return_type} }{",
       "\t$0",
       "}"
     ],
