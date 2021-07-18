@@ -1,5 +1,8 @@
 {
   "diffEditor.ignoreTrimWhitespace": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorSurroundingLines": 5,
   "editor.detectIndentation": false,
