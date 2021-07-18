@@ -46,6 +46,9 @@
   "zenMode.hideLineNumbers": false,
 
   // language settings
+  "[css]": {
+    "editor.tabSize": 2
+  },
   "[elm]": {
     "editor.defaultFormatter": "elmTooling.elm-ls-vscode"
   },
@@ -53,6 +56,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
@@ -84,6 +91,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
 
   // extension settings
   "conventionalCommits.autoCommit": false,
@@ -95,7 +106,10 @@
     "Deque",
     "Mutex",
     "QEMU",
+    "SIGKILL",
+    "TSTP",
     "alloc",
+    "bulma",
     "combinator",
     "dealloc",
     "deallocate",
@@ -103,8 +117,11 @@
     "deallocation",
     "deallocations",
     "deref",
+    "fontawesome",
+    "fortawesome",
     "keypress",
     "multithreaded",
+    "nohup",
     "performant",
     "predefines",
     "preinitialize",
