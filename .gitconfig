@@ -96,4 +96,6 @@
 [help]
 	autocorrect = -1
 [rebase]
+	abbreviateCommands = true
 	autosquash = true
+	autostash = true
