@@ -59,6 +59,7 @@
 	d = diff
 	dc = diff --cached
 	da = diff @
+	dt = difftool
 
 	# stash
 	ss = stash
@@ -93,6 +94,15 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	quotePath = false
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+	tool = vscode
+	autostash = true
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
 [help]
 	autocorrect = -1
 [rebase]
