@@ -95,3 +95,5 @@
 	quotePath = false
 [help]
 	autocorrect = -1
+[rebase]
+	autosquash = true
