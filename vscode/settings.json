@@ -8,7 +8,7 @@
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
   // @sync os=windows
-  "editor.fontFamily": "Consolas,'Courier New'",
+  "editor.fontFamily": "'Noto Sans Mono CJK JP',Consolas,'Courier New'",
   "editor.fontSize": 15,
   "editor.formatOnSave": true,
   "editor.minimap.showSlider": "always",
@@ -75,7 +75,8 @@
     "editor.tabSize": 2
   },
   "[markdown]": {
-    "files.trimTrailingWhitespace": false
+    "files.trimTrailingWhitespace": false,
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "[nim]": {
     "editor.defaultFormatter": "kosz78.nim",
