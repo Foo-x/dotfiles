@@ -15,6 +15,23 @@ nnoremap <C-j> i<CR><Esc>
 nnoremap + <C-a>
 nnoremap - <C-x>
 
+"" not to go next
+nnoremap * *N
+
+"" go to parent braces/brackets/parentheses
+nnoremap [[ "_ya[
+nnoremap [{ "_ya{
+nnoremap [( "_ya(
+nnoremap [] "_ya[
+nnoremap [} "_ya{
+nnoremap [) "_ya(
+nnoremap ][ "_ya[%
+nnoremap ]{ "_ya{%
+nnoremap ]( "_ya(%
+nnoremap ]] "_ya[%
+nnoremap ]} "_ya{%
+nnoremap ]) "_ya(%
+
 noremap <Space>h ^
 noremap <Space>l $
 noremap <Space>m %
@@ -66,13 +83,19 @@ nnoremap <Space>= gg=G
 "" yank all lines
 nnoremap <Space>y ggyG
 
+"" select all
+nnoremap <Space>v ggVG
+
+"" delete all
+nnoremap <Space>d ggdG
+
 "" move to end after pasting
 nnoremap <silent> p p`]
 
 nnoremap <Space>s :%s/
 
 "" disable highlight
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+nnoremap <C-l> :nohlsearch<CR><C-l>
 
 "" correct quit
 nnoremap q: :q
@@ -90,11 +113,12 @@ inoremap jj    <Esc>
 inoremap jk    <CR>
 
 " visual mode
-"" search selected and go next
-vnoremap * "zy:let @/ = @z<CR>n
+"" highlight selected
+vnoremap <silent> * "zy/<C-r>z<CR>N
 
-"" search selected and go previous
-vnoremap # "zy:let @/ = @z<CR>N
+"" continue visual mode after indenting
+vnoremap > >gv
+vnoremap < <gv
 
 "" move to end after yank
 vnoremap <silent> y y`]

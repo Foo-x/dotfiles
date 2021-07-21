@@ -8,7 +8,6 @@ set tabstop=2
 set expandtab
 set noerrorbells
 set number
-set selection=exclusive
 set visualbell t_vb=
 set shellcmdflag=-ic
 set runtimepath+=$HOME/.vim
