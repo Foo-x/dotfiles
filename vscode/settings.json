@@ -19,7 +19,7 @@
   "editor.scrollBeyondLastLine": false,
   "editor.showFoldingControls": "always",
   "editor.tabSize": 4,
-  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?、。！？「」【】『』（）",
+  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?、。・！？「」【】『』（）",
   "explorer.incrementalNaming": "smart",
   "files.defaultLanguage": "markdown",
   "files.eol": "\n",
