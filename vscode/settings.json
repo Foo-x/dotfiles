@@ -47,6 +47,7 @@
   "workbench.editor.tabSizing": "shrink",
   "workbench.startupEditor": "none",
   "zenMode.hideLineNumbers": false,
+  "zenMode.hideStatusBar": false,
   "zenMode.hideTabs": false,
 
   // language settings
