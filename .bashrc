@@ -40,6 +40,9 @@ fi
 if type gh &> /dev/null; then
   eval "$(gh completion -s bash)"
 fi
+if type npm &> /dev/null; then
+  . <(npm completion)
+fi
 
 if type tmux &> /dev/null; then
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
