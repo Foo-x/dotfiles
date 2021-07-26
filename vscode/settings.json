@@ -8,7 +8,8 @@
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
   // @sync os=windows
-  "editor.fontFamily": "'Noto Sans Mono CJK JP',Consolas,'Courier New'",
+  "editor.fontFamily": "Consolas,'Courier New'",
+  // "editor.fontFamily": "'Noto Sans Mono CJK JP',Consolas,'Courier New'",
   "editor.fontSize": 15,
   "editor.formatOnSave": true,
   "editor.minimap.showSlider": "always",
