@@ -86,8 +86,12 @@
 		git dmb; \
 	};f"
 
-	rbsq = "!f(){ git rebase -i ${1:-master} --autosquash; };f"
-	rbsqc = "!f(){ git -c core.editor=: rebase -i ${1:-master} --autosquash; };f"
+	# check if can merge
+	mc = "!f() { \
+		git checkout -q ${1:-master}; \
+		git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
+		git checkout -q -; \
+	};f"
 
 [push]
 	default = current
