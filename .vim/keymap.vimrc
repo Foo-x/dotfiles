@@ -47,7 +47,7 @@ nnoremap <Space>k <C-b>
 nnoremap <Space>i i_<Esc>r
 
 nmap <Space>w [window]
-nnoremap [window]- :<C-u>split<CR>
+nnoremap [window]_ :<C-u>split<CR>
 nnoremap [window]\ :<C-u>vsplit<CR>
 nnoremap [window]c <C-w>c
 nnoremap [window]h <C-w>h
