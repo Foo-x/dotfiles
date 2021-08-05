@@ -366,12 +366,16 @@
       "commands": ["cursorPageUp"]
     },
     {
-      "before": ["<leader>", "w", "s"],
+      "before": ["<leader>", "w", "_"],
       "commands": [":split"]
     },
     {
-      "before": ["<leader>", "w", "v"],
+      "before": ["<leader>", "w", "\\"],
       "commands": [":vsplit"]
+    },
+    {
+      "before": ["<leader>", "w", "c"],
+      "commands": [":q"]
     },
     {
       "before": ["<leader>", "w", "h"],
@@ -404,6 +408,26 @@
     {
       "before": ["<leader>", "w", "K"],
       "commands": ["workbench.action.moveEditorToAboveGroup"]
+    },
+    {
+      "before": ["<leader>", "w", "="],
+      "commands": ["workbench.action.evenEditorWidths"]
+    },
+    {
+      "before": ["<leader>", "w", ">"],
+      "commands": ["workbench.action.increaseViewWidth"]
+    },
+    {
+      "before": ["<leader>", "w", "<"],
+      "commands": ["workbench.action.decreaseViewWidth"]
+    },
+    {
+      "before": ["<leader>", "w", "+"],
+      "commands": ["workbench.action.increaseViewHeight"]
+    },
+    {
+      "before": ["<leader>", "w", "-"],
+      "commands": ["workbench.action.decreaseViewHeight"]
     },
     {
       "before": ["<leader>", "t", "t"],

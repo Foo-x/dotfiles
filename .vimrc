@@ -11,6 +11,7 @@ set number
 set visualbell t_vb=
 set shellcmdflag=-ic
 set runtimepath+=$HOME/.vim
+set wildmode=list:longest
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
