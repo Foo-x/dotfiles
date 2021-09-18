@@ -114,3 +114,5 @@
 	abbreviateCommands = true
 	autosquash = true
 	autostash = true
+[submodule]
+	recurse = true
