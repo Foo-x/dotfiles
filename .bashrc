@@ -51,5 +51,6 @@ if type tmux &> /dev/null; then
 fi
 
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+  . /usr/share/bash-completion/bash_completion
   . ${SCRIPT_DIR}/complete_alias
 fi
