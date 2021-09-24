@@ -125,3 +125,9 @@ function with_env() {
     "$@"
   )
 }
+
+if [[ "${WSL_DISTRO_NAME}" ]]; then
+  function wslviewl() {
+    wslview "$(wslpath -w "$1")"
+  }
+fi
