@@ -125,6 +125,7 @@
           "variable.language",
           "variable.name",
           "variable.other",
+          "variable.other.object.property",
           "variable.other.property",
           "variable.other.readwrite",
           "variable.parameter"
