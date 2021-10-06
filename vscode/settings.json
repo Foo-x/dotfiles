@@ -8,10 +8,8 @@
   "editor.cursorSurroundingLines": 5,
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
-  // @sync os=windows
-  "editor.fontFamily": "Consolas,'Courier New'",
-  // "editor.fontFamily": "'Noto Sans Mono CJK JP',Consolas,'Courier New'",
-  "editor.fontSize": 15,
+  "editor.fontFamily": "Firge35Nerd,Consolas,'Courier New'",
+  "editor.fontSize": 14,
   "editor.formatOnSave": true,
   "editor.minimap.showSlider": "always",
   "editor.minimap.size": "fill",
@@ -43,6 +41,7 @@
     "**/.hg/store/**": true,
     "**/target/**": true
   },
+  "markdown.preview.fontFamily": "Firge35Nerd,-apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif",
   "search.showLineNumbers": true,
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.splitCwd": "workspaceRoot",
