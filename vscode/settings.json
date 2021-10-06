@@ -158,7 +158,7 @@
     "**/.hg/store/**": true,
     "**/target/**": true
   },
-  "markdown.preview.fontFamily": "Firge35Nerd, -apple-system, BlinkMacSystemFont, 'BIZ UDPGothic', 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif",
+  "markdown.preview.fontFamily": "Firge35Nerd, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'BIZ UDPGothic', system-ui, 'Ubuntu', 'Droid Sans', sans-serif",
   "search.showLineNumbers": true,
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.splitCwd": "workspaceRoot",
