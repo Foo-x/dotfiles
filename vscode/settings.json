@@ -56,6 +56,7 @@
           "invalid.illegal",
           "keyword",
           "keyword.control",
+          "keyword.control.export",
           "keyword.operator",
           "keyword.operator.new",
           "keyword.operator.assignment",
@@ -91,6 +92,7 @@
           "meta.tag",
           "meta.type.annotation",
           "meta.type",
+          "punctuation.definition.comment",
           "punctuation.definition.string.begin",
           "punctuation.definition.string.end",
           "punctuation.separator",
@@ -123,6 +125,7 @@
           "variable.language",
           "variable.name",
           "variable.other",
+          "variable.other.property",
           "variable.other.readwrite",
           "variable.parameter"
         ],
