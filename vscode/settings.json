@@ -98,6 +98,7 @@
           "punctuation.separator",
           "punctuation.separator.continuation",
           "punctuation.terminator",
+          "source.vue meta.directive punctuation.separator.key-value",
           "storage",
           "storage.modifier",
           "storage.type",
