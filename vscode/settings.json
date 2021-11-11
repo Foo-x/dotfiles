@@ -303,6 +303,7 @@
   },
   "vim.hlsearch": true,
   "vim.leader": "<space>",
+  "vim.showMarksInGutter": true,
   "vim.useSystemClipboard": true,
   "vim.insertModeKeyBindingsNonRecursive": [
     {
