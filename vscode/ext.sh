@@ -3,11 +3,13 @@
 xargs -I{} code --install-extension {} << EOS
 albert.TabOut
 alefragnani.project-manager
+christian-kohler.path-intellisense
 dbaeumer.vscode-eslint
 donjayamanne.githistory
 elmTooling.elm-ls-vscode
 esbenp.prettier-vscode
 GitHub.remotehub
+GitHub.vscode-pull-request-github
 hbenl.vscode-test-explorer
 hediet.vscode-drawio
 humao.rest-client
@@ -23,12 +25,12 @@ ms-vscode-remote.vscode-remote-extensionpack
 ms-vscode.cpptools
 ms-vscode.test-adapter-converter
 PKief.material-icon-theme
-Shan.code-settings-sync
 shd101wyy.markdown-preview-enhanced
 streetsidesoftware.code-spell-checker
 vivaxy.vscode-conventional-commits
 vscodevim.vim
 wayou.vscode-todo-highlight
 webfreak.debug
+yanai101.css-var-hint
 yzhang.markdown-all-in-one
 EOS
