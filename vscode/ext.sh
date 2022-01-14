@@ -8,6 +8,7 @@ dbaeumer.vscode-eslint
 donjayamanne.githistory
 elmTooling.elm-ls-vscode
 esbenp.prettier-vscode
+formulahendry.auto-rename-tag
 GitHub.remotehub
 GitHub.vscode-pull-request-github
 hbenl.vscode-test-explorer
