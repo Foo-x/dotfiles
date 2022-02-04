@@ -239,5 +239,13 @@
     "key": "alt+l",
     "command": "cursorRight",
     "when": "textInputFocus"
+  },
+  {
+    "key": "alt+b",
+    "command": "workbench.action.tasks.build"
+  },
+  {
+    "key": "alt+t",
+    "command": "workbench.action.tasks.test"
   }
 ]
