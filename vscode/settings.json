@@ -1,5 +1,5 @@
 {
-  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
@@ -138,6 +138,7 @@
     ]
   },
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?、。・！？「」【】『』（）",
+  "emmet.showExpandedAbbreviation": "never",
   "explorer.incrementalNaming": "smart",
   "files.defaultLanguage": "markdown",
   "files.eol": "\n",
@@ -625,6 +626,10 @@
     {
       "before": ["k"],
       "after": ["g", "k"]
+    },
+    {
+      "before": ["p"],
+      "after": ["p", "g", "v", "y"]
     },
     {
       "before": ["<Down>"],

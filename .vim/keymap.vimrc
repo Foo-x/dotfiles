@@ -113,6 +113,9 @@ inoremap jj    <Esc>
 inoremap jk    <CR>
 
 " visual mode
+"" not to override register on paste
+vnoremap p pgvy
+
 "" highlight selected
 vnoremap <silent> * "zy/<C-r>z<CR>N
 
