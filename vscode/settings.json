@@ -122,6 +122,7 @@
           "support.type",
           "support.type.property-name",
           "support.variable",
+          "text.html punctuation.section.embedded",
           "variable",
           "variable.language",
           "variable.name",
