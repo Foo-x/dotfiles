@@ -11,6 +11,7 @@
   "editor.fontFamily": "Firge35Nerd,Consolas,'BIZ UDPGothic'",
   "editor.fontSize": 15,
   "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
   "editor.minimap.showSlider": "always",
   "editor.minimap.size": "fill",
   "editor.renderControlCharacters": true,
@@ -722,5 +723,6 @@
   "remote.extensionKind": {
     "pub.name": ["ui"],
     "alefragnani.project-manager": "workspace"
-  }
+  },
+  "remote.WSL2.connectionMethod": "localhost"
 }
