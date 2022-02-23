@@ -43,7 +43,7 @@
 	# remote
 	p = pull
 	ps = push
-	psf = push -f
+	psf = push --force-with-lease --force-if-includes
 	f = fetch
 	rs = remote show origin
 	rpo = remote prune origin
