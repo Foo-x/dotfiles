@@ -104,8 +104,11 @@
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 [merge]
+	ff = false
 	tool = vscode
 	autostash = true
+[pull]
+	ff = only
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
 [help]
