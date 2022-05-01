@@ -3,6 +3,22 @@
     "prefix": "useState",
     "body": ["const [$1, set${1/(.*)/${1:/capitalize}/}] = useState$2($3)"]
   },
+  "component": {
+    "prefix": "component",
+    "body": [
+      "import React from \"react\"",
+      "",
+      "type Props = {",
+      "  $1",
+      "};",
+      "",
+      "const $2: React.FC<Props> = ({$3}) => {",
+      "  $4",
+      "};",
+      "",
+      "export default $2;"
+    ]
+  },
   "TEA Component": {
     "prefix": "teaComponent",
     "body": [
