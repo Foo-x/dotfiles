@@ -247,5 +247,17 @@
   {
     "key": "alt+t",
     "command": "workbench.action.tasks.test"
+  },
+  {
+    "key": "ctrl+shift+q",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  {
+    "key": "ctrl+k a",
+    "command": "testing.runAll"
+  },
+  {
+    "key": "ctrl+oem_1 a",
+    "command": "-testing.runAll"
   }
 ]
