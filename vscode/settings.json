@@ -732,5 +732,14 @@
     "pub.name": ["ui"],
     "alefragnani.project-manager": "workspace"
   },
-  "remote.WSL2.connectionMethod": "localhost"
+  "remote.WSL2.connectionMethod": "localhost",
+  "hediet.vscode-drawio.theme": "Kennedy",
+  "settingsSync.ignoredSettings": [
+    "-dotfiles.installCommand",
+    "-dotfiles.repository",
+    "-dotfiles.targetPath"
+  ],
+  "dotfiles.targetPath": "~/.dotfiles",
+  "dotfiles.installCommand": "~/.dotfiles/install.sh",
+  "dotfiles.repository": "Foo-x/dotfiles"
 }
