@@ -110,7 +110,6 @@ inoremap <C-l> <Right>
 inoremap <C-u> <BS>
 inoremap <C-i> <Del>
 inoremap jj    <Esc>
-inoremap jk    <CR>
 
 " visual mode
 vnoremap + <C-a>gv
