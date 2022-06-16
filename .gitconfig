@@ -29,6 +29,8 @@
 	rbs = rebase --skip
 	rbi = rebase -i
 	rbim = rebase -i master
+	sco = sparse-checkout
+	scos = sparse-checkout set --cone
 	# show branches with relationship to upstream
 	usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
 
@@ -48,6 +50,7 @@
 	rs = remote show origin
 	rpo = remote prune origin
 	cl = clone
+	clp = clone --filter=blob:none --sparse
 	fusi = !git fetch && git usi
 
 	# reset
@@ -69,6 +72,14 @@
 	sp = stash pop
 	save = stash save
 	ssa = !git stash && git stash apply
+
+	# worktree
+	wt = worktree
+	wta = worktree add
+	wtl = worktree list
+	wtp = worktree prune
+	wtr = worktree remove
+
 
 	al = config --get-regexp alias.*  # show aliases
 
