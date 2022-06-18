@@ -73,7 +73,6 @@ touch ${HOME}/.user_profile
 
 files="
 .bash_profile
-.gfc.json
 .gitignore_global
 .inputrc
 .profile
