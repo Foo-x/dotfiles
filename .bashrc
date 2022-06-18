@@ -10,11 +10,6 @@ shopt -s nocasematch
 shopt -s nullglob
 shopt -u histappend
 
-# set CapsLock to Ctrl if setxkbmap exists
-if [ "$(uname)" != 'Darwin' ] && type setxkbmap &> /dev/null; then
-  setxkbmap -option ctrl:nocaps
-fi
-
 . ${SCRIPT_DIR}/.aliases
 . ${SCRIPT_DIR}/.exports
 
