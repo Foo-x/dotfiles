@@ -46,15 +46,30 @@ alias md=mkdir
 alias gr=grep
 alias dirsc='dirs -c && pushd -n ${PWD} > /dev/null'
 
+# others
 alias relogin='exec $SHELL -l'
+alias osver='cat /etc/*release'
+alias cctypes='echo "Conventional Commits"; echo; echo "
+build:Changes that affect the build system or external dependencies (example scopes - gulp, broccoli, npm)
+chore:Other changes that don'\''t modify src or test files
+ci:Changes to our CI configuration files and scripts (example scopes - Travis, Circle, BrowserStack, SauceLabs)
+docs:Documentation only changes
+feat:A new feature
+fix:A bug fix
+perf:A code change that improves performance
+refactor:A code change that neither fixes a bug nor adds a feature
+revert:Reverts a previous commit
+style:Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+test:Adding missing tests or correcting existing tests
+" | column -ts:'
 
-alias osver='cat /etc/os-release'
-
+# nim
 alias nimc='nim cpp -o:./a.out'
 alias nimcr='nim cpp -o:./a.out -d:release --hints:off --verbosity:0'
 alias nimr='nimc -r'
 alias nimrr='nimcr -r'
 
+# docker
 alias d='docker'
 alias dal='alias | grep "='\''docker[^-]"'
 alias da='docker attach'
@@ -82,6 +97,7 @@ alias dcr='docker-compose run'
 alias dcu='docker-compose up -d'
 alias dcub='docker-compose up -d --build'
 
+# tmux
 alias tm='tmux'
 alias tmal='alias | grep "='\''tmux"'
 alias tma='tmux attach'
@@ -91,31 +107,8 @@ alias tml='tmux ls'
 alias tmn='tmux new'
 alias tmnw='tmux neww'
 alias tmr='tmux rename'
+alias tme='vi ~/.tmux.conf'
 alias tmreload='tmux source-file ~/.tmux.conf'
-
-function open() {
-  if [[ "${WSL_DISTRO_NAME}" ]]; then
-    open-http "$@"
-  elif type open &> /dev/null; then
-    open "$@"
-  elif type xdg-open &> /dev/null; then
-    xdg-open "$@"
-  elif type explorer &> /dev/null; then
-    explorer "$@"
-  fi
-}
-
-function open-http() {
-  if [[ "${WSL_DISTRO_NAME}" ]]; then
-    wslview https://$1
-  elif type open &> /dev/null; then
-    open https://$1
-  elif type xdg-open &> /dev/null; then
-    xdg-open https://$1
-  elif type explorer &> /dev/null; then
-    explorer https://$1
-  fi
-}
 
 function with_env() {
   (
@@ -127,7 +120,7 @@ function with_env() {
 }
 
 if [[ "${WSL_DISTRO_NAME}" ]]; then
-  function wslviewl() {
+  function open() {
     wslview "$(wslpath -w "$1")"
   }
 fi
