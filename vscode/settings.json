@@ -167,6 +167,7 @@
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.splitCwd": "workspaceRoot",
   "workbench.editor.tabSizing": "shrink",
+  "workbench.panel.defaultLocation": "right",
   "workbench.startupEditor": "none",
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
