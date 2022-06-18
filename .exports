@@ -9,6 +9,8 @@ else
   export EDITOR='vi -p'
 fi
 
+export SIMPLE_BACKUP_SUFFIX=.`date +%Y%m%d_%H%M%S`
+
 [[ "${WSL_DISTRO_NAME}" ]] && export BROWSER=wslview
 
 export LANG=C
