@@ -12,26 +12,24 @@ alias ws='cd ~/workspace'
 alias cdg='cd $(git rev-parse --show-toplevel)'  # cd to toplevel of git repo
 function mkcd() { mkdir -p "$1" && cd "$1"; }
 
-# confirm
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-alias ln='ln -i'
-
 # override for convenience
 if [ "$(uname)" = 'Darwin' ]; then
   alias ls='ls -FG'
 else
   alias ls='ls -F --color=auto'
 fi
-alias ll='ls -lah'
+alias ll='ls -lahi'
 alias mkdir='mkdir -p'
 alias df='df -h'
 alias du='du -h'
+alias cp='cp -iav'
+alias ln='ln -iv'
+alias mv='mv -iv'
+alias rm='rm -iv'
 alias free='free -h'
 alias grep='grep --color=auto -En'  # use regexp and show line numbers
 alias dirs='dirs -v'
-alias rsync='rsync -aPv'
+alias rsync='rsync -aPvh'
 
 # shorten
 alias g=git
@@ -45,10 +43,14 @@ fi
 alias md=mkdir
 alias gr=grep
 alias dirsc='dirs -c && pushd -n ${PWD} > /dev/null'
+alias cpb='cp -b'
+alias lnb='ln -b'
+alias mvb='mv -b'
 
 # others
 alias relogin='exec $SHELL -l'
 alias osver='cat /etc/*release'
+alias mirror='rsync --delete'
 alias cctypes='echo "Conventional Commits"; echo; echo "
 build:Changes that affect the build system or external dependencies (example scopes - gulp, broccoli, npm)
 chore:Other changes that don'\''t modify src or test files
@@ -118,6 +120,20 @@ function with_env() {
     "$@"
   )
 }
+
+if type rsync &> /dev/null; then
+    function incr_bak() {
+        local base="$2"
+
+        if [ ! -d "${base}" ]; then
+            mkdir "${base}"
+        fi
+
+        local latest="../$(\ls ${base} | tail -n 1)"
+
+        rsync --link-dest="${latest}" "$1" "${base}/$(date +%Y%m%d_%H%M%S)"
+    }
+fi
 
 if [[ "${WSL_DISTRO_NAME}" ]]; then
   function open() {
