@@ -1,7 +1,7 @@
 #!/bin/sh
 
 fetchf() {
-    if [ ! -f "$1" ]; then
+    if [ ! -f "$1.completion.bash" ]; then
         curl -fsSL "$2" -o "$1.completion.bash"
     fi
 }

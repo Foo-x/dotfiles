@@ -125,9 +125,7 @@ if type rsync &> /dev/null; then
     function incr_bak() {
         local base="$2"
 
-        if [ ! -d "${base}" ]; then
-            mkdir "${base}"
-        fi
+        mkdir "${base}"
 
         local latest="../$(\ls ${base} | tail -n 1)"
 
