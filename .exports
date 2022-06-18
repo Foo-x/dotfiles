@@ -21,6 +21,7 @@ stty stop ''
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
 
+export ENHANCD_FILTER=fzf
 export ENHANCD_DOT_ARG=...
 
 # exec commands after each commands
