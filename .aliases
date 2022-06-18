@@ -9,6 +9,7 @@ alias .....='cd ../../../..'
 alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias ws='cd ~/workspace'
+alias dot='cd ~/.dotfiles'
 alias cdg='cd $(git rev-parse --show-toplevel)'  # cd to toplevel of git repo
 function mkcd() { mkdir -p "$1" && cd "$1"; }
 
@@ -64,6 +65,9 @@ revert:Reverts a previous commit
 style:Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 test:Adding missing tests or correcting existing tests
 " | column -ts:'
+alias al='cat ~/.dotfiles/.aliases{,_fzf} | $PAGER'
+alias inputrc='$PAGER ~/.inputrc'
+alias vikeymap='$PAGER ~/.dotfiles/.vim/keymap.vimrc'
 
 # nim
 alias nimc='nim cpp -o:./a.out'
@@ -109,8 +113,8 @@ alias tml='tmux ls'
 alias tmn='tmux new'
 alias tmnw='tmux neww'
 alias tmr='tmux rename'
-alias tme='vi ~/.tmux.conf'
 alias tmreload='tmux source-file ~/.tmux.conf'
+alias tmconf='$PAGER ~/.tmux.conf'
 
 function with_env() {
   (

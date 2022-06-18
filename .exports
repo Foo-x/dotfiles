@@ -9,6 +9,11 @@ else
   export EDITOR='vi -p'
 fi
 
+if type less &> /dev/null; then
+  export PAGER='less'
+  export LESS='RFMi'
+fi
+
 export SIMPLE_BACKUP_SUFFIX=.`date +%Y%m%d_%H%M%S`
 
 [[ "${WSL_DISTRO_NAME}" ]] && export BROWSER=wslview
