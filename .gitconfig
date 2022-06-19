@@ -47,8 +47,14 @@
 	p = pull
 	ps = push
 	psf = push --force-with-lease --force-if-includes
+	psd = push --delete
 	f = fetch
-	rs = remote show origin
+	rv = remote -vv
+	ra = remote add
+	rsu = remote set-url
+	rs = remote show
+	rso = remote show origin
+	rp = remote prune
 	rpo = remote prune origin
 	cl = clone
 	clp = clone --filter=blob:none --sparse
@@ -63,6 +69,8 @@
 	d = diff
 	dc = diff --cached
 	da = diff @
+	dm = diff --diff-filter=M   # modified
+	dnm = diff --diff-filter=m  # not modified
 	dt = difftool
 
 	# stash
@@ -80,6 +88,19 @@
 	wtp = worktree prune
 	wtr = worktree remove
 
+	# submodule
+	sub = submodule
+	suba = submodule add --progress
+	subu = submodule update --init --recursive --progress
+
+	# bisect
+	bi = bisect
+	bis = bisect start
+	bir = bisect run
+	big = bisect good
+	bib = bisect bad
+	bil = bisect log
+	bire = bisect reset
 
 	al = config --get-regexp alias.*  # show aliases
 
