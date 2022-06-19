@@ -3,9 +3,7 @@ alias _='sudo '
 
 # cd
 alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
+alias ...='cd ...'
 alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias ws='cd ~/workspace'
