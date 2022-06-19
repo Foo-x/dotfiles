@@ -2,6 +2,7 @@ export HISTSIZE=100000
 export HISTFILESIZE=100000
 export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignoreboth  # not save commands that space-beginned and duplicated to history
+export HISTIGNORE='fg*:bg*:history:ls*:ll:h:pwd'
 
 if type vim &> /dev/null; then
   export EDITOR='vim -p'
