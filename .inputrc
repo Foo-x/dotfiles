@@ -17,3 +17,23 @@ set bell-style none
 
 # output
 "\C-o": " &> out"
+
+# help
+"\C-h": " --help"
+
+# kill word (Rubout = Backspace)
+#"\C-w": unix-word-rubout
+#"\C-Rubout": unix-word-rubout
+#"\M-Rubout": backward-kill-word
+
+# kill line
+"\C-u": kill-whole-line
+"\C-k": kill-whole-line
+#"\C-x Rubout": backward-kill-line
+
+# edit-and-execute
+#"\C-x \C-e": edit-and-execute-command
+
+# undo
+#"\C-_": undo
+#"\C-x \C-u": undo
