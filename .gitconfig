@@ -30,6 +30,7 @@
 	rbi = rebase -i
 	rbim = rebase -i master
 	sco = sparse-checkout
+	scol = sparse-checkout list
 	scos = sparse-checkout set --cone
 	# show branches with relationship to upstream
 	usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
@@ -70,7 +71,6 @@
 	sa = stash apply
 	sd = stash drop
 	sp = stash pop
-	save = stash save
 	ssa = !git stash && git stash apply
 
 	# worktree
