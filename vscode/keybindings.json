@@ -1,9 +1,5 @@
 [
   {
-    "key": "ctrl+shift+l",
-    "command": "workbench.action.editor.changeLanguageMode"
-  },
-  {
     "key": "ctrl+shift+right",
     "command": "workbench.action.terminal.focusNext",
     "when": "terminalFocus"
@@ -259,5 +255,10 @@
   {
     "key": "ctrl+oem_1 a",
     "command": "-testing.runAll"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "searchEditorApplyChanges.apply",
+    "when": "inSearchEditor"
   }
 ]
