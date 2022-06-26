@@ -580,6 +580,30 @@
       "after": ["g", "t"]
     },
     {
+      "before": ["<leader>", "g", "d", "j"],
+      "commands": ["editor.action.diffReview.next"]
+    },
+    {
+      "before": ["<leader>", "g", "d", "k"],
+      "commands": ["editor.action.diffReview.prev"]
+    },
+    {
+      "before": ["<leader>", "g", "p", "j"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["<leader>", "g", "p", "k"],
+      "commands": ["editor.action.marker.prevInFiles"]
+    },
+    {
+      "before": ["<leader>", "g", "s", "j"],
+      "commands": ["search.action.focusNextSearchResult"]
+    },
+    {
+      "before": ["<leader>", "g", "s", "k"],
+      "commands": ["search.action.focusPreviousSearchResult"]
+    },
+    {
       "before": ["<leader>", "="],
       "commands": ["editor.action.formatDocument"]
     },
