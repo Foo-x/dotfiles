@@ -260,5 +260,13 @@
     "key": "ctrl+s",
     "command": "searchEditorApplyChanges.apply",
     "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+k tab",
+    "command": "type",
+    "args": {
+      "text": "\t"
+    },
+    "when": "editorTextFocus"
   }
 ]
