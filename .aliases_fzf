@@ -65,29 +65,22 @@ while len(q) > 0:
 
 # fd - cd sorted by depth
 function fd() {
-  local dir null="/dev/null" conv="cat -" sh
-  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && null="nul" && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
-
-  dir=$(
-    ${sh} __bfs_dir 2> /dev/null |
-    ${conv} |
-    fzf +m +s -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> ${null}"
-  ) && cd "$dir"
+  cd $(
+    __bfs_dir 2> /dev/null |
+    fzf +m +s -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> /dev/null"
+  )
 }
 
 # fe - open selected files with EDITOR
 function fe() {
-  local files conv="cat -" sh
-  [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]] && conv="iconv -f SJIS -t UTF-8" && sh="bash -ci"
+  local files
 
   files=($(
-    ${sh} __bfs_file 2> /dev/null |
-    ${conv} |
+    __bfs_file 2> /dev/null |
     fzf -m -q ${1:-''} --header "Tab: toggle"
   ))
   if [[ -n "$files" ]]; then
-    local files_str="$(printf '"%s" ' "${files[@]}")"
-    eval "${EDITOR:-vim -p} ${files_str}"
+    eval "${EDITOR:-vim -p} $(printf '"%s" ' "${files[@]}")"
   fi
 }
 
@@ -109,14 +102,11 @@ function gfco() {
 
 # gfbd - delete branches
 function gfbd() {
-  local tags branches target
-
-  target=$(
-    git --no-pager branch \
-        --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%(refname:short)%(end)%(end)" |
+  git --no-pager branch \
+      --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%(refname:short)%(end)%(end)" |
     sed '/^$/d' |
-    fzf -m --no-hscroll -q ${1:-''} --header="Tab: toggle") || return
-  git branch -D ${target}
+    fzf -m --no-hscroll -q ${1:-''} --header="Tab: toggle" |
+    xargs -r git branch -D
 }
 
 # gfshow - show commit
@@ -125,11 +115,11 @@ function gfshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --tiebreak=index \
-      --preview "echo {} | bash -c \"\grep -Eo '[a-f0-9]+' | head -1 | \
-                xargs -I % git diff-tree --no-commit-id --name-status -r %\"" \
+      --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
+                xargs -I % git diff-tree --no-commit-id --name-status -r %" \
       --bind "ctrl-m:execute: \
-                (echo {} | bash -c \"\grep -Eo '[a-f0-9]+' | head -1 | \
-                xargs -I % bash -c 'export TERM=xterm; git show --color=always % | less -R'\")"
+                (echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
+                xargs -I % git show --color=always % | LESS= less -R)"
 }
 
 # gfcf - commit fixup
@@ -144,7 +134,7 @@ function gfcf() {
   target=$(
     git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" |
     fzf --ansi --no-sort --reverse --tiebreak=index \
-        --preview "echo {} | bash -c \"\grep -Eo '[a-f0-9]+' | head -1 | \
-                    xargs -I % git diff-tree --no-commit-id --name-status -r %\"") || return
+        --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
+                    xargs -I % git diff-tree --no-commit-id --name-status -r %") || return
   git commit --fixup "$(cut -d' ' -f1 <<< "${target}")" "$@"
 }
