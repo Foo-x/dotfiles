@@ -67,7 +67,7 @@ while len(q) > 0:
 function fd() {
   cd $(
     __bfs_dir 2> /dev/null |
-    fzf +m +s -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> /dev/null"
+      fzf +m +s -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> /dev/null"
   )
 }
 
@@ -77,14 +77,14 @@ function fe() {
 
   files=($(
     __bfs_file 2> /dev/null |
-    fzf -m -q ${1:-''} --header "Tab: toggle"
+      fzf -m -q ${1:-''} --header "Tab: toggle"
   ))
   if [[ -n "$files" ]]; then
     eval "${EDITOR:-vim -p} $(printf '"%s" ' "${files[@]}")"
   fi
 }
 
-# gfco - checkout branch
+# gfco - git checkout branch
 function gfco() {
   local tags branches target
 
@@ -95,12 +95,12 @@ function gfco() {
     git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
   target=$(
     (echo "$branches"; echo "$tags") | sed '/^$/d' |
-    fzf --no-hscroll --no-multi -n 2 -q ${1:-''} --header="current: [$(git symbolic-ref --short HEAD 2> /dev/null || echo 'detached HEAD')]" \
-        --ansi --preview="git --no-pager log -150 --color --pretty=format:\"%s %C(black)%C(bold)%cr%C(reset)\" ..{2}") || return
+      fzf --no-hscroll --no-multi -n 2 -q ${1:-''} --header="current: [$(git symbolic-ref --short HEAD 2> /dev/null || echo 'detached HEAD')]" \
+          --ansi --preview="git --no-pager log -150 --color --pretty=format:\"%s %C(black)%C(bold)%cr%C(reset)\" ..{2}") || return
   { git checkout -t $(awk '{print $2}' <<< "$target") || git checkout $(awk '{print $2}' <<< "$target"); } 2> /dev/null
 }
 
-# gfbd - delete branches
+# gfbd - git delete branches
 function gfbd() {
   git --no-pager branch \
       --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%(refname:short)%(end)%(end)" |
@@ -109,20 +109,20 @@ function gfbd() {
     xargs -r git branch -D
 }
 
-# gfshow - show commit
+# gfshow - git show commit
 # can specify file
 function gfshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzf --ansi --no-sort --reverse --tiebreak=index \
-      --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
-                xargs -I % git diff-tree --no-commit-id --name-status -r %" \
-      --bind "ctrl-m:execute: \
-                (echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
-                xargs -I % git show --color=always % | LESS= less -R)"
+    fzf --ansi --no-sort --reverse --tiebreak=index \
+        --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
+                  xargs -I % git diff-tree --no-commit-id --name-status -r %" \
+        --bind "ctrl-m:execute: \
+                  (echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
+                  xargs -I % git show --color=always % | LESS= less -R)"
 }
 
-# gfcf - commit fixup
+# gfcf - git commit fixup
 function gfcf() {
   local target
 
@@ -133,8 +133,84 @@ function gfcf() {
 
   target=$(
     git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" |
-    fzf --ansi --no-sort --reverse --tiebreak=index \
-        --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
-                    xargs -I % git diff-tree --no-commit-id --name-status -r %") || return
+      fzf --ansi --no-sort --reverse --tiebreak=index \
+          --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | \
+                      xargs -I % git diff-tree --no-commit-id --name-status -r %") || return
   git commit --fixup "$(cut -d' ' -f1 <<< "${target}")" "$@"
+}
+
+# dfr - docker run
+function dfr() {
+  local image
+  image=$(docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}')
+
+  [ -n "$image" ] && docker run "$image" "$@"
+}
+
+# dfrr - docker run rm
+function dfrr() {
+  local image
+  image=$(docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}')
+
+  [ -n "$image" ] && docker run --rm "$image" "$@"
+}
+
+# dfri - docker run interactive
+function dfri() {
+  local image
+  image=$(docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}')
+
+  [ -n "$image" ] && docker run -it "$image" "$@"
+}
+
+# dfrir - docker run interactive rm
+function dfrir() {
+  local image
+  image=$(docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}')
+
+  [ -n "$image" ] && docker run -it --rm "$image" "$@"
+}
+
+# dfx - docker exec
+function dfx() {
+  local name
+  name=$(docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}')
+
+  [ -n "$name" ] && docker start "$name" && docker exec "$name" "$@"
+}
+
+# dfxi - docker exec interactive
+function dfxi() {
+  local name
+  name=$(docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}')
+
+  [ -n "$name" ] && docker start "$name" && docker exec -it "$name" "$@"
+}
+
+# dfa - docker attach
+function dfa() {
+  local name
+  name=$(docker ps -a | sed 1d | fzf --no-sort -1 -q "$1" -n 2,-1 | awk '{print $NF}')
+
+  [ -n "$name" ] && docker start "$name" && docker attach "$name"
+}
+
+# dfstart - docker stop
+function dfstart() {
+  docker ps -a | sed 1d | fzf --no-sort -q "$1" -m -n 2,-1 | awk '{ print $NF }' | xargs -r docker start
+}
+
+# dfstop - docker stop
+function dfstop() {
+  docker ps | sed 1d | fzf --no-sort -q "$1" -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker stop
+}
+
+# dfrm - docker rm
+function dfrm() {
+  docker ps -a | sed 1d | fzf --no-sort -q "$1" -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker rm
+}
+
+# dfrmi - docker rmi
+function dfrmi() {
+  docker images | sed 1d | fzf --no-sort -q "$1" -m --tac -n 1,2 | awk '{ print $1 ":" $2 }' | xargs -r docker rmi
 }
