@@ -1,153 +1,156 @@
 [color]
-	ui = auto
+    ui = auto
 [alias]
-	# log
-	l0 = log --oneline --all --decorate --graph                # oneline
-	l1 = log --oneline --all --decorate --graph --name-status  # oneline + changed files
-	l2 = log -p --decorate --all                               # description
+    # log
+    l0 = log --oneline --all --decorate --graph                # oneline
+    l1 = log --oneline --all --decorate --graph --name-status  # oneline + changed files
+    l2 = log -p --decorate --all                               # description
 
-	a = add
-	aa = add --all
-	s = status -sb
-	# show short commit hash
-	rev = rev-parse --short @
+    s = status -sb
+    # show short commit hash
+    rev = rev-parse --short @
 
-	# branch
-	b = branch
-	ba = branch -a
-	bm = branch -m
-	bmg = branch --merged
-	bd = branch -d
-	bdd = branch -D
-	bv = branch -vv
-	co = checkout
-	cb = checkout -b
-	rb = rebase
-	rbm = rebase master
-	rbc = rebase --continue
-	rba = rebase --abort
-	rbs = rebase --skip
-	rbi = rebase -i
-	rbim = rebase -i master
-	sco = sparse-checkout
-	scol = sparse-checkout list
-	scos = sparse-checkout set --cone
-	# show branches with relationship to upstream
-	usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
+    # branch
+    b = branch
+    ba = branch -a
+    bm = branch -m
+    bmg = branch --merged
+    bd = branch -d
+    bdd = branch -D
+    bv = branch -vv
+    co = checkout
+    cb = checkout -b
+    rb = rebase
+    rbm = rebase master
+    rbc = rebase --continue
+    rba = rebase --abort
+    rbs = rebase --skip
+    rbi = rebase -i
+    rbim = rebase -i master
+    sco = sparse-checkout
+    scol = sparse-checkout list
+    scos = sparse-checkout set --cone
+    # show branches with relationship to upstream
+    usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
 
-	# commit
-	c = commit
-	cm = commit -m
-	ca = commit --amend --no-edit
-	ic = commit --allow-empty -m \"Initial Commit\"
-	cf = commit --fixup
-	chp = cherry-pick
+    # add
+    a = add
+    aa = add --all
+    ai = add --interactive
 
-	# remote
-	p = pull
-	ps = push
-	psf = push --force-with-lease --force-if-includes
-	psd = push --delete
-	f = fetch
-	rv = remote -vv
-	ra = remote add
-	rsu = remote set-url
-	rs = remote show
-	rso = remote show origin
-	rp = remote prune
-	rpo = remote prune origin
-	cl = clone
-	clp = clone --filter=blob:none --sparse
-	fusi = !git fetch && git usi
+    # commit
+    c = commit
+    cm = commit -m
+    ca = commit --amend --no-edit
+    ic = commit --allow-empty -m \"Initial Commit\"
+    cf = commit --fixup
+    chp = cherry-pick
 
-	# reset
-	re = reset
-	res = reset --soft
-	reh = reset --hard
+    # remote
+    p = pull
+    ps = push
+    psf = push --force-with-lease --force-if-includes
+    psd = push --delete
+    f = fetch
+    rv = remote -vv
+    ra = remote add
+    rsu = remote set-url
+    rs = remote show
+    rso = remote show origin
+    rp = remote prune
+    rpo = remote prune origin
+    cl = clone
+    clp = clone --filter=blob:none --sparse
+    fusi = !git fetch && git usi
 
-	# diff
-	d = diff
-	dc = diff --cached
-	da = diff @
-	dm = diff --diff-filter=M   # modified
-	dnm = diff --diff-filter=m  # not modified
-	dt = difftool
+    # reset
+    re = reset
+    res = reset --soft
+    reh = reset --hard
 
-	# stash
-	ss = stash
-	sl = stash list
-	sa = stash apply
-	sd = stash drop
-	sp = stash pop
-	ssa = !git stash && git stash apply
+    # diff
+    d = diff
+    dc = diff --cached
+    da = diff @
+    dm = diff --diff-filter=M   # modified
+    dnm = diff --diff-filter=m  # not modified
+    dt = difftool
 
-	# worktree
-	wt = worktree
-	wta = worktree add
-	wtl = worktree list
-	wtp = worktree prune
-	wtr = worktree remove
+    # stash
+    ss = stash
+    sl = stash list
+    sa = stash apply
+    sd = stash drop
+    sp = stash pop
+    ssa = !git stash && git stash apply
 
-	# submodule
-	sub = submodule
-	suba = submodule add --progress
-	subu = submodule update --init --recursive --progress
+    # worktree
+    wt = worktree
+    wta = worktree add
+    wtl = worktree list
+    wtp = worktree prune
+    wtr = worktree remove
 
-	# bisect
-	bi = bisect
-	bis = bisect start
-	bir = bisect run
-	big = bisect good
-	bib = bisect bad
-	bil = bisect log
-	bire = bisect reset
+    # submodule
+    sub = submodule
+    suba = submodule add --progress
+    subu = submodule update --init --recursive --progress
 
-	al = config --get-regexp alias.*  # show aliases
+    # bisect
+    bi = bisect
+    bis = bisect start
+    bir = bisect run
+    big = bisect good
+    bib = bisect bad
+    bil = bisect log
+    bire = bisect reset
 
-	# set upstream of current branch to the same name in origin
-	sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
+    al = config --get-regexp alias.*  # show aliases
 
-	# delete merged branch
-	dmb = !git branch --merged | egrep -v '\\*|develop|master|main' | xargs git branch -d
+    # set upstream of current branch to the same name in origin
+    sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
 
-	# pull and prune
-	pp = "!f(){ \
-		git checkout ${1:-master} && \
-		git pull && \
-		git remote prune origin && \
-		git dmb; \
-	};f"
+    # delete merged branch
+    dmb = !git branch --merged | egrep -v '\\*|develop|master|main' | xargs git branch -d
 
-	# check if can merge
-	mc = "!f() { \
-		git checkout -q ${1:-master}; \
-		git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
-		git checkout -q -; \
-	};f"
+    # pull and prune
+    pp = "!f(){ \
+        git checkout ${1:-master} && \
+        git pull && \
+        git remote prune origin && \
+        git dmb; \
+    };f"
+
+    # check if can merge
+    mc = "!f() { \
+        git checkout -q ${1:-master}; \
+        git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
+        git checkout -q -; \
+    };f"
 
 [push]
-	default = current
+    default = current
 [core]
-	excludesfile = ~/.gitignore_global
-	quotePath = false
+    excludesfile = ~/.gitignore_global
+    quotePath = false
 [diff]
-	tool = vscode
-	wsErrorHighlight = all
+    tool = vscode
+    wsErrorHighlight = all
 [difftool "vscode"]
-	cmd = code --wait --diff $LOCAL $REMOTE
+    cmd = code --wait --diff $LOCAL $REMOTE
 [merge]
-	ff = false
-	tool = vscode
-	autostash = true
+    ff = false
+    tool = vscode
+    autostash = true
 [pull]
-	ff = only
+    ff = only
 [mergetool "vscode"]
-	cmd = code --wait $MERGED
+    cmd = code --wait $MERGED
 [help]
-	autocorrect = -1
+    autocorrect = -1
 [rebase]
-	abbreviateCommands = true
-	autosquash = true
-	autostash = true
+    abbreviateCommands = true
+    autosquash = true
+    autostash = true
 [submodule]
-	recurse = true
+    recurse = true
