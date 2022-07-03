@@ -124,15 +124,15 @@ function with_env() {
 }
 
 if type rsync &> /dev/null; then
-    function incr_bak() {
-        local base="$2"
+  function incr_bak() {
+    local base="$2"
 
-        mkdir "${base}"
+    mkdir "${base}"
 
-        local latest="../$(\ls ${base} | tail -n 1)"
+    local latest="../$(\ls ${base} | tail -n 1)"
 
-        rsync --link-dest="${latest}" "$1" "${base}/$(date +%Y%m%d_%H%M%S)"
-    }
+    rsync --link-dest="${latest}" "$1" "${base}/$(date +%Y%m%d_%H%M%S)"
+  }
 fi
 
 if [[ "${WSL_DISTRO_NAME}" ]]; then
