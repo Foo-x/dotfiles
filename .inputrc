@@ -21,6 +21,9 @@ set bell-style none
 # help
 "\C-h": " --help"
 
+# preview
+"\C-p": " | less"
+
 # kill word (Rubout = Backspace)
 #"\C-w": unix-word-rubout
 #"\C-Rubout": unix-word-rubout
