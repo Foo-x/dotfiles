@@ -43,6 +43,32 @@ export PROMPT_COMMAND='dispatch_prompt_command'
 
 export PROMPT_COMMAND_HISTSAVE='history -a'
 
+function lsgit() {
+  ls -A
+  if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = "true" ] ; then
+    echo
+    git status -sb
+  fi
+}
+
+function lsgit_cd() {
+  if [ "${LSGIT_DIR:-${PWD}}" != "${PWD}" ]; then
+    lsgit
+  fi
+  LSGIT_DIR=${PWD}
+}
+export PROMPT_COMMAND_LSGIT_CD='lsgit_cd'
+
+trap '((cmdcnt++))' DEBUG
+function lsgit_enter() {
+  if [ $((lsgit_enter_cnt + 1)) = ${cmdcnt} ]; then
+    lsgit
+  fi
+
+  lsgit_enter_cnt=${cmdcnt}
+}
+export PROMPT_COMMAND_LSGIT_ENTER='lsgit_enter'
+
 # prompt
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
