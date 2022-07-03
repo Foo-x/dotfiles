@@ -122,10 +122,21 @@
     };f"
 
     # check if can merge
-    mc = "!f() { \
+    mc = "!f(){ \
         git checkout -q ${1:-master}; \
         git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
         git checkout -q -; \
+    };f"
+
+    # contribution stats by author
+    # takes options of git log
+    contribution-stats = "!f(){ \
+        git shortlog -sn | \
+        cut -f2- | \
+        xargs -I_ bash -c 'git log --author='\\''_'\\'' --pretty=tformat: --numstat "$@" | \
+            \\grep -v "^-" | \
+            awk '\\''BEGIN { add=0; remove=0 } { add+=$1; remove+=$2 } END { if (add != 0 || remove != 0) printf \"_\\t+%s\\t-%s\\n\", add, remove }'\\''' -- "$@" | \
+        column -t -s$'\t'; \
     };f"
 
 [push]
