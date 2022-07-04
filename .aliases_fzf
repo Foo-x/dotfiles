@@ -139,6 +139,14 @@ function gfcf() {
   git commit --fixup "$(cut -d' ' -f1 <<< "${target}")" "$@"
 }
 
+# dfl - docker logs
+function dfl() {
+  local name
+  name=$(docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}')
+
+  [ -n "$name" ] && docker logs "$name" "$@"
+}
+
 # dfr - docker run
 function dfr() {
   local image
