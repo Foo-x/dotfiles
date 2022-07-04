@@ -2,13 +2,17 @@
     ui = auto
 [alias]
     # log
-    l0 = log --oneline --all --decorate --graph                # oneline
-    l1 = log --oneline --all --decorate --graph --name-status  # oneline + changed files
-    l2 = log -p --decorate --all                               # description
+    ## oneline
+    l0 = log --oneline --decorate --graph
+    l0a = log --oneline --all --decorate --graph
 
-    s = status -sb
-    # show short commit hash
-    rev = rev-parse --short @
+    ## oneline + changed files
+    l1 = log --oneline --decorate --graph --name-status
+    l1a = log --oneline --all --decorate --graph --name-status
+
+    ## description
+    l2 = log -p --decorate
+    l2a = log -p --decorate --all
 
     # branch
     b = branch
@@ -105,15 +109,22 @@
     bil = bisect log
     bire = bisect reset
 
-    al = config --get-regexp alias.*  # show aliases
+    # others
+    s = status -sb
 
-    # set upstream of current branch to the same name in origin
+    ## show short commit hash
+    rev = rev-parse --short @
+
+    ## show aliases
+    al = config --get-regexp alias.*
+
+    ## set upstream of current branch to the same name in origin
     sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
 
-    # delete merged branch
+    ## delete merged branch
     dmb = !git branch --merged | egrep -v '\\*|develop|master|main' | xargs git branch -d
 
-    # pull and prune
+    ## pull and prune
     pp = "!f(){ \
         git checkout ${1:-master} && \
         git pull && \
@@ -121,15 +132,15 @@
         git dmb; \
     };f"
 
-    # check if can merge
+    ## check if can merge
     mc = "!f(){ \
         git checkout -q ${1:-master}; \
         git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
         git checkout -q -; \
     };f"
 
-    # contribution stats by author
-    # takes options of git log
+    ## contribution stats by author
+    ## takes options of git log
     contribution-stats = "!f(){ \
         git shortlog -sn | \
         cut -f2- | \
