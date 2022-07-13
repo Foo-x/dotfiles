@@ -28,7 +28,6 @@ alias rm='rm -iv'
 alias free='free -h'
 alias grep='grep --color=auto -En'  # use regexp and show line numbers
 alias dirs='dirs -v'
-alias rsync='rsync -aPvh'
 
 # shorten
 alias g=git
@@ -124,6 +123,9 @@ function with_env() {
 }
 
 if type rsync &> /dev/null; then
+  alias rsync='rsync -aPvh'
+  alias rsyncb='rsync --backup --suffix=.`date +%Y%m%d_%H%M%S`'
+
   function incr_bak() {
     local base="$2"
 
