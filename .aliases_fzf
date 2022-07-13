@@ -203,7 +203,7 @@ function dfa() {
   [ -n "$name" ] && docker start "$name" && docker attach "$name"
 }
 
-# dfstart - docker stop
+# dfstart - docker start
 function dfstart() {
   docker ps -a | sed 1d | fzf --no-sort -q "$1" -m -n 2,-1 | awk '{ print $NF }' | xargs -r docker start
 }
@@ -211,6 +211,11 @@ function dfstart() {
 # dfstop - docker stop
 function dfstop() {
   docker ps | sed 1d | fzf --no-sort -q "$1" -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker stop
+}
+
+# dfrestart - docker restart
+function dfrestart() {
+  docker ps -a | sed 1d | fzf --no-sort -q "$1" -m -n 2,-1 | awk '{ print $NF }' | xargs -r docker restart
 }
 
 # dfrm - docker rm
