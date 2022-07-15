@@ -25,12 +25,12 @@
     co = checkout
     cb = checkout -b
     rb = rebase
-    rbm = rebase master
+    rbdb = !git rebase $(git config init.defaultBranch || echo master)
     rbc = rebase --continue
     rba = rebase --abort
     rbs = rebase --skip
     rbi = rebase -i
-    rbim = rebase -i master
+    rbidb = !git rebase -i $(git config init.defaultBranch || echo master)
     sco = sparse-checkout
     scol = sparse-checkout list
     scos = sparse-checkout set --cone
@@ -126,7 +126,7 @@
 
     ## pull and prune
     pp = "!f(){ \
-        git checkout ${1:-master} && \
+        git checkout ${1:-$(git config init.defaultBranch || echo master)} && \
         git pull && \
         git remote prune origin && \
         git dmb; \
@@ -134,7 +134,7 @@
 
     ## check if can merge
     mc = "!f(){ \
-        git checkout -q ${1:-master}; \
+        git checkout -q ${1:-$(git config init.defaultBranch || echo master)}; \
         git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
         git checkout -q -; \
     };f"
