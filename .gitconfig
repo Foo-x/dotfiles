@@ -176,3 +176,5 @@
     autostash = true
 [submodule]
     recurse = true
+[init]
+    defaultBranch = master

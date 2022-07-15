@@ -39,13 +39,13 @@ if type npm &> /dev/null; then
   . <(npm completion)
 fi
 
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+  . /usr/share/bash-completion/bash_completion
+  . ${SCRIPT_DIR}/complete_alias
+fi
+
 if type tmux &> /dev/null; then
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
     tmux new -A -s $(basename $(pwd) | tr -d .)
   fi
-fi
-
-if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-  . /usr/share/bash-completion/bash_completion
-  . ${SCRIPT_DIR}/complete_alias
 fi
