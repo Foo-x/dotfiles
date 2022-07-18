@@ -83,4 +83,5 @@ if type git &> /dev/null; then
 
     GIT_PS1_SHOWDIRTYSTATE=1  # show if files are changed or not
     GIT_PS1_SHOWUPSTREAM=1  # show diff from upstream
+    GIT_PS1_DESCRIBE_STYLE=branch  # show detached HEAD as relative to branch
 fi
