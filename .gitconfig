@@ -34,6 +34,7 @@
     sco = sparse-checkout
     scol = sparse-checkout list
     scos = sparse-checkout set --cone
+    db = config init.defaultBranch
     # show branches with relationship to upstream
     usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
 
