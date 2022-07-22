@@ -167,7 +167,6 @@
   "markdown.preview.fontFamily": "Firge35Nerd, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'BIZ UDPGothic', system-ui, 'Ubuntu', 'Droid Sans', sans-serif",
   "search.mode": "reuseEditor",
   "search.searchEditor.defaultNumberOfContextLines": 3,
-  "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
   "search.showLineNumbers": true,
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.shellIntegration.enabled": true,
