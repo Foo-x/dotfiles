@@ -35,18 +35,25 @@
     bv = branch -vv
     co = checkout
     cb = checkout -b
-    rb = rebase
-    rbdb = !git rebase $(git config init.defaultBranch || echo master)
     rbc = rebase --continue
     rba = rebase --abort
     rbs = rebase --skip
-    rbi = rebase -i
-    rbidb = !git rebase -i $(git config init.defaultBranch || echo master)
     sco = sparse-checkout
     scol = sparse-checkout list
     scos = sparse-checkout set --cone
     db = config init.defaultBranch
-    # show branches with relationship to upstream
+
+    ## rebase
+    rb = "!f(){ \
+        git rebase ${1:-$(git config init.defaultBranch || echo master)}; \
+    };f"
+
+    ## rebase interactive
+    rbi = "!f(){ \
+        git rebase -i ${1:-$(git config init.defaultBranch || echo master)}; \
+    };f"
+
+    ## show branches with relationship to upstream
     usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
 
     ## delete merged branch
