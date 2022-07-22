@@ -14,6 +14,17 @@
     l2 = log -p --decorate
     l2a = log -p --decorate --all
 
+    ## contribution stats by author
+    ## takes options of git log
+    contribution-stats = "!f(){ \
+        git shortlog -sn | \
+        cut -f2- | \
+        xargs -I_ bash -c 'git log --author='\\''_'\\'' --pretty=tformat: --numstat "$@" | \
+            \\grep -v "^-" | \
+            awk '\\''BEGIN { add=0; remove=0 } { add+=$1; remove+=$2 } END { if (add != 0 || remove != 0) printf \"_\\t+%s\\t-%s\\n\", add, remove }'\\''' -- "$@" | \
+        column -t -s$'\t'; \
+    };f"
+
     # branch
     b = branch
     ba = branch -a
@@ -37,6 +48,16 @@
     db = config init.defaultBranch
     # show branches with relationship to upstream
     usi = !git for-each-ref --color --format='%(refname:short)^%(upstream:lstrip=2) %(color:blue)%(upstream:track)' refs/heads | column -t -s^
+
+    ## delete merged branch
+    dmb = !git branch --merged | egrep -v '\\*|develop|master|main' | xargs git branch -d 2> /dev/null
+
+    ## check if can merge
+    mc = "!f(){ \
+        git checkout -q ${1:-$(git config init.defaultBranch || echo master)}; \
+        git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
+        git checkout -q -; \
+    };f"
 
     # add
     a = add
@@ -67,6 +88,17 @@
     cl = clone
     clp = clone --filter=blob:none --sparse
     fusi = !git fetch && git usi
+
+    ## pull and prune
+    pp = "!f(){ \
+        git checkout ${1:-$(git config init.defaultBranch || echo master)} && \
+        git pull && \
+        git remote prune origin && \
+        git dmb; \
+    };f"
+
+    ## set upstream of current branch to the same name in origin
+    sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
 
     # reset
     re = reset
@@ -119,38 +151,6 @@
 
     ## show aliases
     al = config --get-regexp alias.*
-
-    ## set upstream of current branch to the same name in origin
-    sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
-
-    ## delete merged branch
-    dmb = !git branch --merged | egrep -v '\\*|develop|master|main' | xargs git branch -d 2> /dev/null
-
-    ## pull and prune
-    pp = "!f(){ \
-        git checkout ${1:-$(git config init.defaultBranch || echo master)} && \
-        git pull && \
-        git remote prune origin && \
-        git dmb; \
-    };f"
-
-    ## check if can merge
-    mc = "!f(){ \
-        git checkout -q ${1:-$(git config init.defaultBranch || echo master)}; \
-        git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
-        git checkout -q -; \
-    };f"
-
-    ## contribution stats by author
-    ## takes options of git log
-    contribution-stats = "!f(){ \
-        git shortlog -sn | \
-        cut -f2- | \
-        xargs -I_ bash -c 'git log --author='\\''_'\\'' --pretty=tformat: --numstat "$@" | \
-            \\grep -v "^-" | \
-            awk '\\''BEGIN { add=0; remove=0 } { add+=$1; remove+=$2 } END { if (add != 0 || remove != 0) printf \"_\\t+%s\\t-%s\\n\", add, remove }'\\''' -- "$@" | \
-        column -t -s$'\t'; \
-    };f"
 
 [push]
     default = current
