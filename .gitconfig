@@ -5,10 +5,12 @@
     ## oneline
     l0 = log --oneline --decorate --graph
     l0a = log --oneline --all --decorate --graph
+    l0r = log --oneline --decorate --graph --pretty=reference
 
     ## oneline + changed files
     l1 = log --oneline --decorate --graph --name-status
     l1a = log --oneline --all --decorate --graph --name-status
+    l1r = log --oneline --decorate --graph --name-status --pretty=reference
 
     ## description
     l2 = log -p --decorate
