@@ -42,6 +42,7 @@
     rbs = rebase --skip
     sco = sparse-checkout
     scol = sparse-checkout list
+    scoa = sparse-checkout add
     scos = sparse-checkout set --cone
     db = config init.defaultBranch
 
