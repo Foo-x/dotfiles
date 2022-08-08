@@ -169,6 +169,7 @@
   "search.searchEditor.defaultNumberOfContextLines": 3,
   "search.showLineNumbers": true,
   "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.splitCwd": "workspaceRoot",
   "workbench.editor.tabSizing": "shrink",
   "workbench.panel.defaultLocation": "right",
