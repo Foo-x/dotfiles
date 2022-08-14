@@ -138,6 +138,8 @@ if type rsync &> /dev/null; then
 fi
 
 if [[ "${WSL_DISTRO_NAME}" ]]; then
+  alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
+
   function open() {
     wslview "$(wslpath -w "$1")"
   }
