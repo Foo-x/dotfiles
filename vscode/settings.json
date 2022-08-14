@@ -768,6 +768,7 @@
     "pub.name": ["ui"],
     "alefragnani.project-manager": "workspace"
   },
+  "remote.localPortHost": "allInterfaces",
   "remote.WSL2.connectionMethod": "localhost",
   "hediet.vscode-drawio.theme": "Kennedy",
   "settingsSync.ignoredSettings": [
