@@ -9,20 +9,11 @@ set colored-completion-prefix on
 set menu-complete-display-prefix on
 set bell-style none
 
-# null
-"\C-n": " &> /dev/null"
-
 # background
 "\C-b": "\C-anohup \C-e &"
 
-# output
-"\C-o": " &> out"
-
 # help
 "\C-h": " --help"
-
-# preview
-"\C-p": " | less"
 
 # kill word (Rubout = Backspace)
 #"\C-w": unix-word-rubout

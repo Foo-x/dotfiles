@@ -50,18 +50,18 @@ alias relogin='exec $SHELL -l'
 alias osver='cat /etc/*release'
 alias mirror='rsync --delete'
 alias cctypes='echo "Conventional Commits"; echo; echo "
-build:Changes that affect the build system or external dependencies (example scopes - gulp, broccoli, npm)
-chore:Other changes that don'\''t modify src or test files
-ci:Changes to our CI configuration files and scripts (example scopes - Travis, Circle, BrowserStack, SauceLabs)
-docs:Documentation only changes
-feat:A new feature
-fix:A bug fix
-perf:A code change that improves performance
-refactor:A code change that neither fixes a bug nor adds a feature
-revert:Reverts a previous commit
-style:Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-test:Adding missing tests or correcting existing tests
-" | column -ts:'
+build		Changes that affect the build system or external dependencies (example scopes - gulp, broccoli, npm)
+chore		Other changes that don'\''t modify src or test files
+ci		Changes to our CI configuration files and scripts (example scopes - Travis, Circle, BrowserStack, SauceLabs)
+docs		Documentation only changes
+feat		A new feature
+fix		A bug fix
+perf		A code change that improves performance
+refactor	A code change that neither fixes a bug nor adds a feature
+revert		Reverts a previous commit
+style		Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+test		Adding missing tests or correcting existing tests
+"'
 alias al='cat ~/.dotfiles/.aliases{,_fzf} | $PAGER'
 alias inputrc='$PAGER ~/.inputrc'
 alias vikeymap='$PAGER ~/.dotfiles/.vim/keymap.vimrc'
@@ -121,6 +121,21 @@ function with_env() {
     "$@"
   )
 }
+
+function out() {
+  "$@" &> out
+}
+alias out='out '
+
+function silent() {
+  "$@" &> /dev/null
+}
+alias silent='silent '
+
+function preview() {
+  "$@" | less
+}
+alias preview='preview '
 
 if type rsync &> /dev/null; then
   alias rsync='rsync -aPvh'
