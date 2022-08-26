@@ -52,12 +52,12 @@
 
     ## rebase
     rb = "!f(){ \
-        git rebase ${1:-$(git config init.defaultBranch || echo master)}; \
+        git rebase ${@:-$(git config init.defaultBranch || echo master)}; \
     };f"
 
     ## rebase interactive
     rbi = "!f(){ \
-        git rebase -i ${1:-$(git config init.defaultBranch || echo master)}; \
+        git rebase -i ${@:-$(git config init.defaultBranch || echo master)}; \
     };f"
 
     ## delete merged branch
