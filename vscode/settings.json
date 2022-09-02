@@ -491,8 +491,12 @@
       "after": ["O", "<Esc>"]
     },
     {
+      "before": ["<leader>", ","],
+      "after": ["A", ",", "<Esc>"]
+    },
+    {
       "before": ["<leader>", ";"],
-      "after": ["m", "Z", "A", ";", "<Esc>", "`", "Z"]
+      "after": ["A", ";", "<Esc>"]
     },
     {
       "before": ["<leader>", "j"],
