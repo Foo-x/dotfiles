@@ -78,6 +78,8 @@
     # commit
     c = commit
     cm = commit -m
+    cmall = !git add --all && git commit -m
+    ce = commit --allow-empty-message
     ca = commit --amend --no-edit
     ic = commit --allow-empty -m \"Initial Commit\"
     cf = commit --fixup
