@@ -90,6 +90,7 @@
     ps = push
     psf = push --force-with-lease --force-if-includes
     psd = push --delete
+    acep = !git add --all && git commit --allow-empty-message -m '' && git push
     f = fetch
     rv = remote -vv
     ra = remote add
