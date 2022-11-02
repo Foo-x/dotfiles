@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "open (WSL)",
+      "type": "shell",
+      "command": "wslview \"$(wslpath -w \"${file}\")\"",
+      "problemMatcher": []
+    }
+  ]
+}

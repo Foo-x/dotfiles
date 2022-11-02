@@ -16,7 +16,9 @@
   "editor.minimap.size": "fill",
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "boundary",
-  "editor.rulers": [120],
+  "editor.rulers": [
+    120
+  ],
   "editor.scrollBeyondLastLine": false,
   "editor.showFoldingControls": "always",
   "editor.tabSize": 4,
@@ -178,7 +180,6 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
   "zenMode.hideTabs": false,
-
   // language settings
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -202,11 +203,11 @@
     "editor.tabSize": 2
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.json-language-features",
     "editor.tabSize": 2
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.json-language-features",
     "editor.tabSize": 2
   },
   "[markdown]": {
@@ -234,7 +235,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
-
   // extension settings
   "conventionalCommits.autoCommit": false,
   "conventionalCommits.gitmoji": false,
@@ -323,39 +323,74 @@
   "vim.useSystemClipboard": true,
   "vim.insertModeKeyBindingsNonRecursive": [
     {
-      "before": ["j", "j"],
-      "after": ["<Esc>"]
+      "before": [
+        "j",
+        "j"
+      ],
+      "after": [
+        "<Esc>"
+      ]
     },
     {
-      "before": ["<C-a>"],
-      "after": ["<HOME>"]
+      "before": [
+        "<C-a>"
+      ],
+      "after": [
+        "<HOME>"
+      ]
     },
     {
-      "before": ["<C-e>"],
-      "after": ["<END>"]
+      "before": [
+        "<C-e>"
+      ],
+      "after": [
+        "<END>"
+      ]
     },
     {
-      "before": ["<C-j>"],
-      "after": ["<DOWN>"]
+      "before": [
+        "<C-j>"
+      ],
+      "after": [
+        "<DOWN>"
+      ]
     },
     {
-      "before": ["<C-k>"],
-      "after": ["<UP>"]
+      "before": [
+        "<C-k>"
+      ],
+      "after": [
+        "<UP>"
+      ]
     },
     {
-      "before": ["<C-h>"],
-      "after": ["<LEFT>"]
+      "before": [
+        "<C-h>"
+      ],
+      "after": [
+        "<LEFT>"
+      ]
     },
     {
-      "before": ["<C-l>"],
-      "after": ["<RIGHT>"]
+      "before": [
+        "<C-l>"
+      ],
+      "after": [
+        "<RIGHT>"
+      ]
     },
     {
-      "before": ["<C-u>"],
-      "after": ["<BS>"]
+      "before": [
+        "<C-u>"
+      ],
+      "after": [
+        "<BS>"
+      ]
     },
     {
-      "before": ["<C-i>"],
+      "before": [
+        "<C-i>"
+      ],
       "after": [
         // don't know why but, cannot bind <Del>
         "<RIGHT>",
@@ -363,418 +398,1115 @@
       ]
     },
     {
-      "before": ["<C-o>"],
-      "after": ["<Esc>", "o"]
+      "before": [
+        "<C-o>"
+      ],
+      "after": [
+        "<Esc>",
+        "o"
+      ]
     },
     {
-      "before": ["<C-O>"],
-      "after": ["<Esc>", "O"]
+      "before": [
+        "<C-O>"
+      ],
+      "after": [
+        "<Esc>",
+        "O"
+      ]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["j"],
-      "after": ["g", "j"]
-    },
-    {
-      "before": ["k"],
-      "after": ["g", "k"]
-    },
-    {
-      "before": ["<Down>"],
-      "after": ["g", "j"]
-    },
-    {
-      "before": ["<Up>"],
-      "after": ["g", "k"]
-    },
-    {
-      "before": ["<CR>"],
-      "after": ["G"]
-    },
-    {
-      "before": ["<BS>"],
-      "after": ["g", "g"]
-    },
-    {
-      "before": ["Y"],
-      "after": ["y", "$"]
-    },
-    {
-      "before": ["+"],
-      "after": ["<C-a>"]
-    },
-    {
-      "before": ["-"],
-      "after": ["<C-x>"]
-    },
-    {
-      "before": ["*"],
-      "after": ["*", "N"]
-    },
-    {
-      "before": ["[", "["],
-      "after": ["\"", "_", "y", "a", "["]
-    },
-    {
-      "before": ["[", "("],
-      "after": ["\"", "_", "y", "a", "("]
-    },
-    {
-      "before": ["[", "{"],
-      "after": ["\"", "_", "y", "a", "{"]
-    },
-    {
-      "before": ["[", "]"],
-      "after": ["\"", "_", "y", "a", "["]
-    },
-    {
-      "before": ["[", ")"],
-      "after": ["\"", "_", "y", "a", "("]
-    },
-    {
-      "before": ["[", "}"],
-      "after": ["\"", "_", "y", "a", "{"]
-    },
-    {
-      "before": ["]", "["],
-      "after": ["\"", "_", "y", "a", "[", "%"]
-    },
-    {
-      "before": ["]", "("],
-      "after": ["\"", "_", "y", "a", "(", "%"]
-    },
-    {
-      "before": ["]", "{"],
-      "after": ["\"", "_", "y", "a", "{", "%"]
-    },
-    {
-      "before": ["]", "]"],
-      "after": ["\"", "_", "y", "a", "[", "%"]
-    },
-    {
-      "before": ["]", ")"],
-      "after": ["\"", "_", "y", "a", "(", "%"]
-    },
-    {
-      "before": ["]", "}"],
-      "after": ["\"", "_", "y", "a", "{", "%"]
-    },
-    {
-      "before": ["<C-l>"],
-      "commands": [":nohl"]
-    },
-    {
-      "before": ["g", "D"],
-      "commands": ["editor.action.revealDefinitionAside"]
-    },
-    {
-      "before": ["<leader>", "h"],
-      "after": ["^"]
-    },
-    {
-      "before": ["<leader>", "l"],
-      "after": ["$"]
-    },
-    {
-      "before": ["<leader>", "m"],
-      "after": ["%"]
-    },
-    {
-      "before": ["<leader>", "/"],
-      "after": ["*"]
-    },
-    {
-      "before": ["<leader>", "o"],
-      "after": ["o", "<Esc>"]
-    },
-    {
-      "before": ["<leader>", "O"],
-      "after": ["O", "<Esc>"]
-    },
-    {
-      "before": ["<leader>", ","],
-      "after": ["A", ",", "<Esc>"]
-    },
-    {
-      "before": ["<leader>", ";"],
-      "after": ["A", ";", "<Esc>"]
-    },
-    {
-      "before": ["<leader>", "j"],
-      "commands": ["cursorPageDown"]
-    },
-    {
-      "before": ["<leader>", "k"],
-      "commands": ["cursorPageUp"]
-    },
-    {
-      "before": ["<leader>", "w", "_"],
-      "commands": [":split"]
-    },
-    {
-      "before": ["<leader>", "w", "\\"],
-      "commands": [":vsplit"]
-    },
-    {
-      "before": ["<leader>", "w", "c"],
-      "commands": [":q"]
-    },
-    {
-      "before": ["<leader>", "w", "h"],
-      "commands": ["workbench.action.focusLeftGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "l"],
-      "commands": ["workbench.action.focusRightGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "j"],
-      "commands": ["workbench.action.focusBelowGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "k"],
-      "commands": ["workbench.action.focusAboveGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "H"],
-      "commands": ["workbench.action.moveEditorToLeftGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "L"],
-      "commands": ["workbench.action.moveEditorToRightGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "J"],
-      "commands": ["workbench.action.moveEditorToBelowGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "K"],
-      "commands": ["workbench.action.moveEditorToAboveGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "="],
-      "commands": ["workbench.action.evenEditorWidths"]
-    },
-    {
-      "before": ["<leader>", "w", ">"],
-      "commands": ["workbench.action.increaseViewWidth"]
-    },
-    {
-      "before": ["<leader>", "w", "<"],
-      "commands": ["workbench.action.decreaseViewWidth"]
-    },
-    {
-      "before": ["<leader>", "w", "+"],
-      "commands": ["workbench.action.increaseViewHeight"]
-    },
-    {
-      "before": ["<leader>", "w", "-"],
-      "commands": ["workbench.action.decreaseViewHeight"]
-    },
-    {
-      "before": ["<leader>", "t", "t"],
-      "commands": [":tabnew"]
-    },
-    {
-      "before": ["<leader>", "t", "h"],
-      "after": ["g", "T"]
-    },
-    {
-      "before": ["<leader>", "t", "j"],
-      "after": ["g", "T"]
-    },
-    {
-      "before": ["<leader>", "t", "k"],
-      "after": ["g", "t"]
-    },
-    {
-      "before": ["<leader>", "t", "l"],
-      "after": ["g", "t"]
-    },
-    {
-      "before": ["<leader>", "g", "d", "j"],
-      "commands": ["editor.action.diffReview.next"]
-    },
-    {
-      "before": ["<leader>", "g", "d", "k"],
-      "commands": ["editor.action.diffReview.prev"]
-    },
-    {
-      "before": ["<leader>", "g", "p", "j"],
-      "commands": ["editor.action.marker.nextInFiles"]
-    },
-    {
-      "before": ["<leader>", "g", "p", "k"],
-      "commands": ["editor.action.marker.prevInFiles"]
-    },
-    {
-      "before": ["<leader>", "g", "s", "j"],
-      "commands": ["search.action.focusNextSearchResult"]
-    },
-    {
-      "before": ["<leader>", "g", "s", "k"],
-      "commands": ["search.action.focusPreviousSearchResult"]
-    },
-    {
-      "before": ["<leader>", "="],
-      "commands": ["editor.action.formatDocument"]
-    },
-    {
-      "before": ["<leader>", "s"],
-      "after": [":", "%", "s", "/"]
-    },
-    {
-      "before": ["<leader>", "y"],
-      "after": ["g", "g", "y", "G"]
-    },
-    {
-      "before": ["<leader>", "v"],
-      "after": ["g", "g", "V", "G"]
-    },
-    {
-      "before": ["<leader>", "d"],
-      "after": ["g", "g", "d", "G"]
-    },
-    {
-      "before": ["x"],
-      "after": ["\"", "_", "x"]
-    },
-    {
-      "before": ["X"],
-      "after": ["\"", "_", "X"]
-    },
-    {
-      "before": ["s"],
-      "after": ["\"", "_", "s"]
-    },
-    {
-      "before": ["S"],
-      "after": ["\"", "_", "S"]
-    },
-    {
-      "before": ["<leader>", "<leader>", "s"],
-      "after": ["<leader>", "<leader>", "2", "s"]
-    },
-    {
-      "before": ["<leader>", "<leader>", "w"],
-      "after": ["<leader>", "<leader>", "<leader>", "b", "d", "w"]
-    },
-    {
-      "before": ["<leader>", "<leader>", "e"],
-      "after": ["<leader>", "<leader>", "<leader>", "b", "d", "e"]
+      "before": [
+        "j"
+      ],
+      "after": [
+        "g",
+        "j"
+      ]
+    },
+    {
+      "before": [
+        "k"
+      ],
+      "after": [
+        "g",
+        "k"
+      ]
+    },
+    {
+      "before": [
+        "<Down>"
+      ],
+      "after": [
+        "g",
+        "j"
+      ]
+    },
+    {
+      "before": [
+        "<Up>"
+      ],
+      "after": [
+        "g",
+        "k"
+      ]
+    },
+    {
+      "before": [
+        "<CR>"
+      ],
+      "after": [
+        "G"
+      ]
+    },
+    {
+      "before": [
+        "<BS>"
+      ],
+      "after": [
+        "g",
+        "g"
+      ]
+    },
+    {
+      "before": [
+        "Y"
+      ],
+      "after": [
+        "y",
+        "$"
+      ]
+    },
+    {
+      "before": [
+        "+"
+      ],
+      "after": [
+        "<C-a>"
+      ]
+    },
+    {
+      "before": [
+        "-"
+      ],
+      "after": [
+        "<C-x>"
+      ]
+    },
+    {
+      "before": [
+        "*"
+      ],
+      "after": [
+        "*",
+        "N"
+      ]
+    },
+    {
+      "before": [
+        "[",
+        "["
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "["
+      ]
+    },
+    {
+      "before": [
+        "[",
+        "("
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "("
+      ]
+    },
+    {
+      "before": [
+        "[",
+        "{"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "{"
+      ]
+    },
+    {
+      "before": [
+        "[",
+        "]"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "["
+      ]
+    },
+    {
+      "before": [
+        "[",
+        ")"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "("
+      ]
+    },
+    {
+      "before": [
+        "[",
+        "}"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "{"
+      ]
+    },
+    {
+      "before": [
+        "]",
+        "["
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "[",
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "]",
+        "("
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "(",
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "]",
+        "{"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "{",
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "]",
+        "]"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "[",
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "]",
+        ")"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "(",
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "]",
+        "}"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "y",
+        "a",
+        "{",
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "<C-l>"
+      ],
+      "commands": [
+        ":nohl"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "D"
+      ],
+      "commands": [
+        "editor.action.revealDefinitionAside"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "h"
+      ],
+      "after": [
+        "^"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "l"
+      ],
+      "after": [
+        "$"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "m"
+      ],
+      "after": [
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "/"
+      ],
+      "after": [
+        "*"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "o"
+      ],
+      "after": [
+        "o",
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "O"
+      ],
+      "after": [
+        "O",
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        ","
+      ],
+      "after": [
+        "A",
+        ",",
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        ";"
+      ],
+      "after": [
+        "A",
+        ";",
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "j"
+      ],
+      "commands": [
+        "cursorPageDown"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "k"
+      ],
+      "commands": [
+        "cursorPageUp"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "_"
+      ],
+      "commands": [
+        ":split"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "\\"
+      ],
+      "commands": [
+        ":vsplit"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "c"
+      ],
+      "commands": [
+        ":q"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "h"
+      ],
+      "commands": [
+        "workbench.action.focusLeftGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "l"
+      ],
+      "commands": [
+        "workbench.action.focusRightGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "j"
+      ],
+      "commands": [
+        "workbench.action.focusBelowGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "k"
+      ],
+      "commands": [
+        "workbench.action.focusAboveGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "H"
+      ],
+      "commands": [
+        "workbench.action.moveEditorToLeftGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "L"
+      ],
+      "commands": [
+        "workbench.action.moveEditorToRightGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "J"
+      ],
+      "commands": [
+        "workbench.action.moveEditorToBelowGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "K"
+      ],
+      "commands": [
+        "workbench.action.moveEditorToAboveGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "="
+      ],
+      "commands": [
+        "workbench.action.evenEditorWidths"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        ">"
+      ],
+      "commands": [
+        "workbench.action.increaseViewWidth"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "<"
+      ],
+      "commands": [
+        "workbench.action.decreaseViewWidth"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "+"
+      ],
+      "commands": [
+        "workbench.action.increaseViewHeight"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "-"
+      ],
+      "commands": [
+        "workbench.action.decreaseViewHeight"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "t",
+        "t"
+      ],
+      "commands": [
+        ":tabnew"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "t",
+        "h"
+      ],
+      "after": [
+        "g",
+        "T"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "t",
+        "j"
+      ],
+      "after": [
+        "g",
+        "T"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "t",
+        "k"
+      ],
+      "after": [
+        "g",
+        "t"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "t",
+        "l"
+      ],
+      "after": [
+        "g",
+        "t"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "d",
+        "j"
+      ],
+      "commands": [
+        "editor.action.diffReview.next"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "d",
+        "k"
+      ],
+      "commands": [
+        "editor.action.diffReview.prev"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "p",
+        "j"
+      ],
+      "commands": [
+        "editor.action.marker.nextInFiles"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "p",
+        "k"
+      ],
+      "commands": [
+        "editor.action.marker.prevInFiles"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "s",
+        "j"
+      ],
+      "commands": [
+        "search.action.focusNextSearchResult"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "s",
+        "k"
+      ],
+      "commands": [
+        "search.action.focusPreviousSearchResult"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "="
+      ],
+      "commands": [
+        "editor.action.formatDocument"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "s"
+      ],
+      "after": [
+        ":",
+        "%",
+        "s",
+        "/"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "y"
+      ],
+      "after": [
+        "g",
+        "g",
+        "y",
+        "G"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "v"
+      ],
+      "after": [
+        "g",
+        "g",
+        "V",
+        "G"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "d"
+      ],
+      "after": [
+        "g",
+        "g",
+        "d",
+        "G"
+      ]
+    },
+    {
+      "before": [
+        "x"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "x"
+      ]
+    },
+    {
+      "before": [
+        "X"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "X"
+      ]
+    },
+    {
+      "before": [
+        "s"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "s"
+      ]
+    },
+    {
+      "before": [
+        "S"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "S"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "<leader>",
+        "s"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "2",
+        "s"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "<leader>",
+        "w"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "<leader>",
+        "b",
+        "d",
+        "w"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "<leader>",
+        "e"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "<leader>",
+        "b",
+        "d",
+        "e"
+      ]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
-      "before": ["j"],
-      "after": ["g", "j"]
+      "before": [
+        "j"
+      ],
+      "after": [
+        "g",
+        "j"
+      ]
     },
     {
-      "before": ["k"],
-      "after": ["g", "k"]
+      "before": [
+        "k"
+      ],
+      "after": [
+        "g",
+        "k"
+      ]
     },
     {
-      "before": ["p"],
-      "after": ["p", "g", "v", "y"]
+      "before": [
+        "p"
+      ],
+      "after": [
+        "p",
+        "g",
+        "v",
+        "y"
+      ]
     },
     {
-      "before": ["<Down>"],
-      "after": ["g", "j"]
+      "before": [
+        "<Down>"
+      ],
+      "after": [
+        "g",
+        "j"
+      ]
     },
     {
-      "before": ["<Up>"],
-      "after": ["g", "k"]
+      "before": [
+        "<Up>"
+      ],
+      "after": [
+        "g",
+        "k"
+      ]
     },
     {
-      "before": ["<CR>"],
-      "after": ["G"]
+      "before": [
+        "<CR>"
+      ],
+      "after": [
+        "G"
+      ]
     },
     {
-      "before": ["<BS>"],
-      "after": ["g", "g"]
+      "before": [
+        "<BS>"
+      ],
+      "after": [
+        "g",
+        "g"
+      ]
     },
     {
-      "before": ["*"],
-      "after": ["\"", "z", "y", "/", "<C-r>", "z", "<CR>", "N"]
+      "before": [
+        "*"
+      ],
+      "after": [
+        "\"",
+        "z",
+        "y",
+        "/",
+        "<C-r>",
+        "z",
+        "<CR>",
+        "N"
+      ]
     },
     {
-      "before": ["+"],
-      "after": ["<C-a>", "g", "v"]
+      "before": [
+        "+"
+      ],
+      "after": [
+        "<C-a>",
+        "g",
+        "v"
+      ]
     },
     {
-      "before": ["-"],
-      "after": ["<C-x>", "g", "v"]
+      "before": [
+        "-"
+      ],
+      "after": [
+        "<C-x>",
+        "g",
+        "v"
+      ]
     },
     {
-      "before": [">"],
-      "after": [">", "g", "v"]
+      "before": [
+        ">"
+      ],
+      "after": [
+        ">",
+        "g",
+        "v"
+      ]
     },
     {
-      "before": ["<"],
-      "after": ["<", "g", "v"]
+      "before": [
+        "<"
+      ],
+      "after": [
+        "<",
+        "g",
+        "v"
+      ]
     },
     {
-      "before": ["y"],
-      "after": ["y", "g", "v", "<Esc>"]
+      "before": [
+        "y"
+      ],
+      "after": [
+        "y",
+        "g",
+        "v",
+        "<Esc>"
+      ]
     },
     {
-      "before": ["Y"],
-      "after": ["y", "$"]
+      "before": [
+        "Y"
+      ],
+      "after": [
+        "y",
+        "$"
+      ]
     },
     {
-      "before": ["<leader>", "h"],
-      "after": ["^"]
+      "before": [
+        "<leader>",
+        "h"
+      ],
+      "after": [
+        "^"
+      ]
     },
     {
-      "before": ["<leader>", "l"],
-      "after": ["$"]
+      "before": [
+        "<leader>",
+        "l"
+      ],
+      "after": [
+        "$"
+      ]
     },
     {
-      "before": ["<leader>", "m"],
-      "after": ["%"]
+      "before": [
+        "<leader>",
+        "m"
+      ],
+      "after": [
+        "%"
+      ]
     },
     {
-      "before": ["<leader>", "s", "("],
-      "after": ["d", "i", "(", ")", "<Esc>", "P"]
+      "before": [
+        "<leader>",
+        "s",
+        "("
+      ],
+      "after": [
+        "d",
+        "i",
+        "(",
+        ")",
+        "<Esc>",
+        "P"
+      ]
     },
     {
-      "before": ["<leader>", "s", "{"],
-      "after": ["d", "i", "{", "}", "<Esc>", "P"]
+      "before": [
+        "<leader>",
+        "s",
+        "{"
+      ],
+      "after": [
+        "d",
+        "i",
+        "{",
+        "}",
+        "<Esc>",
+        "P"
+      ]
     },
     {
-      "before": ["<leader>", "s", "["],
-      "after": ["d", "i", "[", "]", "<Esc>", "P"]
+      "before": [
+        "<leader>",
+        "s",
+        "["
+      ],
+      "after": [
+        "d",
+        "i",
+        "[",
+        "]",
+        "<Esc>",
+        "P"
+      ]
     },
     {
-      "before": ["<leader>", "s", "<"],
-      "after": ["d", "i", "<", ">", "<Esc>", "P"]
+      "before": [
+        "<leader>",
+        "s",
+        "<"
+      ],
+      "after": [
+        "d",
+        "i",
+        "<",
+        ">",
+        "<Esc>",
+        "P"
+      ]
     },
     {
-      "before": ["<leader>", "s", "\""],
-      "after": ["d", "i", "\"", "\"", "<Esc>", "P"]
+      "before": [
+        "<leader>",
+        "s",
+        "\""
+      ],
+      "after": [
+        "d",
+        "i",
+        "\"",
+        "\"",
+        "<Esc>",
+        "P"
+      ]
     },
     {
-      "before": ["<leader>", "s", "'"],
-      "after": ["d", "i", "'", "'", "<Esc>", "P"]
+      "before": [
+        "<leader>",
+        "s",
+        "'"
+      ],
+      "after": [
+        "d",
+        "i",
+        "'",
+        "'",
+        "<Esc>",
+        "P"
+      ]
     },
     {
-      "before": ["<leader>", "<leader>", "s"],
-      "after": ["<leader>", "<leader>", "2", "s"]
+      "before": [
+        "<leader>",
+        "<leader>",
+        "s"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "2",
+        "s"
+      ]
     },
     {
-      "before": ["<leader>", "<leader>", "w"],
-      "after": ["<leader>", "<leader>", "<leader>", "b", "d", "w"]
+      "before": [
+        "<leader>",
+        "<leader>",
+        "w"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "<leader>",
+        "b",
+        "d",
+        "w"
+      ]
     },
     {
-      "before": ["<leader>", "<leader>", "e"],
-      "after": ["<leader>", "<leader>", "<leader>", "b", "d", "e"]
+      "before": [
+        "<leader>",
+        "<leader>",
+        "e"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "<leader>",
+        "b",
+        "d",
+        "e"
+      ]
     }
   ],
   "workbench.colorTheme": "Noctis Minimus",
   "workbench.iconTheme": "material-icon-theme",
   "remote.extensionKind": {
-    "pub.name": ["ui"],
+    "pub.name": [
+      "ui"
+    ],
     "alefragnani.project-manager": "workspace"
   },
   "remote.localPortHost": "allInterfaces",

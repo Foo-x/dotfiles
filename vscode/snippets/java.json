@@ -1,0 +1,68 @@
+{
+  "BeforeEach": {
+    "prefix": [
+      "beforeeach",
+      "init"
+    ],
+    "body": [
+      "@BeforeEach",
+      "void init() {",
+      "  $0",
+      "}"
+    ]
+  },
+  "BeforeAll": {
+    "prefix": [
+      "beforeall",
+      "initall"
+    ],
+    "body": [
+      "@BeforeAll",
+      "static void initAll() {",
+      "  $0",
+      "}"
+    ]
+  },
+  "AfterEach": {
+    "prefix": [
+      "aftereach",
+      "teardown"
+    ],
+    "body": [
+      "@AfterEach",
+      "void tearDown() {",
+      "  $0",
+      "}"
+    ]
+  },
+  "AfterAll": {
+    "prefix": [
+      "afterall",
+      "teardownall"
+    ],
+    "body": [
+      "@AfterAll",
+      "static void tearDownAll() {",
+      "  $0",
+      "}"
+    ]
+  },
+  "Test": {
+    "prefix": "test",
+    "body": [
+      "@Test",
+      "void $1() {",
+      "  $0",
+      "}"
+    ]
+  },
+  "Nested": {
+    "prefix": "nested",
+    "body": [
+      "@Nested",
+      "class $1 {",
+      "  $0",
+      "}"
+    ]
+  }
+}
