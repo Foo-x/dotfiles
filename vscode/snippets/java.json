@@ -1,5 +1,6 @@
 {
   "BeforeEach": {
+    "scope": "java",
     "prefix": [
       "beforeeach",
       "init"
@@ -12,6 +13,7 @@
     ]
   },
   "BeforeAll": {
+    "scope": "java",
     "prefix": [
       "beforeall",
       "initall"
@@ -24,6 +26,7 @@
     ]
   },
   "AfterEach": {
+    "scope": "java",
     "prefix": [
       "aftereach",
       "teardown"
@@ -36,6 +39,7 @@
     ]
   },
   "AfterAll": {
+    "scope": "java",
     "prefix": [
       "afterall",
       "teardownall"
@@ -48,6 +52,7 @@
     ]
   },
   "Test": {
+    "scope": "java",
     "prefix": "test",
     "body": [
       "@Test",
@@ -57,6 +62,7 @@
     ]
   },
   "Nested": {
+    "scope": "java",
     "prefix": "nested",
     "body": [
       "@Nested",
