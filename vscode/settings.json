@@ -144,6 +144,9 @@
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?、。・！？「」【】『』（）",
   "emmet.showExpandedAbbreviation": "never",
   "explorer.incrementalNaming": "smart",
+  "files.associations": {
+    "*.code-snippets": "jsonc"
+  },
   "files.defaultLanguage": "markdown",
   "files.eol": "\n",
   "files.exclude": {
