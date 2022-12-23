@@ -277,6 +277,9 @@
     "userspace",
     "usize"
   ],
+  "gitlens.codeLens.enabled": false,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.statusBar.enabled": false,
   "markdown.extension.tableFormatter.enabled": false,
   "markdown.extension.toc.updateOnSave": false,
   "markdown-mermaid.darkModeTheme": "neutral",

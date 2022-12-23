@@ -6,7 +6,7 @@ alefragnani.project-manager
 bierner.markdown-mermaid
 christian-kohler.path-intellisense
 dbaeumer.vscode-eslint
-donjayamanne.githistory
+eamodio.gitlens
 esbenp.prettier-vscode
 formulahendry.auto-rename-tag
 GitHub.remotehub
