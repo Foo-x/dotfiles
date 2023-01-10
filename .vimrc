@@ -28,6 +28,9 @@ if !1 | finish | endif
 
 syntax on
 
+" selection color
+hi Visual ctermbg=darkgrey ctermfg=none
+
 " cursor shape
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"

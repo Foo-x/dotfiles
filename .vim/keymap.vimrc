@@ -114,6 +114,8 @@ inoremap jj    <Esc>
 " visual mode
 vnoremap + <C-a>gv
 vnoremap - <C-x>gv
+vnoremap g+ g<C-a>gv
+vnoremap g- g<C-x>gv
 
 "" not to override register on paste
 vnoremap p pgvy
