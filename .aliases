@@ -158,4 +158,20 @@ if [[ "${WSL_DISTRO_NAME}" ]]; then
   function open() {
     wslview "$(wslpath -w "$1")"
   }
+
+  function is_win_dir() {
+    case $PWD/ in
+      /mnt/*) return $(true);;
+      *) return $(false);;
+    esac
+  }
+
+  # use git.exe in win dir for performance
+  function git() {
+    if is_win_dir; then
+      git.exe "$@"
+    else
+      /usr/bin/git "$@"
+    fi
+  }
 fi
