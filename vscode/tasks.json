@@ -6,6 +6,17 @@
       "type": "shell",
       "command": "wslview \"$(wslpath -w \"${file}\")\"",
       "problemMatcher": []
+    },
+    {
+      "label": "open (Windows)",
+      "type": "shell",
+      "command": "${file}",
+      "options": {
+        "shell": {
+          "executable": "powershell"
+        }
+      },
+      "problemMatcher": []
     }
   ]
 }
