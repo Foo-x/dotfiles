@@ -1015,6 +1015,76 @@
     {
       "before": [
         "<leader>",
+        "c",
+        "o"
+      ],
+      "commands": [
+        "git.openChange"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "c"
+      ],
+      "commands": [
+        "git.closeAllDiffEditors"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "f"
+      ],
+      "commands": [
+        "git.openFile"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "s"
+      ],
+      "commands": [
+        "git.stage"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "S"
+      ],
+      "commands": [
+        "git.stageAll"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "u"
+      ],
+      "commands": [
+        "git.unstage"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "U"
+      ],
+      "commands": [
+        "git.unstageAll"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
         "g",
         "d",
         "j"
