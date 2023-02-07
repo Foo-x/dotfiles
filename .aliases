@@ -66,6 +66,24 @@ alias al='cat ~/.dotfiles/.aliases{,_fzf} | $PAGER'
 alias inputrc='$PAGER ~/.inputrc'
 alias vikeymap='$PAGER ~/.dotfiles/.vim/keymap.vimrc'
 
+# date
+alias dt='date'
+
+## ISO 8601
+alias dti='date -I'
+alias dtih='date -Ih'
+alias dtim='date -Im'
+alias dtis='date -Is'
+alias dtin='date -In'
+
+## RFC 3339
+alias dtrd='date --rfc-3339=d'
+alias dtrs='date --rfc-3339=s'
+alias dtrn='date --rfc-3339=n'
+
+## backup
+alias dtbak='date +%Y%m%d_%H%M%S'
+
 # nim
 alias nimc='nim cpp -o:./a.out'
 alias nimcr='nim cpp -o:./a.out -d:release --hints:off --verbosity:0'
