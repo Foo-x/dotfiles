@@ -27,6 +27,7 @@ ms-vscode.test-adapter-converter
 PKief.material-icon-theme
 shd101wyy.markdown-preview-enhanced
 streetsidesoftware.code-spell-checker
+usernamehw.errorlens
 vscodevim.vim
 wayou.vscode-todo-highlight
 webfreak.debug
