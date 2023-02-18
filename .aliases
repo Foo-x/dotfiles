@@ -166,11 +166,32 @@ if type rsync &> /dev/null; then
   function incr_bak() {
     local base="$2"
 
-    mkdir "${base}"
+    mkdir -p "${base}"
 
     local latest="../$(\ls ${base} | tail -n 1)"
 
     rsync --link-dest="${latest}" "$1" "${base}/$(date +%Y%m%d_%H%M%S)"
+  }
+
+  function incr_bak_from_remote() {
+    # incr_bak_from_remote foo bar user@host -i baz.pem
+    local base="$2" src="$3" auth="${@:4}"
+
+    mkdir -p "${base}"
+
+    local latest="../$(\ls ${base} | tail -n 1)"
+
+    rsync --link-dest="${latest}" -e "ssh ${auth}" "${src}:$1" "${base}/$(date +%Y%m%d_%H%M%S)"
+  }
+
+  function incr_bak_to_remote() {
+    # incr_bak_to_remote foo bar user@host -i baz.pem
+    local base="$2" dest="$3" auth="${@:4}"
+
+    ssh "${auth}" "${dest}" "mkdir -p ${base}"
+    local latest="../$(ssh "${@:4}" "${dest}" "\ls ${base} | tail -n 1")"
+
+    rsync --link-dest="${latest}" "$1" -e "ssh ${auth}" "${dest}:${base}/$(date +%Y%m%d_%H%M%S)"
   }
 fi
 
