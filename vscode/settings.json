@@ -11,6 +11,7 @@
   "editor.fontFamily": "Firge35Nerd,Consolas,'BIZ UDPGothic'",
   "editor.fontSize": 15,
   "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": "active",
   "editor.minimap.enabled": false,
   "editor.minimap.showSlider": "always",
   "editor.minimap.size": "fill",

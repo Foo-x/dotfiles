@@ -24,7 +24,6 @@ ms-vscode-remote.remote-wsl
 ms-vscode-remote.vscode-remote-extensionpack
 ms-vscode.cpptools
 ms-vscode.test-adapter-converter
-oderwat.indent-rainbow
 PKief.material-icon-theme
 shd101wyy.markdown-preview-enhanced
 streetsidesoftware.code-spell-checker
