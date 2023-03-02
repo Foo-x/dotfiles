@@ -141,7 +141,7 @@ function with_env() {
 }
 
 function rand() {
-  cat /dev/urandom | base64 | fold -w "${1:-10}" | head -n 1
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9+/=' | fold -w "${1:-10}" | head -n 1
 }
 
 function out() {
