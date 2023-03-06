@@ -323,6 +323,7 @@
     "humao.rest-client",
     "albert.TabOut",
     "bierner.markdown-mermaid",
+    "wmaurer.change-case",
     "yzhang.markdown-all-in-one"
   ],
   "gitlens.currentLine.enabled": false,
@@ -1522,6 +1523,15 @@
       ],
       "after": [
         "%"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "u"
+      ],
+      "commands": [
+        "extension.changeCase.commands"
       ]
     },
     {

@@ -31,6 +31,7 @@ usernamehw.errorlens
 vscodevim.vim
 wayou.vscode-todo-highlight
 webfreak.debug
+wmaurer.change-case
 yanai101.css-var-hint
 yzhang.markdown-all-in-one
 EOS
