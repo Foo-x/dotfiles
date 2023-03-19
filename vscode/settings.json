@@ -187,7 +187,8 @@
     "**/log": true,
     "**/.next": true,
     "**/.nuxt": true,
-    "**/.vscode": true
+    "**/.vscode": true,
+    "**/package-lock.json": true
   },
   "search.mode": "reuseEditor",
   "search.searchEditor.defaultNumberOfContextLines": 3,
