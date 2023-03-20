@@ -2,7 +2,8 @@
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": true,
+    "source.addMissingImports": true
   },
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorSurroundingLines": 5,
