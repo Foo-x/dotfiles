@@ -367,6 +367,7 @@
   "markdown.extension.list.indentationSize": "inherit",
   "markdown-mermaid.darkModeTheme": "neutral",
   "nim.nimsuggestRestartTimeout": 1,
+  "python.analysis.typeCheckingMode": "strict",
   "sync.gist": "a546a2bbd1739a568924794ad9bc65b6",
   "todohighlight.exclude": [
     "**/node_modules/**",
