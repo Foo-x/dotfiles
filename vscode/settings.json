@@ -1,4 +1,5 @@
 {
+  "audioCues.volume": 0,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": {
