@@ -405,6 +405,7 @@
   "vim.easymotionMarkerForegroundColorTwoCharFirst": "#f00",
   "vim.handleKeys": {
     "<C-b>": false,
+    "<C-d>": false,
     "<C-f>": false,
     "<C-k>": false
   },
@@ -1492,6 +1493,15 @@
         "<C-x>",
         "g",
         "v"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "B"
+      ],
+      "commands": [
+        "editor.action.moveSelectionToNextFindMatch"
       ]
     },
     {
