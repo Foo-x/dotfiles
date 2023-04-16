@@ -7,8 +7,6 @@ nnoremap <Down> gj
 nnoremap k gk
 nnoremap <Up> gk
 
-noremap <CR> G
-noremap <BS> gg
 noremap Y y$
 nnoremap <C-j> i<CR><Esc>
 
