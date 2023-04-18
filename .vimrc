@@ -29,9 +29,16 @@ if !1 | finish | endif
 syntax on
 
 " highlight
+hi Comment ctermfg=lightblue
+hi Directory ctermfg=lightblue
+hi Identifier ctermfg=lightblue
+hi NonText ctermfg=lightblue
+hi PreProc ctermfg=red
+hi Question ctermfg=lightgreen
+hi Search ctermbg=darkyellow ctermfg=white
+hi Statement ctermfg=yellow
 hi Visual ctermbg=darkgrey ctermfg=none
-hi Search ctermbg=darkyellow
-hi netrwMarkFile ctermbg=darkmagenta
+hi netrwMarkFile ctermbg=darkmagenta ctermfg=white
 
 " cursor shape
 let &t_ti.="\e[1 q"
@@ -40,7 +47,7 @@ let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
 " netrw
-let g:netrw_liststyle=3
+let g:netrw_liststyle=0
 let g:netrw_sizestyle="H"
 let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
 let g:netrw_altv=1
