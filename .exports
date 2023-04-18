@@ -72,11 +72,16 @@ export PROMPT_COMMAND_LSGIT_ENTER='lsgit_enter'
 # prompt
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
+if [[ -n "${VIMRUNTIME}" ]]; then
+    VIMLABEL="! "
+    export PS1="${VIMLABEL}${PS1}"
+fi
+
 if type git &> /dev/null; then
     . ${SCRIPT_DIR}/git-prompt.sh
 
     # lighter
-    export PS1='\n\[\033[92m\]\u \[\033[93m\]&:\j \[\033[94m\]\w\[\033[91m\]$(__git_ps1)\n$(if [[ $? == "0" ]]; then echo \[\033[92m\]:\); else echo \[\033[91m\]:\(; fi)\[\033[00m\] '
+    export PS1='\n${VIMLABEL}\[\033[92m\]\u \[\033[93m\]&:\j \[\033[94m\]\w\[\033[91m\]$(__git_ps1)\n$(if [[ $? == "0" ]]; then echo \[\033[92m\]:\); else echo \[\033[91m\]:\(; fi)\[\033[00m\] '
 
     # darker
     #export PS1='\n\[\033[32m\]\u \[\033[33m\]&:\j \[\033[34m\]\w\[\033[31m\]$(__git_ps1)\n$(if [[ $? == "0" ]]; then echo \[\033[32m\]:\); else echo \[\033[31m\]:\(; fi)\[\033[00m\] '
