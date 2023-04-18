@@ -31,7 +31,8 @@ nnoremap ]} "_ya{%
 nnoremap ]) "_ya(%
 
 noremap <Space>h ^
-noremap <Space>l $
+nnoremap <Space>l $
+vnoremap <Space>l $h
 noremap <Space>m %
 nnoremap <Space>/ *
 
