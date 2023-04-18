@@ -40,7 +40,7 @@ let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
 " netrw
-let g:netrw_liststyle=0
+let g:netrw_liststyle=3
 let g:netrw_sizestyle="H"
 let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
 let g:netrw_altv=1
