@@ -42,6 +42,8 @@ nnoremap <Space>O O<Esc>
 nnoremap <Space>j <C-f>
 nnoremap <Space>k <C-b>
 
+nnoremap <Space><Space>t :<C-u>tab ter<CR>
+
 "" insert only one character
 nnoremap <Space>i i_<Esc>r
 
@@ -135,3 +137,7 @@ vnoremap <Space>s[ di[]<Esc>P
 vnoremap <Space>s< di<><Esc>P
 vnoremap <Space>s" di""<Esc>P
 vnoremap <Space>s' di''<Esc>P
+
+" terminal mode
+tnoremap <C-n> <C-w>N
+tnoremap <silent><C-w><C-d> <C-w>N:<C-u>bd!<CR>:<C-u>q<CR>
