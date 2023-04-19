@@ -13,6 +13,8 @@ set shellcmdflag=-ic
 set runtimepath+=$HOME/.vim
 set wildmenu
 set wildmode=list:longest
+set laststatus=2
+set statusline=%F%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
