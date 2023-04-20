@@ -78,4 +78,18 @@ endfun
 fun! NetrwUnmarkAll(isLocal)
     return "normal mF"
 endfun
-let g:Netrw_UserMaps= [["ml","NetrwMarkfileList"],["h","NetrwGoParent"],["l","NetrwOpen"],[".","NetrwToggleDot"],["<Tab>","NetrwMark"],["<Space><Tab>","NetrwUnmarkAll"]]
+fun! g:MyNetrw_D(islocal)
+    " get selected file list (:h netrw-mf)
+    let l:flist = netrw#Expose('netrwmarkfilelist')
+    if l:flist is# 'n/a'
+        " no selection -- get name under cursor
+        let l:flist = [b:netrw_curdir . '/' . netrw#GX()]
+    else
+        " remove selection as files will be deleted soon
+        call netrw#Call('NetrwUnmarkAll')
+    endif
+    " do delete and refresh view
+    echo system('rm -rf ' . join(l:flist))
+    return 'refresh'
+endfun
+let g:Netrw_UserMaps= [["ml","NetrwMarkfileList"],["h","NetrwGoParent"],["l","NetrwOpen"],[".","NetrwToggleDot"],["<Tab>","NetrwMark"],["<Space><Tab>","NetrwUnmarkAll"],["D", "MyNetrw_D"]]
