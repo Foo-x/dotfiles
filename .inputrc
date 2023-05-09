@@ -9,21 +9,17 @@ set colored-completion-prefix on
 set menu-complete-display-prefix on
 set bell-style none
 
-# background
-"\C-b": "\C-anohup \C-e &"
-
-# help
-"\C-h": " --help"
-
 # kill word (Rubout = Backspace)
-#"\C-w": unix-word-rubout
-#"\C-Rubout": unix-word-rubout
-#"\M-Rubout": backward-kill-word
+#"\C-w": unix-word-rubout (kill the word behind point, using white space)
+#"\M-Rubout": backward-kill-word (kill the word behind point, using other than alphanumeric characters)
 
 # kill line
-"\C-u": kill-whole-line
-"\C-k": kill-whole-line
-#"\C-x Rubout": backward-kill-line
+#"\C-u": unix-line-discard (kill from point to the beginning)
+#"\C-k": kill-line (kill from point to the end)
+#"\C-x Rubout": backward-kill-line (kill from point to the beginning)
+
+# yank
+#"\C-y": yank
 
 # edit-and-execute
 #"\C-x \C-e": edit-and-execute-command
@@ -31,3 +27,25 @@ set bell-style none
 # undo
 #"\C-_": undo
 #"\C-x \C-u": undo
+
+$if Bash
+    # background
+    "\C-qb": "\C-anohup \C-e &"
+
+    # help
+    "\C-qh": "\C-e --help"
+
+    # preview
+    "\C-qp": "\C-e | less"
+
+    # output
+    "\C-qo": " > out 2>&1"
+
+    # null
+    "\C-qn": " > /dev/null"
+    "\C-qN": " > /dev/null 2>&1"
+
+    # expand line
+    "\C-q ": "\e\C-e "
+    Space: magic-space
+$endif

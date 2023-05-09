@@ -25,6 +25,7 @@ if [[ "${LOCALE_LIST}" == *C.UTF-8* ]]; then
   export LC_CTYPE='C.UTF-8'
 fi
 
+stty start ''
 stty stop ''
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
