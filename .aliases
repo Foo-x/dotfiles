@@ -62,9 +62,6 @@ revert		Reverts a previous commit
 style		Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 test		Adding missing tests or correcting existing tests
 "'
-alias al='cat ~/.dotfiles/.aliases{,_fzf} | $PAGER'
-alias inputrc='$PAGER ~/.inputrc'
-alias vikeymap='$PAGER ~/.dotfiles/.vim/keymap.vimrc'
 
 # date
 alias dt='date'
@@ -92,7 +89,6 @@ alias nimrr='nimcr -r'
 
 # docker
 alias d='docker'
-alias dal='alias | grep "='\''docker[^-]"'
 alias da='docker attach'
 alias db='docker build'
 alias di='docker image'
@@ -108,7 +104,6 @@ alias dvp='docker volume prune'
 alias dx='docker exec'
 alias dxi='docker exec -it'
 alias dc='docker-compose'
-alias dcal='alias | grep "='\''docker-compose"'
 alias dcb='docker-compose build'
 alias dcd='docker-compose down'
 alias dce='docker-compose exec'
@@ -120,7 +115,6 @@ alias dcub='docker-compose up -d --build'
 
 # tmux
 alias tm='tmux'
-alias tmal='alias | grep "='\''tmux"'
 alias tma='tmux attach'
 alias tmd='tmux detach'
 alias tmkill='tmux kill-session'
@@ -129,7 +123,22 @@ alias tmn='tmux new'
 alias tmnw='tmux neww'
 alias tmr='tmux rename'
 alias tmreload='tmux source-file ~/.tmux.conf'
+
+# browse
+alias al='cat ~/.dotfiles/.aliases{,_fzf} | $PAGER'
+alias bashrc='$PAGER ~/.dotfiles/.bashrc'
+alias bashrc_org='$PAGER ~/.bashrc'
+alias inputrc='$PAGER ~/.inputrc'
+alias vimrc='$PAGER ~/.vimrc'
+alias vimkeymap='$PAGER ~/.dotfiles/.vim/keymap.vimrc'
+alias tmal='alias | \grep "='\''tmux"'
 alias tmconf='$PAGER ~/.tmux.conf'
+alias dal='alias | \grep "='\''docker[^-]"'
+alias dcal='alias | \grep "='\''docker-compose"'
+
+if type vim &> /dev/null; then
+  alias bdot='vim ~/.dotfiles'
+fi
 
 function with_env() {
   (
