@@ -38,7 +38,8 @@ stty stop ''
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
 
 export ENHANCD_FILTER=fzf
-export ENHANCD_DOT_ARG=...
+export ENHANCD_ENABLE_SINGLE_DOT=false
+export ENHANCD_ARG_DOUBLE_DOT=...
 
 # exec commands after each commands
 function dispatch_prompt_command() {
