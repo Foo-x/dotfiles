@@ -66,7 +66,7 @@
   {
     "key": "ctrl+p",
     "command": "workbench.action.quickOpen",
-    "when": "!terminalFocus"
+    "when": "!terminalFocus && !inQuickOpen"
   },
   {
     "key": "ctrl+q",
@@ -75,7 +75,7 @@
   {
     "key": "ctrl+q",
     "command": "workbench.action.quickOpenView",
-    "when": "!terminalFocus"
+    "when": "!terminalFocus && !inQuickOpen"
   },
   {
     "key": "ctrl+alt+c",
@@ -245,7 +245,7 @@
     "command": "workbench.action.tasks.test"
   },
   {
-    "key": "ctrl+shift+q",
+    "key": "ctrl+shift+c",
     "command": "workbench.action.toggleMaximizedPanel"
   },
   {
@@ -268,5 +268,15 @@
       "text": "\t"
     },
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   }
 ]

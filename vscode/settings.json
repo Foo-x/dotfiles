@@ -1,5 +1,6 @@
 {
   "audioCues.volume": 0,
+  "diffEditor.renderSideBySide": false,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": {
@@ -13,6 +14,12 @@
   "editor.fontFamily": "Firge35Nerd,Consolas,'BIZ UDPGothic'",
   "editor.fontSize": 15,
   "editor.formatOnSave": true,
+  "editor.glyphMargin": false,
+  "editor.gotoLocation.multipleDeclarations": "goto",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.gotoLocation.multipleImplementations": "goto",
+  "editor.gotoLocation.multipleReferences": "goto",
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
   "editor.guides.bracketPairs": "active",
   "editor.minimap.enabled": false,
   "editor.minimap.showSlider": "always",
@@ -24,6 +31,7 @@
   ],
   "editor.scrollBeyondLastLine": false,
   "editor.showFoldingControls": "always",
+  "editor.snippetSuggestions": "top",
   "editor.stickyScroll.enabled": true,
   "editor.tabSize": 4,
   "editor.tokenColorCustomizations": {
@@ -146,7 +154,11 @@
     ]
   },
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?、。・！？「」【】『』（）",
-  "emmet.showExpandedAbbreviation": "never",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
   "explorer.incrementalNaming": "smart",
   "files.associations": {
     "*.code-snippets": "jsonc"
@@ -213,11 +225,14 @@
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.splitCwd": "workspaceRoot",
+  "window.menuBarVisibility": "toggle",
   "window.title": "${dirty}${rootName}${separator}${appName}",
   "workbench.colorCustomizations": {
     "editorStickyScroll.background": "#004558"
   },
   "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.showTabs": false,
+  "workbench.editor.wrapTabs": true,
   "workbench.panel.defaultLocation": "right",
   "workbench.startupEditor": "none",
   "zenMode.hideLineNumbers": false,
@@ -241,6 +256,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
+  "javascript.suggest.completeFunctionCalls": true,
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
@@ -274,6 +290,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
+  "typescript.suggest.completeFunctionCalls": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
@@ -362,6 +379,7 @@
     "yzhang.markdown-all-in-one"
   ],
   "gitlens.currentLine.enabled": false,
+  "gitlens.keymap": "alternate",
   "gitlens.statusBar.enabled": false,
   "markdown.extension.tableFormatter.enabled": false,
   "markdown.extension.toc.updateOnSave": false,
@@ -407,6 +425,7 @@
     "<C-b>": false,
     "<C-d>": false,
     "<C-f>": false,
+    "<C-i>": false,
     "<C-k>": false
   },
   "vim.hlsearch": true,
@@ -421,90 +440,6 @@
       ],
       "after": [
         "<Esc>"
-      ]
-    },
-    {
-      "before": [
-        "<C-a>"
-      ],
-      "after": [
-        "<HOME>"
-      ]
-    },
-    {
-      "before": [
-        "<C-e>"
-      ],
-      "after": [
-        "<END>"
-      ]
-    },
-    {
-      "before": [
-        "<C-j>"
-      ],
-      "after": [
-        "<DOWN>"
-      ]
-    },
-    {
-      "before": [
-        "<C-k>"
-      ],
-      "after": [
-        "<UP>"
-      ]
-    },
-    {
-      "before": [
-        "<C-h>"
-      ],
-      "after": [
-        "<LEFT>"
-      ]
-    },
-    {
-      "before": [
-        "<C-l>"
-      ],
-      "after": [
-        "<RIGHT>"
-      ]
-    },
-    {
-      "before": [
-        "<C-u>"
-      ],
-      "after": [
-        "<BS>"
-      ]
-    },
-    {
-      "before": [
-        "<C-i>"
-      ],
-      "after": [
-        // don't know why but, cannot bind <Del>
-        "<RIGHT>",
-        "<BS>"
-      ]
-    },
-    {
-      "before": [
-        "<C-o>"
-      ],
-      "after": [
-        "<Esc>",
-        "o"
-      ]
-    },
-    {
-      "before": [
-        "<C-O>"
-      ],
-      "after": [
-        "<Esc>",
-        "O"
       ]
     }
   ],
