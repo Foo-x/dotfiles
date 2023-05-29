@@ -233,6 +233,7 @@
   "workbench.editor.tabSizing": "shrink",
   "workbench.editor.showTabs": false,
   "workbench.editor.wrapTabs": true,
+  "workbench.layoutControl.enabled": true,
   "workbench.panel.defaultLocation": "right",
   "workbench.startupEditor": "none",
   "zenMode.hideLineNumbers": false,
