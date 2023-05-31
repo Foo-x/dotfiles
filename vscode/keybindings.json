@@ -60,24 +60,6 @@
     "command": "-workbench.action.terminal.toggleTerminal"
   },
   {
-    "key": "ctrl+p",
-    "command": "-workbench.action.quickOpen"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "workbench.action.quickOpen",
-    "when": "!terminalFocus && !inQuickOpen"
-  },
-  {
-    "key": "ctrl+q",
-    "command": "-workbench.action.quickOpenView"
-  },
-  {
-    "key": "ctrl+q",
-    "command": "workbench.action.quickOpenView",
-    "when": "!terminalFocus && !inQuickOpen"
-  },
-  {
     "key": "ctrl+alt+c",
     "command": "-rest-client.generate-codesnippet",
     "when": "editorTextFocus && editorLangId == 'http'"
@@ -279,6 +261,25 @@
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
+  // quickOpen
+  {
+    "key": "ctrl+p",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen",
+    "when": "!terminalFocus && !inFilesPicker"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quickOpenView"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "workbench.action.quickOpenView",
+    "when": "!terminalFocus && !inViewsPicker"
+  },
   {
     "key": "ctrl+j",
     "command": "workbench.action.quickOpenSelectNext",
@@ -288,5 +289,15 @@
     "key": "ctrl+k",
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpenSelectNext",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+shift+p",
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "when": "inFilesPicker && inQuickOpen"
   }
 ]

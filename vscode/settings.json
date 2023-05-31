@@ -685,10 +685,28 @@
     {
       "before": [
         "g",
+        "i"
+      ],
+      "commands": [
+        "editor.action.goToImplementation"
+      ]
+    },
+    {
+      "before": [
+        "g",
         "D"
       ],
       "commands": [
         "editor.action.revealDefinitionAside"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "a"
+      ],
+      "commands": [
+        "editor.action.sourceAction"
       ]
     },
     {
@@ -954,6 +972,16 @@
       ],
       "commands": [
         "workbench.action.decreaseViewHeight"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "m"
+      ],
+      "commands": [
+        "workbench.action.joinAllGroups"
       ]
     },
     {
@@ -1243,6 +1271,29 @@
         "S"
       ]
     },
+    // easymotion
+    {
+      "before": [
+        "<leader>",
+        "/"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "/"
+      ]
+    },
+    {
+      "before": [
+        "f"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "2",
+        "s"
+      ]
+    },
     {
       "before": [
         "<leader>",
@@ -1284,6 +1335,43 @@
         "b",
         "d",
         "e"
+      ]
+    },
+    // bookmark
+    {
+      "before": [
+        "m",
+        "m"
+      ],
+      "commands": [
+        "bookmarks.toggle"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        ","
+      ],
+      "commands": [
+        "bookmarks.listFromAllFiles"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "c"
+      ],
+      "commands": [
+        "bookmarks.clear"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "C"
+      ],
+      "commands": [
+        "bookmarks.clearFromAllFiles"
       ]
     }
   ],
@@ -1480,94 +1568,27 @@
         "extension.changeCase.commands"
       ]
     },
+    // easymotion
     {
       "before": [
         "<leader>",
-        "s",
-        "("
+        "/"
       ],
       "after": [
-        "d",
-        "i",
-        "(",
-        ")",
-        "<Esc>",
-        "P"
+        "<leader>",
+        "<leader>",
+        "/"
       ]
     },
     {
       "before": [
-        "<leader>",
-        "s",
-        "{"
+        "f"
       ],
       "after": [
-        "d",
-        "i",
-        "{",
-        "}",
-        "<Esc>",
-        "P"
-      ]
-    },
-    {
-      "before": [
         "<leader>",
-        "s",
-        "["
-      ],
-      "after": [
-        "d",
-        "i",
-        "[",
-        "]",
-        "<Esc>",
-        "P"
-      ]
-    },
-    {
-      "before": [
         "<leader>",
-        "s",
-        "<"
-      ],
-      "after": [
-        "d",
-        "i",
-        "<",
-        ">",
-        "<Esc>",
-        "P"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
-        "s",
-        "\""
-      ],
-      "after": [
-        "d",
-        "i",
-        "\"",
-        "\"",
-        "<Esc>",
-        "P"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
-        "s",
-        "'"
-      ],
-      "after": [
-        "d",
-        "i",
-        "'",
-        "'",
-        "<Esc>",
-        "P"
+        "2",
+        "s"
       ]
     },
     {

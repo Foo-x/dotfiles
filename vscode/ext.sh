@@ -2,6 +2,7 @@
 
 xargs -I{} code --install-extension {} << EOS
 albert.TabOut
+alefragnani.bookmarks
 alefragnani.project-manager
 bierner.markdown-mermaid
 christian-kohler.path-intellisense
