@@ -1340,6 +1340,14 @@
     // bookmark
     {
       "before": [
+        "m"
+      ],
+      "after": [
+        "<Nop>"
+      ]
+    },
+    {
+      "before": [
         "m",
         "m"
       ],
