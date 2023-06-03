@@ -739,15 +739,6 @@
     {
       "before": [
         "<leader>",
-        "/"
-      ],
-      "after": [
-        "*"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
         "o"
       ],
       "after": [
