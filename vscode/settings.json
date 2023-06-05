@@ -223,6 +223,7 @@
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.splitCwd": "workspaceRoot",
   "window.menuBarVisibility": "toggle",
+  "window.newWindowDimensions": "inherit",
   "window.title": "${dirty}${rootName}${separator}${appName}",
   "workbench.colorCustomizations": {
     "editorStickyScroll.background": "#004558"
