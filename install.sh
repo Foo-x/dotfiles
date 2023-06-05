@@ -74,6 +74,7 @@ touch ${HOME}/.user_profile
 files="
 .bash_profile
 .gitignore_global
+.gitmessage
 .inputrc
 .profile
 .vimrc

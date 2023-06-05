@@ -182,6 +182,8 @@
 [core]
     excludesfile = ~/.gitignore_global
     quotePath = false
+[commit]
+    template = ~/.gitmessage
 [diff]
     tool = vscode
     wsErrorHighlight = all
