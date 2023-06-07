@@ -155,6 +155,7 @@
     "javascript": "javascriptreact",
     "typescript": "typescriptreact"
   },
+  "emmet.showSuggestionsAsSnippets": true,
   "emmet.triggerExpansionOnTab": true,
   "explorer.incrementalNaming": "smart",
   "files.associations": {
@@ -303,12 +304,14 @@
     "airbnb",
     "alefragnani",
     "alloc",
+    "Astro",
     "bierner",
     "bulma",
     "cmds",
     "combinator",
     "Combinators",
     "Consolas",
+    "consts",
     "CPUs",
     "dealloc",
     "deallocate",
@@ -321,17 +324,25 @@
     "drawio",
     "eamodio",
     "easymotion",
+    "Eichenwalde",
     "esbenp",
     "Fargate",
     "Firge",
     "fontawesome",
+    "fontsource",
     "fortawesome",
+    "functools",
     "Gamification",
     "gitmoji",
     "Gltf",
+    "gtag",
+    "Hatena",
     "hediet",
     "hlsearch",
+    "Hotspot",
+    "hotspots",
     "humao",
+    "iframe",
     "keypress",
     "kosz",
     "Leaderboards",
@@ -340,18 +351,26 @@
     "MTTR",
     "multithreaded",
     "Mutex",
+    "mysqldump",
+    "Netrw",
     "nimsuggest",
     "Noctis",
     "nohl",
     "nohup",
+    "noto",
+    "nuxt",
+    "oneline",
     "performant",
     "predefines",
     "preinitialize",
     "println",
+    "prismjs",
     "pycache",
     "QEMU",
     "RASIS",
     "realloc",
+    "roboto",
+    "rsyslog",
     "Segoe",
     "SIGKILL",
     "struct",
@@ -364,9 +383,12 @@
     "typeof",
     "unstage",
     "untrusted",
+    "upsert",
     "userspace",
     "usize",
     "vsplit",
+    "wicg",
+    "wslconfig",
     "yzhang"
   ],
   "dev.containers.defaultExtensions": [
@@ -415,11 +437,6 @@
     "**/*.eex"
   ],
   "todohighlight.toggleURI": true,
-  "vim.easymotion": true,
-  "vim.easymotionMarkerBackgroundColor": "#000",
-  "vim.easymotionMarkerFontWeight": "bold",
-  "vim.easymotionMarkerForegroundColorOneChar": "#f00",
-  "vim.easymotionMarkerForegroundColorTwoCharFirst": "#f00",
   "vim.handleKeys": {
     "<C-b>": false,
     "<C-d>": false,
@@ -430,6 +447,9 @@
   "vim.hlsearch": true,
   "vim.leader": "<space>",
   "vim.showMarksInGutter": true,
+  "vim.sneak": true,
+  "vim.sneakReplacesF": true,
+  "vim.sneakUseIgnorecaseAndSmartcase": true,
   "vim.useSystemClipboard": true,
   "vim.insertModeKeyBindingsNonRecursive": [
     {
@@ -1250,7 +1270,8 @@
       "after": [
         "\"",
         "_",
-        "s"
+        "c",
+        "l"
       ]
     },
     {
@@ -1260,73 +1281,25 @@
       "after": [
         "\"",
         "_",
-        "S"
+        "c",
+        "c"
       ]
     },
-    // easymotion
-    {
-      "before": [
-        "<leader>",
-        "/"
-      ],
-      "after": [
-        "<leader>",
-        "<leader>",
-        "/"
-      ]
-    },
+    // sneak
     {
       "before": [
         "f"
       ],
       "after": [
-        "<leader>",
-        "<leader>",
-        "2",
         "s"
       ]
     },
     {
       "before": [
-        "<leader>",
-        "<leader>",
-        "s"
+        "F"
       ],
       "after": [
-        "<leader>",
-        "<leader>",
-        "2",
-        "s"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
-        "<leader>",
-        "w"
-      ],
-      "after": [
-        "<leader>",
-        "<leader>",
-        "<leader>",
-        "b",
-        "d",
-        "w"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
-        "<leader>",
-        "e"
-      ],
-      "after": [
-        "<leader>",
-        "<leader>",
-        "<leader>",
-        "b",
-        "d",
-        "e"
+        "S"
       ]
     },
     // bookmark
@@ -1568,70 +1541,21 @@
         "extension.changeCase.commands"
       ]
     },
-    // easymotion
-    {
-      "before": [
-        "<leader>",
-        "/"
-      ],
-      "after": [
-        "<leader>",
-        "<leader>",
-        "/"
-      ]
-    },
+    // sneak
     {
       "before": [
         "f"
       ],
       "after": [
-        "<leader>",
-        "<leader>",
-        "2",
         "s"
       ]
     },
     {
       "before": [
-        "<leader>",
-        "<leader>",
-        "s"
+        "F"
       ],
       "after": [
-        "<leader>",
-        "<leader>",
-        "2",
-        "s"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
-        "<leader>",
-        "w"
-      ],
-      "after": [
-        "<leader>",
-        "<leader>",
-        "<leader>",
-        "b",
-        "d",
-        "w"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
-        "<leader>",
-        "e"
-      ],
-      "after": [
-        "<leader>",
-        "<leader>",
-        "<leader>",
-        "b",
-        "d",
-        "e"
+        "S"
       ]
     }
   ],
