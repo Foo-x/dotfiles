@@ -181,6 +181,7 @@
     default = current
 [core]
     excludesfile = ~/.gitignore_global
+    hooksPath = ~/.config/git/hooks
     quotePath = false
 [commit]
     template = ~/.gitmessage

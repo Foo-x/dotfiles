@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+COMMIT_MSG_FILE=$1
+
+{
+  echo
+  echo '# Logs'
+  echo '#'
+  git log -30 --format=%s | sed 's/^/# /'
+} >> $COMMIT_MSG_FILE

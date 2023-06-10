@@ -82,6 +82,12 @@ files="
 "
 echo "${files}" | xargs -I{} ln -sf ${DOT_DIR}/{} ${HOME}/{}
 
+mkdir -p ${HOME}/.config/git/hooks
+githooks_files="
+prepare-commit-msg
+"
+echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/git/hooks/{} ${HOME}/.config/git/hooks/{}
+
 mkdir -p ${HOME}/.vim
 vimrc_files="
 keymap.vimrc
