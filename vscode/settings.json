@@ -31,6 +31,9 @@
   "editor.showFoldingControls": "always",
   "editor.snippetSuggestions": "top",
   "editor.stickyScroll.enabled": true,
+  "editor.suggest.showKeywords": false,
+  "editor.suggest.showWords": false,
+  "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.tabSize": 4,
   "editor.tokenColorCustomizations": {
     "textMateRules": [

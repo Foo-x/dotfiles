@@ -299,5 +299,21 @@
     "key": "ctrl+shift+p",
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+k shift+l",
+    "command": "workbench.action.moveActiveEditorGroupRight"
+  },
+  {
+    "key": "ctrl+k shift+j",
+    "command": "workbench.action.moveActiveEditorGroupDown"
+  },
+  {
+    "key": "ctrl+k shift+h",
+    "command": "workbench.action.moveActiveEditorGroupLeft"
+  },
+  {
+    "key": "ctrl+k shift+k",
+    "command": "workbench.action.moveActiveEditorGroupUp"
   }
 ]
