@@ -1336,6 +1336,15 @@
     {
       "before": [
         "m",
+        "l"
+      ],
+      "commands": [
+        "bookmarks.listFromAllFiles"
+      ]
+    },
+    {
+      "before": [
+        "m",
         "c"
       ],
       "commands": [
