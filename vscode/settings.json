@@ -450,6 +450,7 @@
   },
   "vim.hlsearch": true,
   "vim.leader": "<space>",
+  "vim.mouseSelectionGoesIntoVisualMode": false,
   "vim.showMarksInGutter": true,
   "vim.sneak": true,
   "vim.sneakReplacesF": true,
@@ -463,6 +464,42 @@
       ],
       "after": [
         "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "z",
+        "h"
+      ],
+      "after": [
+        "←"
+      ]
+    },
+    {
+      "before": [
+        "z",
+        "j"
+      ],
+      "after": [
+        "↓"
+      ]
+    },
+    {
+      "before": [
+        "z",
+        "k"
+      ],
+      "after": [
+        "↑"
+      ]
+    },
+    {
+      "before": [
+        "z",
+        "l"
+      ],
+      "after": [
+        "→"
       ]
     }
   ],
