@@ -1,9 +1,11 @@
 #!/usr/bin/env sh
 
 COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
 BRANCH_NAME=$(git branch | \grep '*' | sed 's/* //')
 
-if [ $BRANCH_NAME != '(no branch)' ]; then
+# append logs as comments if it is not rebasing or amending
+if [ $BRANCH_NAME != '(no branch)' ] && [ $COMMIT_SOURCE != 'commit' ]; then
     {
         echo
         echo '# Logs'
