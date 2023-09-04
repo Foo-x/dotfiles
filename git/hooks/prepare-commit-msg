@@ -5,7 +5,7 @@ COMMIT_SOURCE=$2
 BRANCH_NAME=$(git branch | \grep '*' | sed 's/* //')
 
 # append logs as comments if it is not rebasing or amending
-if [ "$BRANCH_NAME" != '(no branch)' ] && [ "$COMMIT_SOURCE" != 'commit' ]; then
+if [ "$BRANCH_NAME" != '(no branch)' ] && [ "$COMMIT_SOURCE" != 'commit' ] && [ "$COMMIT_SOURCE" != 'message' ]; then
     {
         echo
         echo '# Logs'
