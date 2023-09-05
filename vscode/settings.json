@@ -765,6 +765,42 @@
     },
     {
       "before": [
+        "g",
+        "h"
+      ],
+      "commands": [
+        "workbench.action.navigateBack"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "l"
+      ],
+      "commands": [
+        "workbench.action.navigateForward"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        ";"
+      ],
+      "commands": [
+        "workbench.action.navigateBackInEditLocations"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        ","
+      ],
+      "commands": [
+        "workbench.action.navigateForwardInEditLocations"
+      ]
+    },
+    {
+      "before": [
         "<leader>",
         "a"
       ],
