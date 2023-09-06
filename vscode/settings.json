@@ -766,24 +766,6 @@
     {
       "before": [
         "g",
-        "h"
-      ],
-      "commands": [
-        "workbench.action.navigateBack"
-      ]
-    },
-    {
-      "before": [
-        "g",
-        "l"
-      ],
-      "commands": [
-        "workbench.action.navigateForward"
-      ]
-    },
-    {
-      "before": [
-        "g",
         ";"
       ],
       "commands": [
@@ -1196,6 +1178,26 @@
       ],
       "commands": [
         "git.unstageAll"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "h"
+      ],
+      "commands": [
+        "workbench.action.navigateBack"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "l"
+      ],
+      "commands": [
+        "workbench.action.navigateForward"
       ]
     },
     {
