@@ -17,7 +17,6 @@ mkdir -p completion
 cd completion
 
 fetch git https://github.com/git/git/raw/master/contrib/completion/git-completion.bash
-fetch docker-compose https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose
 fetch tmux https://raw.githubusercontent.com/Bash-it/bash-it/master/completion/available/tmux.completion.bash
 
 if [ -f /usr/share/bash-completion/bash_completion ]; then

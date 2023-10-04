@@ -38,6 +38,9 @@ fi
 if type npm &> /dev/null; then
   . <(npm completion)
 fi
+if type docker &> /dev/null; then
+  . <(docker completion bash)
+fi
 
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
   . /usr/share/bash-completion/bash_completion
