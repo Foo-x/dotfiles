@@ -4,10 +4,11 @@ export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignoreboth  # not save commands that space-beginned and duplicated to history
 export HISTIGNORE='fg:bg:history:ls:ll:h:pwd:cd*:exit:clear'
 
-if type vim &> /dev/null; then
-  export EDITOR='vim -p'
-else
-  export EDITOR='vi -p'
+if [ -z "$EDITOR" ] && type vim &> /dev/null; then
+    export EDITOR='vim -p'
+fi
+if [ -z "$EDITOR" ]; then
+    export EDITOR='vi -p'
 fi
 
 if type less &> /dev/null; then

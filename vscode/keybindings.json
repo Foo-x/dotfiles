@@ -263,15 +263,6 @@
   },
   // quickOpen
   {
-    "key": "ctrl+p",
-    "command": "-workbench.action.quickOpen"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "workbench.action.quickOpen",
-    "when": "!terminalFocus && !inFilesPicker"
-  },
-  {
     "key": "ctrl+q",
     "command": "-workbench.action.quickOpenView"
   },
