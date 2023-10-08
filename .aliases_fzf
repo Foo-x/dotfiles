@@ -227,12 +227,22 @@ function dfrestart() {
   docker ps -a | sed 1d | fzf --no-sort -q "$1" -m -n 2,-1 | awk '{ print $NF }' | xargs -r docker restart
 }
 
-# dfrm - docker rm
-function dfrm() {
-  docker ps -a | sed 1d | fzf --no-sort -q "$1" -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker rm
+# dfcor - docker container rm
+function dfcor() {
+  docker ps -a | sed 1d | fzf --no-sort -q "$1" -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker container rm
 }
 
-# dfrmi - docker rmi
-function dfrmi() {
-  docker images | sed 1d | fzf --no-sort -q "$1" -m --tac -n 1,2 | awk '{ print $1 ":" $2 }' | xargs -r docker rmi
+# dfcorv - docker container rm -v
+function dfcorv() {
+  docker ps -a | sed 1d | fzf --no-sort -q "$1" -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker container rm -v
+}
+
+# dfir - docker image rm
+function dfir() {
+  docker images | sed 1d | fzf --no-sort -q "$1" -m --tac -n 1,2 | awk '{ print $1 ":" $2 }' | xargs -r docker image rm
+}
+
+# dfvr - docker volume rm
+function dfvr() {
+  docker volume ls | sed 1d | fzf --no-sort -q "$1" -m --tac -n 2 | awk '{ print $NF }' | xargs -r docker volume rm
 }
