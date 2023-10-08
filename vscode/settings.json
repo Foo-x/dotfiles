@@ -404,6 +404,7 @@
     "wmaurer.change-case",
     "yzhang.markdown-all-in-one"
   ],
+  "dev.containers.executeInWSL": true,
   "gitlens.currentLine.enabled": false,
   "gitlens.keymap": "alternate",
   "gitlens.statusBar.enabled": false,
