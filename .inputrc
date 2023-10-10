@@ -9,6 +9,11 @@ set colored-completion-prefix on
 set menu-complete-display-prefix on
 set bell-style none
 
+# move
+#"\C-a": beginnig-of-line
+#"\C-e": end-of-line
+#"\C-l": clear-screen
+
 # kill word (Rubout = Backspace)
 #"\C-w": unix-word-rubout (kill the word behind point, using white space)
 #"\M-Rubout": backward-kill-word (kill the word behind point, using other than alphanumeric characters)
@@ -21,7 +26,7 @@ set bell-style none
 # yank
 #"\C-y": yank
 
-# edit-and-execute
+# edit and execute
 #"\C-x \C-e": edit-and-execute-command
 
 # undo
@@ -29,11 +34,14 @@ set bell-style none
 #"\C-x \C-u": undo
 
 $if Bash
-    # background
-    "\C-qb": "\C-anohup \C-e &"
+    # move to beginning
+    "\C-qh": beginning-of-line
 
-    # help
-    "\C-qh": "\C-e --help"
+    # move to end
+    "\C-ql": end-of-line
+
+    # edit and execute
+    "\C-qe": edit-and-execute-command
 
     # preview
     "\C-qp": "\C-e | less"
