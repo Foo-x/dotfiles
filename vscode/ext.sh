@@ -2,16 +2,17 @@
 
 xargs -I{} code --install-extension {} << EOS
 albert.TabOut
-alefragnani.bookmarks
+alefragnani.Bookmarks
 alefragnani.project-manager
+andys8.jest-snippets
 bierner.markdown-mermaid
 christian-kohler.path-intellisense
 dbaeumer.vscode-eslint
 eamodio.gitlens
 esbenp.prettier-vscode
+firsttris.vscode-jest-runner
 formulahendry.auto-rename-tag
 GitHub.remotehub
-GitHub.vscode-pull-request-github
 hbenl.vscode-test-explorer
 hediet.vscode-drawio
 humao.rest-client
@@ -24,15 +25,22 @@ ms-vscode-remote.remote-ssh-edit
 ms-vscode-remote.remote-wsl
 ms-vscode-remote.vscode-remote-extensionpack
 ms-vscode.cpptools
+ms-vscode.remote-explorer
+ms-vscode.remote-repositories
+ms-vscode.remote-server
 ms-vscode.test-adapter-converter
+ms-vsliveshare.vsliveshare
+ms-vsliveshare.vsliveshare-pack
 PKief.material-icon-theme
 shd101wyy.markdown-preview-enhanced
 streetsidesoftware.code-spell-checker
 usernamehw.errorlens
+VisualStudioExptTeam.intellicode-api-usage-examples
+VisualStudioExptTeam.vscodeintellicode
+VisualStudioExptTeam.vscodeintellicode-completions
 vscodevim.vim
 wayou.vscode-todo-highlight
 webfreak.debug
 wmaurer.change-case
-yanai101.css-var-hint
 yzhang.markdown-all-in-one
 EOS
