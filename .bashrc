@@ -9,6 +9,8 @@ shopt -s nocaseglob
 shopt -s nocasematch
 shopt -s nullglob
 shopt -u histappend
+shopt -s histreedit
+shopt -s histverify
 
 . ${SCRIPT_DIR}/.aliases
 . ${SCRIPT_DIR}/.exports
