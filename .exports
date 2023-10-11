@@ -1,7 +1,7 @@
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export HISTTIMEFORMAT='%F %T '
-export HISTCONTROL=ignoreboth  # not save commands that space-beginned and duplicated to history
+export HISTCONTROL=ignorespace  # not save commands that space-beginned and duplicated to history
 export HISTIGNORE='?:??:???:history:cd*:exit:clear'
 
 if [ -z "$EDITOR" ] && type vim &> /dev/null; then
@@ -51,7 +51,83 @@ function dispatch_prompt_command() {
 }
 export PROMPT_COMMAND='dispatch_prompt_command'
 
-export PROMPT_COMMAND_HISTSAVE='history -a'
+function __dedup_history() {
+  history -a
+
+  cmd='
+import re
+from typing import List, Optional
+from os.path import expanduser
+
+timestamp_pattern = re.compile("^#\d+$")
+home = expanduser("~")
+history_path = f"{home}/.bash_history"
+
+def load_history() -> List[str]:
+    with open(history_path) as f:
+        return f.read().splitlines()
+
+def extract_last_command(history: List[str]) -> Optional[str]:
+    try:
+        last_timestamp_line_num = next(i for i, line in reversed(list(enumerate(history))) if timestamp_pattern.fullmatch(line))
+        return "\n".join(history[last_timestamp_line_num+1:])
+    except:
+        return
+
+def deduplicate_history(history: List[str], last_command: str) -> List[str]:
+    result: List[str] = []
+    last_timestamp_line_num: int = -1
+    for i, line in enumerate(history):
+        if not timestamp_pattern.fullmatch(line):
+            continue
+
+        if i == 0:
+            last_timestamp_line_num = i
+            continue
+
+        command = "\n".join(history[last_timestamp_line_num+1:i])
+        if command != last_command:
+            result.extend(history[max(last_timestamp_line_num, 0):i])
+
+        last_timestamp_line_num = i
+
+    result.extend(history[last_timestamp_line_num:])
+
+    return result
+
+def update_history(new_history: List[str]):
+    out = "\n".join(new_history) + "\n"
+    with open(history_path, "w") as f:
+        f.write(out)
+
+def main():
+    if not home:
+        return
+
+    history = load_history()
+    if len(history) <= 1:
+        return
+
+    last_command = extract_last_command(history)
+    if not last_command:
+        return
+
+    new_history = deduplicate_history(history, last_command)
+    update_history(new_history)
+
+main()
+'
+
+  if type python &> /dev/null; then
+    python -c "$cmd"
+  else
+    python3 -c "$cmd"
+  fi
+
+  history -c
+  history -r
+}
+export PROMPT_COMMAND_HISTSAVE='__dedup_history'
 
 function lsgit() {
   ls -A
