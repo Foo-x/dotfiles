@@ -55,14 +55,14 @@ function __dedup_history() {
   history -a
 
   cmd='
-import re
 import operator
-from typing import List, Optional, Dict
+import re
+from os import getenv
 from os.path import expanduser
+from typing import Dict, List, Optional
 
 timestamp_pattern = re.compile("^#\d+$")
-home = expanduser("~")
-history_path = f"{home}/.bash_history"
+history_path = expanduser(getenv("HISTFILE", "~/.bash_history"))
 
 
 def load_history() -> List[str]:
@@ -114,9 +114,6 @@ def update_history(new_history: List[str]):
 
 
 def main():
-    if not home:
-        return
-
     history = load_history()
     if len(history) <= 1:
         return

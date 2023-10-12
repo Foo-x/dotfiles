@@ -340,6 +340,8 @@ fi
 
 if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
+  alias cmdc='cmd.exe /c'
+  alias mklink='cmd.exe /c mklink'
 
   function open() {
     wslview "$(wslpath -w "$1")"
