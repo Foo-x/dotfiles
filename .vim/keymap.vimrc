@@ -130,6 +130,9 @@ vnoremap <Space>s< di<><Esc>P
 vnoremap <Space>s" di""<Esc>P
 vnoremap <Space>s' di''<Esc>P
 
+" command mode
+cabbr w!! w !sudo tee > /dev/null %
+
 " terminal mode
 tnoremap <C-n> <C-w>N
 tnoremap <silent><C-w><C-d> <C-w>N:<C-u>bd!<CR>:<C-u>q<CR>

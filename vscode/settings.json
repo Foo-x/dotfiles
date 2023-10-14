@@ -452,7 +452,9 @@
     "<C-d>": false,
     "<C-f>": false,
     "<C-i>": false,
-    "<C-k>": false
+    "<C-k>": false,
+    "<C-p>": false,
+    "<C-y>": false
   },
   "vim.hlsearch": true,
   "vim.leader": "<space>",
