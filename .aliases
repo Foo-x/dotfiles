@@ -187,6 +187,10 @@ function rand() {
   cat /dev/urandom | tr -dc 'a-zA-Z0-9+/=' | fold -w "${1:-10}" | head -n 1
 }
 
+function findsamefile() {
+  find "$(findmnt -o TARGET -cenT "$1")" -mount -samefile "$1"
+}
+
 function out() {
   "$@" &> out
 }
