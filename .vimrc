@@ -17,6 +17,9 @@ set wildmode=list:longest
 set laststatus=2
 set statusline=%F%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
 set isk+=-
+set formatoptions+=M
+set matchpairs+=<:>
+set scrolloff=5
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
