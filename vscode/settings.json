@@ -238,8 +238,15 @@
   "workbench.colorCustomizations": {
     "editorStickyScroll.background": "#004558"
   },
-  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.closeEmptyGroups": false,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.excludeDirty": true,
+  "workbench.editor.limit.perEditorGroup": true,
+  // for not to remove editor accidentally e.g. split into right group
+  "workbench.editor.limit.value": 2,
+  "workbench.editor.revealIfOpen": true,
   "workbench.editor.showTabs": false,
+  "workbench.editor.tabSizing": "shrink",
   "workbench.editor.wrapTabs": true,
   "workbench.layoutControl.enabled": false,
   "workbench.panel.defaultLocation": "right",
@@ -454,7 +461,8 @@
     "<C-i>": false,
     "<C-k>": false,
     "<C-p>": false,
-    "<C-y>": false
+    "<C-y>": false,
+    "<C-w>": false
   },
   "vim.hlsearch": true,
   "vim.leader": "<space>",
@@ -900,7 +908,7 @@
         "_"
       ],
       "commands": [
-        ":split"
+        "workbench.action.splitEditorToBelowGroup"
       ]
     },
     {
@@ -910,7 +918,7 @@
         "\\"
       ],
       "commands": [
-        ":vsplit"
+        "workbench.action.splitEditorToRightGroup"
       ]
     },
     {
@@ -921,6 +929,16 @@
       ],
       "commands": [
         ":q"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
+        "q"
+      ],
+      "commands": [
+        "workbench.action.closeEditorsAndGroup"
       ]
     },
     {
@@ -1007,6 +1025,16 @@
       "before": [
         "<leader>",
         "w",
+        "M"
+      ],
+      "commands": [
+        "workbench.action.maximizeEditor"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w",
         "="
       ],
       "commands": [
@@ -1051,16 +1079,6 @@
       ],
       "commands": [
         "workbench.action.decreaseViewHeight"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
-        "w",
-        "m"
-      ],
-      "commands": [
-        "workbench.action.joinAllGroups"
       ]
     },
     {

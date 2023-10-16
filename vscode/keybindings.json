@@ -331,5 +331,74 @@
     "key": "ctrl+b",
     "command": "-markdown.extension.editing.toggleBold",
     "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+w c",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+w q",
+    "command": "workbench.action.closeEditorsAndGroup"
+  },
+  {
+    "key": "ctrl+w _",
+    "command": "workbench.action.splitEditorToBelowGroup"
+  },
+  {
+    "key": "ctrl+w \\",
+    "command": "workbench.action.splitEditorToRightGroup"
+  },
+  {
+    "key": "ctrl+w h",
+    "command": "workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "ctrl+w l",
+    "command": "workbench.action.focusRightGroup"
+  },
+  {
+    "key": "ctrl+w j",
+    "command": "workbench.action.focusBelowGroup"
+  },
+  {
+    "key": "ctrl+w k",
+    "command": "workbench.action.focusAboveGroup"
+  },
+  {
+    "key": "ctrl+w shift+h",
+    "command": "workbench.action.moveEditorToLeftGroup"
+  },
+  {
+    "key": "ctrl+w shift+l",
+    "command": "workbench.action.moveEditorToRightGroup"
+  },
+  {
+    "key": "ctrl+w shift+j",
+    "command": "workbench.action.moveEditorToBelowGroup"
+  },
+  {
+    "key": "ctrl+w shift+k",
+    "command": "workbench.action.moveEditorToAboveGroup"
+  },
+  {
+    "key": "ctrl+w shift+m",
+    "command": "workbench.action.maximizeEditor"
+  },
+  {
+    "key": "ctrl+w =",
+    "command": "workbench.action.evenEditorWidths"
+  },
+  {
+    "key": "ctrl+w m",
+    "command": "workbench.action.joinAllGroups"
+  },
+  {
+    "key": "ctrl+k e",
+    "command": "workbench.action.tasks.runTask",
+    "args": "vim (WSL)"
   }
 ]

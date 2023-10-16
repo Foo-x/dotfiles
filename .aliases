@@ -1,3 +1,5 @@
+shopt -s expand_aliases
+
 alias sudo='sudo '
 alias _='sudo '
 

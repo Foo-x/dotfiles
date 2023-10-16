@@ -8,6 +8,16 @@
       "problemMatcher": []
     },
     {
+      "label": "vim (WSL)",
+      "type": "shell",
+      // wslpathで変換に失敗したらWSLのパスなのでそのままecho
+      "command": "vim \"$(wslpath \"${file}\" || echo \"${file}\")\"",
+      "problemMatcher": [],
+      "presentation": {
+        "focus": true
+      }
+    },
+    {
       "label": "open (Windows)",
       "type": "shell",
       "command": "${file}",

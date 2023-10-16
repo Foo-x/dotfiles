@@ -59,6 +59,7 @@ nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
 nnoremap [window]K <C-w>K
 nnoremap [window]L <C-w>L
+nnoremap [window]M <C-w>\|<C-w>_
 nnoremap [window]= <C-w>=
 nnoremap [window]> <C-w>>
 nnoremap [window]< <C-w><

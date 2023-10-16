@@ -9,7 +9,6 @@ set expandtab
 set noerrorbells
 set number
 set visualbell t_vb=
-set shellcmdflag=-ic
 set runtimepath+=$HOME/.vim
 set noswapfile
 set wildmenu
@@ -20,6 +19,8 @@ set isk+=-
 set formatoptions+=M
 set matchpairs+=<:>
 set scrolloff=5
+set shortmess+=FI
+set shortmess-=S
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -53,6 +54,9 @@ let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
+
+" load bash alias
+let $BASH_ENV="$HOME/.dotfiles/.aliases"
 
 " netrw
 let g:netrw_liststyle=0
