@@ -385,16 +385,12 @@
     "command": "workbench.action.moveEditorToAboveGroup"
   },
   {
-    "key": "ctrl+w shift+m",
+    "key": "ctrl+w m",
     "command": "workbench.action.maximizeEditor"
   },
   {
     "key": "ctrl+w =",
     "command": "workbench.action.evenEditorWidths"
-  },
-  {
-    "key": "ctrl+w m",
-    "command": "workbench.action.joinAllGroups"
   },
   {
     "key": "ctrl+k e",
