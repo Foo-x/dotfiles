@@ -25,14 +25,11 @@ set matchpairs+=<:>
 set scrolloff=5
 set shortmess+=FI
 set shortmess-=S
+set mouse=
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
-
-" clipboard
-set clipboard&
-set clipboard^=unnamedplus,unnamed
 
 runtime! *.vimrc
 
