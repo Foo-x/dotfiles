@@ -400,5 +400,15 @@
     "key": "ctrl+k e",
     "command": "workbench.action.tasks.runTask",
     "args": "vim (WSL)"
+  },
+  {
+    "key": "ctrl+k oem_4",
+    "command": "search.action.focusQueryEditorWidget",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+k oem_4",
+    "command": "search.focus.previousInputBox",
+    "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible && !searchInputBoxFocus"
   }
 ]

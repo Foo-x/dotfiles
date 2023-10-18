@@ -86,7 +86,7 @@ mkdir -p ${HOME}/.config/git/hooks
 githooks_files="
 prepare-commit-msg
 "
-echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/git/hooks/{} ${HOME}/.config/git/hooks/{}
+echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/hooks/{} ${HOME}/.config/git/hooks/{}
 
 mkdir -p ${HOME}/.vim
 vimrc_files="
@@ -94,6 +94,12 @@ keymap.vimrc
 search.vimrc
 "
 echo "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.vim/{} ${HOME}/.vim/{}
+
+mkdir -p ${HOME}/.config/nvim
+nvim_files="
+init.vim
+"
+echo "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${HOME}/.config/nvim/{}
 
 exe_files="
 fetch_completions.sh

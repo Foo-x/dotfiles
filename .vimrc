@@ -16,6 +16,10 @@ set wildmode=list:longest
 set laststatus=2
 set statusline=%F%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
 set isk+=-
+set confirm
+set hidden
+set splitbelow
+set splitright
 set formatoptions+=M
 set matchpairs+=<:>
 set scrolloff=5

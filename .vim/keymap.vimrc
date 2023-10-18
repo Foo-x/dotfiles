@@ -47,9 +47,15 @@ nnoremap <Space><Space>t :<C-u>tab ter<CR>
 "" insert only one character
 nnoremap <Space>i i_<Esc>r
 
+nmap <Space>b [buffer]
+nnoremap [buffer]l :<C-u>ls<CR>
+nnoremap <silent> [buffer]j :<C-u>bnext<CR>
+nnoremap <silent> [buffer]k :<C-u>bprevious<CR>
+nnoremap <silent> [buffer]x :<C-u>bdelete<CR>
+
 nmap <Space>w [window]
-nnoremap [window]_ :<C-u>split<CR>
-nnoremap [window]\ :<C-u>vsplit<CR>
+nnoremap <silent> [window]_ :<C-u>split<CR>
+nnoremap <silent> [window]\ :<C-u>vsplit<CR>
 nnoremap [window]c <C-w>c
 nnoremap [window]h <C-w>h
 nnoremap [window]j <C-w>j
@@ -67,7 +73,7 @@ nnoremap [window]+ <C-w>+
 nnoremap [window]- <C-w>-
 
 nmap <Space>t [tab]
-nnoremap [tab]t :<C-u>tabnew<CR>
+nnoremap <silent> [tab]t :<C-u>tabnew<CR>
 nnoremap [tab]h gT
 nnoremap [tab]j gT
 nnoremap [tab]k gt
@@ -133,7 +139,22 @@ vnoremap <Space>s' di''<Esc>P
 
 " command mode
 cabbr w!! w !sudo tee > /dev/null %
+command! -nargs=+ -complete=file G execute 'silent grep! <args>' | redraw! | cw
+command! -nargs=+ -complete=file LG execute 'silent lgrep! <args>' | redraw! | lw
 
 " terminal mode
 tnoremap <C-n> <C-w>N
 tnoremap <silent><C-w><C-d> <C-w>N:<C-u>bd!<CR>:<C-u>q<CR>
+
+" finish on vim-tiny
+if !1 | finish | endif
+
+" comand mode
+fun! GitGrep(command, arg)
+  let tmp1=&grepprg
+  set grepprg=git\ grep\ -n\ 2>\ /dev/null
+  exe a:command." ".a:arg
+  let &grepprg=tmp1
+endf
+command! -nargs=+ -complete=file GG silent call GitGrep("grep", "<args>") | redraw! | cw
+command! -nargs=+ -complete=file LGG silent call GitGrep("lgrep", "<args>") | redraw! | lw

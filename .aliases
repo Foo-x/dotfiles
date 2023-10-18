@@ -169,8 +169,8 @@ alias vimrc='$PAGER ~/.vimrc'
 alias vimkeymap='$PAGER ~/.dotfiles/.vim/keymap.vimrc'
 alias tmal='alias | \grep "='\''tmux"'
 alias tmconf='$PAGER ~/.tmux.conf'
-alias dal='alias | \grep "='\''docker[^-]"'
-alias dcal='alias | \grep "='\''docker compose"'
+alias dal='alias | \grep "='\''docker[^-]" | $PAGER'
+alias dcal='alias | \grep "='\''docker compose" | $PAGER'
 
 if type vim &> /dev/null; then
   alias bdot='vim ~/.dotfiles'

@@ -1025,7 +1025,7 @@
       "before": [
         "<leader>",
         "w",
-        "M"
+        "m"
       ],
       "commands": [
         "workbench.action.maximizeEditor"
