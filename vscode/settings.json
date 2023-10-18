@@ -454,6 +454,7 @@
     "**/*.eex"
   ],
   "todohighlight.toggleURI": true,
+  "vim.enableNeovim": true,
   "vim.handleKeys": {
     "<C-b>": false,
     "<C-d>": false,
@@ -1678,6 +1679,9 @@
   "remote.extensionKind": {
     "pub.name": [
       "ui"
+    ],
+    "vscodevim.vim": [
+      "workspace"
     ],
     "alefragnani.project-manager": "workspace"
   },
