@@ -1209,6 +1209,16 @@
     {
       "before": [
         "<leader>",
+        "c",
+        "r"
+      ],
+      "commands": [
+        "git.revertSelectedRanges"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
         "g",
         "h"
       ],
