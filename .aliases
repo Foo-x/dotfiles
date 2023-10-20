@@ -39,6 +39,9 @@ alias j=jobs
 if type vim &> /dev/null; then
   alias vi=vim
 fi
+if type nvim &> /dev/null; then
+  alias vi=nvim
+fi
 
 alias md=mkdir
 alias gr=grep
