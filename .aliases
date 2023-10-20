@@ -1,6 +1,6 @@
 shopt -s expand_aliases
 
-alias sudo='sudo '
+alias sudo='sudo -E '
 alias _='sudo '
 
 # cd
