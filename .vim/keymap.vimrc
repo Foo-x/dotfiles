@@ -180,3 +180,27 @@ fun! GitGrep(command, arg)
 endf
 command! -nargs=+ -complete=file GGR silent call GitGrep("grep", "<args>") | redraw! | cw
 command! -nargs=+ -complete=file LGGR silent call GitGrep("lgrep", "<args>") | redraw! | lw
+command! BufOnly silent! %bd|e#|bd#
+
+function! s:list_buffers(unlisted = '')
+  redir => list
+  silent exe 'ls' . a:unlisted
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(command, lines)
+  execute a:command join(map(a:lines, {_, line -> split(split(line)[0],'[^0-9]\+')[0]}))
+endfunction
+
+command! FBD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers('bdelete', lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
+
+command! FBW call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers('!'),
+  \ 'sink*': { lines -> s:delete_buffers('bwipeout', lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))

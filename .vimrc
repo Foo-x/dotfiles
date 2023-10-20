@@ -32,6 +32,8 @@ set rtp+=~/.fzf
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
 
+silent! helptags ALL
+
 runtime! *.vimrc
 
 " finish on vim-tiny
@@ -104,3 +106,7 @@ fun! g:MyNetrw_D(islocal)
     return 'refresh'
 endfun
 let g:Netrw_UserMaps= [["ml","NetrwMarkfileList"],["h","NetrwGoParent"],["l","NetrwOpen"],[".","NetrwToggleDot"],["<Tab>","NetrwMark"],["<Space><Tab>","NetrwUnmarkAll"],["D", "MyNetrw_D"]]
+
+" autocmd
+autocmd VimLeave * if $is_vim_session_loaded=='true' | mks! | else | mks | endif
+autocmd SessionLoadPost * let $is_vim_session_loaded='true'

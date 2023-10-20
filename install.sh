@@ -103,7 +103,6 @@ fi
 # install vim-fugitive
 if has git && [ ! -d ${HOME}/.vim/pack/main/start/vim-fugitive ]; then
     git clone --depth 1 https://github.com/tpope/vim-fugitive.git ${HOME}/.vim/pack/main/start/vim-fugitive
-    vi -u NONE -c "helptags ~/.vim/pack/main/start/vim-fugitive/doc" -c q
 fi
 
 mkdir -p ${HOME}/.config/nvim
