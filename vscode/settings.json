@@ -243,7 +243,7 @@
   "workbench.editor.limit.excludeDirty": true,
   "workbench.editor.limit.perEditorGroup": true,
   // for not to remove editor accidentally e.g. split into right group
-  "workbench.editor.limit.value": 2,
+  "workbench.editor.limit.value": 10,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.showTabs": false,
   "workbench.editor.tabSizing": "shrink",

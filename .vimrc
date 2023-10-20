@@ -26,6 +26,7 @@ set scrolloff=5
 set shortmess+=FI
 set shortmess-=S
 set mouse=
+set rtp+=~/.fzf
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_

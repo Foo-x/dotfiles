@@ -53,6 +53,22 @@ nnoremap <silent> [buffer]j :<C-u>bnext<CR>
 nnoremap <silent> [buffer]k :<C-u>bprevious<CR>
 nnoremap <silent> [buffer]x :<C-u>bdelete<CR>
 
+nmap <Space><Space>c [quickfix]
+nnoremap [quickfix]n :<C-u>cnext<CR>
+nnoremap [quickfix]p :<C-u>cprevious<CR>
+nnoremap [quickfix]k :<C-u>cbefore<CR>
+nnoremap [quickfix]j :<C-u>cafter<CR>
+nnoremap [quickfix]w :<C-u>cwindow<CR>
+nnoremap [quickfix]c :<C-u>cclose<CR>
+
+nmap <Space><Space>l [location]
+nnoremap [location]n :<C-u>lnext<CR>
+nnoremap [location]p :<C-u>lprevious<CR>
+nnoremap [location]k :<C-u>lbefore<CR>
+nnoremap [location]j :<C-u>lafter<CR>
+nnoremap [location]w :<C-u>lwindow<CR>
+nnoremap [location]c :<C-u>lclose<CR>
+
 nmap <Space>w [window]
 nnoremap <silent> [window]_ :<C-u>split<CR>
 nnoremap <silent> [window]\ :<C-u>vsplit<CR>
@@ -65,7 +81,7 @@ nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
 nnoremap [window]K <C-w>K
 nnoremap [window]L <C-w>L
-nnoremap [window]M <C-w>\|<C-w>_
+nnoremap [window]m <C-w>\|<C-w>_
 nnoremap [window]= <C-w>=
 nnoremap [window]> <C-w>>
 nnoremap [window]< <C-w><
@@ -138,9 +154,15 @@ vnoremap <Space>s" di""<Esc>P
 vnoremap <Space>s' di''<Esc>P
 
 " command mode
-cabbr w!! w !sudo tee > /dev/null %
-command! -nargs=+ -complete=file G execute 'silent grep! <args>' | redraw! | cw
-command! -nargs=+ -complete=file LG execute 'silent lgrep! <args>' | redraw! | lw
+cnoreabbr w!! w !sudo tee > /dev/null %
+cnoreabbr FF Files
+cnoreabbr FGF GFiles
+cnoreabbr FB Buffers
+cnoreabbr FL Lines
+cnoreabbr FBL BLines
+cnoreabbr FH History
+command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw
+command! -nargs=+ -complete=file LGR execute 'silent lgrep! <args>' | redraw! | lw
 
 " terminal mode
 tnoremap <C-n> <C-w>N
@@ -156,5 +178,5 @@ fun! GitGrep(command, arg)
   exe a:command." ".a:arg
   let &grepprg=tmp1
 endf
-command! -nargs=+ -complete=file GG silent call GitGrep("grep", "<args>") | redraw! | cw
-command! -nargs=+ -complete=file LGG silent call GitGrep("lgrep", "<args>") | redraw! | lw
+command! -nargs=+ -complete=file GGR silent call GitGrep("grep", "<args>") | redraw! | cw
+command! -nargs=+ -complete=file LGGR silent call GitGrep("lgrep", "<args>") | redraw! | lw

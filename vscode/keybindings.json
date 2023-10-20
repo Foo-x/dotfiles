@@ -406,5 +406,9 @@
     "key": "ctrl+k oem_4",
     "command": "search.focus.previousInputBox",
     "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible && !searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+k ctrl+p",
+    "command": "workbench.action.showAllEditorsByMostRecentlyUsed"
   }
 ]
