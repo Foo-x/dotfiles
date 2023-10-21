@@ -49,6 +49,7 @@ nnoremap <Space>i i_<Esc>r
 
 nmap <Space>b [buffer]
 nnoremap [buffer]l :<C-u>ls<CR>
+nnoremap [buffer]L :<C-u>ls!<CR>
 nnoremap <silent> [buffer]j :<C-u>bnext<CR>
 nnoremap <silent> [buffer]k :<C-u>bprevious<CR>
 nnoremap <silent> [buffer]x :<C-u>bdelete<CR>
@@ -182,14 +183,14 @@ command! -nargs=+ -complete=file GGR silent call GitGrep("grep", "<args>") | red
 command! -nargs=+ -complete=file LGGR silent call GitGrep("lgrep", "<args>") | redraw! | lw
 command! BufOnly silent! %bd|e#|bd#
 
-function! s:list_buffers(unlisted = '')
+fun! s:list_buffers(unlisted = '')
   redir => list
   silent exe 'ls' . a:unlisted
   redir END
   return split(list, "\n")
 endfunction
 
-function! s:delete_buffers(command, lines)
+fun! s:delete_buffers(command, lines)
   execute a:command join(map(a:lines, {_, line -> split(split(line)[0],'[^0-9]\+')[0]}))
 endfunction
 
