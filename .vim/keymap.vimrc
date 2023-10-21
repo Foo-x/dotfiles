@@ -182,6 +182,7 @@ endf
 command! -nargs=+ -complete=file GGR silent call GitGrep("grep", "<args>") | redraw! | cw
 command! -nargs=+ -complete=file LGGR silent call GitGrep("lgrep", "<args>") | redraw! | lw
 command! BufOnly silent! %bd|e#|bd#
+command! Grid silent! on|bf|vert sbn|2sbn|winc h|2sbn|winc k
 
 fun! s:list_buffers(unlisted = '')
   redir => list
