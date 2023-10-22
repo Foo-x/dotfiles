@@ -183,6 +183,13 @@ command! -nargs=+ -complete=file GGR silent call s:git_grep("grep", "<args>") | 
 command! -nargs=+ -complete=file LGGR silent call s:git_grep("lgrep", "<args>") | redraw! | lw
 command! BufOnly silent! %bd|e#|bd#
 
+fun! s:badd_multi(...)
+  for file in a:000
+    exe "badd " . file
+  endfor
+endf
+command! -nargs=+ -complete=file BaddMulti call s:badd_multi(<f-args>)
+
 fun! s:n_bufs(n)
   if a:n < 1
     return []
@@ -203,7 +210,7 @@ fun! s:n_bufs(n)
   let s:wins = []
   let s:bufs = []
 
-  wincmd 1w
+  1wincmd w
   call add(s:bufs, bufnr())
   call add(s:wins, winnr())
 
@@ -213,7 +220,7 @@ fun! s:n_bufs(n)
     if index(s:wins, s:tmp_win) >= 0 && s:inactive_bufs->len() > 0
       call add(s:bufs, remove(s:inactive_bufs, 0))
     elseif index(s:wins, s:tmp_win) >= 0
-      wincmd 1 w
+      1wincmd w
       exe i . "bnext"
       call add(s:bufs, bufnr())
       exe i . "bprevious"
