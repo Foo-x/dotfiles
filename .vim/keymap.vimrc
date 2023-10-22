@@ -190,7 +190,7 @@ fun! s:useopen_buffer(buf)
     exe l:winnr . 'wincmd w'
   endif
 endf
-command! -nargs=1 -complete=buffer Buffer silent! call s:useopen_buffer(<q-args>)
+command! -nargs=1 -complete=buffer B silent! call s:useopen_buffer(<q-args>)
 
 fun! s:badd_multi(...)
   for file in a:000
