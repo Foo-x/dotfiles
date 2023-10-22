@@ -111,6 +111,11 @@ if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/vim-gitgutter ]; then
     git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${HOME}/.vim/pack/plugins/start/vim-gitgutter
 fi
 
+# install vim-sneak
+if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/vim-sneak ]; then
+    git clone --depth 1 https://github.com/justinmk/vim-sneak.git ${HOME}/.vim/pack/plugins/start/vim-sneak
+fi
+
 mkdir -p ${HOME}/.config/nvim
 nvim_files="
 init.vim

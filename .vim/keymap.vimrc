@@ -182,6 +182,15 @@ endf
 command! -nargs=+ -complete=file GGR silent call s:git_grep("grep", "<args>") | redraw! | cw
 command! -nargs=+ -complete=file LGGR silent call s:git_grep("lgrep", "<args>") | redraw! | lw
 command! BufOnly silent! %bd|e#|bd#
+fun! s:useopen_buffer(buf)
+  let l:winnr = a:buf+0 == 0 ? bufwinnr(a:buf) : bufwinnr(a:buf+0)
+  if l:winnr == -1
+    exe 'buffer ' . a:buf
+  else
+    exe l:winnr . 'wincmd w'
+  endif
+endf
+command! -nargs=1 -complete=buffer Buffer silent! call s:useopen_buffer(<q-args>)
 
 fun! s:badd_multi(...)
   for file in a:000
@@ -283,3 +292,5 @@ command! FBW call fzf#run(fzf#wrap({
 nmap <Space><Space>gj <Plug>(GitGutterNextHunk)
 nmap <Space><Space>gk <Plug>(GitGutterPrevHunk)
 nmap <Space><Space>gp <Plug>(GitGutterPreviewHunk)<C-w>P
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S

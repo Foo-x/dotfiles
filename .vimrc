@@ -14,7 +14,7 @@ set noswapfile
 set wildmenu
 set wildmode=list:longest
 set laststatus=2
-set statusline=%F%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
+set statusline=\[%n\]\ %F%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
 set isk+=-
 set confirm
 set hidden
@@ -29,6 +29,7 @@ set mouse=
 set rtp+=~/.fzf
 set updatetime=100
 set signcolumn=yes
+set switchbuf+=useopen
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
