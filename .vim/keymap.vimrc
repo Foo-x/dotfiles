@@ -278,3 +278,8 @@ command! FBW call fzf#run(fzf#wrap({
   \ 'sink*': { lines -> s:delete_buffers('bwipeout', lines) },
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \ }))
+
+" plugins
+nmap <Space><Space>gj <Plug>(GitGutterNextHunk)
+nmap <Space><Space>gk <Plug>(GitGutterPrevHunk)
+nmap <Space><Space>gp <Plug>(GitGutterPreviewHunk)<C-w>P

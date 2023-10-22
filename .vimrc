@@ -27,6 +27,8 @@ set shortmess+=FI
 set shortmess-=S
 set mouse=
 set rtp+=~/.fzf
+set updatetime=100
+set signcolumn=yes
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -42,16 +44,17 @@ if !1 | finish | endif
 syntax on
 
 " highlight
-hi Comment ctermfg=lightblue
-hi Directory ctermfg=lightblue
-hi Identifier ctermfg=lightblue
-hi NonText ctermfg=lightblue
-hi PreProc ctermfg=red
-hi Question ctermfg=lightgreen
-hi Search ctermbg=darkyellow ctermfg=white
-hi Statement ctermfg=yellow
-hi Visual ctermbg=darkgrey ctermfg=none
-hi netrwMarkFile ctermbg=darkmagenta ctermfg=white
+try
+  color habamax
+catch
+  color desert
+  hi SignColumn ctermbg=black
+endtry
+hi netrwMarkFile ctermbg=darkmagenta
+let g:gitgutter_set_sign_backgrounds=1
+hi GitGutterAdd ctermfg=green
+hi GitGutterChange ctermfg=yellow
+hi GitGutterDelete ctermfg=red
 
 " cursor shape
 let &t_ti.="\e[1 q"
@@ -62,6 +65,9 @@ let &t_te.="\e[0 q"
 " load bash alias
 let $BASH_ENV="$HOME/.dotfiles/.aliases"
 
+" gitgutter
+let g:gitgutter_preview_win_floating=0
+
 " netrw
 let g:netrw_liststyle=0
 let g:netrw_sizestyle="H"
@@ -70,8 +76,6 @@ let g:netrw_altv=1
 let g:netrw_alto=1
 let g:netrw_keepdir=0
 let g:netrw_localcopydircmd='cp -r'
-"" open file in new tab
-let g:netrw_browse_split=3
 
 fun! NetrwMarkfileList(islocal)
     echo netrw#Expose("netrwmarkfilelist")
@@ -110,3 +114,4 @@ let g:Netrw_UserMaps= [["ml","NetrwMarkfileList"],["h","NetrwGoParent"],["l","Ne
 " autocmd
 autocmd VimLeave * if $is_vim_session_loaded=='true' | mks! | else | mks | endif
 autocmd SessionLoadPost * let $is_vim_session_loaded='true'
+autocmd VimEnter * GitGutterLineNrHighlightsEnable

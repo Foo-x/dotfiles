@@ -88,7 +88,8 @@ prepare-commit-msg
 "
 echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/hooks/{} ${HOME}/.config/git/hooks/{}
 
-mkdir -p ${HOME}/.vim/pack/main/start/
+mkdir -p ${HOME}/.vim/pack/plugins/start/
+mkdir -p ${HOME}/.vim/pack/colors/start/
 vimrc_files="
 keymap.vimrc
 search.vimrc
@@ -96,13 +97,18 @@ search.vimrc
 echo "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.vim/{} ${HOME}/.vim/{}
 
 # install fzf.vim
-if has git && [ ! -d ${HOME}/.vim/pack/main/start/fzf.vim ]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.vim.git ${HOME}/.vim/pack/main/start/fzf.vim
+if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/fzf.vim ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.vim.git ${HOME}/.vim/pack/plugins/start/fzf.vim
 fi
 
 # install vim-fugitive
-if has git && [ ! -d ${HOME}/.vim/pack/main/start/vim-fugitive ]; then
-    git clone --depth 1 https://github.com/tpope/vim-fugitive.git ${HOME}/.vim/pack/main/start/vim-fugitive
+if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/vim-fugitive ]; then
+    git clone --depth 1 https://github.com/tpope/vim-fugitive.git ${HOME}/.vim/pack/plugins/start/vim-fugitive
+fi
+
+# install vim-gitgutter
+if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/vim-gitgutter ]; then
+    git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${HOME}/.vim/pack/plugins/start/vim-gitgutter
 fi
 
 mkdir -p ${HOME}/.config/nvim
