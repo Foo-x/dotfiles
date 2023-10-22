@@ -173,27 +173,92 @@ tnoremap <silent><C-w><C-d> <C-w>N:<C-u>bd!<CR>:<C-u>q<CR>
 if !1 | finish | endif
 
 " comand mode
-fun! GitGrep(command, arg)
+fun! s:git_grep(command, arg)
   let tmp1=&grepprg
   set grepprg=git\ grep\ -n\ 2>\ /dev/null
   exe a:command." ".a:arg
   let &grepprg=tmp1
 endf
-command! -nargs=+ -complete=file GGR silent call GitGrep("grep", "<args>") | redraw! | cw
-command! -nargs=+ -complete=file LGGR silent call GitGrep("lgrep", "<args>") | redraw! | lw
+command! -nargs=+ -complete=file GGR silent call s:git_grep("grep", "<args>") | redraw! | cw
+command! -nargs=+ -complete=file LGGR silent call s:git_grep("lgrep", "<args>") | redraw! | lw
 command! BufOnly silent! %bd|e#|bd#
-command! Grid silent! on|bf|vert sbn|2sbn|winc h|2sbn|winc k
+
+fun! s:n_bufs(n)
+  if a:n < 1
+    return []
+  endif
+
+  if a:n == 1
+    return [winbufnr(1)]
+  endif
+
+  let s:inactive_bufs = []
+
+  for bufnum in range(1, bufnr('$'))
+    if buflisted(bufnum) && bufwinnr(bufnum) == -1
+      call add(s:inactive_bufs, bufnum)
+    endif
+  endfor
+
+  let s:wins = []
+  let s:bufs = []
+
+  wincmd 1w
+  call add(s:bufs, bufnr())
+  call add(s:wins, winnr())
+
+  for i in range(2, a:n)
+    silent! exe i . "wincmd w"
+    let s:tmp_win = winnr()
+    if index(s:wins, s:tmp_win) >= 0 && s:inactive_bufs->len() > 0
+      call add(s:bufs, remove(s:inactive_bufs, 0))
+    elseif index(s:wins, s:tmp_win) >= 0
+      wincmd 1 w
+      exe i . "bnext"
+      call add(s:bufs, bufnr())
+      exe i . "bprevious"
+    else
+      call add(s:bufs, winbufnr(s:tmp_win))
+    endif
+    call add(s:wins, s:tmp_win)
+  endfor
+
+  return s:bufs
+endf
+
+fun! s:grid()
+  let s:bufs = s:n_bufs(4)
+
+  silent! only
+  exe "buffer " . s:bufs[0]
+  exe "vert sbuffer " . s:bufs[2]
+  exe "sbuffer " . s:bufs[3]
+  wincmd t
+  exe "sbuffer " . s:bufs[1]
+  wincmd t
+endf
+command! Grid call s:grid()
+
+fun! s:two_col()
+  let s:bufs = s:n_bufs(2)
+
+  silent! only
+  exe "buffer " . s:bufs[0]
+  exe "vert sbuffer " . s:bufs[1]
+  wincmd t
+endf
+command! TwoCol call s:two_col()
 
 fun! s:list_buffers(unlisted = '')
   redir => list
   silent exe 'ls' . a:unlisted
   redir END
   return split(list, "\n")
-endfunction
+endf
 
 fun! s:delete_buffers(command, lines)
   execute a:command join(map(a:lines, {_, line -> split(split(line)[0],'[^0-9]\+')[0]}))
-endfunction
+endf
 
 command! FBD call fzf#run(fzf#wrap({
   \ 'source': s:list_buffers(),
