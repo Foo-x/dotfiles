@@ -223,6 +223,9 @@
   "search.mode": "reuseEditor",
   "search.searchEditor.defaultNumberOfContextLines": 3,
   "search.showLineNumbers": true,
+  "terminal.integrated.commandsToSkipShell": [
+    "-workbench.action.quickOpen"
+  ],
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.env.linux": {
     "EDITOR": "code --wait"

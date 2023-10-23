@@ -162,6 +162,11 @@ cnoreabbr FB Buffers
 cnoreabbr FL Lines
 cnoreabbr FBL BLines
 cnoreabbr FH History
+
+if !empty($WSL_DISTRO_NAME)
+  cnoreabbr clip w !clip.exe
+endif
+
 command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw
 command! -nargs=+ -complete=file LGR execute 'silent lgrep! <args>' | redraw! | lw
 

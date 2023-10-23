@@ -84,6 +84,29 @@ function fe() {
   fi
 }
 
+# gfe - open selected files with EDITOR only git tracked
+function gfe() {
+  local files
+
+  files=($(
+    git ls-files 2> /dev/null |
+      fzf -m -q ${1:-''} --header "Tab: toggle"
+  ))
+  if [[ -n "$files" ]]; then
+    eval "${EDITOR:-vim -p} $(printf '"%s" ' "${files[@]}")"
+  fi
+}
+
+# gdfe - open selected files with EDITOR only git modified
+function gdfe() {
+  local files tmp_files
+  tmp_files=$(git ls-files -o -m --exclude-standard $(git rev-parse --show-cdup) 2> /dev/null)
+  files=($(echo "$tmp_files" | fzf -m -q ${1:-''} --header "Tab: toggle"))
+  if [[ -n "$files" ]]; then
+    eval "${EDITOR:-vim -p} $(printf '"%s" ' "${files[@]}")"
+  fi
+}
+
 # gfco - git checkout branch
 function gfco() {
   local tags branches target
