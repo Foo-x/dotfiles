@@ -6,25 +6,31 @@ has() {
     type "$1" > /dev/null 2>&1
 }
 
-if has git; then
-    if [ -d ${DOT_DIR} ]; then
-        git -C ${DOT_DIR} pull
+if [ ! ${IS_UPDATED} ]; then
+    if has git; then
+        if [ -d ${DOT_DIR} ]; then
+            git -C ${DOT_DIR} pull
+        else
+            git clone --depth 1 https://github.com/Foo-x/dotfiles.git ${DOT_DIR}
+        fi
+    elif has curl || has wget; then
+        TARBALL="https://github.com/Foo-x/dotfiles/archive/master.tar.gz"
+        if has curl; then
+            curl -L ${TARBALL} -o master.tar.gz
+        else
+            wget ${TARBALL}
+        fi
+        tar -zxvf master.tar.gz
+        rm -f master.tar.gz
+        mv -f dotfiles-master ${DOT_DIR}
     else
-        git clone --depth 1 https://github.com/Foo-x/dotfiles.git ${DOT_DIR}
+        echo "curl or wget or git required"
+        exit 1
     fi
-elif has curl || has wget; then
-    TARBALL="https://github.com/Foo-x/dotfiles/archive/master.tar.gz"
-    if has curl; then
-        curl -L ${TARBALL} -o master.tar.gz
-    else
-        wget ${TARBALL}
-    fi
-    tar -zxvf master.tar.gz
-    rm -f master.tar.gz
-    mv -f dotfiles-master ${DOT_DIR}
-else
-    echo "curl or wget or git required"
-    exit 1
+
+    export IS_UPDATED=true
+    ${0}
+    exit 0
 fi
 
 # include .bashrc
