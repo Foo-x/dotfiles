@@ -349,6 +349,8 @@ if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'
   alias mklink='cmd.exe /c mklink'
+  alias pbcopy="iconv -t sjis | clip.exe"
+  alias pbpaste="powershell.exe -command 'Get-Clipboard' | iconv -f sjis"
 
   function open() {
     wslview "$(wslpath -w "$1")"

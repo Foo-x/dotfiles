@@ -164,7 +164,8 @@ cnoreabbr FBL BLines
 cnoreabbr FH History
 
 if !empty($WSL_DISTRO_NAME)
-  cnoreabbr clip w !clip.exe
+  cnoreabbr pbcopy w !pbcopy
+  cnoreabbr pbpaste exe 'let @"=' . shellescape(substitute(substitute(system('pbpaste'), '\r', '', 'g'), '\n$', '', 'g'))
 endif
 
 command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw
