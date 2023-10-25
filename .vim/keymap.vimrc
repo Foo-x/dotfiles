@@ -181,7 +181,6 @@ command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw
 command! -nargs=+ -complete=file LGR execute 'silent lgrep! <args>' | redraw! | lw
 
 " terminal mode
-tnoremap <C-n> <C-w>N
 tnoremap <silent><C-w><C-d> <C-w>N:<C-u>bd!<CR>:<C-u>q<CR>
 
 " finish on vim-tiny
