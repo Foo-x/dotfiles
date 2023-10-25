@@ -165,11 +165,6 @@ cnoreabbr FH History
 cnoreabbr BND bn\|bd#
 cnoreabbr BNW bn\|bw#
 
-if !empty($WSL_DISTRO_NAME)
-  cnoreabbr PC w !pbcopy
-  cnoreabbr PP exe 'let @"=' . shellescape(substitute(substitute(system('pbpaste'), '\r', '', 'g'), '\n$', '', 'g')) \| norm p
-endif
-
 command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw
 command! -nargs=+ -complete=file LGR execute 'silent lgrep! <args>' | redraw! | lw
 
