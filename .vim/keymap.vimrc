@@ -8,7 +8,7 @@ nnoremap k gk
 nnoremap <Up> gk
 
 noremap Y y$
-nnoremap <C-j> i<CR><Esc>
+nnoremap U <C-r>
 
 nnoremap + <C-a>
 nnoremap - <C-x>
@@ -164,6 +164,18 @@ cnoreabbr FBL BLines
 cnoreabbr FH History
 cnoreabbr BND bn\|bd#
 cnoreabbr BNW bn\|bw#
+
+if !empty($WSL_DISTRO_NAME)
+  fun! s:inline_pbpaste()
+    let l:output = system('pbpaste')
+    let l:output = substitute(l:output, '\r', '', 'g')
+    let l:output = substitute(l:output, '\n$', '', 'g')
+    set paste
+    execute 'normal i' . l:output
+    set nopaste
+  endf
+  command! P call s:inline_pbpaste()
+endif
 
 command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw
 command! -nargs=+ -complete=file LGR execute 'silent lgrep! <args>' | redraw! | lw
