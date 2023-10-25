@@ -162,10 +162,12 @@ cnoreabbr FB Buffers
 cnoreabbr FL Lines
 cnoreabbr FBL BLines
 cnoreabbr FH History
+cnoreabbr BND bn\|bd#
+cnoreabbr BNW bn\|bw#
 
 if !empty($WSL_DISTRO_NAME)
-  cnoreabbr pbcopy w !pbcopy
-  cnoreabbr pbpaste exe 'let @"=' . shellescape(substitute(substitute(system('pbpaste'), '\r', '', 'g'), '\n$', '', 'g'))
+  cnoreabbr PC w !pbcopy
+  cnoreabbr PP exe 'let @"=' . shellescape(substitute(substitute(system('pbpaste'), '\r', '', 'g'), '\n$', '', 'g')) \| norm p
 endif
 
 command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw

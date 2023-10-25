@@ -116,3 +116,11 @@ let g:Netrw_UserMaps= [["ml","NetrwMarkfileList"],["h","NetrwGoParent"],["l","Ne
 autocmd VimLeave * if $is_vim_session_loaded=='true' | mks! | else | mks | endif
 autocmd SessionLoadPost * let $is_vim_session_loaded='true'
 autocmd VimEnter * GitGutterLineNrHighlightsEnable
+
+if !empty($WSL_DISTRO_NAME)
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('pbcopy', @")
+  augroup END
+endif
+
