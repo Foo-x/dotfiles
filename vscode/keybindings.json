@@ -41,7 +41,7 @@
   {
     "key": "alt+w",
     "command": "workbench.action.terminal.new",
-    "when": "terminalFocus"
+    "when": "terminalFocus && !terminalEditorFocus"
   },
   {
     "key": "ctrl+shift+oem_1",
@@ -72,11 +72,6 @@
   {
     "key": "alt+c",
     "command": "-workbench.action.terminal.toggleFindCaseSensitive",
-    "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "key": "alt+w",
-    "command": "-workbench.action.terminal.toggleFindWholeWord",
     "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported"
   },
   {
@@ -345,7 +340,7 @@
     "command": "workbench.action.closeEditorsAndGroup"
   },
   {
-    "key": "ctrl+w _",
+    "key": "ctrl+w shift+oem_minus",
     "command": "workbench.action.splitEditorToBelowGroup"
   },
   {
@@ -410,5 +405,10 @@
   {
     "key": "ctrl+k ctrl+p",
     "command": "workbench.action.showAllEditorsByMostRecentlyUsed"
+  },
+  {
+    "key": "alt+w",
+    "command": "-workbench.action.terminal.toggleFindWholeWord",
+    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   }
 ]

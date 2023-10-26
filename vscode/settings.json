@@ -915,6 +915,42 @@
     {
       "before": [
         "<leader>",
+        "1"
+      ],
+      "commands": [
+        "workbench.action.focusFirstEditorGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "2"
+      ],
+      "commands": [
+        "workbench.action.focusSecondEditorGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "3"
+      ],
+      "commands": [
+        "workbench.action.focusThirdEditorGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "4"
+      ],
+      "commands": [
+        "workbench.action.focusFourthEditorGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
         "["
       ],
       "commands": [
