@@ -113,6 +113,9 @@ endfun
 let g:Netrw_UserMaps= [["ml","NetrwMarkfileList"],["h","NetrwGoParent"],["l","NetrwOpen"],[".","NetrwToggleDot"],["<Tab>","NetrwMark"],["<Space><Tab>","NetrwUnmarkAll"],["D", "MyNetrw_D"]]
 
 " autocmd
+"" if exists a session and loaded it: override session
+"" if exists a session but not loaded it: do not save new session
+"" if exists no sessions: save new session
 autocmd VimLeave * if $is_vim_session_loaded=='true' | mks! | else | mks | endif
 autocmd SessionLoadPost * let $is_vim_session_loaded='true'
 autocmd VimEnter * GitGutterLineNrHighlightsEnable

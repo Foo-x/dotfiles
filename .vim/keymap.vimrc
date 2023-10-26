@@ -7,6 +7,8 @@ nnoremap <Down> gj
 nnoremap k gk
 nnoremap <Up> gk
 
+nnoremap gf gF
+
 noremap Y y$
 nnoremap U <C-r>
 
@@ -165,6 +167,12 @@ cnoreabbr FH History
 cnoreabbr BND bn\|bd#
 cnoreabbr BNW bn\|bw#
 
+" finish on vim-tiny
+if !1 | finish | endif
+
+" comand mode
+
+"" WSL
 if !empty($WSL_DISTRO_NAME)
   fun! s:inline_pbpaste()
     let l:output = system('pbpaste')
@@ -177,16 +185,31 @@ if !empty($WSL_DISTRO_NAME)
   command! P call s:inline_pbpaste()
 endif
 
+"" VSCode
+fun! s:code(path)
+  silent! exe '!code --goto ' . a:path
+endf
+""" open current file in VSCode
+command! Code call s:code(join([expand('%:p'), line('.'), col('.')], ':'))
+
+""" open the file under the cursor in VSCode
+fun! s:code_gF()
+  let l:pos = matchlist(getline('.'), '\v[^[:fname:]]+([[:digit:]]+)[^[:fname:]]*([[:digit:]]*)|$', col('.'))
+  let l:path = expand('<cfile>')
+  if l:pos[1]
+    let l:path = l:path . ':' . l:pos[1]
+  endif
+  if l:pos[2]
+    let l:path = l:path . ':' . l:pos[2]
+  endif
+  call s:code(l:path)
+endf
+command! Codef call s:code_gF()
+
+"" grep
 command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw
 command! -nargs=+ -complete=file LGR execute 'silent lgrep! <args>' | redraw! | lw
 
-" terminal mode
-tnoremap <silent><C-w><C-d> <C-w>N:<C-u>bd!<CR>:<C-u>q<CR>
-
-" finish on vim-tiny
-if !1 | finish | endif
-
-" comand mode
 fun! s:git_grep(command, arg)
   let tmp1=&grepprg
   set grepprg=git\ grep\ -n\ 2>\ /dev/null
@@ -195,6 +218,8 @@ fun! s:git_grep(command, arg)
 endf
 command! -nargs=+ -complete=file GGR silent call s:git_grep("grep", "<args>") | redraw! | cw
 command! -nargs=+ -complete=file LGGR silent call s:git_grep("lgrep", "<args>") | redraw! | lw
+
+"" buffer
 command! BufOnly silent! %bd|e#|bd#
 fun! s:useopen_buffer(buf)
   let l:winnr = a:buf+0 == 0 ? bufwinnr(a:buf) : bufwinnr(a:buf+0)
@@ -279,6 +304,7 @@ fun! s:two_col()
 endf
 command! TwoCol call s:two_col()
 
+"" fzf
 fun! s:list_buffers(unlisted = '')
   redir => list
   silent exe 'ls' . a:unlisted

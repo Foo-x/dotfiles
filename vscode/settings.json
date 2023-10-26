@@ -1192,7 +1192,7 @@
         "s"
       ],
       "commands": [
-        "git.stage"
+        "git.stageSelectedRanges"
       ]
     },
     {
@@ -1202,7 +1202,7 @@
         "S"
       ],
       "commands": [
-        "git.stageAll"
+        "git.stage"
       ]
     },
     {
@@ -1212,7 +1212,7 @@
         "u"
       ],
       "commands": [
-        "git.unstage"
+        "git.unstageSelectedRanges"
       ]
     },
     {
@@ -1222,7 +1222,7 @@
         "U"
       ],
       "commands": [
-        "git.unstageAll"
+        "git.unstage"
       ]
     },
     {
@@ -1707,6 +1707,36 @@
       ],
       "commands": [
         "extension.changeCase.commands"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "s"
+      ],
+      "commands": [
+        "git.stageSelectedRanges"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "u"
+      ],
+      "commands": [
+        "git.unstageSelectedRanges"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "r"
+      ],
+      "commands": [
+        "git.revertSelectedRanges"
       ]
     },
     // sneak
