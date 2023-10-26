@@ -193,9 +193,13 @@ endf
 command! Code call s:code(join([expand('%:p'), line('.'), col('.')], ':'))
 
 """ open the file under the cursor in VSCode
-fun! s:code_gF()
+fun! s:code_gF() abort
   let l:pos = matchlist(getline('.'), '\v[^[:fname:]]+([[:digit:]]+)[^[:fname:]]*([[:digit:]]*)|$', col('.'))
   let l:path = expand('<cfile>')
+  if !filereadable(l:path)
+    echoerr 'cannot read file: ' . l:path
+    return
+  endif
   if l:pos[1]
     let l:path = l:path . ':' . l:pos[1]
   endif
