@@ -224,7 +224,8 @@
   "search.searchEditor.defaultNumberOfContextLines": 3,
   "search.showLineNumbers": true,
   "terminal.integrated.commandsToSkipShell": [
-    "-workbench.action.quickOpen"
+    "-workbench.action.quickOpen",
+    "workbench.action.createTerminalEditor"
   ],
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.env.linux": {

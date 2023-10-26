@@ -44,6 +44,11 @@
     "when": "terminalFocus && !terminalEditorFocus"
   },
   {
+    "key": "alt+w",
+    "command": "workbench.action.createTerminalEditor",
+    "when": "editorFocus || terminalEditorFocus"
+  },
+  {
     "key": "ctrl+shift+oem_1",
     "command": "workbench.action.terminal.new"
   },
