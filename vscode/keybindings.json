@@ -436,5 +436,9 @@
     "key": "ctrl+g",
     "command": "-workbench.action.terminal.goToRecentDirectory",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-workbench.action.togglePanel"
   }
 ]
