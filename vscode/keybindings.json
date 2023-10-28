@@ -445,5 +445,11 @@
     "key": "ctrl+v",
     "command": "-workbench.action.terminal.paste",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  // ignore ctrl+k in terminal
+  {
+    "key": "ctrl+k",
+    "command": "deleteAllRight",
+    "when": "terminalFocus"
   }
 ]
