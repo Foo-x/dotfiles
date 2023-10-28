@@ -7,8 +7,6 @@ nnoremap <Down> gj
 nnoremap k gk
 nnoremap <Up> gk
 
-nnoremap gf gF
-
 noremap Y y$
 nnoremap U <C-r>
 
@@ -50,6 +48,7 @@ nnoremap <Space><Space>t :<C-u>tab ter<CR>
 nnoremap <Space>i i_<Esc>r
 
 nmap <Space>b [buffer]
+nnoremap [buffer]h <C-^>
 nnoremap [buffer]l :<C-u>ls<CR>
 nnoremap [buffer]L :<C-u>ls!<CR>
 nnoremap <silent> [buffer]j :<C-u>bnext<CR>
@@ -84,6 +83,10 @@ nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
 nnoremap [window]K <C-w>K
 nnoremap [window]L <C-w>L
+nnoremap [window]f <C-w>f
+nnoremap [window]F <C-w>F
+nnoremap [window]gf <C-w>gf
+nnoremap [window]gF <C-w>gF
 nnoremap [window]m <C-w>\|<C-w>_
 nnoremap [window]= <C-w>=
 nnoremap [window]> <C-w>>
@@ -187,12 +190,17 @@ endif
 
 "" VSCode
 fun! s:code(path)
-  silent! exe '!code --goto ' . a:path
+  silent! exe '!code ' . a:path
+endf
+fun! s:code_goto(path)
+  silent! exe '!code --goto ' a:path
 endf
 """ open current file in VSCode
-command! Code call s:code(join([expand('%:p'), line('.'), col('.')], ':'))
+command! Code call s:code_goto(join([expand('%:p'), line('.'), col('.')], ':'))
 
 """ open the file under the cursor in VSCode
+command! Codef call s:code(expand('<cfile>'))
+
 fun! s:code_gF() abort
   let l:pos = matchlist(getline('.'), '\v[^[:fname:]]+([[:digit:]]+)[^[:fname:]]*([[:digit:]]*)|$', col('.'))
   let l:path = expand('<cfile>')
@@ -206,9 +214,9 @@ fun! s:code_gF() abort
   if l:pos[2]
     let l:path = l:path . ':' . l:pos[2]
   endif
-  call s:code(l:path)
+  call s:code_goto(l:path)
 endf
-command! Codef call s:code_gF()
+command! CodeF call s:code_gF()
 
 "" grep
 command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw

@@ -4,6 +4,10 @@ export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignorespace  # not save commands that space-beginned and duplicated to history
 export HISTIGNORE='?:??:???:history:cd*:exit:clear'
 
+if [ "$TMUX" ]; then
+    export PATH=$(echo "$PATH" | sed -E 's#(.*):?.+.vscode-server[^:]+:#\1#')
+fi
+
 if [ -z "$EDITOR" ] && type vim &> /dev/null; then
     export EDITOR='vim -p'
 fi

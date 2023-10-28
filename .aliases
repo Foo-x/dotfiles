@@ -162,6 +162,7 @@ alias tml='tmux ls'
 alias tmn='tmux new'
 alias tmnw='tmux neww'
 alias tmr='tmux rename'
+alias tmrw='tmux renamew'
 alias tmreload='tmux source-file ~/.tmux.conf'
 
 # browse

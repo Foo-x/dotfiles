@@ -2,12 +2,12 @@
   {
     "key": "ctrl+shift+right",
     "command": "workbench.action.terminal.focusNext",
-    "when": "terminalFocus"
+    "when": "terminalFocus && !terminalEditorFocus"
   },
   {
     "key": "ctrl+shift+left",
     "command": "workbench.action.terminal.focusPrevious",
-    "when": "terminalFocus"
+    "when": "terminalFocus && !terminalEditorFocus"
   },
   {
     "key": "n",
@@ -46,7 +46,7 @@
   {
     "key": "alt+w",
     "command": "workbench.action.createTerminalEditor",
-    "when": "editorFocus || terminalEditorFocus"
+    "when": "editorFocus"
   },
   {
     "key": "ctrl+shift+oem_1",
@@ -82,47 +82,47 @@
   {
     "key": "alt+h",
     "command": "workbench.action.terminal.focusPrevious",
-    "when": "terminalFocus"
+    "when": "terminalFocus && !terminalEditorFocus"
   },
   {
     "key": "alt+l",
     "command": "workbench.action.terminal.focusNext",
-    "when": "terminalFocus"
+    "when": "terminalFocus && !terminalEditorFocus"
   },
   {
     "key": "alt+oem_5",
     "command": "workbench.action.terminal.split",
-    "when": "terminalFocus && terminalProcessSupported"
+    "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus"
   },
   {
     "key": "ctrl+g l",
     "command": "workbench.action.terminal.focusNextPane",
-    "when": "terminalFocus && terminalProcessSupported"
+    "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus"
   },
   {
     "key": "ctrl+g h",
     "command": "workbench.action.terminal.focusPreviousPane",
-    "when": "terminalFocus && terminalProcessSupported"
+    "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus"
   },
   {
     "key": "ctrl+g shift+h",
     "command": "workbench.action.terminal.resizePaneLeft",
-    "when": "terminalFocus && terminalProcessSupported"
+    "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus"
   },
   {
     "key": "ctrl+g shift+l",
     "command": "workbench.action.terminal.resizePaneRight",
-    "when": "terminalFocus && terminalProcessSupported"
+    "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus"
   },
   {
     "key": "ctrl+g shift+j",
     "command": "workbench.action.terminal.resizePaneDown",
-    "when": "terminalFocus && terminalProcessSupported"
+    "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus"
   },
   {
     "key": "ctrl+g shift+k",
     "command": "workbench.action.terminal.resizePaneUp",
-    "when": "terminalFocus && terminalProcessSupported"
+    "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus"
   },
   {
     "key": "shift+up",
@@ -393,6 +393,22 @@
     "command": "workbench.action.evenEditorWidths"
   },
   {
+    "key": "ctrl+w 1",
+    "command": "workbench.action.focusFirstEditorGroup"
+  },
+  {
+    "key": "ctrl+w 2",
+    "command": "workbench.action.focusSecondEditorGroup"
+  },
+  {
+    "key": "ctrl+w 3",
+    "command": "workbench.action.focusThirdEditorGroup"
+  },
+  {
+    "key": "ctrl+w 4",
+    "command": "workbench.action.focusFourthEditorGroup"
+  },
+  {
     "key": "ctrl+k e",
     "command": "workbench.action.tasks.runTask",
     "args": "vim (WSL)"
@@ -415,5 +431,10 @@
     "key": "alt+w",
     "command": "-workbench.action.terminal.toggleFindWholeWord",
     "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+g",
+    "command": "-workbench.action.terminal.goToRecentDirectory",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   }
 ]
