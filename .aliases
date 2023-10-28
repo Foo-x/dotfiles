@@ -41,6 +41,8 @@ if type vim &> /dev/null; then
 fi
 if type nvim &> /dev/null; then
   alias vi=nvim
+  alias nview='nvim -R'
+  alias view=nview
 fi
 
 alias md=mkdir
@@ -172,6 +174,7 @@ alias bashrc_org='$PAGER ~/.bashrc'
 alias inputrc='$PAGER ~/.inputrc'
 alias vimrc='$PAGER ~/.vimrc'
 alias vimkeymap='$PAGER ~/.dotfiles/.vim/keymap.vimrc'
+alias vimcommand='$PAGER ~/.dotfiles/.vim/command.vimrc'
 alias tmal='alias | \grep "='\''tmux"'
 alias tmconf='$PAGER ~/.tmux.conf'
 alias dal='alias | \grep "='\''docker[^-]" | $PAGER'

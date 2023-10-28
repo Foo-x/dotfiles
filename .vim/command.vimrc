@@ -26,13 +26,14 @@ endif
 
 " VSCode
 fun! s:code(path, line = '', column = '')
-  if !filereadable(a:path)
+  if !filereadable(expand(a:path))
     echoerr 'cannot read file: ' . a:path
     return
   endif
 
   if !a:line && !a:column
     silent! exe '!code ' . a:path
+    redraw!
     return
   endif
 
@@ -44,6 +45,7 @@ fun! s:code(path, line = '', column = '')
     let l:path = l:path . ':' . a:column
   endif
   silent! exe '!code --goto ' l:path
+  redraw!
 endf
 
 "" open current file in VSCode
