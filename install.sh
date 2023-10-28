@@ -54,7 +54,7 @@ if type gh > /dev/null 2>&1; then
         gh alias set openr 'repo view -w'
         gh alias set openi 'issue view -w'
         gh alias set openp 'pr view -w'
-    } &> /dev/null
+    } > /dev/null 2>&1
 fi
 
 # install fzf
