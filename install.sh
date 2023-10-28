@@ -97,6 +97,7 @@ echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/hooks/{} ${H
 mkdir -p ${HOME}/.vim/pack/plugins/start/
 mkdir -p ${HOME}/.vim/pack/colors/start/
 vimrc_files="
+command.vimrc
 keymap.vimrc
 search.vimrc
 "
