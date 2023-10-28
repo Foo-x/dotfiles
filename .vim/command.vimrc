@@ -25,32 +25,36 @@ if !empty($WSL_DISTRO_NAME)
 endif
 
 " VSCode
-fun! s:code(path)
-  silent! exe '!code ' . a:path
+fun! s:code(path, line = '', column = '')
+  if !filereadable(a:path)
+    echoerr 'cannot read file: ' . a:path
+    return
+  endif
+
+  if !a:line && !a:column
+    silent! exe '!code ' . a:path
+    return
+  endif
+
+  let l:path = a:path
+  if a:line
+    let l:path = l:path . ':' . a:line
+  endif
+  if a:column
+    let l:path = l:path . ':' . a:column
+  endif
+  silent! exe '!code --goto ' l:path
 endf
-fun! s:code_goto(path)
-  silent! exe '!code --goto ' a:path
-endf
+
 "" open current file in VSCode
-command! Code call s:code_goto(join([expand('%:p'), line('.'), col('.')], ':'))
+command! Code call s:code(expand('%:p'), line('.'), col('.'))
 
 "" open the file under the cursor in VSCode
 command! Codef call s:code(expand('<cfile>'))
 
 fun! s:code_gF() abort
   let l:pos = matchlist(getline('.'), '\v[^[:fname:]]+([[:digit:]]+)[^[:fname:]]*([[:digit:]]*)|$', col('.'))
-  let l:path = expand('<cfile>')
-  if !filereadable(l:path)
-    echoerr 'cannot read file: ' . l:path
-    return
-  endif
-  if l:pos[1]
-    let l:path = l:path . ':' . l:pos[1]
-  endif
-  if l:pos[2]
-    let l:path = l:path . ':' . l:pos[2]
-  endif
-  call s:code_goto(l:path)
+  call s:code(expand('<cfile>'), l:pos[1], l:pos[2])
 endf
 command! CodeF call s:code_gF()
 
