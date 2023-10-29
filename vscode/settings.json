@@ -784,7 +784,7 @@
     {
       "before": [
         "g",
-        "i"
+        "I"
       ],
       "commands": [
         "editor.action.goToImplementation"
