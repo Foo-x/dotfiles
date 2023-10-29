@@ -49,8 +49,12 @@ fi
 if type gh > /dev/null 2>&1; then
     {
         gh alias set cl 'repo clone'
+        gh alias set clp 'repo clone $1 -- --filter=blob:none --sparse'
         gh alias set cr 'repo create'
+        gh alias set sync 'repo sync'
         gh alias set il 'issue list'
+        gh alias set co 'pr checkout'
+        gh alias set al 'alias list'
         gh alias set openr 'repo view -w'
         gh alias set openi 'issue view -w'
         gh alias set openp 'pr view -w'
