@@ -22,6 +22,7 @@ if [ ! ${IS_UPDATED} ]; then
         fi
         tar -zxvf master.tar.gz
         rm -f master.tar.gz
+        rm -rf ${DOT_DIR}
         mv -f dotfiles-master ${DOT_DIR}
     else
         echo "curl or wget or git required"
