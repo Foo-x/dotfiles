@@ -143,7 +143,10 @@ main()
   history -c
   history -r
 }
-export PROMPT_COMMAND_HISTSAVE='__dedup_history'
+
+if type python &> /dev/null || type python3 &> /dev/null; then
+  export PROMPT_COMMAND_HISTSAVE='__dedup_history'
+fi
 
 function lsgit() {
   ls -A
