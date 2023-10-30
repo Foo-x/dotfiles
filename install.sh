@@ -62,6 +62,7 @@ if [ ! -d ${HOME}/enhancd ]; then
     git clone --depth 1 https://github.com/b4b4r07/enhancd ${HOME}/enhancd
 fi
 
+mkdir -p ${HOME}/.local/bin
 # install neovim on ubuntu
 if cat /etc/os-release | grep ID=ubuntu > /dev/null 2>&1 && [ ! -f ${HOME}/.local/bin/nvim ]; then
     curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage > ${HOME}/.local/bin/nvim.appimage
