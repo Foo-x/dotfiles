@@ -79,6 +79,17 @@ if [ ! -f ${HOME}/.local/bin/cht.sh ]; then
     chmod +x ${HOME}/.local/bin/cht.sh
 fi
 
+# install neovim
+if [ ! -f ${HOME}/.local/bin/nvim ]; then
+    curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage > ${HOME}/.local/bin/nvim.appimage
+    chmod +x ${HOME}/.local/bin/nvim.appimage
+    if has fusermount; then
+        mv ${HOME}/.local/bin/nvim.appimage ${HOME}/.local/bin/nvim
+    else
+        (cd ${HOME}/.local/bin/; ./nvim.appimage --appimage-extract; mv ./squashfs-root/usr/bin/nvim .; rm -rf ./squashfs-root ./nvim.appimage)
+    fi
+fi
+
 touch ${HOME}/.user_profile
 
 files="
