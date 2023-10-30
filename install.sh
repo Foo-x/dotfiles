@@ -7,26 +7,15 @@ has() {
 }
 
 if [ ! ${IS_UPDATED} ]; then
-    if has git; then
-        if [ -d ${DOT_DIR} ]; then
-            git -C ${DOT_DIR} pull
-        else
-            git clone --depth 1 https://github.com/Foo-x/dotfiles.git ${DOT_DIR}
-        fi
-    elif has curl || has wget; then
-        TARBALL="https://github.com/Foo-x/dotfiles/archive/master.tar.gz"
-        if has curl; then
-            curl -L ${TARBALL} -o master.tar.gz
-        else
-            wget ${TARBALL}
-        fi
-        tar -zxvf master.tar.gz
-        rm -f master.tar.gz
-        rm -rf ${DOT_DIR}
-        mv -f dotfiles-master ${DOT_DIR}
-    else
-        echo "curl or wget or git required"
+    if ! has git || ! has curl; then
+        echo "curl or wget or git required" 1>&2
         exit 1
+    fi
+
+    if [ -d ${DOT_DIR} ]; then
+        git -C ${DOT_DIR} pull
+    else
+        git clone --depth 1 https://github.com/Foo-x/dotfiles.git ${DOT_DIR}
     fi
 
     export IS_UPDATED=true
@@ -42,7 +31,7 @@ if ! \grep -q "${source_bashrc}" ${HOME}/.bashrc; then
 fi
 
 # include .gitconfig
-if has git && git config --global --list > /dev/null 2>&1 && ! git config --global include.path > /dev/null 2>&1; then
+if git config --global --list > /dev/null 2>&1 && ! git config --global include.path > /dev/null 2>&1; then
     git config --global include.path ${DOT_DIR}/.gitconfig
 fi
 
@@ -63,13 +52,13 @@ if type gh > /dev/null 2>&1; then
 fi
 
 # install fzf
-if has git && [ ! -d ${HOME}/.fzf ]; then
+if [ ! -d ${HOME}/.fzf ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
     ${HOME}/.fzf/install --key-bindings --completion --update-rc
 fi
 
 # install enhancd
-if has git && [ ! -d ${HOME}/enhancd ]; then
+if [ ! -d ${HOME}/enhancd ]; then
     git clone --depth 1 https://github.com/b4b4r07/enhancd ${HOME}/enhancd
 fi
 
@@ -120,22 +109,22 @@ search.vimrc
 echo "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.vim/{} ${HOME}/.vim/{}
 
 # install fzf.vim
-if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/fzf.vim ]; then
+if [ ! -d ${HOME}/.vim/pack/plugins/start/fzf.vim ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.vim.git ${HOME}/.vim/pack/plugins/start/fzf.vim
 fi
 
 # install vim-fugitive
-if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/vim-fugitive ]; then
+if [ ! -d ${HOME}/.vim/pack/plugins/start/vim-fugitive ]; then
     git clone --depth 1 https://github.com/tpope/vim-fugitive.git ${HOME}/.vim/pack/plugins/start/vim-fugitive
 fi
 
 # install vim-gitgutter
-if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/vim-gitgutter ]; then
+if [ ! -d ${HOME}/.vim/pack/plugins/start/vim-gitgutter ]; then
     git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${HOME}/.vim/pack/plugins/start/vim-gitgutter
 fi
 
 # install vim-sneak
-if has git && [ ! -d ${HOME}/.vim/pack/plugins/start/vim-sneak ]; then
+if [ ! -d ${HOME}/.vim/pack/plugins/start/vim-sneak ]; then
     git clone --depth 1 https://github.com/justinmk/vim-sneak.git ${HOME}/.vim/pack/plugins/start/vim-sneak
 fi
 
