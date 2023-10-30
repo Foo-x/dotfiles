@@ -19,7 +19,7 @@ if [ ! ${IS_UPDATED} ]; then
     fi
 
     export IS_UPDATED=true
-    ${0}
+    ${DOT_DIR}/install.sh
     exit 0
 fi
 
