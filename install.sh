@@ -87,7 +87,7 @@ if [ ! -f ${HOME}/.local/bin/nvim ]; then
     if has fusermount; then
         mv ${HOME}/.local/bin/nvim.appimage ${HOME}/.local/bin/nvim
     else
-        (cd ${HOME}/.local/bin/; ./nvim.appimage --appimage-extract; mv ./squashfs-root/usr/bin/nvim .; rm -rf ./squashfs-root ./nvim.appimage)
+        (cd ${HOME}/.local/bin/; ./nvim.appimage --appimage-extract; ln -sf ./squashfs-root/usr/bin/nvim ./nvim; rm ./nvim.appimage)
     fi
 fi
 
