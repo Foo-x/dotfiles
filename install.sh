@@ -73,7 +73,7 @@ fi
 if [ ! -f ${HOME}/.local/bin/nvim ]; then
     curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage > ${HOME}/.local/bin/nvim.appimage
     chmod +x ${HOME}/.local/bin/nvim.appimage
-    if has fusermount; then
+    if ${HOME}/.local/bin/nvim.appimage -v > /dev/null 2>&1; then
         mv ${HOME}/.local/bin/nvim.appimage ${HOME}/.local/bin/nvim
     else
         (cd ${HOME}/.local/bin/; ./nvim.appimage --appimage-extract; ln -sf ./squashfs-root/usr/bin/nvim ./nvim; rm ./nvim.appimage)
