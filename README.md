@@ -12,6 +12,8 @@
     - aliases
 - tmux
     - auto-attach
+- git diff-highlight
+    - `GIT_PAGER`
 
 
 ## Installation
