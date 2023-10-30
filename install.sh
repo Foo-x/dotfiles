@@ -76,7 +76,7 @@ if [ ! -f ${HOME}/.local/bin/nvim ]; then
     if ${HOME}/.local/bin/nvim.appimage -v > /dev/null 2>&1; then
         mv ${HOME}/.local/bin/nvim.appimage ${HOME}/.local/bin/nvim
     else
-        (cd ${HOME}/.local/bin/; ./nvim.appimage --appimage-extract; ln -sf ./squashfs-root/usr/bin/nvim ./nvim; rm ./nvim.appimage)
+        (cd ${HOME}/.local/bin/; ./nvim.appimage --appimage-extract; ln -sf ./squashfs-root/usr/bin/nvim ./nvim; rm ./nvim.appimage) > /dev/null 2>&1
     fi
 fi
 
