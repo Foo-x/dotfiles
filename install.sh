@@ -62,13 +62,6 @@ if [ ! -d ${HOME}/enhancd ]; then
     git clone --depth 1 https://github.com/b4b4r07/enhancd ${HOME}/enhancd
 fi
 
-# install cht.sh
-mkdir -p ${HOME}/.local/bin
-if [ ! -f ${HOME}/.local/bin/cht.sh ]; then
-    curl https://cht.sh/:cht.sh > ${HOME}/.local/bin/cht.sh
-    chmod +x ${HOME}/.local/bin/cht.sh
-fi
-
 # install neovim
 if [ ! -f ${HOME}/.local/bin/nvim ]; then
     curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage > ${HOME}/.local/bin/nvim.appimage

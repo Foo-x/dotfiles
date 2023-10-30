@@ -19,6 +19,3 @@ cd completion
 fetch git https://github.com/git/git/raw/master/contrib/completion/git-completion.bash
 fetch tmux https://raw.githubusercontent.com/Bash-it/bash-it/master/completion/available/tmux.completion.bash
 
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-    fetchf cht.sh https://cht.sh/:bash_completion
-fi

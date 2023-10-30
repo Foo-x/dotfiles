@@ -10,8 +10,6 @@
 
 - [bash-completion](https://github.com/scop/bash-completion)
     - aliases
-        - cht.sh
-        - each shortened
 - tmux
     - auto-attach
 
