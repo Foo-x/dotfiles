@@ -112,6 +112,11 @@ if [ ! -d ${HOME}/.vim/pack/plugins/start/vim-fugitive ]; then
     git clone --depth 1 https://github.com/tpope/vim-fugitive.git ${HOME}/.vim/pack/plugins/start/vim-fugitive
 fi
 
+# install gv.vim
+if [ ! -d ${HOME}/.vim/pack/plugins/start/gv.vim ]; then
+    git clone --depth 1 https://github.com/junegunn/gv.vim.git  ${HOME}/.vim/pack/plugins/start/gv.vim
+fi
+
 # install vim-gitgutter
 if [ ! -d ${HOME}/.vim/pack/plugins/start/vim-gitgutter ]; then
     git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${HOME}/.vim/pack/plugins/start/vim-gitgutter

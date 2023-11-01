@@ -186,6 +186,9 @@
     ## show aliases
     al = config --get-regexp alias.*
 
+    ## blame ignore revs
+    bl = "!f(){ [ -f $(git rev-parse --show-toplevel)/.git-blame-ignore-revs ] && git blame --ignore-revs-file .git-blame-ignore-revs "$@" || git blame "$@";};f"
+
 [push]
     default = current
 [core]

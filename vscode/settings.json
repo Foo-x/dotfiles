@@ -228,9 +228,6 @@
     "workbench.action.createTerminalEditor"
   ],
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.env.linux": {
-    "EDITOR": "code --wait"
-  },
   "terminal.integrated.hideOnStartup": "whenEmpty",
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.showExitAlert": false,

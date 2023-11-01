@@ -7,6 +7,12 @@ cnoreabbr FBL BLines
 cnoreabbr FH History
 cnoreabbr BND bn\|bd#
 cnoreabbr BNW bn\|bw#
+cnoreabbr A args
+cnoreabbr AD argdelete
+cnoreabbr ADD argdedupe
+cnoreabbr GV0a GV --all
+cnoreabbr GV1 GV --name-status
+cnoreabbr GV1a GV --name-status --all
 
 " finish on vim-tiny
 if !1 | finish | endif
@@ -84,13 +90,7 @@ fun! s:useopen_buffer(buf)
   endif
 endf
 command! -nargs=1 -complete=buffer B silent! call s:useopen_buffer(<q-args>)
-
-fun! s:badd_multi(...)
-  for file in a:000
-    exe "badd " . file
-  endfor
-endf
-command! -nargs=+ -complete=file BaddMulti call s:badd_multi(<f-args>)
+command! -nargs=+ -complete=file AA argadd <args> | argdedupe
 
 fun! s:n_bufs(n)
   if a:n < 1

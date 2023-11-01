@@ -52,6 +52,7 @@ alias cpb='cp -b'
 alias lnb='ln -b'
 alias mvb='mv -b'
 alias vis='vi -S'
+alias vig='vi -c "G|on"'
 
 # others
 alias relogin='exec $SHELL -l'
