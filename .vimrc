@@ -30,6 +30,7 @@ set rtp+=~/.fzf
 set updatetime=100
 set signcolumn=yes
 set switchbuf+=useopen
+set diffopt+=algorithm:histogram,indent-heuristic
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_

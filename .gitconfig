@@ -205,6 +205,8 @@
     template = ~/.gitmessage
 [diff]
     tool = nvimdiff
+    algorithm = histogram
+    colorMoved = dimmed-zebra
     wsErrorHighlight = all
 [merge]
     ff = false
