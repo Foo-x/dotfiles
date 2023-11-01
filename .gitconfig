@@ -130,6 +130,11 @@
     dnm = diff --diff-filter=m  # not modified
     dt = difftool
 
+    # merge
+    me = merge
+    mea = merge --abort
+    met = mergetool
+
     # stash
     ss = stash
     sl = stash list
@@ -198,18 +203,16 @@
 [commit]
     template = ~/.gitmessage
 [diff]
-    tool = vscode
+    tool = nvimdiff
     wsErrorHighlight = all
-[difftool "vscode"]
-    cmd = code --wait --diff $LOCAL $REMOTE
 [merge]
     ff = false
-    tool = vscode
+    tool = nvimdiff
     autostash = true
+    keepBackup = false
+    conflictstyle = zdiff3
 [pull]
     ff = only
-[mergetool "vscode"]
-    cmd = code --wait $MERGED
 [help]
     autocorrect = -1
 [rebase]

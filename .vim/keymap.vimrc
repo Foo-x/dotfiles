@@ -75,6 +75,7 @@ nmap <Space>w [window]
 nnoremap <silent> [window]_ :<C-u>split<CR>
 nnoremap <silent> [window]\ :<C-u>vsplit<CR>
 nnoremap [window]c <C-w>c
+nnoremap [window]o <C-w>o
 nnoremap [window]h <C-w>h
 nnoremap [window]j <C-w>j
 nnoremap [window]k <C-w>k
@@ -96,6 +97,8 @@ nnoremap [window]- <C-w>-
 
 nmap <Space>t [tab]
 nnoremap <silent> [tab]t :<C-u>tabnew<CR>
+nnoremap <silent> [tab]c :<C-u>tabclose<CR>
+nnoremap <silent> [tab]o :<C-u>tabonly<CR>
 nnoremap [tab]h gT
 nnoremap [tab]j gT
 nnoremap [tab]k gt

@@ -1,16 +1,26 @@
 cnoreabbr w!! w !sudo tee > /dev/null %
+cnoreabbr BND bn\|bd#
+cnoreabbr BNW bn\|bw#
+
+" argument list
+cnoreabbr A args
+cnoreabbr AD argdelete
+cnoreabbr ADA %argdelete
+cnoreabbr ADD argdedupe
+
+" fzf
 cnoreabbr FF Files
 cnoreabbr FGF GFiles
 cnoreabbr FB Buffers
 cnoreabbr FL Lines
 cnoreabbr FBL BLines
 cnoreabbr FH History
-cnoreabbr BND bn\|bd#
-cnoreabbr BNW bn\|bw#
-cnoreabbr A args
-cnoreabbr AD argdelete
-cnoreabbr ADA %argdelete
-cnoreabbr ADD argdedupe
+
+" vim-fugitive
+cnoreabbr GDT G difftool -y
+cnoreabbr GMT G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t \| Gvdiffsplit :1 \| winc j
+
+" gv.vim
 cnoreabbr GV0a GV --all
 cnoreabbr GV1 GV --name-status
 cnoreabbr GV1a GV --name-status --all
@@ -77,8 +87,9 @@ fun! s:git_grep(command, arg)
   exe a:command." ".a:arg
   let &grepprg=tmp1
 endf
-command! -nargs=+ -complete=file GGR silent call s:git_grep("grep", "<args>") | redraw! | cw
-command! -nargs=+ -complete=file LGGR silent call s:git_grep("lgrep", "<args>") | redraw! | lw
+command! -nargs=+ -complete=file -bang GGR silent call s:git_grep("grep<bang>", "<args>") | redraw! | cw
+command! -nargs=+ -complete=file -bang LGGR silent call s:git_grep("lgrep<bang>", "<args>") | redraw! | lw
+command! -bang Conflicts GGR<bang> '^<<<<<<< HEAD$'
 
 " buffer
 command! BufOnly silent! %bd|e#|bd#
