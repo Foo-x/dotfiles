@@ -9,6 +9,7 @@ cnoreabbr BND bn\|bd#
 cnoreabbr BNW bn\|bw#
 cnoreabbr A args
 cnoreabbr AD argdelete
+cnoreabbr ADA %argdelete
 cnoreabbr ADD argdedupe
 cnoreabbr GV0a GV --all
 cnoreabbr GV1 GV --name-status
@@ -167,7 +168,10 @@ fun! s:list_buffers(unlisted = '')
 endf
 
 fun! s:delete_buffers(command, lines)
-  execute a:command join(map(a:lines, {_, line -> split(split(line)[0],'[^0-9]\+')[0]}))
+  let l:bufnrs = map(a:lines, {_, line -> split(split(line)[0],'[^0-9]\+')[0]})
+  let l:bufnames = map(copy(l:bufnrs), {_, val -> bufname(str2nr(val))})
+  silent! execute 'argdelete' join(l:bufnames)
+  execute a:command join(l:bufnrs)
 endf
 
 command! FBD call fzf#run(fzf#wrap({
