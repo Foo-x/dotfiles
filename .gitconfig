@@ -132,6 +132,7 @@
 
     # merge
     me = merge
+    mec = merge --continue
     mea = merge --abort
     met = mergetool
 
