@@ -2,7 +2,6 @@
 
 xargs -I{} code --install-extension {} << EOS
 albert.TabOut
-alefragnani.Bookmarks
 alefragnani.project-manager
 andys8.jest-snippets
 bierner.markdown-mermaid

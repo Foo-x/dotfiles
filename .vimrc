@@ -31,6 +31,7 @@ set updatetime=100
 set signcolumn=yes
 set switchbuf+=useopen
 set diffopt+=algorithm:histogram,indent-heuristic
+set spelllang=en,cjk
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -128,3 +129,7 @@ if !empty($WSL_DISTRO_NAME)
   augroup END
 endif
 
+augroup GitSpellCheck
+  autocmd!
+  autocmd FileType gitcommit setlocal spell
+augroup END

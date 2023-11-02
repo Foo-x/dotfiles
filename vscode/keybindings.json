@@ -386,7 +386,13 @@
   },
   {
     "key": "ctrl+w m",
-    "command": "workbench.action.maximizeEditor"
+    "command": "workbench.action.toggleMaximizeEditorGroup",
+    "when": "maximizedEditorGroup || multipleEditorGroups"
+  },
+  {
+    "key": "ctrl+k ctrl+m",
+    "command": "-workbench.action.toggleMaximizeEditorGroup",
+    "when": "maximizedEditorGroup || multipleEditorGroups"
   },
   {
     "key": "ctrl+w =",
@@ -451,5 +457,10 @@
     "key": "ctrl+k",
     "command": "deleteAllRight",
     "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "-workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   }
 ]

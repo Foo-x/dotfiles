@@ -87,8 +87,8 @@ fun! s:git_grep(command, arg)
   exe a:command." ".a:arg
   let &grepprg=tmp1
 endf
-command! -nargs=+ -complete=file -bang GGR silent call s:git_grep("grep<bang>", "<args>") | redraw! | cw
-command! -nargs=+ -complete=file -bang LGGR silent call s:git_grep("lgrep<bang>", "<args>") | redraw! | lw
+command! -nargs=+ -complete=file -bang GGR silent call s:git_grep("grep<bang>", <q-args>) | redraw! | cw
+command! -nargs=+ -complete=file -bang LGGR silent call s:git_grep("lgrep<bang>", <q-args>) | redraw! | lw
 command! -bang Conflicts GGR<bang> '^<<<<<<< HEAD$'
 
 " buffer
@@ -103,6 +103,14 @@ fun! s:useopen_buffer(buf)
 endf
 command! -nargs=1 -complete=buffer B silent! call s:useopen_buffer(<q-args>)
 command! -nargs=+ -complete=file AA argadd <args> | argdedupe
+
+fun! s:close_no_name_buffers()
+  let l:nonamebuffers = map(filter(getbufinfo({'buflisted':1}), 'v:val.name=="" && len(v:val.windows)==0'), 'v:val.bufnr')
+  for i in l:nonamebuffers
+    exe 'bdelete ' . i
+  endfor
+endf
+command! CloseNoNameBuffers call s:close_no_name_buffers()
 
 fun! s:n_bufs(n)
   if a:n < 1
@@ -169,6 +177,15 @@ fun! s:two_col()
   wincmd t
 endf
 command! TwoCol call s:two_col()
+fun! s:two_row()
+  let s:bufs = s:n_bufs(2)
+
+  silent! only
+  exe "buffer " . s:bufs[0]
+  exe "sbuffer " . s:bufs[1]
+  wincmd t
+endf
+command! TwoRow call s:two_row()
 
 " fzf
 fun! s:list_buffers(unlisted = '')
