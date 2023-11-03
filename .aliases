@@ -214,6 +214,16 @@ function preview() {
 }
 alias preview='preview '
 
+function check_truecolor() {
+  for i in {0..80}; do
+    ((r = 255 - (i * 255 / 80)))
+    ((g = i < 40 ? i * 255 / 40 : 510 - i * 255 / 40))
+    ((b = i * 255 / 80))
+    printf "\e[48;2;%d;%d;%dm \e[m" $r $g $b
+  done
+  echo
+}
+
 function ansi_cht() {
   {
     echo '--- font style ---'
