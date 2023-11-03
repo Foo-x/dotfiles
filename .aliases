@@ -215,7 +215,7 @@ function preview() {
 alias preview='preview '
 
 function check_truecolor() {
-  for i in {0..80}; do
+  for i in {1..80}; do
     ((r = 255 - (i * 255 / 80)))
     ((g = i < 40 ? i * 255 / 40 : 510 - i * 255 / 40))
     ((b = i * 255 / 80))
