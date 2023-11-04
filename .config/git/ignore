@@ -1,3 +1,29 @@
 .env
-Session.vim
 .quickfix
+*~
+*.bak
+*.tmp
+*.log
+out/
+dist/
+cache/
+logs/
+
+# vim
+Session.vim
+*.sw?
+
+# JavaScript
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Windows
+[Dd]esktop.ini
+Thumbs.db
+*.lnk
+
+# macOS
+.DS_Store

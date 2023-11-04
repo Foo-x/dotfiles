@@ -11,7 +11,7 @@ LS_COLORS="pi=${__yellow_ansi_foreground}:${LS_COLORS}"
 # link
 LS_COLORS="ln=${__cyan_ansi_pccs_palep_foreground}:${LS_COLORS}"
 # orphan link
-LS_COLORS="or=${__red_ansi_foreground}:${LS_COLORS}"
+LS_COLORS="or=9;${__red_ansi_foreground}:${LS_COLORS}"
 # socket
 LS_COLORS="so=${__red_ansi_pccs_deep_foreground}:${LS_COLORS}"
 # setuid
@@ -22,6 +22,10 @@ LS_COLORS="sg=30;${__yellow_ansi_background}:${LS_COLORS}"
 LS_COLORS="tw=30;${__green_ansi_background}:${LS_COLORS}"
 # not sticky and other writable directory
 LS_COLORS="ow=${__blue_ansi_pccs_deep_foreground};${__green_ansi_background}:${LS_COLORS}"
+# ignored
+LS_COLORS="*~=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
+LS_COLORS="*.bak=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
+LS_COLORS="*.tmp=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
 export LS_COLORS
 
 export HISTSIZE=100000
