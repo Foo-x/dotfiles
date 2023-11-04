@@ -2,7 +2,7 @@ DOT_DIR="${HOME}/.dotfiles"
 
 . ${DOT_DIR}/.config/bash/.exports_color
 
-export LS_COLORS="di=${__blue_ansi_foreground}:ex=${__green_ansi_foreground}:pi=${__yellow_ansi_foreground}:ln=${__cyan_ansi_pccs_palep_foreground}:or=${__red_ansi_foreground}:su=30;${__red_ansi_background}:sg=30;${__yellow_ansi_background}:tw=30;${__green_ansi_background}:ow=${__blue_ansi_pccs_deep_foreground};${__green_ansi_background}"
+export LS_COLORS="di=${__blue_ansi_foreground}:ex=${__green_ansi_foreground}:pi=${__yellow_ansi_foreground}:ln=${__cyan_ansi_pccs_palep_foreground}:or=${__red_ansi_foreground}:so=${__red_ansi_pccs_deep_foreground}:su=30;${__red_ansi_background}:sg=30;${__yellow_ansi_background}:tw=30;${__green_ansi_background}:ow=${__blue_ansi_pccs_deep_foreground};${__green_ansi_background}"
 
 export HISTSIZE=100000
 export HISTFILESIZE=100000
@@ -193,6 +193,6 @@ export PS1='\n${VIMLABEL}\[\e[${__green_ansi_foreground}m\]\u \[\e[${__yellow_an
 GIT_PS1_SHOWDIRTYSTATE=1  # show if there are changed files '*' for unstaged and '+' for staged
 GIT_PS1_SHOWSTASHSTATE=1  # show '$' if something is stashed
 GIT_PS1_SHOWUNTRACKEDFILES=1  # show '%' if there are untracked files
-GIT_PS1_SHOWUPSTREAM=auto  # show diff from upstream
+GIT_PS1_SHOWUPSTREAM='verbose name'  # show diff from upstream
 GIT_PS1_DESCRIBE_STYLE=branch  # show detached HEAD as relative to branch
 GIT_PS1_SHOWCONFLICTSTATE=yes  # show '|CONFLICT' if there are conflicts

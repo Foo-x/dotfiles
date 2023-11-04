@@ -51,6 +51,8 @@ if [ ! -d ${HOME}/.fzf ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
     ${HOME}/.fzf/install --key-bindings --completion --update-rc
 fi
+## source fzf last because LS_COLORS must be set before loading inputrc and fzf use 'bind' which loads inputrc
+sed -i '$!{/fzf/{H;d}};$G' ${HOME}/.bashrc
 
 # install enhancd
 if [ ! -d ${HOME}/enhancd ]; then
@@ -73,7 +75,6 @@ touch ${HOME}/.user_profile
 
 files="
 .bash_profile
-.gitmessage
 .inputrc
 .profile
 .vimrc
