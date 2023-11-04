@@ -208,7 +208,7 @@ fi
 
 . ${DOT_DIR}/.config/bash/git-prompt.sh
 
-export PS1='\n${VIMLABEL}\[\e[${__green_ansi_foreground}m\]\u \[\e[${__yellow_ansi_foreground}m\]&:\j \[\e[${__blue_ansi_foreground}m\]\w\[\e[${__red_ansi_foreground}m\]$(__git_ps1)\n$(if [[ $? == "0" ]]; then printf "\[\e[${__green_ansi_foreground}m\]:)"; else printf "\[\e[${__red_ansi_foreground}m\]:("; fi)\[\e[00m\] '
+export PS1='\n${VIMLABEL}\[\e[${__green_ansi_foreground}m\]\u \[\e[${__yellow_ansi_foreground}m\]&:\j \[\e[${__blue_ansi_foreground}m\]\w\[\e[${__magenta_ansi_foreground}m\]$(__git_ps1)\n$(if [[ $? == "0" ]]; then printf "\[\e[${__green_ansi_foreground}m\]:)"; else printf "\[\e[${__magenta_ansi_foreground}m\]:("; fi)\[\e[00m\] '
 
 GIT_PS1_SHOWDIRTYSTATE=1  # show if there are changed files '*' for unstaged and '+' for staged
 GIT_PS1_SHOWSTASHSTATE=1  # show '$' if something is stashed

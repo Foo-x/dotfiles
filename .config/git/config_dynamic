@@ -23,21 +23,21 @@ git config --global --unset color.status.remoteBranch
 
 # set
 git config --global color.branch.current "${__green_hex}"
-git config --global color.branch.remote "${__red_hex}"
+git config --global color.branch.remote "${__magenta_hex}"
 
 git config --global color.diff.old "${__red_hex}"
 git config --global color.diff.new "${__green_hex}"
-git config --global color.diff.oldMovedDimmed "#6d6d6d"
-git config --global color.diff.newMovedDimmed "#878787"
+git config --global color.diff.oldMovedDimmed "${__gy45_pccs_hex}"
+git config --global color.diff.newMovedDimmed "${__gy65_pccs_hex}"
 git config --global color.diff.meta "${__cyan_hex}"
 git config --global color.diff.frag "${__blue_hex}"
 git config --global color.diff.whitespace "0 ${__red_hex}"
-git config --global color.diff.context "#d6d6d6"
+git config --global color.diff.context "${__gy85_pccs_hex}"
 
 git config --global color.status.added "${__green_hex}"
 git config --global color.status.changed "${__red_hex}"
-git config --global color.status.untracked "${__red_hex}"
+git config --global color.status.untracked "${__magenta_hex}"
 git config --global color.status.branch "${__green_hex}"
-git config --global color.status.nobranch "${__red_hex}"
+git config --global color.status.nobranch "${__magenta_hex}"
 git config --global color.status.localBranch "${__green_hex}"
-git config --global color.status.remoteBranch "${__red_hex}"
+git config --global color.status.remoteBranch "${__magenta_hex}"
