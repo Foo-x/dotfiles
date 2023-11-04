@@ -1,0 +1,132 @@
+# ansi_foreground
+## 24bit habamax
+#__red_ansi_foreground='38;2;175;135;175'
+#__green_ansi_foreground='38;2;135;175;135'
+#__yellow_ansi_foreground='38;2;175;175;135'
+#__blue_ansi_foreground='38;2;135;135;175'
+#__cyan_ansi_foreground='38;2;135;175;175'
+
+## 24bit PCCS bright
+#__red_ansi_foreground='38;2;208;103;142'
+#__green_ansi_foreground='38;2;65;184;121'
+#__yellow_ansi_foreground='38;2;255;173;54'
+#__blue_ansi_foreground='38;2;41;129;192'
+#__cyan_ansi_foreground='38;2;0;152;185'
+
+## 24bit PCCS soft
+#__red_ansi_foreground='38;2;180;120;139'
+#__green_ansi_foreground='38;2;118;177;138'
+#__yellow_ansi_foreground='38;2;219;166;107'
+#__blue_ansi_foreground='38;2;93;126;160'
+#__cyan_ansi_foreground='38;2;81;146;164'
+
+## 24bit PCCS light+
+__red_ansi_foreground='38;2;217;142;165'
+__green_ansi_foreground='38;2;133;206;158'
+__yellow_ansi_foreground='38;2;255;190;113'
+__blue_ansi_foreground='38;2;108;154;197'
+__cyan_ansi_foreground='38;2;91;175;196'
+
+## 4bit lighter
+#__red_ansi_foreground='91'
+#__green_ansi_foreground='92'
+#__yellow_ansi_foreground='93'
+#__blue_ansi_foreground='94'
+#__cyan_ansi_foreground='96'
+
+## 4bit darker
+#__red_ansi_foreground='31'
+#__green_ansi_foreground='32'
+#__yellow_ansi_foreground='33'
+#__blue_ansi_foreground='34'
+#__cyan_ansi_foreground='36'
+
+export __red_ansi_foreground
+export __green_ansi_foreground
+export __yellow_ansi_foreground
+export __blue_ansi_foreground
+export __cyan_ansi_foreground
+
+# ansi_background
+## 24bit habamax
+#__red_ansi_background='48;2;175;135;175'
+#__green_ansi_background='48;2;135;175;135'
+#__yellow_ansi_background='48;2;175;175;135'
+#__blue_ansi_background='48;2;135;135;175'
+#__cyan_ansi_background='48;2;135;175;175'
+
+## 24bit PCCS bright
+#__red_ansi_background='48;2;208;103;142'
+#__green_ansi_background='48;2;65;184;121'
+#__yellow_ansi_background='48;2;255;173;54'
+#__blue_ansi_background='48;2;41;129;192'
+#__cyan_ansi_background='48;2;0;152;185'
+
+## 24bit PCCS soft
+#__red_ansi_background='48;2;180;120;139'
+#__green_ansi_background='48;2;118;177;138'
+#__yellow_ansi_background='48;2;219;166;107'
+#__blue_ansi_background='48;2;93;126;160'
+#__cyan_ansi_background='48;2;81;146;164'
+
+## 24bit PCCS light+
+__red_ansi_background='48;2;217;142;165'
+__green_ansi_background='48;2;133;206;158'
+__yellow_ansi_background='48;2;255;190;113'
+__blue_ansi_background='48;2;108;154;197'
+__cyan_ansi_background='48;2;91;175;196'
+
+## 4bit lighter
+#__red_ansi_background='101'
+#__green_ansi_background='102'
+#__yellow_ansi_background='103'
+#__blue_ansi_background='104'
+#__cyan_ansi_background='106'
+
+## 4bit darker
+#__red_ansi_background='41'
+#__green_ansi_background='42'
+#__yellow_ansi_background='43'
+#__blue_ansi_background='44'
+#__cyan_ansi_background='46'
+
+export __red_ansi_background
+export __green_ansi_background
+export __yellow_ansi_background
+export __blue_ansi_background
+export __cyan_ansi_background
+
+# hex
+## 24bit habamax
+#__red_hex='#af87af'
+#__green_hex='#87af87'
+#__yellow_hex='#afaf87'
+#__blue_hex='#8787af'
+#__cyan_hex='#87afaf'
+
+## 24bit PCCS bright
+#__red_hex='#d0678e'
+#__green_hex='#41b879'
+#__yellow_hex='#ffad36'
+#__blue_hex='#2981c0'
+#__cyan_hex='#0098b9'
+
+## 24bit PCCS soft
+#__red_hex='#b4788b'
+#__green_hex='#76b18a'
+#__yellow_hex='#dba66b'
+#__blue_hex='#5d7ea0'
+#__cyan_hex='#5192a4'
+
+## 24bit PCCS light+
+__red_hex='#d98ea5'
+__green_hex='#85ce9e'
+__yellow_hex='#ffbe71'
+__blue_hex='#6c9ac5'
+__cyan_hex='#5bafc4'
+
+export __red_hex
+export __green_hex
+export __yellow_hex
+export __blue_hex
+export __cyan_hex

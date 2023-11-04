@@ -1,0 +1,43 @@
+# unset
+git config --global --unset color.branch.current
+git config --global --unset color.branch.remote
+
+git config --global --unset color.diff.old
+git config --global --unset color.diff.new
+git config --global --unset color.diff.oldMovedDimmed
+git config --global --unset color.diff.newMovedDimmed
+git config --global --unset color.diff.meta
+git config --global --unset color.diff.frag
+git config --global --unset color.diff.whitespace
+git config --global --unset color.diff.commit
+git config --global --unset color.diff.context
+
+git config --global --unset color.status.header
+git config --global --unset color.status.added
+git config --global --unset color.status.changed
+git config --global --unset color.status.updated
+git config --global --unset color.status.branch
+git config --global --unset color.status.nobranch
+git config --global --unset color.status.localBranch
+git config --global --unset color.status.remoteBranch
+
+# set
+git config --global color.branch.current "${__green_hex}"
+git config --global color.branch.remote "${__red_hex}"
+
+git config --global color.diff.old "${__red_hex}"
+git config --global color.diff.new "${__green_hex}"
+git config --global color.diff.oldMovedDimmed "#6d6d6d"
+git config --global color.diff.newMovedDimmed "#878787"
+git config --global color.diff.meta "${__cyan_hex}"
+git config --global color.diff.frag "${__blue_hex}"
+git config --global color.diff.whitespace "0 ${__red_hex}"
+git config --global color.diff.context "#d6d6d6"
+
+git config --global color.status.added "${__green_hex}"
+git config --global color.status.changed "${__red_hex}"
+git config --global color.status.untracked "${__red_hex}"
+git config --global color.status.branch "${__green_hex}"
+git config --global color.status.nobranch "${__red_hex}"
+git config --global color.status.localBranch "${__green_hex}"
+git config --global color.status.remoteBranch "${__red_hex}"

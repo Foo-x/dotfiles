@@ -14,6 +14,7 @@ shopt -s histverify
 
 . ${SCRIPT_DIR}/.aliases
 . ${SCRIPT_DIR}/.exports
+. ${SCRIPT_DIR}/.gitconfig_dynamic
 
 if type pacman &> /dev/null; then
   . ${SCRIPT_DIR}/.aliases_arch
