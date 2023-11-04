@@ -30,11 +30,6 @@ if ! \grep -q "${source_bashrc}" ${HOME}/.bashrc; then
     echo "${source_bashrc}" >> ${HOME}/.bashrc
 fi
 
-# include .gitconfig
-if git config --global --list > /dev/null 2>&1 && ! git config --global include.path > /dev/null 2>&1; then
-    git config --global include.path ${DOT_DIR}/.gitconfig
-fi
-
 # setup gh
 if type gh > /dev/null 2>&1; then
     {
@@ -78,7 +73,6 @@ touch ${HOME}/.user_profile
 
 files="
 .bash_profile
-.gitignore_global
 .gitmessage
 .inputrc
 .profile
@@ -86,6 +80,14 @@ files="
 .tmux.conf
 "
 echo "${files}" | xargs -I{} ln -sf ${DOT_DIR}/{} ${HOME}/{}
+
+mkdir -p ${HOME}/.config/git
+gitconfig_files="
+commit_template
+config
+ignore
+"
+echo "${gitconfig_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/{} ${HOME}/.config/git/{}
 
 mkdir -p ${HOME}/.config/git/hooks
 githooks_files="

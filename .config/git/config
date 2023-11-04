@@ -198,11 +198,10 @@
 [push]
     default = current
 [core]
-    excludesfile = ~/.gitignore_global
     hooksPath = ~/.config/git/hooks
     quotePath = false
 [commit]
-    template = ~/.gitmessage
+    template = ~/.config/git/commit_template
 [diff]
     tool = nvimdiff
     algorithm = histogram

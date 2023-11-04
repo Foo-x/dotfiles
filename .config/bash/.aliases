@@ -28,7 +28,7 @@ alias ln='ln -iv'
 alias mv='mv -iv'
 alias rm='rm -iv'
 alias free='free -h'
-alias grep='grep --color=auto -En'  # use regexp and show line numbers
+alias grep='grep --color=auto -rnIE --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=..'  # use regexp and show line numbers
 alias dirs='dirs -v'
 
 # shorten

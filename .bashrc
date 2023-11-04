@@ -1,4 +1,4 @@
-SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
+DOT_DIR="${HOME}/.dotfiles"
 
 shopt -s autocd
 shopt -s cdspell
@@ -12,23 +12,23 @@ shopt -u histappend
 shopt -s histreedit
 shopt -s histverify
 
-. ${SCRIPT_DIR}/.aliases
-. ${SCRIPT_DIR}/.exports
-. ${SCRIPT_DIR}/.gitconfig_dynamic
+. ${DOT_DIR}/.config/bash/.aliases
+. ${DOT_DIR}/.config/bash/.exports
+. ${DOT_DIR}/.config/git/config_dynamic
 
 if type pacman &> /dev/null; then
-  . ${SCRIPT_DIR}/.aliases_arch
+  . ${DOT_DIR}/.config/bash/.aliases_arch
 fi
 
 if type fzf &> /dev/null; then
-  . ${SCRIPT_DIR}/.aliases_fzf
+  . ${DOT_DIR}/.config/bash/.aliases_fzf
 fi
 
 if [[ -d $HOME/enhancd ]]; then
   . $HOME/enhancd/init.sh
 fi
 
-for completion in ${SCRIPT_DIR}/completion/*; do
+for completion in ${DOT_DIR}/completion/*; do
   . ${completion}
 done
 if type rustup &> /dev/null; then
@@ -47,7 +47,7 @@ fi
 
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
   . /usr/share/bash-completion/bash_completion
-  . ${SCRIPT_DIR}/complete_alias
+  . ${DOT_DIR}/.config/bash/complete_alias
 fi
 
 if type tmux &> /dev/null; then

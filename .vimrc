@@ -32,6 +32,7 @@ set signcolumn=yes
 set switchbuf+=useopen
 set diffopt+=algorithm:histogram,indent-heuristic
 set spelllang=en,cjk
+set grepprg=grep\ -rnIE\ --exclude-dir=.git\ --exclude-dir=node_modules\ --exclude-dir=..\ $*\ /dev/null
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -66,7 +67,7 @@ let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
 " load bash alias
-let $BASH_ENV="$HOME/.dotfiles/.aliases"
+let $BASH_ENV="$HOME/.dotfiles/.config/bash/.aliases"
 
 " gitgutter
 let g:gitgutter_preview_win_floating=0

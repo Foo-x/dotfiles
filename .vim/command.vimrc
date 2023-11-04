@@ -30,15 +30,20 @@ if !1 | finish | endif
 
 " WSL
 if !empty($WSL_DISTRO_NAME)
-  fun! s:inline_pbpaste()
+  fun! InlinePbpaste(r = 0)
     let l:output = system('pbpaste')
     let l:output = substitute(l:output, '\r', '', 'g')
     let l:output = substitute(l:output, '\n$', '', 'g')
-    set paste
-    execute 'normal i' . l:output
-    set nopaste
+    call setreg('', l:output)
+
+    if a:r > 0
+      norm gvp
+    else
+      norm p
+    endif
   endf
-  command! P call s:inline_pbpaste()
+  command! -range P call InlinePbpaste(<range>)
+  vnoremap <silent> P :call InlinePbpaste(1)<CR>
 endif
 
 " VSCode

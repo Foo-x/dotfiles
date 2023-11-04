@@ -1,8 +1,8 @@
-SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
+DOT_DIR="${HOME}/.dotfiles"
 
-. ${SCRIPT_DIR}/.exports_color
+. ${DOT_DIR}/.config/bash/.exports_color
 
-export LS_COLORS="di=${__blue_ansi_foreground}:ex=${__green_ansi_foreground}:ln=${__cyan_ansi_foreground}:su=30;${__red_ansi_background}:sg=30;${__yellow_ansi_background}:ow=30;${__green_ansi_background}"
+export LS_COLORS="di=${__blue_ansi_foreground}:ex=${__green_ansi_foreground}:pi=${__yellow_ansi_foreground}:ln=${__cyan_ansi_pccs_palep_foreground}:or=${__red_ansi_foreground}:su=30;${__red_ansi_background}:sg=30;${__yellow_ansi_background}:tw=30;${__green_ansi_background}:ow=${__blue_ansi_pccs_deep_foreground};${__green_ansi_background}"
 
 export HISTSIZE=100000
 export HISTFILESIZE=100000
@@ -181,14 +181,12 @@ function lsgit_enter() {
 export PROMPT_COMMAND_LSGIT_ENTER='lsgit_enter'
 
 # prompt
-SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
-
 if [[ -n "${VIMRUNTIME}" ]]; then
     VIMLABEL="! "
     export PS1="${VIMLABEL}${PS1}"
 fi
 
-. ${SCRIPT_DIR}/git-prompt.sh
+. ${DOT_DIR}/.config/bash/git-prompt.sh
 
 export PS1='\n${VIMLABEL}\[\e[${__green_ansi_foreground}m\]\u \[\e[${__yellow_ansi_foreground}m\]&:\j \[\e[${__blue_ansi_foreground}m\]\w\[\e[${__red_ansi_foreground}m\]$(__git_ps1)\n$(if [[ $? == "0" ]]; then printf "\[\e[${__green_ansi_foreground}m\]:)"; else printf "\[\e[${__red_ansi_foreground}m\]:("; fi)\[\e[00m\] '
 
