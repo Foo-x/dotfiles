@@ -1,9 +1,10 @@
 # ansi_foreground
 ## 24bit habamax
-export __red_ansi_habamax_foreground='38;2;175;135;175'
+export __red_ansi_habamax_foreground='38;2;175;135;135'
 export __green_ansi_habamax_foreground='38;2;135;175;135'
 export __yellow_ansi_habamax_foreground='38;2;175;175;135'
 export __blue_ansi_habamax_foreground='38;2;135;135;175'
+export __magenta_ansi_habamax_foreground='38;2;175;135;175'
 export __cyan_ansi_habamax_foreground='38;2;135;175;175'
 
 ## 24bit PCCS bright
@@ -11,6 +12,7 @@ export __red_ansi_pccs_bright_foreground='38;2;208;103;142'
 export __green_ansi_pccs_bright_foreground='38;2;65;184;121'
 export __yellow_ansi_pccs_bright_foreground='38;2;255;173;54'
 export __blue_ansi_pccs_bright_foreground='38;2;41;129;192'
+export __magenta_ansi_pccs_bright_foreground='38;2;124;61;132'
 export __cyan_ansi_pccs_bright_foreground='38;2;0;152;185'
 
 ## 24bit PCCS deep
@@ -18,27 +20,31 @@ export __red_ansi_pccs_deep_foreground='38;2;134;29;85'
 export __green_ansi_pccs_deep_foreground='38;2;0;114;67'
 export __yellow_ansi_pccs_deep_foreground='38;2;177;108;0'
 export __blue_ansi_pccs_deep_foreground='38;2;0;66;128'
+export __magenta_ansi_pccs_deep_foreground='38;2;97;36;105'
 export __cyan_ansi_pccs_deep_foreground='38;2;0;84;118'
-
-## 24bit PCCS soft
-export __red_ansi_pccs_soft_foreground='38;2;180;120;139'
-export __green_ansi_pccs_soft_foreground='38;2;118;177;138'
-export __yellow_ansi_pccs_soft_foreground='38;2;219;166;107'
-export __blue_ansi_pccs_soft_foreground='38;2;93;126;160'
-export __cyan_ansi_pccs_soft_foreground='38;2;81;146;164'
 
 ## 24bit PCCS light+
 export __red_ansi_pccs_lightp_foreground='38;2;217;142;165'
 export __green_ansi_pccs_lightp_foreground='38;2;133;206;158'
 export __yellow_ansi_pccs_lightp_foreground='38;2;255;190;113'
 export __blue_ansi_pccs_lightp_foreground='38;2;108;154;197'
+export __magenta_ansi_pccs_lightp_foreground='38;2;176;136;181'
 export __cyan_ansi_pccs_lightp_foreground='38;2;91;175;196'
+
+## 24bit PCCS soft
+export __red_ansi_pccs_soft_foreground='38;2;180;120;139'
+export __green_ansi_pccs_soft_foreground='38;2;118;177;138'
+export __yellow_ansi_pccs_soft_foreground='38;2;219;166;107'
+export __blue_ansi_pccs_soft_foreground='38;2;93;126;160'
+export __magenta_ansi_pccs_soft_foreground='38;2;144;113;148'
+export __cyan_ansi_pccs_soft_foreground='38;2;81;146;164'
 
 ## 24bit PCCS pale+
 export __red_ansi_pccs_palep_foreground='38;2;222;196;202'
 export __green_ansi_pccs_palep_foreground='38;2;174;212;185'
 export __yellow_ansi_pccs_palep_foreground='38;2;244;212;176'
 export __blue_ansi_pccs_palep_foreground='38;2;175;192;209'
+export __magenta_ansi_pccs_palep_foreground='38;2;200;185;201'
 export __cyan_ansi_pccs_palep_foreground='38;2;173;209;218'
 
 ## 4bit lighter
@@ -46,6 +52,7 @@ export __red_ansi_lighter_foreground='91'
 export __green_ansi_lighter_foreground='92'
 export __yellow_ansi_lighter_foreground='93'
 export __blue_ansi_lighter_foreground='94'
+export __magenta_ansi_lighter_foreground='95'
 export __cyan_ansi_lighter_foreground='96'
 
 ## 4bit darker
@@ -53,12 +60,14 @@ export __red_ansi_darker_foreground='31'
 export __green_ansi_darker_foreground='32'
 export __yellow_ansi_darker_foreground='33'
 export __blue_ansi_darker_foreground='34'
+export __magenta_ansi_darker_foreground='35'
 export __cyan_ansi_darker_foreground='36'
 
 export __red_ansi_foreground=${__red_ansi_pccs_lightp_foreground}
 export __green_ansi_foreground=${__green_ansi_pccs_lightp_foreground}
 export __yellow_ansi_foreground=${__yellow_ansi_pccs_lightp_foreground}
 export __blue_ansi_foreground=${__blue_ansi_pccs_lightp_foreground}
+export __magenta_ansi_foreground=${__magenta_ansi_pccs_lightp_foreground}
 export __cyan_ansi_foreground=${__cyan_ansi_pccs_lightp_foreground}
 
 export __gy95_ansi_pccs_foreground='38;2;241;241;241'
@@ -73,10 +82,11 @@ export __gy15_ansi_pccs_foreground='38;2;39;39;39'
 
 # ansi_background
 ## 24bit habamax
-export __red_ansi_habamax_background='48;2;175;135;175'
+export __red_ansi_habamax_background='48;2;175;135;135'
 export __green_ansi_habamax_background='48;2;135;175;135'
 export __yellow_ansi_habamax_background='48;2;175;175;135'
 export __blue_ansi_habamax_background='48;2;135;135;175'
+export __magenta_ansi_habamax_background='48;2;175;135;175'
 export __cyan_ansi_habamax_background='48;2;135;175;175'
 
 ## 24bit PCCS bright
@@ -84,6 +94,7 @@ export __red_ansi_pccs_bright_background='48;2;208;103;142'
 export __green_ansi_pccs_bright_background='48;2;65;184;121'
 export __yellow_ansi_pccs_bright_background='48;2;255;173;54'
 export __blue_ansi_pccs_bright_background='48;2;41;129;192'
+export __magenta_ansi_pccs_bright_background='48;2;124;61;132'
 export __cyan_ansi_pccs_bright_background='48;2;0;152;185'
 
 ## 24bit PCCS deep
@@ -91,27 +102,31 @@ export __red_ansi_pccs_deep_background='48;2;134;29;85'
 export __green_ansi_pccs_deep_background='48;2;0;114;67'
 export __yellow_ansi_pccs_deep_background='48;2;177;108;0'
 export __blue_ansi_pccs_deep_background='48;2;0;66;128'
+export __magenta_ansi_pccs_deep_background='48;2;97;36;105'
 export __cyan_ansi_pccs_deep_background='48;2;0;84;118'
-
-## 24bit PCCS soft
-export __red_ansi_pccs_soft_background='48;2;180;120;139'
-export __green_ansi_pccs_soft_background='48;2;118;177;138'
-export __yellow_ansi_pccs_soft_background='48;2;219;166;107'
-export __blue_ansi_pccs_soft_background='48;2;93;126;160'
-export __cyan_ansi_pccs_soft_background='48;2;81;146;164'
 
 ## 24bit PCCS light+
 export __red_ansi_pccs_lightp_background='48;2;217;142;165'
 export __green_ansi_pccs_lightp_background='48;2;133;206;158'
 export __yellow_ansi_pccs_lightp_background='48;2;255;190;113'
 export __blue_ansi_pccs_lightp_background='48;2;108;154;197'
+export __magenta_ansi_pccs_lightp_background='48;2;176;136;181'
 export __cyan_ansi_pccs_lightp_background='48;2;91;175;196'
+
+## 24bit PCCS soft
+export __red_ansi_pccs_soft_background='48;2;180;120;139'
+export __green_ansi_pccs_soft_background='48;2;118;177;138'
+export __yellow_ansi_pccs_soft_background='48;2;219;166;107'
+export __blue_ansi_pccs_soft_background='48;2;93;126;160'
+export __magenta_ansi_pccs_soft_background='48;2;144;113;148'
+export __cyan_ansi_pccs_soft_background='48;2;81;146;164'
 
 ## 24bit PCCS pale+
 export __red_ansi_pccs_palep_background='48;2;222;196;202'
 export __green_ansi_pccs_palep_background='48;2;174;212;185'
 export __yellow_ansi_pccs_palep_background='48;2;244;212;176'
 export __blue_ansi_pccs_palep_background='48;2;175;192;209'
+export __magenta_ansi_pccs_palep_background='48;2;200;185;201'
 export __cyan_ansi_pccs_palep_background='48;2;173;209;218'
 
 ## 4bit lighter
@@ -119,6 +134,7 @@ export __red_ansi_lighter_background='101'
 export __green_ansi_lighter_background='102'
 export __yellow_ansi_lighter_background='103'
 export __blue_ansi_lighter_background='104'
+export __magenta_ansi_lighter_background='105'
 export __cyan_ansi_lighter_background='106'
 
 ## 4bit darker
@@ -126,12 +142,14 @@ export __red_ansi_darker_background='41'
 export __green_ansi_darker_background='42'
 export __yellow_ansi_darker_background='43'
 export __blue_ansi_darker_background='44'
+export __magenta_ansi_darker_background='45'
 export __cyan_ansi_darker_background='46'
 
 export __red_ansi_background=${__red_ansi_pccs_lightp_background}
 export __green_ansi_background=${__green_ansi_pccs_lightp_background}
 export __yellow_ansi_background=${__yellow_ansi_pccs_lightp_background}
 export __blue_ansi_background=${__blue_ansi_pccs_lightp_background}
+export __magenta_ansi_background=${__magenta_ansi_pccs_lightp_background}
 export __cyan_ansi_background=${__cyan_ansi_pccs_lightp_background}
 
 export __gy95_ansi_pccs_background='48;2;241;241;241'
@@ -146,10 +164,11 @@ export __gy15_ansi_pccs_background='48;2;39;39;39'
 
 # hex
 ## 24bit habamax
-export __red_habamax_hex='#af87af'
+export __red_habamax_hex='#af8787'
 export __green_habamax_hex='#87af87'
 export __yellow_habamax_hex='#afaf87'
 export __blue_habamax_hex='#8787af'
+export __magenta_habamax_hex='#af87af'
 export __cyan_habamax_hex='#87afaf'
 
 ## 24bit PCCS bright
@@ -157,6 +176,7 @@ export __red_pccs_bright_hex='#d0678e'
 export __green_pccs_bright_hex='#41b879'
 export __yellow_pccs_bright_hex='#ffad36'
 export __blue_pccs_bright_hex='#2981c0'
+export __magenta_pccs_bright_hex='#7c3d84'
 export __cyan_pccs_bright_hex='#0098b9'
 
 ## 24bit PCCS deep
@@ -164,33 +184,38 @@ export __red_pccs_deep_hex='#861d55'
 export __green_pccs_deep_hex='#007243'
 export __yellow_pccs_deep_hex='#b16c00'
 export __blue_pccs_deep_hex='#004280'
+export __magenta_pccs_deep_hex='#612469'
 export __cyan_pccs_deep_hex='#005476'
-
-## 24bit PCCS soft
-export __red_pccs_soft_hex='#b4788b'
-export __green_pccs_soft_hex='#76b18a'
-export __yellow_pccs_soft_hex='#dba66b'
-export __blue_pccs_soft_hex='#5d7ea0'
-export __cyan_pccs_soft_hex='#5192a4'
 
 ## 24bit PCCS light+
 export __red_pccs_lightp_hex='#d98ea5'
 export __green_pccs_lightp_hex='#85ce9e'
 export __yellow_pccs_lightp_hex='#ffbe71'
 export __blue_pccs_lightp_hex='#6c9ac5'
+export __magenta_pccs_lightp_hex='#b088b5'
 export __cyan_pccs_lightp_hex='#5bafc4'
+
+## 24bit PCCS soft
+export __red_pccs_soft_hex='#b4788b'
+export __green_pccs_soft_hex='#76b18a'
+export __yellow_pccs_soft_hex='#dba66b'
+export __blue_pccs_soft_hex='#5d7ea0'
+export __magenta_pccs_soft_hex='#907194'
+export __cyan_pccs_soft_hex='#5192a4'
 
 ## 24bit PCCS pale+
 export __red_pccs_palep_hex='#dec4ca'
 export __green_pccs_palep_hex='#aed4b9'
 export __yellow_pccs_palep_hex='#f4d4b0'
 export __blue_pccs_palep_hex='#afc0d1'
+export __magenta_pccs_palep_hex='#c8b9c9'
 export __cyan_pccs_palep_hex='#add1da'
 
 export __red_hex=${__red_pccs_lightp_hex}
 export __green_hex=${__green_pccs_lightp_hex}
 export __yellow_hex=${__yellow_pccs_lightp_hex}
 export __blue_hex=${__blue_pccs_lightp_hex}
+export __magenta_hex=${__magenta_pccs_lightp_hex}
 export __cyan_hex=${__cyan_pccs_lightp_hex}
 
 export __gy95_pccs_hex='#f1f1f1'

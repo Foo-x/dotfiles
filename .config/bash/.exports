@@ -2,7 +2,27 @@ DOT_DIR="${HOME}/.dotfiles"
 
 . ${DOT_DIR}/.config/bash/.exports_color
 
-export LS_COLORS="di=${__blue_ansi_foreground}:ex=${__green_ansi_foreground}:pi=${__yellow_ansi_foreground}:ln=${__cyan_ansi_pccs_palep_foreground}:or=${__red_ansi_foreground}:so=${__red_ansi_pccs_deep_foreground}:su=30;${__red_ansi_background}:sg=30;${__yellow_ansi_background}:tw=30;${__green_ansi_background}:ow=${__blue_ansi_pccs_deep_foreground};${__green_ansi_background}"
+# directory
+LS_COLORS="di=${__blue_ansi_foreground}"
+# executable
+LS_COLORS="ex=${__green_ansi_foreground}:${LS_COLORS}"
+# pipe
+LS_COLORS="pi=${__yellow_ansi_foreground}:${LS_COLORS}"
+# link
+LS_COLORS="ln=${__cyan_ansi_pccs_palep_foreground}:${LS_COLORS}"
+# orphan link
+LS_COLORS="or=${__red_ansi_foreground}:${LS_COLORS}"
+# socket
+LS_COLORS="so=${__red_ansi_pccs_deep_foreground}:${LS_COLORS}"
+# setuid
+LS_COLORS="su=30;${__red_ansi_background}:${LS_COLORS}"
+# setgid
+LS_COLORS="sg=30;${__yellow_ansi_background}:${LS_COLORS}"
+# sticky and other writable directory
+LS_COLORS="tw=30;${__green_ansi_background}:${LS_COLORS}"
+# not sticky and other writable directory
+LS_COLORS="ow=${__blue_ansi_pccs_deep_foreground};${__green_ansi_background}:${LS_COLORS}"
+export LS_COLORS
 
 export HISTSIZE=100000
 export HISTFILESIZE=100000
