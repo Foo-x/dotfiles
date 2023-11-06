@@ -12,9 +12,12 @@ set bell-style none
 # move
 #"\C-a": beginnig-of-line
 #"\C-e": end-of-line
+#"\M-f": forward-word
+#"\M-b": backward-word
 #"\C-l": clear-screen
 
 # kill word (Rubout = Backspace)
+#"\M-d": kill-word (kill from point the end of the current word, or if between words, to the end of the next word)
 #"\C-w": unix-word-rubout (kill the word behind point, using white space)
 #"\M-Rubout": backward-kill-word (kill the word behind point, using other than alphanumeric characters)
 
@@ -42,6 +45,7 @@ $if Bash
 
     # edit and execute
     "\C-qe": edit-and-execute-command
+    "\C-f": edit-and-execute-command
 
     # preview
     "\C-qp": "\C-e | less"

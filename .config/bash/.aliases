@@ -169,7 +169,7 @@ alias tmrw='tmux renamew'
 alias tmreload='tmux source-file ~/.tmux.conf'
 
 # browse
-alias al='cat ~/.dotfiles/.aliases{,_fzf} | $PAGER'
+alias al='cat ~/.dotfiles/.config/bash/.aliases{,_fzf} | $PAGER'
 alias bashrc='$PAGER ~/.dotfiles/.bashrc'
 alias bashrc_org='$PAGER ~/.bashrc'
 alias inputrc='$PAGER ~/.inputrc'

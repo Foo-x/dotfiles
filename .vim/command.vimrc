@@ -1,6 +1,6 @@
 cnoreabbr w!! w !sudo tee > /dev/null %
-cnoreabbr BND bn\|bd#
-cnoreabbr BNW bn\|bw#
+cnoreabbr BD bn\|bd#
+cnoreabbr BW bn\|bw#
 
 " argument list
 cnoreabbr A args
