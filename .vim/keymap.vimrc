@@ -23,12 +23,14 @@ nnoremap [( "_ya(
 nnoremap [] "_ya[
 nnoremap [} "_ya{
 nnoremap [) "_ya(
+nnoremap [t vato<Esc>
 nnoremap ][ "_ya[%
 nnoremap ]{ "_ya{%
 nnoremap ]( "_ya(%
 nnoremap ]] "_ya[%
 nnoremap ]} "_ya{%
 nnoremap ]) "_ya(%
+nnoremap ]t vat<Esc>
 
 noremap <Space>h ^
 nnoremap <Space>l $
@@ -141,6 +143,14 @@ nnoremap q: :q
 inoremap jj    <Esc>
 
 " visual mode
+"" display lines downward
+vnoremap j gj
+vnoremap <Down> gj
+
+"" display lines upward
+vnoremap k gk
+vnoremap <Up> gk
+
 vnoremap + <C-a>gv
 vnoremap - <C-x>gv
 vnoremap g+ g<C-a>gv
