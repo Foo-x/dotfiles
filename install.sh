@@ -1,6 +1,10 @@
 #!/bin/sh
 
 DOT_DIR="${HOME}/.dotfiles"
+XDG_CONFIG_HOME="${HOME}/.config"
+XDG_CACHE_HOME="${HOME}/.cache"
+XDG_DATA_HOME="${HOME}/.local/share"
+XDG_STATE_HOME="${HOME}/.local/state"
 
 has() {
     type "$1" > /dev/null 2>&1
@@ -22,6 +26,11 @@ if [ ! ${IS_UPDATED} ]; then
     ${DOT_DIR}/install.sh
     exit 0
 fi
+
+mkdir -p ${XDG_CONFIG_HOME}
+mkdir -p ${XDG_CACHE_HOME}
+mkdir -p ${XDG_DATA_HOME}
+mkdir -p ${XDG_STATE_HOME}
 
 # include .bashrc
 touch ${HOME}/.bashrc
@@ -77,69 +86,82 @@ files="
 .bash_profile
 .inputrc
 .profile
-.vimrc
-.tmux.conf
 "
 echo "${files}" | xargs -I{} ln -sf ${DOT_DIR}/{} ${HOME}/{}
 
-mkdir -p ${HOME}/.config/git
+# setup git
+git config --global include.path ${DOT_DIR}/.config/git/config
+
+mkdir -p ${XDG_CONFIG_HOME}/git
 gitconfig_files="
 commit_template
-config
 ignore
 "
-echo "${gitconfig_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/{} ${HOME}/.config/git/{}
+echo "${gitconfig_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/{} ${XDG_CONFIG_HOME}/git/{}
+[ -f ${HOME}/.gitconfig ] && mv ${HOME}/.gitconfig ${XDG_CONFIG_HOME}/git/config
 
-mkdir -p ${HOME}/.config/git/hooks
+mkdir -p ${XDG_CONFIG_HOME}/git/hooks
 githooks_files="
 prepare-commit-msg
 "
-echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/hooks/{} ${HOME}/.config/git/hooks/{}
+echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/hooks/{} ${XDG_CONFIG_HOME}/git/hooks/{}
 
-mkdir -p ${HOME}/.vim/pack/plugins/start/
-mkdir -p ${HOME}/.vim/pack/colors/start/
+# setup vim
+mkdir -p ${XDG_CONFIG_HOME}/vim
+mkdir -p ${XDG_CONFIG_HOME}/vim/pack/plugins/start/
+mkdir -p ${XDG_CONFIG_HOME}/vim/pack/colors/start/
 vimrc_files="
+vimrc
 command.vimrc
 keymap.vimrc
 search.vimrc
 "
-echo "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.vim/{} ${HOME}/.vim/{}
+echo "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/vim/{} ${XDG_CONFIG_HOME}/vim/{}
 
+VIM_PACK_DIR=${XDG_CONFIG_HOME}/vim/pack/plugins/start
 # install fzf.vim
-if [ ! -d ${HOME}/.vim/pack/plugins/start/fzf.vim ]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.vim.git ${HOME}/.vim/pack/plugins/start/fzf.vim
+if [ ! -d ${VIM_PACK_DIR}/fzf.vim ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.vim.git ${VIM_PACK_DIR}/fzf.vim
 fi
 
 # install vim-fugitive
-if [ ! -d ${HOME}/.vim/pack/plugins/start/vim-fugitive ]; then
-    git clone --depth 1 https://github.com/tpope/vim-fugitive.git ${HOME}/.vim/pack/plugins/start/vim-fugitive
+if [ ! -d ${VIM_PACK_DIR}/vim-fugitive ]; then
+    git clone --depth 1 https://github.com/tpope/vim-fugitive.git ${VIM_PACK_DIR}/vim-fugitive
 fi
 
 # install gv.vim
-if [ ! -d ${HOME}/.vim/pack/plugins/start/gv.vim ]; then
-    git clone --depth 1 https://github.com/junegunn/gv.vim.git  ${HOME}/.vim/pack/plugins/start/gv.vim
+if [ ! -d ${VIM_PACK_DIR}/gv.vim ]; then
+    git clone --depth 1 https://github.com/junegunn/gv.vim.git  ${VIM_PACK_DIR}/gv.vim
 fi
 
 # install vim-gitgutter
-if [ ! -d ${HOME}/.vim/pack/plugins/start/vim-gitgutter ]; then
-    git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${HOME}/.vim/pack/plugins/start/vim-gitgutter
+if [ ! -d ${VIM_PACK_DIR}/vim-gitgutter ]; then
+    git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${VIM_PACK_DIR}/vim-gitgutter
 fi
 
 # install vim-sneak
-if [ ! -d ${HOME}/.vim/pack/plugins/start/vim-sneak ]; then
-    git clone --depth 1 https://github.com/justinmk/vim-sneak.git ${HOME}/.vim/pack/plugins/start/vim-sneak
+if [ ! -d ${VIM_PACK_DIR}/vim-sneak ]; then
+    git clone --depth 1 https://github.com/justinmk/vim-sneak.git ${VIM_PACK_DIR}/vim-sneak
 fi
 
-mkdir -p ${HOME}/.config/nvim
+mkdir -p ${XDG_CONFIG_HOME}/nvim
 nvim_files="
 init.vim
 "
-echo "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${HOME}/.config/nvim/{}
+echo "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
+
+# setup tmux
+mkdir -p ${XDG_CONFIG_HOME}/tmux
+ln -sf ${DOT_DIR}/.config/tmux/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
 
 exe_files="
 fetch_completions.sh
 fetch_git_prompt.sh
 "
 echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
+
+# setup bash history
+mkdir -p ${XDG_STATE_HOME}/bash
+[ -f ${HOME}/.bash_history ] && mv ${HOME}/.bash_history ${XDG_STATE_HOME}/bash/history
 
 echo "Done."
