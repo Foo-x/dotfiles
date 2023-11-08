@@ -79,11 +79,12 @@ stty start ''
 stty stop ''
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
-export FZF_DEFAULT_COMMAND='grep -rl "" --exclude-dir=.git --exclude-dir=node_modules'
+export FZF_DEFAULT_COMMAND="find .[^.]* * -type f,l ! -path '.git/*' ! -path 'node_modules/*'"
 
 export ENHANCD_FILTER=fzf
 export ENHANCD_ENABLE_SINGLE_DOT=false
 export ENHANCD_ARG_DOUBLE_DOT=...
+export ENHANCD_ARG_HYPHEN==
 
 # exec commands after each commands
 function dispatch_prompt_command() {

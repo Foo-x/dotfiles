@@ -44,8 +44,6 @@ set grepprg=grep\ -rnIE\ --exclude-dir=.git\ --exclude-dir=node_modules\ --exclu
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
 
-silent! helptags ALL
-
 runtime! *.vimrc
 
 " finish on vim-tiny

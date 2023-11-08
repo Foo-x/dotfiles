@@ -160,7 +160,7 @@ vnoremap g- g<C-x>gv
 vnoremap p pgvy
 
 "" highlight selected
-vnoremap <silent> * "zy/<C-r>z<CR>N
+vnoremap <silent> * "zy:exe '/\V' . escape(@z, '\\/')<CR>N
 
 "" continue visual mode after indenting
 vnoremap > >gv

@@ -63,6 +63,16 @@ while len(q) > 0:
   fi
 }
 
+# fsh - execute after editing
+function fsh() {
+  fzf -m --header "Tab: toggle" | vipe | $SHELL
+}
+
+# fxargs - execute xargs
+function fxargs() {
+  fzf -m --header "Tab: toggle" | xargs "$@"
+}
+
 # fd - cd sorted by depth
 function fd() {
   if ! type python &> /dev/null && ! type python3 &> /dev/null; then
@@ -70,10 +80,16 @@ function fd() {
     return 1
   fi
 
-  cd $(
+  local dir
+
+  dir=$(
     __bfs_dir 2> /dev/null |
       fzf +m +s -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> /dev/null"
   )
+
+  if [[ -n "$dir" ]]; then
+    cd "$dir"
+  fi
 }
 
 # fe - open selected files with EDITOR

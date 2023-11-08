@@ -41,6 +41,7 @@
     bv = branch -vv
     co = checkout
     cb = checkout -b
+    com = checkout -m
     rbc = rebase --continue
     rba = rebase --abort
     rbs = rebase --skip
@@ -48,6 +49,7 @@
     scol = sparse-checkout list
     scoa = sparse-checkout add
     scos = sparse-checkout set --cone
+    scod = sparse-checkout disable
     db = config init.defaultBranch
 
     ## rebase
@@ -142,6 +144,7 @@
     sa = stash apply
     sd = stash drop
     sp = stash pop
+    sshow = stash show -p
     ssa = !git stash && git stash apply
 
     # worktree
@@ -211,8 +214,10 @@
     ff = false
     tool = nvimdiff
     autostash = true
-    keepBackup = false
     conflictstyle = zdiff3
+[mergetool]
+    keepBackup = false
+    writeToTemp = true
 [pull]
     ff = only
 [help]

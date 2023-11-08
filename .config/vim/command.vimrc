@@ -1,6 +1,7 @@
 cnoreabbr w!! w !sudo tee > /dev/null %
 cnoreabbr BD bn\|bd#
 cnoreabbr BW bn\|bw#
+cnoreabbr WTC windo update \| tabclose
 
 " argument list
 cnoreabbr A args

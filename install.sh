@@ -150,6 +150,8 @@ init.vim
 "
 echo "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
 
+nvim +'helptags ALL' +qa
+
 # setup tmux
 mkdir -p ${XDG_CONFIG_HOME}/tmux
 ln -sf ${DOT_DIR}/.config/tmux/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
@@ -162,6 +164,9 @@ echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 
 # setup bash history
 mkdir -p ${XDG_STATE_HOME}/bash
-[ -f ${HOME}/.bash_history ] && mv ${HOME}/.bash_history ${XDG_STATE_HOME}/bash/history
+if [ -f ${HOME}/.bash_history ]; then
+  cat ${HOME}/.bash_history >> ${XDG_STATE_HOME}/bash/history
+  rm ${HOME}/.bash_history
+fi
 
 echo "Done."
