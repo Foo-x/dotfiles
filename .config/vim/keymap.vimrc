@@ -180,5 +180,5 @@ vnoremap <Space>s' di''<Esc>P
 nmap <Space><Space>gj <Plug>(GitGutterNextHunk)
 nmap <Space><Space>gk <Plug>(GitGutterPrevHunk)
 nmap <Space><Space>gp <Plug>(GitGutterPreviewHunk)<C-w>P
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S

@@ -38,7 +38,7 @@ export HISTFILE=${HOME}/.local/state/bash/history
 export HISTFILESIZE=100000
 export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignorespace  # not save commands that space-beginned and duplicated to history
-export HISTIGNORE='?:??:???:history:cd*:exit:clear'
+export HISTIGNORE='?:??:pwd:history:cd*:exit:clear'
 
 if [ "$TMUX" ]; then
     export PATH=$(echo "$PATH" | sed -E 's#(.*):?.+.vscode-server[^:]+:#\1#')

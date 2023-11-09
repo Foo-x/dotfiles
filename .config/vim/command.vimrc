@@ -99,7 +99,20 @@ command! -bang Conflicts GGR<bang> '^<<<<<<< HEAD$'
 
 " buffer
 command! BufOnly silent! %bd|e#|bd#
-fun! s:useopen_buffer(buf)
+
+fun! s:delete_buffers(command, bufnrs)
+  let l:bufnames = map(copy(a:bufnrs), {_, val -> bufname(str2nr(val))})
+  silent! execute 'argdelete' join(l:bufnames)
+  execute a:command join(a:bufnrs)
+endf
+
+fun! s:clean_nonexistent_buffers()
+  let l:nonexistent_buffers = map(filter(getbufinfo({'buflisted':1}), '!filereadable(expand(v:val.name))'), 'v:val.bufnr')
+  call s:delete_buffers('bwipeout', l:nonexistent_buffers)
+endf
+command! CleanNonExistentBuffers call s:clean_nonexistent_buffers()
+
+fun! s:use_open_buffer(buf)
   let l:winnr = a:buf+0 == 0 ? bufwinnr(a:buf) : bufwinnr(a:buf+0)
   if l:winnr == -1
     exe 'buffer ' . a:buf
@@ -107,7 +120,7 @@ fun! s:useopen_buffer(buf)
     exe l:winnr . 'wincmd w'
   endif
 endf
-command! -nargs=1 -complete=buffer B silent! call s:useopen_buffer(<q-args>)
+command! -nargs=1 -complete=buffer B silent! call s:use_open_buffer(<q-args>)
 command! -nargs=+ -complete=file AA argadd <args> | argdedupe
 
 fun! s:close_no_name_buffers()
@@ -201,22 +214,20 @@ fun! s:list_buffers(unlisted = '')
   return split(list, "\n")
 endf
 
-fun! s:delete_buffers(command, lines)
+fun! s:fzf_delete_buffers(command, lines)
   let l:bufnrs = map(a:lines, {_, line -> split(split(line)[0],'[^0-9]\+')[0]})
-  let l:bufnames = map(copy(l:bufnrs), {_, val -> bufname(str2nr(val))})
-  silent! execute 'argdelete' join(l:bufnames)
-  execute a:command join(l:bufnrs)
+  call s:delete_buffers(a:command, l:bufnrs)
 endf
 
 command! FBD call fzf#run(fzf#wrap({
   \ 'source': s:list_buffers(),
-  \ 'sink*': { lines -> s:delete_buffers('bdelete', lines) },
+  \ 'sink*': { lines -> s:fzf_delete_buffers('bdelete', lines) },
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \ }))
 
 command! FBW call fzf#run(fzf#wrap({
   \ 'source': s:list_buffers('!'),
-  \ 'sink*': { lines -> s:delete_buffers('bwipeout', lines) },
+  \ 'sink*': { lines -> s:fzf_delete_buffers('bwipeout', lines) },
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \ }))
 
