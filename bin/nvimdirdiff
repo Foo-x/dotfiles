@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+cd $(git rev-parse --show-toplevel)
+
+LOCAL_FILES="$(find "$1" -type f,l |sort | sed -E 's;^.+left/;;')"
+REMOTE_FILES="$(find "$2" -type f,l |sort | sed -E 's;^.+right/;;')"
+
+COMMAND=
+
+for FILE in $(
+  comm -12 <(echo "$LOCAL_FILES") <(echo "$REMOTE_FILES"); # changed
+  comm -23 <(echo "$LOCAL_FILES") <(echo "$REMOTE_FILES"); # only in LOCAL
+  comm -13 <(echo "$LOCAL_FILES") <(echo "$REMOTE_FILES"); # only in REMOTE
+); do
+  COMMAND="$COMMAND exe 'tabe $1$FILE' | exe 'vert diffs $FILE' |"
+done
+
+COMMAND="$COMMAND 1tabc | tabfirst"
+
+nvim -c "$COMMAND"

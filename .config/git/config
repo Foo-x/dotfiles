@@ -130,7 +130,7 @@
     da = diff @
     dm = diff --diff-filter=M   # modified
     dnm = diff --diff-filter=m  # not modified
-    dt = difftool
+    dt = difftool -d
 
     # merge
     me = merge
@@ -206,10 +206,14 @@
 [commit]
     template = ~/.config/git/commit_template
 [diff]
-    tool = nvimdiff
+    tool = nvimdirdiff
     algorithm = histogram
     colorMoved = dimmed-zebra
     wsErrorHighlight = all
+[difftool]
+    prompt = false
+[difftool "nvimdirdiff"]
+    cmd = nvimdirdiff "$LOCAL" "$REMOTE"
 [merge]
     ff = false
     tool = nvimdiff

@@ -80,14 +80,19 @@ if [ ! -f ${HOME}/.local/bin/nvim ]; then
     fi
 fi
 
+binfiles="
+nvimdirdiff
+"
+echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
+
 touch ${HOME}/.user_profile
 
-files="
+dotfiles="
 .bash_profile
 .inputrc
 .profile
 "
-echo "${files}" | xargs -I{} ln -sf ${DOT_DIR}/{} ${HOME}/{}
+echo "${dotfiles}" | xargs -I{} ln -sf ${DOT_DIR}/{} ${HOME}/{}
 
 # setup git
 git config --global include.path ${DOT_DIR}/.config/git/config
