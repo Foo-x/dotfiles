@@ -112,15 +112,16 @@ fun! s:clean_nonexistent_buffers()
 endf
 command! CleanNonExistentBuffers call s:clean_nonexistent_buffers()
 
-fun! s:use_open_buffer(buf)
-  let l:winnr = a:buf+0 == 0 ? bufwinnr(a:buf) : bufwinnr(a:buf+0)
-  if l:winnr == -1
+fun! s:useopen_buffer(buf)
+  let l:bnr = bufnr(a:buf)
+  let l:wids = win_findbuf(bnr)
+  if empty(l:wids)
     exe 'buffer ' . a:buf
   else
-    exe l:winnr . 'wincmd w'
+    call win_gotoid(l:wids[0])
   endif
 endf
-command! -nargs=1 -complete=buffer B silent! call s:use_open_buffer(<q-args>)
+command! -nargs=1 -complete=buffer B silent! call s:useopen_buffer(<q-args>)
 command! -nargs=+ -complete=file AA argadd <args> | argdedupe
 
 fun! s:close_no_name_buffers()
