@@ -213,7 +213,7 @@
 [difftool]
     prompt = false
 [difftool "nvimdirdiff"]
-    cmd = nvimdirdiff "$LOCAL" "$REMOTE"
+    cmd = nvim -c 'G difftool -y | 1tabc'
 [merge]
     ff = false
     tool = nvimdiff

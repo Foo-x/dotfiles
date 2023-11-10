@@ -1,7 +1,6 @@
 cnoreabbr w!! w !sudo tee > /dev/null %
 cnoreabbr BD bn\|bd#
 cnoreabbr BW bn\|bw#
-cnoreabbr WTC windo update \| tabclose
 
 " argument list
 cnoreabbr A args
@@ -99,6 +98,9 @@ command! -bang Conflicts GGR<bang> '^<<<<<<< HEAD$'
 
 " buffer
 command! BufOnly silent! %bd|e#|bd#
+command! TQ if tabpagenr('$') > 1 | tabclose | else | qa | endif
+command! -bar WUP windo update
+cnoreabbr WQ WUP \| TQ
 
 fun! s:delete_buffers(command, bufnrs)
   let l:bufnames = map(copy(a:bufnrs), {_, val -> bufname(str2nr(val))})

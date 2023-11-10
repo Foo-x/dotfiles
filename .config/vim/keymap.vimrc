@@ -34,7 +34,6 @@ nnoremap ]t vat<Esc>
 
 noremap <Space>h ^
 nnoremap <Space>l $
-vnoremap <Space>l $h
 noremap <Space>m %
 nnoremap <Space>/ *
 
@@ -169,12 +168,23 @@ vnoremap < <gv
 "" move to end after yank
 vnoremap <silent> y y`]
 
+vnoremap <Space>l $h
+
 vnoremap <Space>s( di()<Esc>P
 vnoremap <Space>s{ di{}<Esc>P
 vnoremap <Space>s[ di[]<Esc>P
 vnoremap <Space>s< di<><Esc>P
 vnoremap <Space>s" di""<Esc>P
 vnoremap <Space>s' di''<Esc>P
+
+vnoremap <Space>do :diffget<CR>
+vnoremap <Space>1do :diffget 1<CR>
+vnoremap <Space>2do :diffget 2<CR>
+vnoremap <Space>3do :diffget 3<CR>
+vnoremap <Space>dp :diffput<CR>
+vnoremap <Space>1dp :diffput 1<CR>
+vnoremap <Space>2dp :diffput 2<CR>
+vnoremap <Space>3dp :diffput 3<CR>
 
 " plugins
 nmap <Space><Space>gj <Plug>(GitGutterNextHunk)
