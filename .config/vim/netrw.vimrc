@@ -3,8 +3,6 @@ if !1 | finish | endif
 
 let g:netrw_home = $XDG_DATA_HOME."/vim"
 
-hi netrwMarkFile ctermbg=darkmagenta
-
 let g:netrw_liststyle=0
 let g:netrw_sizestyle="H"
 let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"

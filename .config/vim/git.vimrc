@@ -4,9 +4,6 @@ if 1
   " gitgutter
   let g:gitgutter_set_sign_backgrounds=1
   let g:gitgutter_preview_win_floating=0
-  hi GitGutterAdd ctermfg=green
-  hi GitGutterChange ctermfg=yellow
-  hi GitGutterDelete ctermfg=red
 endif
 " }}}
 

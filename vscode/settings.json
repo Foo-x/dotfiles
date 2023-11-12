@@ -309,9 +309,8 @@
     "editor.tabSize": 2
   },
   // extension settings
-  "conventionalCommits.autoCommit": false,
-  "conventionalCommits.gitmoji": false,
-  "conventionalCommits.lineBreak": "\\n",
+  "bookmarks.navigateThroughAllFiles": false,
+  "bookmarks.wrapNavigation": false,
   "cSpell.userWords": [
     "actix",
     "airbnb",
@@ -1497,6 +1496,105 @@
         "_",
         "c",
         "c"
+      ]
+    },
+    // bookmark
+    {
+      "before": [
+        "m"
+      ],
+      "after": [
+        "<Nop>"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "m"
+      ],
+      "commands": [
+        "bookmarks.toggle"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "]"
+      ],
+      "commands": [
+        "bookmarks.jumpToNext"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "j"
+      ],
+      "commands": [
+        "bookmarks.jumpToNext"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "n"
+      ],
+      "commands": [
+        "bookmarks.jumpToNext"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "["
+      ],
+      "commands": [
+        "bookmarks.jumpToPrevious"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "k"
+      ],
+      "commands": [
+        "bookmarks.jumpToPrevious"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "p"
+      ],
+      "commands": [
+        "bookmarks.jumpToPrevious"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "l"
+      ],
+      "commands": [
+        "bookmarks.listFromAllFiles"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "c"
+      ],
+      "commands": [
+        "bookmarks.clear"
+      ]
+    },
+    {
+      "before": [
+        "m",
+        "C"
+      ],
+      "commands": [
+        "bookmarks.clearFromAllFiles"
       ]
     },
     // sneak

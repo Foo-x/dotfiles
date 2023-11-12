@@ -3,12 +3,12 @@
 if 1
   fun! s:code(path, line = '', column = '')
     if !filereadable(expand(a:path))
-      echoerr 'cannot read file: ' . a:path
+      echoerr 'cannot read file:' a:path
       return
     endif
 
     if !a:line && !a:column
-      silent! exe '!code ' . a:path
+      silent! exe '!code' a:path
       redraw!
       return
     endif
@@ -20,7 +20,7 @@ if 1
     if a:column
       let l:path = l:path . ':' . a:column
     endif
-    silent! exe '!code --goto ' l:path
+    silent! exe '!code --goto' l:path
     redraw!
   endf
 

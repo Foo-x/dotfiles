@@ -11,7 +11,7 @@ if 1
   fun! s:git_grep(command, arg)
     let tmp1=&grepprg
     set grepprg=git\ grep\ -n\ 2>\ /dev/null
-    exe a:command." ".a:arg
+    exe a:command a:arg
     let &grepprg=tmp1
   endf
   command! -nargs=+ -complete=file -bang GGR silent call s:git_grep("grep<bang>", <q-args>) | redraw! | cw

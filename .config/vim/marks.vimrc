@@ -33,7 +33,8 @@ nmap m [Mark]
 nnoremap [Mark] <Nop>
 
 nnoremap <silent>[Mark]m :<C-u>call <SID>AutoMark()<CR>
-nnoremap [Mark]c :<C-u>delmarks!<CR>
+nnoremap [Mark]c :<C-u>delmarks a-z<CR>
+nnoremap [Mark]C :<C-u>delmarks a-zA-Z<CR>
 nnoremap [Mark]] ]`
 nnoremap [Mark]j ]`
 nnoremap [Mark]n ]`

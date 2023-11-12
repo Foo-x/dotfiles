@@ -13,7 +13,6 @@ set shiftwidth=2
 set tabstop=2
 set expandtab
 set noerrorbells
-set number
 set visualbell t_vb=
 set runtimepath+=$HOME/.vim
 set noswapfile
@@ -36,7 +35,8 @@ set updatetime=100
 set signcolumn=yes
 set diffopt+=algorithm:histogram,indent-heuristic
 set spelllang=en,cjk
-set foldcolumn=auto
+
+if has('nvim') | set foldcolumn=auto | else | set foldcolumn=1 | endif
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -65,6 +65,10 @@ catch
   color desert
   hi SignColumn ctermbg=black
 endtry
+hi GitGutterAdd ctermfg=green
+hi GitGutterChange ctermfg=yellow
+hi GitGutterDelete ctermfg=red
+hi netrwMarkFile ctermbg=darkmagenta
 
 " cursor shape
 let &t_ti.="\e[1 q"

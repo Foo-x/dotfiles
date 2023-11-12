@@ -39,7 +39,7 @@ if 1
     let l:bnr = bufnr(a:buf)
     let l:wids = win_findbuf(bnr)
     if empty(l:wids)
-      exe 'buffer ' . a:buf
+      exe 'buffer' a:buf
     else
       call win_gotoid(l:wids[0])
     endif
@@ -50,7 +50,7 @@ if 1
   fun! s:close_no_name_buffers()
     let l:nonamebuffers = map(filter(getbufinfo({'buflisted':1}), 'v:val.name=="" && len(v:val.windows)==0'), 'v:val.bufnr')
     for i in l:nonamebuffers
-      exe 'bdelete ' . i
+      exe 'bdelete' i
     endfor
   endf
   command! CloseNoNameBuffers call s:close_no_name_buffers()
@@ -102,11 +102,11 @@ if 1
     let s:bufs = s:n_bufs(4)
 
     silent! only
-    exe "buffer " . s:bufs[0]
-    exe "vert sbuffer " . s:bufs[2]
-    exe "sbuffer " . s:bufs[3]
+    exe "buffer" s:bufs[0]
+    exe "vert sbuffer" s:bufs[2]
+    exe "sbuffer" s:bufs[3]
     wincmd t
-    exe "sbuffer " . s:bufs[1]
+    exe "sbuffer" s:bufs[1]
     wincmd t
   endf
   command! Grid call s:grid()
@@ -115,8 +115,8 @@ if 1
     let s:bufs = s:n_bufs(2)
 
     silent! only
-    exe "buffer " . s:bufs[0]
-    exe "vert sbuffer " . s:bufs[1]
+    exe "buffer" s:bufs[0]
+    exe "vert sbuffer" s:bufs[1]
     wincmd t
   endf
   command! TwoCol call s:two_col()
@@ -124,8 +124,8 @@ if 1
     let s:bufs = s:n_bufs(2)
 
     silent! only
-    exe "buffer " . s:bufs[0]
-    exe "sbuffer " . s:bufs[1]
+    exe "buffer" s:bufs[0]
+    exe "sbuffer" s:bufs[1]
     wincmd t
   endf
   command! TwoRow call s:two_row()
