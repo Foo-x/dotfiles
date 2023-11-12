@@ -453,7 +453,6 @@
   "vim.enableNeovim": true,
   "vim.handleKeys": {
     "<C-b>": false,
-    "<C-d>": false,
     "<C-f>": false,
     "<C-i>": false,
     "<C-k>": false,
@@ -509,6 +508,14 @@
       ],
       "after": [
         "→"
+      ]
+    },
+    {
+      "before": [
+        "<C-l>"
+      ],
+      "after": [
+        "<Del>"
       ]
     }
   ],
@@ -969,6 +976,25 @@
       ],
       "commands": [
         "editor.gotoParentFold"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "n"
+      ],
+      "commands": [
+        ":set number!"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "r",
+        "n"
+      ],
+      "commands": [
+        ":set relativenumber!"
       ]
     },
     {
