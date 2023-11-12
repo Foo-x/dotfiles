@@ -9,6 +9,7 @@ cnoreabbr FB Buffers
 cnoreabbr FL Lines
 cnoreabbr FBL BLines
 cnoreabbr FH History
+cnoreabbr FHE Helptags
 
 " skip on vim-tiny
 if 1

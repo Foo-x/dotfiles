@@ -464,10 +464,6 @@
   "vim.hlsearch": true,
   "vim.leader": "<space>",
   "vim.mouseSelectionGoesIntoVisualMode": false,
-  "vim.showMarksInGutter": true,
-  "vim.sneak": true,
-  "vim.sneakReplacesF": true,
-  "vim.sneakUseIgnorecaseAndSmartcase": true,
   "vim.useSystemClipboard": true,
   "vim.insertModeKeyBindingsNonRecursive": [
     {
@@ -1595,23 +1591,6 @@
       ],
       "commands": [
         "bookmarks.clearFromAllFiles"
-      ]
-    },
-    // sneak
-    {
-      "before": [
-        "f"
-      ],
-      "after": [
-        "s"
-      ]
-    },
-    {
-      "before": [
-        "F"
-      ],
-      "after": [
-        "S"
       ]
     }
   ],

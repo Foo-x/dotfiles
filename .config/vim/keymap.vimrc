@@ -88,6 +88,7 @@ nnoremap [window]f <C-w>f
 nnoremap [window]F <C-w>F
 nnoremap [window]gf <C-w>gf
 nnoremap [window]gF <C-w>gF
+nnoremap [window]r <C-w>r
 nnoremap [window]m <C-w>\|<C-w>_
 nnoremap [window]= <C-w>=
 nnoremap [window]> <C-w>>
@@ -170,6 +171,3 @@ vnoremap <Space>1dp :diffput 1<CR>
 vnoremap <Space>2dp :diffput 2<CR>
 vnoremap <Space>3dp :diffput 3<CR>
 
-" plugins
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S

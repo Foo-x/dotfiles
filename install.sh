@@ -32,13 +32,6 @@ mkdir -p ${XDG_CACHE_HOME}
 mkdir -p ${XDG_DATA_HOME}
 mkdir -p ${XDG_STATE_HOME}
 
-# include .bashrc
-touch ${HOME}/.bashrc
-source_bashrc=". ${DOT_DIR}/.bashrc"
-if ! \grep -q "${source_bashrc}" ${HOME}/.bashrc; then
-    echo "${source_bashrc}" >> ${HOME}/.bashrc
-fi
-
 # setup gh
 if type gh > /dev/null 2>&1; then
     {
@@ -60,8 +53,16 @@ if [ ! -d ${HOME}/.fzf ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
     ${HOME}/.fzf/install --key-bindings --completion --update-rc
 fi
-## source fzf last because LS_COLORS must be set before loading inputrc and fzf use 'bind' which loads inputrc
-sed -i '$!{/fzf/{H;d}};$G' ${HOME}/.bashrc
+# include .bashrc
+touch ${HOME}/.bashrc
+source_bashrc=". ${DOT_DIR}/.bashrc"
+sed -ie "\~${source_bashrc}~d" ${HOME}/.bashrc
+if \grep -qF "fzf" ${HOME}/.bashrc; then
+    # load bashrc before fzf because LS_COLORS must be set before loading inputrc and fzf use 'bind' which loads inputrc
+    sed -ie "/fzf/i ${source_bashrc}" ${HOME}/.bashrc
+else
+    echo "${source_bashrc}" >> ${HOME}/.bashrc
+fi
 
 # install enhancd
 if [ ! -d ${HOME}/enhancd ]; then
@@ -139,9 +140,9 @@ if [ ! -d ${VIM_PACK_DIR}/vim-gitgutter ]; then
     git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${VIM_PACK_DIR}/vim-gitgutter
 fi
 
-# install vim-sneak
-if [ ! -d ${VIM_PACK_DIR}/vim-sneak ]; then
-    git clone --depth 1 https://github.com/justinmk/vim-sneak.git ${VIM_PACK_DIR}/vim-sneak
+# install vimdoc-ja
+if [ ! -d ${VIM_PACK_DIR}/vimdoc-ja ]; then
+    git clone --depth 1 https://github.com/vim-jp/vimdoc-ja.git ${VIM_PACK_DIR}/vimdoc-ja
 fi
 
 mkdir -p ${XDG_CONFIG_HOME}/nvim

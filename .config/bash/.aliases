@@ -319,7 +319,11 @@ if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias pbpaste="powershell.exe -command 'Get-Clipboard' | iconv -f sjis"
 
   function open() {
-    wslview "$(wslpath -w "$1")"
+    if [ -e "$1" ]; then
+      wslview "$(wslpath -w "$1")"
+    else
+      wslview "$1"
+    fi
   }
 
   function is_win_dir() {

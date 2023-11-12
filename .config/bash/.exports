@@ -70,7 +70,7 @@ export SIMPLE_BACKUP_SUFFIX=.`date +%Y%m%d_%H%M%S`
 [[ "${WSL_DISTRO_NAME}" ]] && export BROWSER=wslview
 
 export LANG=C
-LOCALE_LIST="$(locale -a)"
+LOCALE_LIST="$(localectl list-locales)"
 if [[ "${LOCALE_LIST}" == *C.UTF-8* ]]; then
   export LC_CTYPE='C.UTF-8'
 fi

@@ -35,6 +35,7 @@ set updatetime=100
 set signcolumn=yes
 set diffopt+=algorithm:histogram,indent-heuristic
 set spelllang=en,cjk
+set helplang=ja,en
 
 if has('nvim') | set foldcolumn=auto | else | set foldcolumn=1 | endif
 
