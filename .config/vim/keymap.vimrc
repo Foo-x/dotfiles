@@ -16,6 +16,10 @@ nnoremap - <C-x>
 "" not to go next
 nnoremap * *N
 
+"" toggle number
+nnoremap <Space>n :<C-u>set number!<CR>
+nnoremap <Space>rn :<C-u>set relativenumber!<CR>
+
 "" go to parent braces/brackets/parentheses
 nnoremap [[ "_ya[
 nnoremap [{ "_ya{
@@ -35,7 +39,6 @@ nnoremap ]t vat<Esc>
 noremap <Space>h ^
 nnoremap <Space>l $
 noremap <Space>m %
-nnoremap <Space>/ *
 
 nnoremap <Space>o o<Esc>
 nnoremap <Space>O O<Esc>
@@ -45,14 +48,6 @@ nnoremap <Space>k <C-b>
 
 "" insert only one character
 nnoremap <Space>i i_<Esc>r
-
-nmap <Space>b [buffer]
-nnoremap [buffer]h <C-^>
-nnoremap [buffer]l :<C-u>ls<CR>
-nnoremap [buffer]L :<C-u>ls!<CR>
-nnoremap <silent> [buffer]j :<C-u>bnext<CR>
-nnoremap <silent> [buffer]k :<C-u>bprevious<CR>
-nnoremap <silent> [buffer]x :<C-u>bdelete<CR>
 
 nmap <Space>g [goto]
 nnoremap [goto]h <C-o>
@@ -130,14 +125,6 @@ nnoremap <Space>d ggdG
 "" move to end after pasting
 nnoremap <silent> p p`]
 
-nnoremap <Space>s :%s/
-
-"" disable highlight
-nnoremap <C-l> :nohlsearch<CR><C-l>
-
-"" correct quit
-nnoremap q: :q
-
 " insert mode
 inoremap jj    <Esc>
 
@@ -157,9 +144,6 @@ vnoremap g- g<C-x>gv
 
 "" not to override register on paste
 vnoremap p pgvy
-
-"" highlight selected
-vnoremap <silent> * "zy:exe '/\V' . escape(@z, '\\/')<CR>N
 
 "" continue visual mode after indenting
 vnoremap > >gv
@@ -187,8 +171,5 @@ vnoremap <Space>2dp :diffput 2<CR>
 vnoremap <Space>3dp :diffput 3<CR>
 
 " plugins
-nmap <Space><Space>gj <Plug>(GitGutterNextHunk)
-nmap <Space><Space>gk <Plug>(GitGutterPrevHunk)
-nmap <Space><Space>gp <Plug>(GitGutterPreviewHunk)<C-w>P
 nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S

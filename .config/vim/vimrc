@@ -32,13 +32,11 @@ set scrolloff=5
 set shortmess+=FI
 set shortmess-=S
 set mouse=
-set rtp+=~/.fzf
 set updatetime=100
 set signcolumn=yes
-set switchbuf+=useopen
 set diffopt+=algorithm:histogram,indent-heuristic
 set spelllang=en,cjk
-set grepprg=grep\ -rnIE\ --exclude-dir=.git\ --exclude-dir=node_modules\ --exclude-dir=..\ $*\ /dev/null
+set foldcolumn=auto
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -49,7 +47,6 @@ runtime! *.vimrc
 " finish on vim-tiny
 if !1 | finish | endif
 
-let g:netrw_home = $XDG_DATA_HOME."/vim"
 call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
 set viewdir=$XDG_DATA_HOME/vim/view | call mkdir(&viewdir, 'p')
 
@@ -68,11 +65,6 @@ catch
   color desert
   hi SignColumn ctermbg=black
 endtry
-hi netrwMarkFile ctermbg=darkmagenta
-let g:gitgutter_set_sign_backgrounds=1
-hi GitGutterAdd ctermfg=green
-hi GitGutterChange ctermfg=yellow
-hi GitGutterDelete ctermfg=red
 
 " cursor shape
 let &t_ti.="\e[1 q"
@@ -83,52 +75,6 @@ let &t_te.="\e[0 q"
 " load bash alias
 let $BASH_ENV="$HOME/.dotfiles/.config/bash/.aliases"
 
-" gitgutter
-let g:gitgutter_preview_win_floating=0
-
-" netrw
-let g:netrw_liststyle=0
-let g:netrw_sizestyle="H"
-let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
-let g:netrw_altv=1
-let g:netrw_alto=1
-let g:netrw_keepdir=0
-let g:netrw_localcopydircmd='cp -r'
-
-fun! NetrwMarkfileList(islocal)
-    echo netrw#Expose("netrwmarkfilelist")
-endfun
-fun! NetrwGoParent(isLocal)
-    return "normal -"
-endfun
-fun! NetrwOpen(isLocal)
-    return "normal \<CR>"
-endfun
-fun! NetrwToggleDot(isLocal)
-    return "normal gh"
-endfun
-fun! NetrwMark(isLocal)
-    return "normal mf"
-endfun
-fun! NetrwUnmarkAll(isLocal)
-    return "normal mF"
-endfun
-fun! g:MyNetrw_D(islocal)
-    " get selected file list (:h netrw-mf)
-    let l:flist = netrw#Expose('netrwmarkfilelist')
-    if l:flist is# 'n/a'
-        " no selection -- get name under cursor
-        let l:flist = [b:netrw_curdir . '/' . netrw#GX()]
-    else
-        " remove selection as files will be deleted soon
-        call netrw#Call('NetrwUnmarkAll')
-    endif
-    " do delete and refresh view
-    echo system('rm -rf ' . join(l:flist))
-    return 'refresh'
-endfun
-let g:Netrw_UserMaps= [["ml","NetrwMarkfileList"],["h","NetrwGoParent"],["l","NetrwOpen"],[".","NetrwToggleDot"],["<Tab>","NetrwMark"],["<Space><Tab>","NetrwUnmarkAll"],["D", "MyNetrw_D"]]
-
 " autocmd
 "" if exists a session and loaded it: overwrite session
 "" if exists a session but not loaded it: do not save new session
@@ -137,14 +83,7 @@ autocmd VimLeave * if $is_vim_session_loaded=='true' | mks! | else | mks | endif
 autocmd SessionLoadPost * let $is_vim_session_loaded='true'
 autocmd VimEnter * GitGutterLineNrHighlightsEnable
 
-if !empty($WSL_DISTRO_NAME)
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('pbcopy', @")
-  augroup END
-endif
-
-augroup GitSpellCheck
+augroup Fold
   autocmd!
-  autocmd FileType gitcommit setlocal spell
+  autocmd FileType vim setlocal foldmethod=marker
 augroup END

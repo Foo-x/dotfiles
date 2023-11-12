@@ -1,3 +1,4 @@
+" options {{{
 set ignorecase
 set smartcase
 set incsearch
@@ -7,3 +8,14 @@ set wrapscan
 
 " highlight
 set hlsearch
+" }}}
+
+" keymap {{{
+nnoremap <Space>s :%s/
+
+" disable highlight
+nnoremap <C-l> :nohlsearch<CR><C-l>
+
+"" highlight selected
+vnoremap <silent> * "zy:exe '/\V' . escape(@z, '\\/')<CR>N
+" }}}

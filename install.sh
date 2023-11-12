@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 DOT_DIR="${HOME}/.dotfiles"
 XDG_CONFIG_HOME="${HOME}/.config"
@@ -115,13 +115,8 @@ echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/hooks/{} ${X
 mkdir -p ${XDG_CONFIG_HOME}/vim
 mkdir -p ${XDG_CONFIG_HOME}/vim/pack/plugins/start/
 mkdir -p ${XDG_CONFIG_HOME}/vim/pack/colors/start/
-vimrc_files="
-vimrc
-command.vimrc
-keymap.vimrc
-search.vimrc
-"
-echo "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/vim/{} ${XDG_CONFIG_HOME}/vim/{}
+vimrc_files=$(cd ${DOT_DIR}/.config/vim && \ls -1 *vimrc)
+printf "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/vim/{} ${XDG_CONFIG_HOME}/vim/{}
 
 VIM_PACK_DIR=${XDG_CONFIG_HOME}/vim/pack/plugins/start
 # install fzf.vim
