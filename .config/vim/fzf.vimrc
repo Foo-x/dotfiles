@@ -22,7 +22,7 @@ if 1
 
   fun! s:fzf_delete_buffers(command, lines)
     let l:bufnrs = map(a:lines, {_, line -> split(split(line)[0],'[^0-9]\+')[0]})
-    call s:delete_buffers(a:command, l:bufnrs)
+    call DeleteBuffers(a:command, l:bufnrs)
   endf
 
   command! FBD call fzf#run(fzf#wrap({

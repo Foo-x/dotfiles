@@ -138,6 +138,8 @@ nnoremap <silent> p p`]
 " insert mode
 inoremap jj <Esc>
 inoremap <C-l> <Del>
+inoremap <C-z> <C-o>u
+inoremap <C-y> <C-o><C-r>
 
 " visual mode
 "" display lines downward

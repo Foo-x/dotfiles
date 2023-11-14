@@ -23,7 +23,7 @@ if 1
   command! -bar WUP windo update
   cnoreabbr WQ WUP \| TQ
 
-  fun! s:delete_buffers(command, bufnrs)
+  fun! DeleteBuffers(command, bufnrs)
     let l:bufnames = map(copy(a:bufnrs), {_, val -> bufname(str2nr(val))})
     silent! execute 'argdelete' join(l:bufnames)
     execute a:command join(a:bufnrs)
@@ -31,7 +31,7 @@ if 1
 
   fun! s:clean_nonexistent_buffers()
     let l:nonexistent_buffers = map(filter(getbufinfo({'buflisted':1}), '!filereadable(expand(v:val.name))'), 'v:val.bufnr')
-    call s:delete_buffers('bwipeout', l:nonexistent_buffers)
+    call DeleteBuffers('bwipeout', l:nonexistent_buffers)
   endf
   command! CleanNonExistentBuffers call s:clean_nonexistent_buffers()
 
