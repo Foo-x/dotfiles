@@ -53,6 +53,10 @@ nmap <Space>g [goto]
 nnoremap [goto]h <C-o>
 nnoremap [goto]l <C-i>
 
+nmap <Space>a [argument]
+nnoremap [argument]n :<C-u>next<CR>
+nnoremap [argument]p :<C-u>previous<CR>
+
 nmap <Space>q [quickfix]
 nnoremap [quickfix]n :<C-u>cnext<CR>
 nnoremap [quickfix]p :<C-u>cprevious<CR>

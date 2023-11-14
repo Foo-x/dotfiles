@@ -45,7 +45,6 @@ if 1
     endif
   endf
   command! -nargs=1 -complete=buffer B silent! call s:useopen_buffer(<q-args>)
-  command! -nargs=+ -complete=file AA argadd <args> | argdedupe
 
   fun! s:close_no_name_buffers()
     let l:nonamebuffers = map(filter(getbufinfo({'buflisted':1}), 'v:val.name=="" && len(v:val.windows)==0'), 'v:val.bufnr')

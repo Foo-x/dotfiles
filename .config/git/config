@@ -104,7 +104,8 @@
     rp = remote prune
     rpo = remote prune origin
     cl = clone
-    clp = clone --filter=blob:none --sparse
+    clp = clone --filter=blob:none
+    clps = clone --filter=blob:none --sparse
     fbv = !git fetch && git bv
 
     ## pull and prune
