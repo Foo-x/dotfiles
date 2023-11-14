@@ -35,7 +35,12 @@ set updatetime=100
 set signcolumn=yes
 set diffopt+=algorithm:histogram,indent-heuristic
 set spelllang=en,cjk
-set helplang=ja,en
+set helplang=en,ja
+set errorformat+=%-G#q#%.%#
+set errorformat+=%f%*[^[:fname:]]%l\ %m
+set errorformat+=%f%*[^[:fname:]]%l
+set errorformat+=%f
+set errorformat+=%-G%.%#
 
 if has('nvim') | set foldcolumn=auto | else | set foldcolumn=1 | endif
 
@@ -91,4 +96,8 @@ autocmd VimEnter * GitGutterLineNrHighlightsEnable
 augroup Fold
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
+augroup END
+augroup AutoOpenQuickFixWindow
+  autocmd!
+  autocmd QuickFixCmdPost * cw
 augroup END

@@ -407,9 +407,10 @@
     "eamodio.gitlens",
     "humao.rest-client",
     "albert.TabOut",
+    "alefragnani.Bookmarks",
     "bierner.markdown-mermaid",
-    "wmaurer.change-case",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "streetsidesoftware.code-spell-checker"
   ],
   "dev.containers.executeInWSL": true,
   "gitlens.currentLine.enabled": false,
@@ -1841,23 +1842,6 @@
       ],
       "commands": [
         "git.revertSelectedRanges"
-      ]
-    },
-    // sneak
-    {
-      "before": [
-        "f"
-      ],
-      "after": [
-        "s"
-      ]
-    },
-    {
-      "before": [
-        "F"
-      ],
-      "after": [
-        "S"
       ]
     }
   ],

@@ -41,6 +41,5 @@ VisualStudioExptTeam.vscodeintellicode-completions
 vscodevim.vim
 wayou.vscode-todo-highlight
 webfreak.debug
-wmaurer.change-case
 yzhang.markdown-all-in-one
 EOS

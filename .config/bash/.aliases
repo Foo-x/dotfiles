@@ -53,6 +53,7 @@ alias lnb='ln -b'
 alias mvb='mv -b'
 alias vis='vi -S'
 alias vig='vi -c "G|on|1bw"'
+alias viq='vi -c "cfile"'
 
 # others
 alias relogin='exec $SHELL -l'

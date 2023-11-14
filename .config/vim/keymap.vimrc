@@ -60,6 +60,9 @@ nnoremap [quickfix]k :<C-u>cbefore<CR>
 nnoremap [quickfix]j :<C-u>cafter<CR>
 nnoremap [quickfix]w :<C-u>cwindow<CR>
 nnoremap [quickfix]c :<C-u>cclose<CR>
+nnoremap [quickfix]. :<C-u>cgetbuffer<CR>
+nnoremap [quickfix]f :<C-u>cgetfile<CR>
+nnoremap <silent> [quickfix]e :<C-u>exe 'e' &errorfile<CR>
 "" toggle quickfix
 nnoremap <expr> [quickfix]t empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
 
@@ -70,6 +73,8 @@ nnoremap [location]k :<C-u>lbefore<CR>
 nnoremap [location]j :<C-u>lafter<CR>
 nnoremap [location]w :<C-u>lwindow<CR>
 nnoremap [location]c :<C-u>lclose<CR>
+nnoremap [location]. :<C-u>lgetbuffer<CR>
+nnoremap [location]f :<C-u>lgetfile<CR>
 
 nmap <Space>w [window]
 nnoremap <silent> [window]_ :<C-u>split<CR>
