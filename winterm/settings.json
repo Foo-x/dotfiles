@@ -28,6 +28,14 @@
             "keys": "ctrl+c"
         },
         {
+            "command": "unbound",
+            "keys": "alt+shift+minus"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+shift+plus"
+        },
+        {
             "command": 
             {
                 "action": "closeTab"

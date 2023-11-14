@@ -89,6 +89,7 @@ nnoremap [window]h <C-w>h
 nnoremap [window]j <C-w>j
 nnoremap [window]k <C-w>k
 nnoremap [window]l <C-w>l
+" TODO: dont change layout
 nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
 nnoremap [window]K <C-w>K
