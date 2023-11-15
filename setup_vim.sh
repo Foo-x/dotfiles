@@ -77,9 +77,80 @@ if [ ! -d ${VIM_PACK_DIR}/vimdoc-ja ]; then
     git clone --depth 1 https://github.com/vim-jp/vimdoc-ja.git ${VIM_PACK_DIR}/vimdoc-ja
 fi
 
+# setup nvim
+mkdir -p ${XDG_CONFIG_HOME}/nvim
+mkdir -p ${XDG_CONFIG_HOME}/nvim/pack/plugins/start/
+mkdir -p ${XDG_CONFIG_HOME}/nvim/pack/colors/start/
+
+NVIM_PACK_DIR=${XDG_CONFIG_HOME}/nvim/pack/plugins/start
+# install nvim-lspconfig
+if [ ! -d ${NVIM_PACK_DIR}/nvim-lspconfig ]; then
+    git clone --depth 1 https://github.com/neovim/nvim-lspconfig.git ${NVIM_PACK_DIR}/nvim-lspconfig
+fi
+
+# install mason.nvim
+if [ ! -d ${NVIM_PACK_DIR}/mason.nvim ]; then
+    git clone --depth 1 https://github.com/williamboman/mason.nvim.git ${NVIM_PACK_DIR}/mason.nvim
+fi
+
+# install mason-lspconfig.nvim
+if [ ! -d ${NVIM_PACK_DIR}/mason-lspconfig.nvim ]; then
+    git clone --depth 1 https://github.com/williamboman/mason-lspconfig.nvim.git ${NVIM_PACK_DIR}/mason-lspconfig.nvim
+fi
+
+# install nvim-cmp
+if [ ! -d ${NVIM_PACK_DIR}/nvim-cmp ]; then
+    git clone --depth 1 https://github.com/hrsh7th/nvim-cmp.git ${NVIM_PACK_DIR}/nvim-cmp
+fi
+
+# install cmp-nvim-lsp
+if [ ! -d ${NVIM_PACK_DIR}/cmp-nvim-lsp ]; then
+    git clone --depth 1 https://github.com/hrsh7th/cmp-nvim-lsp.git ${NVIM_PACK_DIR}/cmp-nvim-lsp
+fi
+
+# install cmp-buffer
+if [ ! -d ${NVIM_PACK_DIR}/cmp-buffer ]; then
+    git clone --depth 1 https://github.com/hrsh7th/cmp-buffer.git ${NVIM_PACK_DIR}/cmp-buffer
+fi
+
+# install cmp-path
+if [ ! -d ${NVIM_PACK_DIR}/cmp-path ]; then
+    git clone --depth 1 https://github.com/hrsh7th/cmp-path.git ${NVIM_PACK_DIR}/cmp-path
+fi
+
+# install vim-vsnip
+if [ ! -d ${NVIM_PACK_DIR}/vim-vsnip ]; then
+    git clone --depth 1 https://github.com/hrsh7th/vim-vsnip.git ${NVIM_PACK_DIR}/vim-vsnip
+fi
+
+# install cmp-vsnip
+if [ ! -d ${NVIM_PACK_DIR}/cmp-vsnip ]; then
+    git clone --depth 1 https://github.com/hrsh7th/cmp-vsnip.git ${NVIM_PACK_DIR}/cmp-vsnip
+fi
+
+# install lspkind.nvim
+if [ ! -d ${NVIM_PACK_DIR}/lspkind.nvim ]; then
+    git clone --depth 1 https://github.com/onsails/lspkind.nvim.git ${NVIM_PACK_DIR}/lspkind.nvim
+fi
+
+# install nvim-treesitter
+if [ ! -d ${NVIM_PACK_DIR}/nvim-treesitter ]; then
+    git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter.git ${NVIM_PACK_DIR}/nvim-treesitter
+fi
+
+# install lspsaga.nvim
+if [ ! -d ${NVIM_PACK_DIR}/lspsaga.nvim ]; then
+    git clone --depth 1 https://github.com/kkharji/lspsaga.nvim.git ${NVIM_PACK_DIR}/lspsaga.nvim
+fi
+
+# install fidget.nvim
+if [ ! -d ${NVIM_PACK_DIR}/fidget.nvim ]; then
+    git clone --depth 1 https://github.com/j-hui/fidget.nvim.git ${NVIM_PACK_DIR}/fidget.nvim
+fi
+
 mkdir -p ${XDG_CONFIG_HOME}/nvim
 nvim_files="
-init.vim
+init.lua
 "
 echo "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
 

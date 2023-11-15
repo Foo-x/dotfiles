@@ -46,7 +46,7 @@ fi
 
 export EDITOR='nvim -p'
 
-export VIMINIT='let $MYVIMRC = has("nvim") ? "$XDG_CONFIG_HOME/nvim/init.vim" : "$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC'
+export VIMINIT='let $MYVIMRC = has("nvim") ? "$XDG_CONFIG_HOME/nvim/init.lua" : "$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC'
 
 export PAGER='more'
 if type less &> /dev/null; then

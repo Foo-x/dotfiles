@@ -18,7 +18,6 @@ nnoremap * *N
 
 "" toggle number
 nnoremap <Space>n :<C-u>set number!<CR>
-nnoremap <Space>rn :<C-u>set relativenumber!<CR>
 
 "" go to parent braces/brackets/parentheses
 nnoremap [[ "_ya[

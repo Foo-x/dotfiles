@@ -17,6 +17,7 @@ if 1
         \ )
     nmap <buffer> <CR> <Plug>(fern-my-open-or-expand)
     nmap <buffer> l <Plug>(fern-my-open-or-expand)
+    nmap <buffer> D <Plug>(fern-action-remove=)
   endf
 
   augroup Fern

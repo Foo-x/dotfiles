@@ -991,16 +991,6 @@
     {
       "before": [
         "<leader>",
-        "r",
-        "n"
-      ],
-      "commands": [
-        ":set relativenumber!"
-      ]
-    },
-    {
-      "before": [
-        "<leader>",
         "w",
         "_"
       ],
