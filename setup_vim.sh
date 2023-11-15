@@ -47,6 +47,31 @@ if [ ! -d ${VIM_PACK_DIR}/vim-gitgutter ]; then
     git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${VIM_PACK_DIR}/vim-gitgutter
 fi
 
+# install fern.vim
+if [ ! -d ${VIM_PACK_DIR}/fern.vim ]; then
+    git clone --depth 1 https://github.com/lambdalisue/fern.vim.git ${VIM_PACK_DIR}/fern.vim
+fi
+
+# install fern-git-status.vim
+if [ ! -d ${VIM_PACK_DIR}/fern-git-status.vim ]; then
+    git clone --depth 1 https://github.com/lambdalisue/fern-git-status.vim.git ${VIM_PACK_DIR}/fern-git-status.vim
+fi
+
+# install fern-renderer-nerdfont.vim
+if [ ! -d ${VIM_PACK_DIR}/fern-renderer-nerdfont.vim ]; then
+    git clone --depth 1 https://github.com/lambdalisue/fern-renderer-nerdfont.vim.git ${VIM_PACK_DIR}/fern-renderer-nerdfont.vim
+fi
+
+# install glyph-palette.vim
+if [ ! -d ${VIM_PACK_DIR}/glyph-palette.vim ]; then
+    git clone --depth 1 https://github.com/lambdalisue/glyph-palette.vim.git ${VIM_PACK_DIR}/glyph-palette.vim
+fi
+
+# install nerdfont.vim
+if [ ! -d ${VIM_PACK_DIR}/nerdfont.vim ]; then
+    git clone --depth 1 https://github.com/lambdalisue/nerdfont.vim.git ${VIM_PACK_DIR}/nerdfont.vim
+fi
+
 # install vimdoc-ja
 if [ ! -d ${VIM_PACK_DIR}/vimdoc-ja ]; then
     git clone --depth 1 https://github.com/vim-jp/vimdoc-ja.git ${VIM_PACK_DIR}/vimdoc-ja
