@@ -78,6 +78,11 @@ if [ ! -d ${VIM_PACK_DIR}/vim-markdown ]; then
     git clone --depth 1 https://github.com/gabrielelana/vim-markdown.git ${VIM_PACK_DIR}/vim-markdown
 fi
 
+# install previm
+if [ ! -d ${VIM_PACK_DIR}/previm ]; then
+    git clone --depth 1 https://github.com/previm/previm.git ${VIM_PACK_DIR}/previm
+fi
+
 # install vimdoc-ja
 if [ ! -d ${VIM_PACK_DIR}/vimdoc-ja ]; then
     git clone --depth 1 https://github.com/vim-jp/vimdoc-ja.git ${VIM_PACK_DIR}/vimdoc-ja
