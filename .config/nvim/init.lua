@@ -30,13 +30,14 @@ mason_lspconfig.setup_handlers {
     lspconfig[server].setup(opts)
   end,
 }
-
-vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-  pattern = { '*' },
-  callback = function()
-    require('lspsaga.diagnostic').show_cursor_diagnostics()
-  end,
-})
+vim.cmd [[
+set updatetime=300
+augroup lsp_document_highlight
+  autocmd!
+  autocmd CursorHold,CursorHoldI * lua vim.lsp.buf.document_highlight()
+  autocmd CursorMoved,CursorMovedI * lua vim.lsp.buf.clear_references()
+augroup END
+]]
 
 local set = vim.keymap.set
 set('n', 'gi', vim.lsp.buf.implementation)
@@ -48,6 +49,11 @@ local cmp = require('cmp')
 local lspkind = require('lspkind')
 
 cmp.setup {
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
   mapping = cmp.mapping.preset.insert({
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),

@@ -46,6 +46,7 @@ set errorformat+=%f%*[^[:fname:]]%l\ %m
 set errorformat+=%f%*[^[:fname:]]%l
 set errorformat+=%f
 set errorformat+=%-G%.%#
+if has('nvim') | set termguicolors | endif
 
 if has('nvim') | set foldcolumn=auto | else | set foldcolumn=1 | endif
 
@@ -71,14 +72,20 @@ syntax on
 
 " highlight
 try
-  color habamax
+  packadd! everforest
+  " GitGutter highlights will be cleared if color directly
+  autocmd VimEnter * color everforest
+  "packadd! nightfox.nvim
+  "color nordfox
+  "packadd! kanagawa.nvim
+  "color kanagawa-dragon
 catch
   color desert
   hi SignColumn ctermbg=black
+  hi GitGutterAdd ctermfg=green guifg=green
+  hi GitGutterChange ctermfg=yellow
+  hi GitGutterDelete ctermfg=red
 endtry
-hi GitGutterAdd ctermfg=green
-hi GitGutterChange ctermfg=yellow
-hi GitGutterDelete ctermfg=red
 hi netrwMarkFile ctermbg=darkmagenta
 
 " cursor shape

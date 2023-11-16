@@ -20,13 +20,14 @@ nvimdirdiff
 echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 
 # setup vim
-mkdir -p ${XDG_CONFIG_HOME}/vim
-mkdir -p ${XDG_CONFIG_HOME}/vim/pack/plugins/start/
-mkdir -p ${XDG_CONFIG_HOME}/vim/pack/colors/start/
+VIM_PACK_DIR=${XDG_CONFIG_HOME}/vim/pack/plugins/start
+VIM_PACK_COLORS_DIR=${XDG_CONFIG_HOME}/vim/pack/colors/opt
+
+mkdir -p ${VIM_PACK_DIR}
+mkdir -p ${VIM_PACK_COLORS_DIR}
 vimrc_files=$(cd ${DOT_DIR}/.config/vim && \ls -1 *vimrc)
 printf "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/vim/{} ${XDG_CONFIG_HOME}/vim/{}
 
-VIM_PACK_DIR=${XDG_CONFIG_HOME}/vim/pack/plugins/start
 # install fzf.vim
 if [ ! -d ${VIM_PACK_DIR}/fzf.vim ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.vim.git ${VIM_PACK_DIR}/fzf.vim
@@ -78,11 +79,28 @@ if [ ! -d ${VIM_PACK_DIR}/vimdoc-ja ]; then
 fi
 
 # setup nvim
-mkdir -p ${XDG_CONFIG_HOME}/nvim
-mkdir -p ${XDG_CONFIG_HOME}/nvim/pack/plugins/start/
-mkdir -p ${XDG_CONFIG_HOME}/nvim/pack/colors/start/
-
 NVIM_PACK_DIR=${XDG_CONFIG_HOME}/nvim/pack/plugins/start
+NVIM_PACK_COLORS_DIR=${XDG_CONFIG_HOME}/nvim/pack/colors/opt
+
+mkdir -p ${NVIM_PACK_DIR}
+mkdir -p ${NVIM_PACK_COLORS_DIR}
+nvim_files=$(cd ${DOT_DIR}/.config/nvim && \ls -1)
+printf "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
+
+# install everforest
+if [ ! -d ${NVIM_PACK_COLORS_DIR}/everforest ]; then
+    git clone --depth 1 https://github.com/sainnhe/everforest.git ${NVIM_PACK_COLORS_DIR}/everforest
+fi
+
+# install nightfox.nvim
+if [ ! -d ${NVIM_PACK_COLORS_DIR}/nightfox.nvim ]; then
+    git clone --depth 1 https://github.com/EdenEast/nightfox.nvim.git ${NVIM_PACK_COLORS_DIR}/nightfox.nvim
+fi
+
+# install kanagawa.nvim
+if [ ! -d ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim ]; then
+    git clone --depth 1 https://github.com/rebelot/kanagawa.nvim.git ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim
+fi
 # install nvim-lspconfig
 if [ ! -d ${NVIM_PACK_DIR}/nvim-lspconfig ]; then
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig.git ${NVIM_PACK_DIR}/nvim-lspconfig
@@ -148,10 +166,11 @@ if [ ! -d ${NVIM_PACK_DIR}/fidget.nvim ]; then
     git clone --depth 1 https://github.com/j-hui/fidget.nvim.git ${NVIM_PACK_DIR}/fidget.nvim
 fi
 
-mkdir -p ${XDG_CONFIG_HOME}/nvim
-nvim_files="
-init.lua
+nvim -es +"
+set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after |
+  silent! packl! |
+  packadd everforest |
+  packadd nightfox.nvim |
+  helptags ALL |
+  q
 "
-echo "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
-
-nvim -es +"set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after | silent! packl! | helptags ALL | q"
