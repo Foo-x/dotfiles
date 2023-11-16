@@ -183,3 +183,5 @@ vnoremap <Space>1dp :diffput 1<CR>
 vnoremap <Space>2dp :diffput 2<CR>
 vnoremap <Space>3dp :diffput 3<CR>
 
+" plugin
+nnoremap <silent><buffer> <Leader>x :<C-u>call markdown#SwitchStatus()<CR>

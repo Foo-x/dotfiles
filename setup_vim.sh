@@ -73,6 +73,11 @@ if [ ! -d ${VIM_PACK_DIR}/nerdfont.vim ]; then
     git clone --depth 1 https://github.com/lambdalisue/nerdfont.vim.git ${VIM_PACK_DIR}/nerdfont.vim
 fi
 
+# install vim-markdown
+if [ ! -d ${VIM_PACK_DIR}/vim-markdown ]; then
+    git clone --depth 1 https://github.com/gabrielelana/vim-markdown.git ${VIM_PACK_DIR}/vim-markdown
+fi
+
 # install vimdoc-ja
 if [ ! -d ${VIM_PACK_DIR}/vimdoc-ja ]; then
     git clone --depth 1 https://github.com/vim-jp/vimdoc-ja.git ${VIM_PACK_DIR}/vimdoc-ja

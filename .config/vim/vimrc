@@ -75,8 +75,10 @@ try
   packadd! everforest
   " GitGutter highlights will be cleared if color directly
   autocmd VimEnter * color everforest
+
   "packadd! nightfox.nvim
   "color nordfox
+  "
   "packadd! kanagawa.nvim
   "color kanagawa-dragon
 catch
