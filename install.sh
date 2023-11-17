@@ -98,8 +98,19 @@ prepare-commit-msg
 echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/hooks/{} ${XDG_CONFIG_HOME}/git/hooks/{}
 
 # setup tmux
-mkdir -p ${XDG_CONFIG_HOME}/tmux
-ln -sf ${DOT_DIR}/.config/tmux/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
+TMUX_DIR=${XDG_CONFIG_HOME}/tmux
+mkdir -p ${TMUX_DIR}
+ln -sf ${DOT_DIR}/.config/tmux/tmux.conf ${TMUX_DIR}/tmux.conf
+
+# install tmux-resurrect
+if [ ! -d ${TMUX_DIR}/tmux-resurrect ]; then
+    git clone --depth 1 https://github.com/tmux-plugins/tmux-resurrect ${TMUX_DIR}/tmux-resurrect
+fi
+
+# install tmux-continuum
+if [ ! -d ${TMUX_DIR}/tmux-continuum ]; then
+    git clone --depth 1 https://github.com/tmux-plugins/tmux-continuum ${TMUX_DIR}/tmux-continuum
+fi
 
 exe_files="
 fetch_completions.sh
