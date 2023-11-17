@@ -88,6 +88,7 @@ nnoremap [window]h <C-w>h
 nnoremap [window]j <C-w>j
 nnoremap [window]k <C-w>k
 nnoremap [window]l <C-w>l
+nnoremap [window]w <C-w>w
 " TODO: dont change layout
 nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
@@ -109,10 +110,8 @@ nmap <Space>t [tab]
 nnoremap <silent> [tab]t :<C-u>tabnew<CR>
 nnoremap <silent> [tab]c :<C-u>tabclose<CR>
 nnoremap <silent> [tab]o :<C-u>tabonly<CR>
-nnoremap [tab]h gT
-nnoremap [tab]j gT
-nnoremap [tab]k gt
-nnoremap [tab]l gt
+nnoremap <silent> [tab]h :<C-u>tabprevious<CR>
+nnoremap <silent> [tab]l :<C-u>tabnext<CR>
 
 "" not to yunk
 nnoremap x "_x
@@ -182,3 +181,6 @@ vnoremap <Space>dp :diffput<CR>
 vnoremap <Space>1dp :diffput 1<CR>
 vnoremap <Space>2dp :diffput 2<CR>
 vnoremap <Space>3dp :diffput 3<CR>
+
+" terminal mode
+tmap <C-o> <C-\><C-n>

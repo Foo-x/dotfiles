@@ -25,7 +25,6 @@ set wildmenu
 set wildmode=list:longest
 set laststatus=2
 set statusline=\[%n\]\ %F%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
-set isk+=-
 set confirm
 set hidden
 set splitbelow
@@ -37,7 +36,6 @@ set shortmess+=FI
 set shortmess-=S
 set mouse=
 set updatetime=100
-set signcolumn=yes
 set diffopt+=algorithm:histogram,indent-heuristic
 set spelllang=en,cjk
 set helplang=en,ja
@@ -46,9 +44,18 @@ set errorformat+=%f%*[^[:fname:]]%l\ %m
 set errorformat+=%f%*[^[:fname:]]%l
 set errorformat+=%f
 set errorformat+=%-G%.%#
-if has('nvim') | set termguicolors | endif
-
-if has('nvim') | set foldcolumn=auto | else | set foldcolumn=1 | endif
+set foldmethod=indent
+set foldminlines=3
+set nofoldenable
+if has('nvim')
+  set foldcolumn=auto
+  set signcolumn=yes:2
+  set termguicolors
+else
+  set foldcolumn=1
+  set signcolumn=yes
+  set viminfofile=$XDG_CACHE_HOME/vim/viminfo
+endif
 
 " show invisible chars
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -65,8 +72,6 @@ set viewdir=$XDG_DATA_HOME/vim/view | call mkdir(&viewdir, 'p')
 set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p')
 set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p')
 set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
-
-if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
 
 syntax on
 

@@ -146,6 +146,11 @@ if [ ! -d ${NVIM_PACK_DIR}/cmp-path ]; then
     git clone --depth 1 https://github.com/hrsh7th/cmp-path.git ${NVIM_PACK_DIR}/cmp-path
 fi
 
+# install cmp-cmdline
+if [ ! -d ${NVIM_PACK_DIR}/cmp-cmdline ]; then
+    git clone --depth 1 https://github.com/hrsh7th/cmp-cmdline.git ${NVIM_PACK_DIR}/cmp-cmdline
+fi
+
 # install vim-vsnip
 if [ ! -d ${NVIM_PACK_DIR}/vim-vsnip ]; then
     git clone --depth 1 https://github.com/hrsh7th/vim-vsnip.git ${NVIM_PACK_DIR}/vim-vsnip
@@ -161,19 +166,34 @@ if [ ! -d ${NVIM_PACK_DIR}/lspkind.nvim ]; then
     git clone --depth 1 https://github.com/onsails/lspkind.nvim.git ${NVIM_PACK_DIR}/lspkind.nvim
 fi
 
+# install none-ls.nvim
+if [ ! -d ${NVIM_PACK_DIR}/none-ls.nvim ]; then
+    git clone --depth 1 https://github.com/nvimtools/none-ls.nvim.git ${NVIM_PACK_DIR}/none-ls.nvim
+fi
+
+# install mason-null-ls.nvim
+if [ ! -d ${NVIM_PACK_DIR}/mason-null-ls.nvim ]; then
+    git clone --depth 1 https://github.com/jay-babu/mason-null-ls.nvim.git ${NVIM_PACK_DIR}/mason-null-ls.nvim
+fi
+
+# install plenary.nvim
+if [ ! -d ${NVIM_PACK_DIR}/plenary.nvim ]; then
+    git clone --depth 1 https://github.com/nvim-lua/plenary.nvim.git ${NVIM_PACK_DIR}/plenary.nvim
+fi
+
 # install nvim-treesitter
 if [ ! -d ${NVIM_PACK_DIR}/nvim-treesitter ]; then
     git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter.git ${NVIM_PACK_DIR}/nvim-treesitter
 fi
 
-# install lspsaga.nvim
-if [ ! -d ${NVIM_PACK_DIR}/lspsaga.nvim ]; then
-    git clone --depth 1 https://github.com/kkharji/lspsaga.nvim.git ${NVIM_PACK_DIR}/lspsaga.nvim
-fi
-
 # install fidget.nvim
 if [ ! -d ${NVIM_PACK_DIR}/fidget.nvim ]; then
     git clone --depth 1 https://github.com/j-hui/fidget.nvim.git ${NVIM_PACK_DIR}/fidget.nvim
+fi
+
+# install symbols-outline.nvim
+if [ ! -d ${NVIM_PACK_DIR}/symbols-outline.nvim ]; then
+    git clone --depth 1 https://github.com/simrat39/symbols-outline.nvim.git ${NVIM_PACK_DIR}/symbols-outline.nvim
 fi
 
 nvim -es +"

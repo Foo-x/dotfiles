@@ -49,7 +49,7 @@
     "copyOnSelect": false,
     "disableAnimations": false,
     "firstWindowPreference": "defaultProfile",
-    "launchMode": "fullscreen",
+    "launchMode": "maximizedFocus",
     "newTabMenu": 
     [
         {

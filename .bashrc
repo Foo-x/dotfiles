@@ -25,7 +25,7 @@ if type fzf &> /dev/null; then
 fi
 
 if [[ -d $HOME/enhancd ]]; then
-  . $HOME/enhancd/init.sh
+  . ${HOME}/enhancd/init.sh
 fi
 
 for completion in ${DOT_DIR}/completion/*; do

@@ -1,15 +1,48 @@
 vim.env.XDG_CONFIG_HOME = vim.fn.get(vim.fn.environ(), 'XDG_CONFIG_HOME', vim.env.HOME .. '/.config')
 vim.cmd.exe('"source" $XDG_CONFIG_HOME . "/vim/vimrc"')
 
+local set = vim.keymap.set
+
+require('symbols-outline').setup()
+
+set('n', '<M-.>', '<Cmd>SymbolsOutline<CR>')
+
 -- lsp
 local lspconfig = require('lspconfig')
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
+local mason_null_ls = require('mason-null-ls')
+local null_ls = require('null-ls')
 
-require('lspsaga').setup()
 require('fidget').setup()
 
 mason.setup()
+mason_null_ls.setup {
+  ensure_installed = {
+    'markdownlint',
+    'markuplint',
+    'prettier',
+    'shellcheck',
+    'shfmt',
+    'sql-formatter',
+  },
+}
+null_ls.setup {
+  sources = {
+    null_ls.builtins.diagnostics.markdownlint.with {
+      extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    },
+    null_ls.builtins.diagnostics.markuplint,
+    null_ls.builtins.formatting.markdownlint.with {
+      extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    },
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.shfmt.with {
+      extra_args = { '-i', '2', '-sr' },
+    },
+    null_ls.builtins.formatting.sql_formatter,
+  }
+}
 mason_lspconfig.setup {
   ensure_installed = {
     'bashls',
@@ -62,15 +95,35 @@ local function help()
   if ft == 'vim' or ft == 'help' then
     vim.cmd([[execute 'h ' . expand('<cword>') ]])
   else
-    require('lspsaga.hover').render_hover_doc()
+    vim.lsp.buf.hover()
   end
 end
 
-local set = vim.keymap.set
 set('n', 'K', help)
-set('n', 'gi', vim.lsp.buf.implementation)
-set('n', '<F2>', require('lspsaga.rename').rename)
--- TODO: set more keymap
+set('n', 'gh', vim.diagnostic.open_float)
+set('n', '[d', vim.diagnostic.goto_prev)
+set('n', ']d', vim.diagnostic.goto_next)
+set('n', '<space>qq', vim.diagnostic.setqflist)
+set('n', '<space><space>ll', vim.diagnostic.setloclist)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('LspConfig', {}),
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    set('n', 'gD', vim.lsp.buf.declaration, opts)
+    set('n', 'gd', vim.lsp.buf.definition, opts)
+    set('n', 'gi', vim.lsp.buf.implementation, opts)
+    set('n', 'gr', vim.lsp.buf.references, opts)
+    set('n', 'gt', vim.lsp.buf.type_definition, opts)
+    set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    set('n', '<F2>', vim.lsp.buf.rename, opts)
+    set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    set({ 'n', 'v' }, '<space>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
 
 -- cmp
 local cmp = require('cmp')
@@ -110,11 +163,42 @@ cmp.setup {
   },
 }
 
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
   }
+})
+
+cmp.setup.cmdline(':', {
+  mapping = {
+    ['<Tab>'] = {
+      c = function()
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          cmp.complete()
+        end
+      end,
+    },
+    ['<S-Tab>'] = {
+      c = function()
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          cmp.complete()
+        end
+      end,
+    },
+    ['<C-e>'] = {
+      c = cmp.mapping.abort(),
+    },
+  },
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })
 
 -- treesitter
