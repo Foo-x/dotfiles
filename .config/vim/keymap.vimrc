@@ -48,76 +48,76 @@ nnoremap <Space>k <C-b>
 "" insert only one character
 nnoremap <Space>i i_<Esc>r
 
-nmap <Space>g [goto]
-nnoremap [goto]h <C-o>
-nnoremap [goto]l <C-i>
+nmap <Space>g <Plug>(goto)
+nnoremap <Plug>(goto)h <C-o>
+nnoremap <Plug>(goto)l <C-i>
 
-nmap <Space>a [argument]
-nnoremap [argument]n :<C-u>next<CR>
-nnoremap [argument]p :<C-u>previous<CR>
+nmap <Space>a <Plug>(argument)
+nnoremap <Plug>(argument)n :<C-u>next<CR>
+nnoremap <Plug>(argument)p :<C-u>previous<CR>
 
-nmap <Space>q [quickfix]
-nnoremap [quickfix]n :<C-u>cnext<CR>
-nnoremap [quickfix]p :<C-u>cprevious<CR>
-nnoremap [quickfix]k :<C-u>cbefore<CR>
-nnoremap [quickfix]j :<C-u>cafter<CR>
-nnoremap [quickfix]w :<C-u>cwindow<CR>
-nnoremap [quickfix]c :<C-u>cclose<CR>
-nnoremap [quickfix]. :<C-u>cgetbuffer<CR>
-nnoremap [quickfix]f :<C-u>cgetfile<CR>
-nnoremap <silent> [quickfix]e :<C-u>exe 'e' &errorfile<CR>
+nmap <Space>q <Plug>(quickfix)
+nnoremap <Plug>(quickfix)n :<C-u>cnext<CR>
+nnoremap <Plug>(quickfix)p :<C-u>cprevious<CR>
+nnoremap <Plug>(quickfix)k :<C-u>cbefore<CR>
+nnoremap <Plug>(quickfix)j :<C-u>cafter<CR>
+nnoremap <Plug>(quickfix)w :<C-u>cwindow<CR>
+nnoremap <Plug>(quickfix)c :<C-u>cclose<CR>
+nnoremap <Plug>(quickfix). :<C-u>cgetbuffer<CR>
+nnoremap <Plug>(quickfix)f :<C-u>cgetfile<CR>
+nnoremap <silent> <Plug>(quickfix)e :<C-u>exe 'e' &errorfile<CR>
 "" toggle quickfix
-nnoremap <expr> [quickfix]t empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
+nnoremap <expr> <Plug>(quickfix)t empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
 
-nmap <Space><Space>l [location]
-nnoremap [location]n :<C-u>lnext<CR>
-nnoremap [location]p :<C-u>lprevious<CR>
-nnoremap [location]k :<C-u>lbefore<CR>
-nnoremap [location]j :<C-u>lafter<CR>
-nnoremap [location]w :<C-u>lwindow<CR>
-nnoremap [location]c :<C-u>lclose<CR>
-nnoremap [location]. :<C-u>lgetbuffer<CR>
-nnoremap [location]f :<C-u>lgetfile<CR>
+nmap <Space><Space>l <Plug>(location)
+nnoremap <Plug>(location)n :<C-u>lnext<CR>
+nnoremap <Plug>(location)p :<C-u>lprevious<CR>
+nnoremap <Plug>(location)k :<C-u>lbefore<CR>
+nnoremap <Plug>(location)j :<C-u>lafter<CR>
+nnoremap <Plug>(location)w :<C-u>lwindow<CR>
+nnoremap <Plug>(location)c :<C-u>lclose<CR>
+nnoremap <Plug>(location). :<C-u>lgetbuffer<CR>
+nnoremap <Plug>(location)f :<C-u>lgetfile<CR>
 
-nmap <Space>w [window]
-nnoremap <silent> [window]_ :<C-u>split<CR>
-nnoremap <silent> [window]\ :<C-u>vsplit<CR>
-nnoremap [window]c <C-w>c
-nnoremap [window]o <C-w>o
-nnoremap [window]h <C-w>h
-nnoremap [window]j <C-w>j
-nnoremap [window]k <C-w>k
-nnoremap [window]l <C-w>l
-nnoremap [window]w <C-w>w
+nmap <Space>w <Plug>(window)
+nnoremap <silent> <Plug>(window)_ :<C-u>split<CR>
+nnoremap <silent> <Plug>(window)\ :<C-u>vsplit<CR>
+nnoremap <Plug>(window)c <C-w>c
+nnoremap <Plug>(window)o <C-w>o
+nnoremap <Plug>(window)h <C-w>h
+nnoremap <Plug>(window)j <C-w>j
+nnoremap <Plug>(window)k <C-w>k
+nnoremap <Plug>(window)l <C-w>l
+nnoremap <Plug>(window)w <C-w>w
 " TODO: dont change layout
-nnoremap [window]H <C-w>H
-nnoremap [window]J <C-w>J
-nnoremap [window]K <C-w>K
-nnoremap [window]L <C-w>L
-nnoremap [window]f <C-w>f
-nnoremap [window]F <C-w>F
-nnoremap [window]gf <C-w>gf
-nnoremap [window]gF <C-w>gF
-nnoremap [window]r <C-w>r
-nnoremap [window]m <C-w>\|<C-w>_
-nnoremap [window]= <C-w>=
-nnoremap [window]> <C-w>>
-nnoremap [window]< <C-w><
-nnoremap [window]+ <C-w>+
-nnoremap [window]- <C-w>-
+nnoremap <Plug>(window)H <C-w>H
+nnoremap <Plug>(window)J <C-w>J
+nnoremap <Plug>(window)K <C-w>K
+nnoremap <Plug>(window)L <C-w>L
+nnoremap <Plug>(window)f <C-w>f
+nnoremap <Plug>(window)F <C-w>F
+nnoremap <Plug>(window)gf <C-w>gf
+nnoremap <Plug>(window)gF <C-w>gF
+nnoremap <Plug>(window)r <C-w>r
+nnoremap <Plug>(window)m <C-w>\|<C-w>_
+nnoremap <Plug>(window)= <C-w>=
+nnoremap <Plug>(window)> <C-w>>
+nnoremap <Plug>(window)< <C-w><
+nnoremap <Plug>(window)+ <C-w>+
+nnoremap <Plug>(window)- <C-w>-
 
-nmap <Space>t [tab]
-nnoremap <silent> [tab]t :<C-u>tabnew<CR>
-nnoremap <silent> [tab]c :<C-u>tabclose<CR>
-nnoremap <silent> [tab]o :<C-u>tabonly<CR>
-nnoremap <silent> [tab]h :<C-u>tabprevious<CR>
-nnoremap <silent> [tab]l :<C-u>tabnext<CR>
+nmap <Space>t <Plug>(tab)
+nnoremap <silent> <Plug>(tab)t :<C-u>tabnew<CR>
+nnoremap <silent> <Plug>(tab)c :<C-u>tabclose<CR>
+nnoremap <silent> <Plug>(tab)o :<C-u>tabonly<CR>
+nnoremap <silent> <Plug>(tab)h :<C-u>tabprevious<CR>
+nnoremap <silent> <Plug>(tab)l :<C-u>tabnext<CR>
 
 "" not to yunk
 nnoremap x "_x
 nnoremap X "_X
-nnoremap s "_s
-nnoremap S "_S
+"nnoremap s "_s
+"nnoremap S "_S
 
 "" format all lines
 nnoremap <Space>= gg=G
@@ -134,11 +134,15 @@ nnoremap <Space>d ggdG
 "" move to end after pasting
 nnoremap <silent> p p`]
 
+nnoremap <Space>; A;<Esc>
+nnoremap <Space>, A,<Esc>
+
 " insert mode
 inoremap jj <Esc>
 inoremap <C-l> <Del>
 inoremap <C-z> <C-o>u
 inoremap <C-y> <C-o><C-r>
+inoremap <C-v>u <C-r>=nr2char(0x)<Left>
 
 " visual mode
 "" display lines downward
@@ -184,3 +188,9 @@ vnoremap <Space>3dp :diffput 3<CR>
 
 " terminal mode
 tmap <C-o> <C-\><C-n>
+
+" depends on FileType
+augroup FileTypeMap
+  autocmd!
+  autocmd FileType help nnoremap <buffer> <CR> <C-]>
+augroup END

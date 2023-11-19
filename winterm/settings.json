@@ -41,6 +41,10 @@
                 "action": "closeTab"
             },
             "keys": "ctrl+shift+c"
+        },
+        {
+            "command": "openNewTabDropdown",
+            "keys": "ctrl+shift+t"
         }
     ],
     "alwaysOnTop": false,
@@ -56,6 +60,13 @@
             "type": "remainingProfiles"
         }
     ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "colorScheme": "One Half Dark"
+        }
+    },
     "startOnUserLogin": true,
     "themes": []
 }

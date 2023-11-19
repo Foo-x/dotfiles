@@ -15,6 +15,7 @@ nmap <Space><Space>gp <Plug>(GitGutterPreviewHunk)<C-w>P
 "
 " command {{{
 " vim-fugitive
+cnoreabbr G tab Git
 cnoreabbr GDT G difftool -y
 cnoreabbr GMT G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t \| Gvdiffsplit :1 \| winc j
 
@@ -30,6 +31,11 @@ if 1
   augroup GitSpellCheck
     autocmd!
     autocmd FileType gitcommit setlocal spell
+  augroup END
+  augroup Fugitive
+    autocmd!
+    autocmd FileType fugitive nnoremap <buffer><silent> <Tab> :<C-u>norm =<CR>
+    autocmd FileType fugitive nnoremap <buffer><silent> s :<C-u>norm -<CR>
   augroup END
 endif 
 " }}}

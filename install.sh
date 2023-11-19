@@ -66,7 +66,7 @@ fi
 
 # install enhancd
 if [ ! -d ${HOME}/enhancd ]; then
-    git clone --depth 1 https://github.com/b4b4r07/enhancd ${HOME}/enhancd
+    git clone --depth 1 https://github.com/b4b4r07/enhancd.git ${HOME}/enhancd
 fi
 
 mkdir -p ${HOME}/.local/bin
@@ -104,12 +104,12 @@ ln -sf ${DOT_DIR}/.config/tmux/tmux.conf ${TMUX_DIR}/tmux.conf
 
 # install tmux-resurrect
 if [ ! -d ${TMUX_DIR}/tmux-resurrect ]; then
-    git clone --depth 1 https://github.com/tmux-plugins/tmux-resurrect ${TMUX_DIR}/tmux-resurrect
+    git clone --depth 1 https://github.com/tmux-plugins/tmux-resurrect.git ${TMUX_DIR}/tmux-resurrect
 fi
 
 # install tmux-continuum
 if [ ! -d ${TMUX_DIR}/tmux-continuum ]; then
-    git clone --depth 1 https://github.com/tmux-plugins/tmux-continuum ${TMUX_DIR}/tmux-continuum
+    git clone --depth 1 https://github.com/tmux-plugins/tmux-continuum.git ${TMUX_DIR}/tmux-continuum
 fi
 
 exe_files="

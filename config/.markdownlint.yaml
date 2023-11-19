@@ -1,4 +1,3 @@
 default: true
-ul-indent:
-  indent: 4
+ul-indent: false
 no-multiple-blanks: false

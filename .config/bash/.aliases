@@ -59,6 +59,8 @@ alias viq='vi -c "cfile"'
 alias relogin='exec $SHELL -l'
 alias osver='cat /etc/*release'
 alias mirror='rsync --delete'
+alias chownme='chown $USER:$USER'
+alias chownmeR='chown -R $USER:$USER'
 alias cctypes='echo "Conventional Commits"; echo; echo "
 build		Changes that affect the build system or external dependencies (example scopes - gulp, broccoli, npm)
 chore		Other changes that don'\''t modify src or test files

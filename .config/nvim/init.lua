@@ -3,11 +3,63 @@ vim.cmd.exe('"source" $XDG_CONFIG_HOME . "/vim/vimrc"')
 
 local set = vim.keymap.set
 
-require('symbols-outline').setup()
+require('Comment').setup()
+set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
+set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
 
+require('symbols-outline').setup({
+  symbol_blacklist = {
+    'Array',
+    'Boolean',
+    'Field',
+    'Null',
+    'Number',
+    'Object',
+    'Package',
+    'Property',
+    'String',
+
+    -- 'Class',
+    -- 'Component',
+    -- 'Constant',
+    -- 'Constructor',
+    -- 'Enum',
+    -- 'EnumMember',
+    -- 'Event',
+    -- 'File',
+    -- 'Fragment',
+    -- 'Function',
+    -- 'Interface',
+    -- 'Key',
+    -- 'Method',
+    -- 'Module',
+    -- 'Namespace',
+    -- 'Operator',
+    -- 'Struct',
+    -- 'TypeParameter',
+    -- 'Variable',
+  },
+})
 set('n', '<M-.>', '<Cmd>SymbolsOutline<CR>')
 
--- lsp
+require('nvim-autopairs').setup()
+
+require('other-nvim').setup({})
+set('n', '<leader>oo', ':<C-u>Other<CR>', { silent = true })
+set('n', '<leader>ot', ':<C-u>OtherTabNew<CR>', { silent = true })
+set('n', '<leader>os', ':<C-u>OtherSplit<CR>', { silent = true })
+set('n', '<leader>ov', ':<C-u>OtherVSplit<CR>', { silent = true })
+set('n', '<leader>oc', ':<C-u>OtherClear<CR>', { silent = true })
+
+require('stickybuf').setup()
+
+require('leap').add_repeat_mappings(';', ',')
+set({ 'n', 'x', 'o' }, 'f', '<Plug>(leap-forward-to)')
+set({ 'n', 'x', 'o' }, 'F', '<Plug>(leap-backward-to)')
+set({ 'n', 'x', 'o' }, 't', '<Plug>(leap-forward-till)')
+set({ 'n', 'x', 'o' }, 'T', '<Plug>(leap-backward-till)')
+
+-- lsp {{{
 local lspconfig = require('lspconfig')
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
@@ -17,7 +69,7 @@ local null_ls = require('null-ls')
 require('fidget').setup()
 
 mason.setup()
-mason_null_ls.setup {
+mason_null_ls.setup({
   ensure_installed = {
     'markdownlint',
     'markuplint',
@@ -26,24 +78,24 @@ mason_null_ls.setup {
     'shfmt',
     'sql-formatter',
   },
-}
-null_ls.setup {
+})
+null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.markdownlint.with {
+    null_ls.builtins.diagnostics.markdownlint.with({
       extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
-    },
+    }),
     null_ls.builtins.diagnostics.markuplint,
-    null_ls.builtins.formatting.markdownlint.with {
+    null_ls.builtins.formatting.markdownlint.with({
       extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
-    },
+    }),
     null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.shfmt.with {
+    null_ls.builtins.formatting.shfmt.with({
       extra_args = { '-i', '2', '-sr' },
-    },
+    }),
     null_ls.builtins.formatting.sql_formatter,
   }
-}
-mason_lspconfig.setup {
+})
+mason_lspconfig.setup({
   ensure_installed = {
     'bashls',
     'cssls',
@@ -62,12 +114,12 @@ mason_lspconfig.setup {
     'vimls',
     'yamlls',
   },
-}
+})
 
-mason_lspconfig.setup_handlers {
+mason_lspconfig.setup_handlers({
   function(server)
     local on_attach = function(client, bufnr)
-      if client.supports_method "textDocument/documentHighlight" then
+      if client.supports_method('textDocument/documentHighlight') then
         vim.cmd [[
         set updatetime=300
         augroup lsp_document_highlight
@@ -77,6 +129,11 @@ mason_lspconfig.setup_handlers {
         augroup END
         ]]
       end
+      require('ibl').setup({
+        indent = {
+          char = '▏',
+        },
+      })
     end
 
     local opts = {
@@ -88,7 +145,7 @@ mason_lspconfig.setup_handlers {
 
     lspconfig[server].setup(opts)
   end,
-}
+})
 
 local function help()
   local ft = vim.opt.filetype._value
@@ -115,24 +172,33 @@ vim.api.nvim_create_autocmd('LspAttach', {
     set('n', 'gi', vim.lsp.buf.implementation, opts)
     set('n', 'gr', vim.lsp.buf.references, opts)
     set('n', 'gt', vim.lsp.buf.type_definition, opts)
-    set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, opts)
     set('n', '<F2>', vim.lsp.buf.rename, opts)
     set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
     set({ 'n', 'v' }, '<space>f', function()
-      vim.lsp.buf.format { async = true }
+      vim.lsp.buf.format({ async = true })
     end, opts)
   end,
 })
+-- }}}
 
--- cmp
+-- cmp {{{
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
-cmp.setup {
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
+cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      vim.fn['vsnip#anonymous'](args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
@@ -140,8 +206,29 @@ cmp.setup {
     ['<C-k>'] = cmp.mapping.scroll_docs(-4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ['<Tab>'] = cmp.mapping({
+      i = function(fallback)
+        if vim.fn['vsnip#jumpable'](1) == 1 then
+          feedkey('<Plug>(vsnip-jump-next)', '')
+        elseif cmp.visible() then
+          cmp.select_next_item()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end,
+    }),
+    ['<S-Tab>'] = cmp.mapping({
+      i = function()
+        if vim.fn['vsnip#jumpable'](-1) == 1 then
+          feedkey('<Plug>(vsnip-jump-prev)', '')
+        elseif cmp.visible() then
+          cmp.select_prev_item()
+        end
+      end,
+    }),
   }),
   window = {
     completion = cmp.config.window.bordered(),
@@ -161,13 +248,13 @@ cmp.setup {
   experimental = {
     ghost_text = true,
   },
-}
+})
 
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
-  }
+  },
 })
 
 cmp.setup.cmdline(':', {
@@ -200,13 +287,14 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
+-- }}}
 
--- treesitter
+-- treesitter {{{
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'bash',
     'css',
-    'csv',
+    --'csv',
     'dockerfile',
     'git_config',
     'gitcommit',
@@ -228,7 +316,50 @@ require('nvim-treesitter.configs').setup({
     'tsx',
     'vim',
   },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['as'] = { query = '@scope', query_group = 'locals' },
+      },
+      include_surrounding_whitespace = true,
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        [']f'] = '@function.outer',
+        [']s'] = { query = '@scope', query_group = 'locals' },
+        [']z'] = { query = '@fold', query_group = 'folds' },
+      },
+      goto_next_end = {
+        [']F'] = '@function.outer',
+        [']S'] = { query = '@scope', query_group = 'locals' },
+        [']Z'] = { query = '@fold', query_group = 'folds' },
+      },
+      goto_previous_start = {
+        ['[f'] = '@function.outer',
+        ['[s'] = { query = '@scope', query_group = 'locals' },
+        ['[z'] = { query = '@fold', query_group = 'folds' },
+      },
+      goto_previous_end = {
+        ['[F'] = '@function.outer',
+        ['[S'] = { query = '@scope', query_group = 'locals' },
+        ['[Z'] = { query = '@fold', query_group = 'folds' },
+      },
+    },
+  },
   highlight = {
     enable = true,
   },
+  autotag = {
+    enable = true,
+  },
 })
+
+set('n', '[c', require('treesitter-context').go_to_context)
+-- }}}
+-- vim: set foldmethod=marker :

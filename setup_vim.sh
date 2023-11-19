@@ -83,6 +83,31 @@ if [ ! -d ${VIM_PACK_DIR}/previm ]; then
     git clone --depth 1 https://github.com/previm/previm.git ${VIM_PACK_DIR}/previm
 fi
 
+# install vim-table-mode
+if [ ! -d ${VIM_PACK_DIR}/vim-table-mode ]; then
+    git clone --depth 1 https://github.com/dhruvasagar/vim-table-mode.git ${VIM_PACK_DIR}/vim-table-mode
+fi
+
+# install vim-visual-multi
+if [ ! -d ${VIM_PACK_DIR}/vim-visual-multi ]; then
+    git clone --depth 1 https://github.com/mg979/vim-visual-multi.git ${VIM_PACK_DIR}/vim-visual-multi
+fi
+
+# install linediff.vim
+if [ ! -d ${VIM_PACK_DIR}/linediff.vim ]; then
+    git clone --depth 1 https://github.com/AndrewRadev/linediff.vim.git ${VIM_PACK_DIR}/linediff.vim
+fi
+
+# install capture.vim
+if [ ! -d ${VIM_PACK_DIR}/capture.vim ]; then
+    git clone --depth 1 https://github.com/tyru/capture.vim.git ${VIM_PACK_DIR}/capture.vim
+fi
+
+# install rainbow_csv
+if [ ! -d ${VIM_PACK_DIR}/rainbow_csv ]; then
+    git clone --depth 1 https://github.com/mechatroner/rainbow_csv.git ${VIM_PACK_DIR}/rainbow_csv
+fi
+
 # install vimdoc-ja
 if [ ! -d ${VIM_PACK_DIR}/vimdoc-ja ]; then
     git clone --depth 1 https://github.com/vim-jp/vimdoc-ja.git ${VIM_PACK_DIR}/vimdoc-ja
@@ -111,6 +136,7 @@ fi
 if [ ! -d ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim ]; then
     git clone --depth 1 https://github.com/rebelot/kanagawa.nvim.git ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim
 fi
+
 # install nvim-lspconfig
 if [ ! -d ${NVIM_PACK_DIR}/nvim-lspconfig ]; then
     git clone --depth 1 https://github.com/neovim/nvim-lspconfig.git ${NVIM_PACK_DIR}/nvim-lspconfig
@@ -161,6 +187,11 @@ if [ ! -d ${NVIM_PACK_DIR}/cmp-vsnip ]; then
     git clone --depth 1 https://github.com/hrsh7th/cmp-vsnip.git ${NVIM_PACK_DIR}/cmp-vsnip
 fi
 
+# install friendly-snippets
+if [ ! -d ${NVIM_PACK_DIR}/friendly-snippets ]; then
+    git clone --depth 1 https://github.com/rafamadriz/friendly-snippets.git ${NVIM_PACK_DIR}/friendly-snippets
+fi
+
 # install lspkind.nvim
 if [ ! -d ${NVIM_PACK_DIR}/lspkind.nvim ]; then
     git clone --depth 1 https://github.com/onsails/lspkind.nvim.git ${NVIM_PACK_DIR}/lspkind.nvim
@@ -186,6 +217,26 @@ if [ ! -d ${NVIM_PACK_DIR}/nvim-treesitter ]; then
     git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter.git ${NVIM_PACK_DIR}/nvim-treesitter
 fi
 
+# install nvim-treesitter-context
+if [ ! -d ${NVIM_PACK_DIR}/nvim-treesitter-context ]; then
+    git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter-context.git ${NVIM_PACK_DIR}/nvim-treesitter-context
+fi
+
+# install nvim-treesitter-textobjects
+if [ ! -d ${NVIM_PACK_DIR}/nvim-treesitter-textobjects ]; then
+    git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git ${NVIM_PACK_DIR}/nvim-treesitter-textobjects
+fi
+
+# install nvim-ts-autotag
+if [ ! -d ${NVIM_PACK_DIR}/nvim-ts-autotag ]; then
+    git clone --depth 1 https://github.com/windwp/nvim-ts-autotag.git ${NVIM_PACK_DIR}/nvim-ts-autotag
+fi
+
+# install indent-blankline.nvim
+if [ ! -d ${NVIM_PACK_DIR}/indent-blankline.nvim ]; then
+    git clone --depth 1 https://github.com/lukas-reineke/indent-blankline.nvim.git ${NVIM_PACK_DIR}/indent-blankline.nvim
+fi
+
 # install fidget.nvim
 if [ ! -d ${NVIM_PACK_DIR}/fidget.nvim ]; then
     git clone --depth 1 https://github.com/j-hui/fidget.nvim.git ${NVIM_PACK_DIR}/fidget.nvim
@@ -194,6 +245,36 @@ fi
 # install symbols-outline.nvim
 if [ ! -d ${NVIM_PACK_DIR}/symbols-outline.nvim ]; then
     git clone --depth 1 https://github.com/simrat39/symbols-outline.nvim.git ${NVIM_PACK_DIR}/symbols-outline.nvim
+fi
+
+# install nvim-bqf
+if [ ! -d ${NVIM_PACK_DIR}/nvim-bqf ]; then
+    git clone --depth 1 https://github.com/kevinhwang91/nvim-bqf.git ${NVIM_PACK_DIR}/nvim-bqf
+fi
+
+# install Comment.nvim
+if [ ! -d ${NVIM_PACK_DIR}/Comment.nvim ]; then
+    git clone --depth 1 https://github.com/numToStr/Comment.nvim.git ${NVIM_PACK_DIR}/Comment.nvim
+fi
+
+# install nvim-autopairs
+if [ ! -d ${NVIM_PACK_DIR}/nvim-autopairs ]; then
+    git clone --depth 1 https://github.com/windwp/nvim-autopairs.git ${NVIM_PACK_DIR}/nvim-autopairs
+fi
+
+# install other.nvim
+if [ ! -d ${NVIM_PACK_DIR}/other.nvim ]; then
+    git clone --depth 1 https://github.com/rgroli/other.nvim.git ${NVIM_PACK_DIR}/other.nvim
+fi
+
+# install stickybuf.nvim
+if [ ! -d ${NVIM_PACK_DIR}/stickybuf.nvim ]; then
+    git clone --depth 1 https://github.com/stevearc/stickybuf.nvim.git ${NVIM_PACK_DIR}/stickybuf.nvim
+fi
+
+# install leap.nvim
+if [ ! -d ${NVIM_PACK_DIR}/leap.nvim ]; then
+    git clone --depth 1 https://github.com/ggandor/leap.nvim.git ${NVIM_PACK_DIR}/leap.nvim
 fi
 
 nvim -es +"

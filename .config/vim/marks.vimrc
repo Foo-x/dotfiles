@@ -29,20 +29,16 @@ fun! s:AutoMark()
   echo 'marked' g:mark_chars[b:mark_chars_pos]
 endf
 
-nmap m [Mark]
-nnoremap [Mark] <Nop>
-
-nnoremap <silent>[Mark]m :<C-u>call <SID>AutoMark()<CR>
-nnoremap [Mark]c :<C-u>delmarks a-z<CR>
-nnoremap [Mark]C :<C-u>delmarks a-zA-Z<CR>
-nnoremap [Mark]] ]`
-nnoremap [Mark]j ]`
-nnoremap [Mark]n ]`
-nnoremap [Mark][ [`
-nnoremap [Mark]k [`
-nnoremap [Mark]p [`
-
-nnoremap [Mark]l :<C-u>exe 'marks' join(g:mark_chars, '')<CR>
+nmap m <Plug>(mark)
+nnoremap <Plug>(mark) <Nop>
+nnoremap <silent><Plug>(mark)m :<C-u>call <SID>AutoMark()<CR>
+nnoremap <Plug>(mark)c :<C-u>delmarks a-z<CR>
+nnoremap <Plug>(mark)C :<C-u>delmarks a-zA-Z<CR>
+nnoremap <Plug>(mark)j ]`
+nnoremap <Plug>(mark)n ]`
+nnoremap <Plug>(mark)k [`
+nnoremap <Plug>(mark)p [`
+nnoremap <Plug>(mark)l :<C-u>exe 'marks' join(g:mark_chars, '')<CR>
 
 " delete all marks after reading buffer
 augroup AutoMark

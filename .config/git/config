@@ -184,6 +184,11 @@
     igfl = !git ls-files -v | \\grep -E '^S|^h'
     igedit = !$EDITOR $(git rev-parse --show-toplevel)/.git/info/exclude
 
+    # ls-files
+    ls = ls-files
+    lso = ls-files --others
+    lsm = ls-files --modified
+
     # others
     s = status -sb
 

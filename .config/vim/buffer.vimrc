@@ -3,18 +3,18 @@ set switchbuf+=useopen
 " }}}
 
 " keymap {{{
-nmap <Space>b [buffer]
-nnoremap [buffer]h <C-^>
-nnoremap [buffer]l :<C-u>ls<CR>
-nnoremap [buffer]L :<C-u>ls!<CR>
-nnoremap <silent> [buffer]j :<C-u>bnext<CR>
-nnoremap <silent> [buffer]k :<C-u>bprevious<CR>
-nnoremap <silent> [buffer]x :<C-u>bdelete<CR>
+nmap <Space>b <Plug>(buffer)
+nnoremap <Plug>(buffer)h <C-^>
+nnoremap <Plug>(buffer)l :<C-u>ls<CR>
+nnoremap <Plug>(buffer)L :<C-u>ls!<CR>
+nnoremap <silent> <Plug>(buffer)j :<C-u>bnext<CR>
+nnoremap <silent> <Plug>(buffer)k :<C-u>bprevious<CR>
+nnoremap <silent> <Plug>(buffer)x :<C-u>bdelete<CR>
 " }}}
 
 " command {{{
-cnoreabbr BD bn\|bd#
-cnoreabbr BW bn\|bw#
+cnoreabbr BD b#\|bd#
+cnoreabbr BW b#\|bw#
 
 " skip on vim-tiny
 if 1

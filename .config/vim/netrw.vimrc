@@ -10,6 +10,7 @@ let g:netrw_altv=1
 let g:netrw_alto=1
 let g:netrw_keepdir=0
 let g:netrw_localcopydircmd='cp -r'
+let g:netrw_browsex_viewer='open'
 
 fun! NetrwMarkfileList(islocal)
     echo netrw#Expose("netrwmarkfilelist")
