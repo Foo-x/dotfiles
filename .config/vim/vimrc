@@ -46,6 +46,7 @@ set errorformat+=%f
 set errorformat+=%-G%.%#
 set foldminlines=3
 set nofoldenable
+set autoread
 if has('nvim')
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
@@ -125,4 +126,8 @@ augroup END
 augroup AutoOpenQuickFixWindow
   autocmd!
   autocmd QuickFixCmdPost * cw
+augroup END
+augroup AutoRead
+  autocmd!
+  autocmd Cursorhold * checktime
 augroup END
