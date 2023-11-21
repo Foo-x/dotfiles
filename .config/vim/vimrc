@@ -24,7 +24,7 @@ set noswapfile
 set wildmenu
 set wildmode=list:longest
 set laststatus=2
-set statusline=\[%n\]\ %F%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
+set statusline=%f%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
 set confirm
 set hidden
 set splitbelow

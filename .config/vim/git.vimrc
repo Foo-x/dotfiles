@@ -37,5 +37,21 @@ if 1
     autocmd FileType fugitive nnoremap <buffer><silent> <Tab> :<C-u>norm =<CR>
     autocmd FileType fugitive nnoremap <buffer><silent> s :<C-u>norm -<CR>
   augroup END
-endif 
+  fun! s:diff_fold()
+    let l:line = getline(v:lnum)
+    if l:line =~ '^\(diff\|---\|+++\|@@\) '
+      return 1
+    elseif l:line[0] =~ '[-+ ]'
+      return 2
+    else
+      return 0
+    endif
+  endf
+  augroup Git
+    autocmd!
+    autocmd FileType fugitive,git,GV setlocal isk+=-
+    autocmd FileType fugitive,git,GV nnoremap <buffer><silent> cob :<C-u>G checkout <cword><CR>
+    autocmd FileType diff,git setlocal foldmethod=expr foldexpr=s:diff_fold()
+  augroup END
+endif
 " }}}

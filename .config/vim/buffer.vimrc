@@ -13,9 +13,6 @@ nnoremap <silent> <Plug>(buffer)x :<C-u>bdelete<CR>
 " }}}
 
 " command {{{
-cnoreabbr BD b#\|bd#
-cnoreabbr BW b#\|bw#
-
 " skip on vim-tiny
 if 1
   command! BufOnly silent! %bd|e#|bd#
@@ -28,6 +25,18 @@ if 1
     silent! execute 'argdelete' join(l:bufnames)
     execute a:command join(a:bufnrs)
   endf
+
+  fun! s:bclose(command)
+    let l:alt_bufinfo = getbufinfo('#')
+    if l:alt_bufinfo[0].listed
+      b#
+    else
+      bp
+    endif
+    call DeleteBuffers(a:command, ['#'])
+  endf
+  command! BD call s:bclose('bd')
+  command! BW call s:bclose('bw')
 
   fun! s:clean_nonexistent_buffers()
     let l:nonexistent_buffers = map(filter(getbufinfo({'buflisted':1}), '!filereadable(expand(v:val.name))'), 'v:val.bufnr')
@@ -63,70 +72,91 @@ if 1
       return [winbufnr(1)]
     endif
 
-    let s:inactive_bufs = []
+    let l:inactive_bufs = []
 
-    for bufnum in range(1, bufnr('$'))
-      if buflisted(bufnum) && bufwinnr(bufnum) == -1
-        call add(s:inactive_bufs, bufnum)
+    for l:bufnum in range(1, bufnr('$'))
+      if buflisted(l:bufnum) && bufwinnr(l:bufnum) == -1
+        call add(l:inactive_bufs, l:bufnum)
       endif
     endfor
 
-    let s:wins = []
-    let s:bufs = []
+    let l:bufs = []
+    let l:wins = []
 
     1wincmd w
-    call add(s:bufs, bufnr())
-    call add(s:wins, winnr())
+    call add(l:bufs, bufnr())
+    call add(l:wins, winnr())
 
-    for i in range(2, a:n)
-      silent! exe i . "wincmd w"
-      let s:tmp_win = winnr()
-      if index(s:wins, s:tmp_win) >= 0 && s:inactive_bufs->len() > 0
-        call add(s:bufs, remove(s:inactive_bufs, 0))
-      elseif index(s:wins, s:tmp_win) >= 0
+    for l:i in range(2, a:n)
+      silent! exe l:i . "wincmd w"
+      let l:tmp_win = winnr()
+      if index(l:wins, l:tmp_win) >= 0 && l:inactive_bufs->len() > 0
+        call add(l:bufs, remove(l:inactive_bufs, 0))
+      elseif index(l:wins, l:tmp_win) >= 0 || !getbufinfo(winbufnr(l:tmp_win))[0].listed
         1wincmd w
-        exe i . "bnext"
-        call add(s:bufs, bufnr())
-        exe i . "bprevious"
+        exe l:i . "bnext"
+        call add(l:bufs, bufnr())
+        exe l:i . "bprevious"
       else
-        call add(s:bufs, winbufnr(s:tmp_win))
+        call add(l:bufs, winbufnr(l:tmp_win))
       endif
-      call add(s:wins, s:tmp_win)
+      call add(l:wins, l:tmp_win)
     endfor
 
-    return s:bufs
+    return l:bufs
   endf
 
   fun! s:grid()
-    let s:bufs = s:n_bufs(4)
+    let l:bufs = s:n_bufs(4)
 
     silent! only
-    exe "buffer" s:bufs[0]
-    exe "vert sbuffer" s:bufs[2]
-    exe "sbuffer" s:bufs[3]
+    exe "buffer" l:bufs[0]
+    exe "vert sbuffer" l:bufs[2]
+    exe "sbuffer" l:bufs[3]
     wincmd t
-    exe "sbuffer" s:bufs[1]
+    exe "sbuffer" l:bufs[1]
     wincmd t
   endf
   command! Grid call s:grid()
 
   fun! s:two_col()
-    let s:bufs = s:n_bufs(2)
+    let l:bufs = s:n_bufs(2)
 
     silent! only
-    exe "buffer" s:bufs[0]
-    exe "vert sbuffer" s:bufs[1]
+    exe "buffer" l:bufs[0]
+    exe "vert sbuffer" l:bufs[1]
     wincmd t
   endf
   command! TwoCol call s:two_col()
   fun! s:two_row()
-    let s:bufs = s:n_bufs(2)
+    let l:bufs = s:n_bufs(2)
 
     silent! only
-    exe "buffer" s:bufs[0]
-    exe "sbuffer" s:bufs[1]
+    exe "buffer" l:bufs[0]
+    exe "sbuffer" l:bufs[1]
     wincmd t
   endf
   command! TwoRow call s:two_row()
+
+  fun! s:open_buffers_in_new_tab(is_vert, ...)
+    exe 'tabnew' a:000[0]
+    if len(a:000) == 1
+      return
+    endif
+
+    for l:buf in a:000[1:]
+      if a:is_vert
+        exe 'vert sbuffer' l:buf
+      else
+        exe 'sbuffer' l:buf
+      endif
+    endfor
+  endf
+  command! -nargs=+ -complete=file TS silent! call s:open_buffers_in_new_tab(0, <f-args>)
+  command! -nargs=+ -complete=file TV silent! call s:open_buffers_in_new_tab(1, <f-args>)
+  command! -nargs=+ -complete=buffer BTS silent! call s:open_buffers_in_new_tab(0, <f-args>)
+  command! -nargs=+ -complete=buffer BTV silent! call s:open_buffers_in_new_tab(1, <f-args>)
+  command! -nargs=+ -complete=arglist ATS silent! call s:open_buffers_in_new_tab(0, <f-args>)
+  command! -nargs=+ -complete=arglist ATV silent! call s:open_buffers_in_new_tab(1, <f-args>)
 endif
 " }}}

@@ -89,11 +89,10 @@ nnoremap <Plug>(window)j <C-w>j
 nnoremap <Plug>(window)k <C-w>k
 nnoremap <Plug>(window)l <C-w>l
 nnoremap <Plug>(window)w <C-w>w
-" TODO: dont change layout
-nnoremap <Plug>(window)H <C-w>H
-nnoremap <Plug>(window)J <C-w>J
-nnoremap <Plug>(window)K <C-w>K
-nnoremap <Plug>(window)L <C-w>L
+nnoremap <silent> <Plug>(window)H :<C-u>call SwapWindow('h')<CR>
+nnoremap <silent> <Plug>(window)J :<C-u>call SwapWindow('j')<CR>
+nnoremap <silent> <Plug>(window)K :<C-u>call SwapWindow('k')<CR>
+nnoremap <silent> <Plug>(window)L :<C-u>call SwapWindow('l')<CR>
 nnoremap <Plug>(window)f <C-w>f
 nnoremap <Plug>(window)F <C-w>F
 nnoremap <Plug>(window)gf <C-w>gf
@@ -105,9 +104,14 @@ nnoremap <Plug>(window)> <C-w>>
 nnoremap <Plug>(window)< <C-w><
 nnoremap <Plug>(window)+ <C-w>+
 nnoremap <Plug>(window)- <C-w>-
+nnoremap <Space>1 <C-w>t
+nnoremap <Space>2 <C-w>t<C-w>l
+nnoremap <Space>3 <C-w>t<C-w>j
+nnoremap <Space>4 <C-w>b
 
 nmap <Space>t <Plug>(tab)
 nnoremap <silent> <Plug>(tab)t :<C-u>tabnew<CR>
+nnoremap <silent> <Plug>(tab)f :<C-u>tabfirst<CR>
 nnoremap <silent> <Plug>(tab)c :<C-u>tabclose<CR>
 nnoremap <silent> <Plug>(tab)o :<C-u>tabonly<CR>
 nnoremap <silent> <Plug>(tab)h :<C-u>tabprevious<CR>
@@ -116,8 +120,8 @@ nnoremap <silent> <Plug>(tab)l :<C-u>tabnext<CR>
 "" not to yunk
 nnoremap x "_x
 nnoremap X "_X
-"nnoremap s "_s
-"nnoremap S "_S
+nnoremap s "_s
+nnoremap S "_S
 
 "" format all lines
 nnoremap <Space>= gg=G
@@ -136,6 +140,8 @@ nnoremap <silent> p p`]
 
 nnoremap <Space>; A;<Esc>
 nnoremap <Space>, A,<Esc>
+
+nnoremap <M-z> :<C-u>set wrap!<CR>
 
 " insert mode
 inoremap jj <Esc>

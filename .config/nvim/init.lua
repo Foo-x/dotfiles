@@ -4,6 +4,7 @@ vim.cmd.exe('"source" $XDG_CONFIG_HOME . "/vim/vimrc"')
 local set = vim.keymap.set
 
 require('Comment').setup()
+-- <C-_> == <C-/>
 set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
 set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
 
@@ -54,10 +55,10 @@ set('n', '<leader>oc', ':<C-u>OtherClear<CR>', { silent = true })
 require('stickybuf').setup()
 
 require('leap').add_repeat_mappings(';', ',')
-set({ 'n', 'x', 'o' }, 'f', '<Plug>(leap-forward-to)')
-set({ 'n', 'x', 'o' }, 'F', '<Plug>(leap-backward-to)')
-set({ 'n', 'x', 'o' }, 't', '<Plug>(leap-forward-till)')
-set({ 'n', 'x', 'o' }, 'T', '<Plug>(leap-backward-till)')
+set('n', 'f', '<Plug>(leap-forward-to)')
+set('n', 'F', '<Plug>(leap-backward-to)')
+set('n', 't', '<Plug>(leap-forward-till)')
+set('n', 'T', '<Plug>(leap-backward-till)')
 
 -- lsp {{{
 local lspconfig = require('lspconfig')
@@ -353,6 +354,9 @@ require('nvim-treesitter.configs').setup({
     },
   },
   highlight = {
+    enable = true,
+  },
+  indent = {
     enable = true,
   },
   autotag = {
