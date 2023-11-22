@@ -68,75 +68,92 @@ if 1
       return []
     endif
 
-    if a:n == 1
-      return [winbufnr(1)]
-    endif
-
-    let l:inactive_bufs = []
-
-    for l:bufnum in range(1, bufnr('$'))
-      if buflisted(l:bufnum) && bufwinnr(l:bufnum) == -1
-        call add(l:inactive_bufs, l:bufnum)
-      endif
-    endfor
+    let l:bufinfo = filter(getbufinfo(), 'v:val.listed')
+    let l:all_bufs = map(copy(l:bufinfo), 'v:val.bufnr')
+    let l:wininfo = filter(getwininfo(), 'v:val.winnr <= a:n && v:val.tabnr == tabpagenr() && index(l:all_bufs, v:val.bufnr) >= 0')
+    let l:winnrs = map(copy(l:wininfo), 'v:val.winnr')
+    let l:winbufs = map(copy(l:wininfo), 'v:val.bufnr')
+    let l:inactive_bufs = filter(copy(l:all_bufs), 'bufwinnr(v:val) == -1')
 
     let l:bufs = []
-    let l:wins = []
-
-    1wincmd w
-    call add(l:bufs, bufnr())
-    call add(l:wins, winnr())
-
-    for l:i in range(2, a:n)
-      silent! exe l:i . "wincmd w"
-      let l:tmp_win = winnr()
-      if index(l:wins, l:tmp_win) >= 0 && l:inactive_bufs->len() > 0
-        call add(l:bufs, remove(l:inactive_bufs, 0))
-      elseif index(l:wins, l:tmp_win) >= 0 || !getbufinfo(winbufnr(l:tmp_win))[0].listed
-        1wincmd w
-        exe l:i . "bnext"
-        call add(l:bufs, bufnr())
-        exe l:i . "bprevious"
-      else
-        call add(l:bufs, winbufnr(l:tmp_win))
+    for l:i in range(1, a:n)
+      let l:winbuf_idx = index(l:winnrs, l:i)
+      if l:winbuf_idx >= 0
+        call add(l:bufs, l:winbufs->get(l:winbuf_idx))
+        continue
       endif
-      call add(l:wins, l:tmp_win)
+      if l:inactive_bufs->len() > 0
+        call add(l:bufs, remove(l:inactive_bufs, 0))
+        continue
+      endif
+      let l:idx = (l:i - 1) % l:all_bufs->len()
+      call add(l:bufs, l:all_bufs->get(l:idx))
     endfor
 
     return l:bufs
   endf
 
-  fun! s:grid()
-    let l:bufs = s:n_bufs(4)
+  fun! s:n_arg_bufs(n)
+    if a:n < 1
+      return []
+    endif
 
+    let l:argv = argv()
+    if l:argv->len() == 0
+      return []
+    endif
+
+    let l:arg_bufs = map(l:argv, 'bufnr(v:val)')
+    let l:wininfo = filter(getwininfo(), 'v:val.winnr <= a:n && v:val.tabnr == tabpagenr() && index(l:argv, bufname(v:val.bufnr)) >= 0')
+    let l:winnrs = map(copy(l:wininfo), 'v:val.winnr')
+    let l:winbufs = map(copy(l:wininfo), 'v:val.bufnr')
+    let l:inactive_arg_bufs = filter(map(argv(), 'bufnr(v:val)'), 'index(l:winbufs, v:val) == -1')
+
+    let l:bufs = []
+    for l:i in range(1, a:n)
+      let l:winbuf_idx = index(l:winnrs, l:i)
+      if l:winbuf_idx >= 0
+        call add(l:bufs, l:winbufs->get(l:winbuf_idx))
+        continue
+      endif
+      if l:inactive_arg_bufs->len() > 0
+        call add(l:bufs, remove(l:inactive_arg_bufs, 0))
+        continue
+      endif
+      let l:idx = (l:i - 1) % l:arg_bufs->len()
+      call add(l:bufs, l:arg_bufs->get(l:idx))
+    endfor
+
+    return l:bufs
+  endf
+
+  fun! s:grid(bufs)
     silent! only
-    exe "buffer" l:bufs[0]
-    exe "vert sbuffer" l:bufs[2]
-    exe "sbuffer" l:bufs[3]
+    exe "buffer" a:bufs[0]
+    exe "vert sbuffer" a:bufs[2]
+    exe "sbuffer" a:bufs[3]
     wincmd t
-    exe "sbuffer" l:bufs[1]
+    exe "sbuffer" a:bufs[1]
     wincmd t
   endf
-  command! Grid call s:grid()
-
-  fun! s:two_col()
-    let l:bufs = s:n_bufs(2)
-
+  command! Grid call s:grid(s:n_bufs(4))
+  command! AGrid call s:grid(s:n_arg_bufs(4))
+  fun! s:two_col(bufs)
     silent! only
-    exe "buffer" l:bufs[0]
-    exe "vert sbuffer" l:bufs[1]
+    exe "buffer" a:bufs[0]
+    exe "vert sbuffer" a:bufs[1]
     wincmd t
   endf
-  command! TwoCol call s:two_col()
-  fun! s:two_row()
-    let l:bufs = s:n_bufs(2)
-
+  command! TwoCol call s:two_col(s:n_bufs(2))
+  command! ATwoCol call s:two_col(s:n_arg_bufs(2))
+  fun! s:two_row(bufs)
     silent! only
-    exe "buffer" l:bufs[0]
-    exe "sbuffer" l:bufs[1]
+    exe "buffer" a:bufs[0]
+    exe "sbuffer" a:bufs[1]
     wincmd t
   endf
-  command! TwoRow call s:two_row()
+  command! TwoRow call s:two_row(s:n_bufs(2))
+  command! ATwoRow call s:two_row(s:n_arg_bufs(2))
 
   fun! s:open_buffers_in_new_tab(is_vert, ...)
     exe 'tabnew' a:000[0]

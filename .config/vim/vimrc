@@ -129,5 +129,5 @@ augroup AutoOpenQuickFixWindow
 augroup END
 augroup AutoRead
   autocmd!
-  autocmd Cursorhold * checktime
+  autocmd CursorHold * silent! checktime
 augroup END
