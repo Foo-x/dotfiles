@@ -7,9 +7,14 @@ nmap <Space>b <Plug>(buffer)
 nnoremap <Plug>(buffer)h <C-^>
 nnoremap <Plug>(buffer)l :<C-u>ls<CR>
 nnoremap <Plug>(buffer)L :<C-u>ls!<CR>
+nnoremap <Plug>(buffer)g :<C-u>Grid<CR>
+nnoremap <Plug>(buffer)ag :<C-u>AGrid<CR>
+nnoremap <Plug>(buffer)c :<C-u>TwoCol<CR>
+nnoremap <Plug>(buffer)ac :<C-u>ATwoCol<CR>
+nnoremap <Plug>(buffer)r :<C-u>TwoRow<CR>
+nnoremap <Plug>(buffer)ar :<C-u>ATwoRow<CR>
 nnoremap <silent> <Plug>(buffer)j :<C-u>bnext<CR>
 nnoremap <silent> <Plug>(buffer)k :<C-u>bprevious<CR>
-nnoremap <silent> <Plug>(buffer)x :<C-u>bdelete<CR>
 " }}}
 
 " command {{{

@@ -24,7 +24,6 @@ set noswapfile
 set wildmenu
 set wildmode=list:longest
 set laststatus=2
-set statusline=%f%m%r%h%w%=%l,%v/%L\ %{&ff}\ %{&fenc!=''?&fenc:&enc}\ %y
 set confirm
 set hidden
 set splitbelow
@@ -47,6 +46,7 @@ set errorformat+=%-G%.%#
 set foldminlines=3
 set nofoldenable
 set autoread
+set colorcolumn=80,120
 if has('nvim')
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()

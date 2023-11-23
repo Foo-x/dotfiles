@@ -54,7 +54,9 @@ set('n', '<leader>oc', ':<C-u>OtherClear<CR>', { silent = true })
 
 require('stickybuf').setup()
 
-require('leap').add_repeat_mappings(';', ',')
+require('leap').add_repeat_mappings(':', ',', {
+  modes = 'n',
+})
 set('n', 'f', '<Plug>(leap-forward-to)')
 set('n', 'F', '<Plug>(leap-backward-to)')
 set('n', 't', '<Plug>(leap-forward-till)')
@@ -161,8 +163,8 @@ set('n', 'K', help)
 set('n', 'gh', vim.diagnostic.open_float)
 set('n', '[d', vim.diagnostic.goto_prev)
 set('n', ']d', vim.diagnostic.goto_next)
-set('n', '<space>qq', vim.diagnostic.setqflist)
-set('n', '<space><space>ll', vim.diagnostic.setloclist)
+set('n', '<leader>q', vim.diagnostic.setqflist)
+set('n', '<leader>l', vim.diagnostic.setloclist)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('LspConfig', {}),
@@ -175,8 +177,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     set('n', 'gt', vim.lsp.buf.type_definition, opts)
     set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, opts)
     set('n', '<F2>', vim.lsp.buf.rename, opts)
-    set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    set({ 'n', 'v' }, '<space>f', function()
+    set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    set({ 'n', 'v' }, '<leader>f', function()
       vim.lsp.buf.format({ async = true })
     end, opts)
   end,

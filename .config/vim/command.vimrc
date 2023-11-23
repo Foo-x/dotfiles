@@ -59,6 +59,10 @@ if 1
       command! -buffer InsertPrintInfo call s:insert_print('info')
       command! -buffer InsertPrintWarn call s:insert_print('warn')
       command! -buffer InsertPrintError call s:insert_print('error')
+      nnoremap <buffer> <Space>i <Plug>(insert_print)
+      nnoremap <buffer> <Plug>(insert_print)i :<C-u>InsertPrintInfo<CR>
+      nnoremap <buffer> <Plug>(insert_print)w :<C-u>InsertPrintWarn<CR>
+      nnoremap <buffer> <Plug>(insert_print)e :<C-u>InsertPrintError<CR>
     endif
   endf
   augroup InsertPrint

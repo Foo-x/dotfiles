@@ -13,6 +13,9 @@ nnoremap U <C-r>
 nnoremap + <C-a>
 nnoremap - <C-x>
 
+nnoremap ; :
+nnoremap : ;
+
 "" not to go next
 nnoremap * *N
 
@@ -39,20 +42,18 @@ noremap <Space>h ^
 nnoremap <Space>l $
 noremap <Space>m %
 
-nnoremap <Space>o o<Esc>
-nnoremap <Space>O O<Esc>
+nnoremap <Space>o :<C-u>a<CR><CR>.<CR>
+nnoremap <Space>O :<C-u>i<CR><CR>.<CR>
 
 nnoremap <Space>j <C-f>
 nnoremap <Space>k <C-b>
-
-"" insert only one character
-nnoremap <Space>i i_<Esc>r
 
 nmap <Space>g <Plug>(goto)
 nnoremap <Plug>(goto)h <C-o>
 nnoremap <Plug>(goto)l <C-i>
 
 nmap <Space>a <Plug>(argument)
+nnoremap <Plug>(argument)a :<C-u>Args<CR>
 nnoremap <Plug>(argument)n :<C-u>next<CR>
 nnoremap <Plug>(argument)p :<C-u>previous<CR>
 
@@ -97,6 +98,7 @@ nnoremap <Plug>(window)f <C-w>f
 nnoremap <Plug>(window)F <C-w>F
 nnoremap <Plug>(window)gf <C-w>gf
 nnoremap <Plug>(window)gF <C-w>gF
+nnoremap <Plug>(window)T <C-w>T
 nnoremap <Plug>(window)r <C-w>r
 nnoremap <Plug>(window)m <C-w>\|<C-w>_
 nnoremap <Plug>(window)= <C-w>=
@@ -116,6 +118,11 @@ nnoremap <silent> <Plug>(tab)c :<C-u>tabclose<CR>
 nnoremap <silent> <Plug>(tab)o :<C-u>tabonly<CR>
 nnoremap <silent> <Plug>(tab)h :<C-u>tabprevious<CR>
 nnoremap <silent> <Plug>(tab)l :<C-u>tabnext<CR>
+
+nmap <Space>r <Plug>(reload)
+nnoremap <Plug>(reload)v :<C-u>source $MYVIMRC<CR>
+
+nnoremap <C-s> :<C-u>update<CR>
 
 "" not to yunk
 nnoremap x "_x
@@ -149,6 +156,13 @@ inoremap <C-l> <Del>
 inoremap <C-z> <C-o>u
 inoremap <C-y> <C-o><C-r>
 inoremap <C-v>u <C-r>=nr2char(0x)<Left>
+inoremap <C-s> <Esc>:<C-u>update<CR>gi
+
+imap <C-f> <Plug>(i_file)
+inoremap <Plug>(i_file). <C-r>%
+inoremap <Plug>(i_file)p <C-r>=expand('%:p')<CR>
+inoremap <Plug>(i_file)t <C-r>=expand('%:t')<CR>
+inoremap <Plug>(i_file)r <C-r>=expand('%:t:r')<CR>
 
 " visual mode
 "" display lines downward
@@ -163,6 +177,9 @@ vnoremap + <C-a>gv
 vnoremap - <C-x>gv
 vnoremap g+ g<C-a>gv
 vnoremap g- g<C-x>gv
+
+vnoremap ; :
+vnoremap : ;
 
 "" not to override register on paste
 vnoremap p pgvy
