@@ -51,9 +51,11 @@ nnoremap <Space>k <C-b>
 nmap <Space>g <Plug>(goto)
 nnoremap <Plug>(goto)h <C-o>
 nnoremap <Plug>(goto)l <C-i>
+nnoremap <Plug>(goto)j <Plug>(GitGutterNextHunk)
+nnoremap <Plug>(goto)k <Plug>(GitGutterPrevHunk)
 
 nmap <Space>a <Plug>(argument)
-nnoremap <Plug>(argument)a :<C-u>Args<CR>
+nnoremap <Plug>(argument) :<C-u>Args<CR>
 nnoremap <Plug>(argument)n :<C-u>next<CR>
 nnoremap <Plug>(argument)p :<C-u>previous<CR>
 
@@ -120,7 +122,7 @@ nnoremap <silent> <Plug>(tab)h :<C-u>tabprevious<CR>
 nnoremap <silent> <Plug>(tab)l :<C-u>tabnext<CR>
 
 nmap <Space>r <Plug>(reload)
-nnoremap <Plug>(reload)v :<C-u>source $MYVIMRC<CR>
+nnoremap <Plug>(reload) :<C-u>source $MYVIMRC<CR>
 
 nnoremap <C-s> :<C-u>update<CR>
 

@@ -8,8 +8,6 @@ endif
 " }}}
 
 " keymap {{{
-nmap <Space><Space>gj <Plug>(GitGutterNextHunk)
-nmap <Space><Space>gk <Plug>(GitGutterPrevHunk)
 nmap <Space><Space>gp <Plug>(GitGutterPreviewHunk)<C-w>P
 " }}}
 "
