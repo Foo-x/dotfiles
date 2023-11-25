@@ -92,10 +92,10 @@ nnoremap <Plug>(window)j <C-w>j
 nnoremap <Plug>(window)k <C-w>k
 nnoremap <Plug>(window)l <C-w>l
 nnoremap <Plug>(window)w <C-w>w
-nnoremap <silent> <Plug>(window)H :<C-u>call SwapWindow('h')<CR>
-nnoremap <silent> <Plug>(window)J :<C-u>call SwapWindow('j')<CR>
-nnoremap <silent> <Plug>(window)K :<C-u>call SwapWindow('k')<CR>
-nnoremap <silent> <Plug>(window)L :<C-u>call SwapWindow('l')<CR>
+nnoremap <silent> <Plug>(window)H :<C-u>call MoveWindow('h')<CR>
+nnoremap <silent> <Plug>(window)J :<C-u>call MoveWindow('j')<CR>
+nnoremap <silent> <Plug>(window)K :<C-u>call MoveWindow('k')<CR>
+nnoremap <silent> <Plug>(window)L :<C-u>call MoveWindow('l')<CR>
 nnoremap <Plug>(window)f <C-w>f
 nnoremap <Plug>(window)F <C-w>F
 nnoremap <Plug>(window)gf <C-w>gf

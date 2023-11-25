@@ -9,11 +9,11 @@
 ### Optional
 
 - [bash-completion](https://github.com/scop/bash-completion)
-    - aliases
 - tmux
-    - auto-attach
 - git diff-highlight
-    - `GIT_PAGER`
+- vim
+- neovim
+- taskwarrior
 
 
 ## Installation

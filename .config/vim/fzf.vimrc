@@ -31,15 +31,15 @@ if 1
 
   command! FBD call fzf#vim#buffers(fzf#vim#with_preview({
     \ 'sink*': { lines -> s:fzf_delete_buffers('bdelete', lines) },
-    \ 'options': '--multi --reverse --bind ctrl-a:select-all'
+    \ 'options': '--multi --reverse --bind ctrl-a:select-all --prompt "FBD> "'
   \ }))
 
   command! FBW call fzf#vim#buffers(map(getbufinfo(), 'v:val.bufnr'), fzf#vim#with_preview({
     \ 'sink*': { lines -> s:fzf_delete_buffers('bwipeout', lines) },
-    \ 'options': '--multi --reverse --bind ctrl-a:select-all'
+    \ 'options': '--multi --reverse --bind ctrl-a:select-all --prompt "FBW> "'
   \ }))
 
-  command! Args call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': argv()}), 0))
+  command! Args call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': argv(), 'options': '--prompt "Args> "'}), 0))
   fun! s:fzf_argdelete(lines)
     let l:args = join(map(a:lines, 'fnameescape(v:val)'))
     exe 'argdelete' l:args
@@ -47,7 +47,7 @@ if 1
   command! DeleteArgs call fzf#run(fzf#wrap(fzf#vim#with_preview({
     \ 'source': argv(),
     \ 'sink*': { lines -> s:fzf_argdelete(lines) },
-    \ 'options': '--multi --bind ctrl-a:select-all'
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "DeleteArgs> "'
   \ }), 0))
   fun! s:fzf_argadd(lines, should_update)
     if a:should_update
@@ -58,11 +58,56 @@ if 1
   endf
   command! -bang AddArgs call fzf#vim#files(<q-args>, fzf#vim#with_preview({
     \ 'sink*': { lines -> s:fzf_argadd(lines, <bang>0) },
-    \ 'options': '--multi --bind ctrl-a:select-all'
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "AddArgs> "'
   \ }))
   command! -bang GAddArgs call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
     \ 'sink*': { lines -> s:fzf_argadd(lines, <bang>0) },
-    \ 'options': '--multi --bind ctrl-a:select-all'
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "GAddArgs> "'
   \ }))
+
+  fun! s:open_buffers_in_new_tab(is_vert, lines)
+    let l:lines = map(filter(a:lines, 'len(v:val)'), {_, line -> split(line, '	')[-1]})
+    echom l:lines
+    exe 'tabnew' fnameescape(l:lines[0])
+    if len(l:lines) == 1
+      return
+    endif
+
+    for l:file in l:lines[1:]
+      if a:is_vert
+        exe 'vsplit' fnameescape(l:file)
+      else
+        exe 'split' fnameescape(l:file)
+      endif
+    endfor
+    winc t
+  endf
+
+  command! -bang TS call fzf#vim#files(<q-args>, fzf#vim#with_preview({
+    \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "TS> "'
+  \ }))
+  command! -bang TV call fzf#vim#files(<q-args>, fzf#vim#with_preview({
+    \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "TV> "'
+  \ }))
+  command! -bang BTS call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({
+    \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "BTS> "'
+  \ }))
+  command! -bang BTV call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({
+    \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "BTV> "'
+  \ }))
+  command! -bang ATS call fzf#run(fzf#wrap(fzf#vim#with_preview({
+    \ 'source': argv(),
+    \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "ATS> "'
+  \ })))
+  command! -bang ATV call fzf#run(fzf#wrap(fzf#vim#with_preview({
+    \ 'source': argv(),
+    \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "ATV> "'
+  \ })))
 endif
 " }}}

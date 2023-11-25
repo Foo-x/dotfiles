@@ -45,7 +45,28 @@ set('n', '<M-.>', '<Cmd>SymbolsOutline<CR>')
 
 require('nvim-autopairs').setup()
 
-require('other-nvim').setup({})
+require('other-nvim').setup({
+  mappings = {
+    {
+      pattern = 'src/resources/views/(.*).blade.php',
+      target = 'src/app/Http/%1.php',
+      transformer = 'capitalize_by_slash'
+    },
+    {
+      pattern = 'src/app/Http/(.*).php',
+      target = 'src/resources/views/%1.blade.php',
+      transformer = 'lowercase'
+    },
+  },
+  transformers = {
+    capitalize_by_slash = function (input)
+      return input:gsub('^%l', string.upper):gsub('/%l', string.upper)
+    end,
+    lowercase = function (input)
+      return input:lower()
+    end
+  }
+})
 set('n', '<leader>oo', ':<C-u>Other<CR>', { silent = true })
 set('n', '<leader>ot', ':<C-u>OtherTabNew<CR>', { silent = true })
 set('n', '<leader>os', ':<C-u>OtherSplit<CR>', { silent = true })

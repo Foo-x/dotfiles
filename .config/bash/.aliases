@@ -3,6 +3,8 @@ shopt -s expand_aliases
 alias sudo='sudo -E '
 alias _='sudo '
 
+alias man='man '
+
 # cd
 alias ..='cd ..'
 alias ...='cd ...'
@@ -176,9 +178,6 @@ alias al='cat ~/.dotfiles/.config/bash/.aliases{,_fzf} | $PAGER'
 alias bashrc='$PAGER ~/.dotfiles/.bashrc'
 alias bashrc_org='$PAGER ~/.bashrc'
 alias inputrc='$PAGER ~/.inputrc'
-alias vimrc='$PAGER $XDG_CONFIG_HOME/vim/vimrc'
-alias vimkeymap='$PAGER $XDG_CONFIG_HOME/vim/keymap.vimrc'
-alias vimcommand='$PAGER $XDG_CONFIG_HOME/vim/command.vimrc'
 alias tmal='alias | \grep "='\''tmux"'
 alias tmconf='$PAGER $XDG_CONFIG_HOME/tmux/tmux.conf'
 alias dal='alias | \grep "='\''docker[^-]" | $PAGER'
@@ -314,6 +313,15 @@ if type rsync &> /dev/null; then
   }
 fi
 
+if type task &> /dev/null; then
+  alias t=task
+  alias taskrc='$PAGER $XDG_CONFIG_HOME/task/taskrc'
+fi
+
+if type taskwarrior-tui &> /dev/null; then
+  alias tt=taskwarrior-tui
+fi
+
 if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'
@@ -338,7 +346,7 @@ if [[ "${WSL_DISTRO_NAME}" ]]; then
 
   # use git.exe in win dir for performance
   function git() {
-    if is_win_dir; then
+    if is_win_dir && type git.exe &> /dev/null; then
       git.exe "$@"
     else
       /usr/bin/git "$@"

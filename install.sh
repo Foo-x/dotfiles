@@ -33,7 +33,7 @@ mkdir -p ${XDG_DATA_HOME}
 mkdir -p ${XDG_STATE_HOME}
 
 # setup gh
-if type gh > /dev/null 2>&1; then
+if has gh; then
     {
         gh alias set cl 'repo clone'
         gh alias set clp 'repo clone $1 -- --filter=blob:none --sparse'
@@ -123,6 +123,13 @@ mkdir -p ${XDG_STATE_HOME}/bash
 if [ -f ${HOME}/.bash_history ]; then
   cat ${HOME}/.bash_history >> ${XDG_STATE_HOME}/bash/history
   rm ${HOME}/.bash_history
+fi
+
+# setup taskwarrior
+if has task; then
+  TASK_DIR=${XDG_CONFIG_HOME}/task
+  mkdir -p ${TASK_DIR}
+  ln -sf ${DOT_DIR}/.config/task/taskrc ${TASK_DIR}/taskrc
 fi
 
 sh ${DOT_DIR}/setup_vim.sh

@@ -159,26 +159,5 @@ if 1
   endf
   command! TwoRow call s:two_row(s:n_bufs(2))
   command! ATwoRow call s:two_row(s:n_arg_bufs(2))
-
-  fun! s:open_buffers_in_new_tab(is_vert, ...)
-    exe 'tabnew' a:000[0]
-    if len(a:000) == 1
-      return
-    endif
-
-    for l:buf in a:000[1:]
-      if a:is_vert
-        exe 'vert sbuffer' l:buf
-      else
-        exe 'sbuffer' l:buf
-      endif
-    endfor
-  endf
-  command! -nargs=+ -complete=file TS silent! call s:open_buffers_in_new_tab(0, <f-args>)
-  command! -nargs=+ -complete=file TV silent! call s:open_buffers_in_new_tab(1, <f-args>)
-  command! -nargs=+ -complete=buffer BTS silent! call s:open_buffers_in_new_tab(0, <f-args>)
-  command! -nargs=+ -complete=buffer BTV silent! call s:open_buffers_in_new_tab(1, <f-args>)
-  command! -nargs=+ -complete=arglist ATS silent! call s:open_buffers_in_new_tab(0, <f-args>)
-  command! -nargs=+ -complete=arglist ATV silent! call s:open_buffers_in_new_tab(1, <f-args>)
 endif
 " }}}

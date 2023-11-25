@@ -88,4 +88,21 @@ if 1
     call cursor(l:target_line, l:target_col)
     winc p
   endf
+  fun! MoveWindow(direction)
+    if a:direction !~ '[hjkl]'
+      return
+    endif
+
+    let l:source_winnr = winnr()
+    let l:source_bufnr = bufnr()
+    let l:source_line = line('.')
+    let l:source_col = col('.')
+
+    exe 'winc' a:direction
+    exe 'b' l:source_bufnr
+    call cursor(l:source_line, l:source_col)
+    winc p
+    b#
+    winc p
+  endf
 endif
