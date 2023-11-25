@@ -95,12 +95,12 @@ require('fidget').setup()
 mason.setup()
 mason_null_ls.setup({
   ensure_installed = {
-    'markdownlint',
-    'markuplint',
-    'prettier',
+    -- 'markdownlint',
+    -- 'markuplint',
+    -- 'prettier',
     'shellcheck',
     'shfmt',
-    'sql-formatter',
+    -- 'sql-formatter',
   },
 })
 null_ls.setup({
@@ -121,22 +121,23 @@ null_ls.setup({
 })
 mason_lspconfig.setup({
   ensure_installed = {
-    'bashls',
-    'cssls',
-    'cssmodules_ls',
-    'dockerls',
-    'docker_compose_language_service',
-    'eslint',
-    'intelephense',
-    'html',
-    'jsonls',
+    -- 'bashls',
+    -- 'cssls',
+    -- 'cssmodules_ls',
+    -- 'dockerls',
+    -- 'docker_compose_language_service',
+    -- 'eslint',
+    -- 'intelephense',
+    -- 'html',
+    -- 'jsonls',
     'lua_ls',
     'marksman',
-    'pyright',
-    'sqlls',
-    'tsserver',
-    'vimls',
-    'yamlls',
+    -- 'pyright',
+    -- 'rust_analyzer',
+    -- 'sqlls',
+    -- 'tsserver',
+    -- 'vimls',
+    -- 'yamlls',
   },
 })
 
