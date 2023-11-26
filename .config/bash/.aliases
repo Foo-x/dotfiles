@@ -48,6 +48,7 @@ if type nvim &> /dev/null; then
 fi
 alias kmd='vi -O ${XDG_DATA_HOME}/kanbanmd/*_*.md'
 alias kmdh='$PAGER ${XDG_DATA_HOME}/kanbanmd/README.md'
+alias kmdn='cat ${XDG_DATA_HOME}/kanbanmd/{2_ready,3_doing}.md | $PAGER'
 
 alias md=mkdir
 alias gr=grep
