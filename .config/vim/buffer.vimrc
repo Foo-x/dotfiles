@@ -159,5 +159,22 @@ if 1
   endf
   command! TwoRow call s:two_row(s:n_bufs(2))
   command! ATwoRow call s:two_row(s:n_arg_bufs(2))
+
+  fun! s:update_oldfiles(file)
+    if !exists('v:oldfiles')
+      return
+    endif
+    let l:idx = index(v:oldfiles, a:file)
+    if l:idx != -1
+      call remove(v:oldfiles, l:idx)
+    endif
+    if len(a:file) != 0
+      call insert(v:oldfiles, a:file, 0)
+    endif
+  endf
+  augroup UpdateOldfiles
+    autocmd!
+    autocmd BufEnter * call s:update_oldfiles(expand('<afile>:p'))
+  augroup END
 endif
 " }}}

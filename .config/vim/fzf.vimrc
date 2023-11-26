@@ -7,6 +7,8 @@ nnoremap <Space>f <Plug>(fzf)
 nnoremap <Plug>(fzf)f :<C-u>Files<CR>
 nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
 nnoremap <Plug>(fzf)b :<C-u>Buffers<CR>
+nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
+nnoremap <Plug>(fzf)H :<C-u>History<CR>
 nnoremap <Plug>(fzf)a :<C-u>Args<CR>
 nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs<CR>
 nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
@@ -17,7 +19,8 @@ nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
 cnoreabbr FF Files
 cnoreabbr FG GFiles
 cnoreabbr FB Buffers
-cnoreabbr FH History
+cnoreabbr FH HistoryWS
+cnoreabbr FHA History
 cnoreabbr FHE Helptags
 cnoreabbr FA Args
 cnoreabbr FGA GArgs
@@ -40,6 +43,8 @@ if 1
   \ }))
 
   command! Args call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': argv(), 'options': '--prompt "Args> "'}), 0))
+  command! History call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': filter(copy(v:oldfiles[1:]), 'filereadable(v:val)'), 'options': '--prompt "History> "'}), 0))
+  command! HistoryWS call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': filter(copy(v:oldfiles[1:]), 'filereadable(v:val) && v:val =~ "^" . getcwd()'), 'options': '--prompt "HistoryWS> "'}), 0))
   fun! s:fzf_argdelete(lines)
     let l:args = join(map(a:lines, 'fnameescape(v:val)'))
     exe 'argdelete' l:args

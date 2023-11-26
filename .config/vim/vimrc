@@ -47,6 +47,8 @@ set foldminlines=3
 set nofoldenable
 set autoread
 set colorcolumn=80,120
+set viminfo-='100
+set viminfo+='10000
 if has('nvim')
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
