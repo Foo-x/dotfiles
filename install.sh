@@ -121,18 +121,15 @@ echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 # setup bash history
 mkdir -p ${XDG_STATE_HOME}/bash
 if [ -f ${HOME}/.bash_history ]; then
-  cat ${HOME}/.bash_history >> ${XDG_STATE_HOME}/bash/history
-  rm ${HOME}/.bash_history
+    cat ${HOME}/.bash_history >> ${XDG_STATE_HOME}/bash/history
+    rm ${HOME}/.bash_history
 fi
 
-# setup taskwarrior
-if has task; then
-  TASK_DIR=${XDG_CONFIG_HOME}/task
-  mkdir -p ${TASK_DIR}
-  ln -sf ${DOT_DIR}/.config/task/taskrc ${TASK_DIR}/taskrc
+if [ ! -d ${XDG_DATA_HOME}/kanbanmd ]; then
+    cp -r kanbanmd ${XDG_DATA_HOME}
+else
+    \cp kanbanmd/README.md ${XDG_DATA_HOME}/kanbanmd
 fi
-
-cp -r kanbanmd ${XDG_DATA_HOME}
 
 sh ${DOT_DIR}/setup_vim.sh
 

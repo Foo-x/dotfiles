@@ -1,8 +1,8 @@
 # README
 
 ```md
-  1-- 2--------------------------------------
-- (A) task +project @context #tag {key:value}
+  1-- 2--------------------------------------------------
+- (A) task +project @context #tag ~2023-12-31 {key:value}
 ```
 
 1. Priority
@@ -16,6 +16,7 @@
         - prefix: `@`
     - Tag
         - prefix: `#`
+    - Due
+        - prefix: `~`
     - KeyValuePair
         - `{key:value}`
-        - e.g. `{due:2023-12-31}`

@@ -187,15 +187,11 @@ if type python &> /dev/null || type python3 &> /dev/null; then
   export PROMPT_COMMAND_HISTSAVE='__dedup_history'
 fi
 
-export LSGIT_TASK=true
 function lsgit() {
   ls -A
   if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = "true" ] ; then
     echo
     git status -sb
-  fi
-  if ${LSGIT_TASK} && type task &> /dev/null; then
-    task 2> /dev/null
   fi
 }
 

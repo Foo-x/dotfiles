@@ -13,7 +13,6 @@
 - git diff-highlight
 - vim
 - neovim
-- taskwarrior
 
 
 ## Installation
