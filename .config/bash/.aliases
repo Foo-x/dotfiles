@@ -40,11 +40,13 @@ alias j=jobs
 
 if type vim &> /dev/null; then
   alias vi=vim
+  alias kmd='vim -O ${XDG_DATA_HOME}/kanbanmd/*_*.md'
 fi
 if type nvim &> /dev/null; then
   alias vi=nvim
   alias nview='nvim -R'
   alias view=nview
+  alias kmd='nvim -O ${XDG_DATA_HOME}/kanbanmd/*_*.md'
 fi
 
 alias md=mkdir

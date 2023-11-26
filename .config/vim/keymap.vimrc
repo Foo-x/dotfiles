@@ -195,12 +195,13 @@ vnoremap <silent> y y`]
 
 vnoremap <Space>l $h
 
-vnoremap <Space>s( di()<Esc>P
-vnoremap <Space>s{ di{}<Esc>P
-vnoremap <Space>s[ di[]<Esc>P
-vnoremap <Space>s< di<><Esc>P
-vnoremap <Space>s" di""<Esc>P
-vnoremap <Space>s' di''<Esc>P
+vnoremap <Space>s( <Esc>`<i(<Esc>`>la)<Esc>
+vnoremap <Space>s{ <Esc>`<i{<Esc>`>la}<Esc>
+vnoremap <Space>s[ <Esc>`<i[<Esc>`>la]<Esc>
+vnoremap <Space>s< <Esc>`<i<<Esc>`>la><Esc>
+vnoremap <Space>s" <Esc>`<i"<Esc>`>la"<Esc>
+vnoremap <Space>s' <Esc>`<i'<Esc>`>la'<Esc>
+vnoremap <Space>s` <Esc>`<i`<Esc>`>la`<Esc>
 
 vnoremap <Space>do :diffget<CR>
 vnoremap <Space>1do :diffget 1<CR>

@@ -132,6 +132,8 @@ if has task; then
   ln -sf ${DOT_DIR}/.config/task/taskrc ${TASK_DIR}/taskrc
 fi
 
+cp -r kanbanmd ${XDG_DATA_HOME}
+
 sh ${DOT_DIR}/setup_vim.sh
 
 echo "Done."
