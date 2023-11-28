@@ -18,9 +18,9 @@ cnoreabbr GDT G difftool -y
 cnoreabbr GMT G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t \| Gvdiffsplit :1 \| winc j
 
 " gv.vim
-cnoreabbr GV0a GV --all
+cnoreabbr GVA GV --all
 cnoreabbr GV1 GV --name-status
-cnoreabbr GV1a GV --name-status --all
+cnoreabbr GVA1 GV --name-status --all
 " }}}
 
 " autocmd {{{

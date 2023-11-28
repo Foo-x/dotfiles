@@ -9,7 +9,7 @@ nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
 nnoremap <Plug>(fzf)b :<C-u>Buffers<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
 nnoremap <Plug>(fzf)H :<C-u>History<CR>
-nnoremap <Plug>(fzf)a :<C-u>Args<CR>
+nnoremap <Plug>(fzf)ar :<C-u>Args<CR>
 nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs<CR>
 nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
 nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>

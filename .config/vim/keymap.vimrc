@@ -55,7 +55,7 @@ nnoremap <Plug>(goto)j <Plug>(GitGutterNextHunk)
 nnoremap <Plug>(goto)k <Plug>(GitGutterPrevHunk)
 
 nmap <Space>a <Plug>(argument)
-nnoremap <Plug>(argument) :<C-u>Args<CR>
+nnoremap <Plug>(argument)r :<C-u>Args<CR>
 nnoremap <Plug>(argument)n :<C-u>next<CR>
 nnoremap <Plug>(argument)p :<C-u>previous<CR>
 
