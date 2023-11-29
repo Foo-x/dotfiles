@@ -228,6 +228,8 @@
 [mergetool]
     keepBackup = false
     writeToTemp = true
+[fetch]
+    prune = true
 [pull]
     ff = only
 [help]

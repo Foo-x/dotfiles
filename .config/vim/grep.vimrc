@@ -5,8 +5,9 @@ set grepprg=grep\ -rnIE\ --exclude-dir=.git\ --exclude-dir=node_modules\ --exclu
 " command {{{
 " skip on vim-tiny
 if 1
-  command! -nargs=+ -complete=file GR execute 'silent grep! <args>' | redraw! | cw
-  command! -nargs=+ -complete=file LGR execute 'silent lgrep! <args>' | redraw! | lw
+  " use '\\\#' to search '#'
+  command! -nargs=+ -complete=file GR execute 'silent grep!' <q-args> | redraw! | cw
+  command! -nargs=+ -complete=file LGR execute 'silent lgrep!' <q-args> | redraw! | lw
 
   fun! s:git_grep(command, bang, arg) abort
     let tmp1=&grepprg
