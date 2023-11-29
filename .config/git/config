@@ -197,13 +197,18 @@
 
     # others
     s = status -sb
+    si = status -sb --ignored
 
-    ## sync untracked and ignored
-    syncui = "!f(){ \
-        git status -su --ignored \
+    ## cp untracked and ignored
+    cpui = "!f(){ \
+        local cp='cp -a'; \
+        if [ -x \"$(command -v rsync)\" ]; then \
+            cp='rsync -ah --info=progress2'; \
+        fi; \
+        git status -s --ignored \
         | egrep '^\\?\\?|^!!' \
         | sed 's/^...//' \
-        | xargs -i sh -c 'mkdir -p '$1'/$(dirname {}) && ln -f {} '$1'/{}'; \
+        | xargs -i $cp {} $1/{}; \
     };f"
 
     ## edit all changed files
