@@ -63,7 +63,7 @@
     };f"
 
     ## delete merged branch
-    dmb = !git branch --merged | egrep -v '\\*|develop|master|main' | xargs git branch -d 2> /dev/null
+    dmb = !git branch --merged | egrep -v '\\*|develop|master|main' | sed 's/+ //' | xargs -i sh -c 'git worktree remove {} 2> /dev/null; git branch -d {} 2> /dev/null'
 
     ## check if can merge
     mc = "!f(){ \
@@ -154,6 +154,12 @@
     wtl = worktree list
     wtp = worktree prune
     wtr = worktree remove
+    wtpp = "!f(){ \
+        cd $(git worktree list | head -n1 | cut -d' ' -f1) && \
+        git pull && \
+        git remote prune origin && \
+        git dmb; \
+    };f"
 
     # submodule
     sub = submodule
@@ -191,6 +197,14 @@
 
     # others
     s = status -sb
+
+    ## sync untracked and ignored
+    syncui = "!f(){ \
+        git status -su --ignored \
+        | egrep '^\\?\\?|^!!' \
+        | sed 's/^...//' \
+        | xargs -i sh -c 'mkdir -p '$1'/$(dirname {}) && ln -f {} '$1'/{}'; \
+    };f"
 
     ## edit all changed files
     editall = !$EDITOR $(git ls-files -o -m --exclude-standard $(git rev-parse --show-cdup))
