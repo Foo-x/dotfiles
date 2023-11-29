@@ -17,11 +17,11 @@ if 1
 
   " insert_print
   if !exists('g:insert_print_prefix')
-    let g:insert_print_prefix = '+++++ '
+    let g:insert_print_prefix = '🔴🟠🟡🟢🔵🟣🟤 '
   endif
 
   if !exists('g:insert_print_suffix')
-    let g:insert_print_suffix = ' +++++'
+    let g:insert_print_suffix = ' 🟤🟣🔵🟢🟡🟠🔴'
   endif
 
   if !exists('g:insert_print_templates')
@@ -33,7 +33,7 @@ if 1
   endif
 
   if !exists('g:insert_print_text')
-    let g:insert_print_text = '📝 $0'
+    let g:insert_print_text = '$0'
   endif
 
   fun! s:insert_print()

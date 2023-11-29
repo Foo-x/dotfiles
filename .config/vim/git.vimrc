@@ -9,6 +9,8 @@ endif
 
 " keymap {{{
 nmap <Space><Space>gp <Plug>(GitGutterPreviewHunk)<C-w>P
+nnoremap <F9> :<C-u>GV --all<CR>
+nnoremap <S-F9> :<C-u>GV --name-status --all<CR>
 " }}}
 "
 " command {{{
