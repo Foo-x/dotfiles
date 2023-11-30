@@ -9,28 +9,21 @@
 
 1. Priority
     - `(A)` to `(Z)`
-    - optional
 2. Description with notes
     - Description
         - no prefix
         - required
     - Project
         - prefix: `+`
-        - optional
     - Context
         - prefix: `@`
-        - optional
     - Tag
         - prefix: `#`
-        - optional
     - Due
         - prefix: `~`
-        - optional
     - Key Value
         - `{key:value}`
-        - optional
 3. Checkbox
     - `[ ]` or `[x]`
     - subtask only
-    - required
 

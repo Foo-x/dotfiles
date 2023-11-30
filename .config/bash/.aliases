@@ -326,8 +326,8 @@ if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'
   alias mklink='cmd.exe /c mklink'
-  alias pbcopy="iconv -t sjis | clip.exe"
-  alias pbpaste="powershell.exe -command 'Get-Clipboard' | iconv -f sjis"
+  alias pbcopy='powershell.exe -command '\''[Console]::InputEncoding = [System.Text.Encoding]::UTF8; $reader = [System.IO.StreamReader]::new([System.IO.Stream]::Synchronized([System.Console]::OpenStandardInput())); $reader.ReadToEnd() | Set-Clipboard'\'
+  alias pbpaste='powershell.exe -command '\''[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; Get-Clipboard'\'
 
   function open() {
     if [ -e "$1" ]; then

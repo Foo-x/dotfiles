@@ -63,7 +63,12 @@
     };f"
 
     ## delete merged branch
-    dmb = !git branch --merged | egrep -v '\\*|develop|master|main' | sed 's/+ //' | xargs -i sh -c 'git worktree remove {} 2> /dev/null; git branch -d {} 2> /dev/null'
+    dmb = "!f(){ \
+        git branch --merged | \
+        egrep -v '\\*|develop|master|main' | \
+        sed 's/+ //' | \
+        xargs -i sh -c 'git worktree remove {} 2> /dev/null; git branch -d {} 2> /dev/null'; \
+    };f"
 
     ## check if can merge
     mc = "!f(){ \
