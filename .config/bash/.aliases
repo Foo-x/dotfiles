@@ -46,9 +46,9 @@ if type nvim &> /dev/null; then
   alias nview='nvim -R'
   alias view=nview
 fi
-alias kmd='vi +"e ${XDG_DATA_HOME}/kanbanmd/1_backlog.md | sp ${XDG_DATA_HOME}/kanbanmd/4_onhold.md | vs ${XDG_DATA_HOME}/kanbanmd/5_done.md | winc t | vs ${XDG_DATA_HOME}/kanbanmd/2_ready.md | vs ${XDG_DATA_HOME}/kanbanmd/3_doing.md"'
+alias kmd='(cd ${XDG_DATA_HOME}/kanbanmd && vi +"e 1_backlog.md | sp 4_blocked.md | vs 5_done.md | winc t | vs 2_ready.md | vs 3_doing.md")'
 alias kmdh='$PAGER ${XDG_DATA_HOME}/kanbanmd/README.md'
-alias kmdn='cat ${XDG_DATA_HOME}/kanbanmd/2_ready.md <(echo) ${XDG_DATA_HOME}/kanbanmd/3_doing.md | $PAGER'
+alias kmdn='(cd ${XDG_DATA_HOME}/kanbanmd && cat 2_ready.md <(echo) 3_doing.md | $PAGER)'
 
 alias md=mkdir
 alias gr=grep

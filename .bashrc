@@ -22,6 +22,7 @@ fi
 
 if type fzf &> /dev/null; then
   . ${DOT_DIR}/.config/bash/.aliases_fzf
+  . ${DOT_DIR}/.config/bash/.aliases_cdb
 fi
 
 if [[ -d $HOME/enhancd ]]; then

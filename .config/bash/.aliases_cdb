@@ -1,0 +1,88 @@
+function __cdb_goto() {
+  local f="${XDG_DATA_HOME:-~/.local/share}/cdb/bookmarks" path
+  path=$(fzf +m --preview "ls -p --group-directories-first --color=always {} 2> /dev/null" < "${f}")
+  cd "${path}" || return 1
+}
+
+function __cdb_add() {
+  local f="${XDG_DATA_HOME:-~/.local/share}/cdb/bookmarks" dir dirs path
+  if [ "${#@}" = 0 ]; then
+    dirs=(".")
+  else
+    dirs=("$@")
+  fi
+
+  for dir in "${dirs[@]}"; do
+    path=$(realpath "${dir}")
+    if [ ! -d "${path}" ]; then
+      echo "No such directory: ${path}"
+      return 1
+    fi
+    if ! \grep -qFx "${path}" "${f}"; then
+      echo "${path}" >> "${f}"
+      echo "Added: ${path}"
+    fi
+  done
+}
+
+function __cdb_delete() {
+  local f="${XDG_DATA_HOME:-~/.local/share}/cdb/bookmarks" dir path
+  path=$(fzf -m --preview "ls -p --group-directories-first --color=always {} 2> /dev/null" < "${f}")
+  for dir in ${path}; do
+    path=$(realpath "${dir}")
+    sed -ie "\~${path}~d" "${f}"
+    echo "Deleted: ${path}"
+  done
+}
+
+function __cdb_list() {
+  ${PAGER} "${XDG_DATA_HOME:-~/.local/share}/cdb/bookmarks"
+}
+
+function __cdb_edit() {
+  ${EDITOR} "${XDG_DATA_HOME:-~/.local/share}/cdb/bookmarks"
+}
+
+function __cdb_help() {
+  echo 'Usage: cdb [COMMAND]'
+  echo
+  echo 'cd bookmarks'
+  echo
+  echo 'Commands:'
+  echo '  a, add [DIR ...] Add directories to bookmarks (default: current directory)'
+  echo '  d, delete        Delete directories from bookmarks with fzf'
+  echo '  l, list          List bookmarks'
+  echo '  e, edit          Edit bookmarks'
+  echo '  h, help          Show help'
+  echo
+  echo 'cd to directory with fzf if no COMMAND supplied.'
+}
+
+function cdb() {
+  mkdir -p "${XDG_DATA_HOME}/cdb"
+  touch "${XDG_DATA_HOME}/cdb/bookmarks"
+
+  local subcommand=$1
+  shift
+
+  case $subcommand in
+  '')
+    __cdb_goto
+    ;;
+  add | a)
+    __cdb_add "$@"
+    ;;
+  delete | d)
+    __cdb_delete
+    ;;
+  list | l)
+    __cdb_list
+    ;;
+  edit | e)
+    __cdb_edit
+    ;;
+  *)
+    __cdb_help
+    ;;
+  esac
+}

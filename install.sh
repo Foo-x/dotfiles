@@ -11,8 +11,8 @@ has() {
 }
 
 if [ ! ${IS_UPDATED} ]; then
-    if ! has git || ! has curl; then
-        echo "curl or wget or git required" 1>&2
+    if ! has git; then
+        echo "git required" 1>&2
         exit 1
     fi
 
@@ -125,6 +125,7 @@ if [ -f ${HOME}/.bash_history ]; then
     rm ${HOME}/.bash_history
 fi
 
+# setup kanbanmd
 if [ ! -d ${XDG_DATA_HOME}/kanbanmd ]; then
     cp -r kanbanmd ${XDG_DATA_HOME}
 else
