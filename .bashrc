@@ -53,6 +53,6 @@ fi
 
 if type tmux &> /dev/null; then
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
-    tmux new -A -s $(basename $(pwd) | tr -d .)
+    tmux attach
   fi
 fi

@@ -18,6 +18,7 @@ if 1
     nmap <buffer> <CR> <Plug>(fern-my-open-or-expand)
     nmap <buffer> l <Plug>(fern-my-open-or-expand)
     nmap <buffer> D <Plug>(fern-action-remove=)
+    nmap <buffer><silent> x <Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>
     map <buffer> <Tab> <Plug>(fern-action-mark)
   endf
 
