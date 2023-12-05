@@ -327,7 +327,7 @@ if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'
   alias mklink='cmd.exe /c mklink'
-  alias pbcopy="powershell.exe -command '[Console]::InputEncoding = [System.Text.Encoding]::UTF8; \$reader = [System.IO.StreamReader]::new([System.IO.Stream]::Synchronized([System.Console]::OpenStandardInput())); \$reader.ReadToEnd() | Set-Clipboard'"
+  alias pbcopy="iconv -t utf16 | tail -c +3 | clip.exe"
   alias clip=pbcopy
   alias pbpaste="powershell.exe -command '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; Get-Clipboard'"
 
