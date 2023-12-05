@@ -21,7 +21,7 @@ if 1
   endif
 
   if !exists('g:insert_print_suffix')
-    let g:insert_print_suffix = ' 🟤🟣🔵🟢🟡🟠🔴'
+    let g:insert_print_suffix = ''
   endif
 
   if !exists('g:insert_print_templates')

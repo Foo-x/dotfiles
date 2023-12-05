@@ -135,7 +135,3 @@ augroup AutoRead
   autocmd!
   autocmd CursorHold * silent! checktime
 augroup END
-augroup Redraw
-  autocmd!
-  autocmd CursorHold * silent! mode
-augroup END
