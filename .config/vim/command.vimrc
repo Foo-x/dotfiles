@@ -150,30 +150,18 @@ if 1
     winc p
   endf
 
-  if !exists('g:autosave')
-    let g:autosave = 0
-  endif
-  if !exists('t:autosave')
-    let t:autosave = 0
-  endif
-  if !exists('w:autosave')
-    let w:autosave = 0
-  endif
-  if !exists('b:autosave')
-    let b:autosave = 0
-  endif
   fun! s:autosave()
     if !&modifiable || &readonly || !filewritable(expand('%'))
       return
     endif
-    if g:autosave || t:autosave || w:autosave || b:autosave
-      w
+    if get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0)
+      silent! update
     endif
   endf
   augroup AutoSave
     autocmd!
-    autocmd CursorHold * silent! call s:autosave()
+    autocmd CursorHold * call s:autosave()
   augroup END
   command! ClearAutoSaveVars let g:autosave=0 | let t:autosave=0 | let w:autosave=0 | let b:autosave=0
-  command! EchoAutoSaveVars echom 'g:' . g:autosave | echom 't:' . t:autosave | echom 'w:' . w:autosave | echom 'b:' . b:autosave
+  command! EchoAutoSaveVars echom 'g:' . get(g:, 'autosave', 0) | echom 't:' . get(t:, 'autosave', 0) | echom 'w:' . get(w:, 'autosave', 0) | echom 'b:' . get(b:, 'autosave', 0)
 endif
