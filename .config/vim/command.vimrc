@@ -24,8 +24,37 @@ if 1
   endf
   command! Everforest call s:everforest()
   if has('nvim')
-    command! Nordfox packadd! nightfox.nvim | color nordfox
-    command! KanagawaDragon packadd! kanagawa.nvim | color kanagawa-dragon
+    fun! s:nordfox()
+      packadd! nightfox.nvim
+      color nordfox
+      exe 'hi GitGutterChangeDelete guifg=' . v:lua.require('nightfox.palette').load('nordfox').blue.base
+    endf
+    command! Nordfox call s:nordfox()
+    fun! s:kanagawa_dragon()
+      packadd! kanagawa.nvim
+      lua require('kanagawa').setup({
+      \  colors = {
+      \    theme = {
+      \      all = {
+      \        ui = {
+      \          bg_gutter = "none"
+      \        }
+      \      }
+      \    }
+      \  },
+      \  overrides = function(colors)
+      \    local theme = colors.theme
+      \    return {
+      \      GitGutterAdd = { fg = theme.vcs.added },
+      \      GitGutterChange = { fg = theme.vcs.changed },
+      \      GitGutterDelete = { fg = theme.vcs.removed },
+      \      GitGutterChangeDelete = { fg = colors.palette.dragonBlue },
+      \    }
+      \  end,
+      \})
+      color kanagawa-dragon
+    endf
+    command! KanagawaDragon call s:kanagawa_dragon()
   endif
 
   command! TabcloseRight +,$tabdo tabclose
