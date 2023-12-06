@@ -13,6 +13,21 @@ if 1
   command! TabArgs tabnew | silent! argdo tab next
   command! -nargs=+ -complete=file EditMultiple silent! argdelete * | AA <args> | TabArgs
 
+  fun! s:everforest()
+    packadd! everforest
+    color everforest
+    let l:palette = everforest#get_palette('medium', {})
+    exe 'hi GitGutterAdd guifg=' . l:palette['green'][0]
+    exe 'hi GitGutterChange guifg=' . l:palette['blue'][0]
+    exe 'hi GitGutterDelete guifg=' . l:palette['red'][0]
+    exe 'hi GitGutterChangeDelete guifg=' . l:palette['purple'][0]
+  endf
+  command! Everforest call s:everforest()
+  if has('nvim')
+    command! Nordfox packadd! nightfox.nvim | color nordfox
+    command! KanagawaDragon packadd! kanagawa.nvim | color kanagawa-dragon
+  endif
+
   command! TabcloseRight +,$tabdo tabclose
 
   " insert_print
