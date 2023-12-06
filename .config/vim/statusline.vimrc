@@ -13,9 +13,10 @@ fun! MyStatusline()
     let l:diagnostics_status = printf('  %d  %d  %d 󰌵 %d', l:error_cnt, l:warn_cnt, l:info_cnt, l:hint_cnt)
   endif
 
+  let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
   let l:pinned_status = v:lua.require("stickybuf").is_pinned() ? ' ' : ''
 
-  return ' ' . l:common . l:diagnostics_status . l:pinned_status . ' '
+  return ' ' . l:common . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
 endf
 set statusline=%{%MyStatusline()%}
 
