@@ -85,15 +85,18 @@ set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
 syntax on
 
 " highlight
-try
-  Everforest
-catch
-  color desert
-  hi SignColumn ctermbg=black
-  hi GitGutterAdd ctermfg=green guifg=green
-  hi GitGutterChange ctermfg=yellow
-  hi GitGutterDelete ctermfg=red
-endtry
+" only first loading
+if !exists('g:colors_name')
+  try
+    Everforest
+  catch
+    color desert
+    hi SignColumn ctermbg=black
+    hi GitGutterAdd ctermfg=green guifg=green
+    hi GitGutterChange ctermfg=yellow
+    hi GitGutterDelete ctermfg=red
+  endtry
+endif
 hi netrwMarkFile ctermbg=darkmagenta
 
 " cursor shape
