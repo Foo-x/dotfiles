@@ -120,6 +120,8 @@ nnoremap <silent> <Plug>(tab)c :<C-u>tabclose<CR>
 nnoremap <silent> <Plug>(tab)o :<C-u>tabonly<CR>
 nnoremap <silent> <Plug>(tab)h :<C-u>tabprevious<CR>
 nnoremap <silent> <Plug>(tab)l :<C-u>tabnext<CR>
+nnoremap <silent> <Plug>(tab)H :<C-u>tabmove -<CR>
+nnoremap <silent> <Plug>(tab)L :<C-u>tabmove +<CR>
 
 nmap <Space>r <Plug>(reload)
 nnoremap <Plug>(reload) :<C-u>source $MYVIMRC<CR>

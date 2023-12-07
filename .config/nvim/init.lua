@@ -105,18 +105,20 @@ mason_null_ls.setup({
 })
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.markdownlint.with({
-      extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
-    }),
-    null_ls.builtins.diagnostics.markuplint,
-    null_ls.builtins.formatting.markdownlint.with({
-      extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
-    }),
-    null_ls.builtins.formatting.prettier,
+    -- null_ls.builtins.diagnostics.markdownlint.with({
+    --   extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    -- }),
+    -- null_ls.builtins.formatting.markdownlint.with({
+    --   extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    -- }),
+    -- null_ls.builtins.diagnostics.markuplint,
+    -- null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.code_actions.shellcheck,
     null_ls.builtins.formatting.shfmt.with({
       extra_args = { '-i', '2', '-sr' },
     }),
-    null_ls.builtins.formatting.sql_formatter,
+    -- null_ls.builtins.formatting.sql_formatter,
   }
 })
 mason_lspconfig.setup({

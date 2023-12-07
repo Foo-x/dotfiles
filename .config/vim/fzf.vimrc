@@ -23,7 +23,6 @@ cnoreabbr FH HistoryWS
 cnoreabbr FHA History
 cnoreabbr FHE Helptags
 cnoreabbr FA Args
-cnoreabbr FGA GArgs
 
 " skip on vim-tiny
 if 1

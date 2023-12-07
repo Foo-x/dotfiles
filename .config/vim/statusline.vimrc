@@ -1,5 +1,5 @@
 fun! MyStatusline()
-  let l:common = '%f%m%r%h%w%=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
+  let l:common = '%f%m%r%h%w %=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
   if !has('nvim')
     return ' ' . l:common . ' '
   endif
