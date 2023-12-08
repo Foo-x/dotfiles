@@ -4,6 +4,7 @@ nnoremap <silent> <Space>e :<C-u>exe 'Fern . -drawer -reveal=% -toggle -width=' 
 if 1
   let g:fern#renderer = "nerdfont"
   let g:fern#default_hidden = 1
+  let g:fern#default_exclude = '\v^%(\.git|node_modules|__pycache__|[Dd]esktop\.ini|Thumbs\.db|\.DS_Store)$|\.pyc$'
 
   fun! s:init_fern()
     nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>

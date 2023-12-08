@@ -59,10 +59,10 @@ require('other-nvim').setup({
     },
   },
   transformers = {
-    capitalize_by_slash = function (input)
+    capitalize_by_slash = function(input)
       return input:gsub('^%l', string.upper):gsub('/%l', string.upper)
     end,
-    lowercase = function (input)
+    lowercase = function(input)
       return input:lower()
     end
   }
@@ -222,59 +222,69 @@ local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-j>'] = cmp.mapping.scroll_docs(4),
-    ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
-    ['<Tab>'] = cmp.mapping({
-      i = function(fallback)
-        if vim.fn['vsnip#jumpable'](1) == 1 then
-          feedkey('<Plug>(vsnip-jump-next)', '')
-        elseif cmp.visible() then
-          cmp.select_next_item()
-        elseif has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end,
-    }),
-    ['<S-Tab>'] = cmp.mapping({
-      i = function()
-        if vim.fn['vsnip#jumpable'](-1) == 1 then
-          feedkey('<Plug>(vsnip-jump-prev)', '')
-        elseif cmp.visible() then
-          cmp.select_prev_item()
-        end
-      end,
-    }),
-  }),
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-    { name = 'buffer' },
-    { name = 'path' },
-  }),
-  formatting = {
-    format = lspkind.cmp_format({
-      mode = 'symbol',
-    }),
-  },
-  experimental = {
-    ghost_text = true,
-  },
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = vim.api.nvim_create_augroup('CmpSetup', {}),
+  callback = function()
+    if vim.bo.filetype == 'markdown' or vim.b.cmp_loaded then
+      return
+    end
+
+    cmp.setup.buffer({
+      snippet = {
+        expand = function(args)
+          vim.fn['vsnip#anonymous'](args.body)
+        end,
+      },
+      mapping = cmp.mapping.preset.insert({
+        ['<C-j>'] = cmp.mapping.scroll_docs(4),
+        ['<C-k>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<Tab>'] = cmp.mapping({
+          i = function(fallback)
+            if vim.fn['vsnip#jumpable'](1) == 1 then
+              feedkey('<Plug>(vsnip-jump-next)', '')
+            elseif cmp.visible() then
+              cmp.select_next_item()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end,
+        }),
+        ['<S-Tab>'] = cmp.mapping({
+          i = function()
+            if vim.fn['vsnip#jumpable'](-1) == 1 then
+              feedkey('<Plug>(vsnip-jump-prev)', '')
+            elseif cmp.visible() then
+              cmp.select_prev_item()
+            end
+          end,
+        }),
+      }),
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
+      sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' },
+        { name = 'buffer' },
+        { name = 'path' },
+      }),
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = 'symbol',
+        }),
+      },
+      experimental = {
+        ghost_text = true,
+      },
+    })
+    vim.b.cmp_loaded = true
+  end
 })
 
 cmp.setup.cmdline({ '/', '?' }, {

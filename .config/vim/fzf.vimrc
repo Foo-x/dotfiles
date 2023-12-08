@@ -5,6 +5,7 @@ set rtp+=~/.fzf
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
 nnoremap <Plug>(fzf)f :<C-u>Files<CR>
+nnoremap <Plug>(fzf)e :<C-u>FFern<CR>
 nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
 nnoremap <Plug>(fzf)b :<C-u>Buffers<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
@@ -113,5 +114,14 @@ if 1
     \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
     \ 'options': '--multi --bind ctrl-a:select-all --prompt "ATV> "'
   \ })))
+
+  fun! s:fern_reveal(line)
+    exe 'Fern . -drawer -reveal=' . a:line
+  endf
+  command! FFern call fzf#run(fzf#wrap({
+    \ 'source': '__bfs_dir',
+    \ 'sink': function('s:fern_reveal'),
+    \ 'options': '--prompt "FFern> "'
+  \ }))
 endif
 " }}}

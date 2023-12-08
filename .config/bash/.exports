@@ -1,4 +1,4 @@
-DOT_DIR="${HOME}/.dotfiles"
+export DOT_DIR="${HOME}/.dotfiles"
 
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
