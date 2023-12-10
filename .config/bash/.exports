@@ -34,7 +34,7 @@ LS_COLORS="*.tmp=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
 export LS_COLORS
 
 export HISTSIZE=100000
-export HISTFILE=${HOME}/.local/state/bash/history
+export HISTFILE=${XDG_STATE_HOME}/bash/history
 export HISTFILESIZE=100000
 export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignorespace  # not save commands that space-beginned and duplicated to history

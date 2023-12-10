@@ -134,3 +134,8 @@ augroup CursorLine
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
+augroup HighlightToday
+  autocmd!
+  exe 'autocmd Syntax * syntax match Todo containedin=ALL /' . strftime('%F') . '/'
+  exe 'autocmd WinEnter * match Todo /' . strftime('%F') . '/'
+augroup END

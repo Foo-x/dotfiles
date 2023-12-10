@@ -93,54 +93,69 @@ local null_ls = require('null-ls')
 require('fidget').setup()
 
 mason.setup()
-mason_null_ls.setup({
-  ensure_installed = {
-    -- 'markdownlint',
-    -- 'markuplint',
-    -- 'prettier',
+local mason_null_ls_config = {
+  'shfmt',
+}
+if vim.fn.executable('npm') == 1 then
+  for _, v in pairs({
+    'markdownlint',
+    'markuplint',
+    'prettier',
+    'sql-formatter',
+  }) do table.insert(mason_null_ls_config, v) end
+end
+if vim.fn.executable('tar') == 1 and vim.fn.executable('xz') == 1 then
+  for _, v in pairs({
     'shellcheck',
-    'shfmt',
-    -- 'sql-formatter',
-  },
+  }) do table.insert(mason_null_ls_config, v) end
+end
+mason_null_ls.setup({
+  ensure_installed = mason_null_ls_config,
 })
 null_ls.setup({
   sources = {
-    -- null_ls.builtins.diagnostics.markdownlint.with({
-    --   extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
-    -- }),
-    -- null_ls.builtins.formatting.markdownlint.with({
-    --   extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
-    -- }),
-    -- null_ls.builtins.diagnostics.markuplint,
-    -- null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.markdownlint.with({
+      extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    }),
+    null_ls.builtins.formatting.markdownlint.with({
+      extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    }),
+    null_ls.builtins.diagnostics.markuplint,
+    null_ls.builtins.formatting.prettier,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.code_actions.shellcheck,
     null_ls.builtins.formatting.shfmt.with({
       extra_args = { '-i', '2', '-sr' },
     }),
-    -- null_ls.builtins.formatting.sql_formatter,
+    null_ls.builtins.formatting.sql_formatter,
   }
 })
+
+local mason_lspconfig_config = {
+  'lua_ls',
+  'marksman',
+  'rust_analyzer',
+}
+if vim.fn.executable('npm') == 1 then
+  for _, v in pairs({
+    'bashls',
+    'cssls',
+    'cssmodules_ls',
+    'dockerls',
+    'docker_compose_language_service',
+    'eslint',
+    'html',
+    'intelephense',
+    'jsonls',
+    'pyright',
+    'sqlls',
+    'tsserver',
+    'vimls',
+    'yamlls',
+  }) do table.insert(mason_lspconfig_config, v) end
+end
 mason_lspconfig.setup({
-  ensure_installed = {
-    -- 'bashls',
-    -- 'cssls',
-    -- 'cssmodules_ls',
-    -- 'dockerls',
-    -- 'docker_compose_language_service',
-    -- 'eslint',
-    -- 'intelephense',
-    -- 'html',
-    -- 'jsonls',
-    'lua_ls',
-    'marksman',
-    -- 'pyright',
-    -- 'rust_analyzer',
-    -- 'sqlls',
-    -- 'tsserver',
-    -- 'vimls',
-    -- 'yamlls',
-  },
+  ensure_installed = mason_lspconfig_config,
 })
 
 mason_lspconfig.setup_handlers({
@@ -207,6 +222,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
+
+local signs = { Error = " ", Warn = " ", Info = " ", Hint = "󰌵 " }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
+end
 -- }}}
 
 -- cmp {{{
@@ -327,79 +348,81 @@ cmp.setup.cmdline(':', {
 -- }}}
 
 -- treesitter {{{
-require('nvim-treesitter.configs').setup({
-  ensure_installed = {
-    'bash',
-    'css',
-    --'csv',
-    'dockerfile',
-    'git_config',
-    'gitcommit',
-    'gitignore',
-    'html',
-    'java',
-    'javascript',
-    'json',
-    'jsonc',
-    'lua',
-    'markdown',
-    'markdown_inline',
-    'php',
-    'python',
-    'regex',
-    'sql',
-    'typescript',
-    'tsv',
-    'tsx',
-    'vim',
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true,
-      keymaps = {
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['as'] = { query = '@scope', query_group = 'locals' },
-      },
-      include_surrounding_whitespace = true,
+if vim.fn.executable('cc') == 1 or vim.fn.executable('gcc') == 1 or vim.fn.executable('clang') == 1 or vim.fn.executable('cl') == 1 or vim.fn.executable('zig') == 1 then
+  require('nvim-treesitter.configs').setup({
+    ensure_installed = {
+      'bash',
+      'css',
+      'csv',
+      'dockerfile',
+      'git_config',
+      'gitcommit',
+      'gitignore',
+      'html',
+      'java',
+      'javascript',
+      'json',
+      'jsonc',
+      'lua',
+      'markdown',
+      'markdown_inline',
+      'php',
+      'python',
+      'regex',
+      'sql',
+      'typescript',
+      'tsv',
+      'tsx',
+      'vim',
     },
-    move = {
-      enable = true,
-      set_jumps = true,
-      goto_next_start = {
-        [']f'] = '@function.outer',
-        [']s'] = { query = '@scope', query_group = 'locals' },
-        [']z'] = { query = '@fold', query_group = 'folds' },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['as'] = { query = '@scope', query_group = 'locals' },
+        },
+        include_surrounding_whitespace = true,
       },
-      goto_next_end = {
-        [']F'] = '@function.outer',
-        [']S'] = { query = '@scope', query_group = 'locals' },
-        [']Z'] = { query = '@fold', query_group = 'folds' },
-      },
-      goto_previous_start = {
-        ['[f'] = '@function.outer',
-        ['[s'] = { query = '@scope', query_group = 'locals' },
-        ['[z'] = { query = '@fold', query_group = 'folds' },
-      },
-      goto_previous_end = {
-        ['[F'] = '@function.outer',
-        ['[S'] = { query = '@scope', query_group = 'locals' },
-        ['[Z'] = { query = '@fold', query_group = 'folds' },
+      move = {
+        enable = true,
+        set_jumps = true,
+        goto_next_start = {
+          [']f'] = '@function.outer',
+          [']s'] = { query = '@scope', query_group = 'locals' },
+          [']z'] = { query = '@fold', query_group = 'folds' },
+        },
+        goto_next_end = {
+          [']F'] = '@function.outer',
+          [']S'] = { query = '@scope', query_group = 'locals' },
+          [']Z'] = { query = '@fold', query_group = 'folds' },
+        },
+        goto_previous_start = {
+          ['[f'] = '@function.outer',
+          ['[s'] = { query = '@scope', query_group = 'locals' },
+          ['[z'] = { query = '@fold', query_group = 'folds' },
+        },
+        goto_previous_end = {
+          ['[F'] = '@function.outer',
+          ['[S'] = { query = '@scope', query_group = 'locals' },
+          ['[Z'] = { query = '@fold', query_group = 'folds' },
+        },
       },
     },
-  },
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-  autotag = {
-    enable = true,
-  },
-})
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+    },
+    autotag = {
+      enable = true,
+    },
+  })
 
-set('n', '[c', require('treesitter-context').go_to_context)
+  set('n', '[c', require('treesitter-context').go_to_context)
+end
 -- }}}
 -- vim: set foldmethod=marker :
