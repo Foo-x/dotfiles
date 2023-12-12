@@ -189,6 +189,15 @@ mason_lspconfig.setup_handlers({
   end,
 })
 
+require('lsp_signature').setup({
+  bind = true,
+  handler_opts = {
+    border = 'single'
+  },
+  select_signature_key = '<M-n>',
+  move_cursor_key = '<M-x>',
+})
+
 local function help()
   local ft = vim.opt.filetype._value
   if ft == 'vim' or ft == 'help' then
@@ -198,7 +207,7 @@ local function help()
   end
 end
 
-set('n', 'K', help)
+set('n', 'M', help)
 set('n', 'gh', vim.diagnostic.open_float)
 set('n', '[d', vim.diagnostic.goto_prev)
 set('n', ']d', vim.diagnostic.goto_next)
@@ -214,7 +223,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     set('n', 'gi', vim.lsp.buf.implementation, opts)
     set('n', 'gr', vim.lsp.buf.references, opts)
     set('n', 'gt', vim.lsp.buf.type_definition, opts)
-    set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, opts)
+    set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, opts)
     set('n', '<F2>', vim.lsp.buf.rename, opts)
     set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
     set({ 'n', 'v' }, '<leader>f', function()

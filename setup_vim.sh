@@ -212,6 +212,11 @@ if [ ! -d ${NVIM_PACK_DIR}/plenary.nvim ]; then
     git clone --depth 1 https://github.com/nvim-lua/plenary.nvim.git ${NVIM_PACK_DIR}/plenary.nvim
 fi
 
+# install lsp_signature.nvim
+if [ ! -d ${NVIM_PACK_DIR}/lsp_signature.nvim ]; then
+    git clone --depth 1 https://github.com/ray-x/lsp_signature.nvim ${NVIM_PACK_DIR}/lsp_signature.nvim
+fi
+
 # install nvim-treesitter
 if [ ! -d ${NVIM_PACK_DIR}/nvim-treesitter ]; then
     git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter.git ${NVIM_PACK_DIR}/nvim-treesitter

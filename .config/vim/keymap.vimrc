@@ -45,8 +45,8 @@ noremap <Space>m %
 nnoremap <Space>o :<C-u>a<CR><CR>.<CR>
 nnoremap <Space>O :<C-u>i<CR><CR>.<CR>
 
-nnoremap <Space>j <C-f>
-nnoremap <Space>k <C-b>
+nnoremap <S-j> <C-f>
+nnoremap <S-k> <C-b>
 
 nmap <Space>g <Plug>(goto)
 nnoremap <Plug>(goto)h <C-o>
@@ -68,7 +68,7 @@ nnoremap <Plug>(quickfix)w :<C-u>cwindow<CR>
 nnoremap <Plug>(quickfix)c :<C-u>cclose<CR>
 nnoremap <Plug>(quickfix). :<C-u>cgetbuffer<CR>
 nnoremap <Plug>(quickfix)f :<C-u>cgetfile<CR>
-nnoremap <silent> <Plug>(quickfix)e :<C-u>exe 'e' &errorfile<CR>
+nnoremap <Plug>(quickfix)e <Cmd>exe 'e' &errorfile<CR>
 "" toggle quickfix
 nnoremap <expr> <Plug>(quickfix)t empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
 
@@ -83,8 +83,8 @@ nnoremap <Plug>(location). :<C-u>lgetbuffer<CR>
 nnoremap <Plug>(location)f :<C-u>lgetfile<CR>
 
 nmap <Space>w <Plug>(window)
-nnoremap <silent> <Plug>(window)_ :<C-u>split<CR>
-nnoremap <silent> <Plug>(window)\ :<C-u>vsplit<CR>
+nnoremap <Plug>(window)_ <Cmd>split<CR>
+nnoremap <Plug>(window)\ <Cmd>vsplit<CR>
 nnoremap <Plug>(window)c <C-w>c
 nnoremap <Plug>(window)o <C-w>o
 nnoremap <Plug>(window)h <C-w>h
@@ -92,10 +92,10 @@ nnoremap <Plug>(window)j <C-w>j
 nnoremap <Plug>(window)k <C-w>k
 nnoremap <Plug>(window)l <C-w>l
 nnoremap <Plug>(window)w <C-w>w
-nnoremap <silent> <Plug>(window)H :<C-u>call MoveWindow('h')<CR>
-nnoremap <silent> <Plug>(window)J :<C-u>call MoveWindow('j')<CR>
-nnoremap <silent> <Plug>(window)K :<C-u>call MoveWindow('k')<CR>
-nnoremap <silent> <Plug>(window)L :<C-u>call MoveWindow('l')<CR>
+nnoremap <Plug>(window)H <Cmd>call MoveWindow('h')<CR>
+nnoremap <Plug>(window)J <Cmd>call MoveWindow('j')<CR>
+nnoremap <Plug>(window)K <Cmd>call MoveWindow('k')<CR>
+nnoremap <Plug>(window)L <Cmd>call MoveWindow('l')<CR>
 nnoremap <Plug>(window)f <C-w>f
 nnoremap <Plug>(window)F <C-w>F
 nnoremap <Plug>(window)gf <C-w>gf
@@ -114,14 +114,16 @@ nnoremap <Space>3 <C-w>t<C-w>j
 nnoremap <Space>4 <C-w>b
 
 nmap <Space>t <Plug>(tab)
-nnoremap <silent> <Plug>(tab)t :<C-u>tabnew<CR>
-nnoremap <silent> <Plug>(tab)f :<C-u>tabfirst<CR>
-nnoremap <silent> <Plug>(tab)c :<C-u>tabclose<CR>
-nnoremap <silent> <Plug>(tab)o :<C-u>tabonly<CR>
-nnoremap <silent> <Plug>(tab)h :<C-u>tabprevious<CR>
-nnoremap <silent> <Plug>(tab)l :<C-u>tabnext<CR>
-nnoremap <silent> <Plug>(tab)H :<C-u>tabmove -<CR>
-nnoremap <silent> <Plug>(tab)L :<C-u>tabmove +<CR>
+nnoremap <Plug>(tab)t <Cmd>tabnew<CR>
+nnoremap <Plug>(tab)f <Cmd>tabfirst<CR>
+nnoremap <Plug>(tab)c <Cmd>tabclose<CR>
+nnoremap <Plug>(tab)o <Cmd>tabonly<CR>
+nnoremap <Plug>(tab)h <Cmd>tabprevious<CR>
+nnoremap <Plug>(tab)l <Cmd>tabnext<CR>
+nnoremap H <Cmd>tabprevious<CR>
+nnoremap L <Cmd>tabnext<CR>
+nnoremap <Plug>(tab)H <Cmd>tabmove -<CR>
+nnoremap <Plug>(tab)L <Cmd>tabmove +<CR>
 
 nmap <Space>r <Plug>(reload)
 nnoremap <Plug>(reload) :<C-u>source $MYVIMRC<CR>
