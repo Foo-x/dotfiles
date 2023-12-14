@@ -88,11 +88,6 @@ if [ ! -d ${VIM_PACK_DIR}/vim-table-mode ]; then
     git clone --depth 1 https://github.com/dhruvasagar/vim-table-mode.git ${VIM_PACK_DIR}/vim-table-mode
 fi
 
-# install vim-visual-multi
-if [ ! -d ${VIM_PACK_DIR}/vim-visual-multi ]; then
-    git clone --depth 1 https://github.com/mg979/vim-visual-multi.git ${VIM_PACK_DIR}/vim-visual-multi
-fi
-
 # install linediff.vim
 if [ ! -d ${VIM_PACK_DIR}/linediff.vim ]; then
     git clone --depth 1 https://github.com/AndrewRadev/linediff.vim.git ${VIM_PACK_DIR}/linediff.vim
