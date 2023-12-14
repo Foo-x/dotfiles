@@ -75,9 +75,6 @@ set('n', '<leader>oc', ':<C-u>OtherClear<CR>', { silent = true })
 
 require('stickybuf').setup()
 
-require('leap').add_repeat_mappings(':', ',', {
-  modes = 'n',
-})
 set('n', 'f', '<Plug>(leap-forward-to)')
 set('n', 'F', '<Plug>(leap-backward-to)')
 set('n', 't', '<Plug>(leap-forward-till)')

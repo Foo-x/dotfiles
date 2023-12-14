@@ -14,7 +14,8 @@ nnoremap + <C-a>
 nnoremap - <C-x>
 
 nnoremap ; :
-nnoremap : ;
+nnoremap : @:
+nnoremap , @@
 
 "" not to go next
 nnoremap * *N
@@ -165,9 +166,13 @@ inoremap <C-v>u <C-r>=nr2char(0x)<Left>
 inoremap <C-s> <Esc>:<C-u>update<CR>gi
 
 imap <C-f> <Plug>(i_file)
+"" relative
 inoremap <Plug>(i_file). <C-r>%
+"" absolute
 inoremap <Plug>(i_file)p <C-r>=expand('%:p')<CR>
+"" basename
 inoremap <Plug>(i_file)t <C-r>=expand('%:t')<CR>
+"" basename without extension
 inoremap <Plug>(i_file)r <C-r>=expand('%:t:r')<CR>
 
 " visual mode
