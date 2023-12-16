@@ -1,6 +1,8 @@
 vim.env.XDG_CONFIG_HOME = vim.fn.get(vim.fn.environ(), 'XDG_CONFIG_HOME', vim.env.HOME .. '/.config')
 vim.cmd.exe('"source" $XDG_CONFIG_HOME . "/vim/vimrc"')
 
+vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust', {})
+
 local set = vim.keymap.set
 
 require('Comment').setup()

@@ -7,20 +7,18 @@ if 1
   let g:fern#default_exclude = '\v^%(\.git|node_modules|__pycache__|[Dd]esktop\.ini|Thumbs\.db|\.DS_Store)$|\.pyc$'
 
   fun! s:init_fern()
-    nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>
-    nmap <buffer><silent> <Plug>(fern-action-open-and-close)
-        \ <Plug>(fern-action-open)
-        \ <Plug>(fern-close-drawer)
+    nmap <Plug>(fern-close-drawer) <Cmd>FernDo close -drawer -stay<CR>
+    nmap <buffer><silent> <Plug>(fern-action-open-and-close) <Plug>(fern-action-open)<Plug>(fern-close-drawer)
     nmap <buffer><expr> <Plug>(fern-my-open-or-expand)
         \ fern#smart#leaf(
         \   "<Plug>(fern-action-open-and-close)",
         \   "<Plug>(fern-action-expand)",
         \ )
-    nmap <buffer> <CR> <Plug>(fern-my-open-or-expand)
-    nmap <buffer> l <Plug>(fern-my-open-or-expand)
-    nmap <buffer> D <Plug>(fern-action-remove=)
-    nmap <buffer><silent> x <Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>
-    map <buffer> <Tab> <Plug>(fern-action-mark)
+    nnoremap <buffer> <CR> <Plug>(fern-my-open-or-expand)
+    nnoremap <buffer> l <Plug>(fern-my-open-or-expand)
+    nnoremap <buffer> D <Plug>(fern-action-remove=)
+    nnoremap <buffer><silent> x <Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>
+    noremap <buffer> <Tab> <Plug>(fern-action-mark)
   endf
 
   augroup Fern
