@@ -14,8 +14,8 @@ nnoremap + <C-a>
 nnoremap - <C-x>
 
 nnoremap ; :
-nnoremap : @:
-nnoremap , @@
+nnoremap : ;
+nnoremap , @:
 
 "" not to go next
 nnoremap * *N

@@ -28,6 +28,26 @@ mkdir -p ${VIM_PACK_COLORS_DIR}
 vimrc_files=$(cd ${DOT_DIR}/.config/vim && \ls -1 *vimrc)
 printf "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/vim/{} ${XDG_CONFIG_HOME}/vim/{}
 
+# install everforest
+if [ ! -d ${VIM_PACK_COLORS_DIR}/everforest ]; then
+    git clone --depth 1 https://github.com/sainnhe/everforest.git ${VIM_PACK_COLORS_DIR}/everforest
+fi
+
+# install vim-aomi-grayscale
+if [ ! -d ${VIM_PACK_COLORS_DIR}/vim-aomi-grayscale ]; then
+    git clone --depth 1 https://github.com/eihigh/vim-aomi-grayscale.git ${VIM_PACK_COLORS_DIR}/vim-aomi-grayscale
+fi
+
+# install base16-vim
+if [ ! -d ${VIM_PACK_COLORS_DIR}/base16-vim ]; then
+    git clone --depth 1 https://github.com/chriskempson/base16-vim.git ${VIM_PACK_COLORS_DIR}/base16-vim
+fi
+
+# install iceberg.vim
+if [ ! -d ${VIM_PACK_COLORS_DIR}/iceberg.vim ]; then
+    git clone --depth 1 https://github.com/cocopon/iceberg.vim.git ${VIM_PACK_COLORS_DIR}/iceberg.vim
+fi
+
 # install fzf.vim
 if [ ! -d ${VIM_PACK_DIR}/fzf.vim ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.vim.git ${VIM_PACK_DIR}/fzf.vim
@@ -116,16 +136,6 @@ mkdir -p ${NVIM_PACK_DIR}
 mkdir -p ${NVIM_PACK_COLORS_DIR}
 nvim_files=$(cd ${DOT_DIR}/.config/nvim && \ls -1)
 printf "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
-
-# install everforest
-if [ ! -d ${NVIM_PACK_COLORS_DIR}/everforest ]; then
-    git clone --depth 1 https://github.com/sainnhe/everforest.git ${NVIM_PACK_COLORS_DIR}/everforest
-fi
-
-# install nightfox.nvim
-if [ ! -d ${NVIM_PACK_COLORS_DIR}/nightfox.nvim ]; then
-    git clone --depth 1 https://github.com/EdenEast/nightfox.nvim.git ${NVIM_PACK_COLORS_DIR}/nightfox.nvim
-fi
 
 # install kanagawa.nvim
 if [ ! -d ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim ]; then
@@ -281,7 +291,6 @@ nvim -es +"
 set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after |
   silent! packl! |
   packadd everforest |
-  packadd nightfox.nvim |
   helptags ALL |
   q
 "

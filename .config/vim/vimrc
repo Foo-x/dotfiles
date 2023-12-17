@@ -45,7 +45,6 @@ set errorformat+=%-G%.%#
 set foldminlines=3
 set nofoldenable
 set autoread
-set colorcolumn=80,120
 set viminfo+='10000
 set viminfo-='100
 if has('nvim')
@@ -87,7 +86,7 @@ syntax on
 " only first loading
 if !exists('g:colors_name')
   try
-    Everforest
+    Base16GrayscaleDark
   catch
     color desert
     hi SignColumn ctermbg=black
