@@ -191,6 +191,16 @@ if 1
   command! AutoSaveClear let g:autosave=0 | let t:autosave=0 | let w:autosave=0 | let b:autosave=0
   command! AutoSaveInfo echom 'g:' . get(g:, 'autosave', 0) | echom 't:' . get(t:, 'autosave', 0) | echom 'w:' . get(w:, 'autosave', 0) | echom 'b:' . get(b:, 'autosave', 0)
 
+  function! UseEasyRegname()
+    if v:event.regname ==# ''
+      call setreg(v:event.operator, getreg())
+    endif
+  endfunction
+
+  augroup UseEasyRegname
+    autocmd!
+    au TextYankPost * call UseEasyRegname()
+  augroup END
 
   if has('nvim')
     command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif
