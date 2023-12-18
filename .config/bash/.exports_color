@@ -7,6 +7,7 @@ export __blue_ansi_habamax_foreground='38;2;135;135;175'
 export __magenta_ansi_habamax_foreground='38;2;175;135;175'
 export __cyan_ansi_habamax_foreground='38;2;135;175;175'
 
+## PCCS red=24 green=12 yellow=6 blue=18 magenta=22 cyan=16
 ## 24bit PCCS bright
 export __red_ansi_pccs_bright_foreground='38;2;208;103;142'
 export __green_ansi_pccs_bright_foreground='38;2;65;184;121'
@@ -23,6 +24,14 @@ export __blue_ansi_pccs_deep_foreground='38;2;0;66;128'
 export __magenta_ansi_pccs_deep_foreground='38;2;97;36;105'
 export __cyan_ansi_pccs_deep_foreground='38;2;0;84;118'
 
+## 24bit PCCS dull
+export __red_ansi_pccs_dull_foreground='38;2;139;79;101'
+export __green_ansi_pccs_dull_foreground='38;2;79;135;102'
+export __yellow_ansi_pccs_dull_foreground='38;2;179;127;70'
+export __blue_ansi_pccs_dull_foreground='38;2;52;89;125'
+export __magenta_ansi_pccs_dull_foreground='38;2;108;74;113'
+export __cyan_ansi_pccs_dull_foreground='38;2;36;106;125'
+
 ## 24bit PCCS light+
 export __red_ansi_pccs_lightp_foreground='38;2;217;142;165'
 export __green_ansi_pccs_lightp_foreground='38;2;133;206;158'
@@ -31,6 +40,14 @@ export __blue_ansi_pccs_lightp_foreground='38;2;108;154;197'
 export __magenta_ansi_pccs_lightp_foreground='38;2;176;136;181'
 export __cyan_ansi_pccs_lightp_foreground='38;2;91;175;196'
 
+## 24bit PCCS light grayish
+export __red_ansi_pccs_lightg_foreground='38;2;189;172;176'
+export __green_ansi_pccs_lightg_foreground='38;2;157;182;165'
+export __yellow_ansi_pccs_lightg_foreground='38;2;206;187;168'
+export __blue_ansi_pccs_lightg_foreground='38;2;155;165;175'
+export __magenta_ansi_pccs_lightg_foreground='38;2;171;160;171'
+export __cyan_ansi_pccs_lightg_foreground='38;2;158;180;185'
+
 ## 24bit PCCS soft
 export __red_ansi_pccs_soft_foreground='38;2;180;120;139'
 export __green_ansi_pccs_soft_foreground='38;2;118;177;138'
@@ -38,6 +55,14 @@ export __yellow_ansi_pccs_soft_foreground='38;2;219;166;107'
 export __blue_ansi_pccs_soft_foreground='38;2;93;126;160'
 export __magenta_ansi_pccs_soft_foreground='38;2;144;113;148'
 export __cyan_ansi_pccs_soft_foreground='38;2;81;146;164'
+
+## 24bit PCCS strong
+export __red_ansi_pccs_strong_foreground='38;2;163;60;106'
+export __green_ansi_pccs_strong_foreground='38;2;0;143;86'
+export __yellow_ansi_pccs_strong_foreground='38;2;225;146;21'
+export __blue_ansi_pccs_strong_foreground='38;2;0;91;155'
+export __magenta_ansi_pccs_strong_foreground='38;2;124;61;132'
+export __cyan_ansi_pccs_strong_foreground='38;2;0;111;146'
 
 ## 24bit PCCS pale+
 export __red_ansi_pccs_palep_foreground='38;2;222;196;202'

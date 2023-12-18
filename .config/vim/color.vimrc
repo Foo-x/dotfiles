@@ -38,19 +38,20 @@ if 1
             diagnostic_warning = '#887744',
             diagnostic_info = '#535353',
             diagnostic_hint = '#535353',
-            diff_add = '#446688',
-            diff_change = '#558855',
-            diff_delete = '#884444',
+            diff_add = '#6688AA',
+            diff_change = '#77AA77',
+            diff_delete = '#AA6666',
           }
         })
 EOF
-      hi GitGutterAdd guifg=#446688
-      hi GitGutterChange guifg=#558855
-      hi GitGutterDelete guifg=#884444
-      hi FoldColumn guibg=none
-      hi Visual guibg=#446688
+      hi GitGutterAdd guifg=#6688AA
+      hi GitGutterChange guifg=#77AA77
+      hi GitGutterDelete guifg=#AA6666
+      hi FoldColumn guibg=bg
+      hi Visual guibg=#446688 guifg=white
       hi IncSearch guibg=#554433 guifg=white
       hi Search guibg=#334455 guifg=white
+      hi MoreMsg guibg=bg
     endf
     command! NoirbuddySlate call s:noirbuddy_slate()
   endif
