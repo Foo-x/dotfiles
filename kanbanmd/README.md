@@ -10,7 +10,7 @@
 ```
 
 1. Priority
-    - `(H)` High / `(M)` Medium / `(L)` Low / no priority
+    - `(H)` High / `(L)` Low / no priority
 2. Description with notes
     - Description
         - no prefix

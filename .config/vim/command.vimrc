@@ -30,14 +30,8 @@ if 1
   endf
   command! AomiGrayscale call s:aomi_grayscale()
   fun! s:base16_grayscale_dark()
-    packadd! base16-vim
+    packadd! nvim-base16
     color base16-grayscale-dark
-    hi GitGutterAdd guibg=none
-    hi GitGutterChange guibg=none
-    hi GitGutterDelete guibg=none
-    hi GitGutterChangeDelete guibg=none
-    hi SignColumn guibg=none
-    hi FoldColumn guibg=none
   endf
   command! Base16GrayscaleDark call s:base16_grayscale_dark()
   fun! s:iceberg()

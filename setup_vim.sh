@@ -38,11 +38,6 @@ if [ ! -d ${VIM_PACK_COLORS_DIR}/vim-aomi-grayscale ]; then
     git clone --depth 1 https://github.com/eihigh/vim-aomi-grayscale.git ${VIM_PACK_COLORS_DIR}/vim-aomi-grayscale
 fi
 
-# install base16-vim
-if [ ! -d ${VIM_PACK_COLORS_DIR}/base16-vim ]; then
-    git clone --depth 1 https://github.com/chriskempson/base16-vim.git ${VIM_PACK_COLORS_DIR}/base16-vim
-fi
-
 # install iceberg.vim
 if [ ! -d ${VIM_PACK_COLORS_DIR}/iceberg.vim ]; then
     git clone --depth 1 https://github.com/cocopon/iceberg.vim.git ${VIM_PACK_COLORS_DIR}/iceberg.vim
@@ -140,6 +135,11 @@ printf "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONF
 # install kanagawa.nvim
 if [ ! -d ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim ]; then
     git clone --depth 1 https://github.com/rebelot/kanagawa.nvim.git ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim
+fi
+
+# install nvim-base16
+if [ ! -d ${NVIM_PACK_COLORS_DIR}/nvim-base16 ]; then
+    git clone --depth 1 https://github.com/RRethy/nvim-base16.git ${NVIM_PACK_COLORS_DIR}/nvim-base16
 fi
 
 # install nvim-lspconfig
