@@ -16,11 +16,6 @@ if 1
     hi! link ColorColumn CursorLine
   endf
   command! AomiGrayscale call s:aomi_grayscale()
-  fun! s:base16_grayscale_dark()
-    packadd! nvim-base16
-    color base16-grayscale-dark
-  endf
-  command! Base16GrayscaleDark call s:base16_grayscale_dark()
   fun! s:iceberg()
     packadd! iceberg
     color iceberg
@@ -34,6 +29,11 @@ if 1
   command! Iceberg call s:iceberg()
 
   if has('nvim')
+    fun! s:base16_grayscale_dark()
+      packadd! nvim-base16
+      color base16-grayscale-dark
+    endf
+    command! Base16GrayscaleDark call s:base16_grayscale_dark()
     fun! s:kanagawa_dragon()
       packadd! kanagawa.nvim
       lua require('kanagawa').setup({
@@ -61,10 +61,22 @@ if 1
     command! KanagawaDragon call s:kanagawa_dragon()
   endif
 
+  fun! s:color_complete(...)
+    if has('nvim')
+      return ['Everforest', 'AomiGrayscale', 'Iceberg', 'KanagawaDragon', 'Base16GrayscaleDark']
+    endif
+    return ['Everforest', 'AomiGrayscale', 'Iceberg']
+  endf
+  command! -nargs=1 -complete=customlist,s:color_complete Color <args>
+
   " only first loading
   if !exists('g:colors_name')
     try
-      Base16GrayscaleDark
+      if has('nvim')
+        Base16GrayscaleDark
+      else
+        Iceberg
+      endif
     catch
       color desert
       hi SignColumn ctermbg=black
