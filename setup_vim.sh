@@ -33,11 +33,6 @@ if [ ! -d ${VIM_PACK_COLORS_DIR}/everforest ]; then
     git clone --depth 1 https://github.com/sainnhe/everforest.git ${VIM_PACK_COLORS_DIR}/everforest
 fi
 
-# install vim-aomi-grayscale
-if [ ! -d ${VIM_PACK_COLORS_DIR}/vim-aomi-grayscale ]; then
-    git clone --depth 1 https://github.com/eihigh/vim-aomi-grayscale.git ${VIM_PACK_COLORS_DIR}/vim-aomi-grayscale
-fi
-
 # install iceberg.vim
 if [ ! -d ${VIM_PACK_COLORS_DIR}/iceberg.vim ]; then
     git clone --depth 1 https://github.com/cocopon/iceberg.vim.git ${VIM_PACK_COLORS_DIR}/iceberg.vim
@@ -135,6 +130,16 @@ printf "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONF
 # install nvim-base16
 if [ ! -d ${NVIM_PACK_COLORS_DIR}/nvim-base16 ]; then
     git clone --depth 1 https://github.com/RRethy/nvim-base16.git ${NVIM_PACK_COLORS_DIR}/nvim-base16
+fi
+
+# install colorbuddy.nvim
+if [ ! -d ${NVIM_PACK_DIR}/colorbuddy.nvim ]; then
+    git clone --depth 1 https://github.com/tjdevries/colorbuddy.nvim.git ${NVIM_PACK_DIR}/colorbuddy.nvim
+fi
+
+# install nvim-noirbuddy
+if [ ! -d ${NVIM_PACK_DIR}/nvim-noirbuddy ]; then
+    git clone --depth 1 https://github.com/jesseleite/nvim-noirbuddy.git ${NVIM_PACK_DIR}/nvim-noirbuddy
 fi
 
 # install nvim-lspconfig

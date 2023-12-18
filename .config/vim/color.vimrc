@@ -10,12 +10,6 @@ if 1
     exe 'hi GitGutterChangeDelete guifg=' . l:palette['purple'][0]
   endf
   command! Everforest call s:everforest()
-  fun! s:aomi_grayscale()
-    packadd! vim-aomi-grayscale
-    color aomi-grayscale
-    hi! link ColorColumn CursorLine
-  endf
-  command! AomiGrayscale call s:aomi_grayscale()
   fun! s:iceberg()
     packadd! iceberg
     color iceberg
@@ -34,13 +28,38 @@ if 1
       color base16-grayscale-dark
     endf
     command! Base16GrayscaleDark call s:base16_grayscale_dark()
+    fun! s:noirbuddy_slate()
+      hi clear
+      lua << EOF
+        require('noirbuddy').setup({
+          preset = 'slate',
+          colors = {
+            diagnostic_error = '#884444',
+            diagnostic_warning = '#887744',
+            diagnostic_info = '#535353',
+            diagnostic_hint = '#535353',
+            diff_add = '#446688',
+            diff_change = '#558855',
+            diff_delete = '#884444',
+          }
+        })
+EOF
+      hi GitGutterAdd guifg=#446688
+      hi GitGutterChange guifg=#558855
+      hi GitGutterDelete guifg=#884444
+      hi FoldColumn guibg=none
+      hi Visual guibg=#446688
+      hi IncSearch guibg=#554433 guifg=white
+      hi Search guibg=#334455 guifg=white
+    endf
+    command! NoirbuddySlate call s:noirbuddy_slate()
   endif
 
   fun! s:color_complete(...)
     if has('nvim')
-      return ['Everforest', 'AomiGrayscale', 'Iceberg', 'Base16GrayscaleDark']
+      return ['Everforest', 'Iceberg', 'Base16GrayscaleDark', 'NoirbuddySlate']
     endif
-    return ['Everforest', 'AomiGrayscale', 'Iceberg']
+    return ['Everforest', 'Iceberg']
   endf
   command! -nargs=1 -complete=customlist,s:color_complete Color <args>
 
@@ -48,7 +67,7 @@ if 1
   if !exists('g:colors_name')
     try
       if has('nvim')
-        Base16GrayscaleDark
+        NoirbuddySlate
       else
         Iceberg
       endif
