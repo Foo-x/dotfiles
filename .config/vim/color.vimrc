@@ -34,36 +34,11 @@ if 1
       color base16-grayscale-dark
     endf
     command! Base16GrayscaleDark call s:base16_grayscale_dark()
-    fun! s:kanagawa_dragon()
-      packadd! kanagawa.nvim
-      lua require('kanagawa').setup({
-      \  colors = {
-      \    theme = {
-      \      all = {
-      \        ui = {
-      \          bg_gutter = "none"
-      \        }
-      \      }
-      \    }
-      \  },
-      \  overrides = function(colors)
-      \    local theme = colors.theme
-      \    return {
-      \      GitGutterAdd = { fg = theme.vcs.added },
-      \      GitGutterChange = { fg = theme.vcs.changed },
-      \      GitGutterDelete = { fg = theme.vcs.removed },
-      \      GitGutterChangeDelete = { fg = colors.palette.dragonBlue },
-      \    }
-      \  end,
-      \})
-      color kanagawa-dragon
-    endf
-    command! KanagawaDragon call s:kanagawa_dragon()
   endif
 
   fun! s:color_complete(...)
     if has('nvim')
-      return ['Everforest', 'AomiGrayscale', 'Iceberg', 'KanagawaDragon', 'Base16GrayscaleDark']
+      return ['Everforest', 'AomiGrayscale', 'Iceberg', 'Base16GrayscaleDark']
     endif
     return ['Everforest', 'AomiGrayscale', 'Iceberg']
   endf

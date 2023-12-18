@@ -132,11 +132,6 @@ mkdir -p ${NVIM_PACK_COLORS_DIR}
 nvim_files=$(cd ${DOT_DIR}/.config/nvim && \ls -1)
 printf "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
 
-# install kanagawa.nvim
-if [ ! -d ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim ]; then
-    git clone --depth 1 https://github.com/rebelot/kanagawa.nvim.git ${NVIM_PACK_COLORS_DIR}/kanagawa.nvim
-fi
-
 # install nvim-base16
 if [ ! -d ${NVIM_PACK_COLORS_DIR}/nvim-base16 ]; then
     git clone --depth 1 https://github.com/RRethy/nvim-base16.git ${NVIM_PACK_COLORS_DIR}/nvim-base16
