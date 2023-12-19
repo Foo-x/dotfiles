@@ -1,61 +1,60 @@
-if ! git config --get-regexp 'color.branch' > /dev/null; then
-  git config --global --unset color.branch.current
-  git config --global --unset color.branch.remote
-  git config --global color.branch.current "${__green_hex}"
-  git config --global color.branch.remote "${__magenta_hex}"
-fi
-if ! git config --get-regexp 'color.diff' > /dev/null; then
-  git config --global --unset color.diff.old
-  git config --global --unset color.diff.oldBold
-  git config --global --unset color.diff.oldMoved
-  git config --global --unset color.diff.oldMovedAlternative
-  git config --global --unset color.diff.oldDimmed
-  git config --global --unset color.diff.oldMovedDimmed
-  git config --global --unset color.diff.oldMovedAlternativeDimmed
-  git config --global --unset color.diff.new
-  git config --global --unset color.diff.newBold
-  git config --global --unset color.diff.newMoved
-  git config --global --unset color.diff.newMovedAlternative
-  git config --global --unset color.diff.newDimmed
-  git config --global --unset color.diff.newMovedDimmed
-  git config --global --unset color.diff.newMovedAlternativeDimmed
-  git config --global --unset color.diff.commit
-  git config --global --unset color.diff.context
-  git config --global --unset color.diff.contextBold
-  git config --global --unset color.diff.contextDimmed
-  git config --global --unset color.diff.frag
-  git config --global --unset color.diff.func
-  git config --global --unset color.diff.meta
-  git config --global --unset color.diff.whitespace
-  git config --global color.diff.old "${__red_hex}"
-  git config --global color.diff.oldMoved "${__gy65_pccs_hex} strike"
-  git config --global color.diff.oldMovedAlternative "${__gy65_pccs_hex} bold strike"
-  git config --global color.diff.oldMovedDimmed "${__gy45_pccs_hex} strike"
-  git config --global color.diff.oldMovedAlternativeDimmed "${__gy45_pccs_hex} bold strike"
-  git config --global color.diff.new "${__green_hex}"
-  git config --global color.diff.newMoved "${__gy65_pccs_hex}"
-  git config --global color.diff.newMovedAlternative "${__gy65_pccs_hex} bold"
-  git config --global color.diff.newMovedDimmed "${__gy45_pccs_hex}"
-  git config --global color.diff.newMovedAlternativeDimmed "${__gy45_pccs_hex} bold"
-  git config --global color.diff.context "${__gy95_pccs_hex}"
-  git config --global color.diff.frag "${__blue_hex}"
-  git config --global color.diff.meta "${__cyan_hex}"
-  git config --global color.diff.whitespace "0 ${__red_hex}"
-fi
-if ! git config --get-regexp 'color.status' > /dev/null; then
-  git config --global --unset color.status.header
-  git config --global --unset color.status.added
-  git config --global --unset color.status.changed
-  git config --global --unset color.status.updated
-  git config --global --unset color.status.branch
-  git config --global --unset color.status.nobranch
-  git config --global --unset color.status.localBranch
-  git config --global --unset color.status.remoteBranch
-  git config --global color.status.added "${__green_hex}"
-  git config --global color.status.changed "${__red_hex}"
-  git config --global color.status.untracked "${__magenta_hex}"
-  git config --global color.status.branch "${__green_hex}"
-  git config --global color.status.nobranch "${__magenta_hex}"
-  git config --global color.status.localBranch "${__green_hex}"
-  git config --global color.status.remoteBranch "${__magenta_hex}"
-fi
+# branch
+git config --global --unset color.branch.current
+git config --global --unset color.branch.remote
+git config --global color.branch.current "${__blue_pccs_lightp_hex}"
+git config --global color.branch.remote "${__blue_pccs_palep_hex}"
+
+# diff
+git config --global --unset color.diff.old
+git config --global --unset color.diff.oldBold
+git config --global --unset color.diff.oldMoved
+git config --global --unset color.diff.oldMovedAlternative
+git config --global --unset color.diff.oldDimmed
+git config --global --unset color.diff.oldMovedDimmed
+git config --global --unset color.diff.oldMovedAlternativeDimmed
+git config --global --unset color.diff.new 
+git config --global --unset color.diff.newBold
+git config --global --unset color.diff.newMoved
+git config --global --unset color.diff.newMovedAlternative
+git config --global --unset color.diff.newDimmed
+git config --global --unset color.diff.newMovedDimmed
+git config --global --unset color.diff.newMovedAlternativeDimmed
+git config --global --unset color.diff.commit
+git config --global --unset color.diff.context
+git config --global --unset color.diff.contextBold
+git config --global --unset color.diff.contextDimmed
+git config --global --unset color.diff.frag
+git config --global --unset color.diff.func
+git config --global --unset color.diff.meta
+git config --global --unset color.diff.whitespace
+git config --global color.diff.old "${__red_hex}"
+git config --global color.diff.oldMoved "${__gy65_pccs_hex} strike"
+git config --global color.diff.oldMovedAlternative "${__gy65_pccs_hex} bold strike"
+git config --global color.diff.oldMovedDimmed "${__gy45_pccs_hex} strike"
+git config --global color.diff.oldMovedAlternativeDimmed "${__gy45_pccs_hex} bold strike"
+git config --global color.diff.new "${__blue_pccs_lightp_hex}"
+git config --global color.diff.newMoved "${__gy65_pccs_hex}"
+git config --global color.diff.newMovedAlternative "${__gy65_pccs_hex} bold"
+git config --global color.diff.newMovedDimmed "${__gy45_pccs_hex}"
+git config --global color.diff.newMovedAlternativeDimmed "${__gy45_pccs_hex} bold"
+git config --global color.diff.context "${__gy95_pccs_hex}"
+git config --global color.diff.frag "${__gy65_pccs_hex}"
+git config --global color.diff.meta "${__blue_pccs_palep_hex}"
+git config --global color.diff.whitespace "0 ${__red_hex}"
+
+# status
+git config --global --unset color.status.header
+git config --global --unset color.status.added
+git config --global --unset color.status.changed
+git config --global --unset color.status.updated
+git config --global --unset color.status.branch
+git config --global --unset color.status.nobranch
+git config --global --unset color.status.localBranch
+git config --global --unset color.status.remoteBranch
+git config --global color.status.added "${__blue_pccs_lightp_hex}"
+git config --global color.status.changed "${__blue_pccs_palep_hex}"
+git config --global color.status.untracked "${__gy65_pccs_hex}"
+git config --global color.status.branch "${__blue_pccs_lightp_hex}"
+git config --global color.status.nobranch "${__blue_pccs_palep_hex}"
+git config --global color.status.localBranch "${__blue_pccs_lightp_hex}"
+git config --global color.status.remoteBranch "${__blue_pccs_palep_hex}"

@@ -5,6 +5,12 @@ vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust',
 
 local set = vim.keymap.set
 
+require('colorizer').setup({
+  filetypes = {
+    'css'
+  },
+})
+
 require('Comment').setup()
 -- <C-_> == <C-/>
 set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')

@@ -196,6 +196,7 @@ export __blue_habamax_hex='#8787af'
 export __magenta_habamax_hex='#af87af'
 export __cyan_habamax_hex='#87afaf'
 
+## PCCS red=24 green=12 yellow=6 blue=18 magenta=22 cyan=16
 ## 24bit PCCS bright
 export __red_pccs_bright_hex='#d0678e'
 export __green_pccs_bright_hex='#41b879'
@@ -212,6 +213,22 @@ export __blue_pccs_deep_hex='#004280'
 export __magenta_pccs_deep_hex='#612469'
 export __cyan_pccs_deep_hex='#005476'
 
+## 24bit PCCS dark
+export __red_pccs_dark_hex='#612d46'
+export __green_pccs_dark_hex='#23523a'
+export __yellow_pccs_dark_hex='#794d1c'
+export __blue_pccs_dark_hex='#123452'
+export __magenta_pccs_dark_hex='#432848'
+export __cyan_pccs_dark_hex='#004558'
+
+## 24bit PCCS dull
+export __red_pccs_dull_hex='#8b4f65'
+export __green_pccs_dull_hex='#4f8766'
+export __yellow_pccs_dull_hex='#b37f46'
+export __blue_pccs_dull_hex='#34597d'
+export __magenta_pccs_dull_hex='#6c4a71'
+export __cyan_pccs_dull_hex='#246a7d'
+
 ## 24bit PCCS light+
 export __red_pccs_lightp_hex='#d98ea5'
 export __green_pccs_lightp_hex='#85ce9e'
@@ -220,6 +237,14 @@ export __blue_pccs_lightp_hex='#6c9ac5'
 export __magenta_pccs_lightp_hex='#b088b5'
 export __cyan_pccs_lightp_hex='#5bafc4'
 
+## 24bit PCCS light grayish
+export __red_pccs_lightg_hex='#bdacb0'
+export __green_pccs_lightg_hex='#9db6a5'
+export __yellow_pccs_lightg_hex='#cebba8'
+export __blue_pccs_lightg_hex='#9ba5af'
+export __magenta_pccs_lightg_hex='#aba0ab'
+export __cyan_pccs_lightg_hex='#9eb4b9'
+
 ## 24bit PCCS soft
 export __red_pccs_soft_hex='#b4788b'
 export __green_pccs_soft_hex='#76b18a'
@@ -227,6 +252,14 @@ export __yellow_pccs_soft_hex='#dba66b'
 export __blue_pccs_soft_hex='#5d7ea0'
 export __magenta_pccs_soft_hex='#907194'
 export __cyan_pccs_soft_hex='#5192a4'
+
+## 24bit PCCS strong
+export __red_pccs_strong_hex='#a33c6a'
+export __green_pccs_strong_hex='#008f56'
+export __yellow_pccs_strong_hex='#e19215'
+export __blue_pccs_strong_hex='#005b9b'
+export __magenta_pccs_strong_hex='#7c3d84'
+export __cyan_pccs_strong_hex='#006f92'
 
 ## 24bit PCCS pale+
 export __red_pccs_palep_hex='#dec4ca'

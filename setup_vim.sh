@@ -287,6 +287,11 @@ if [ ! -d ${NVIM_PACK_DIR}/leap.nvim ]; then
     git clone --depth 1 https://github.com/ggandor/leap.nvim.git ${NVIM_PACK_DIR}/leap.nvim
 fi
 
+# install nvim-colorizer.lua
+if [ ! -d ${NVIM_PACK_DIR}/nvim-colorizer.lua ]; then
+    git clone --depth 1 https://github.com/NvChad/nvim-colorizer.lua.git ${NVIM_PACK_DIR}/nvim-colorizer.lua
+fi
+
 nvim -es +"
 set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after |
   silent! packl! |

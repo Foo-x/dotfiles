@@ -53,6 +53,9 @@ EOF
       hi Search guibg=#334455 guifg=white
       hi MoreMsg guibg=bg
       hi NormalFloat guibg=#222229
+      hi Cursor guibg=#f5f5f5 guifg=#323232
+
+      lua require('leap').init_highlight(true)
     endf
     command! NoirbuddySlate call s:noirbuddy_slate()
   endif
