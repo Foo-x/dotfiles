@@ -216,7 +216,7 @@ export PROMPT_COMMAND_LSGIT_ENTER='lsgit_enter'
 # prompt
 . ${DOT_DIR}/.config/bash/git-prompt.sh
 
-export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf \"\[\e[${__cyan_ansi_pccs_bright_foreground}m\]& \")\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__cyan_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__cyan_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__cyan_ansi_pccs_lightg_foreground}m\]\w\[\e[${__gy45_ansi_pccs_foreground}m\]\$(type __git_ps1 > /dev/null 2>&1 && __git_ps1 \" %s\")\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__cyan_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__red_ansi_pccs_lightp_foreground}m\]\")\\$\[\e[m\] \")"
+export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf \"\[\e[${__cyan_ansi_pccs_bright_foreground}m\]& \")\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__cyan_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__cyan_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__blue_ansi_pccs_lightp_foreground}m\]\w\[\e[${__gy45_ansi_pccs_foreground}m\]\$(type __git_ps1 > /dev/null 2>&1 && __git_ps1 \" %s\")\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__cyan_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy45_ansi_pccs_foreground}m\]\")\\$\[\e[m\] \")"
 
 GIT_PS1_SHOWDIRTYSTATE=1  # show if there are changed files '*' for unstaged and '+' for staged
 GIT_PS1_SHOWSTASHSTATE=1  # show '$' if something is stashed
