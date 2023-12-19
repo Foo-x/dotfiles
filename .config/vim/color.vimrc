@@ -52,6 +52,7 @@ EOF
       hi IncSearch guibg=#554433 guifg=white
       hi Search guibg=#334455 guifg=white
       hi MoreMsg guibg=bg
+      hi NormalFloat guibg=#222229
     endf
     command! NoirbuddySlate call s:noirbuddy_slate()
   endif
