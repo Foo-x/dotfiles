@@ -1,3 +1,5 @@
+. ${DOT_DIR}/.config/bash/.exports_color
+
 # branch
 git config --global --unset color.branch.current
 git config --global --unset color.branch.remote

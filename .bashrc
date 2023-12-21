@@ -14,7 +14,6 @@ shopt -s histverify
 
 . ${DOT_DIR}/.config/bash/.aliases
 . ${DOT_DIR}/.config/bash/.exports
-. ${DOT_DIR}/.config/git/config_dynamic
 
 if type pacman &> /dev/null; then
   . ${DOT_DIR}/.config/bash/.aliases_arch
@@ -55,4 +54,10 @@ if type tmux &> /dev/null; then
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
     tmux attach
   fi
+fi
+
+if type script &> /dev/null && [ "$(cat /proc/$PPID/comm)" != 'script' ]; then
+  mkdir -p /tmp/script
+  export SCRIPT=/tmp/script/$$
+  script -f $SCRIPT
 fi

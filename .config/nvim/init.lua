@@ -234,6 +234,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     set({ 'n', 'v' }, '<leader>f', function()
       vim.lsp.buf.format({ async = true })
     end, opts)
+
+    vim.diagnostic.config({
+      severity_sort = true,
+    })
   end,
 })
 
