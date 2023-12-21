@@ -90,7 +90,7 @@ ignore
 "
 echo "${gitconfig_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/{} ${XDG_CONFIG_HOME}/git/{}
 [ -f ${HOME}/.gitconfig ] && mv ${HOME}/.gitconfig ${XDG_CONFIG_HOME}/git/config
-. ${DOT_DIR}/.config/git/config_dynamic
+sh ${DOT_DIR}/.config/git/config_dynamic
 
 mkdir -p ${XDG_CONFIG_HOME}/git/hooks
 githooks_files="
