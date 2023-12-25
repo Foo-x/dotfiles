@@ -109,6 +109,7 @@ nnoremap <Plug>(window)> <C-w>>
 nnoremap <Plug>(window)< <C-w><
 nnoremap <Plug>(window)+ <C-w>+
 nnoremap <Plug>(window)- <C-w>-
+nnoremap <Plug>(window)t <Cmd>tab split<CR>
 nnoremap <Space>1 <C-w>t
 nnoremap <Space>2 <C-w>t<C-w>l
 nnoremap <Space>3 <C-w>t<C-w>j

@@ -96,6 +96,14 @@ if 1
     \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
     \ 'options': '--multi --bind ctrl-a:select-all --prompt "TV> "'
   \ }))
+  command! -bang GTS call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
+    \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "GTS> "'
+  \ }))
+  command! -bang GTV call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
+    \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
+    \ 'options': '--multi --bind ctrl-a:select-all --prompt "GTV> "'
+  \ }))
   command! -bang BTS call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({
     \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
     \ 'options': '--multi --bind ctrl-a:select-all --prompt "BTS> "'
