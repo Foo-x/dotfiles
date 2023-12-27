@@ -388,11 +388,6 @@ if type devcontainer &> /dev/null; then
   alias devcx='devcontainer exec --workspace-folder .'
 fi
 
-if type script &> /dev/null && [ "$(cat /proc/$PPID/comm)" = 'script' ] && [ $SCRIPT ]; then
-  # preview output
-  alias po='$PAGER $SCRIPT'
-fi
-
 if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'

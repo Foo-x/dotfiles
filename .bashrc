@@ -55,9 +55,3 @@ if type tmux &> /dev/null; then
     tmux attach
   fi
 fi
-
-if type script &> /dev/null && [ "$(cat /proc/$PPID/comm)" != 'script' ]; then
-  mkdir -p /tmp/script
-  export SCRIPT=/tmp/script/$$
-  script -f $SCRIPT
-fi
