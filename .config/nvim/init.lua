@@ -16,48 +16,38 @@ require('Comment').setup()
 set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
 set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
 
-vim.api.nvim_create_autocmd('BufReadPost', {
-  group = vim.api.nvim_create_augroup('SymbolsOutlineSetup', {}),
-  callback = function()
-    if vim.bo.filetype == 'markdown' then
-      require('symbols-outline').setup()
-      return
-    end
+require('symbols-outline').setup({
+  symbol_blacklist = {
+    'Array',
+    'Boolean',
+    'Field',
+    'Null',
+    'Number',
+    'Object',
+    'Package',
+    'Property',
 
-    require('symbols-outline').setup({
-      symbol_blacklist = {
-        'Array',
-        'Boolean',
-        'Field',
-        'Null',
-        'Number',
-        'Object',
-        'Package',
-        'Property',
-        'String',
-
-        -- 'Class',
-        -- 'Component',
-        -- 'Constant',
-        -- 'Constructor',
-        -- 'Enum',
-        -- 'EnumMember',
-        -- 'Event',
-        -- 'File',
-        -- 'Fragment',
-        -- 'Function',
-        -- 'Interface',
-        -- 'Key',
-        -- 'Method',
-        -- 'Module',
-        -- 'Namespace',
-        -- 'Operator',
-        -- 'Struct',
-        -- 'TypeParameter',
-        -- 'Variable',
-      },
-    })
-  end
+    -- 'Class',
+    -- 'Component',
+    -- 'Constant',
+    -- 'Constructor',
+    -- 'Enum',
+    -- 'EnumMember',
+    -- 'Event',
+    -- 'File',
+    -- 'Fragment',
+    -- 'Function',
+    -- 'Interface',
+    -- 'Key',
+    -- 'Method',
+    -- 'Module',
+    -- 'Namespace',
+    -- 'Operator',
+    -- 'String',
+    -- 'Struct',
+    -- 'TypeParameter',
+    -- 'Variable',
+  },
 })
 set('n', '<M-.>', '<Cmd>SymbolsOutline<CR>')
 
