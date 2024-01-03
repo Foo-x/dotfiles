@@ -252,9 +252,9 @@ if [ ! -d ${NVIM_PACK_DIR}/fidget.nvim ]; then
     git clone --depth 1 https://github.com/j-hui/fidget.nvim.git ${NVIM_PACK_DIR}/fidget.nvim
 fi
 
-# install symbols-outline.nvim
-if [ ! -d ${NVIM_PACK_DIR}/symbols-outline.nvim ]; then
-    git clone --depth 1 https://github.com/simrat39/symbols-outline.nvim.git ${NVIM_PACK_DIR}/symbols-outline.nvim
+# install aerial.nvim
+if [ ! -d ${NVIM_PACK_DIR}/aerial.nvim ]; then
+    git clone --depth 1 https://github.com/stevearc/aerial.nvim.git ${NVIM_PACK_DIR}/aerial.nvim
 fi
 
 # install nvim-bqf

@@ -16,40 +16,21 @@ require('Comment').setup()
 set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
 set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
 
-require('symbols-outline').setup({
-  symbol_blacklist = {
-    'Array',
-    'Boolean',
-    'Field',
-    'Null',
-    'Number',
-    'Object',
-    'Package',
-    'Property',
-
-    -- 'Class',
-    -- 'Component',
-    -- 'Constant',
-    -- 'Constructor',
-    -- 'Enum',
-    -- 'EnumMember',
-    -- 'Event',
-    -- 'File',
-    -- 'Fragment',
-    -- 'Function',
-    -- 'Interface',
-    -- 'Key',
-    -- 'Method',
-    -- 'Module',
-    -- 'Namespace',
-    -- 'Operator',
-    -- 'String',
-    -- 'Struct',
-    -- 'TypeParameter',
-    -- 'Variable',
+local aerial = require('aerial')
+aerial.setup({
+  keymaps = {
+    ['<CR>'] = {
+      callback = function()
+        aerial.select()
+        aerial.close()
+      end,
+    }
   },
+  filter_kind = false,
+  on_attach = function()
+    set('n', '<M-.>', '<Cmd>AerialToggle<CR>')
+  end,
 })
-set('n', '<M-.>', '<Cmd>SymbolsOutline<CR>')
 
 require('nvim-autopairs').setup()
 
@@ -243,8 +224,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local signs = { Error = " ", Warn = " ", Info = " ", Hint = "󰌵 " }
 for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 -- }}}
 
