@@ -162,6 +162,9 @@ mason_lspconfig.setup_handlers({
           char = '▏',
         },
       })
+      vim.cmd [[
+        call SetupColor()
+      ]]
     end
 
     local opts = {

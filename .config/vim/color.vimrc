@@ -72,8 +72,7 @@ EOF
   endf
   command! -nargs=1 -complete=customlist,s:color_complete Color <args>
 
-  " only first loading
-  if !exists('g:colors_name')
+  fun! SetupColor()
     try
       if has('nvim')
         NoirbuddySlate
@@ -87,6 +86,11 @@ EOF
       hi GitGutterChange ctermfg=yellow
       hi GitGutterDelete ctermfg=red
     endtry
+  endf
+
+  " only first loading
+  if !exists('g:colors_name')
+    call SetupColor()
   endif
   hi netrwMarkFile ctermbg=darkmagenta
 endif
