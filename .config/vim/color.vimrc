@@ -54,6 +54,10 @@ EOF
       hi MoreMsg guibg=bg
       hi NormalFloat guibg=#222229
       hi Cursor guibg=#f5f5f5 guifg=#323232
+      hi @ibl.indent.char.1 gui=nocombine guifg=#323232
+      hi @ibl.whitespace.char.1 gui=nocombine guifg=#323232
+      hi @ibl.scope.char.1 gui=nocombine guifg=#737373
+      hi @ibl.scope.underline.1 gui=underline guisp=#737373
 
       lua require('leap').init_highlight(true)
     endf
