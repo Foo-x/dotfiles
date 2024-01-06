@@ -35,16 +35,16 @@ mkdir -p ${XDG_STATE_HOME}
 # setup gh
 if has gh; then
     {
-        gh alias set cl 'repo clone'
-        gh alias set clp 'repo clone $1 -- --filter=blob:none --sparse'
-        gh alias set cr 'repo create'
-        gh alias set sync 'repo sync'
-        gh alias set il 'issue list'
-        gh alias set co 'pr checkout'
-        gh alias set al 'alias list'
-        gh alias set openr 'repo view -w'
-        gh alias set openi 'issue view -w'
-        gh alias set openp 'pr view -w'
+        gh alias set --clobber cl 'repo clone'
+        gh alias set --clobber clp 'repo clone $1 -- --filter=blob:none --sparse'
+        gh alias set --clobber cr 'repo create'
+        gh alias set --clobber il 'issue list'
+        gh alias set --clobber co 'pr checkout'
+        gh alias set --clobber al 'alias list'
+        gh alias set --clobber openr 'repo view -w'
+        gh alias set --clobber openi 'issue view -w'
+        gh alias set --clobber openp 'pr view -w'
+        gh alias set --clobber --shell sync 'gh repo sync $(git config --get remote.origin.url | \grep -oP "(?<=:).+(?=\.)")'
     } > /dev/null 2>&1
 fi
 

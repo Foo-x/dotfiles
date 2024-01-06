@@ -38,7 +38,7 @@
     bmg = branch --merged
     bd = branch -d
     bdd = branch -D
-    bv = branch -vv
+    bv = branch -avv
     co = checkout
     cb = checkout -b
     com = checkout -m
