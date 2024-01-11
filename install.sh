@@ -36,7 +36,8 @@ mkdir -p ${XDG_STATE_HOME}
 if has gh; then
     {
         gh alias set --clobber cl 'repo clone'
-        gh alias set --clobber clp 'repo clone $1 -- --filter=blob:none --sparse'
+        gh alias set --clobber clp 'repo clone $1 -- --filter=blob:none'
+        gh alias set --clobber clps 'repo clone $1 -- --filter=blob:none --sparse'
         gh alias set --clobber cr 'repo create'
         gh alias set --clobber il 'issue list'
         gh alias set --clobber co 'pr checkout'

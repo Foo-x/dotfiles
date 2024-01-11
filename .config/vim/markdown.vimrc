@@ -1,4 +1,5 @@
 let g:previm_open_cmd = 'open'
+let g:previm_show_header = 0
 
 fun! s:init_markdown()
   nnoremap <silent><buffer> <Leader>x :<C-u>call markdown#SwitchStatus()<CR>
