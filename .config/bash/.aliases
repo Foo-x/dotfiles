@@ -21,6 +21,7 @@ if [ "$(uname)" = 'Darwin' ]; then
 else
   alias ls='ls -F --color=auto'
 fi
+alias la='ls -A'
 alias ll='ls -lahi --time-style=+%c'
 alias mkdir='mkdir -p'
 alias df='df -h'
