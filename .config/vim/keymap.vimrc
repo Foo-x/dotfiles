@@ -69,6 +69,8 @@ nnoremap <Plug>(quickfix)w :<C-u>cwindow<CR>
 nnoremap <Plug>(quickfix)c :<C-u>cclose<CR>
 nnoremap <Plug>(quickfix). :<C-u>cgetbuffer<CR>
 nnoremap <Plug>(quickfix)f :<C-u>cgetfile<CR>
+nnoremap <Plug>(quickfix)h :<C-u>colder<CR>
+nnoremap <Plug>(quickfix)l :<C-u>cnewer<CR>
 nnoremap <Plug>(quickfix)e <Cmd>exe 'e' &errorfile<CR>
 "" toggle quickfix
 nnoremap <expr> <Plug>(quickfix)t empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
@@ -82,6 +84,8 @@ nnoremap <Plug>(location)w :<C-u>lwindow<CR>
 nnoremap <Plug>(location)c :<C-u>lclose<CR>
 nnoremap <Plug>(location). :<C-u>lgetbuffer<CR>
 nnoremap <Plug>(location)f :<C-u>lgetfile<CR>
+nnoremap <Plug>(location)h :<C-u>lolder<CR>
+nnoremap <Plug>(location)l :<C-u>lnewer<CR>
 
 nmap <Space>w <Plug>(window)
 nnoremap <Plug>(window)_ <Cmd>split<CR>
@@ -177,6 +181,9 @@ inoremap <Plug>(i_file)t <C-r>=expand('%:t')<CR>
 inoremap <Plug>(i_file)r <C-r>=expand('%:t:r')<CR>
 
 " visual mode
+vnoremap <S-j> <C-f>
+vnoremap <S-k> <C-b>
+
 "" display lines downward
 vnoremap j gj
 vnoremap <Down> gj

@@ -14,6 +14,7 @@ nnoremap <C-j> <Plug>(GitGutterNextHunk)
 nnoremap <C-k> <Plug>(GitGutterPrevHunk)
 nnoremap <F9> :<C-u>GV --all<CR>
 nnoremap <S-F9> :<C-u>GV --name-status --all<CR>
+nnoremap <F10> :<C-u>GV! --all<CR>
 " }}}
 "
 " command {{{
