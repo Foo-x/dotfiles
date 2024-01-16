@@ -292,6 +292,11 @@ if [ ! -d ${NVIM_PACK_DIR}/nvim-colorizer.lua ]; then
     git clone --depth 1 https://github.com/NvChad/nvim-colorizer.lua.git ${NVIM_PACK_DIR}/nvim-colorizer.lua
 fi
 
+# install diffview.nvim
+if [ ! -d ${NVIM_PACK_DIR}/diffview.nvim ]; then
+    git clone --depth 1 https://github.com/sindrets/diffview.nvim.git ${NVIM_PACK_DIR}/diffview.nvim
+fi
+
 nvim -es +"
 set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after |
   silent! packl! |

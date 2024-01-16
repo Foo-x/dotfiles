@@ -69,6 +69,20 @@ set('n', 'F', '<Plug>(leap-backward-to)')
 set('n', 't', '<Plug>(leap-forward-till)')
 set('n', 'T', '<Plug>(leap-backward-till)')
 
+local diffview_actions = require('diffview.actions')
+require('diffview').setup({
+  keymaps = {
+    file_panel = {
+      ['L'] = false,
+      { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Open the commit log panel' } },
+    },
+    file_history_panel = {
+      ['L'] = false,
+      { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Show commit details' } },
+    },
+  },
+})
+
 -- lsp {{{
 local lspconfig = require('lspconfig')
 local mason = require('mason')

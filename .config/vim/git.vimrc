@@ -27,6 +27,13 @@ cnoreabbr GMT G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t 
 cnoreabbr GVA GV --all
 cnoreabbr GV1 GV --name-status
 cnoreabbr GVA1 GV --name-status --all
+
+" diffview.nvim
+if has('nvim')
+  cnoreabbr DV DiffviewOpen
+  cnoreabbr DVH DiffviewFileHistory --all
+  cnoreabbr DVH! DiffviewFileHistory % --all
+endif
 " }}}
 
 " autocmd {{{
@@ -55,6 +62,7 @@ if 1
     autocmd!
     autocmd FileType fugitive,git,GV setlocal isk+=-
     autocmd FileType fugitive,git,GV nnoremap <buffer><silent> cob :<C-u>G checkout <cword><CR>
+    autocmd FileType GV nnoremap <buffer><silent> <CR> :<C-u>call feedkeys(".\<lt>C-u>DiffviewOpen\<lt>C-e>^!\<lt>CR>")<CR>
     autocmd FileType diff,git setlocal foldmethod=expr foldexpr=s:diff_fold()
   augroup END
 endif

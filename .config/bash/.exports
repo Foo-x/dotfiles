@@ -43,6 +43,9 @@ export HISTIGNORE='?:??:pwd:history:cd*:exit:clear'
 if [ "$TMUX" ]; then
     export PATH=$(echo "$PATH" | sed -E 's#(.*):?.+.vscode-server[^:]+:#\1#')
 fi
+if type mise &> /dev/null; then
+    export PATH="${XDG_DATA_HOME}/mise/shims:$PATH"
+fi
 
 export EDITOR='nvim -p'
 

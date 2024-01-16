@@ -44,6 +44,7 @@ if 1
           }
         })
 EOF
+      hi DiffText guifg=#f5f5f5 guibg=#558855
       hi GitGutterAdd guifg=#6688AA
       hi GitGutterChange guifg=#77AA77
       hi GitGutterDelete guifg=#AA6666
