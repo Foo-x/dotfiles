@@ -67,6 +67,9 @@ fi
 if type diff-highlight &> /dev/null; then
   export GIT_PAGER='diff-highlight | ${PAGER}'
 fi
+if type delta &> /dev/null; then
+  export GIT_PAGER=delta
+fi
 
 export SIMPLE_BACKUP_SUFFIX=.`date +%Y%m%d_%H%M%S`
 

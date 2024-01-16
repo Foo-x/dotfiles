@@ -233,6 +233,15 @@
 [core]
     hooksPath = ~/.config/git/hooks
     quotePath = false
+[delta]
+    navigate = true
+    commit-decoration-style = box
+    features = readable
+    true-color = always
+    syntax-theme = ansi
+[delta "readable"]
+    line-numbers = true
+    side-by-side = true
 [commit]
     template = ~/.config/git/commit_template
 [diff]
