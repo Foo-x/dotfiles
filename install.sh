@@ -114,6 +114,21 @@ if [ ! -d ${TMUX_DIR}/tmux-continuum ]; then
     git clone --depth 1 https://github.com/tmux-plugins/tmux-continuum.git ${TMUX_DIR}/tmux-continuum
 fi
 
+# install mise
+if ! type mise > /dev/null 2>&1; then
+    curl https://mise.jdx.dev/install.sh | sh
+fi
+
+# install delta
+if ! type delta > /dev/null 2>&1; then
+    mise use -gy delta
+fi
+
+# install bat
+if ! type bat > /dev/null 2>&1; then
+    mise use -gy bat
+fi
+
 exe_files="
 fetch_completions.sh
 fetch_git_prompt.sh

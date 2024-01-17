@@ -62,5 +62,5 @@ git config --global color.status.localBranch "${__blue_pccs_lightp_hex}"
 git config --global color.status.remoteBranch "${__blue_pccs_palep_hex}"
 
 if type delta &> /dev/null; then
-    git config --global interactive.diffFilter 'delta --color-only'
+    git config --global interactive.diffFilter 'delta --color-only' &> /dev/null
 fi
