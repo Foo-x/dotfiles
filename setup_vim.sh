@@ -48,6 +48,11 @@ if [ ! -d ${VIM_PACK_DIR}/vim-fugitive ]; then
     git clone --depth 1 https://github.com/tpope/vim-fugitive.git ${VIM_PACK_DIR}/vim-fugitive
 fi
 
+# install vim-rhubarb
+if [ ! -d ${VIM_PACK_DIR}/vim-rhubarb ]; then
+    git clone --depth 1 https://github.com/tpope/vim-rhubarb.git ${VIM_PACK_DIR}/vim-rhubarb
+fi
+
 # install gv.vim
 if [ ! -d ${VIM_PACK_DIR}/gv.vim ]; then
     git clone --depth 1 https://github.com/junegunn/gv.vim.git  ${VIM_PACK_DIR}/gv.vim
