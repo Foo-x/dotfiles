@@ -93,8 +93,8 @@ let $BASH_ENV="$HOME/.dotfiles/.config/bash/.aliases"
 
 " autocmd
 autocmd SessionLoadPost * let $is_vim_session_loaded='true'
-" save a session every 15 min
-autocmd SessionLoadPost * call timer_start(15 * 60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })
+" save a session every 1 min
+autocmd SessionLoadPost * call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })
 "" if exists a session and loaded it: overwrite session
 "" if exists a session but not loaded it: do not save new session
 "" if exists no sessions: save new session
