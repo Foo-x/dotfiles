@@ -71,6 +71,11 @@ set('n', 'T', '<Plug>(leap-backward-till)')
 
 local diffview_actions = require('diffview.actions')
 require('diffview').setup({
+  hooks = {
+    view_leave = function()
+      vim.cmd.tabclose()
+    end,
+  },
   keymaps = {
     file_panel = {
       ['L'] = false,

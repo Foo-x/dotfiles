@@ -5,6 +5,7 @@ errors.err
 *.bak
 *.tmp
 *.log
+.local/
 out/
 dist/
 cache/
