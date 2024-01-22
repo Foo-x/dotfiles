@@ -169,6 +169,8 @@ inoremap <C-z> <C-o>u
 inoremap <C-y> <C-o><C-r>
 inoremap <C-v>u <C-r>=nr2char(0x)<Left>
 inoremap <C-s> <Esc>:<C-u>update<CR>gi
+inoremap <Left> <C-g>U<Left>
+inoremap <Right> <C-g>U<Right>
 
 imap <C-f> <Plug>(i_file)
 "" relative

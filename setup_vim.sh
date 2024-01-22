@@ -5,7 +5,7 @@ XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
 # install neovim
 if [ ! -f ${HOME}/.local/bin/nvim ]; then
-    curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage > ${HOME}/.local/bin/nvim.appimage
+    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > ${HOME}/.local/bin/nvim.appimage
     chmod +x ${HOME}/.local/bin/nvim.appimage
     if ${HOME}/.local/bin/nvim.appimage -v > /dev/null 2>&1; then
         mv ${HOME}/.local/bin/nvim.appimage ${HOME}/.local/bin/nvim
@@ -300,6 +300,11 @@ fi
 # install diffview.nvim
 if [ ! -d ${NVIM_PACK_DIR}/diffview.nvim ]; then
     git clone --depth 1 https://github.com/sindrets/diffview.nvim.git ${NVIM_PACK_DIR}/diffview.nvim
+fi
+
+# install nvim-surround
+if [ ! -d ${NVIM_PACK_DIR}/nvim-surround ]; then
+    git clone --depth 1 https://github.com/kylechui/nvim-surround.git ${NVIM_PACK_DIR}/nvim-surround
 fi
 
 nvim -es +"

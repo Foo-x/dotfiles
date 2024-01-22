@@ -118,3 +118,11 @@ augroup CursorLine
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
+augroup CmdWin
+  autocmd!
+  autocmd CmdwinEnter * setlocal nonumber
+  autocmd CmdwinEnter * setlocal signcolumn=no
+  autocmd CmdwinEnter : g/\v^q%[a!]$/d
+  autocmd CmdwinEnter : g/\v^w%[qa!]$/d
+  autocmd CmdWinEnter * nnoremap <buffer> q <Cmd>q<CR>
+augroup END

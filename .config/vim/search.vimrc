@@ -11,7 +11,7 @@ set hlsearch
 " }}}
 
 " keymap {{{
-nnoremap <Space>s :%s/
+nnoremap <Space>s :%s//g<Left><Left>
 
 " disable highlight
 nnoremap <C-l> :nohlsearch<CR><C-l>

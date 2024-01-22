@@ -130,16 +130,28 @@ if 1
   command! CopyFilenameBasename let @"=expand('%:t') | silent! doautocmd TextYankPost
   command! CopyFilenameBasenameWithoutExtension let @"=expand('%:t:r') | silent! doautocmd TextYankPost
 
-  function! UseEasyRegname()
+  fun! s:use_easy_regname()
     if v:event.regname ==# ''
       call setreg(v:event.operator, getreg())
     endif
-  endfunction
+  endf
 
   augroup UseEasyRegname
     autocmd!
-    au TextYankPost * call UseEasyRegname()
+    au TextYankPost * call s:use_easy_regname()
   augroup END
+
+  fun! s:to_cmdwin(trigger)
+    if empty(getcmdline()) && getcmdtype() == a:trigger
+      return "\<ESC>q" . a:trigger
+    else
+      return a:trigger
+    endif
+  endf
+
+  cnoremap <expr> ; <SID>to_cmdwin(':')
+  cnoremap <expr> / <SID>to_cmdwin('/')
+  cnoremap <expr> ? <SID>to_cmdwin('?')
 
   if has('nvim')
     command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif
