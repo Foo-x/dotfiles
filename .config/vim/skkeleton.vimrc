@@ -11,9 +11,8 @@ call skkeleton#config({
   \ 'markerHenkanSelect': '■',
   \ })
 
-call add(g:skkeleton#mapped_keys, '<C-d>')
+call add(g:skkeleton#mapped_keys, 'df')
 
-call skkeleton#register_keymap('input', '<C-d>', 'cancel')
-call skkeleton#register_keymap('henkan', '<C-d>', 'cancel')
+call skkeleton#register_keymap('input', 'df', 'cancel')
+call skkeleton#register_keymap('henkan', 'df', 'cancel')
 call skkeleton#register_keymap('henkan', '<CR>', 'kakutei')
-
