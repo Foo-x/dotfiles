@@ -5,6 +5,8 @@ vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust',
 
 local set = vim.keymap.set
 
+require('skkeleton_indicator').setup()
+
 require('nvim-surround').setup()
 
 require('colorizer').setup({

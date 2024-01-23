@@ -1,8 +1,15 @@
 fun! MyStatusline()
-  let l:common = '%f%m%r%h%w %=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
-  if !has('nvim')
-    return ' ' . l:common . ' '
+  let l:common = '%f%m%r%h%w %=%l,%v %p%%'
+
+  let l:branch = matchstr(FugitiveStatusline(), '\v\[Git\(\zs.+\ze\)\]')
+  if l:branch != ''
+    let l:branch = ' ' . l:branch
   endif
+
+  if !has('nvim')
+    return ' ' . l:common . l:branch . ' '
+  endif
+
   if luaeval('vim.inspect(vim.lsp.buf_get_clients())') == '{}'
     let l:diagnostics_status = ''
   else
@@ -16,7 +23,7 @@ fun! MyStatusline()
   let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
   let l:pinned_status = v:lua.require("stickybuf").is_pinned() ? ' ' : ''
 
-  return ' ' . l:common . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
+  return ' ' . l:common . l:branch . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
 endf
 set statusline=%{%MyStatusline()%}
 

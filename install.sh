@@ -129,6 +129,11 @@ if ! type bat > /dev/null 2>&1; then
     mise use -gy bat
 fi
 
+# install deno
+if ! type deno > /dev/null 2>&1; then
+    mise use -gy deno
+fi
+
 exe_files="
 fetch_completions.sh
 fetch_git_prompt.sh

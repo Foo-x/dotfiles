@@ -30,6 +30,7 @@ set splitright
 set formatoptions+=M
 set matchpairs+=<:>
 set scrolloff=5
+set sidescrolloff=10
 set shortmess+=FI
 set shortmess-=S
 set mouse=
@@ -65,7 +66,7 @@ if has('nvim-0.8')
 endif
 
 " show invisible chars
-set lcs=tab:▸\ ,lead:·,trail:·,nbsp:_
+set lcs=tab:▸\ ,lead:·,trail:·,nbsp:_,extends:»,precedes:«
 set list
 
 runtime! *.vimrc

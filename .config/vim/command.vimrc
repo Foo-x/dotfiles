@@ -17,11 +17,11 @@ if 1
 
   " insert_print
   if !exists('g:insert_print_prefix')
-    let g:insert_print_prefix = '🔴🟠🟡🟢🔵🟣🟤 '
+    let g:insert_print_prefix = '+++++ 🔴🟠🟡🟢🔵🟣🟤 '
   endif
 
   if !exists('g:insert_print_suffix')
-    let g:insert_print_suffix = ''
+    let g:insert_print_suffix = ' +++++'
   endif
 
   if !exists('g:insert_print_templates')
@@ -152,6 +152,23 @@ if 1
   cnoremap <expr> ; <SID>to_cmdwin(':')
   cnoremap <expr> / <SID>to_cmdwin('/')
   cnoremap <expr> ? <SID>to_cmdwin('?')
+
+  fun! s:fileinfo()
+    let l:path = expand('%:p')
+    let l:lines = line('$') . 'L'
+    let l:size = trim(execute('w !wc -c | numfmt --to=iec')) . 'B'
+    if l:path != ''
+      echo '"' . l:path . '"' l:lines l:size
+    else
+      echo '"[No Name]"' l:lines l:size
+    endif
+
+    set ff?
+    set fenc?
+    set enc?
+    set ft?
+  endf
+  command! FileInfo call s:fileinfo()
 
   if has('nvim')
     command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif

@@ -14,6 +14,12 @@ if [ ! -f ${HOME}/.local/bin/nvim ]; then
     fi
 fi
 
+# download skk dictionary
+mkdir -p ${HOME}/.skk
+if [ ! -f ${HOME}/.skk/SKK-JISYO.L ]; then
+  curl https://skk-dev.github.io/dict/SKK-JISYO.L.gz | gzip -d > ${HOME}/.skk/SKK-JISYO.L
+fi
+
 binfiles="
 nvimdirdiff
 "
@@ -116,6 +122,16 @@ fi
 # install rainbow_csv
 if [ ! -d ${VIM_PACK_DIR}/rainbow_csv ]; then
     git clone --depth 1 https://github.com/mechatroner/rainbow_csv.git ${VIM_PACK_DIR}/rainbow_csv
+fi
+
+# install denops.vim
+if [ ! -d ${VIM_PACK_DIR}/denops.vim ]; then
+    git clone --depth 1 https://github.com/vim-denops/denops.vim.git ${VIM_PACK_DIR}/denops.vim
+fi
+
+# install skkeleton
+if [ ! -d ${VIM_PACK_DIR}/skkeleton ]; then
+    git clone --depth 1 https://github.com/vim-skk/skkeleton.git ${VIM_PACK_DIR}/skkeleton
 fi
 
 # install vimdoc-ja
@@ -305,6 +321,11 @@ fi
 # install nvim-surround
 if [ ! -d ${NVIM_PACK_DIR}/nvim-surround ]; then
     git clone --depth 1 https://github.com/kylechui/nvim-surround.git ${NVIM_PACK_DIR}/nvim-surround
+fi
+
+# install skkeleton_indicator.nvim
+if [ ! -d ${NVIM_PACK_DIR}/skkeleton_indicator.nvim ]; then
+    git clone --depth 1 https://github.com/delphinus/skkeleton_indicator.nvim.git ${NVIM_PACK_DIR}/skkeleton_indicator.nvim
 fi
 
 nvim -es +"
