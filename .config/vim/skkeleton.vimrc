@@ -7,6 +7,7 @@ call skkeleton#initialize()
 
 call skkeleton#config({
   \ 'globalDictionaries': ['~/.skk/SKK-JISYO.L'],
+  \ 'keepState': v:true,
   \ 'markerHenkan': '□',
   \ 'markerHenkanSelect': '■',
   \ })

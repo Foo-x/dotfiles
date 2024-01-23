@@ -328,6 +328,11 @@ if [ ! -d ${NVIM_PACK_DIR}/skkeleton_indicator.nvim ]; then
     git clone --depth 1 https://github.com/delphinus/skkeleton_indicator.nvim.git ${NVIM_PACK_DIR}/skkeleton_indicator.nvim
 fi
 
+# install toggleterm.nvim
+if [ ! -d ${NVIM_PACK_DIR}/toggleterm.nvim ]; then
+    git clone --depth 1 https://github.com/akinsho/toggleterm.nvim.git ${NVIM_PACK_DIR}/toggleterm.nvim
+fi
+
 nvim -es +"
 set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after |
   silent! packl! |
