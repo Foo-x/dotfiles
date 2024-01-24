@@ -9,7 +9,13 @@ endif
 " }}}
 
 " keymap {{{
-nmap <Space><Space>gp <Plug>(GitGutterPreviewHunk)<C-w>P
+nmap <Space>g <Plug>(git)
+nnoremap <Plug>(git)<CR> <Plug>(GitGutterPreviewHunk)<C-w>P
+nnoremap <Plug>(git)cc <Cmd>tab Git commit<CR>
+nnoremap <Plug>(git)ca <Cmd>tab Git commit --amend<CR>
+nnoremap <Plug>(git)ce <Cmd>Git commit --amend --no-edit<CR>
+nnoremap <Plug>(git)p <Cmd>Git push<CR>
+
 nnoremap <C-j> <Plug>(GitGutterNextHunk)
 nnoremap <C-k> <Plug>(GitGutterPrevHunk)
 nnoremap <F9> :<C-u>GV --all<CR>
@@ -19,20 +25,20 @@ nnoremap <F10> :<C-u>GV! --all<CR>
 "
 " command {{{
 " vim-fugitive
-cnoreabbr G tab Git
-cnoreabbr GDT G difftool -y
-cnoreabbr GMT G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t \| Gvdiffsplit :1 \| winc j
+cnoreabbr <expr> G getcmdtype() == ':' && getcmdline() ==# 'G' ? 'tab Git' : 'G'
+cnoreabbr gdt G difftool -y
+cnoreabbr gmt G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t \| Gvdiffsplit :1 \| winc j
 
 " gv.vim
-cnoreabbr GVA GV --all
-cnoreabbr GV1 GV --name-status
-cnoreabbr GVA1 GV --name-status --all
+cnoreabbr gva GV --all
+cnoreabbr gv1 GV --name-status
+cnoreabbr gva1 GV --name-status --all
 
 " diffview.nvim
 if has('nvim')
-  cnoreabbr DV DiffviewOpen
-  cnoreabbr DVH DiffviewFileHistory --all
-  cnoreabbr DVH! DiffviewFileHistory % --all
+  cnoreabbr dv DiffviewOpen
+  cnoreabbr dvh DiffviewFileHistory --all
+  cnoreabbr dvh! DiffviewFileHistory % --all
 endif
 " }}}
 

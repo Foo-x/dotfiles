@@ -49,12 +49,6 @@ nnoremap <Space>O :<C-u>i<CR><CR>.<CR>
 nnoremap <S-j> <C-f>
 nnoremap <S-k> <C-b>
 
-nmap <Space>g <Plug>(goto)
-nnoremap <Plug>(goto)h <C-o>
-nnoremap <Plug>(goto)l <C-i>
-nnoremap <Plug>(goto)j <Plug>(GitGutterNextHunk)
-nnoremap <Plug>(goto)k <Plug>(GitGutterPrevHunk)
-
 nmap <Space>a <Plug>(argument)
 nnoremap <Plug>(argument)r :<C-u>Args<CR>
 nnoremap <Plug>(argument)n :<C-u>next<CR>
@@ -156,6 +150,9 @@ nnoremap <Space>d ggdG
 
 "" move to end after pasting
 nnoremap <silent> p p`]
+
+"" select last pasted
+nnoremap gpv `[v`]
 
 nnoremap <Space>; A;<Esc>
 nnoremap <Space>, A,<Esc>

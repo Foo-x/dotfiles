@@ -17,13 +17,13 @@ nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
 " }}}
 
 " command {{{
-cnoreabbr FF Files
-cnoreabbr FG GFiles
-cnoreabbr FB Buffers
-cnoreabbr FH HistoryWS
-cnoreabbr FHA History
-cnoreabbr FHE Helptags
-cnoreabbr FA Args
+cnoreabbr ff Files
+cnoreabbr fg GFiles
+cnoreabbr fb Buffers
+cnoreabbr fh HistoryWS
+cnoreabbr fha History
+cnoreabbr fhe Helptags
+cnoreabbr fa Args
 
 " skip on vim-tiny
 if 1

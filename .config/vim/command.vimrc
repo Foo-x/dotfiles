@@ -1,10 +1,10 @@
 cnoreabbr w!! w !sudo tee > /dev/null %
 
 " argument list
-cnoreabbr AR args
-cnoreabbr AD argdelete
-cnoreabbr ADA argdelete *
-cnoreabbr ADD argdedupe
+cnoreabbr ar args
+cnoreabbr ad argdelete
+cnoreabbr ada argdelete *
+cnoreabbr <expr> add getcmdtype() == ':' && getcmdline() ==# 'add' ? 'argdedupe' : 'add'
 
 " skip on vim-tiny
 if 1
@@ -141,17 +141,9 @@ if 1
     au TextYankPost * call s:use_easy_regname()
   augroup END
 
-  fun! s:to_cmdwin(trigger)
-    if empty(getcmdline()) && getcmdtype() == a:trigger
-      return "\<ESC>q" . a:trigger
-    else
-      return a:trigger
-    endif
-  endf
-
-  cnoremap <expr> ; <SID>to_cmdwin(':')
-  cnoremap <expr> / <SID>to_cmdwin('/')
-  cnoremap <expr> ? <SID>to_cmdwin('?')
+  cnoremap <expr> ; getcmdtype() == ':' && empty(getcmdline()) ? "\<Esc>q:" : ';'
+  cnoremap <expr> / getcmdtype() == '/' && empty(getcmdline()) ? "\<Esc>q/" : '/'
+  cnoremap <expr> ? getcmdtype() == '?' && empty(getcmdline()) ? "\<Esc>q?" : '?'
 
   fun! s:fileinfo()
     let l:path = expand('%:p')

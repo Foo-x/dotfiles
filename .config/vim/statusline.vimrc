@@ -1,13 +1,7 @@
 fun! MyStatusline()
   let l:common = '%f%m%r%h%w %=%l,%v %p%%'
-
-  let l:branch = matchstr(FugitiveStatusline(), '\v\[Git\(\zs.+\ze\)\]')
-  if l:branch != ''
-    let l:branch = ' ' . l:branch
-  endif
-
   if !has('nvim')
-    return ' ' . l:common . l:branch . ' '
+    return ' ' . l:common . ' '
   endif
 
   if luaeval('vim.inspect(vim.lsp.buf_get_clients())') == '{}'
@@ -23,7 +17,7 @@ fun! MyStatusline()
   let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
   let l:pinned_status = v:lua.require("stickybuf").is_pinned() ? ' ' : ''
 
-  return ' ' . l:common . l:branch . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
+  return ' ' . l:common . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
 endf
 set statusline=%{%MyStatusline()%}
 
@@ -48,6 +42,7 @@ fun! MyTabline()
     let l:result = l:result . l:hi . l:id . l:label
   endfor
 
-  return l:result . '%#TabLineFill#%T'
+  let l:branch = matchstr(FugitiveStatusline(), '\v\[Git\(\zs.+\ze\)\]')
+  return l:result . '%#TabLineFill#%=' . l:branch . ' %T'
 endf
 set tabline=%!MyTabline()

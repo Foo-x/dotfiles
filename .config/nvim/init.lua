@@ -91,23 +91,34 @@ set('n', 't', '<Plug>(leap-forward-till)')
 set('n', 'T', '<Plug>(leap-backward-till)')
 
 local diffview_actions = require('diffview.actions')
-require('diffview').setup({
-  hooks = {
-    view_leave = function()
-      vim.cmd.tabclose()
-    end,
-  },
-  keymaps = {
-    file_panel = {
-      ['L'] = false,
-      { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Open the commit log panel' } },
+if not DiffviewLoaded then
+  require('diffview').setup({
+    hooks = {
+      view_leave = function()
+        vim.cmd.tabclose()
+      end,
     },
-    file_history_panel = {
-      ['L'] = false,
-      { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Show commit details' } },
+    keymaps = {
+      view = {
+        { 'n', 'q', '<Cmd>tabclose<CR>', { desc = 'Close tab' } },
+      },
+      file_panel = {
+        ['L'] = false,
+        { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Open the commit log panel' } },
+        { 'n', 'q', '<Cmd>tabclose<CR>', { desc = 'Close tab' } },
+        { 'n', 'cc', '<Cmd>tabclose <bar> tab Git commit<CR>', { desc = 'Commit' } },
+        { 'n', 'ca', '<Cmd>tabclose <bar> tab Git commit --amend<CR>', { desc = 'Commit amend' } },
+        { 'n', 'ce', '<Cmd>tab Git commit --amend --no-edit<CR>', { desc = 'Commit amend no edit' } },
+      },
+      file_history_panel = {
+        ['L'] = false,
+        { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Show commit details' } },
+        { 'n', 'q', '<Cmd>tabclose<CR>', { desc = 'Close tab' } },
+      },
     },
-  },
-})
+  })
+end
+DiffviewLoaded = true
 
 -- lsp {{{
 local lspconfig = require('lspconfig')
