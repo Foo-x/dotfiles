@@ -22,7 +22,6 @@ set runtimepath+=$HOME/.vim
 set noswapfile
 set wildmenu
 set wildmode=list:longest
-set laststatus=2
 set showtabline=2
 set confirm
 set hidden
@@ -55,11 +54,13 @@ if has('nvim')
   set foldcolumn=auto
   set signcolumn=yes:2
   set termguicolors
+  set laststatus=3
 else
   set foldmethod=indent
   set foldcolumn=1
   set signcolumn=yes
   set viminfofile=$XDG_CACHE_HOME/vim/viminfo
+  set laststatus=2
 endif
 
 if has('nvim-0.8')

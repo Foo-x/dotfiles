@@ -1,25 +1,31 @@
-fun! MyStatusline()
-  let l:common = '%f%m%r%h%w %=%l,%v %p%%'
-  if !has('nvim')
-    return ' ' . l:common . ' '
-  endif
+if has('nvim')
+  fun! MyStatusline()
+    let l:common = '%=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
+    let l:branch = matchstr(FugitiveStatusline(), '\v\[Git\(\zs.+\ze\)\]')
+    if l:branch != ''
+      let l:branch = ' ' . l:branch
+    endif
 
-  if luaeval('vim.inspect(vim.lsp.buf_get_clients())') == '{}'
-    let l:diagnostics_status = ''
-  else
-    let l:error_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })')
-    let l:warn_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })')
-    let l:info_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })')
-    let l:hint_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })')
-    let l:diagnostics_status = printf('  %d  %d  %d 󰌵 %d', l:error_cnt, l:warn_cnt, l:info_cnt, l:hint_cnt)
-  endif
+    if luaeval('vim.inspect(vim.lsp.buf_get_clients())') == '{}'
+      let l:diagnostics_status = ''
+    else
+      let l:error_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })')
+      let l:warn_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })')
+      let l:info_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })')
+      let l:hint_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })')
+      let l:diagnostics_status = printf('  %d  %d  %d 󰌵 %d', l:error_cnt, l:warn_cnt, l:info_cnt, l:hint_cnt)
+    endif
 
-  let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
-  let l:pinned_status = v:lua.require("stickybuf").is_pinned() ? ' ' : ''
+    let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
+    let l:pinned_status = v:lua.require("stickybuf").is_pinned() ? ' ' : ''
 
-  return ' ' . l:common . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
-endf
-set statusline=%{%MyStatusline()%}
+    return ' ' . l:common . l:branch . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
+  endf
+  set statusline=%{%MyStatusline()%}
+  set winbar=\ %f%m%r%h%w
+else
+  set statusline=\ %f%m%r%h%w\ %=%l,%v\ %p%%\ 
+endif
 
 fun! MyTabline()
   let l:result = ''
@@ -42,7 +48,6 @@ fun! MyTabline()
     let l:result = l:result . l:hi . l:id . l:label
   endfor
 
-  let l:branch = matchstr(FugitiveStatusline(), '\v\[Git\(\zs.+\ze\)\]')
-  return l:result . '%#TabLineFill#%=' . l:branch . ' %T'
+  return l:result . '%#TabLineFill#%=' . ' %T'
 endf
 set tabline=%!MyTabline()

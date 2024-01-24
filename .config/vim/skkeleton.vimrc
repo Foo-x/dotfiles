@@ -1,3 +1,8 @@
+if ! has('nvim') && ! has('patch-9.0.1499')
+  let g:denops_disable_version_check = 1
+  finish
+endif
+
 imap <C-j> <Plug>(skkeleton-enable)
 imap jk <Plug>(skkeleton-enable)
 cmap <C-j> <Plug>(skkeleton-enable)
