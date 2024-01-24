@@ -5,22 +5,33 @@ vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust',
 
 local set = vim.keymap.set
 
-require('toggleterm').setup({
+local toggleterm = require('toggleterm')
+toggleterm.setup({
   open_mapping = [[<c-\>]],
   direction = 'tab',
 })
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+  set('t', 'jk', [[<C-\><C-n>]], opts)
 end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+local function term_exec_git(cmd)
+  toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
+end
+set('n', '<Plug>(git)f', function() term_exec_git('git fetch') end)
+set('n', '<Plug>(git)p', function() term_exec_git('git pull') end)
+set('n', '<Plug>(git)pp', function() term_exec_git('git pp') end)
+set('n', '<Plug>(git)ps', function() term_exec_git('git push') end)
+-- set g:termx<count> and then type <count><Space>x to execute set command
+-- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
+-- if <count> is 1, it can be omitted on typing
+set('n', '<Space>x', function()
+  local cmd = vim.g['termx' .. vim.v.count1]
+  if cmd then
+    toggleterm.exec(cmd)
+  end
+end)
 
 require('skkeleton_indicator').setup()
 

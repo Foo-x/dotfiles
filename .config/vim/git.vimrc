@@ -10,11 +10,14 @@ endif
 
 " keymap {{{
 nmap <Space>g <Plug>(git)
-nnoremap <Plug>(git)<CR> <Plug>(GitGutterPreviewHunk)<C-w>P
+nnoremap <Plug>(git) <Plug>(GitGutterPreviewHunk)<C-w>P
 nnoremap <Plug>(git)cc <Cmd>tab Git commit<CR>
 nnoremap <Plug>(git)ca <Cmd>tab Git commit --amend<CR>
 nnoremap <Plug>(git)ce <Cmd>Git commit --amend --no-edit<CR>
-nnoremap <Plug>(git)p <Cmd>Git push<CR>
+nnoremap <Plug>(git)f <Cmd>Git fetch<CR>
+nnoremap <Plug>(git)p <Cmd>Git pull<CR>
+nnoremap <Plug>(git)pp <Cmd>Git pp<CR>
+nnoremap <Plug>(git)ps <Cmd>Git push<CR>
 
 nnoremap <C-j> <Plug>(GitGutterNextHunk)
 nnoremap <C-k> <Plug>(GitGutterPrevHunk)
