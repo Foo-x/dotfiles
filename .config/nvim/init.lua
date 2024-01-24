@@ -12,17 +12,23 @@ toggleterm.setup({
 })
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
-  set('t', 'jk', [[<C-\><C-n>]], opts)
+  set('t', 'qq', [[<C-\><C-n>]], opts)
 end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 local function term_exec_git(cmd)
   toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
 end
+set('n', '<Plug>(git)<Space>', ':2TermExec size=' .. vim.o.columns / 2 .. ' direction=vertical name=git cmd="git "<Left>')
+set('n', '<Plug>(git)b', function() term_exec_git('git branch') end)
+set('n', '<Plug>(git)ba', function() term_exec_git('git branch -a') end)
+set('n', '<Plug>(git)bv', function() term_exec_git('git branch -avv') end)
+set('n', '<Plug>(git)s', function() term_exec_git('git status -sb') end)
 set('n', '<Plug>(git)f', function() term_exec_git('git fetch') end)
 set('n', '<Plug>(git)p', function() term_exec_git('git pull') end)
 set('n', '<Plug>(git)pp', function() term_exec_git('git pp') end)
 set('n', '<Plug>(git)ps', function() term_exec_git('git push') end)
+set('n', '<Plug>(git)sl', function() term_exec_git('git stash list') end)
 -- set g:termx<count> and then type <count><Space>x to execute set command
 -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
 -- if <count> is 1, it can be omitted on typing

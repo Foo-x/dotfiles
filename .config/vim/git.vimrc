@@ -11,13 +11,22 @@ endif
 " keymap {{{
 nmap <Space>g <Plug>(git)
 nnoremap <Plug>(git) <Plug>(GitGutterPreviewHunk)<C-w>P
+nnoremap <Plug>(git)<Space> :<C-u>tab Git<Space>
 nnoremap <Plug>(git)cc <Cmd>tab Git commit<CR>
 nnoremap <Plug>(git)ca <Cmd>tab Git commit --amend<CR>
 nnoremap <Plug>(git)ce <Cmd>Git commit --amend --no-edit<CR>
+nnoremap <Plug>(git)b <Cmd>Git branch<CR>
+nnoremap <Plug>(git)ba <Cmd>Git branch -a<CR>
+nnoremap <Plug>(git)bv <Cmd>Git branch -avv<CR>
+nnoremap <Plug>(git)s <Cmd>Git status -sb<CR>
 nnoremap <Plug>(git)f <Cmd>Git fetch<CR>
 nnoremap <Plug>(git)p <Cmd>Git pull<CR>
 nnoremap <Plug>(git)pp <Cmd>Git pp<CR>
 nnoremap <Plug>(git)ps <Cmd>Git push<CR>
+nnoremap <Plug>(git)ss <Cmd>Git stash<CR>
+nnoremap <Plug>(git)sl <Cmd>Git stash list<CR>
+nnoremap <Plug>(git)sd <Cmd>Git stash drop<CR>
+nnoremap <Plug>(git)sp <Cmd>Git stash pop<CR>
 
 nnoremap <C-j> <Plug>(GitGutterNextHunk)
 nnoremap <C-k> <Plug>(GitGutterPrevHunk)

@@ -86,8 +86,8 @@
     c = commit
     cm = commit -m
     cmall = !git add --all && git commit -m
-    ce = commit --allow-empty-message -m ''
-    ca = commit --amend --no-edit
+    ca = commit --amend
+    ce = commit --amend --no-edit
     ic = commit --allow-empty -m \"Initial Commit\"
     cf = commit --fixup
     chp = cherry-pick
