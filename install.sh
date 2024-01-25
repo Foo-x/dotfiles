@@ -134,6 +134,11 @@ if ! type deno > /dev/null 2>&1; then
     mise use -gy deno
 fi
 
+# install neovim
+if ! type nvim > /dev/null 2>&1; then
+    mise use -gy neovim@nightly
+fi
+
 exe_files="
 fetch_completions.sh
 fetch_git_prompt.sh

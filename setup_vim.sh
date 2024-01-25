@@ -3,17 +3,6 @@
 DOT_DIR="${DOT_DIR:-${HOME}/.dotfiles}"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
-# install neovim
-if [ ! -f ${HOME}/.local/bin/nvim ]; then
-    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > ${HOME}/.local/bin/nvim.appimage
-    chmod +x ${HOME}/.local/bin/nvim.appimage
-    if ${HOME}/.local/bin/nvim.appimage -v > /dev/null 2>&1; then
-        mv ${HOME}/.local/bin/nvim.appimage ${HOME}/.local/bin/nvim
-    else
-        (cd ${HOME}/.local/bin/; ./nvim.appimage --appimage-extract; ln -sf ./squashfs-root/usr/bin/nvim ./nvim; rm ./nvim.appimage) > /dev/null 2>&1
-    fi
-fi
-
 # download skk dictionary
 mkdir -p ${HOME}/.skk
 if [ ! -f ${HOME}/.skk/SKK-JISYO.L ]; then
