@@ -68,7 +68,7 @@ if has('nvim-0.8')
 endif
 
 " show invisible chars
-set lcs=tab:▸\ ,lead:·,trail:·,nbsp:_,extends:»,precedes:«
+set lcs=tab:▸\ ,trail:·,nbsp:_,extends:»,precedes:«
 set list
 
 runtime! *.vimrc
