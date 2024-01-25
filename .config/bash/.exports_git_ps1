@@ -1,0 +1,9 @@
+. ${DOT_DIR}/.config/bash/git-prompt.sh
+
+GIT_PS1_SHOWDIRTYSTATE=1  # show if there are changed files '*' for unstaged and '+' for staged
+GIT_PS1_SHOWSTASHSTATE=1  # show '$' if something is stashed
+GIT_PS1_SHOWUNTRACKEDFILES=1  # show '%' if there are untracked files
+GIT_PS1_STATESEPARATOR='|'  # separator between the branch name and the state symbols
+GIT_PS1_SHOWUPSTREAM='verbose name'  # show diff from upstream
+GIT_PS1_DESCRIBE_STYLE=branch  # show detached HEAD as relative to branch
+GIT_PS1_SHOWCONFLICTSTATE=yes  # show '|CONFLICT' if there are conflicts

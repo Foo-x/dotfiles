@@ -81,8 +81,12 @@ if [[ "${LOCALE_LIST}" =~ C.UTF-8|C.utf8 ]]; then
   export LC_CTYPE='C.UTF-8'
 fi
 
-stty start ''
-stty stop ''
+case $- in
+  *i*)
+    stty start ''
+    stty stop ''
+    ;;
+esac
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
 export FZF_DEFAULT_COMMAND="find .[^.]* * -type f,l ! -path '.git/*' ! -path 'node_modules/*'"
@@ -220,14 +224,6 @@ function lsgit_enter() {
 export PROMPT_COMMAND_LSGIT_ENTER='lsgit_enter'
 
 # prompt
-. ${DOT_DIR}/.config/bash/git-prompt.sh
+. ${DOT_DIR}/.config/bash/.exports_git_ps1
 
 export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf \"\[\e[${__blue_ansi_pccs_bright_foreground}m\]& \")\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w\[\e[${__gy65_ansi_pccs_foreground}m\]\$(type __git_ps1 > /dev/null 2>&1 && __git_ps1 \" %s\")\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy65_ansi_pccs_foreground}m\]\")\\$\[\e[m\] \")"
-
-GIT_PS1_SHOWDIRTYSTATE=1  # show if there are changed files '*' for unstaged and '+' for staged
-GIT_PS1_SHOWSTASHSTATE=1  # show '$' if something is stashed
-GIT_PS1_SHOWUNTRACKEDFILES=1  # show '%' if there are untracked files
-GIT_PS1_STATESEPARATOR='|'  # separator between the branch name and the state symbols
-GIT_PS1_SHOWUPSTREAM='verbose name'  # show diff from upstream
-GIT_PS1_DESCRIBE_STYLE=branch  # show detached HEAD as relative to branch
-GIT_PS1_SHOWCONFLICTSTATE=yes  # show '|CONFLICT' if there are conflicts

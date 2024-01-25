@@ -1,9 +1,24 @@
 if has('nvim')
+  fun! s:update_git_status_cache(cache, jobid, data, event_type)
+    let l:value = join(a:data, "\n")
+    if l:value != ''
+      let a:cache.value = substitute(l:value, '%', '%%', 'g')
+      redrawstatus
+    endif
+  endf
   fun! MyStatusline()
     let l:common = '%=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
-    let l:branch = matchstr(FugitiveStatusline(), '\v\[Git\(\zs.+\ze\)\]')
-    if l:branch != ''
-      let l:branch = ' ' . l:branch
+    if ! exists('w:git_status_cache')
+      let w:git_status_cache = { 'time': 0, 'value': '' }
+    endif
+    if (reltimefloat(reltime()) - w:git_status_cache.time) > 1
+      let l:dir = expand('%:h')
+      if isdirectory(l:dir)
+        call jobstart('. ${DOT_DIR}/.config/bash/.exports_git_ps1 && __git_ps1 " %s"', {'on_stdout': function('s:update_git_status_cache', [w:git_status_cache]), 'cwd': l:dir})
+      else
+        let w:git_status_cache.value = ''
+      endif
+      let w:git_status_cache.time = reltimefloat(reltime())
     endif
 
     if luaeval('vim.inspect(vim.lsp.buf_get_clients())') == '{}'
@@ -19,7 +34,7 @@ if has('nvim')
     let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
     let l:pinned_status = v:lua.require("stickybuf").is_pinned() ? ' ' : ''
 
-    return ' ' . l:common . l:branch . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
+    return ' ' . l:common . w:git_status_cache.value . l:diagnostics_status . l:autosave_status . l:pinned_status . ' '
   endf
   set statusline=%{%MyStatusline()%}
   set winbar=\ %f%m%r%h%w
