@@ -21,6 +21,7 @@ call add(g:skkeleton#mapped_keys, 'df')
 
 call skkeleton#register_kanatable('rom', {
   \ 'jj': 'escape',
+  \ 'xn': ['ん'],
   \ })
 
 call skkeleton#register_keymap('input', 'df', 'cancel')
