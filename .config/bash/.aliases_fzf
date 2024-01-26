@@ -8,8 +8,8 @@ function fxargs() {
   fzf -m --header "Tab: toggle" | xargs "$@"
 }
 
-# fd - cd sorted by depth
-function fd() {
+# fcd - cd sorted by depth
+function fcd() {
   if ! type python &> /dev/null && ! type python3 &> /dev/null; then
     echo 'python is required' 1>&2
     return 1

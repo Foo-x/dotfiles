@@ -32,23 +32,6 @@ mkdir -p ${XDG_CACHE_HOME}
 mkdir -p ${XDG_DATA_HOME}
 mkdir -p ${XDG_STATE_HOME}
 
-# setup gh
-if has gh; then
-    {
-        gh alias set --clobber cl 'repo clone'
-        gh alias set --clobber clp 'repo clone $1 -- --filter=blob:none'
-        gh alias set --clobber clps 'repo clone $1 -- --filter=blob:none --sparse'
-        gh alias set --clobber cr 'repo create'
-        gh alias set --clobber il 'issue list'
-        gh alias set --clobber co 'pr checkout'
-        gh alias set --clobber al 'alias list'
-        gh alias set --clobber openr 'repo view -w'
-        gh alias set --clobber openi 'issue view -w'
-        gh alias set --clobber openp 'pr view -w'
-        gh alias set --clobber --shell sync 'gh repo sync $(git config --get remote.origin.url | \grep -oP "(?<=:).+(?=\.)")'
-    } > /dev/null 2>&1
-fi
-
 # install fzf
 if [ ! -d ${HOME}/.fzf ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
@@ -115,28 +98,73 @@ if [ ! -d ${TMUX_DIR}/tmux-continuum ]; then
 fi
 
 # install mise
-if ! type mise > /dev/null 2>&1; then
+if ! has mise; then
     curl https://mise.jdx.dev/install.sh | sh
 fi
 
 # install delta
-if ! type delta > /dev/null 2>&1; then
+if ! has delta; then
     mise use -gy delta
 fi
 
 # install bat
-if ! type bat > /dev/null 2>&1; then
+if ! has bat; then
     mise use -gy bat
 fi
 
 # install deno
-if ! type deno > /dev/null 2>&1; then
+if ! has deno; then
     mise use -gy deno
 fi
 
 # install neovim
-if ! type nvim > /dev/null 2>&1; then
+if ! has nvim; then
     mise use -gy neovim@nightly
+fi
+
+# install ripgrep
+if ! has rg; then
+    mise use -gy ripgrep
+fi
+
+# install dust
+if ! has dust; then
+    mise use -gy dust
+fi
+
+# install fd
+if ! has fd; then
+    mise use -gy fd
+fi
+
+# install watchexec
+if ! has watchexec; then
+    mise use -gy watchexec
+fi
+
+# install hyperfine
+if ! has hyperfine; then
+    mise use -gy hyperfine
+fi
+
+# setup gh
+if ! has gh; then
+    mise use -gy github-cli
+fi
+if has gh; then
+    {
+        gh alias set --clobber cl 'repo clone'
+        gh alias set --clobber clp 'repo clone $1 -- --filter=blob:none'
+        gh alias set --clobber clps 'repo clone $1 -- --filter=blob:none --sparse'
+        gh alias set --clobber cr 'repo create'
+        gh alias set --clobber il 'issue list'
+        gh alias set --clobber co 'pr checkout'
+        gh alias set --clobber al 'alias list'
+        gh alias set --clobber openr 'repo view -w'
+        gh alias set --clobber openi 'issue view -w'
+        gh alias set --clobber openp 'pr view -w'
+        gh alias set --clobber --shell sync 'gh repo sync $(git config --get remote.origin.url | \grep -oP "(?<=:).+(?=\.)")'
+    } > /dev/null 2>&1
 fi
 
 exe_files="
