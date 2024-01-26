@@ -26,3 +26,4 @@ call skkeleton#register_kanatable('rom', {
 call skkeleton#register_keymap('input', 'df', 'cancel')
 call skkeleton#register_keymap('henkan', 'df', 'cancel')
 call skkeleton#register_keymap('henkan', '<CR>', 'kakutei')
+call skkeleton#register_keymap('input', ';', 'henkanPoint')
