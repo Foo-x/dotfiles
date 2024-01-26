@@ -19,6 +19,10 @@ call skkeleton#config({
 
 call add(g:skkeleton#mapped_keys, 'df')
 
+call skkeleton#register_kanatable('rom', {
+  \ 'jj': 'escape',
+  \ })
+
 call skkeleton#register_keymap('input', 'df', 'cancel')
 call skkeleton#register_keymap('henkan', 'df', 'cancel')
 call skkeleton#register_keymap('henkan', '<CR>', 'kakutei')

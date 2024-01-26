@@ -25,5 +25,6 @@ if 1
     autocmd! *
     autocmd FileType fern call glyph_palette#apply()
     autocmd FileType fern call s:init_fern()
+    autocmd FileType fern autocmd WinLeave <buffer> exe "norm \<Plug>(fern-close-drawer)"
   augroup END
 endif
