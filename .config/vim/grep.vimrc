@@ -1,26 +1,13 @@
 " options {{{
-set grepprg=grep\ -rnIE\ --exclude-dir=.git\ --exclude-dir=node_modules\ --exclude-dir=..\ $*\ /dev/null
-" }}}
-"
-" command {{{
-" skip on vim-tiny
-if 1
-  " use '\\\#' to search '#'
-  command! -nargs=+ -complete=file GR execute 'silent grep!' <q-args> | redraw! | cw
-  command! -nargs=+ -complete=file LGR execute 'silent lgrep!' <q-args> | redraw! | lw
-
-  fun! s:git_grep(command, bang, arg) abort
-    let tmp1=&grepprg
-    set grepprg=git\ grep\ -n\ 2>\ /dev/null
-    if a:bang
-      exe a:command . '! ' . a:arg
-    else
-      exe a:command a:arg
-    endif
-    let &grepprg=tmp1
-  endf
-  command! -nargs=+ -complete=file -bang GGR silent call s:git_grep("grep", <bang>1, <q-args>) | redraw! | cw
-  command! -nargs=+ -complete=file -bang LGGR silent call s:git_grep("lgrep", <bang>1, <q-args>) | redraw! | lw
-  command! -bang Conflicts GGR<bang> '^<<<<<<< HEAD$'
+set grepformat^=%f:%l:%c:%m
+set grepprg=git\ grep\ --no-index\ --exclude-standard\ --no-color\ --column\ -In\ -P
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --sort=path
 endif
+" }}}
+
+" keymap {{{
+cnoreabbr <expr> gr getcmdtype() == ':' && getcmdline() ==# 'gr' ? 'silent grep!' : 'gr'
+cnoreabbr <expr> grep getcmdtype() == ':' && getcmdline() ==# 'grep' ? 'silent grep!' : 'grep'
+cnoreabbr <expr> rg getcmdtype() == ':' && getcmdline() ==# 'rg' ? 'Rg' : 'rg'
 " }}}

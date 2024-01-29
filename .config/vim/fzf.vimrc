@@ -126,7 +126,7 @@ if 1
   fun! s:fern_reveal(line)
     exe 'Fern . -drawer -reveal=' . a:line
   endf
-  command! FFern call fzf#run(fzf#wrap({
+  command! FFern exe "norm \<Plug>(fern-close-drawer)" | call fzf#run(fzf#wrap({
     \ 'source': '__bfs_dir',
     \ 'sink': function('s:fern_reveal'),
     \ 'options': '--prompt "FFern> "'

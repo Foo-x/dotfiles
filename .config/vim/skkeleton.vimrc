@@ -11,6 +11,7 @@ cmap jk <Plug>(skkeleton-enable)
 call skkeleton#initialize()
 
 call skkeleton#config({
+  \ 'eggLikeNewline': v:true,
   \ 'globalDictionaries': ['~/.skk/SKK-JISYO.L'],
   \ 'keepState': v:true,
   \ 'markerHenkan': '□',
@@ -26,5 +27,4 @@ call skkeleton#register_kanatable('rom', {
 
 call skkeleton#register_keymap('input', 'df', 'cancel')
 call skkeleton#register_keymap('henkan', 'df', 'cancel')
-call skkeleton#register_keymap('henkan', '<CR>', 'kakutei')
 call skkeleton#register_keymap('input', ';', 'henkanPoint')

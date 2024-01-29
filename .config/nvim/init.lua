@@ -108,16 +108,38 @@ set('n', 't', '<Plug>(leap-forward-till)')
 set('n', 'T', '<Plug>(leap-backward-till)')
 
 local diffview_actions = require('diffview.actions')
+vim.g.diffview_tabpagenr = -1
+vim.api.nvim_create_autocmd('TabEnter', {
+  group = vim.api.nvim_create_augroup('DiffviewClose', {
+    clear = false,
+  }),
+  callback = function(ev)
+    if vim.g.diffview_tabpagenr > 0 then
+      vim.cmd.tabclose(vim.g.diffview_tabpagenr)
+      vim.g.diffview_tabpagenr = -1
+    end
+  end,
+})
+vim.api.nvim_create_autocmd('TabClosed', {
+  group = vim.api.nvim_create_augroup('DiffviewClose', {
+    clear = false,
+  }),
+  callback = function(ev)
+    vim.g.diffview_tabpagenr = -1
+  end,
+})
 if not DiffviewLoaded then
   require('diffview').setup({
     hooks = {
       view_leave = function()
-        vim.cmd.tabclose()
+        vim.g.diffview_tabpagenr = vim.fn.tabpagenr()
       end,
     },
     keymaps = {
       view = {
         { 'n', 'q', '<Cmd>tabclose<CR>', { desc = 'Close tab' } },
+        { 'n', '<F9>', '<Cmd>tabclose <bar>GV --all<CR>', { desc = 'Open the commit log' } },
+        { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>', { desc = 'Open the commit log --name-status' } },
       },
       file_panel = {
         ['L'] = false,
@@ -126,6 +148,8 @@ if not DiffviewLoaded then
         { 'n', 'cc', '<Cmd>tabclose <bar> tab Git commit<CR>', { desc = 'Commit' } },
         { 'n', 'ca', '<Cmd>tabclose <bar> tab Git commit --amend<CR>', { desc = 'Commit amend' } },
         { 'n', 'ce', '<Cmd>tab Git commit --amend --no-edit<CR>', { desc = 'Commit amend no edit' } },
+        { 'n', '<F9>', '<Cmd>tabclose <bar>GV --all<CR>', { desc = 'Open the commit log' } },
+        { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>', { desc = 'Open the commit log --name-status' } },
       },
       file_history_panel = {
         ['L'] = false,
@@ -412,7 +436,7 @@ cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
-    { name = 'cmdline' }
+    { name = 'cmdline', keyword_pattern=[=[[^[:blank:]\!]*]=]}
   })
 })
 -- }}}

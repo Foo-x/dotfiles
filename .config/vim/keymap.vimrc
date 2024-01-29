@@ -61,6 +61,7 @@ nnoremap <Plug>(quickfix)k :<C-u>cbefore<CR>
 nnoremap <Plug>(quickfix)j :<C-u>cafter<CR>
 nnoremap <Plug>(quickfix)w :<C-u>cwindow<CR>
 nnoremap <Plug>(quickfix)c :<C-u>cclose<CR>
+nnoremap <Plug>(quickfix)o :<C-u>copen<CR>
 nnoremap <Plug>(quickfix). :<C-u>cgetbuffer<CR>
 nnoremap <Plug>(quickfix)f :<C-u>cgetfile<CR>
 nnoremap <Plug>(quickfix)h :<C-u>colder<CR>

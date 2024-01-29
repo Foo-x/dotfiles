@@ -203,6 +203,8 @@
     # others
     s = status -sb
     si = status -sb --ignored
+    tree = !git ls-files | tree --fromfile=.
+    treed = !git ls-files | tree --fromfile=. -d
 
     ## cp untracked and ignored
     cpui = "!f(){ \
@@ -275,6 +277,10 @@
     recurse = true
 [init]
     defaultBranch = master
+[grep]
+    lineNumber = true
+    column = true
+    patternType = perl
 [maintenance "gc"]
     enabled = true
 [maintenance "commit-graph"]
