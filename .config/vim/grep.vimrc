@@ -1,6 +1,6 @@
 " options {{{
 set grepformat^=%f:%l:%c:%m
-set grepprg=git\ grep\ --no-index\ --exclude-standard\ --no-color\ --column\ -In\ -P
+set grepprg=git\ grep\ --no-index\ --exclude-standard\ --no-color\ -n\ --column\ -I\ -P
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --sort=path
 endif
