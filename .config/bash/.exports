@@ -89,7 +89,7 @@ case $- in
 esac
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
-export FZF_DEFAULT_COMMAND="find .[^.]* * -type f,l ! -path '.git/*' ! -path 'node_modules/*'"
+export FZF_DEFAULT_COMMAND="fd --hidden -tf -tl | sort"
 
 export ENHANCD_FILTER=fzf
 export ENHANCD_ENABLE_SINGLE_DOT=false

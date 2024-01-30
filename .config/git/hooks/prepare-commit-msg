@@ -13,3 +13,9 @@ if [ "$BRANCH_NAME" != '(no branch)' ] && [ "$COMMIT_SOURCE" != 'commit' ] && [ 
         git log -30 --format=%s | sed 's/^/# /'
     } >> $COMMIT_MSG_FILE
 fi
+
+LOCAL_HOOK="$(git rev-parse --show-toplevel)/.git/hooks/$(basename $0)"
+
+if [ -x "$LOCAL_HOOK" ]; then
+  "$LOCAL_HOOK" "$@"
+fi

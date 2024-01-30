@@ -17,6 +17,8 @@ nnoremap ; :
 nnoremap : ;
 nnoremap , @:
 
+nnoremap gf gF
+
 "" not to go next
 nnoremap * *N
 
@@ -98,8 +100,7 @@ nnoremap <Plug>(window)K <Cmd>call MoveWindow('k')<CR>
 nnoremap <Plug>(window)L <Cmd>call MoveWindow('l')<CR>
 nnoremap <Plug>(window)f <C-w>f
 nnoremap <Plug>(window)F <C-w>F
-nnoremap <Plug>(window)gf <C-w>gf
-nnoremap <Plug>(window)gF <C-w>gF
+nnoremap <Plug>(window)gf <C-w>gF
 nnoremap <Plug>(window)T <C-w>T
 nnoremap <Plug>(window)r <C-w>r
 nnoremap <Plug>(window)m <C-w>\|<C-w>_

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+LOCAL_HOOK="$(git rev-parse --show-toplevel)/.git/hooks/$(basename $0)"
+
+if [ -x "$LOCAL_HOOK" ]; then
+  "$LOCAL_HOOK" "$@"
+fi

@@ -4,7 +4,7 @@ set rtp+=~/.fzf
 
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
-nnoremap <Plug>(fzf)f :<C-u>Files<CR>
+nnoremap <Plug>(fzf) :<C-u>Files<CR>
 nnoremap <Plug>(fzf)e :<C-u>FFern<CR>
 nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
 nnoremap <Plug>(fzf)b :<C-u>Buffers<CR>

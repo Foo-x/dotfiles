@@ -233,7 +233,7 @@
 [push]
     default = current
 [core]
-    hooksPath = ~/.config/git/hooks
+    hooksPath = ~/.dotfiles/.config/git/hooks
     quotePath = false
 [delta]
     navigate = true
@@ -245,7 +245,7 @@
     line-numbers = true
     side-by-side = true
 [commit]
-    template = ~/.config/git/commit_template
+    template = ~/.dotfiles/.config/git/commit_template
 [diff]
     tool = nvimdirdiff
     algorithm = histogram

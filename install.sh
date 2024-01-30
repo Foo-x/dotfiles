@@ -69,18 +69,11 @@ git config --global include.path ${DOT_DIR}/.config/git/config
 
 mkdir -p ${XDG_CONFIG_HOME}/git
 gitconfig_files="
-commit_template
 ignore
 "
 echo "${gitconfig_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/{} ${XDG_CONFIG_HOME}/git/{}
 [ -f ${HOME}/.gitconfig ] && mv ${HOME}/.gitconfig ${XDG_CONFIG_HOME}/git/config
 sh ${DOT_DIR}/.config/git/config_dynamic
-
-mkdir -p ${XDG_CONFIG_HOME}/git/hooks
-githooks_files="
-prepare-commit-msg
-"
-echo "${githooks_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/hooks/{} ${XDG_CONFIG_HOME}/git/hooks/{}
 
 # setup tmux
 TMUX_DIR=${XDG_CONFIG_HOME}/tmux

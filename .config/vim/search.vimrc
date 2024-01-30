@@ -8,6 +8,7 @@ set wrapscan
 
 " highlight
 set hlsearch
+nohlsearch
 " }}}
 
 " keymap {{{

@@ -19,15 +19,18 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 local function term_exec_git(cmd)
   toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
 end
+local function term_exec_git_background(cmd)
+  toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git', true, false)
+end
 set('n', '<Plug>(git)<Space>', ':2TermExec size=' .. vim.o.columns / 2 .. ' direction=vertical name=git cmd="git "<Left>')
 set('n', '<Plug>(git)b', function() term_exec_git('git branch') end)
 set('n', '<Plug>(git)ba', function() term_exec_git('git branch -a') end)
 set('n', '<Plug>(git)bv', function() term_exec_git('git branch -avv') end)
 set('n', '<Plug>(git)s', function() term_exec_git('git status -sb') end)
-set('n', '<Plug>(git)f', function() term_exec_git('git fetch') end)
-set('n', '<Plug>(git)p', function() term_exec_git('git pull') end)
-set('n', '<Plug>(git)pp', function() term_exec_git('git pp') end)
-set('n', '<Plug>(git)ps', function() term_exec_git('git push') end)
+set('n', '<Plug>(git)f', function() term_exec_git_background('git fetch') end)
+set('n', '<Plug>(git)p', function() term_exec_git_background('git pull') end)
+set('n', '<Plug>(git)pp', function() term_exec_git_background('git pp') end)
+set('n', '<Plug>(git)ps', function() term_exec_git_background('git push') end)
 set('n', '<Plug>(git)sl', function() term_exec_git('git stash list') end)
 -- set g:termx<count> and then type <count><Space>x to execute set command
 -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
@@ -145,9 +148,9 @@ if not DiffviewLoaded then
         ['L'] = false,
         { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Open the commit log panel' } },
         { 'n', 'q', '<Cmd>tabclose<CR>', { desc = 'Close tab' } },
-        { 'n', 'cc', '<Cmd>tabclose <bar> tab Git commit<CR>', { desc = 'Commit' } },
-        { 'n', 'ca', '<Cmd>tabclose <bar> tab Git commit --amend<CR>', { desc = 'Commit amend' } },
-        { 'n', 'ce', '<Cmd>tab Git commit --amend --no-edit<CR>', { desc = 'Commit amend no edit' } },
+        { 'n', 'cc', '<Cmd>tabclose <bar> silent !tmux new-window \'git commit; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit' } },
+        { 'n', 'ca', '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit amend' } },
+        { 'n', 'ce', '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit amend no edit' } },
         { 'n', '<F9>', '<Cmd>tabclose <bar>GV --all<CR>', { desc = 'Open the commit log' } },
         { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>', { desc = 'Open the commit log --name-status' } },
       },
@@ -433,10 +436,17 @@ cmp.setup.cmdline(':', {
       c = cmp.mapping.abort(),
     },
   },
+  enabled = function()
+    local result = not vim.regex('^r\\%[ead] \\?!\\|^w\\%[rite] !\\|^!'):match_str(vim.fn.getcmdline())
+    if not result then
+      cmp.close()
+    end
+    return result
+  end,
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
-    { name = 'cmdline', keyword_pattern=[=[[^[:blank:]\!]*]=]}
+    { name = 'cmdline' }
   })
 })
 -- }}}
