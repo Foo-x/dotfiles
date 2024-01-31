@@ -11,18 +11,21 @@ toggleterm.setup({
   direction = 'tab',
 })
 function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
-  set('t', 'qq', [[<C-\><C-n>]], opts)
+  local opts = { buffer = 0 }
+  set('t', '<Esc>', [[<C-\><C-n>]], opts)
 end
+
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+vim.cmd('autocmd! FileType fzf lua vim.keymap.del("t", "<Esc>", { buffer = 0 })')
 local function term_exec_git(cmd)
   toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
 end
 local function term_exec_git_background(cmd)
   toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git', true, false)
 end
-set('n', '<Plug>(git)<Space>', ':2TermExec size=' .. vim.o.columns / 2 .. ' direction=vertical name=git cmd="git "<Left>')
+set('n', '<Plug>(git)<Space>',
+  ':2TermExec size=' .. vim.o.columns / 2 .. ' direction=vertical name=git go_back=0 cmd="git "<Left>')
 set('n', '<Plug>(git)b', function() term_exec_git('git branch') end)
 set('n', '<Plug>(git)ba', function() term_exec_git('git branch -a') end)
 set('n', '<Plug>(git)bv', function() term_exec_git('git branch -avv') end)
@@ -140,24 +143,24 @@ if not DiffviewLoaded then
     },
     keymaps = {
       view = {
-        { 'n', 'q', '<Cmd>tabclose<CR>', { desc = 'Close tab' } },
-        { 'n', '<F9>', '<Cmd>tabclose <bar>GV --all<CR>', { desc = 'Open the commit log' } },
+        { 'n', 'q',      '<Cmd>tabclose<CR>',                             { desc = 'Close tab' } },
+        { 'n', '<F9>',   '<Cmd>tabclose <bar>GV --all<CR>',               { desc = 'Open the commit log' } },
         { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>', { desc = 'Open the commit log --name-status' } },
       },
       file_panel = {
         ['L'] = false,
-        { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Open the commit log panel' } },
-        { 'n', 'q', '<Cmd>tabclose<CR>', { desc = 'Close tab' } },
-        { 'n', 'cc', '<Cmd>tabclose <bar> silent !tmux new-window \'git commit; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit' } },
-        { 'n', 'ca', '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit amend' } },
-        { 'n', 'ce', '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit amend no edit' } },
-        { 'n', '<F9>', '<Cmd>tabclose <bar>GV --all<CR>', { desc = 'Open the commit log' } },
-        { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>', { desc = 'Open the commit log --name-status' } },
+        { 'n', 'M',      diffview_actions.open_commit_log,                                                                                                 { desc = 'Open the commit log panel' } },
+        { 'n', 'q',      '<Cmd>tabclose<CR>',                                                                                                              { desc = 'Close tab' } },
+        { 'n', 'cc',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit; read -n 1 -s -p "press any key to close ..."\'<CR>',                   { desc = 'Commit' } },
+        { 'n', 'ca',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend; read -n 1 -s -p "press any key to close ..."\'<CR>',           { desc = 'Commit amend' } },
+        { 'n', 'ce',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit amend no edit' } },
+        { 'n', '<F9>',   '<Cmd>tabclose <bar>GV --all<CR>',                                                                                                { desc = 'Open the commit log' } },
+        { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>',                                                                                  { desc = 'Open the commit log --name-status' } },
       },
       file_history_panel = {
         ['L'] = false,
         { 'n', 'M', diffview_actions.open_commit_log, { desc = 'Show commit details' } },
-        { 'n', 'q', '<Cmd>tabclose<CR>', { desc = 'Close tab' } },
+        { 'n', 'q', '<Cmd>tabclose<CR>',              { desc = 'Close tab' } },
       },
     },
   })

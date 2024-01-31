@@ -3,16 +3,14 @@
 [alias]
     # log
     ## oneline
-    l0 = log --oneline --decorate --graph
-    l0a = log --oneline --all --decorate --graph
-    l0r = log --oneline --decorate --graph --pretty=reference
+    l = "!git log --graph --date-order --pretty=format:\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%ad%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S'"
+    la = "!git log --graph --date-order --pretty=format:\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%ad%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --all"
 
     ## oneline + changed files
-    l1 = log --oneline --decorate --graph --name-status
-    l1a = log --oneline --all --decorate --graph --name-status
-    l1r = log --oneline --decorate --graph --name-status --pretty=reference
+    l1 = "!git log --graph --date-order --pretty=format:\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%ad%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status"
+    l1a = "!git log --graph --date-order --pretty=format:\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%ad%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)%n\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status --all"
 
-    ## description
+    ## detail
     l2 = log -p --decorate
     l2a = log -p --decorate --all
 
@@ -251,6 +249,7 @@
     algorithm = histogram
     colorMoved = dimmed-zebra
     wsErrorHighlight = all
+    renames = copy
 [difftool]
     prompt = false
 [difftool "nvimdirdiff"]
