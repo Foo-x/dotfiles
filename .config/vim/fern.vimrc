@@ -15,16 +15,16 @@ if 1
         \   "<Plug>(fern-action-expand)",
         \ )
     nnoremap <buffer> <CR> <Plug>(fern-my-open-or-expand)
-    nnoremap <buffer> l <Plug>(fern-my-open-or-expand)
+    nnoremap <buffer> l <Plug>(fern-action-expand)
+    nnoremap <buffer> t <Plug>(fern-action-open:tabedit)gt<Plug>(fern-close-drawer)gT
     nnoremap <buffer> D <Plug>(fern-action-remove=)
     nnoremap <buffer><silent> x <Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>
-    noremap <buffer> <Tab> <Plug>(fern-action-mark)
+    noremap <buffer> <Tab> <Plug>(fern-action-mark)<Down>
   endf
 
   augroup Fern
     autocmd! *
     autocmd FileType fern call glyph_palette#apply()
     autocmd FileType fern call s:init_fern()
-    autocmd FileType fern autocmd WinLeave <buffer> exe "norm \<Plug>(fern-close-drawer)"
   augroup END
 endif

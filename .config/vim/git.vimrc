@@ -53,7 +53,7 @@ cnoreabbr gva1 GV --name-status --all
 if has('nvim')
   cnoreabbr dv DiffviewOpen
   cnoreabbr dvh DiffviewFileHistory --all
-  cnoreabbr dvh! DiffviewFileHistory % --all
+  cnoreabbr dvhh DiffviewFileHistory % --all
 endif
 " }}}
 
