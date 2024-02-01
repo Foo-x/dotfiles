@@ -9,7 +9,6 @@ set runtimepath+=$XDG_CONFIG_HOME/vim/after
 set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
 set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
 
-set nocompatible
 set backspace=indent,eol,start
 set encoding=utf-8
 set cindent
@@ -95,14 +94,20 @@ let &t_te.="\e[0 q"
 let $BASH_ENV="$HOME/.dotfiles/.config/bash/.aliases"
 
 " autocmd
-autocmd SessionLoadPost * let $is_vim_session_loaded='true'
-" save a session every 1 min
-autocmd SessionLoadPost * call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })
-"" if exists a session and loaded it: overwrite session
-"" if exists a session but not loaded it: do not save new session
-"" if exists no sessions: save new session
-autocmd VimLeave * if $is_vim_session_loaded=='true' | mks! | else | mks | endif
-autocmd VimEnter * GitGutterLineNrHighlightsEnable
+augroup SessionLoad
+  autocmd!
+  autocmd SessionLoadPost * let $is_vim_session_loaded='true'
+  " save a session every 1 min
+  autocmd SessionLoadPost * call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })
+  "" if exists a session and loaded it: overwrite session
+  "" if exists a session but not loaded it: do not save new session
+  "" if exists no sessions: save new session
+  autocmd VimLeave * if $is_vim_session_loaded=='true' | mks! | else | mks | endif
+augroup END
+augroup GitGutter
+  autocmd!
+  autocmd VimEnter * GitGutterLineNrHighlightsEnable
+augroup END
 
 augroup Fold
   autocmd!

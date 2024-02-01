@@ -16,8 +16,13 @@ function _G.set_terminal_keymaps()
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-vim.cmd('autocmd! FileType fzf lua vim.keymap.del("t", "<Esc>", { buffer = 0 })')
+vim.cmd [[
+augroup ToggleTerm
+  autocmd!
+  autocmd TermOpen term://* lua set_terminal_keymaps()
+  autocmd FileType fzf lua vim.keymap.del("t", "<Esc>", { buffer = 0 })
+augroup END
+]]
 local function term_exec_git(cmd)
   toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
 end
@@ -115,10 +120,9 @@ set('n', 'T', '<Plug>(leap-backward-till)')
 
 local diffview_actions = require('diffview.actions')
 vim.g.diffview_tabpagenr = -1
+local diffview_close_augroup = vim.api.nvim_create_augroup('DiffviewClose', {})
 vim.api.nvim_create_autocmd('TabEnter', {
-  group = vim.api.nvim_create_augroup('DiffviewClose', {
-    clear = false,
-  }),
+  group = diffview_close_augroup,
   callback = function(ev)
     if vim.g.diffview_tabpagenr > 0 then
       vim.cmd.tabclose(vim.g.diffview_tabpagenr)
@@ -127,9 +131,7 @@ vim.api.nvim_create_autocmd('TabEnter', {
   end,
 })
 vim.api.nvim_create_autocmd('TabClosed', {
-  group = vim.api.nvim_create_augroup('DiffviewClose', {
-    clear = false,
-  }),
+  group = diffview_close_augroup,
   callback = function(ev)
     vim.g.diffview_tabpagenr = -1
   end,

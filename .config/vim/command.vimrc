@@ -7,6 +7,12 @@ cnoreabbr ad argdelete
 cnoreabbr ada argdelete *
 cnoreabbr <expr> add getcmdtype() == ':' && getcmdline() ==# 'add' ? 'argdedupe' : 'add'
 
+cnoremap <expr> ; getcmdtype() == ':' && empty(getcmdline()) ? "\<Esc>q:" : ';'
+cnoremap <expr> / getcmdtype() == '/' && empty(getcmdline()) ? "\<Esc>q/" : '/'
+cnoremap <expr> ? getcmdtype() == '?' && empty(getcmdline()) ? "\<Esc>q?" : '?'
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 " skip on vim-tiny
 if 1
   command! -nargs=1 -complete=arglist A b <args>
@@ -141,10 +147,6 @@ if 1
     autocmd!
     au TextYankPost * call s:use_easy_regname()
   augroup END
-
-  cnoremap <expr> ; getcmdtype() == ':' && empty(getcmdline()) ? "\<Esc>q:" : ';'
-  cnoremap <expr> / getcmdtype() == '/' && empty(getcmdline()) ? "\<Esc>q/" : '/'
-  cnoremap <expr> ? getcmdtype() == '?' && empty(getcmdline()) ? "\<Esc>q?" : '?'
 
   fun! s:fileinfo()
     let l:path = expand('%:p')

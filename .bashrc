@@ -47,6 +47,9 @@ fi
 if type mise &> /dev/null; then
   . <(mise completion bash)
 fi
+if type zoxide &> /dev/null; then
+  . <(zoxide init bash)
+fi
 
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
   . /usr/share/bash-completion/bash_completion

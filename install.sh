@@ -60,6 +60,11 @@ if has ranger; then
   rc.conf
   "
   echo "${rangerfiles}" | xargs -I{} ln -sf ${DOT_DIR}/.config/ranger/{} ${XDG_CONFIG_HOME}/ranger/{}
+
+  mkdir -p ${XDG_CONFIG_HOME}/ranger/plugins
+  if [ ! -d ${XDG_CONFIG_HOME}/ranger/plugins/zoxide ]; then
+    git clone --depth 1 https://github.com/jchook/ranger-zoxide.git ${XDG_CONFIG_HOME}/ranger/plugins/zoxide
+  fi
 fi
 
 mkdir -p ${HOME}/.local/bin
@@ -147,6 +152,11 @@ fi
 # install hyperfine
 if ! has hyperfine; then
     mise use -gy hyperfine
+fi
+
+# install zoxide
+if ! has zoxide; then
+    mise use -gy zoxide
 fi
 
 # setup gh

@@ -390,7 +390,7 @@ fi
 if type ranger &> /dev/null; then
   function r() {
     if [ -z "${RANGER_LEVEL}" ]; then
-      ranger --cmd="tab_new" "$@"
+      ranger --cmd="tab_new" --cmd="tab_move -1" "$@"
     else
       exit
     fi

@@ -215,7 +215,12 @@ export PROMPT_COMMAND_LSGIT_CD='lsgit_cd'
 
 trap '((cmdcnt++))' DEBUG
 function lsgit_enter() {
-  if [ $((lsgit_enter_cnt + 1)) = ${cmdcnt} ]; then
+  local splitted_prompts oldifs
+  oldifs=$IFS
+  IFS=';' splitted_prompts=(${PROMPT_COMMAND})
+  IFS=$oldifs
+
+  if [ $((lsgit_enter_cnt + ${#splitted_prompts[@]})) = ${cmdcnt} ]; then
     lsgit
   fi
 
