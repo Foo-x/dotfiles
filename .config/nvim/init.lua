@@ -149,13 +149,16 @@ if not DiffviewLoaded then
       },
       file_panel = {
         ['L'] = false,
-        { 'n', 'M',      diffview_actions.open_commit_log,                                                                                                 { desc = 'Open the commit log panel' } },
-        { 'n', 'q',      '<Cmd>tabclose<CR>',                                                                                                              { desc = 'Close tab' } },
-        { 'n', 'cc',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit; read -n 1 -s -p "press any key to close ..."\'<CR>',                   { desc = 'Commit' } },
-        { 'n', 'ca',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend; read -n 1 -s -p "press any key to close ..."\'<CR>',           { desc = 'Commit amend' } },
-        { 'n', 'ce',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit amend no edit' } },
-        { 'n', '<F9>',   '<Cmd>tabclose <bar>GV --all<CR>',                                                                                                { desc = 'Open the commit log' } },
-        { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>',                                                                                  { desc = 'Open the commit log --name-status' } },
+        { 'n', 'M',      diffview_actions.open_commit_log,                                                                                                    { desc = 'Open the commit log panel' } },
+        { 'n', 'q',      '<Cmd>tabclose<CR>',                                                                                                                 { desc = 'Close tab' } },
+        { 'n', 'cc',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit; read -n 1 -s -p "press any key to close ..."\'<CR>',                      { desc = 'Commit' } },
+        { 'n', 'cC',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit -n; read -n 1 -s -p "press any key to close ..."\'<CR>',                   { desc = 'Commit' } },
+        { 'n', 'ca',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend; read -n 1 -s -p "press any key to close ..."\'<CR>',              { desc = 'Commit amend' } },
+        { 'n', 'cA',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend -n; read -n 1 -s -p "press any key to close ..."\'<CR>',           { desc = 'Commit amend' } },
+        { 'n', 'ce',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."\'<CR>',    { desc = 'Commit amend no edit' } },
+        { 'n', 'cE',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit -n; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit amend no edit' } },
+        { 'n', '<F9>',   '<Cmd>tabclose <bar>GV --all<CR>',                                                                                                   { desc = 'Open the commit log' } },
+        { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>',                                                                                     { desc = 'Open the commit log --name-status' } },
       },
       file_history_panel = {
         ['L'] = false,
@@ -440,7 +443,7 @@ cmp.setup.cmdline(':', {
     },
   },
   enabled = function()
-    local result = not vim.regex('^r\\%[ead] \\?!\\|^w\\%[rite] !\\|^!'):match_str(vim.fn.getcmdline())
+    local result = not vim.regex('^r\\%[ead] \\?!\\|^w\\%[rite] !\\|^w!!\\|^!'):match_str(vim.fn.getcmdline())
     if not result then
       cmp.close()
     end

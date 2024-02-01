@@ -1,4 +1,5 @@
 cnoreabbr w!! w !sudo tee > /dev/null %
+cnoreabbr e% expand('%')
 
 " argument list
 cnoreabbr ar args
