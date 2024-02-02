@@ -57,6 +57,7 @@ fi
 if has ranger; then
   mkdir -p ${XDG_CONFIG_HOME}/ranger
   rangerfiles="
+  commands.py
   rc.conf
   "
   echo "${rangerfiles}" | xargs -I{} ln -sf ${DOT_DIR}/.config/ranger/{} ${XDG_CONFIG_HOME}/ranger/{}
