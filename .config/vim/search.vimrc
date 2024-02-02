@@ -12,7 +12,6 @@ nohlsearch
 " }}}
 
 " keymap {{{
-nnoremap / /\v
 nnoremap <Space>s :%s//g<Left><Left>
 
 " disable highlight
