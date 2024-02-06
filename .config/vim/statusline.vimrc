@@ -6,8 +6,14 @@ if has('nvim')
       redrawstatus
     endif
   endf
+  fun! s:ime_status()
+    if !exists('b:ime_status')
+      return ''
+    endif
+    return b:ime_status == 0 ? 'A' : 'あ'
+  endf
   fun! MyStatusline()
-    let l:common = '%=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
+    let l:common = s:ime_status() . '%=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
     if ! exists('w:git_status_cache')
       let w:git_status_cache = { 'time': 0, 'value': '' }
     endif
