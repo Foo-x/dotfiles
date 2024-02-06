@@ -3,12 +3,6 @@
 DOT_DIR="${DOT_DIR:-${HOME}/.dotfiles}"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
-# download skk dictionary
-mkdir -p ${HOME}/.skk
-if [ ! -f ${HOME}/.skk/SKK-JISYO.L ]; then
-  curl https://skk-dev.github.io/dict/SKK-JISYO.L.gz | gzip -d > ${HOME}/.skk/SKK-JISYO.L
-fi
-
 binfiles="
 nvimdirdiff
 "
@@ -83,9 +77,9 @@ if [ ! -d ${VIM_PACK_DIR}/nerdfont.vim ]; then
     git clone --depth 1 https://github.com/lambdalisue/nerdfont.vim.git ${VIM_PACK_DIR}/nerdfont.vim
 fi
 
-# install vim-markdown
-if [ ! -d ${VIM_PACK_DIR}/vim-markdown ]; then
-    git clone --depth 1 https://github.com/gabrielelana/vim-markdown.git ${VIM_PACK_DIR}/vim-markdown
+# install bullets.vim
+if [ ! -d ${VIM_PACK_DIR}/bullets.vim ]; then
+    git clone --depth 1 https://github.com/bullets-vim/bullets.vim.git ${VIM_PACK_DIR}/bullets.vim
 fi
 
 # install previm
@@ -111,16 +105,6 @@ fi
 # install rainbow_csv
 if [ ! -d ${VIM_PACK_DIR}/rainbow_csv ]; then
     git clone --depth 1 https://github.com/mechatroner/rainbow_csv.git ${VIM_PACK_DIR}/rainbow_csv
-fi
-
-# install denops.vim
-if [ ! -d ${VIM_PACK_DIR}/denops.vim ]; then
-    git clone --depth 1 https://github.com/vim-denops/denops.vim.git ${VIM_PACK_DIR}/denops.vim
-fi
-
-# install skkeleton
-if [ ! -d ${VIM_PACK_DIR}/skkeleton ]; then
-    git clone --depth 1 https://github.com/vim-skk/skkeleton.git ${VIM_PACK_DIR}/skkeleton
 fi
 
 # install vimdoc-ja
@@ -312,9 +296,9 @@ if [ ! -d ${NVIM_PACK_DIR}/nvim-surround ]; then
     git clone --depth 1 https://github.com/kylechui/nvim-surround.git ${NVIM_PACK_DIR}/nvim-surround
 fi
 
-# install skkeleton_indicator.nvim
-if [ ! -d ${NVIM_PACK_DIR}/skkeleton_indicator.nvim ]; then
-    git clone --depth 1 https://github.com/delphinus/skkeleton_indicator.nvim.git ${NVIM_PACK_DIR}/skkeleton_indicator.nvim
+# install nvim-various-textobjs
+if [ ! -d ${NVIM_PACK_DIR}/nvim-various-textobjs ]; then
+    git clone --depth 1 https://github.com/chrisgrieser/nvim-various-textobjs.git ${NVIM_PACK_DIR}/nvim-various-textobjs
 fi
 
 # install toggleterm.nvim

@@ -120,11 +120,6 @@ if ! has bat; then
     mise use -gy bat
 fi
 
-# install deno
-if ! has deno; then
-    mise use -gy deno
-fi
-
 # install neovim
 if ! has nvim; then
     mise use -gy neovim@nightly

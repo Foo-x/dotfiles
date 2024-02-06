@@ -5,6 +5,10 @@ vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust',
 
 local set = vim.keymap.set
 
+require("various-textobjs").setup({
+  useDefaultKeymaps = true,
+})
+
 local toggleterm = require('toggleterm')
 toggleterm.setup({
   open_mapping = [[<c-\>]],
@@ -49,8 +53,6 @@ set('n', '<Space>x', function()
     toggleterm.exec(cmd)
   end
 end)
-
-require('skkeleton_indicator').setup()
 
 require('nvim-surround').setup()
 
@@ -366,7 +368,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
         ['<C-k>'] = cmp.mapping.scroll_docs(-4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<CR>'] = function(fallback)
+          if not cmp.confirm({ select = false }) then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<c-g>u', true, true, true))
+            fallback()
+          end
+        end,
         ['<Tab>'] = cmp.mapping({
           i = function(fallback)
             if vim.fn['vsnip#jumpable'](1) == 1 then
@@ -412,6 +419,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
     vim.b.cmp_loaded = true
   end
 })
+
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
