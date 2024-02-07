@@ -14,18 +14,11 @@ shopt -s histverify
 
 . ${DOT_DIR}/.config/bash/.aliases
 . ${DOT_DIR}/.config/bash/.exports
+. ${DOT_DIR}/.config/bash/.aliases_fzf
+. ${DOT_DIR}/.config/bash/.aliases_cdb
 
 if type pacman &> /dev/null; then
   . ${DOT_DIR}/.config/bash/.aliases_arch
-fi
-
-if type fzf &> /dev/null; then
-  . ${DOT_DIR}/.config/bash/.aliases_fzf
-  . ${DOT_DIR}/.config/bash/.aliases_cdb
-fi
-
-if [[ -d $HOME/enhancd ]]; then
-  . ${HOME}/enhancd/init.sh
 fi
 
 for completion in ${DOT_DIR}/completion/*; do

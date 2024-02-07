@@ -288,67 +288,12 @@ function ansi_cht() {
 
 # __bfs_dir - breadth-first search for directories
 function __bfs_dir() {
-  local cmd ignore_ptn="\.git|node_modules"
-
-  cmd="
-import os
-import re
-from collections import deque
-
-pattern = re.compile('${ignore_ptn}')
-
-q = deque([c for c in os.listdir('.') if os.path.isdir(c) and not pattern.match(c)])
-
-while len(q) > 0:
-    p = q.popleft()
-    print(p)
-    for c in os.listdir(p):
-        if pattern.match(c):
-            continue
-        child_path = p + '/' + c
-        if os.path.isdir(child_path):
-            q.append(child_path)
-"
-  if which python &> /dev/null; then
-    python -c "$cmd"
-  else
-    python3 -c "$cmd"
-  fi
+  fd -td | awk -F/ '{print NF-1 " " $0}' | sort -n | cut -d' ' -f2-
 }
 
 # __bfs_file - breadth-first search for files
 function __bfs_file() {
-  local cmd ignore_ptn="\.git|node_modules"
-
-  cmd="
-import os
-import re
-from collections import deque
-
-for c in os.listdir('.'):
-    if os.path.isfile(c):
-        print(c)
-
-pattern = re.compile('${ignore_ptn}')
-
-q = deque([c for c in os.listdir('.') if os.path.isdir(c) and not pattern.match(c)])
-
-while len(q) > 0:
-    p = q.popleft()
-    for c in os.listdir(p):
-        if pattern.match(c):
-            continue
-        child_path = p + '/' + c
-        if os.path.isdir(child_path):
-            q.append(child_path)
-        if os.path.isfile(child_path):
-            print(child_path)
-"
-  if which python &> /dev/null; then
-    python -c "$cmd"
-  else
-    python3 -c "$cmd"
-  fi
+  fd -tf -tl | awk -F/ '{print NF-1 " " $0}' | sort -n | cut -d' ' -f2-
 }
 
 if type rsync &> /dev/null; then

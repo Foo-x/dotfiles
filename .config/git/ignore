@@ -10,6 +10,7 @@ out/
 dist/
 cache/
 logs/
+.cache/
 
 # vim
 Session.vim
@@ -21,6 +22,14 @@ node_modules/
 # Python
 __pycache__/
 *.pyc
+
+# Rust
+.cargo/
+.rustup/
+target/
+
+# VSCode
+.vscode-server/
 
 # Windows
 [Dd]esktop.ini

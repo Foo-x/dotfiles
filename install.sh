@@ -48,11 +48,6 @@ else
     echo "${source_bashrc}" >> ${HOME}/.bashrc
 fi
 
-# install enhancd
-if [ ! -d ${HOME}/enhancd ]; then
-    git clone --depth 1 https://github.com/b4b4r07/enhancd.git ${HOME}/enhancd
-fi
-
 # setup ranger
 if has ranger; then
   mkdir -p ${XDG_CONFIG_HOME}/ranger
