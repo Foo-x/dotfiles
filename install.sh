@@ -64,6 +64,12 @@ if has ranger; then
 fi
 
 mkdir -p ${HOME}/.local/bin
+binfiles="
+nvimdirdiff
+f
+vipe
+"
+echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 
 touch ${HOME}/.user_profile
 

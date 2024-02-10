@@ -3,11 +3,6 @@
 DOT_DIR="${DOT_DIR:-${HOME}/.dotfiles}"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
-binfiles="
-nvimdirdiff
-"
-echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
-
 # setup vim
 VIM_PACK_DIR=${XDG_CONFIG_HOME}/vim/pack/plugins/start
 VIM_PACK_COLORS_DIR=${XDG_CONFIG_HOME}/vim/pack/colors/opt

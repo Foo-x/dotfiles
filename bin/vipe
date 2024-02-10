@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+__vipe() {
+  local f=$(mktemp)
+  cat > $f
+  $EDITOR $f < /dev/tty > /dev/tty
+  cat $f
+  \rm $f
+}
+
+__vipe

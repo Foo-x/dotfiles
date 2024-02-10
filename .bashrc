@@ -24,6 +24,8 @@ fi
 for completion in ${DOT_DIR}/completion/*; do
   . ${completion}
 done
+. <(f completion)
+
 if type rustup &> /dev/null; then
   eval "$(rustup completions bash)"
   eval "$(rustup completions bash cargo)"

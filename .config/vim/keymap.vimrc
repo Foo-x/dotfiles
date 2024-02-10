@@ -79,10 +79,13 @@ nnoremap <Plug>(location)k :<C-u>lbefore<CR>
 nnoremap <Plug>(location)j :<C-u>lafter<CR>
 nnoremap <Plug>(location)w :<C-u>lwindow<CR>
 nnoremap <Plug>(location)c :<C-u>lclose<CR>
+nnoremap <Plug>(location)o :<C-u>lopen<CR>
 nnoremap <Plug>(location). :<C-u>lgetbuffer<CR>
 nnoremap <Plug>(location)f :<C-u>lgetfile<CR>
 nnoremap <Plug>(location)h :<C-u>lolder<CR>
 nnoremap <Plug>(location)l :<C-u>lnewer<CR>
+"" toggle location list
+nnoremap <expr> <Plug>(location)t empty(filter(getwininfo(), 'v:val.loclist')) ? ':lopen<CR>' : ':lclose<CR>'
 
 nmap <Space>w <Plug>(window)
 nnoremap <Plug>(window)_ <Cmd>split<CR>
