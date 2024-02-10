@@ -2,9 +2,9 @@ cnoreabbr w!! w !sudo tee > /dev/null %
 cnoreabbr e% expand('%')
 
 " argument list
-cnoreabbr ar args
-cnoreabbr ad argdelete
-cnoreabbr ada argdelete *
+cnoreabbr <expr> ar getcmdtype() == ':' && getcmdline() ==# 'ar' ? 'args' : 'ar'
+cnoreabbr <expr> ad getcmdtype() == ':' && getcmdline() ==# 'ad' ? 'argdelete' : 'ad'
+cnoreabbr <expr> ada getcmdtype() == ':' && getcmdline() ==# 'ada' ? 'argdelete *' : 'ada'
 cnoreabbr <expr> add getcmdtype() == ':' && getcmdline() ==# 'add' ? 'argdedupe' : 'add'
 
 cnoremap <expr> ; getcmdtype() == ':' && empty(getcmdline()) ? "\<Esc>q:" : ';'

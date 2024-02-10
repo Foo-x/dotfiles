@@ -1,35 +1,35 @@
-#!/usr/bin/env -S deno run --ext=ts --allow-all
+#!/usr/bin/env -S bun --silent
 
-import { basename } from 'https://deno.land/std/path/mod.ts';
-import $ from 'https://deno.land/x/dax/mod.ts';
-import yargs from 'https://deno.land/x/yargs/deno.ts'
+import { basename } from 'path';
+import { $ } from 'bun';
+import yargs from 'yargs/yargs';
 
-yargs(Deno.args)
+yargs(process.argv.slice(2))
   .command(['x <cmd>'], 'fzf execute with xargs', (yargs: any) => {
     yargs.strict(false);
   }, async () => {
-    await $.raw`fzf -m --header "Tab: toggle" | xargs ${Deno.args.slice(1)}`;
+    await $`${{ raw: `fzf -m --header "Tab: toggle" | xargs ${process.argv.slice(3).join(' ')}` }}`;
   })
   .command(['ex'], 'fzf execute after editing', {}, async () => {
-    await $.raw`fzf -m --header "Tab: toggle" | vipe | $SHELL`;
+    await $`${{ raw: `fzf -m --header "Tab: toggle" | vipe | $SHELL` }}`;
   })
   .command(['d', 'docker'], 'fzf docker', (yargs: any) => {
     yargs
       .command(['l [args]', 'logs'], 'fzf docker logs', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const result = await $.raw`docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}'`.text();
+        const result = (await $`${{ raw: `docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}'` }}`).stdout.toString();
         if (result) {
-          await $.raw`docker logs ${result} ${Deno.args.slice(2)}`;
+          await $`${{ raw: `docker logs ${result} ${process.argv.slice(4)}` }}`;
         }
       })
       .command(['r [args]', 'run'], 'fzf docker run', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const result = await $.raw`docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}'`.text();
+        const result = (await $`${{ raw: `docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}'` }}`).stdout.toString();
         if (result) {
           try {
-            await $.raw`docker run ${result} ${Deno.args.slice(2)}`;
+            await $`${{ raw: `docker run ${result} ${process.argv.slice(4)}` }}`;
           } catch {
           }
         }
@@ -37,10 +37,10 @@ yargs(Deno.args)
       .command(['rr [args]'], 'fzf docker run rm', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const result = await $.raw`docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}'`.text();
+        const result = (await $`${{ raw: `docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}'` }}`).stdout.toString();
         if (result) {
           try {
-            await $.raw`docker run --rm ${result} ${Deno.args.slice(2)}`;
+            await $`${{ raw: `docker run --rm ${result} ${process.argv.slice(4)}` }}`;
           } catch {
           }
         }
@@ -48,10 +48,10 @@ yargs(Deno.args)
       .command(['ri [args]'], 'fzf docker run interactive', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const result = await $.raw`docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}'`.text();
+        const result = (await $`${{ raw: `docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}'` }}`).stdout.toString();
         if (result) {
           try {
-            await $.raw`docker run -it ${result} ${Deno.args.slice(2)}`;
+            await $`${{ raw: `docker run -it ${result} ${process.argv.slice(4)}` }}`;
           } catch {
           }
         }
@@ -59,10 +59,10 @@ yargs(Deno.args)
       .command(['rir [args]'], 'fzf docker run interactive rm', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const result = await $.raw`docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}'`.text();
+        const result = (await $`${{ raw: `docker images | sed 1d | fzf --no-sort -n 1,2 | awk '{print $1 ":" $2}'` }}`).stdout.toString();
         if (result) {
           try {
-            await $.raw`docker run -it --rm ${result} ${Deno.args.slice(2)}`;
+            await $`${{ raw: `docker run -it --rm ${result} ${process.argv.slice(4)}` }}`;
           } catch {
           }
         }
@@ -70,14 +70,14 @@ yargs(Deno.args)
       .command(['x [args]', 'exec'], 'fzf docker exec', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        if (Deno.args.slice(2).length === 0) {
+        if (process.argv.slice(4).length === 0) {
           console.error('"docker exec" requires a command.');
           return;
         }
-        const result = await $.raw`docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}'`.text();
+        const result = (await $`${{ raw: `docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}'` }}`).stdout.toString();
         if (result) {
           try {
-            await $.raw`docker start ${result} > /dev/null && docker exec ${result} ${Deno.args.slice(2)}`;
+            await $`${{ raw: `docker start ${result} > /dev/null && docker exec ${result} ${process.argv.slice(4)}` }}`;
           } catch {
           }
         }
@@ -85,14 +85,14 @@ yargs(Deno.args)
       .command(['xi [args]'], 'fzf docker exec interactive', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        if (Deno.args.slice(2).length === 0) {
+        if (process.argv.slice(4).length === 0) {
           console.error('"docker exec" requires a command.');
           return;
         }
-        const result = await $.raw`docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}'`.text();
+        const result = (await $`${{ raw: `docker ps -a | sed 1d | fzf --no-sort -n 2,-1 | awk '{print $NF}'` }}`).stdout.toString();
         if (result) {
           try {
-            await $.raw`docker start ${result} > /dev/null && docker exec -it ${result} ${Deno.args.slice(2)}`;
+            await $`${{ raw: `docker start ${result} > /dev/null && docker exec -it ${result} ${process.argv.slice(4)}` }}`;
           } catch {
           }
         }
@@ -100,10 +100,10 @@ yargs(Deno.args)
       .command(['a [query]', 'attach'], 'fzf docker attach', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const result = await $.raw`docker ps -a | sed 1d | fzf --no-sort -1 -q '${Deno.args[2] || ''}' -n 2,-1 | awk '{print $NF}'`.text();
+        const result = (await $`${{ raw: `docker ps -a | sed 1d | fzf --no-sort -1 -q '${process.argv[4] || '\0'}' -n 2,-1 | awk '{print $NF}'` }}`).stdout.toString();
         if (result) {
           try {
-            await $.raw`docker start ${result} > /dev/null && docker attach ${result}`;
+            await $`${{ raw: `docker start ${result} > /dev/null && docker attach ${result}` }}`;
           } catch {
           }
         }
@@ -111,37 +111,37 @@ yargs(Deno.args)
       .command(['s [query]', 'start'], 'fzf docker start', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $.raw`docker ps -a | sed 1d | fzf --no-sort -q '${Deno.args[2] || ''}' -m -n 2,-1 | awk '{ print $NF }' | xargs -r docker start`;
+        await $`${{ raw: `docker ps -a | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m -n 2,-1 | awk '{ print $NF }' | xargs -r docker start` }}`;
       })
       .command(['st [query]', 'stop'], 'fzf docker stop', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $.raw`docker ps | sed 1d | fzf --no-sort -q '${Deno.args[2] || ''}' -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker stop`;
+        await $`${{ raw: `docker ps | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker stop` }}`;
       })
       .command(['rs [query]', 'restart'], 'fzf docker restart', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $.raw`docker ps -a | sed 1d | fzf --no-sort -q '${Deno.args[2] || ''}' -m -n 2,-1 | awk '{ print $NF }' | xargs -r docker restart`;
+        await $`${{ raw: `docker ps -a | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m -n 2,-1 | awk '{ print $NF }' | xargs -r docker restart` }}`;
       })
       .command(['cor [query]'], 'fzf docker container rm', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $.raw`docker ps -a | sed 1d | fzf --no-sort -q '${Deno.args[2] || ''}' -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker container rm`;
+        await $`${{ raw: `docker ps -a | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker container rm` }}`;
       })
       .command(['corv [query]'], 'fzf docker container rm --volumes', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $.raw`docker ps -a | sed 1d | fzf --no-sort -q '${Deno.args[2] || ''}' -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker container rm --volumes`;
+        await $`${{ raw: `docker ps -a | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m --tac -n 2,-1 | awk '{ print $NF }' | xargs -r docker container rm --volumes` }}`;
       })
       .command(['ir [query]'], 'fzf docker image rm', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $.raw`docker images | sed 1d | fzf --no-sort -q '${Deno.args[2] || ''}' -m --tac -n 1,2 | awk '{ print $1 ":" $2 }' | xargs -r docker image rm`;
+        await $`${{ raw: `docker images | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m --tac -n 1,2 | awk '{ print $1 ":" $2 }' | xargs -r docker image rm` }}`;
       })
       .command(['vr [query]'], 'fzf docker volume rm', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $.raw`docker volume ls | sed 1d | fzf --no-sort -q '${Deno.args[2] || ''}' -m --tac -n 2 | awk '{ print $NF }' | xargs -r docker volume rm`;
+        await $`${{ raw: `docker volume ls | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m --tac -n 2 | awk '{ print $NF }' | xargs -r docker volume rm` }}`;
       })
       .demandCommand(1);
   })

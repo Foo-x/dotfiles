@@ -17,13 +17,13 @@ nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
 " }}}
 
 " command {{{
-cnoreabbr ff Files
-cnoreabbr fg GFiles
-cnoreabbr fb Buffers
-cnoreabbr fh HistoryWS
-cnoreabbr fha History
-cnoreabbr fhe Helptags
-cnoreabbr fa Args
+cnoreabbr <expr> ff getcmdtype() == ':' && getcmdline() ==# 'ff' ? 'Files' : 'ff'
+cnoreabbr <expr> fg getcmdtype() == ':' && getcmdline() ==# 'fg' ? 'GFiles' : 'fg'
+cnoreabbr <expr> fb getcmdtype() == ':' && getcmdline() ==# 'fb' ? 'Buffers' : 'fb'
+cnoreabbr <expr> fh getcmdtype() == ':' && getcmdline() ==# 'fh' ? 'HistoryWS' : 'fh'
+cnoreabbr <expr> fha getcmdtype() == ':' && getcmdline() ==# 'fha' ? 'History' : 'fha'
+cnoreabbr <expr> fhe getcmdtype() == ':' && getcmdline() ==# 'fhe' ? 'Helptags' : 'fhe'
+cnoreabbr <expr> fa getcmdtype() == ':' && getcmdline() ==# 'fa' ? 'Args' : 'fa'
 
 " skip on vim-tiny
 if 1
