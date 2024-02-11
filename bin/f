@@ -42,7 +42,7 @@ yargs(process.argv.slice(2))
           await $`${{ raw: cmd }}`;
         }
       })
-      .command(['co [query]', 'checkout'], 'fzf checkout git branch', (yargs: any) => {
+      .command(['co [query]', 'checkout'], 'fzf git checkout', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
         const localBranches = await $`git --no-pager branch --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mlocal%09%1B[m%(refname:short)%(end)%(end)"`.text();
@@ -62,17 +62,17 @@ yargs(process.argv.slice(2))
           await $`${{ raw: `git checkout ${name} 2> /dev/null` }}`;
         }
       })
-      .command(['bd [query]'], 'fzf delete branches', (yargs: any) => {
+      .command(['bd [query]'], 'fzf git branch -D', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
         await $`${{ raw: `git --no-pager branch --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%(refname:short)%(end)%(end)" | sed '/^$/d' | fzf -m --no-hscroll -q ${process.argv[4] || '\0'} --header="Tab: toggle" | xargs -r git branch -D` }}`;
       })
-      .command(['show [path]'], 'fzf show commit', (yargs: any) => {
+      .command(['show [path]'], 'fzf git commit browser', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
         await $`${{ raw: `git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" --bind "ctrl-m:execute: (echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git show --color=always % | LESS= less -R > /dev/tty)"` }}`;
       })
-      .command(['cf [args]'], 'fzf commit fixup', (yargs: any) => {
+      .command(['cf [args]'], 'fzf git commit --fixup', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
         const target = (await $`${{ raw: `git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
@@ -210,6 +210,59 @@ yargs(process.argv.slice(2))
         yargs.strict(false);
       }, async () => {
         await $`${{ raw: `docker volume ls | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m --tac -n 2 | awk '{ print $NF }' | xargs -r docker volume rm` }}`;
+      })
+  })
+  .command(['m <subcmd>', 'mise'], 'fzf mise', (yargs: any) => {
+    yargs
+      .command(['i [query]', 'install'], 'fzf mise install', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls-remote --all | fzf --tac -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `mise install ${target}` }}`;
+        }
+      })
+      .command(['pi [query]'], 'fzf mise plugins install', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise p ls-remote | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          const actual = target.replace(/[ *]+/, '');
+          await $`${{ raw: `mise plugins install -y ${actual}` }}`;
+        }
+      })
+      .command(['u [query]', 'use'], 'fzf mise use -g', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls-remote --all | fzf --tac -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `mise use -g ${target}` }}`;
+        }
+      })
+      .command(['ul [query]'], 'fzf mise use (local)', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls-remote --all | fzf --tac -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `mise use ${target}` }}`;
+        }
+      })
+      .command(['rm [query]', 'un', 'uninstall'], 'fzf mise uninstall', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls --no-header | sed -E 's/([^ ]+[ ]+[^ ]+).+/\\1/' | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          const actual = target.replace(/ +/, '@');
+          await $`${{ raw: `mise rm ${actual}` }}`;
+        }
+      })
+      .command(['prm [query]', 'pun'], 'fzf mise plugins uninstall', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise plugins ls | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `mise plugins rm ${target}` }}`;
+        }
       })
   })
   .completion()
