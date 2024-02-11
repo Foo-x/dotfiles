@@ -127,7 +127,7 @@ if 1
     exe 'Fern . -drawer -reveal=' . a:line
   endf
   command! FFern exe "norm \<Plug>(fern-close-drawer)" | call fzf#run(fzf#wrap({
-    \ 'source': '__bfs_dir',
+    \ 'source': 'bfs d',
     \ 'sink': function('s:fern_reveal'),
     \ 'options': '--prompt "FFern> "'
   \ }))

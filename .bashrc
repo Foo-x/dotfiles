@@ -14,7 +14,6 @@ shopt -s histverify
 
 . ${DOT_DIR}/.config/bash/.aliases
 . ${DOT_DIR}/.config/bash/.exports
-. ${DOT_DIR}/.config/bash/.aliases_fzf
 . ${DOT_DIR}/.config/bash/.aliases_cdb
 
 if type pacman &> /dev/null; then

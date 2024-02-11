@@ -13,7 +13,75 @@ yargs(process.argv.slice(2))
   .command(['ex'], 'fzf execute after editing', {}, async () => {
     await $`${{ raw: `fzf -m --header "Tab: toggle" | vipe | $SHELL` }}`;
   })
-  .command(['d', 'docker'], 'fzf docker', (yargs: any) => {
+  .command(['e [query]', 'edit'], 'fzf edit with EDITOR', (yargs: any) => {
+    yargs.strict(false);
+  }, async () => {
+    const files = (await $`${{ raw: `bfs f -I -E '.git' 2> /dev/null | fzf -m -q ${process.argv[3] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
+    if (files) {
+      const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
+      await $`${{ raw: cmd }}`;
+    }
+  })
+  .command(['g <subcmd>', 'git'], 'fzf git', (yargs: any) => {
+    yargs
+      .command(['e [query]', 'edit'], 'fzf edit with EDITOR only git tracked', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const files = (await $`${{ raw: `bfs f 2> /dev/null | fzf -m -q ${process.argv[4] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
+        if (files) {
+          const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
+          await $`${{ raw: cmd }}`;
+        }
+      })
+      .command(['em [query]'], 'fzf edit with EDITOR only git modified', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const files = (await $`${{ raw: `git ls-files -o -m --exclude-standard $(git rev-parse --show-cdup) 2> /dev/null | fzf -m -q ${process.argv[4] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
+        if (files) {
+          const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
+          await $`${{ raw: cmd }}`;
+        }
+      })
+      .command(['co [query]', 'checkout'], 'fzf checkout git branch', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const localBranches = await $`git --no-pager branch --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mlocal%09%1B[m%(refname:short)%(end)%(end)"`.text();
+        const remoteBranches = await $`git --no-pager branch --remote --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mremote%09%1B[m%(refname:short)%(end)%(end)"`.text();
+        const tags = await $`git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}'`.text();
+        const branches = localBranches + remoteBranches + tags;
+        const current = await $`git symbolic-ref --short HEAD 2> /dev/null`.text() || 'detached HEAD';
+
+        const target = Buffer.alloc(300);
+        await $`sed '/^$/d' < ${Buffer.from(branches)} | fzf --no-hscroll --no-multi -n 2 -q ${process.argv[4] || '\0'} --header="current: [${{ raw: current.replace('\n', '') }}]" --ansi --preview='git --no-pager log -150 --color --pretty=format:"%s %C(black)%C(bold)%cr%C(reset)" ..{2}' > ${target}`;
+
+        const [typ, name] = target.toString().replace(/\0|\n/g, '').split('\t');
+        if (typ === 'remote') {
+          const branchName = name.replace(/^.+\//, '');
+          await $`${{ raw: `git checkout -t ${name} 2> /dev/null || git checkout ${branchName} 2> /dev/null` }}`;
+        } else {
+          await $`${{ raw: `git checkout ${name} 2> /dev/null` }}`;
+        }
+      })
+      .command(['bd [query]'], 'fzf delete branches', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        await $`${{ raw: `git --no-pager branch --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%(refname:short)%(end)%(end)" | sed '/^$/d' | fzf -m --no-hscroll -q ${process.argv[4] || '\0'} --header="Tab: toggle" | xargs -r git branch -D` }}`;
+      })
+      .command(['show [path]'], 'fzf show commit', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        await $`${{ raw: `git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" --bind "ctrl-m:execute: (echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git show --color=always % | LESS= less -R > /dev/tty)"` }}`;
+      })
+      .command(['cf [args]'], 'fzf commit fixup', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
+        if (target) {
+          await $`${{ raw: `git commit --fixup ${target} ${process.argv.slice(4)}` }}`;
+        }
+      })
+  })
+  .command(['d <subcmd>', 'docker'], 'fzf docker', (yargs: any) => {
     yargs
       .command(['l [args]', 'logs'], 'fzf docker logs', (yargs: any) => {
         yargs.strict(false);
@@ -143,9 +211,9 @@ yargs(process.argv.slice(2))
       }, async () => {
         await $`${{ raw: `docker volume ls | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m --tac -n 2 | awk '{ print $NF }' | xargs -r docker volume rm` }}`;
       })
-      .demandCommand(1);
   })
   .completion()
+  .usage('$0 <subcmd>')
   .help()
   .alias('h', 'help')
   .demandCommand(1)

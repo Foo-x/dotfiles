@@ -183,7 +183,7 @@ alias tmrw='tmux renamew'
 alias tmreload='tmux source-file $XDG_CONFIG_HOME/tmux/tmux.conf'
 
 # browse
-alias al='cat ~/.dotfiles/.config/bash/.aliases{,_fzf} | $PAGER'
+alias al='cat ~/.dotfiles/.config/bash/.aliases | $PAGER'
 alias bashrc='$PAGER ~/.dotfiles/.bashrc'
 alias bashrc_org='$PAGER ~/.bashrc'
 alias inputrc='$PAGER ~/.inputrc'
@@ -224,6 +224,19 @@ function preview() {
   "$@" | less
 }
 alias preview='preview '
+
+function fcd() {
+  local dir
+
+  dir=$(
+    bfs d 2> /dev/null |
+      fzf +m +s -q ${1:-''} --preview "ls -p --group-directories-first --color=always {} 2> /dev/null"
+  )
+
+  if [[ -n "$dir" ]]; then
+    cd "$dir"
+  fi
+}
 
 function check_truecolor() {
   for i in {1..80}; do
@@ -276,16 +289,6 @@ function ansi_cht() {
     echo
     echo 'reset: \e[0m'
   } | less -R
-}
-
-# __bfs_dir - breadth-first search for directories
-function __bfs_dir() {
-  fd -td | awk -F/ '{print NF-1 " " $0}' | sort -n | cut -d' ' -f2-
-}
-
-# __bfs_file - breadth-first search for files
-function __bfs_file() {
-  fd -tf -tl | awk -F/ '{print NF-1 " " $0}' | sort -n | cut -d' ' -f2-
 }
 
 if type rsync &> /dev/null; then

@@ -1,0 +1,24 @@
+#!/usr/bin/env -S bun --silent
+// breadth first search
+import { basename } from 'path';
+import { $ } from 'bun';
+import yargs from 'yargs/yargs';
+
+yargs(process.argv.slice(2))
+  .command(['d [args]', 'dir'], 'bfs directory', (yargs: any) => {
+    yargs.strict(false);
+  }, async () => {
+    await $`${{ raw: `fd --hidden -td ${process.argv.slice(3).join(' ')} | awk -F/ '{print NF-1 " " $0}' | sort -n | cut -d' ' -f2-` }}`;
+  })
+  .command(['f [args]', 'file'], 'bfs file', (yargs: any) => {
+    yargs.strict(false);
+  }, async () => {
+    await $`${{ raw: `fd --hidden -tf -tl ${process.argv.slice(3).join(' ')} | awk -F/ '{print NF-1 " " $0}' | sort -n | cut -d' ' -f2-` }}`;
+  })
+  .completion()
+  .help()
+  .alias('h', 'help')
+  .demandCommand(1)
+  .strict()
+  .scriptName(basename(import.meta.filename))
+  .parse();
