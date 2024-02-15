@@ -132,33 +132,25 @@ if 1
     return l:bufs
   endf
 
-  fun! s:grid(bufs)
+  fun! s:fill_win(setup, bufs)
     silent! only
-    exe "buffer" a:bufs[0]
-    exe "vert sbuffer" a:bufs[2]
-    exe "sbuffer" a:bufs[3]
-    wincmd t
-    exe "sbuffer" a:bufs[1]
-    wincmd t
+    call a:setup()
+
+    let l:i = 0
+    while l:i < len(a:bufs)
+      exe (l:i + 1) . 'winc w'
+      exe 'buffer' a:bufs[l:i]
+      let l:i += 1
+    endwhile
+
+    winc t
   endf
-  command! Grid call s:grid(s:n_bufs(4))
-  command! AGrid call s:grid(s:n_arg_bufs(4))
-  fun! s:two_col(bufs)
-    silent! only
-    exe "buffer" a:bufs[0]
-    exe "vert sbuffer" a:bufs[1]
-    wincmd t
-  endf
-  command! TwoCol call s:two_col(s:n_bufs(2))
-  command! ATwoCol call s:two_col(s:n_arg_bufs(2))
-  fun! s:two_row(bufs)
-    silent! only
-    exe "buffer" a:bufs[0]
-    exe "sbuffer" a:bufs[1]
-    wincmd t
-  endf
-  command! TwoRow call s:two_row(s:n_bufs(2))
-  command! ATwoRow call s:two_row(s:n_arg_bufs(2))
+  command! Grid call s:fill_win({ -> execute('split | windo vsplit') }, s:n_bufs(4))
+  command! AGrid call s:fill_win({ -> execute('split | windo vsplit') }, s:n_arg_bufs(4))
+  command! TwoCol call s:fill_win({ -> execute('vsplit') }, s:n_bufs(2))
+  command! ATwoCol call  s:fill_win({ -> execute('vsplit') }, s:n_arg_bufs(2))
+  command! TwoRow call s:fill_win({ -> execute('split') }, s:n_bufs(2))
+  command! ATwoRow call  s:fill_win({ -> execute('split') }, s:n_arg_bufs(2))
 
   fun! s:update_oldfiles(file)
     if !exists('v:oldfiles')

@@ -15,11 +15,18 @@ if 1
         \   "<Plug>(fern-action-expand)",
         \ )
     nnoremap <buffer> <CR> <Plug>(fern-my-open-or-expand)
+    nnoremap <buffer> i <Nop>
+    nnoremap <buffer> K <C-b>
+    nnoremap <buffer> in <Plug>(fern-action-new-file)
+    nnoremap <buffer> iN <Plug>(fern-action-new-dir)
     nnoremap <buffer> l <Plug>(fern-my-open-or-expand)
     nnoremap <buffer> t <Plug>(fern-action-open:tabedit)gt<Plug>(fern-close-drawer)gT
     nnoremap <buffer> D <Plug>(fern-action-remove=)
     nnoremap <buffer><silent> x <Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>
     noremap <buffer> <Tab> <Plug>(fern-action-mark)<Down>
+    if maparg('N', 'n') != ''
+      nunmap <buffer> N
+    endif
   endf
 
   augroup Fern

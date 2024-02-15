@@ -59,6 +59,10 @@ EOF
       hi @ibl.whitespace.char.1 gui=nocombine guifg=#323232
       hi @ibl.scope.char.1 gui=nocombine guifg=#737373
       hi @ibl.scope.underline.1 gui=underline guisp=#737373
+      hi Comment guifg=#737373
+      hi @comment guifg=#737373
+      hi NonText guifg=#535353
+      hi LineNr guifg=#434343
 
       lua require('leap').init_highlight(true)
     endf

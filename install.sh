@@ -184,10 +184,12 @@ fetch_git_prompt.sh
 echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 
 # setup spzenhan
-SPZENHAN_DIR=/mnt/c/Users/$(powershell.exe '$env:username' | tr -d '\r')/Documents/spzenhan
-if [ "${WSL_DISTRO_NAME}" ] && [ ! -x ${SPZENHAN_DIR}/spzenhan.exe ] ; then
-  mkdir -p ${SPZENHAN_DIR}
-  curl -Lo ${SPZENHAN_DIR}/spzenhan.exe https://github.com/kaz399/spzenhan.vim/raw/master/zenhan/spzenhan.exe
+if [ "${WSL_DISTRO_NAME}" ]; then
+  SPZENHAN_DIR=/mnt/c/Users/$(powershell.exe '$env:username' | tr -d '\r')/Documents/spzenhan
+  if [ ! -x ${SPZENHAN_DIR}/spzenhan.exe ]; then
+    mkdir -p ${SPZENHAN_DIR}
+    curl -Lo ${SPZENHAN_DIR}/spzenhan.exe https://github.com/kaz399/spzenhan.vim/raw/master/zenhan/spzenhan.exe
+  fi
 fi
 
 # setup bash history
