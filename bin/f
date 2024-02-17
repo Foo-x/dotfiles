@@ -70,12 +70,12 @@ yargs(process.argv.slice(2))
       .command(['show [path]'], 'fzf git commit browser', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $`${{ raw: `git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" --bind "ctrl-m:execute: (echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git show --color=always % | LESS= less -R > /dev/tty)"` }}`;
+        await $`${{ raw: `git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" --bind "ctrl-m:execute: (echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git show --color % | LESS= less -R > /dev/tty)"` }}`;
       })
       .command(['cf [args]'], 'fzf git commit --fixup', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
+        const target = (await $`${{ raw: `git log --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
         if (target) {
           await $`${{ raw: `git commit --fixup ${target} ${process.argv.slice(4)}` }}`;
         }
@@ -83,7 +83,7 @@ yargs(process.argv.slice(2))
       .command(['cF [args]'], 'fzf git commit --fixup and rebase', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
+        const target = (await $`${{ raw: `git log --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
         if (target) {
           await $`${{ raw: `git commit --fixup ${target} ${process.argv.slice(4)}` }}`;
           await $`${{ raw: `git rebase --autosquash ${target}` }}`;

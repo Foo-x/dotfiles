@@ -3,16 +3,16 @@
 [alias]
     # log
     ## oneline
-    l = "!git log --graph --date-order --pretty=format:\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%ad%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S'"
-    la = "!git log --graph --date-order --pretty=format:\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%ad%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --all"
+    l = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S'"
+    la = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --all"
 
     ## oneline + changed files
-    l1 = "!git log --graph --date-order --pretty=format:\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%ad%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status"
-    l1a = "!git log --graph --date-order --pretty=format:\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%ad%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)%n\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status --all"
+    l1 = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status"
+    l1a = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)%n\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status --all"
 
     ## detail
-    l2 = log -p --decorate
-    l2a = log -p --decorate --all
+    l2 = log -p --decorate --color
+    l2a = log -p --decorate --color --all
 
     ## contribution stats by author
     ## takes options of git log
