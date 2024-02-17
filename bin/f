@@ -80,6 +80,15 @@ yargs(process.argv.slice(2))
           await $`${{ raw: `git commit --fixup ${target} ${process.argv.slice(4)}` }}`;
         }
       })
+      .command(['cF [args]'], 'fzf git commit --fixup and rebase', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
+        if (target) {
+          await $`${{ raw: `git commit --fixup ${target} ${process.argv.slice(4)}` }}`;
+          await $`${{ raw: `git rebase --autosquash ${target}` }}`;
+        }
+      })
   })
   .command(['d <subcmd>', 'docker'], 'fzf docker', (yargs: any) => {
     yargs
