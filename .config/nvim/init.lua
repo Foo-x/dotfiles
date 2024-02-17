@@ -42,7 +42,7 @@ set('n', '<Plug>(git)s', function() term_exec_git('git status -sb') end)
 set('n', '<Plug>(git)f', function() term_exec_git_background('git fetch') end)
 set('n', '<Plug>(git)p', function() term_exec_git_background('git pull') end)
 set('n', '<Plug>(git)pp', function() term_exec_git_background('git pp') end)
-set('n', '<Plug>(git)ps', function() term_exec_git_background('git push') end)
+set('n', '<Plug>(git)ps', function() term_exec_git('git push') end)
 set('n', '<Plug>(git)sl', function() term_exec_git('git stash list') end)
 -- set g:termx<count> and then type <count><Space>x to execute set command
 -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
