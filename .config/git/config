@@ -65,7 +65,7 @@
         git branch --merged | \
         egrep -v '\\*|develop|master|main' | \
         sed 's/+ //' | \
-        xargs -i sh -c 'git worktree remove {} 2> /dev/null; git branch -d {} 2> /dev/null'; \
+        xargs -ri sh -c 'git worktree remove {} 2> /dev/null; git branch -d {} 2> /dev/null'; \
     };f"
 
     ## check if can merge
@@ -114,10 +114,12 @@
     ## pull and prune
     pp = "!f(){ \
         git checkout ${1:-$(git config init.defaultBranch || echo master)} && \
-        git pull && \
-        git remote prune origin && \
+        git pull -p && \
         git dmb; \
     };f"
+
+    forget="!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -d"
+    forgetlist="!git fetch -p && git branch -vv | awk '/: gone]/{print $1}'"
 
     ## set upstream of current branch to the same name in origin
     sus = !git branch -u origin/`git symbolic-ref --short HEAD` `git symbolic-ref --short HEAD`
@@ -159,8 +161,7 @@
     wtr = worktree remove
     wtpp = "!f(){ \
         cd $(git worktree list | head -n1 | cut -d' ' -f1) && \
-        git pull && \
-        git remote prune origin && \
+        git pull -p && \
         git dmb; \
     };f"
 
@@ -198,6 +199,15 @@
     lso = ls-files --others
     lsm = ls-files --modified
 
+    # rerere
+    rr = rerere
+    rrs = rerere status
+    rrf = rerere forget
+    rrc = rerere clear
+    rrd = rerere diff
+    rrr = rerere remaining
+    rrg = rerere gc
+
     # others
     s = status -sb
     si = status -sb --ignored
@@ -233,6 +243,10 @@
 [core]
     hooksPath = ~/.dotfiles/.config/git/hooks
     quotePath = false
+[branch]
+    sort = -committerdate
+[column]
+    ui = auto
 [delta]
     navigate = true
     commit-decoration-style = box
@@ -272,6 +286,9 @@
     abbreviateCommands = true
     autosquash = true
     autostash = true
+[rerere]
+    enabled = true
+    autoUpdate = true
 [submodule]
     recurse = true
 [init]
