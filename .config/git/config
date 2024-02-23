@@ -136,6 +136,7 @@
     da = diff @
     dm = diff --diff-filter=M   # modified
     dnm = diff --diff-filter=m  # not modified
+    du = !git ls-files --others --exclude-standard | xargs -r wc -l  # untracked
     dt = difftool -d
 
     # merge

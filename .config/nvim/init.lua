@@ -27,6 +27,9 @@ augroup ToggleTerm
   autocmd FileType fzf lua vim.keymap.del("t", "<Esc>", { buffer = 0 })
 augroup END
 ]]
+if vim.bo.filetype ~= 'gitcommit' then
+  toggleterm.exec('', 2, vim.o.columns / 2, nil, 'vertical', 'git', true, false)
+end
 local function term_exec_git(cmd)
   toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
 end
@@ -100,12 +103,16 @@ require('other-nvim').setup({
   },
   transformers = {
     capitalize_by_slash = function(input)
-      return input:gsub('^%l', string.upper):gsub('/%l', string.upper)
+      return input:gsub('^%l', string.upper):gsub('/%l', string.upper):gsub('-%l', function(s)
+        return s:sub(2, 2):upper()
+      end)
     end,
     lowercase = function(input)
-      return input:lower()
+      return input:gsub('^%u', string.lower):gsub('/%u', string.lower):gsub('%u', function(s)
+        return '-' .. s:lower()
+      end)
     end
-  }
+  },
 })
 set('n', '<leader>oo', ':<C-u>Other<CR>', { silent = true })
 set('n', '<leader>ot', ':<C-u>OtherTabNew<CR>', { silent = true })
@@ -163,6 +170,7 @@ if not DiffviewLoaded then
         { 'n', 'cE',     '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit -n; read -n 1 -s -p "press any key to close ..."\'<CR>', { desc = 'Commit amend no edit' } },
         { 'n', '<F9>',   '<Cmd>tabclose <bar>GV --all<CR>',                                                                                                   { desc = 'Open the commit log' } },
         { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>',                                                                                     { desc = 'Open the commit log --name-status' } },
+        { 'n', 't',      diffview_actions.goto_file_tab,                                                                                                      { desc = 'Open the file in a new tabpage' } },
       },
       file_history_panel = {
         ['L'] = false,
@@ -458,7 +466,8 @@ cmp.setup.cmdline(':', {
     },
   },
   enabled = function()
-    local result = not vim.regex('^r\\%[ead] \\?!\\|^w\\%[rite] !\\|^w!!\\|^!\\|silent!'):match_str(vim.fn.getcmdline())
+    local result = not vim.regex('^r\\%[ead] \\?!\\|^w\\%[rite] !\\|^w!!\\|^!\\|silent!'):match_str(vim.fn
+      .getcmdline())
     if not result then
       cmp.close()
     end

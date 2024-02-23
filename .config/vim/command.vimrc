@@ -153,7 +153,8 @@ if 1
     let l:lines = line('$') . 'L'
     let l:size = trim(execute('w !wc -c | numfmt --to=iec')) . 'B'
     if l:path != ''
-      echo '"' . l:path . '"' l:lines l:size
+      let l:stat = system('stat -c "%A uid=%u(%U) gid=%g(%G) %y" ' . expand('%'))
+      echo '"' . l:path . '"' l:lines l:size l:stat
     else
       echo '"[No Name]"' l:lines l:size
     endif
