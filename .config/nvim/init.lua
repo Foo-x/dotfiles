@@ -27,9 +27,19 @@ augroup ToggleTerm
   autocmd FileType fzf lua vim.keymap.del("t", "<Esc>", { buffer = 0 })
 augroup END
 ]]
-if vim.bo.filetype ~= 'gitcommit' then
-  toggleterm.exec('', 2, vim.o.columns / 2, nil, 'vertical', 'git', true, false)
-end
+vim.api.nvim_create_autocmd('VimEnter', {
+  group = vim.api.nvim_create_augroup('ToggleTerm', { clear = false }),
+  callback = function()
+    if vim.bo.filetype ~= 'gitcommit' then
+      toggleterm.exec('', 2, vim.o.columns / 2, nil, 'vertical', 'git', false)
+      set_terminal_keymaps()
+      vim.cmd('ToggleTerm')
+      toggleterm.exec('', 1, nil, nil, 'tab', nil, false)
+      set_terminal_keymaps()
+      vim.cmd('ToggleTerm')
+    end
+  end,
+})
 local function term_exec_git(cmd)
   toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
 end
