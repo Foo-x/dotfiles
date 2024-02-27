@@ -243,4 +243,5 @@ tmap <C-o> <C-\><C-n>
 augroup FileTypeMap
   autocmd!
   autocmd FileType help nnoremap <buffer> <CR> <C-]>
+  autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 augroup END

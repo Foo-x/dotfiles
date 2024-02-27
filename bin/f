@@ -99,6 +99,23 @@ yargs(process.argv.slice(2))
           await $`${{ raw: `git rebase --autosquash ${target}` }}`;
         }
       })
+      .command(['cs [args]'], 'fzf git commit --squash', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `git log --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
+        if (target) {
+          await $`${{ raw: `git commit --squash ${target} ${process.argv.slice(4)}` }}`;
+        }
+      })
+      .command(['cS [args]'], 'fzf git commit --squash and rebase', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `git log --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
+        if (target) {
+          await $`${{ raw: `git commit --squash ${target} ${process.argv.slice(4)}` }}`;
+          await $`${{ raw: `git rebase --autosquash ${target}` }}`;
+        }
+      })
   })
   .command(['d <subcmd>', 'docker'], 'fzf docker', (yargs: any) => {
     yargs
