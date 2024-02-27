@@ -48,16 +48,16 @@
     scoa = sparse-checkout add
     scos = sparse-checkout set --cone
     scod = sparse-checkout disable
-    db = config init.defaultBranch
+    db = "!git rev-parse --abbrev-ref origin/HEAD | sed 's;origin/;;'"
 
     ## rebase
     rb = "!f(){ \
-        git rebase ${@:-$(git config init.defaultBranch || echo master)}; \
+        git rebase ${@:-$(git db || echo master)}; \
     };f"
 
     ## rebase interactive
     rbi = "!f(){ \
-        git rebase -i ${@:-$(git config init.defaultBranch || echo master)}; \
+        git rebase -i ${@:-$(git db || echo master)}; \
     };f"
 
     ## delete merged branch
@@ -70,7 +70,7 @@
 
     ## check if can merge
     mc = "!f(){ \
-        git checkout -q ${1:-$(git config init.defaultBranch || echo master)}; \
+        git checkout -q ${1:-$(git db || echo master)}; \
         git format-patch @..$(git rev-parse @{-1}) --stdout | git apply --check; \
         git checkout -q -; \
     };f"
@@ -114,7 +114,7 @@
 
     ## pull and prune
     pp = "!f(){ \
-        git checkout ${1:-$(git config init.defaultBranch || echo master)} && \
+        git checkout ${1:-$(git db || echo master)} && \
         git pull -p && \
         git dmb; \
     };f"
@@ -293,8 +293,6 @@
     autoUpdate = true
 [submodule]
     recurse = true
-[init]
-    defaultBranch = master
 [grep]
     lineNumber = true
     column = true
