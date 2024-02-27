@@ -41,22 +41,22 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end,
 })
 local function term_exec_git(cmd)
-  toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
+  toggleterm.exec('git ' .. cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git')
 end
 local function term_exec_git_background(cmd)
-  toggleterm.exec(cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git', true, false)
+  toggleterm.exec('git ' .. cmd, 2, vim.o.columns / 2, nil, 'vertical', 'git', true, false)
 end
 set('n', '<Plug>(git)<Space>',
   ':2TermExec size=' .. vim.o.columns / 2 .. ' direction=vertical name=git go_back=0 cmd="git "<Left>')
-set('n', '<Plug>(git)b', function() term_exec_git('git branch') end)
-set('n', '<Plug>(git)ba', function() term_exec_git('git branch -a') end)
-set('n', '<Plug>(git)bv', function() term_exec_git('git branch -avv') end)
-set('n', '<Plug>(git)s', function() term_exec_git('git status -sb') end)
-set('n', '<Plug>(git)f', function() term_exec_git_background('git fetch') end)
-set('n', '<Plug>(git)p', function() term_exec_git_background('git pull') end)
-set('n', '<Plug>(git)pp', function() term_exec_git_background('git pp') end)
-set('n', '<Plug>(git)ps', function() term_exec_git('git push') end)
-set('n', '<Plug>(git)sl', function() term_exec_git('git stash list') end)
+set('n', '<Plug>(git)b', function() term_exec_git('branch') end)
+set('n', '<Plug>(git)ba', function() term_exec_git('branch -a') end)
+set('n', '<Plug>(git)bv', function() term_exec_git('branch -avv') end)
+set('n', '<Plug>(git)s', function() term_exec_git('status -sb') end)
+set('n', '<Plug>(git)f', function() term_exec_git_background('fetch') end)
+set('n', '<Plug>(git)p', function() term_exec_git_background('pull') end)
+set('n', '<Plug>(git)pp', function() term_exec_git_background('pp') end)
+set('n', '<Plug>(git)ps', function() term_exec_git('push') end)
+set('n', '<Plug>(git)sl', function() term_exec_git('stash list') end)
 -- set g:termx<count> and then type <count><Space>x to execute set command
 -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
 -- if <count> is 1, it can be omitted on typing
@@ -66,6 +66,38 @@ set('n', '<Space>x', function()
     toggleterm.exec(cmd)
   end
 end)
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('GVLua', {}),
+  pattern = { "GV" },
+  callback = function()
+    set('n', 'cf',
+      [[<Cmd>silent !tmux new-window 'git commit --fixup ]] ..
+      vim.fn.expand('<cword>') .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]], { buffer = 0 })
+    set('n', 'cF', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git commit --fixup ]] ..
+          sha ..
+          [[ && git -c sequence.editor=: rebase -i --autosquash ]] ..
+          sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
+    set('n', 'ca',
+      [[<Cmd>silent !tmux new-window 'git commit --fixup amend:]] ..
+      vim.fn.expand('<cword>') .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]], { buffer = 0 })
+    set('n', 'cA', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git commit --fixup amend:]] ..
+          sha .. [[ && git rebase -i --autosquash ]] .. sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
+    set('n', 'cs',
+      [[<Cmd>silent !tmux new-window 'git commit --squash ]] ..
+      vim.fn.expand('<cword>') .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]], { buffer = 0 })
+    set('n', 'cS', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git commit --squash ]] ..
+          sha .. [[ && git rebase -i --autosquash ]] .. sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
+  end,
+})
 
 require('nvim-surround').setup()
 

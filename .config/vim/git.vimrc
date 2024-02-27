@@ -118,6 +118,12 @@ if 1
     autocmd FileType GV nnoremap <buffer><silent> u <Cmd>call GvUpdate()<CR>
     autocmd FileType GV nnoremap <buffer><silent> a <Cmd>call GvToggleAll()<CR>
     autocmd FileType GV nnoremap <buffer><silent> <C-n> <Cmd>call GvToggleNameStatus()<CR>
+    autocmd FileType GV nnoremap <buffer><silent> cf :<C-u>G commit --fixup <cword><CR>
+    autocmd FileType GV nnoremap <buffer><silent> cF :<C-u>G commit --fixup <cword><CR>:G -c sequence.editor=: rebase -i --autosquash <cword>^<CR>
+    autocmd FileType GV nnoremap <buffer><silent> ca :<C-u>G commit --fixup amend:<cword><CR>
+    autocmd FileType GV nnoremap <buffer><silent> cA :<C-u>G commit --fixup amend:<cword><CR>:G rebase -i --autosquash <cword>^<CR>
+    autocmd FileType GV nnoremap <buffer><silent> cs :<C-u>G commit --squash <cword><CR>
+    autocmd FileType GV nnoremap <buffer><silent> cS :<C-u>G commit --squash <cword><CR>:G rebase -i --autosquash <cword>^<CR>
     autocmd FileType diff,git setlocal foldmethod=expr foldexpr=s:diff_fold()
   augroup END
 endif
