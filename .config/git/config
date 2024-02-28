@@ -48,7 +48,8 @@
     scoa = sparse-checkout add
     scos = sparse-checkout set --cone
     scod = sparse-checkout disable
-    db = "!git rev-parse --abbrev-ref origin/HEAD | sed 's;origin/;;'"
+    db = config init.defaultBranch
+    setdb = !git config init.defaultBranch $(git remote show origin | \\grep -oP '(?<=HEAD branch: ).+')
 
     ## rebase
     rb = "!f(){ \
@@ -293,6 +294,8 @@
     autoUpdate = true
 [submodule]
     recurse = true
+[init]
+    defaultBranch = master
 [grep]
     lineNumber = true
     column = true
