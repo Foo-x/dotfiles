@@ -86,7 +86,15 @@ vim.api.nvim_create_autocmd('FileType', {
     set('n', 'cA', function()
       local sha = vim.fn.expand('<cword>')
       return [[<Cmd>silent !tmux new-window 'git commit --fixup amend:]] ..
-          sha .. [[ && git rebase -i --autosquash ]] .. sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          sha .. [[ && git -c sequence.editor=: rebase -i --autosquash ]] .. sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
+    set('n', 'cr',
+      [[<Cmd>silent !tmux new-window 'git commit --fixup reword:]] ..
+      vim.fn.expand('<cword>') .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]], { buffer = 0 })
+    set('n', 'cR', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git commit --fixup reword:]] ..
+          sha .. [[ && git -c sequence.editor=: rebase -i --autosquash ]] .. sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
     end, { buffer = 0, expr = true })
     set('n', 'cs',
       [[<Cmd>silent !tmux new-window 'git commit --squash ]] ..

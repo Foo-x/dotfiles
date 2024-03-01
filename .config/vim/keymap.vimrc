@@ -178,6 +178,7 @@ inoremap <Right> <C-g>U<Right>
 inoremap <CR> <C-g>u<CR>
 
 imap <C-f> <Plug>(i_file)
+inoremap <Plug>(i_file) <Nop>
 "" relative
 inoremap <Plug>(i_file). <C-r>%
 "" absolute
