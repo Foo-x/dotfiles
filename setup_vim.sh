@@ -301,6 +301,11 @@ if [ ! -d ${NVIM_PACK_DIR}/toggleterm.nvim ]; then
     git clone --depth 1 https://github.com/akinsho/toggleterm.nvim.git ${NVIM_PACK_DIR}/toggleterm.nvim
 fi
 
+# install nvim-lsp-file-operations
+if [ ! -d ${NVIM_PACK_DIR}/nvim-lsp-file-operations ]; then
+    git clone --depth 1 https://github.com/antosha417/nvim-lsp-file-operations.git ${NVIM_PACK_DIR}/nvim-lsp-file-operations
+fi
+
 nvim -es +"
 set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after |
   silent! packl! |

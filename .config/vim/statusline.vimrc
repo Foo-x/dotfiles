@@ -59,7 +59,12 @@ fun! MyTabline()
       let l:fname = fnamemodify(l:bufname, ':t')
       let l:name = len(l:fname) ? l:fname : '[?]'
     endif
-    let l:label = ' ' . l:name . ' '
+    if getbufvar(l:bufname, '&modified')
+      let l:flag = '[+]'
+    else
+      let l:flag = ''
+    endif
+    let l:label = ' ' . l:name . l:flag . ' '
     let l:result = l:result . l:hi . l:id . l:label
   endfor
 
