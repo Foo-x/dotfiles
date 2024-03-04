@@ -152,6 +152,11 @@ if ! has hyperfine; then
     mise use -gy hyperfine
 fi
 
+# setup usage
+if ! has usage; then
+    mise use -gy usage
+fi
+
 # install zoxide
 if ! has zoxide; then
     mise use -gy zoxide

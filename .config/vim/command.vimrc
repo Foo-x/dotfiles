@@ -37,6 +37,7 @@ if 1
     let g:insert_print_templates.javascript = 'console.log(`{}`);'
     let g:insert_print_templates.typescript = 'console.log(`{}`);'
     let g:insert_print_templates.typescriptreact = 'console.log(`{}`);'
+    let g:insert_print_templates.vue = 'console.log(`{}`);'
   endif
 
   if !exists('g:insert_print_text')

@@ -237,9 +237,6 @@ vnoremap <Space>1dp :diffput 1<CR>
 vnoremap <Space>2dp :diffput 2<CR>
 vnoremap <Space>3dp :diffput 3<CR>
 
-" terminal mode
-tmap <C-o> <C-\><C-n>
-
 " depends on FileType
 augroup FileTypeMap
   autocmd!
