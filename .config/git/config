@@ -255,8 +255,6 @@
     quotePath = false
 [branch]
     sort = -committerdate
-[column]
-    ui = auto
 [delta]
     navigate = true
     commit-decoration-style = box
