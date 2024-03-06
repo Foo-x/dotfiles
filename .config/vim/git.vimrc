@@ -110,6 +110,13 @@ if 1
   fun! GvToggleNameStatus()
     call GvToggleOption('--name-status')
   endf
+  fun! GvToggleDefaultBranch()
+    let l:default_branch = trim(system('git config init.defaultBranch'))
+    if l:default_branch == ''
+      let l:default_branch = 'master'
+    endif
+    call GvToggleOption(l:default_branch . '..@')
+  endf
   augroup Git
     autocmd!
     autocmd FileType fugitive,git,GV setlocal isk+=-
@@ -117,6 +124,7 @@ if 1
     autocmd FileType GV nnoremap <buffer><silent> <CR> :<C-u>call feedkeys(".\<lt>C-u>DiffviewOpen\<lt>C-e>^!\<lt>CR>")<CR>
     autocmd FileType GV nnoremap <buffer><silent> u <Cmd>call GvUpdate()<CR>
     autocmd FileType GV nnoremap <buffer><silent> a <Cmd>call GvToggleAll()<CR>
+    autocmd FileType GV nnoremap <buffer><silent> d <Cmd>call GvToggleDefaultBranch()<CR>
     autocmd FileType GV nnoremap <buffer><silent> <C-n> <Cmd>call GvToggleNameStatus()<CR>
     autocmd FileType GV nnoremap <buffer><silent> cf :<C-u>G commit --fixup <cword><CR>
     autocmd FileType GV nnoremap <buffer><silent> cF :<C-u>G commit --fixup <cword><CR>:G -c sequence.editor=true rebase -i --autosquash <cword>^<CR>

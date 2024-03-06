@@ -5,14 +5,17 @@
     ## oneline
     l = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S'"
     la = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --all"
+    dbl = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' $(git db)..@"
 
     ## oneline + changed files
     l1 = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status"
     l1a = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)%n\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status --all"
+    dbl1 = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status $(git db)..@"
 
     ## detail
     l2 = log -p --decorate --color
     l2a = log -p --decorate --color --all
+    dbl2 = "!git log -p --decorate --color $(git db)..@"
 
     ## contribution stats by author
     ## takes options of git log
@@ -134,12 +137,16 @@
 
     # diff
     d = diff
+    df = diff --name-only
     dc = diff --cached
     da = diff @
     dm = diff --diff-filter=M   # modified
     dnm = diff --diff-filter=m  # not modified
     du = !git ls-files --others --exclude-standard | xargs -r wc -l  # untracked
     dt = difftool -d
+    dbd = "!git diff $(git db)..@"
+    dbdf = "!git diff --name-only $(git db)..@"
+    dbds = "!git diff --name-status $(git db)..@"
 
     # merge
     me = merge
