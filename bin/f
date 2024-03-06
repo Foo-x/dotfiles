@@ -96,7 +96,7 @@ yargs(process.argv.slice(2))
         const target = (await $`${{ raw: `git log --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
         if (target) {
           await $`${{ raw: `git commit --fixup ${target} ${process.argv.slice(4)}` }}`;
-          await $`${{ raw: `git -c sequence.editor=: rebase -i --autosquash ${target}^` }}`;
+          await $`${{ raw: `git -c sequence.editor=true rebase -i --autosquash ${target}^` }}`;
         }
       })
       .command(['ca [args]'], 'fzf git commit --fixup amend', (yargs: any) => {
@@ -113,7 +113,7 @@ yargs(process.argv.slice(2))
         const target = (await $`${{ raw: `git log --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
         if (target) {
           await $`${{ raw: `git commit --fixup amend:${target} ${process.argv.slice(4)} > /dev/tty` }}`;
-          await $`${{ raw: `git -c sequence.editor=: rebase -i --autosquash ${target}^ > /dev/tty` }}`;
+          await $`${{ raw: `git -c sequence.editor=true rebase -i --autosquash ${target}^ > /dev/tty` }}`;
         }
       })
       .command(['cr [args]'], 'fzf git commit --fixup reword', (yargs: any) => {
@@ -130,7 +130,7 @@ yargs(process.argv.slice(2))
         const target = (await $`${{ raw: `git log --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
         if (target) {
           await $`${{ raw: `git commit --fixup reword:${target} ${process.argv.slice(4)} > /dev/tty` }}`;
-          await $`${{ raw: `git -c sequence.editor=: rebase -i --autosquash ${target}^ > /dev/tty` }}`;
+          await $`${{ raw: `git -c sequence.editor=true rebase -i --autosquash ${target}^ > /dev/tty` }}`;
         }
       })
       .command(['cs [args]'], 'fzf git commit --squash', (yargs: any) => {

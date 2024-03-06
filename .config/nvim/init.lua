@@ -72,43 +72,56 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('GVLua', {}),
   pattern = { "GV" },
   callback = function()
-    set('n', 'cf',
-      [[<Cmd>silent !tmux new-window 'git commit --fixup ]] ..
-      vim.fn.expand('<cword>') .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]], { buffer = 0 })
+    set('n', 'cf', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git commit --fixup ]] ..
+          sha .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
     set('n', 'cF', function()
       local sha = vim.fn.expand('<cword>')
       return [[<Cmd>silent !tmux new-window 'git commit --fixup ]] ..
           sha ..
-          [[ && git -c sequence.editor=: rebase -i --autosquash ]] ..
+          [[ && git -c sequence.editor=true rebase -i --autosquash ]] ..
           sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
     end, { buffer = 0, expr = true })
-    set('n', 'ca',
-      [[<Cmd>silent !tmux new-window 'git commit --fixup amend:]] ..
-      vim.fn.expand('<cword>') .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]], { buffer = 0 })
+    set('n', 'ca', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git commit --fixup amend:]] ..
+          sha .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
     set('n', 'cA', function()
       local sha = vim.fn.expand('<cword>')
       return [[<Cmd>silent !tmux new-window 'git commit --fixup amend:]] ..
           sha ..
-          [[ && git -c sequence.editor=: rebase -i --autosquash ]] ..
+          [[ && git -c sequence.editor=true rebase -i --autosquash ]] ..
           sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
     end, { buffer = 0, expr = true })
-    set('n', 'cr',
-      [[<Cmd>silent !tmux new-window 'git commit --fixup reword:]] ..
-      vim.fn.expand('<cword>') .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]], { buffer = 0 })
+    set('n', 'cr', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git commit --fixup reword:]] ..
+          sha .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
     set('n', 'cR', function()
       local sha = vim.fn.expand('<cword>')
       return [[<Cmd>silent !tmux new-window 'git commit --fixup reword:]] ..
           sha ..
-          [[ && git -c sequence.editor=: rebase -i --autosquash ]] ..
+          [[ && git -c sequence.editor=true rebase -i --autosquash ]] ..
           sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
     end, { buffer = 0, expr = true })
-    set('n', 'cs',
-      [[<Cmd>silent !tmux new-window 'git commit --squash ]] ..
-      vim.fn.expand('<cword>') .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]], { buffer = 0 })
+    set('n', 'cs', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git commit --squash ]] ..
+          sha .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
     set('n', 'cS', function()
       local sha = vim.fn.expand('<cword>')
       return [[<Cmd>silent !tmux new-window 'git commit --squash ]] ..
           sha .. [[ && git rebase -i --autosquash ]] .. sha .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+    end, { buffer = 0, expr = true })
+    set('n', 'me', function()
+      local sha = vim.fn.expand('<cword>')
+      return [[<Cmd>silent !tmux new-window 'git merge ]] ..
+          sha .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
     end, { buffer = 0, expr = true })
   end,
 })
