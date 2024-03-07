@@ -13,7 +13,7 @@ nmap <Space>g <Plug>(git)
 nnoremap <Plug>(git) <Plug>(GitGutterPreviewHunk)<C-w>P
 nnoremap <Plug>(git)<Space> :<C-u>tab Git<Space>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
-nnoremap <Plug>(git)cb :<C-u>Git checkout -b<Space>
+nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
 nnoremap <Plug>(git)cc <Cmd>silent !tmux new-window 'git commit; read -n 1 -s -p "press any key to close ..."'<CR>
 nnoremap <Plug>(git)cC <Cmd>silent !tmux new-window 'git commit -n; read -n 1 -s -p "press any key to close ..."'<CR>
 nnoremap <Plug>(git)ca <Cmd>silent !tmux new-window 'git commit --amend; read -n 1 -s -p "press any key to close ..."'<CR>
@@ -111,11 +111,12 @@ if 1
     call GvToggleOption('--name-status')
   endf
   fun! GvToggleDefaultBranch()
-    let l:default_branch = trim(system('git config init.defaultBranch'))
-    if l:default_branch == ''
-      let l:default_branch = 'master'
-    endif
+    let l:default_branch = trim(system('git db || echo master'))
     call GvToggleOption(l:default_branch . '..@')
+  endf
+  fun! GvToggleBaseBranch()
+    let l:base_branch = trim(system('git bb || echo master'))
+    call GvToggleOption(l:base_branch . '..@')
   endf
   augroup Git
     autocmd!
@@ -125,6 +126,7 @@ if 1
     autocmd FileType GV nnoremap <buffer><silent> u <Cmd>call GvUpdate()<CR>
     autocmd FileType GV nnoremap <buffer><silent> a <Cmd>call GvToggleAll()<CR>
     autocmd FileType GV nnoremap <buffer><silent> d <Cmd>call GvToggleDefaultBranch()<CR>
+    autocmd FileType GV nnoremap <buffer><silent> b <Cmd>call GvToggleBaseBranch()<CR>
     autocmd FileType GV nnoremap <buffer><silent> <C-n> <Cmd>call GvToggleNameStatus()<CR>
     autocmd FileType GV nnoremap <buffer><silent> cf :<C-u>G commit --fixup <cword><CR>
     autocmd FileType GV nnoremap <buffer><silent> cF :<C-u>G commit --fixup <cword><CR>:G -c sequence.editor=true rebase -i --autosquash <cword>^<CR>

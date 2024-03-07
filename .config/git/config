@@ -6,16 +6,19 @@
     l = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S'"
     la = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --all"
     dbl = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' $(git db)..@"
+    bcl = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' $(git bc)..@"
 
     ## oneline + changed files
     l1 = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status"
     l1a = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)%n\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status --all"
     dbl1 = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status $(git db)..@"
+    bcl1 = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status $(git bc)..@"
 
     ## detail
     l2 = log -p --decorate --color
     l2a = log -p --decorate --color --all
     dbl2 = "!git log -p --decorate --color $(git db)..@"
+    bcl2 = "!git log -p --decorate --color $(git bc)..@"
 
     ## contribution stats by author
     ## takes options of git log
@@ -40,8 +43,19 @@
     bd = branch -d
     bdd = branch -D
     bv = branch -avv
+    bb = !git config "branch.$(git branch --show-current).base"
+    mbb = "!f(){ \
+        [[ -n $1 ]] && \
+        git rebase --onto $1 $(git bb) && \
+        git bb $1; \
+    };f"
+    bc = !git merge-base $(git bb) @
     co = checkout
-    cb = checkout -b
+    cb = "!f(){ \
+        b=$(git branch --show-current) && \
+        git checkout -b $1 $2 && \
+        git bb ${2:-$b}; \
+    };f"
     com = checkout -m
     rbc = rebase --continue
     rba = rebase --abort
@@ -56,12 +70,12 @@
 
     ## rebase
     rb = "!f(){ \
-        git rebase ${@:-$(git db || echo master)}; \
+        git rebase ${@:-$(git bb || echo master)}; \
     };f"
 
     ## rebase interactive
     rbi = "!f(){ \
-        git rebase -i ${@:-$(git db || echo master)}; \
+        git rebase -i ${@:-$(git bb || echo master)}; \
     };f"
 
     ## delete merged branch
@@ -147,6 +161,9 @@
     dbd = "!git diff $(git db)..@"
     dbdf = "!git diff --name-only $(git db)..@"
     dbds = "!git diff --name-status $(git db)..@"
+    bcd = "!git diff $(git bc)..@"
+    bcdf = "!git diff --name-only $(git bc)..@"
+    bcds = "!git diff --name-status $(git bc)..@"
 
     # merge
     me = merge

@@ -356,6 +356,25 @@ mason_lspconfig.setup_handlers({
       capabilities = require('cmp_nvim_lsp').default_capabilities(),
     }
 
+    if server == 'tsserver' then
+      opts.init_options = {
+        plugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = vim.fn.fnamemodify(vim.fn.expand('$NVM_BIN'), ':h') .. '/lib/node_modules/@vue/typescript-plugin',
+            languages = { "vue" },
+          },
+        },
+      }
+      opts.filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+      }
+    end
+
     lspconfig[server].setup(opts)
   end,
 })
