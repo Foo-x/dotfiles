@@ -70,12 +70,12 @@
 
     ## rebase
     rb = "!f(){ \
-        git rebase ${@:-$(git bb || echo master)}; \
+        git rebase ${@:-$(git bb || git db || echo master)}; \
     };f"
 
     ## rebase interactive
     rbi = "!f(){ \
-        git rebase -i ${@:-$(git bb || echo master)}; \
+        git rebase -i ${@:-$(git bb || git db || echo master)}; \
     };f"
 
     ## delete merged branch

@@ -115,7 +115,7 @@ if 1
     call GvToggleOption(l:default_branch . '..@')
   endf
   fun! GvToggleBaseBranch()
-    let l:base_branch = trim(system('git bb || echo master'))
+    let l:base_branch = trim(system('git bb || git db || echo master'))
     call GvToggleOption(l:base_branch . '..@')
   endf
   augroup Git

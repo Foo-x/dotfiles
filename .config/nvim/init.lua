@@ -262,10 +262,13 @@ require('fidget').setup()
 
 mason.setup()
 local mason_null_ls_config = {
+  'phpcs',
+  'php-cs-fixer',
   'shfmt',
 }
 if vim.fn.executable('npm') == 1 then
   for _, v in pairs({
+    'blade-formatter',
     'markdownlint',
     'markuplint',
     'prettier',
@@ -288,6 +291,9 @@ null_ls.setup({
     null_ls.builtins.formatting.markdownlint.with({
       extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
     }),
+    null_ls.builtins.formatting.blade_formatter,
+    null_ls.builtins.diagnostics.phpcs,
+    null_ls.builtins.formatting.phpcsfixer,
     null_ls.builtins.diagnostics.markuplint,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.diagnostics.shellcheck,
@@ -361,7 +367,7 @@ mason_lspconfig.setup_handlers({
         plugins = {
           {
             name = "@vue/typescript-plugin",
-            location = vim.fn.fnamemodify(vim.fn.expand('$NVM_BIN'), ':h') .. '/lib/node_modules/@vue/typescript-plugin',
+            location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
             languages = { "vue" },
           },
         },
