@@ -118,6 +118,9 @@ if 1
     let l:base_branch = trim(system('git bb || git db || echo master'))
     call GvToggleOption(l:base_branch . '..@')
   endf
+  fun! GvToggleMessage()
+    call GvToggleOption('--pretty=medium')
+  endf
   augroup Git
     autocmd!
     autocmd FileType fugitive,git,GV setlocal isk+=-
@@ -128,6 +131,7 @@ if 1
     autocmd FileType GV nnoremap <buffer><silent> d <Cmd>call GvToggleDefaultBranch()<CR>
     autocmd FileType GV nnoremap <buffer><silent> b <Cmd>call GvToggleBaseBranch()<CR>
     autocmd FileType GV nnoremap <buffer><silent> <C-n> <Cmd>call GvToggleNameStatus()<CR>
+    autocmd FileType GV nnoremap <buffer><silent> m <Cmd>call GvToggleMessage()<CR>
     autocmd FileType GV nnoremap <buffer><silent> cf :<C-u>G commit --fixup <cword><CR>
     autocmd FileType GV nnoremap <buffer><silent> cF :<C-u>G commit --fixup <cword><CR>:G -c sequence.editor=true rebase -i --autosquash <cword>^<CR>
     autocmd FileType GV nnoremap <buffer><silent> ca :<C-u>G commit --fixup amend:<cword><CR>

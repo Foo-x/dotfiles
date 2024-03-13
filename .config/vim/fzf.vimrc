@@ -24,6 +24,12 @@ cnoreabbr <expr> fh getcmdtype() == ':' && getcmdline() ==# 'fh' ? 'HistoryWS' :
 cnoreabbr <expr> fha getcmdtype() == ':' && getcmdline() ==# 'fha' ? 'History' : 'fha'
 cnoreabbr <expr> fhe getcmdtype() == ':' && getcmdline() ==# 'fhe' ? 'Helptags' : 'fhe'
 cnoreabbr <expr> fa getcmdtype() == ':' && getcmdline() ==# 'fa' ? 'Args' : 'fa'
+cnoreabbr <expr> ts getcmdtype() == ':' && getcmdline() ==# 'ts' ? 'TS' : 'ts'
+cnoreabbr <expr> tv getcmdtype() == ':' && getcmdline() ==# 'tv' ? 'TV' : 'tv'
+cnoreabbr <expr> gts getcmdtype() == ':' && getcmdline() ==# 'gts' ? 'GTS' : 'gts'
+cnoreabbr <expr> gtv getcmdtype() == ':' && getcmdline() ==# 'gtv' ? 'GTV' : 'gtv'
+cnoreabbr <expr> ats getcmdtype() == ':' && getcmdline() ==# 'ats' ? 'ATS' : 'ats'
+cnoreabbr <expr> atv getcmdtype() == ':' && getcmdline() ==# 'atv' ? 'ATV' : 'atv'
 
 " skip on vim-tiny
 if 1
@@ -103,14 +109,6 @@ if 1
   command! -bang GTV call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
     \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
     \ 'options': '--multi --bind ctrl-a:select-all --prompt "GTV> "'
-  \ }))
-  command! -bang BTS call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({
-    \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
-    \ 'options': '--multi --bind ctrl-a:select-all --prompt "BTS> "'
-  \ }))
-  command! -bang BTV call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({
-    \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
-    \ 'options': '--multi --bind ctrl-a:select-all --prompt "BTV> "'
   \ }))
   command! -bang ATS call fzf#run(fzf#wrap(fzf#vim#with_preview({
     \ 'source': argv(),

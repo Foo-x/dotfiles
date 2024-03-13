@@ -334,31 +334,7 @@ mason_lspconfig.setup({
 
 mason_lspconfig.setup_handlers({
   function(server)
-    local on_attach = function(client, bufnr)
-      if client.supports_method('textDocument/documentHighlight') then
-        vim.cmd [[
-        set updatetime=300
-        augroup lsp_document_highlight
-          autocmd!
-          autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-          autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-        ]]
-      end
-      require('ibl').setup({
-        indent = {
-          char = '▏',
-        },
-      })
-      vim.cmd [[
-        call SetupColor()
-      ]]
-    end
-
     local opts = {
-      on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-      end,
       capabilities = require('cmp_nvim_lsp').default_capabilities(),
     }
 
@@ -410,6 +386,15 @@ set('n', ']d', vim.diagnostic.goto_next)
 set('n', '<leader>q', vim.diagnostic.setqflist)
 set('n', '<leader>l', vim.diagnostic.setloclist)
 
+local function contains(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('LspConfig', {}),
   callback = function(ev)
@@ -422,13 +407,46 @@ vim.api.nvim_create_autocmd('LspAttach', {
     set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, opts)
     set('n', '<F2>', vim.lsp.buf.rename, opts)
     set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-    set({ 'n', 'v' }, '<leader>f', function()
-      vim.lsp.buf.format({ async = true })
-    end, opts)
+    if contains({
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "vue",
+        }, vim.bo.filetype) then
+      set({ 'n', 'v' }, '<leader>f', function()
+        vim.cmd([[EslintFixAll]])
+        vim.lsp.buf.format({ async = true, name = 'null-ls' })
+      end, opts)
+    else
+      set({ 'n', 'v' }, '<leader>f', function()
+        vim.lsp.buf.format({ async = true })
+      end, opts)
+    end
 
     vim.diagnostic.config({
       severity_sort = true,
     })
+
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client.supports_method('textDocument/documentHighlight') then
+      vim.cmd [[
+        set updatetime=300
+        augroup lsp_document_highlight
+          autocmd!
+          autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+          autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+        ]]
+    end
+    require('ibl').setup({
+      indent = {
+        char = '▏',
+      },
+    })
+    vim.cmd [[
+        call SetupColor()
+      ]]
   end,
 })
 
