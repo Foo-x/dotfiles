@@ -69,6 +69,7 @@ nvimdirdiff
 f
 vipe
 bfs
+mmdc
 "
 echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 

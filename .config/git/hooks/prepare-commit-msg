@@ -6,12 +6,18 @@ BRANCH_NAME=$(git branch | \grep '*' | sed 's/* //')
 
 # append logs as comments if it is not rebasing or amending
 if [ "$BRANCH_NAME" != '(no branch)' ] && [ "$COMMIT_SOURCE" != 'commit' ] && [ "$COMMIT_SOURCE" != 'message' ]; then
+    logs=$(mktemp)
     {
         echo
         echo '# Logs'
         echo '#'
         git log -30 --format=%s | sed 's/^/# /'
-    } >> $COMMIT_MSG_FILE
+    } > "$logs"
+    if \grep -q -- '--- >8 ---' "$COMMIT_MSG_FILE"; then
+        sed -i "/--- >8 ---/e cat $logs" "$COMMIT_MSG_FILE"
+    else
+        cat "$logs" >> "$COMMIT_MSG_FILE"
+    fi
 fi
 
 LOCAL_HOOK="$(git rev-parse --show-toplevel)/.git/hooks/$(basename $0)"

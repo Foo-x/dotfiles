@@ -434,7 +434,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         set updatetime=300
         augroup lsp_document_highlight
           autocmd!
-          autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+          autocmd CursorHold,CursorHoldI <buffer> silent! lua vim.lsp.buf.document_highlight()
           autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
         augroup END
         ]]
