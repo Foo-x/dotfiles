@@ -11,6 +11,8 @@ dist/
 cache/
 logs/
 .cache/
+.cspell.json
+cspell.txt
 
 # vim
 Session.vim

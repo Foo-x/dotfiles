@@ -212,6 +212,10 @@ else
     \cp kanbanmd/README.md ${XDG_DATA_HOME}/kanbanmd
 fi
 
+# setup cspell
+mkdir -p ${XDG_DATA_HOME}/cspell
+touch ${XDG_DATA_HOME}/cspell/local.txt
+
 sh ${DOT_DIR}/setup_vim.sh
 
 echo "Done."

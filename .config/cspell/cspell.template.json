@@ -1,0 +1,27 @@
+{
+  "dictionaries": [
+    "local",
+    "global",
+    "project"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "local",
+      "path": "~/.local/share/cspell/local.txt",
+      "description": "User local dictionary",
+      "addWords": true
+    },
+    {
+      "name": "global",
+      "path": "~/.dotfiles/.config/cspell/global.txt",
+      "description": "User global dictionary",
+      "addWords": true
+    },
+    {
+      "name": "project",
+      "path": "cspell.txt",
+      "description": "Project dictionary",
+      "addWords": true
+    }
+  ]
+}

@@ -341,6 +341,15 @@ if type devcontainer &> /dev/null; then
   alias devcu='devcontainer up --workspace-folder .'
   alias devcx='devcontainer exec --workspace-folder .'
 fi
+if type cspell &> /dev/null; then
+  function cspell_init() {
+    touch cspell.txt
+    cp ~/.dotfiles/.config/cspell/cspell.template.json .cspell.json
+  }
+  alias cspell_edit_local="$EDITOR ~/.local/share/cspell/local.txt"
+  alias cspell_edit_global="$EDITOR ~/.dotfiles/.config/cspell/global.txt"
+  alias cspell_edit_project="$EDITOR cspell.txt"
+fi
 
 if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'

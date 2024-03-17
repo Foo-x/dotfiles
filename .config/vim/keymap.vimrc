@@ -241,5 +241,5 @@ vnoremap <Space>3dp :diffput 3<CR>
 augroup FileTypeMap
   autocmd!
   autocmd FileType help nnoremap <buffer> <CR> <C-]>
-  autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
+  autocmd FileType qf exe 'BqfDisable' | exe 'BqfEnable'
 augroup END

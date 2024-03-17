@@ -257,6 +257,7 @@ local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
 local mason_null_ls = require('mason-null-ls')
 local null_ls = require('null-ls')
+local cspell = require('cspell')
 
 require('fidget').setup()
 
@@ -283,26 +284,41 @@ end
 mason_null_ls.setup({
   ensure_installed = mason_null_ls_config,
 })
-null_ls.setup({
-  sources = {
-    null_ls.builtins.diagnostics.markdownlint.with({
-      extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
-    }),
-    null_ls.builtins.formatting.markdownlint.with({
-      extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
-    }),
-    null_ls.builtins.formatting.blade_formatter,
-    null_ls.builtins.diagnostics.phpcs,
-    null_ls.builtins.formatting.phpcsfixer,
-    null_ls.builtins.diagnostics.markuplint,
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.diagnostics.shellcheck,
-    null_ls.builtins.code_actions.shellcheck,
-    null_ls.builtins.formatting.shfmt.with({
-      extra_args = { '-i', '2', '-sr' },
-    }),
-    null_ls.builtins.formatting.sql_formatter,
+local null_ls_sources = {
+  null_ls.builtins.diagnostics.markdownlint.with({
+    extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+  }),
+  null_ls.builtins.formatting.markdownlint.with({
+    extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+  }),
+  null_ls.builtins.formatting.blade_formatter,
+  null_ls.builtins.diagnostics.phpcs,
+  null_ls.builtins.formatting.phpcsfixer,
+  null_ls.builtins.diagnostics.markuplint,
+  null_ls.builtins.formatting.prettier,
+  null_ls.builtins.diagnostics.shellcheck,
+  null_ls.builtins.code_actions.shellcheck,
+  null_ls.builtins.formatting.shfmt.with({
+    extra_args = { '-i', '2', '-sr' },
+  }),
+  null_ls.builtins.formatting.sql_formatter,
+}
+if vim.fn.executable('cspell') == 1 then
+  local cspell_config = {
+    find_json = function()
+      if vim.fn.filereadable('.cspell.json') == 1 then
+        return '.cspell.json'
+      end
+      return vim.fn.expand('~/.dotfiles/.config/cspell/cspell.json')
+    end,
   }
+  for _, v in pairs({
+    cspell.diagnostics.with({ config = cspell_config }),
+    cspell.code_actions.with({ config = cspell_config }),
+  }) do table.insert(null_ls_sources, v) end
+end
+null_ls.setup({
+  sources = null_ls_sources
 })
 
 local mason_lspconfig_config = {
