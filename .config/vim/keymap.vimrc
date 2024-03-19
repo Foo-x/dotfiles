@@ -242,4 +242,5 @@ augroup FileTypeMap
   autocmd!
   autocmd FileType help nnoremap <buffer> <CR> <C-]>
   autocmd FileType qf exe 'BqfDisable' | exe 'BqfEnable'
+  autocmd FileType qf nnoremap <buffer> <Plug>(quickfix)r <Cmd>exe 'BqfDisable' \| exe 'BqfEnable'<CR>
 augroup END

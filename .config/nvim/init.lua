@@ -257,7 +257,6 @@ local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
 local mason_null_ls = require('mason-null-ls')
 local null_ls = require('null-ls')
-local cspell = require('cspell')
 
 require('fidget').setup()
 
@@ -303,20 +302,6 @@ local null_ls_sources = {
   }),
   null_ls.builtins.formatting.sql_formatter,
 }
-if vim.fn.executable('cspell') == 1 then
-  local cspell_config = {
-    find_json = function()
-      if vim.fn.filereadable('.cspell.json') == 1 then
-        return '.cspell.json'
-      end
-      return vim.fn.expand('~/.dotfiles/.config/cspell/cspell.json')
-    end,
-  }
-  for _, v in pairs({
-    cspell.diagnostics.with({ config = cspell_config }),
-    cspell.code_actions.with({ config = cspell_config }),
-  }) do table.insert(null_ls_sources, v) end
-end
 null_ls.setup({
   sources = null_ls_sources
 })
@@ -325,6 +310,7 @@ local mason_lspconfig_config = {
   'lua_ls',
   'marksman',
   'rust_analyzer',
+  'typos_lsp',
 }
 if vim.fn.executable('npm') == 1 then
   for _, v in pairs({
@@ -370,6 +356,14 @@ mason_lspconfig.setup_handlers({
         "typescript",
         "typescriptreact",
         "vue",
+      }
+    end
+
+    if server == 'typos_lsp' then
+      local config = vim.fn.filereadable('typos.toml') == 1 and 'typos.toml' or '~/.dotfiles/typos.toml'
+      opts.init_options = {
+        config = config,
+        diagnosticSeverity = 'Information',
       }
     end
 

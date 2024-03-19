@@ -201,11 +201,6 @@ if [ ! -d ${NVIM_PACK_DIR}/mason-null-ls.nvim ]; then
     git clone --depth 1 https://github.com/jay-babu/mason-null-ls.nvim.git ${NVIM_PACK_DIR}/mason-null-ls.nvim
 fi
 
-# install cspell.nvim
-if [ ! -d ${NVIM_PACK_DIR}/cspell.nvim ]; then
-    git clone --depth 1 https://github.com/davidmh/cspell.nvim.git ${NVIM_PACK_DIR}/cspell.nvim
-fi
-
 # install plenary.nvim
 if [ ! -d ${NVIM_PACK_DIR}/plenary.nvim ]; then
     git clone --depth 1 https://github.com/nvim-lua/plenary.nvim.git ${NVIM_PACK_DIR}/plenary.nvim

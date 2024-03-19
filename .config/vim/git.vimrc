@@ -48,9 +48,8 @@ cnoreabbr gdt G difftool -y
 cnoreabbr gmt G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t \| Gvdiffsplit :1 \| winc j
 
 " gv.vim
-cnoreabbr gva GV --all
-cnoreabbr gv1 GV --name-status
-cnoreabbr gva1 GV --name-status --all
+cnoreabbr gv GV --all
+cnoreabbr gvf GV! --all
 
 " diffview.nvim
 if has('nvim')

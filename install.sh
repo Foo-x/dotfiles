@@ -183,6 +183,11 @@ if has gh; then
     } > /dev/null 2>&1
 fi
 
+# install typos
+if ! has typos; then
+    mise use -gy typos
+fi
+
 exe_files="
 fetch_completions.sh
 fetch_git_prompt.sh
@@ -211,10 +216,6 @@ if [ ! -d ${XDG_DATA_HOME}/kanbanmd ]; then
 else
     \cp kanbanmd/README.md ${XDG_DATA_HOME}/kanbanmd
 fi
-
-# setup cspell
-mkdir -p ${XDG_DATA_HOME}/cspell
-touch ${XDG_DATA_HOME}/cspell/local.txt
 
 sh ${DOT_DIR}/setup_vim.sh
 
