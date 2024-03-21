@@ -54,6 +54,7 @@ if 1
     nnoremap <buffer> l <Plug>(fern-my-open-or-expand)
     nnoremap <buffer> t <Plug>(fern-action-open:tabedit)gt<Plug>(fern-close-drawer)gT
     nnoremap <buffer> D <Plug>(fern-action-remove=)
+    nnoremap <buffer> s <Plug>(fern-action-open:select)<Plug>(fern-close-drawer)
     nnoremap <buffer> m <Cmd>call <SID>move()<CR>
     nnoremap <buffer><silent> x <Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>
     noremap <buffer> <Tab> <Plug>(fern-action-mark)<Down>

@@ -275,17 +275,13 @@ if vim.fn.executable('npm') == 1 then
     'sql-formatter',
   }) do table.insert(mason_null_ls_config, v) end
 end
-if vim.fn.executable('tar') == 1 and vim.fn.executable('xz') == 1 then
-  for _, v in pairs({
-    'shellcheck',
-  }) do table.insert(mason_null_ls_config, v) end
-end
 mason_null_ls.setup({
   ensure_installed = mason_null_ls_config,
 })
 local null_ls_sources = {
   null_ls.builtins.diagnostics.markdownlint.with({
     extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    method = null_ls.methods.DIAGNOSTICS_ON_SAVE
   }),
   null_ls.builtins.formatting.markdownlint.with({
     extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
@@ -295,8 +291,6 @@ local null_ls_sources = {
   null_ls.builtins.formatting.phpcsfixer,
   null_ls.builtins.diagnostics.markuplint,
   null_ls.builtins.formatting.prettier,
-  null_ls.builtins.diagnostics.shellcheck,
-  null_ls.builtins.code_actions.shellcheck,
   null_ls.builtins.formatting.shfmt.with({
     extra_args = { '-i', '2', '-sr' },
   }),
