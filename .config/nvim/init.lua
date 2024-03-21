@@ -275,6 +275,11 @@ if vim.fn.executable('npm') == 1 then
     'sql-formatter',
   }) do table.insert(mason_null_ls_config, v) end
 end
+if vim.fn.executable('tar') == 1 and vim.fn.executable('xz') == 1 then
+  for _, v in pairs({
+    'shellcheck',
+  }) do table.insert(mason_null_ls_config, v) end
+end
 mason_null_ls.setup({
   ensure_installed = mason_null_ls_config,
 })
