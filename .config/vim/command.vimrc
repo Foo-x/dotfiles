@@ -45,11 +45,11 @@ if 1
   endif
 
   fun! s:insert_print()
-    let b:insert_print_cur = get(b:, 'insert_print_cur', 0)
-    let b:insert_print_cur += 1
+    let g:insert_print_cur = get(g:, 'insert_print_cur', 0)
+    let g:insert_print_cur += 1
 
     let l:line_template = get(g:insert_print_templates, &filetype, '{}')
-    let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . b:insert_print_cur . '. ' . g:insert_print_text . g:insert_print_suffix, '')
+    let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . g:insert_print_cur . '. ' . g:insert_print_text . g:insert_print_suffix, '')
     put=l:insert_print_line
     norm! ==
     " move cursor to $0 or eol
