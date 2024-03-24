@@ -24,7 +24,7 @@ if 1
 
   " insert_print
   if !exists('g:insert_print_prefix')
-    let g:insert_print_prefix = '+++++ 🔴🟠🟡🟢🔵🟣🟤 '
+    let g:insert_print_prefix = '+++++ 🔴🟠🟡🟢🔵🟣🟤 $FILENAME:$LINENO '
   endif
 
   if !exists('g:insert_print_suffix')
@@ -50,6 +50,8 @@ if 1
 
     let l:line_template = get(g:insert_print_templates, &filetype, '{}')
     let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . g:insert_print_cur . '. ' . g:insert_print_text . g:insert_print_suffix, '')
+    let l:insert_print_line = substitute(l:insert_print_line, '$FILENAME', expand('%'), '')
+    let l:insert_print_line = substitute(l:insert_print_line, '$LINENO', line('.') + 1, '')
     put=l:insert_print_line
     norm! ==
     " move cursor to $0 or eol

@@ -587,7 +587,7 @@ cmp.setup.cmdline(':', {
     },
   },
   enabled = function()
-    local result = not vim.regex('^r\\%[ead] \\?!\\|^w\\%[rite] !\\|^w!!\\|^!\\|silent!'):match_str(vim.fn
+    local result = not vim.regex('r\\%[ead] \\?!\\|w\\%[rite] !\\|^w!!\\|^!\\|silent!'):match_str(vim.fn
       .getcmdline())
     if not result then
       cmp.close()
