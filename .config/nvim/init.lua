@@ -223,9 +223,10 @@ if not DiffviewLoaded then
     },
     keymaps = {
       view = {
-        { 'n', 'q',      '<Cmd>tabclose<CR>',                             { desc = 'Close tab' } },
-        { 'n', '<F9>',   '<Cmd>tabclose <bar>GV --all<CR>',               { desc = 'Open the commit log' } },
-        { 'n', '<S-F9>', '<Cmd>tabclose <bar>GV --name-status --all<CR>', { desc = 'Open the commit log --name-status' } },
+        { 'n', 'q',         '<Cmd>tabclose<CR>',                             { desc = 'Close tab' } },
+        { 'n', '<F9>',      '<Cmd>tabclose <bar>GV --all<CR>',               { desc = 'Open the commit log' } },
+        { 'n', '<S-F9>',    '<Cmd>tabclose <bar>GV --name-status --all<CR>', { desc = 'Open the commit log --name-status' } },
+        { 'n', '<leader>s', diffview_actions.toggle_stage_entry,             { desc = 'Stage / unstage the selected entry' } },
       },
       file_panel = {
         ['L'] = false,
