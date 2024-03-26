@@ -63,6 +63,9 @@ EOF
       hi @comment guifg=#737373
       hi NonText guifg=#535353
       hi LineNr guifg=#434343
+      hi LspReferenceText guibg=#323232
+      hi LspReferenceRead guibg=#323232
+      hi LspReferenceWrite guibg=#323232
 
       lua require('leap').init_highlight(true)
     endf
