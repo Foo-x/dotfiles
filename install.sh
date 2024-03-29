@@ -113,6 +113,16 @@ if ! has mise; then
     curl https://mise.jdx.dev/install.sh | sh
 fi
 
+# install node
+if ! has node; then
+    mise use -gy node
+fi
+
+# install bun
+if ! has bun; then
+    mise use -gy bun
+fi
+
 # install delta
 if ! has delta; then
     mise use -gy delta

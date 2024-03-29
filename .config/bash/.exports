@@ -49,6 +49,7 @@ fi
 export PATH="/mnt/c/Users/$(powershell.exe '$env:username' | tr -d '\r')/Documents/spzenhan:$PATH"
 
 export EDITOR='nvim -p'
+export SUDO_EDITOR=$(type -p nvim)
 
 export VIMINIT='let $MYVIMRC = has("nvim") ? "$XDG_CONFIG_HOME/nvim/init.lua" : "$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC'
 

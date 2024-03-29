@@ -286,6 +286,11 @@ if [ ! -d ${NVIM_PACK_DIR}/diffview.nvim ]; then
     git clone --depth 1 https://github.com/sindrets/diffview.nvim.git ${NVIM_PACK_DIR}/diffview.nvim
 fi
 
+# install nvim-web-devicons
+if [ ! -d ${NVIM_PACK_DIR}/nvim-web-devicons ]; then
+    git clone --depth 1 https://github.com/nvim-tree/nvim-web-devicons.git ${NVIM_PACK_DIR}/nvim-web-devicons
+fi
+
 # install nvim-surround
 if [ ! -d ${NVIM_PACK_DIR}/nvim-surround ]; then
     git clone --depth 1 https://github.com/kylechui/nvim-surround.git ${NVIM_PACK_DIR}/nvim-surround
