@@ -70,6 +70,7 @@ f
 vipe
 bfs
 mmdc
+git
 "
 echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 

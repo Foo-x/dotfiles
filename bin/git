@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function is_win_dir() {
+  case $PWD/ in
+    /mnt/*) return $(true);;
+    *) return $(false);;
+  esac
+}
+
+if is_win_dir && type git.exe &> /dev/null; then
+  git.exe "$@"
+else
+  /usr/bin/git "$@"
+fi

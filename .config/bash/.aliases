@@ -364,13 +364,4 @@ if [[ "${WSL_DISTRO_NAME}" ]]; then
       *) return $(false);;
     esac
   }
-
-  # use git.exe in win dir for performance
-  function git() {
-    if is_win_dir && type git.exe &> /dev/null; then
-      git.exe "$@"
-    else
-      /usr/bin/git "$@"
-    fi
-  }
 fi
