@@ -73,6 +73,7 @@ mmdc
 git
 "
 echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
+export PATH="${HOME}/.local/bin:${PATH}"
 
 touch ${HOME}/.user_profile
 
@@ -112,6 +113,7 @@ fi
 # install mise
 if ! has mise; then
     curl https://mise.jdx.dev/install.sh | sh
+    
 fi
 
 # install node
@@ -197,6 +199,11 @@ fi
 # install typos
 if ! has typos; then
     mise use -gy typos
+fi
+
+# install yargs
+if ! bun pm ls -g | grep -q yargs; then
+  bun install -g yargs
 fi
 
 exe_files="
