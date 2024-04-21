@@ -82,6 +82,14 @@ yargs(process.argv.slice(2))
       }, async () => {
         await $`${{ raw: `git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" --bind "ctrl-m:execute: (echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git show --color % | LESS= less -R > /dev/tty)"` }}`;
       })
+      .command(['chp [args]'], 'fzf git cherry-pick', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `git cherry-pick ${process.argv.slice(4)} ${target}` }}`;
+        }
+      })
       .command(['cf [args]'], 'fzf git commit --fixup', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
