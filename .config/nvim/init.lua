@@ -425,7 +425,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
           "vue",
         }, vim.bo.filetype) then
       set({ 'n', 'v' }, '<leader>f', function()
-        vim.cmd([[EslintFixAll]])
+        if vim.fn.exists(':EslintFixAll') == 2 then
+          vim.cmd([[EslintFixAll]])
+        end
         vim.lsp.buf.format({ async = true, name = 'null-ls' })
       end, opts)
     else

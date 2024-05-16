@@ -102,6 +102,11 @@ if [ ! -d ${VIM_PACK_DIR}/rainbow_csv ]; then
     git clone --depth 1 https://github.com/mechatroner/rainbow_csv.git ${VIM_PACK_DIR}/rainbow_csv
 fi
 
+# install vim-test
+if [ ! -d ${VIM_PACK_DIR}/vim-test ]; then
+    git clone --depth 1 https://github.com/vim-test/vim-test.git ${VIM_PACK_DIR}/vim-test
+fi
+
 # install vimdoc-ja
 if [ ! -d ${VIM_PACK_DIR}/vimdoc-ja ]; then
     git clone --depth 1 https://github.com/vim-jp/vimdoc-ja.git ${VIM_PACK_DIR}/vimdoc-ja

@@ -131,3 +131,5 @@ augroup CmdWin
   autocmd CmdwinEnter : g/\v^w%[qa!]$/d
   autocmd CmdWinEnter * nnoremap <buffer> q <Cmd>q<CR>
 augroup END
+
+let test#strategy = 'toggleterm'
