@@ -73,8 +73,6 @@ if type delta &> /dev/null; then
   export GIT_PAGER=delta
 fi
 
-export SIMPLE_BACKUP_SUFFIX=.`date +%Y%m%d_%H%M%S`
-
 [[ "${WSL_DISTRO_NAME}" ]] && export BROWSER=wslview
 
 export LANG=C

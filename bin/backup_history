@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# crontab -e
+# 0 * * * * /usr/bin/env bash ${HOME}/.dotfiles/bin/backup_history
+
+HISTFILE_DIR="${HOME}/.local/state/bash"
+
+cp -b --suffix=.`date +%Y%m%d_%H%M%S` "${HISTFILE_DIR}/history" "${HISTFILE_DIR}/history.bak"
+
+find "${HISTFILE_DIR}" -type f -name 'history.bak.*' -mtime +7 -exec rm {} \;
