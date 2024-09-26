@@ -59,7 +59,7 @@ await yargs(process.argv.slice(2))
         const remoteBranches = await $`git --no-pager branch --remote --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mremote%09%1B[m%(refname:short)%(end)%(end)"`.text();
         const tags = await $`git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}'`.text();
         const branches = localBranches + remoteBranches + tags;
-        const current = await $`git symbolic-ref --short HEAD 2> /dev/null`.text() || 'detached HEAD';
+        const current = await $`git symbolic-ref --short HEAD 2> /dev/null`.nothrow().text() || 'detached HEAD';
 
         const target = Buffer.alloc(300);
         await $`sed '/^$/d' < ${Buffer.from(branches)} | fzf --no-hscroll --no-multi -n 2 -q ${process.argv[4] || '\0'} --header="current: [${{ raw: current.replace('\n', '') }}]" --ansi --preview='git --no-pager log -150 --color --pretty=format:"%s %C(black)%C(bold)%cr%C(reset)" ..{2}' > ${target}`;
