@@ -10,7 +10,7 @@ set menu-complete-display-prefix on
 set bell-style none
 
 # move
-#"\C-a": beginnig-of-line
+#"\C-a": beginning-of-line
 #"\C-e": end-of-line
 #"\M-f": forward-word
 #"\M-b": backward-word

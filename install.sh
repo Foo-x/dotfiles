@@ -114,7 +114,6 @@ fi
 # install mise
 if ! has mise; then
     curl https://mise.jdx.dev/install.sh | sh
-    
 fi
 
 # install node

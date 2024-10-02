@@ -1,9 +1,11 @@
 shopt -s expand_aliases
 
+# expand alias
 alias sudo='sudo -E '
 alias _='sudo '
 alias watch='watch '
 alias man='man '
+alias xargs='xargs '
 
 # cd
 alias ..='cd ..'
