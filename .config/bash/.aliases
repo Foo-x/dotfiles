@@ -184,6 +184,14 @@ alias tmr='tmux rename'
 alias tmrw='tmux renamew'
 alias tmreload='tmux source-file $XDG_CONFIG_HOME/tmux/tmux.conf'
 
+# terraform
+alias tf='terraform'
+alias tfi='terraform init'
+alias tfv='terraform validate'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfd='terraform destroy'
+
 # browse
 alias al='cat ~/.dotfiles/.config/bash/.aliases | $PAGER'
 alias bashrc='$PAGER ~/.dotfiles/.bashrc'
