@@ -26,7 +26,7 @@ await yargs(process.argv.slice(2))
   .command(['e [query]', 'edit'], 'fzf edit with EDITOR', (yargs: any) => {
     yargs.strict(false);
   }, async () => {
-    const files = (await $`${{ raw: `bfs f -I -E '.git' 2> /dev/null | fzf -m -q ${process.argv[3] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
+    const files = (await $`${{ raw: `bfs f -I -E '.git/objects' 2> /dev/null | fzf -m -q ${process.argv[3] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
     if (files) {
       const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
       await $`${{ raw: cmd }}`;
@@ -37,7 +37,7 @@ await yargs(process.argv.slice(2))
       .command(['e [query]', 'edit'], 'fzf edit with EDITOR only git tracked', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const files = (await $`${{ raw: `bfs f 2> /dev/null | fzf -m -q ${process.argv[4] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
+        const files = (await $`${{ raw: `bfs f -E '.git/objects' 2> /dev/null | fzf -m -q ${process.argv[4] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
         if (files) {
           const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
           await $`${{ raw: cmd }}`;
@@ -50,6 +50,14 @@ await yargs(process.argv.slice(2))
         if (files) {
           const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
           await $`${{ raw: cmd }}`;
+        }
+      })
+      .command(['d [query]', 'diff'], 'fzf git diff', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const files = (await $`${{ raw: `git ls-files -m | fzf -m -q ${process.argv[4] || '\0'} --header "Tab: toggle"` }}`).stdout.toString().trim().replaceAll('\n', ' ');
+        if (files) {
+          await $`${{ raw: `GIT_PAGER=delta git diff ${files} > /dev/tty` }}`;
         }
       })
       .command(['co [query]', 'checkout'], 'fzf git checkout', (yargs: any) => {
@@ -103,6 +111,33 @@ await yargs(process.argv.slice(2))
         if (target) {
           await $`${{ raw: `git cherry-pick ${process.argv.slice(4)} ${target}` }}`;
         }
+      })
+      .command(['rb [query]', 'rebase'], 'fzf git rebase', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = Buffer.alloc(10);
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+
+        const cid = target.toString().replace(/\0|\n/g, '');
+        await $`git rebase ${cid}`.nothrow();
+      })
+      .command(['rbi [query]'], 'fzf git rebase -i', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = Buffer.alloc(10);
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+
+        const cid = target.toString().replace(/\0|\n/g, '');
+        await $`git rebase -i ${cid} > /dev/tty`.nothrow();
+      })
+      .command(['bis [query]'], 'fzf git bisect start', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = Buffer.alloc(10);
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+
+        const cid = target.toString().replace(/\0|\n/g, '');
+        await $`git bisect start @ ${cid}`.nothrow();
       })
       .command(['cf [args]'], 'fzf git commit --fixup', (yargs: any) => {
         yargs.strict(false);
