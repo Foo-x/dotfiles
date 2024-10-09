@@ -66,6 +66,7 @@ EOF
       hi LspReferenceText guibg=#323232
       hi LspReferenceRead guibg=#323232
       hi LspReferenceWrite guibg=#323232
+      hi link CodeiumSuggestion NonText
 
       lua require('leap').init_highlight(true)
     endf
