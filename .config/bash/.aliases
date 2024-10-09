@@ -1,5 +1,4 @@
 shopt -s expand_aliases
-
 # expand alias
 alias sudo='sudo -E '
 alias _='sudo '
@@ -66,6 +65,7 @@ alias vis='vi -S'
 alias vig='vi -c "DiffviewOpen" -c "on|1bw"'
 alias viq='vi -c "cfile"'
 alias we='watchexec'
+alias ai='aichat'
 
 # others
 alias relogin='exec $SHELL -l'

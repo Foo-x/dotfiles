@@ -21,6 +21,16 @@ function _G.set_terminal_keymaps()
   set('t', '<Esc>', [[<C-\><C-n>]], opts)
 end
 
+-- Codeium
+vim.g.codeium_enabled = true
+if vim.g.codeium_enabled then
+  vim.g.codeium_disable_bindings = 1
+  set('i', "<M-'>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+  set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+  set('i', '<M-]>', function() return vim.fn['codeium#CycleOrComplete']() end, { expr = true, silent = true })
+  set('i', '<C-]>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+end
+
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd [[
 augroup ToggleTerm

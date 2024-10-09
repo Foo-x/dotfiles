@@ -316,6 +316,11 @@ if [ ! -d ${NVIM_PACK_DIR}/nvim-lsp-file-operations ]; then
     git clone --depth 1 https://github.com/antosha417/nvim-lsp-file-operations.git ${NVIM_PACK_DIR}/nvim-lsp-file-operations
 fi
 
+# install codeium.vim
+if [ ! -d ${NVIM_PACK_DIR}/codeium.vim ]; then
+    git clone --depth 1 https://github.com/Exafunction/codeium.vim.git ${NVIM_PACK_DIR}/codeium.vim
+fi
+
 nvim -es +"
 set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after |
   silent! packl! |
