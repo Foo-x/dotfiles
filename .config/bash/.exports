@@ -46,7 +46,12 @@ fi
 if type mise &> /dev/null; then
     export PATH="${XDG_DATA_HOME}/mise/shims:$PATH"
 fi
-export PATH="/mnt/c/Users/$(powershell.exe '$env:username' | tr -d '\r')/Documents/spzenhan:$PATH"
+if type bun &> /dev/null; then
+    export PATH="$(bun pm -g bin 2> /dev/null):$PATH"
+fi
+if [ "${WSL_DISTRO_NAME}" ]; then
+    export PATH="/mnt/c/Users/$(powershell.exe '$env:username' | tr -d '\r')/Documents/spzenhan:$PATH"
+fi
 
 export EDITOR='nvim -p'
 export SUDO_EDITOR=$(type -p nvim)
