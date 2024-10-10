@@ -339,7 +339,7 @@ if vim.fn.executable('npm') == 1 then
     'jsonls',
     'pyright',
     'sqlls',
-    'tsserver',
+    'ts_ls',
     'vimls',
     'yamlls',
   }) do table.insert(mason_lspconfig_config, v) end
@@ -354,7 +354,7 @@ mason_lspconfig.setup_handlers({
       capabilities = require('cmp_nvim_lsp').default_capabilities(),
     }
 
-    if server == 'tsserver' then
+    if server == 'ts_ls' then
       opts.init_options = {
         plugins = {
           {

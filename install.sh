@@ -37,6 +37,10 @@ if [ ! -d ${HOME}/.fzf ]; then
   git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
   ${HOME}/.fzf/install --key-bindings --completion --update-rc
 fi
+# install fzf-tab-completion
+if [ ! -d ${HOME}/.fzf-tab-completion ]; then
+  git clone --depth 1 https://github.com/lincheney/fzf-tab-completion.git ${HOME}/.fzf-tab-completion
+fi
 # include .bashrc
 touch ${HOME}/.bashrc
 source_bashrc=". ${DOT_DIR}/.bashrc"

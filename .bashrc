@@ -54,6 +54,12 @@ if [[ -f /usr/share/bash-completion/bash_completion ]]; then
   . ${DOT_DIR}/.config/bash/complete_alias
 fi
 
+if [ -d ${HOME}/.fzf-tab-completion ]; then
+  . ${HOME}/.fzf-tab-completion/bash/fzf-bash-completion.sh
+  # bind S-tab to fzf bash completion
+  bind -x '"\e[Z": fzf_bash_completion'
+fi
+
 if type tmux &> /dev/null; then
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
     tmux attach
