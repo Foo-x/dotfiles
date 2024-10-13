@@ -47,15 +47,14 @@ set nofoldenable
 set autoread
 set viminfo+='10000
 set viminfo-='100
+set foldmethod=indent
 if has('nvim')
-  set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
   set foldcolumn=auto
   set signcolumn=yes:2
   set termguicolors
   set laststatus=3
 else
-  set foldmethod=indent
   set foldcolumn=1
   set signcolumn=yes
   set viminfofile=$XDG_CACHE_HOME/vim/viminfo

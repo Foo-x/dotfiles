@@ -324,7 +324,6 @@ local mason_lspconfig_config = {
   'lua_ls',
   'marksman',
   'rust_analyzer',
-  'typos_lsp',
 }
 if vim.fn.executable('npm') == 1 then
   for _, v in pairs({
@@ -352,7 +351,7 @@ mason_lspconfig.setup_handlers({
   function(server)
     local opts = {
       capabilities = require('cmp_nvim_lsp').default_capabilities(),
-      on_attach = function(client, bufnr)
+      on_attach = function(client)
         if vim.b.large_buf then
           client.stop()
         end
@@ -375,14 +374,6 @@ mason_lspconfig.setup_handlers({
         "typescript",
         "typescriptreact",
         "vue",
-      }
-    end
-
-    if server == 'typos_lsp' then
-      local config = vim.fn.filereadable('typos.toml') == 1 and 'typos.toml' or '~/.dotfiles/typos.toml'
-      opts.init_options = {
-        config = config,
-        diagnosticSeverity = 'Information',
       }
     end
 
@@ -709,6 +700,8 @@ if vim.fn.executable('cc') == 1 or vim.fn.executable('gcc') == 1 or vim.fn.execu
             return true
           end
         end
+
+        vim.o.foldmethod = 'expr'
       end,
     },
     indent = {

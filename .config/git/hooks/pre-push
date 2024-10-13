@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+typos
+
 LOCAL_HOOK="$(git rev-parse --show-toplevel)/.git/hooks/$(basename $0)"
 
 if [ -x "$LOCAL_HOOK" ]; then
