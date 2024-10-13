@@ -1,5 +1,6 @@
 vim.env.XDG_CONFIG_HOME = vim.fn.get(vim.fn.environ(), 'XDG_CONFIG_HOME', vim.env.HOME .. '/.config')
 vim.cmd.exe('"source" $XDG_CONFIG_HOME . "/vim/vimrc"')
+local DOT_DIR = vim.fn.get(vim.fn.environ(), 'DOT_DIR', vim.env.HOME .. '/.dotfiles')
 
 vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust', {})
 
@@ -300,11 +301,11 @@ mason_null_ls.setup({
 })
 local null_ls_sources = {
   null_ls.builtins.diagnostics.markdownlint.with({
-    extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
     method = null_ls.methods.DIAGNOSTICS_ON_SAVE
   }),
   null_ls.builtins.formatting.markdownlint.with({
-    extra_args = { '-c', vim.fn.expand('~/.dotfiles/config/.markdownlint.yaml') },
+    extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
   }),
   null_ls.builtins.formatting.blade_formatter,
   null_ls.builtins.diagnostics.phpcs,

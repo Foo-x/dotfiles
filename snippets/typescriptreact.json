@@ -1,13 +1,11 @@
 {
   "useState": {
-    "scope": "typescriptreact",
     "prefix": "useState",
     "body": [
       "const [$1, set${1/(.*)/${1:/capitalize}/}] = useState$2($3)"
     ]
   },
   "useEffect": {
-    "scope": "typescriptreact",
     "prefix": "useEffect",
     "body": [
       "useEffect(() => {",
@@ -16,7 +14,6 @@
     ]
   },
   "component": {
-    "scope": "typescriptreact",
     "prefix": "component",
     "body": [
       "type Props = {",
@@ -31,7 +28,6 @@
     ]
   },
   "TEA Component": {
-    "scope": "typescriptreact",
     "prefix": "teaComponent",
     "body": [
       "import { Cmd, Init, Sub, Tea, Update, View } from '@foo-x/react-tea';",
@@ -61,7 +57,6 @@
     ]
   },
   "TEA Component with Hooks": {
-    "scope": "typescriptreact",
     "prefix": "teaComponentWithHooks",
     "body": [
       "import { Cmd, Init, Sub, Tea, Update, UseHooks, View } from '@foo-x/react-tea';",
@@ -99,7 +94,6 @@
     ]
   },
   "Container": {
-    "scope": "typescriptreact",
     "prefix": "container",
     "body": [
       "import { Container, UseHooks, View } from '@foo-x/react-container';",

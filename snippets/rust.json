@@ -1,6 +1,5 @@
 {
   "allow": {
-    "scope": "rust",
     "prefix": "allow",
     "body": [
       "#[allow(${1|unused_imports,dead_code,unused_variables,non_snake_case|})]$0"
@@ -8,7 +7,6 @@
     "description": "Insert allow"
   },
   "as": {
-    "scope": "rust",
     "prefix": "as",
     "body": [
       "as ${1|u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize,isize|}$0"
@@ -16,7 +14,6 @@
     "description": "Casting between types"
   },
   "assert": {
-    "scope": "rust",
     "prefix": "assert",
     "body": [
       "assert!($1);$0"
@@ -24,7 +21,6 @@
     "description": "Insert assert macro"
   },
   "assert_eq": {
-    "scope": "rust",
     "prefix": "assert_eq",
     "body": [
       "assert_eq!($1, $2);$0"
@@ -32,7 +28,6 @@
     "description": "Insert assert equal macro"
   },
   "cfg": {
-    "scope": "rust",
     "prefix": "cfg",
     "body": [
       "#[cfg($1)]$0"
@@ -40,7 +35,6 @@
     "description": "Insert cfg attribute"
   },
   "closure": {
-    "scope": "rust",
     "prefix": "closure",
     "body": [
       "|$1| {",
@@ -50,7 +44,6 @@
     "description": "Insert closure"
   },
   "const": {
-    "scope": "rust",
     "prefix": "const",
     "body": [
       "const $1: $2 = $3;$0"
@@ -58,7 +51,6 @@
     "description": "Insert constant variable"
   },
   "derive": {
-    "scope": "rust",
     "prefix": "derive",
     "body": [
       "#[derive(${1|Debug,Copy,Clone,Default,Eq,Hash,Ord,PartialEq,PartialOrd|})]$0"
@@ -66,7 +58,6 @@
     "description": "Insert derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd) attribute"
   },
   "else if": {
-    "scope": "rust",
     "prefix": "elif",
     "body": [
       "else if ${1:condition} {",
@@ -76,7 +67,6 @@
     "description": "Insert else if"
   },
   "else": {
-    "scope": "rust",
     "prefix": "else",
     "body": [
       "else {",
@@ -86,7 +76,6 @@
     "description": "Insert else"
   },
   "enum": {
-    "scope": "rust",
     "prefix": "enum",
     "body": [
       "enum ${1:Name} {",
@@ -97,7 +86,6 @@
     "description": "Insert enumeration"
   },
   "err": {
-    "scope": "rust",
     "prefix": "Err",
     "body": [
       "Err($1)$0"
@@ -105,13 +93,11 @@
     "description": "Insert error variant"
   },
   "feature": {
-    "scope": "rust",
     "prefix": "feature",
     "body": "#![feature(${1:feature_name})]$0",
     "description": "Insert feature"
   },
   "fn": {
-    "scope": "rust",
     "prefix": "fn",
     "body": [
       "fn ${1:fn_name}(${2:arg}) ${3:-> ${4:return_type} }{",
@@ -121,7 +107,6 @@
     "description": "Insert function"
   },
   "for": {
-    "scope": "rust",
     "prefix": "for",
     "body": [
       "for ${1:element} in ${2:range} {",
@@ -131,7 +116,6 @@
     "description": "Insert for loop"
   },
   "format": {
-    "scope": "rust",
     "prefix": "format",
     "body": [
       "format!(\"${1:{${2|:?,}{|}\\}}\", $3)${4|;,\\,|}$0"
@@ -139,7 +123,6 @@
     "description": "Insert format macro"
   },
   "if": {
-    "scope": "rust",
     "prefix": "if",
     "body": [
       "if ${1:condition} {",
@@ -149,7 +132,6 @@
     "description": "Insert if"
   },
   "if let": {
-    "scope": "rust",
     "prefix": "if let",
     "body": [
       "if let ${1:param} = ${2:compare_to_param} {",
@@ -159,7 +141,6 @@
     "description": "Insert if let"
   },
   "impl": {
-    "scope": "rust",
     "prefix": "impl",
     "body": [
       "impl ${1:TraitName} ${2:for ${3:Type} }{",
@@ -169,7 +150,6 @@
     "description": "Implement generics"
   },
   "let statement": {
-    "scope": "rust",
     "prefix": "let",
     "body": [
       "let $1 = $2;"
@@ -177,7 +157,6 @@
     "description": "Insert variable"
   },
   "let mut statement": {
-    "scope": "rust",
     "prefix": [
       "lm",
       "lem",
@@ -189,7 +168,6 @@
     "description": "Insert mutable variable"
   },
   "loop": {
-    "scope": "rust",
     "prefix": "loop",
     "body": [
       "loop {",
@@ -199,7 +177,6 @@
     "description": "Insert infinite loop"
   },
   "macro_rules": {
-    "scope": "rust",
     "prefix": "macro_rules",
     "body": [
       "macro_rules! ${1:macro_name} {",
@@ -211,7 +188,6 @@
     "description": "Insert macro rules"
   },
   "macro_use": {
-    "scope": "rust",
     "prefix": "macro_use",
     "body": [
       "#[macro_use]$0"
@@ -219,7 +195,6 @@
     "description": "Insert macro_use"
   },
   "main": {
-    "scope": "rust",
     "prefix": "main",
     "body": [
       "fn main() $0"
@@ -227,7 +202,6 @@
     "description": "Insert main function"
   },
   "match": {
-    "scope": "rust",
     "prefix": "match",
     "body": [
       "match $1 {",
@@ -237,7 +211,6 @@
     "description": "Insert match"
   },
   "move closure": {
-    "scope": "rust",
     "prefix": "move",
     "body": [
       "move |$1| {",
@@ -247,7 +220,6 @@
     "description": "Insert move closure"
   },
   "ok": {
-    "scope": "rust",
     "prefix": "Ok",
     "body": [
       "Ok($1)$0"
@@ -255,7 +227,6 @@
     "description": "Insert ok variant"
   },
   "option": {
-    "scope": "rust",
     "prefix": "Option",
     "body": [
       "Option<${1:T}>$0"
@@ -263,7 +234,6 @@
     "description": "Insert option"
   },
   "println": {
-    "scope": "rust",
     "prefix": "println",
     "body": [
       "println!(\"${1:{${2|:?,}{|}\\}}\", $3)${4|;,\\,|}$0"
@@ -271,7 +241,6 @@
     "description": "Insert print line macro"
   },
   "result": {
-    "scope": "rust",
     "prefix": "Result",
     "body": [
       "Result<${1:T}, ${2:E}>$0"
@@ -279,7 +248,6 @@
     "description": "Insert result"
   },
   "some": {
-    "scope": "rust",
     "prefix": "some",
     "body": [
       "Some($1)$0"
@@ -287,7 +255,6 @@
     "description": "Insert some"
   },
   "static": {
-    "scope": "rust",
     "prefix": "static",
     "body": [
       "static $1: $2 = $3;$0"
@@ -295,7 +262,6 @@
     "description": "Insert static variable"
   },
   "static ref": {
-    "scope": "rust",
     "prefix": [
       "sr",
       "static ref"
@@ -306,7 +272,6 @@
     "description": "Insert static ref"
   },
   "struct": {
-    "scope": "rust",
     "prefix": "struct",
     "body": [
       "struct ${1:Name} {",
@@ -316,13 +281,11 @@
     "description": "Insert structure"
   },
   "test": {
-    "scope": "rust",
     "prefix": "test",
     "body": "#[test]",
     "description": "Insert test block"
   },
   "trait": {
-    "scope": "rust",
     "prefix": "trait",
     "body": [
       "trait ${1:TraitName} {",
@@ -331,7 +294,6 @@
     ]
   },
   "type": {
-    "scope": "rust",
     "prefix": "type",
     "body": [
       "${1|u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize,isize|}$0"
@@ -339,7 +301,6 @@
     "description": "Insert type"
   },
   "union": {
-    "scope": "rust",
     "prefix": "union",
     "body": [
       "union ${1:Name} {",
@@ -349,7 +310,6 @@
     "description": "Insert union"
   },
   "unsafe": {
-    "scope": "rust",
     "prefix": "unsafe",
     "body": [
       "unsafe {",
@@ -359,7 +319,6 @@
     "description": "Insert unsafe block"
   },
   "Vec": {
-    "scope": "rust",
     "prefix": "Vec",
     "body": [
       "Vec${1:<${2|u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize,isize|}>}$0"
@@ -367,7 +326,6 @@
     "description": "Insert vector constractor"
   },
   "vec!": {
-    "scope": "rust",
     "prefix": "vec!",
     "body": [
       "vec![$1];$0"
@@ -375,13 +333,11 @@
     "description": "Insert vector macro"
   },
   "where": {
-    "scope": "rust",
     "prefix": "where",
     "body": "where ${1:T}: ${2:TraitName}$0",
     "description": "Insert where"
   },
   "while": {
-    "scope": "rust",
     "prefix": "while",
     "body": [
       "while ${1:condition} {",
@@ -391,7 +347,6 @@
     "description": "Insert while loop"
   },
   "while let": {
-    "scope": "rust",
     "prefix": "while let",
     "body": [
       "while let ${1:param} = ${2:compare_to_param} {",

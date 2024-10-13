@@ -252,4 +252,7 @@ fi
 
 sh ${DOT_DIR}/setup_vim.sh
 
+# setup vsnip
+ln -sf ${DOT_DIR}/snippets ${HOME}/.vsnip
+
 echo "Done."

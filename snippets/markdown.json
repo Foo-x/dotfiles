@@ -1,6 +1,5 @@
 {
   "TODO": {
-    "scope": "markdown",
     "prefix": "todo",
     "isFileTemplate": true,
     "description": "日次TODOファイルのテンプレート。コマンドパレットの Snippets: Populate File from Snippet からファイルを置換可能。",

@@ -1,0 +1,14 @@
+{
+  "shebang": {
+    "prefix": [
+      "shebang",
+      "#!"
+    ],
+    "body": [
+      "#!/usr/bin/env bash",
+      "set -euCo pipefail",
+      "",
+      "$0"
+    ]
+  }
+}

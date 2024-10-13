@@ -1,6 +1,5 @@
 {
   "RUN apt install": {
-    "scope": "dockerfile",
     "prefix": "aptinstall",
     "body": [
       "RUN apt update && export DEBIAN_FRONTEND=noninteractive \\",
