@@ -96,6 +96,7 @@ let $BASH_ENV="$HOME/.dotfiles/.config/bash/.aliases"
 " autocmd
 augroup SessionLoad
   autocmd!
+  let g:save_session = v:false
   autocmd SessionLoadPost * let g:save_session = v:true
   " save a session every 1 min
   autocmd SessionLoadPost * call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })

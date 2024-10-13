@@ -12,6 +12,9 @@ cache/
 logs/
 .cache/
 
+# git worktree
+.gwt/
+
 # vim
 Session.vim
 *.sw?

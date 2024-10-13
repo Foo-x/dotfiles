@@ -352,6 +352,11 @@ mason_lspconfig.setup_handlers({
   function(server)
     local opts = {
       capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      on_attach = function(client, bufnr)
+        if vim.b.large_buf then
+          client.stop()
+        end
+      end
     }
 
     if server == 'ts_ls' then
@@ -685,6 +690,26 @@ if vim.fn.executable('cc') == 1 or vim.fn.executable('gcc') == 1 or vim.fn.execu
     },
     highlight = {
       enable = true,
+      disable = function(_, buf)
+        vim.b.large_buf = false
+
+        -- check size
+        local max_filesize = 100 * 1024 -- 100 KB
+        local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()))
+        if size > max_filesize then
+          vim.b.large_buf = true
+          return true
+        end
+
+        -- check column lengths
+        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+        for _, line in ipairs(lines) do
+          if #line > vim.o.synmaxcol then
+            vim.b.large_buf = true
+            return true
+          end
+        end
+      end,
     },
     indent = {
       enable = true,
