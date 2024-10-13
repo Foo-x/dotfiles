@@ -323,7 +323,7 @@
     "body": [
       "Vec${1:<${2|u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize,isize|}>}$0"
     ],
-    "description": "Insert vector constractor"
+    "description": "Insert vector constructor"
   },
   "vec!": {
     "prefix": "vec!",

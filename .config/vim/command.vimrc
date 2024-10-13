@@ -190,6 +190,8 @@ if 1
   endfunction
   command! ShowHighlightGroup call s:show_highlight_group()
 
+  command! Typos !typos %
+
   if has('nvim')
     command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif
     command! VirtualTextToggle lua vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
