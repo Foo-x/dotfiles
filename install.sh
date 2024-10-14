@@ -218,13 +218,21 @@ echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 
 # install aichat
 if ! has aichat; then
-  (
-    cd /tmp || :
-    curl -LO https://github.com/sigoden/aichat/releases/download/v0.22.0/aichat-v0.22.0-x86_64-unknown-linux-musl.tar.gz
-    tar xvf aichat-v0.22.0-x86_64-unknown-linux-musl.tar.gz
-    mv aichat ${HOME}/.local/bin/aichat
-    rm -f aichat-v0.22.0-x86_64-unknown-linux-musl.tar.gz
-  )
+  asset=
+  if [ "$(uname -s)" = 'Darwin' ]; then
+    asset="aichat-v0.22.0-$(uname -m)-apple-darwin.tar.gz"
+  elif [ "$(uname -s)" = 'Linux' ]; then
+    asset="aichat-v0.22.0-$(uname -m)-unknown-linux-musl.tar.gz"
+  fi
+  if [ -n "${asset}" ]; then
+    (
+      cd /tmp || :
+      curl -LO "https://github.com/sigoden/aichat/releases/download/v0.22.0/${asset}"
+      tar xvf "${asset}"
+      mv aichat ${HOME}/.local/bin/aichat
+      rm -f "${asset}"
+    )
+  fi
 fi
 
 # setup spzenhan
