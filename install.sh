@@ -234,6 +234,8 @@ if ! has aichat; then
     )
   fi
 fi
+mkdir -p ${XDG_CONFIG_HOME}/aichat
+ln -sf ${DOT_DIR}/aichat/roles ${XDG_CONFIG_HOME}/aichat
 
 # setup spzenhan
 if [ "${WSL_DISTRO_NAME}" ]; then
