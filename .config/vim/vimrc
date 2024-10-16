@@ -96,10 +96,8 @@ let $BASH_ENV="$HOME/.dotfiles/.config/bash/.aliases"
 augroup SessionLoad
   autocmd!
   let g:save_session = v:false
-  autocmd SessionLoadPost * let g:save_session = v:true
   " save a session every 1 min
-  autocmd SessionLoadPost * call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })
-  autocmd VimEnter * if $VIM_SESSION_LOADED && !exists('g:save_session') | doautocmd SessionLoadPost | endif
+  autocmd SessionLoadPost * if !g:save_session | let g:save_session = v:true | call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 }) | endif
   autocmd VimLeave * if g:save_session | mks! | endif
 augroup END
 augroup GitGutter
