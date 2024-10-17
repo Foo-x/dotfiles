@@ -4,6 +4,17 @@
 
 HISTFILE_DIR="${HOME}/.local/state/bash"
 
-cp -b --suffix=.`date +%Y%m%d_%H%M%S` "${HISTFILE_DIR}/history" "${HISTFILE_DIR}/history.bak"
+if [ ! -f "${HISTFILE_DIR}/history.bak" ]; then
+    cp "${HISTFILE_DIR}/history" "${HISTFILE_DIR}/history.bak"
+    exit 0
+fi
 
-find "${HISTFILE_DIR}" -type f -name 'history.bak.*' -mtime +7 -exec rm {} \;
+# sync to the larger one
+original_size=$(stat -c%s "${HISTFILE_DIR}/history")
+target_size=$(stat -c%s "${HISTFILE_DIR}/history.bak")
+
+if ((original_size > target_size)); then
+    cp "${HISTFILE_DIR}/history" "${HISTFILE_DIR}/history.bak"
+else
+    cp "${HISTFILE_DIR}/history.bak" "${HISTFILE_DIR}/history"
+fi

@@ -13,12 +13,14 @@ if 1
   fun! s:iceberg()
     packadd! iceberg
     color iceberg
-    hi GitGutterAdd guibg=none
-    hi GitGutterChange guibg=none
-    hi GitGutterDelete guibg=none
-    hi GitGutterChangeDelete guibg=none
-    hi SignColumn guibg=none
-    hi FoldColumn guibg=none
+    if has('nvim')
+      hi GitGutterAdd guibg=none
+      hi GitGutterChange guibg=none
+      hi GitGutterDelete guibg=none
+      hi GitGutterChangeDelete guibg=none
+      hi SignColumn guibg=none
+      hi FoldColumn guibg=none
+    endif
   endf
   command! Iceberg call s:iceberg()
 
@@ -97,9 +99,9 @@ EOF
     endtry
   endf
 
-  " only first loading
-  if !exists('g:colors_name')
-    call SetupColor()
-  endif
+  augroup SetupColor
+    autocmd!
+    autocmd VimEnter * call SetupColor()
+  augroup END
   hi netrwMarkFile ctermbg=darkmagenta
 endif

@@ -48,6 +48,7 @@ set autoread
 set viminfo+='10000
 set viminfo-='100
 set foldmethod=indent
+set background=dark
 if has('nvim')
   set foldexpr=nvim_treesitter#foldexpr()
   set foldcolumn=auto
