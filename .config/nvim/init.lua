@@ -6,6 +6,28 @@ vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust',
 
 local set = vim.keymap.set
 
+require('kulala').setup({
+})
+
+vim.filetype.add({
+  extension = {
+    ['http'] = 'http',
+  },
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('Kulala', {}),
+  pattern = { "http" },
+  callback = function()
+    set('n', '<CR>', '<Cmd>lua require("kulala").run()<CR>', { buffer = 0, desc = 'Execute the request' })
+    set('n', '[r', '<Cmd>lua require("kulala").jump_prev()<CR>', { buffer = 0, desc = 'Jump to the previous request' })
+    set('n', ']r', '<Cmd>lua require("kulala").jump_next()<CR>', { buffer = 0, desc = 'Jump to the next request' })
+    set('n', '<leader>i', '<Cmd>lua require("kulala").inspect()<CR>', { buffer = 0, desc = 'Inspect the current request' })
+    set('n', '<leader>y', '<Cmd>lua require("kulala").copy()<CR>', { buffer = 0, desc = 'Copy the current request as a curl command' })
+    set('n', '<leader>p', '<Cmd>lua require("kulala").from_curl()<CR>', { buffer = 0, desc = 'Paste curl from clipboard as http request' })
+  end,
+})
+
 require('lsp-file-operations').setup()
 
 require("various-textobjs").setup({

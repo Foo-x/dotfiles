@@ -321,6 +321,11 @@ if [ ! -d ${NVIM_PACK_DIR}/codeium.vim ]; then
     git clone --depth 1 https://github.com/Exafunction/codeium.vim.git ${NVIM_PACK_DIR}/codeium.vim
 fi
 
+# install kulala.nvim
+if [ ! -d ${NVIM_PACK_DIR}/kulala.nvim ]; then
+    git clone --depth 1 https://github.com/mistweaverco/kulala.nvim.git ${NVIM_PACK_DIR}/kulala.nvim
+fi
+
 nvim -es +"
 set pp+=${XDG_CONFIG_HOME}/vim,${XDG_CONFIG_HOME}/vim/after |
   silent! packl! |

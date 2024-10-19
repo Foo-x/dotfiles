@@ -180,6 +180,11 @@ if ! has zoxide; then
   mise use -gy zoxide
 fi
 
+# install jq
+if ! has jq; then
+  mise use -gy jq
+fi
+
 # setup gh
 if ! has gh; then
   mise use -gy github-cli
@@ -263,6 +268,6 @@ fi
 sh ${DOT_DIR}/setup_vim.sh
 
 # setup vsnip
-ln -sf ${DOT_DIR}/snippets ${HOME}/.vsnip
+ln -sfn ${DOT_DIR}/snippets ${HOME}/.vsnip
 
 echo "Done."
