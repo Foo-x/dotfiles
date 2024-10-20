@@ -7,6 +7,26 @@ vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust',
 local set = vim.keymap.set
 
 require('kulala').setup({
+  default_view = 'headers_body',
+  scratchpad_default_contents = {
+    '@MY_TOKEN_NAME=my_token_value',
+    '',
+    '# @name scratchpad_get',
+    'GET https://httpbin.org/get HTTP/1.1',
+    '',
+    '###',
+    '',
+    '# @name scratchpad_post',
+    'POST https://httpbin.org/post HTTP/1.1',
+    'accept: application/json',
+    'content-type: application/json',
+    '',
+    '{',
+    '  "foo": "bar"',
+    '}',
+  },
+  winbar = true,
+  default_winbar_panes = { 'body', 'headers', 'headers_body', 'stats' },
 })
 
 vim.filetype.add({
@@ -15,6 +35,8 @@ vim.filetype.add({
   },
 })
 
+vim.api.nvim_create_user_command('KulalaScratchpad', require('kulala').scratchpad, {})
+
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('Kulala', {}),
   pattern = { "http" },
@@ -22,9 +44,19 @@ vim.api.nvim_create_autocmd('FileType', {
     set('n', '<CR>', '<Cmd>lua require("kulala").run()<CR>', { buffer = 0, desc = 'Execute the request' })
     set('n', '[r', '<Cmd>lua require("kulala").jump_prev()<CR>', { buffer = 0, desc = 'Jump to the previous request' })
     set('n', ']r', '<Cmd>lua require("kulala").jump_next()<CR>', { buffer = 0, desc = 'Jump to the next request' })
-    set('n', '<leader>i', '<Cmd>lua require("kulala").inspect()<CR>', { buffer = 0, desc = 'Inspect the current request' })
-    set('n', '<leader>y', '<Cmd>lua require("kulala").copy()<CR>', { buffer = 0, desc = 'Copy the current request as a curl command' })
-    set('n', '<leader>p', '<Cmd>lua require("kulala").from_curl()<CR>', { buffer = 0, desc = 'Paste curl from clipboard as http request' })
+    set('n', '<Space>k', '<Plug>(kulala)', { buffer = 0 })
+    set('n', '<Plug>(kulala)r', '<Cmd>lua require("kulala").replay()<CR>',
+      { buffer = 0, desc = 'Replay the last run' })
+    set('n', '<Plug>(kulala)t', '<Cmd>lua require("kulala").toggle_view()<CR>',
+      { buffer = 0, desc = 'Toggle between body and headers' })
+    set('n', '<Plug>(kulala)s', '<Cmd>lua require("kulala").show_stats()<CR>',
+      { buffer = 0, desc = 'Show stats of the last run' })
+    set('n', '<Plug>(kulala)i', '<Cmd>lua require("kulala").inspect()<CR>',
+      { buffer = 0, desc = 'Inspect the current request' })
+    set('n', '<Plug>(kulala)y', '<Cmd>lua require("kulala").copy()<CR>',
+      { buffer = 0, desc = 'Copy the current request as a curl command' })
+    set('n', '<Plug>(kulala)p', '<Cmd>lua require("kulala").from_curl()<CR>',
+      { buffer = 0, desc = 'Paste curl from clipboard as http request' })
   end,
 })
 
