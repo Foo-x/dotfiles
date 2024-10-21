@@ -3,7 +3,7 @@
 __vipe() {
   local f=$(mktemp)
   cat > $f
-  NOLSP=1 $EDITOR $f < /dev/tty > /dev/tty
+  $EDITOR $f < /dev/tty > /dev/tty
   cat $f
   \rm $f
 }

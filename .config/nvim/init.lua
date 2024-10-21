@@ -321,7 +321,7 @@ end
 DiffviewLoaded = true
 
 -- lsp {{{
-if vim.env.NOLSP ~= '1' then
+vim.api.nvim_create_user_command('StartLsp', function()
   local lspconfig = require('lspconfig')
   local mason = require('mason')
   local mason_lspconfig = require('mason-lspconfig')
@@ -532,6 +532,9 @@ if vim.env.NOLSP ~= '1' then
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
+end, {})
+if vim.env.LSP == '1' then
+  vim.cmd('StartLsp')
 end
 -- }}}
 

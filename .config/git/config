@@ -225,7 +225,7 @@
     igf = update-index --skip-worktree
     igfn = update-index --no-skip-worktree
     igfl = !git ls-files -v | \\grep -E '^S|^h'
-    igedit = !NOLSP=1 $EDITOR $(git rev-parse --show-toplevel)/.git/info/exclude
+    igedit = !$EDITOR $(git rev-parse --show-toplevel)/.git/info/exclude
 
     # ls-files
     ls = ls-files
@@ -260,7 +260,7 @@
     };f"
 
     ## edit all changed files
-    editall = !$EDITOR $(git ls-files -o -m --exclude-standard $(git rev-parse --show-cdup))
+    editall = !LSP=1 $EDITOR $(git ls-files -o -m --exclude-standard $(git rev-parse --show-cdup))
 
     ## show short commit hash
     rev = rev-parse --short @

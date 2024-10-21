@@ -28,7 +28,7 @@ await yargs(process.argv.slice(2))
   }, async () => {
     const files = (await $`${{ raw: `bfs f -I -E '.git/objects' 2> /dev/null | fzf -m -q ${process.argv[3] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
     if (files) {
-      const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
+      const cmd = `LSP=1 ${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
       await $`${{ raw: cmd }}`;
     }
   })
@@ -39,7 +39,7 @@ await yargs(process.argv.slice(2))
       }, async () => {
         const files = (await $`${{ raw: `bfs f -E '.git/objects' 2> /dev/null | fzf -m -q ${process.argv[4] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
         if (files) {
-          const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
+          const cmd = `LSP=1 ${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
           await $`${{ raw: cmd }}`;
         }
       })
@@ -48,7 +48,7 @@ await yargs(process.argv.slice(2))
       }, async () => {
         const files = (await $`${{ raw: `git ls-files -o -m --exclude-standard $(git rev-parse --show-cdup) 2> /dev/null | fzf -m -q ${process.argv[4] || '\0'} --header "Tab: toggle"` }}`).stdout.toString();
         if (files) {
-          const cmd = `${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
+          const cmd = `LSP=1 ${process.env.EDITOR} ${files.replace(/\n/, ' ')} > /dev/tty`;
           await $`${{ raw: cmd }}`;
         }
       })
