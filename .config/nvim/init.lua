@@ -6,41 +6,39 @@ vim.api.nvim_create_user_command('TrustEdit', 'edit $XDG_STATE_HOME/nvim/trust',
 
 local set = vim.keymap.set
 
-require('kulala').setup({
-  default_view = 'headers_body',
-  scratchpad_default_contents = {
-    '@MY_TOKEN_NAME=my_token_value',
-    '',
-    '# @name scratchpad_get',
-    'GET https://httpbin.org/get HTTP/1.1',
-    '',
-    '###',
-    '',
-    '# @name scratchpad_post',
-    'POST https://httpbin.org/post HTTP/1.1',
-    'accept: application/json',
-    'content-type: application/json',
-    '',
-    '{',
-    '  "foo": "bar"',
-    '}',
-  },
-  winbar = true,
-  default_winbar_panes = { 'body', 'headers', 'headers_body', 'stats' },
-})
-
 vim.filetype.add({
   extension = {
     ['http'] = 'http',
   },
 })
 
-vim.api.nvim_create_user_command('KulalaScratchpad', require('kulala').scratchpad, {})
-
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('Kulala', {}),
   pattern = { "http" },
   callback = function()
+    require('kulala').setup({
+      default_view = 'headers_body',
+      scratchpad_default_contents = {
+        '@MY_TOKEN_NAME=my_token_value',
+        '',
+        '# @name scratchpad_get',
+        'GET https://httpbin.org/get HTTP/1.1',
+        '',
+        '###',
+        '',
+        '# @name scratchpad_post',
+        'POST https://httpbin.org/post HTTP/1.1',
+        'accept: application/json',
+        'content-type: application/json',
+        '',
+        '{',
+        '  "foo": "bar"',
+        '}',
+      },
+      winbar = true,
+      default_winbar_panes = { 'body', 'headers', 'headers_body', 'stats' },
+    })
+
     set('n', '<CR>', '<Cmd>lua require("kulala").run()<CR>', { buffer = 0, desc = 'Execute the request' })
     set('n', '[r', '<Cmd>lua require("kulala").jump_prev()<CR>', { buffer = 0, desc = 'Jump to the previous request' })
     set('n', ']r', '<Cmd>lua require("kulala").jump_next()<CR>', { buffer = 0, desc = 'Jump to the next request' })
@@ -59,6 +57,7 @@ vim.api.nvim_create_autocmd('FileType', {
       { buffer = 0, desc = 'Paste curl from clipboard as http request' })
   end,
 })
+vim.api.nvim_create_user_command('KulalaScratchpad', function() require('kulala').scratchpad() end, {})
 
 require('lsp-file-operations').setup()
 
@@ -322,215 +321,217 @@ end
 DiffviewLoaded = true
 
 -- lsp {{{
-local lspconfig = require('lspconfig')
-local mason = require('mason')
-local mason_lspconfig = require('mason-lspconfig')
-local mason_null_ls = require('mason-null-ls')
-local null_ls = require('null-ls')
+if vim.env.NOLSP ~= '1' then
+  local lspconfig = require('lspconfig')
+  local mason = require('mason')
+  local mason_lspconfig = require('mason-lspconfig')
+  local mason_null_ls = require('mason-null-ls')
+  local null_ls = require('null-ls')
 
-require('fidget').setup()
+  require('fidget').setup()
 
-mason.setup()
-local mason_null_ls_config = {
-  'phpcs',
-  'php-cs-fixer',
-  'shfmt',
-}
-if vim.fn.executable('npm') == 1 then
-  for _, v in pairs({
-    'blade-formatter',
-    'markdownlint',
-    'markuplint',
-    'prettier',
-    'sql-formatter',
-  }) do table.insert(mason_null_ls_config, v) end
-end
-if vim.fn.executable('tar') == 1 and vim.fn.executable('xz') == 1 then
-  for _, v in pairs({
-    'shellcheck',
-  }) do table.insert(mason_null_ls_config, v) end
-end
-mason_null_ls.setup({
-  ensure_installed = mason_null_ls_config,
-})
-local null_ls_sources = {
-  null_ls.builtins.diagnostics.markdownlint.with({
-    extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
-    method = null_ls.methods.DIAGNOSTICS_ON_SAVE
-  }),
-  null_ls.builtins.formatting.markdownlint.with({
-    extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
-  }),
-  null_ls.builtins.formatting.blade_formatter,
-  null_ls.builtins.diagnostics.phpcs,
-  null_ls.builtins.formatting.phpcsfixer,
-  null_ls.builtins.diagnostics.markuplint,
-  null_ls.builtins.formatting.prettier,
-  null_ls.builtins.formatting.shfmt.with({
-    extra_args = { '-i', '2', '-sr' },
-  }),
-  null_ls.builtins.formatting.sql_formatter,
-}
-null_ls.setup({
-  sources = null_ls_sources
-})
+  mason.setup()
+  local mason_null_ls_config = {
+    'phpcs',
+    'php-cs-fixer',
+    'shfmt',
+  }
+  if vim.fn.executable('npm') == 1 then
+    for _, v in pairs({
+      'blade-formatter',
+      'markdownlint',
+      'markuplint',
+      'prettier',
+      'sql-formatter',
+    }) do table.insert(mason_null_ls_config, v) end
+  end
+  if vim.fn.executable('tar') == 1 and vim.fn.executable('xz') == 1 then
+    for _, v in pairs({
+      'shellcheck',
+    }) do table.insert(mason_null_ls_config, v) end
+  end
+  mason_null_ls.setup({
+    ensure_installed = mason_null_ls_config,
+  })
+  local null_ls_sources = {
+    null_ls.builtins.diagnostics.markdownlint.with({
+      extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
+      method = null_ls.methods.DIAGNOSTICS_ON_SAVE
+    }),
+    null_ls.builtins.formatting.markdownlint.with({
+      extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
+    }),
+    null_ls.builtins.formatting.blade_formatter,
+    null_ls.builtins.diagnostics.phpcs,
+    null_ls.builtins.formatting.phpcsfixer,
+    null_ls.builtins.diagnostics.markuplint,
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.shfmt.with({
+      extra_args = { '-i', '2', '-sr' },
+    }),
+    null_ls.builtins.formatting.sql_formatter,
+  }
+  null_ls.setup({
+    sources = null_ls_sources
+  })
 
-local mason_lspconfig_config = {
-  'lua_ls',
-  'marksman',
-  'rust_analyzer',
-}
-if vim.fn.executable('npm') == 1 then
-  for _, v in pairs({
-    'bashls',
-    'cssls',
-    'cssmodules_ls',
-    'dockerls',
-    'docker_compose_language_service',
-    'eslint',
-    'html',
-    'intelephense',
-    'jsonls',
-    'pyright',
-    'sqlls',
-    'ts_ls',
-    'vimls',
-    'yamlls',
-  }) do table.insert(mason_lspconfig_config, v) end
-end
-mason_lspconfig.setup({
-  ensure_installed = mason_lspconfig_config,
-})
+  local mason_lspconfig_config = {
+    'lua_ls',
+    'marksman',
+    'rust_analyzer',
+  }
+  if vim.fn.executable('npm') == 1 then
+    for _, v in pairs({
+      'bashls',
+      'cssls',
+      'cssmodules_ls',
+      'dockerls',
+      'docker_compose_language_service',
+      'eslint',
+      'html',
+      'intelephense',
+      'jsonls',
+      'pyright',
+      'sqlls',
+      'ts_ls',
+      'vimls',
+      'yamlls',
+    }) do table.insert(mason_lspconfig_config, v) end
+  end
+  mason_lspconfig.setup({
+    ensure_installed = mason_lspconfig_config,
+  })
 
-mason_lspconfig.setup_handlers({
-  function(server)
-    local opts = {
-      capabilities = require('cmp_nvim_lsp').default_capabilities(),
-      on_attach = function(client)
-        if vim.b.large_buf then
-          client.stop()
+  mason_lspconfig.setup_handlers({
+    function(server)
+      local opts = {
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        on_attach = function(client)
+          if vim.b.large_buf then
+            client.stop()
+          end
         end
-      end
-    }
+      }
 
-    if server == 'ts_ls' then
-      opts.init_options = {
-        plugins = {
-          {
-            name = "@vue/typescript-plugin",
-            location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
-            languages = { "vue" },
+      if server == 'ts_ls' then
+        opts.init_options = {
+          plugins = {
+            {
+              name = "@vue/typescript-plugin",
+              location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
+              languages = { "vue" },
+            },
           },
-        },
-      }
-      opts.filetypes = {
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-        "vue",
-      }
-    end
-
-    lspconfig[server].setup(opts)
-  end,
-})
-
-require('lsp_signature').setup({
-  bind = true,
-  handler_opts = {
-    border = 'single'
-  },
-  select_signature_key = '<M-n>',
-  move_cursor_key = '<M-x>',
-})
-
-local function help()
-  local ft = vim.opt.filetype._value
-  if ft == 'vim' or ft == 'help' then
-    vim.cmd([[execute 'h ' . expand('<cword>') ]])
-  else
-    vim.lsp.buf.hover()
-  end
-end
-
-set('n', 'M', help)
-set('n', 'gh', vim.diagnostic.open_float)
-set('n', '[d', vim.diagnostic.goto_prev)
-set('n', ']d', vim.diagnostic.goto_next)
-set('n', '<leader>q', vim.diagnostic.setqflist)
-set('n', '<leader>l', vim.diagnostic.setloclist)
-
-local function contains(table, element)
-  for _, value in pairs(table) do
-    if value == element then
-      return true
-    end
-  end
-  return false
-end
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('LspConfig', {}),
-  callback = function(ev)
-    local opts = { buffer = ev.buf }
-    set('n', 'gD', vim.lsp.buf.declaration, opts)
-    set('n', 'gd', vim.lsp.buf.definition, opts)
-    set('n', 'gi', vim.lsp.buf.implementation, opts)
-    set('n', 'gr', vim.lsp.buf.references, opts)
-    set('n', 'gt', vim.lsp.buf.type_definition, opts)
-    set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, opts)
-    set('n', '<F2>', vim.lsp.buf.rename, opts)
-    set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-    if contains({
+        }
+        opts.filetypes = {
           "javascript",
           "javascriptreact",
           "typescript",
           "typescriptreact",
           "vue",
-        }, vim.bo.filetype) then
-      set({ 'n', 'v' }, '<leader>f', function()
-        if vim.fn.exists(':EslintFixAll') == 2 then
-          vim.cmd([[EslintFixAll]])
-        end
-        vim.lsp.buf.format({ async = true, name = 'null-ls' })
-      end, opts)
+        }
+      end
+
+      lspconfig[server].setup(opts)
+    end,
+  })
+
+  require('lsp_signature').setup({
+    bind = true,
+    handler_opts = {
+      border = 'single'
+    },
+    select_signature_key = '<M-n>',
+    move_cursor_key = '<M-x>',
+  })
+
+  local function help()
+    local ft = vim.opt.filetype._value
+    if ft == 'vim' or ft == 'help' then
+      vim.cmd([[execute 'h ' . expand('<cword>') ]])
     else
-      set({ 'n', 'v' }, '<leader>f', function()
-        vim.lsp.buf.format({ async = true })
-      end, opts)
+      vim.lsp.buf.hover()
     end
+  end
 
-    vim.diagnostic.config({
-      severity_sort = true,
-    })
+  set('n', 'M', help)
+  set('n', 'gh', vim.diagnostic.open_float)
+  set('n', '[d', vim.diagnostic.goto_prev)
+  set('n', ']d', vim.diagnostic.goto_next)
+  set('n', '<leader>q', vim.diagnostic.setqflist)
+  set('n', '<leader>l', vim.diagnostic.setloclist)
 
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client.supports_method('textDocument/documentHighlight') then
+  local function contains(table, element)
+    for _, value in pairs(table) do
+      if value == element then
+        return true
+      end
+    end
+    return false
+  end
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('LspConfig', {}),
+    callback = function(ev)
+      local opts = { buffer = ev.buf }
+      set('n', 'gD', vim.lsp.buf.declaration, opts)
+      set('n', 'gd', vim.lsp.buf.definition, opts)
+      set('n', 'gi', vim.lsp.buf.implementation, opts)
+      set('n', 'gr', vim.lsp.buf.references, opts)
+      set('n', 'gt', vim.lsp.buf.type_definition, opts)
+      set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, opts)
+      set('n', '<F2>', vim.lsp.buf.rename, opts)
+      set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+      if contains({
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+          }, vim.bo.filetype) then
+        set({ 'n', 'v' }, '<leader>f', function()
+          if vim.fn.exists(':EslintFixAll') == 2 then
+            vim.cmd([[EslintFixAll]])
+          end
+          vim.lsp.buf.format({ async = true, name = 'null-ls' })
+        end, opts)
+      else
+        set({ 'n', 'v' }, '<leader>f', function()
+          vim.lsp.buf.format({ async = true })
+        end, opts)
+      end
+
+      vim.diagnostic.config({
+        severity_sort = true,
+      })
+
+      local client = vim.lsp.get_client_by_id(ev.data.client_id)
+      if client.supports_method('textDocument/documentHighlight') then
+        vim.cmd [[
+          set updatetime=300
+          augroup lsp_document_highlight
+            autocmd!
+            autocmd CursorHold,CursorHoldI <buffer> silent! lua vim.lsp.buf.document_highlight()
+            autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
+          augroup END
+          ]]
+      end
+      require('ibl').setup({
+        indent = {
+          char = '▏',
+        },
+      })
       vim.cmd [[
-        set updatetime=300
-        augroup lsp_document_highlight
-          autocmd!
-          autocmd CursorHold,CursorHoldI <buffer> silent! lua vim.lsp.buf.document_highlight()
-          autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
+          call SetupColor()
         ]]
-    end
-    require('ibl').setup({
-      indent = {
-        char = '▏',
-      },
-    })
-    vim.cmd [[
-        call SetupColor()
-      ]]
-  end,
-})
+    end,
+  })
 
-local signs = { Error = " ", Warn = " ", Info = " ", Hint = "󰌵 " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  local signs = { Error = " ", Warn = " ", Info = " ", Hint = "󰌵 " }
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
 end
 -- }}}
 

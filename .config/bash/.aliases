@@ -64,6 +64,8 @@ alias mvb='mv -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias vis='touch Session.vim && vi +"doautocmd SessionLoadPost" -S'
 alias vig='vi -c "DiffviewOpen" -c "on|1bw"'
 alias viq='vi -c "cfile"'
+# no lsp
+alias vinl='NOLSP=1 vi'
 alias we='watchexec'
 alias ai='aichat'
 

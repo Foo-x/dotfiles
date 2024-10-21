@@ -10,6 +10,7 @@ cnoreabbr <expr> add getcmdtype() == ':' && getcmdline() ==# 'add' ? 'argdedupe'
 cnoremap <expr> ; getcmdtype() == ':' && empty(getcmdline()) ? "\<Esc>q:" : ';'
 cnoremap <expr> / getcmdtype() == '/' && empty(getcmdline()) ? "\<Esc>q/" : '/'
 cnoremap <expr> ? getcmdtype() == '?' && empty(getcmdline()) ? "\<Esc>q?" : '?'
+cnoremap <expr> gd getcmdtype() == ':' && empty(getcmdline()) ? "g//d_\<Left>\<Left>\<Left>" : 'gd'
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
@@ -148,10 +149,19 @@ fun! s:use_easy_regname()
     call setreg(v:event.operator, getreg())
   endif
 endf
-
 augroup UseEasyRegname
   autocmd!
   au TextYankPost * call s:use_easy_regname()
+augroup END
+
+fun! s:yank_to_clipboard()
+  if v:event.regname ==# ''
+    call setreg('+', getreg())
+  endif
+endf
+augroup YankToClipboard
+  autocmd!
+  au TextYankPost * call s:yank_to_clipboard()
 augroup END
 
 fun! s:fileinfo()
