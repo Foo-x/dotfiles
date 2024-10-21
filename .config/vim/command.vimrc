@@ -135,11 +135,16 @@ if 1
   command! AutoSaveClear let g:autosave=0 | let t:autosave=0 | let w:autosave=0 | let b:autosave=0
   command! AutoSaveInfo echom 'g:' . get(g:, 'autosave', 0) | echom 't:' . get(t:, 'autosave', 0) | echom 'w:' . get(w:, 'autosave', 0) | echom 'b:' . get(b:, 'autosave', 0)
 
-  command! CopyFilename let @"=expand('%') | silent! doautocmd TextYankPost
-  command! CopyFilenameAbsolute let @"=expand('%:p') | silent! doautocmd TextYankPost
-  command! CopyFilenameBasename let @"=expand('%:t') | silent! doautocmd TextYankPost
-  command! CopyFilenameBasenameWithoutExtension let @"=expand('%:t:r') | silent! doautocmd TextYankPost
+  command! CopyFilename let @+=expand('%') | silent! doautocmd TextYankPost
+  command! CopyFilenameAbsolute let @+=expand('%:p') | silent! doautocmd TextYankPost
+  command! CopyFilenameBasename let @+=expand('%:t') | silent! doautocmd TextYankPost
+  command! CopyFilenameBasenameWithoutExtension let @+=expand('%:t:r') | silent! doautocmd TextYankPost
+  command! CopyFilenameWithCursorPosition let @+=expand('%') . ":" . line('.') . ":" . col('.') | silent! doautocmd TextYankPost
+  command! CopyFilenameAbsoluteWithCursorPosition let @+=expand('%:p') . ":" . line('.') . ":" . col('.') | silent! doautocmd TextYankPost
 
+  " save yanked text to the operator register too
+  " change -> c, delete -> d, yank -> y
+  " https://blog.atusy.net/2023/12/17/vim-easy-to-remember-regnames/
   fun! s:use_easy_regname()
     if v:event.regname ==# ''
       call setreg(v:event.operator, getreg())
@@ -191,6 +196,7 @@ if 1
   command! ShowHighlightGroup call s:show_highlight_group()
 
   command! Typos !typos %
+  command! TyposAll !typos
 
   if has('nvim')
     command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif

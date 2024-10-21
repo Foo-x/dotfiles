@@ -38,6 +38,7 @@ nnoremap <C-j> <Plug>(GitGutterNextHunk)
 nnoremap <C-k> <Plug>(GitGutterPrevHunk)
 nnoremap <F9> :<C-u>GV --all<CR>
 nnoremap <S-F9> :<C-u>GV --name-status --all<CR>
+" file history
 nnoremap <F10> :<C-u>GV! --all<CR>
 " }}}
 "
@@ -49,6 +50,7 @@ cnoreabbr gmt G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t 
 
 " gv.vim
 cnoreabbr gv GV --all
+"" file history
 cnoreabbr gvf GV! --all
 
 " diffview.nvim
