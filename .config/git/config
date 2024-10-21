@@ -225,7 +225,7 @@
     igf = update-index --skip-worktree
     igfn = update-index --no-skip-worktree
     igfl = !git ls-files -v | \\grep -E '^S|^h'
-    igedit = !$EDITOR $(git rev-parse --show-toplevel)/.git/info/exclude
+    igedit = !NOLSP=1 $EDITOR $(git rev-parse --show-toplevel)/.git/info/exclude
 
     # ls-files
     ls = ls-files

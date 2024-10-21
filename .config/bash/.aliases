@@ -47,7 +47,7 @@ if type vim &> /dev/null; then
 fi
 if type nvim &> /dev/null; then
   alias vi=nvim
-  alias nview='nvim -R'
+  alias nview='NOLSP=1 nvim -R'
   alias view=nview
 fi
 # not to use subshell to restore with tmux session
