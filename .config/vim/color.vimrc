@@ -8,6 +8,7 @@ if 1
     exe 'hi GitGutterChange guifg=' . l:palette['blue'][0]
     exe 'hi GitGutterDelete guifg=' . l:palette['red'][0]
     exe 'hi GitGutterChangeDelete guifg=' . l:palette['purple'][0]
+    call s:kmd_syntax()
   endf
   command! Everforest call s:everforest()
   fun! s:iceberg()
@@ -21,6 +22,7 @@ if 1
       hi SignColumn guibg=none
       hi FoldColumn guibg=none
     endif
+    call s:kmd_syntax()
   endf
   command! Iceberg call s:iceberg()
 
@@ -71,6 +73,7 @@ EOF
       hi link CodeiumSuggestion NonText
 
       lua require('leap').init_highlight(true)
+      call s:kmd_syntax()
     endf
     command! NoirbuddySlate call s:noirbuddy_slate()
   endif
@@ -82,6 +85,20 @@ EOF
     return ['Everforest', 'Iceberg']
   endf
   command! -nargs=1 -complete=customlist,s:color_complete Color <args>
+
+  fun! s:kmd_syntax()
+    hi link KmdContext Changed
+    hi link KmdTag Added
+    hi link KmdDue Removed
+
+    let l:slist = execute('syntax list')
+    if l:slist =~ 'KmdContext'
+      return
+    endif
+    windo syntax match KmdContext display " @\S\+"
+    windo syntax match KmdTag display " +\S\+"
+    windo syntax match KmdDue display " \~\d\{4\}-\d\{2\}-\d\{2\}"
+  endf
 
   fun! SetupColor()
     try

@@ -4,7 +4,7 @@
 ## Project Name
 
   1-- 2--------------------------------------------------
-- (H) task @context #tag ~2023-12-31
+- (H) task @context +tag ~2023-12-31
       3--
     - [ ] subtask
 ```
@@ -18,7 +18,7 @@
     - Context
         - prefix: `@`
     - Tag
-        - prefix: `#`
+        - prefix: `+`
     - Due
         - prefix: `~`
 3. Checkbox
