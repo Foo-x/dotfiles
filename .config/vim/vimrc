@@ -74,9 +74,6 @@ set list
 
 runtime! *.vimrc
 
-" finish on vim-tiny
-if !1 | finish | endif
-
 call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
 set viewdir=$XDG_DATA_HOME/vim/view | call mkdir(&viewdir, 'p')
 

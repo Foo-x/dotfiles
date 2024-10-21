@@ -1,6 +1,3 @@
-" finish on vim-tiny
-if !1 | finish | endif
-
 if !exists('g:mark_chars')
   let g:mark_chars = map(range(char2nr('a'), char2nr('z')), 'nr2char(v:val)')
 endif

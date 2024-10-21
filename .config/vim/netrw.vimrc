@@ -1,6 +1,3 @@
-" finish on vim-tiny
-if !1 | finish | endif
-
 let g:netrw_home = $XDG_DATA_HOME."/vim"
 
 let g:netrw_liststyle=0
