@@ -51,7 +51,7 @@ if type nvim &> /dev/null; then
   alias view=nview
 fi
 # not to use subshell to restore with tmux session
-alias kmd='cd ${XDG_DATA_HOME}/kanbanmd; LSP=1 vi 1_backlog.md +"sp 4_blocked.md | vs 5_done.md | winc t | vs 2_ready.md | vs 3_doing.md" +"let t:autosave=v:true" +"doautocmd SessionLoadPost"; cd -'
+alias kmd='cd ${XDG_DATA_HOME}/kanbanmd; vi 1_backlog.md +"sp 4_blocked.md | vs 5_done.md | winc t | vs 2_ready.md | vs 3_doing.md" +"let t:autosave=v:true" +"doautocmd SessionLoadPost"; cd -'
 alias kmdh='$PAGER ${XDG_DATA_HOME}/kanbanmd/README.md'
 alias kmdn='(cd ${XDG_DATA_HOME}/kanbanmd && cat 2_ready.md <(echo) 3_doing.md | $PAGER)'
 
@@ -61,10 +61,10 @@ alias dirsc='dirs -c && pushd -n ${PWD} > /dev/null'
 alias cpb='cp -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias lnb='ln -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias mvb='mv -b --suffix=.`date +%Y%m%d_%H%M%S`'
-alias vil='LSP=1 vi'
-alias vis='touch Session.vim && LSP=1 vi +"doautocmd SessionLoadPost" -S'
-alias vig='LSP=1 vi -c "DiffviewOpen" -c "on|1bw"'
-alias viq='LSP=1 vi -c "cfile"'
+alias vis='touch Session.vim && vi +"doautocmd SessionLoadPost" -S'
+alias vig='vi -c "DiffviewOpen" -c "on|1bw"'
+alias viq='vi -c "cfile"'
+alias vit='\rm startuptime.log &> /dev/null; vi --startuptime startuptime.log +"sl 300m | q" && vi startuptime.log'
 alias we='watchexec'
 alias ai='aichat'
 

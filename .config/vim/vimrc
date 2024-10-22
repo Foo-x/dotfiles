@@ -3,6 +3,8 @@ let $XDG_CACHE_HOME=get(environ(), 'XDG_CACHE_HOME', $HOME . '/.cache')
 let $XDG_DATA_HOME=get(environ(), 'XDG_DATA_HOME', $HOME . '/.local/share')
 let $XDG_STATE_HOME=get(environ(), 'XDG_STATE_HOME', $HOME . '/.local/state')
 
+let g:loaded_matchit            = 1
+
 set runtimepath^=$XDG_CONFIG_HOME/vim
 set runtimepath+=$XDG_DATA_HOME/vim
 set runtimepath+=$XDG_CONFIG_HOME/vim/after

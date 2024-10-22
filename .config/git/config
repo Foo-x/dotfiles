@@ -260,7 +260,7 @@
     };f"
 
     ## edit all changed files
-    editall = !LSP=1 $EDITOR $(git ls-files -o -m --exclude-standard $(git rev-parse --show-cdup))
+    editall = !$EDITOR $(git ls-files -o -m --exclude-standard $(git rev-parse --show-cdup))
 
     ## show short commit hash
     rev = rev-parse --short @

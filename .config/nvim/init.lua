@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 vim.env.XDG_CONFIG_HOME = vim.fn.get(vim.fn.environ(), 'XDG_CONFIG_HOME', vim.env.HOME .. '/.config')
 vim.cmd.exe('"source" $XDG_CONFIG_HOME . "/vim/vimrc"')
 local DOT_DIR = vim.fn.get(vim.fn.environ(), 'DOT_DIR', vim.env.HOME .. '/.dotfiles')
@@ -76,14 +78,21 @@ function _G.set_terminal_keymaps()
 end
 
 -- Codeium
-vim.g.codeium_enabled = true
-if vim.g.codeium_enabled then
-  vim.g.codeium_disable_bindings = 1
-  set('i', "<M-'>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-  set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-  set('i', '<M-]>', function() return vim.fn['codeium#CycleOrComplete']() end, { expr = true, silent = true })
-  set('i', '<C-]>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-end
+vim.g.codeium_enabled = false
+vim.api.nvim_create_autocmd('InsertEnter', {
+  group = vim.api.nvim_create_augroup('StartCodeium', {}),
+  once = true,
+  callback = function()
+    vim.g.codeium_enabled = true
+    if vim.g.codeium_enabled then
+      vim.g.codeium_disable_bindings = 1
+      set('i', "<M-'>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+      set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+      set('i', '<M-]>', function() return vim.fn['codeium#CycleOrComplete']() end, { expr = true, silent = true })
+      set('i', '<C-]>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+    end
+  end,
+})
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd [[
@@ -260,6 +269,7 @@ set('n', 'F', '<Plug>(leap-backward-to)')
 set('n', 't', '<Plug>(leap-forward-till)')
 set('n', 'T', '<Plug>(leap-backward-till)')
 
+-- diffview {{{
 local diffview_actions = require('diffview.actions')
 vim.g.diffview_tabpagenr = -1
 local diffview_close_augroup = vim.api.nvim_create_augroup('DiffviewClose', {})
@@ -319,195 +329,199 @@ if not DiffviewLoaded then
   })
 end
 DiffviewLoaded = true
+-- }}}
 
 -- lsp {{{
-vim.api.nvim_create_user_command('StartLsp', function()
-  local lspconfig = require('lspconfig')
-  local mason = require('mason')
-  local mason_lspconfig = require('mason-lspconfig')
-  local mason_null_ls = require('mason-null-ls')
-  local null_ls = require('null-ls')
+vim.api.nvim_create_autocmd('CursorHold', {
+  group = vim.api.nvim_create_augroup('StartLsp', {}),
+  once = true,
+  callback = function()
+    local lspconfig = require('lspconfig')
+    local mason = require('mason')
+    local mason_lspconfig = require('mason-lspconfig')
+    local mason_null_ls = require('mason-null-ls')
+    local null_ls = require('null-ls')
 
-  require('fidget').setup()
+    require('fidget').setup()
 
-  mason.setup()
-  local mason_null_ls_config = {
-    'phpcs',
-    'php-cs-fixer',
-    'shfmt',
-  }
-  if vim.fn.executable('npm') == 1 then
-    for _, v in pairs({
-      'blade-formatter',
-      'markdownlint',
-      'markuplint',
-      'prettier',
-      'sql-formatter',
-    }) do table.insert(mason_null_ls_config, v) end
-  end
-  if vim.fn.executable('tar') == 1 and vim.fn.executable('xz') == 1 then
-    for _, v in pairs({
-      'shellcheck',
-    }) do table.insert(mason_null_ls_config, v) end
-  end
-  mason_null_ls.setup({
-    ensure_installed = mason_null_ls_config,
-  })
-  local null_ls_sources = {
-    null_ls.builtins.diagnostics.markdownlint.with({
-      extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
-      method = null_ls.methods.DIAGNOSTICS_ON_SAVE
-    }),
-    null_ls.builtins.formatting.markdownlint.with({
-      extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
-    }),
-    null_ls.builtins.formatting.blade_formatter,
-    null_ls.builtins.diagnostics.phpcs,
-    null_ls.builtins.formatting.phpcsfixer,
-    null_ls.builtins.diagnostics.markuplint,
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.shfmt.with({
-      extra_args = { '-i', '2', '-sr' },
-    }),
-    null_ls.builtins.formatting.sql_formatter,
-  }
-  null_ls.setup({
-    sources = null_ls_sources
-  })
+    mason.setup()
+    local mason_null_ls_config = {
+      'phpcs',
+      'php-cs-fixer',
+      'shfmt',
+    }
+    if vim.fn.executable('npm') == 1 then
+      for _, v in pairs({
+        'blade-formatter',
+        'markdownlint',
+        'markuplint',
+        'prettier',
+        'sql-formatter',
+      }) do table.insert(mason_null_ls_config, v) end
+    end
+    if vim.fn.executable('tar') == 1 and vim.fn.executable('xz') == 1 then
+      for _, v in pairs({
+        'shellcheck',
+      }) do table.insert(mason_null_ls_config, v) end
+    end
+    mason_null_ls.setup({
+      ensure_installed = mason_null_ls_config,
+    })
+    local null_ls_sources = {
+      null_ls.builtins.diagnostics.markdownlint.with({
+        extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
+        method = null_ls.methods.DIAGNOSTICS_ON_SAVE
+      }),
+      null_ls.builtins.formatting.markdownlint.with({
+        extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
+      }),
+      null_ls.builtins.formatting.blade_formatter,
+      null_ls.builtins.diagnostics.phpcs,
+      null_ls.builtins.formatting.phpcsfixer,
+      null_ls.builtins.diagnostics.markuplint,
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.shfmt.with({
+        extra_args = { '-i', '2', '-sr' },
+      }),
+      null_ls.builtins.formatting.sql_formatter,
+    }
+    null_ls.setup({
+      sources = null_ls_sources
+    })
 
-  local mason_lspconfig_config = {
-    'lua_ls',
-    'marksman',
-    'rust_analyzer',
-  }
-  if vim.fn.executable('npm') == 1 then
-    for _, v in pairs({
-      'bashls',
-      'cssls',
-      'cssmodules_ls',
-      'dockerls',
-      'docker_compose_language_service',
-      'eslint',
-      'html',
-      'intelephense',
-      'jsonls',
-      'pyright',
-      'sqlls',
-      'ts_ls',
-      'vimls',
-      'yamlls',
-    }) do table.insert(mason_lspconfig_config, v) end
-  end
-  mason_lspconfig.setup({
-    ensure_installed = mason_lspconfig_config,
-  })
+    local mason_lspconfig_config = {
+      'lua_ls',
+      'marksman',
+      'rust_analyzer',
+    }
+    if vim.fn.executable('npm') == 1 then
+      for _, v in pairs({
+        'bashls',
+        'cssls',
+        'cssmodules_ls',
+        'dockerls',
+        'docker_compose_language_service',
+        'eslint',
+        'html',
+        'intelephense',
+        'jsonls',
+        'pyright',
+        'sqlls',
+        'ts_ls',
+        'vimls',
+        'yamlls',
+      }) do table.insert(mason_lspconfig_config, v) end
+    end
+    mason_lspconfig.setup({
+      ensure_installed = mason_lspconfig_config,
+    })
 
-  mason_lspconfig.setup_handlers({
-    function(server)
-      local opts = {
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
-        on_attach = function(client)
-          if vim.b.large_buf then
-            client.stop()
+    mason_lspconfig.setup_handlers({
+      function(server)
+        local opts = {
+          capabilities = require('cmp_nvim_lsp').default_capabilities(),
+          on_attach = function(client)
+            if vim.b.large_buf then
+              client.stop()
+            end
           end
-        end
-      }
+        }
 
-      if server == 'ts_ls' then
-        opts.init_options = {
-          plugins = {
-            {
-              name = "@vue/typescript-plugin",
-              location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
-              languages = { "vue" },
+        if server == 'ts_ls' then
+          opts.init_options = {
+            plugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
+                languages = { "vue" },
+              },
             },
-          },
-        }
-        opts.filetypes = {
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-          "vue",
-        }
-      end
-
-      lspconfig[server].setup(opts)
-    end,
-  })
-
-  require('lsp_signature').setup({
-    bind = true,
-    handler_opts = {
-      border = 'single'
-    },
-    select_signature_key = '<M-n>',
-    move_cursor_key = '<M-x>',
-  })
-
-  local function help()
-    local ft = vim.opt.filetype._value
-    if ft == 'vim' or ft == 'help' then
-      vim.cmd([[execute 'h ' . expand('<cword>') ]])
-    else
-      vim.lsp.buf.hover()
-    end
-  end
-
-  set('n', 'M', help)
-  set('n', 'gh', vim.diagnostic.open_float)
-  set('n', '[d', vim.diagnostic.goto_prev)
-  set('n', ']d', vim.diagnostic.goto_next)
-  set('n', '<leader>q', vim.diagnostic.setqflist)
-  set('n', '<leader>l', vim.diagnostic.setloclist)
-
-  local function contains(table, element)
-    for _, value in pairs(table) do
-      if value == element then
-        return true
-      end
-    end
-    return false
-  end
-
-  vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('LspConfig', {}),
-    callback = function(ev)
-      local opts = { buffer = ev.buf }
-      set('n', 'gD', vim.lsp.buf.declaration, opts)
-      set('n', 'gd', vim.lsp.buf.definition, opts)
-      set('n', 'gi', vim.lsp.buf.implementation, opts)
-      set('n', 'gr', vim.lsp.buf.references, opts)
-      set('n', 'gt', vim.lsp.buf.type_definition, opts)
-      set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, opts)
-      set('n', '<F2>', vim.lsp.buf.rename, opts)
-      set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-      if contains({
+          }
+          opts.filetypes = {
             "javascript",
             "javascriptreact",
             "typescript",
             "typescriptreact",
             "vue",
-          }, vim.bo.filetype) then
-        set({ 'n', 'v' }, '<leader>f', function()
-          if vim.fn.exists(':EslintFixAll') == 2 then
-            vim.cmd([[EslintFixAll]])
-          end
-          vim.lsp.buf.format({ async = true, name = 'null-ls' })
-        end, opts)
+          }
+        end
+
+        lspconfig[server].setup(opts)
+      end,
+    })
+
+    require('lsp_signature').setup({
+      bind = true,
+      handler_opts = {
+        border = 'single'
+      },
+      select_signature_key = '<M-n>',
+      move_cursor_key = '<M-x>',
+    })
+
+    local function help()
+      local ft = vim.opt.filetype._value
+      if ft == 'vim' or ft == 'help' then
+        vim.cmd([[execute 'h ' . expand('<cword>') ]])
       else
-        set({ 'n', 'v' }, '<leader>f', function()
-          vim.lsp.buf.format({ async = true })
-        end, opts)
+        vim.lsp.buf.hover()
       end
+    end
 
-      vim.diagnostic.config({
-        severity_sort = true,
-      })
+    set('n', 'M', help)
+    set('n', 'gh', vim.diagnostic.open_float)
+    set('n', '[d', vim.diagnostic.goto_prev)
+    set('n', ']d', vim.diagnostic.goto_next)
+    set('n', '<leader>q', vim.diagnostic.setqflist)
+    set('n', '<leader>l', vim.diagnostic.setloclist)
 
-      local client = vim.lsp.get_client_by_id(ev.data.client_id)
-      if client.supports_method('textDocument/documentHighlight') then
-        vim.cmd [[
+    local function contains(table, element)
+      for _, value in pairs(table) do
+        if value == element then
+          return true
+        end
+      end
+      return false
+    end
+
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('LspConfig', {}),
+      callback = function(ev)
+        local opts = { buffer = ev.buf }
+        set('n', 'gD', vim.lsp.buf.declaration, opts)
+        set('n', 'gd', vim.lsp.buf.definition, opts)
+        set('n', 'gi', vim.lsp.buf.implementation, opts)
+        set('n', 'gr', vim.lsp.buf.references, opts)
+        set('n', 'gt', vim.lsp.buf.type_definition, opts)
+        set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, opts)
+        set('n', '<F2>', vim.lsp.buf.rename, opts)
+        set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+        if contains({
+              "javascript",
+              "javascriptreact",
+              "typescript",
+              "typescriptreact",
+              "vue",
+            }, vim.bo.filetype) then
+          set({ 'n', 'v' }, '<leader>f', function()
+            if vim.fn.exists(':EslintFixAll') == 2 then
+              vim.cmd([[EslintFixAll]])
+            end
+            vim.lsp.buf.format({ async = true, name = 'null-ls' })
+          end, opts)
+        else
+          set({ 'n', 'v' }, '<leader>f', function()
+            vim.lsp.buf.format({ async = true })
+          end, opts)
+        end
+
+        vim.diagnostic.config({
+          severity_sort = true,
+        })
+
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client.supports_method('textDocument/documentHighlight') then
+          vim.cmd [[
           set updatetime=300
           augroup lsp_document_highlight
             autocmd!
@@ -515,27 +529,27 @@ vim.api.nvim_create_user_command('StartLsp', function()
             autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
           augroup END
           ]]
-      end
-      require('ibl').setup({
-        indent = {
-          char = '▏',
-        },
-      })
-      vim.cmd [[
+        end
+        require('ibl').setup({
+          indent = {
+            char = '▏',
+          },
+        })
+        vim.cmd [[
           call SetupColor()
         ]]
-    end,
-  })
+      end,
+    })
 
-  local signs = { Error = " ", Warn = " ", Info = " ", Hint = "󰌵 " }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
-end, {})
-if vim.env.LSP == '1' then
-  vim.cmd('StartLsp')
-end
+    local signs = { Error = " ", Warn = " ", Info = " ", Hint = "󰌵 " }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    end
+
+    vim.cmd('LspStart')
+  end,
+})
 -- }}}
 
 -- cmp {{{

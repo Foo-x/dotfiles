@@ -223,16 +223,17 @@ echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 
 # install aichat
 if ! has aichat; then
+  ver=v0.22.0
   asset=
   if [ "$(uname -s)" = 'Darwin' ]; then
-    asset="aichat-v0.22.0-$(uname -m)-apple-darwin.tar.gz"
+    asset="aichat-${ver}-$(uname -m)-apple-darwin.tar.gz"
   elif [ "$(uname -s)" = 'Linux' ]; then
-    asset="aichat-v0.22.0-$(uname -m)-unknown-linux-musl.tar.gz"
+    asset="aichat-${ver}-$(uname -m)-unknown-linux-musl.tar.gz"
   fi
   if [ -n "${asset}" ]; then
     (
       cd /tmp || :
-      curl -LO "https://github.com/sigoden/aichat/releases/download/v0.22.0/${asset}"
+      curl -LO "https://github.com/sigoden/aichat/releases/download/${ver}/${asset}"
       tar xvf "${asset}"
       mv aichat ${HOME}/.local/bin/aichat
       rm -f "${asset}"
