@@ -13,8 +13,6 @@ nnoremap <Plug>(buffer)c :<C-u>TwoCol<CR>
 nnoremap <Plug>(buffer)ac :<C-u>ATwoCol<CR>
 nnoremap <Plug>(buffer)r :<C-u>TwoRow<CR>
 nnoremap <Plug>(buffer)ar :<C-u>ATwoRow<CR>
-nnoremap <silent> <Plug>(buffer)j :<C-u>bnext<CR>
-nnoremap <silent> <Plug>(buffer)k :<C-u>bprevious<CR>
 " }}}
 
 " command {{{
@@ -46,17 +44,6 @@ fun! s:clean_nonexistent_buffers()
   call DeleteBuffers('bwipeout', l:nonexistent_buffers)
 endf
 command! CleanNonExistentBuffers call s:clean_nonexistent_buffers()
-
-fun! s:useopen_buffer(buf)
-  let l:bnr = bufnr(a:buf)
-  let l:wids = win_findbuf(bnr)
-  if empty(l:wids)
-    exe 'buffer' a:buf
-  else
-    call win_gotoid(l:wids[0])
-  endif
-endf
-command! -nargs=1 -complete=buffer B silent! call s:useopen_buffer(<q-args>)
 
 fun! s:close_no_name_buffers()
   let l:nonamebuffers = map(filter(getbufinfo({'buflisted':1}), 'v:val.name=="" && len(v:val.windows)==0'), 'v:val.bufnr')

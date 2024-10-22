@@ -7,7 +7,6 @@ nnoremap <Space>f <Plug>(fzf)
 nnoremap <Plug>(fzf) :<C-u>Files<CR>
 nnoremap <Plug>(fzf)e :<C-u>FFern<CR>
 nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
-nnoremap <Plug>(fzf)b :<C-u>Buffers<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
 nnoremap <Plug>(fzf)H :<C-u>History<CR>
 nnoremap <Plug>(fzf)ar :<C-u>Args<CR>
@@ -19,7 +18,6 @@ nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
 " command {{{
 cnoreabbr <expr> ff getcmdtype() == ':' && getcmdline() ==# 'ff' ? 'Files' : 'ff'
 cnoreabbr <expr> fg getcmdtype() == ':' && getcmdline() ==# 'fg' ? 'GFiles' : 'fg'
-cnoreabbr <expr> fb getcmdtype() == ':' && getcmdline() ==# 'fb' ? 'Buffers' : 'fb'
 cnoreabbr <expr> fh getcmdtype() == ':' && getcmdline() ==# 'fh' ? 'HistoryWS' : 'fh'
 cnoreabbr <expr> fha getcmdtype() == ':' && getcmdline() ==# 'fha' ? 'History' : 'fha'
 cnoreabbr <expr> fhe getcmdtype() == ':' && getcmdline() ==# 'fhe' ? 'Helptags' : 'fhe'

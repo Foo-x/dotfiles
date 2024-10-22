@@ -32,11 +32,13 @@ endif
 
 if !exists('g:insert_print_templates')
   let g:insert_print_templates = {}
-  let g:insert_print_templates.python = 'print(f"{}")'
-  let g:insert_print_templates.javascript = 'console.log(`{}`);'
-  let g:insert_print_templates.typescript = 'console.log(`{}`);'
-  let g:insert_print_templates.typescriptreact = 'console.log(`{}`);'
-  let g:insert_print_templates.vue = 'console.log(`{}`);'
+  " needs `import time`
+  let g:insert_print_templates.python = 'print(f"{time.perf_counter()}s {}")'
+  let g:insert_print_templates.javascript = 'console.log(`${performance.now() / 1000}s {}`);'
+  let g:insert_print_templates.typescript = 'console.log(`${performance.now() / 1000}s {}`);'
+  let g:insert_print_templates.typescriptreact = 'console.log(`${performance.now() / 1000}s {}`);'
+  let g:insert_print_templates.vue = 'console.log(`${performance.now() / 1000}s {}`);'
+  let g:insert_print_templates.lua = 'print(os.clock() .. "s {}")'
 endif
 
 if !exists('g:insert_print_text')
