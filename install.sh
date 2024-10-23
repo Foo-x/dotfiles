@@ -149,6 +149,8 @@ fi
 if ! has rg; then
   mise use -gy ripgrep
 fi
+mkdir -p "${XDG_CONFIG_HOME}/ripgrep"
+ln -sf "${DOT_DIR}/.config/ripgrep/ripgreprc" "${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
 
 # install dust
 if ! has dust; then

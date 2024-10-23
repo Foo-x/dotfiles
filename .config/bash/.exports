@@ -96,6 +96,10 @@ esac
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
 export FZF_DEFAULT_COMMAND="fd --hidden -tf -tl | sort"
 
+if type rg &> /dev/null; then
+  export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
+fi
+
 # exec commands after each commands
 function dispatch_prompt_command() {
   local f
