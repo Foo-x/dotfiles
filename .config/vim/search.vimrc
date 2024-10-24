@@ -6,16 +6,15 @@ set incsearch
 " search from the top if reaches the end
 set wrapscan
 
-" highlight
-set hlsearch
-nohlsearch
+" no highlight by default
+set nohlsearch
 " }}}
 
 " keymap {{{
 nnoremap <Space>s :%s//g<Left><Left>
 
-" disable highlight
-nnoremap <C-l> :nohlsearch<CR><C-l>
+" toggle highlight
+nnoremap <C-l> <C-l>:set hlsearch!<CR>
 
 "" highlight selected
 vnoremap <silent> * "zy:exe '/\V' . escape(@z, '\\/')<CR>N
