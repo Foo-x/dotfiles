@@ -136,12 +136,12 @@ command! AutoSaveToggleBuffer let b:autosave=!get(b:, 'autosave', 0)
 command! AutoSaveClear let g:autosave=0 | let t:autosave=0 | let w:autosave=0 | let b:autosave=0
 command! AutoSaveInfo echom 'g:' . get(g:, 'autosave', 0) | echom 't:' . get(t:, 'autosave', 0) | echom 'w:' . get(w:, 'autosave', 0) | echom 'b:' . get(b:, 'autosave', 0)
 
-command! CopyFilename let @+=expand('%') | silent! doautocmd TextYankPost
-command! CopyFilenameAbsolute let @+=expand('%:p') | silent! doautocmd TextYankPost
-command! CopyFilenameBasename let @+=expand('%:t') | silent! doautocmd TextYankPost
-command! CopyFilenameBasenameWithoutExtension let @+=expand('%:t:r') | silent! doautocmd TextYankPost
-command! CopyFilenameWithCursorPosition let @+=expand('%') . ":" . line('.') . ":" . col('.') | silent! doautocmd TextYankPost
-command! CopyFilenameAbsoluteWithCursorPosition let @+=expand('%:p') . ":" . line('.') . ":" . col('.') | silent! doautocmd TextYankPost
+command! CopyFilename let @"=expand('%') | silent! doautocmd TextYankPost
+command! CopyFilenameAbsolute let @"=expand('%:p') | silent! doautocmd TextYankPost
+command! CopyFilenameBasename let @"=expand('%:t') | silent! doautocmd TextYankPost
+command! CopyFilenameBasenameWithoutExtension let @"=expand('%:t:r') | silent! doautocmd TextYankPost
+command! CopyFilenameWithCursorPosition let @"=expand('%') . ":" . line('.') . ":" . col('.') | silent! doautocmd TextYankPost
+command! CopyFilenameAbsoluteWithCursorPosition let @"=expand('%:p') . ":" . line('.') . ":" . col('.') | silent! doautocmd TextYankPost
 
 " save yanked text to the operator register too
 " change -> c, delete -> d, yank -> y

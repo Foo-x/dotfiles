@@ -8,7 +8,7 @@ if has('nvim')
   fun! s:move()
     lua <<
     vim.cmd [[silent! exe "norm! \<Plug>(fern-action-yank)"]]
-    local src = vim.fn.getreg('+')
+    local src = vim.fn.getreg('"')
     local dst = vim.fn.input('New name: ' .. src .. ' -> ', src)
     if dst ~= '' then
       os.execute('mv ' .. src .. ' ' .. dst)
@@ -27,7 +27,7 @@ if has('nvim')
 else
   fun! s:move()
     silent! exe "norm! \<Plug>(fern-action-yank)"
-    let l:src = getreg('+')
+    let l:src = getreg('"')
     let l:dst = input('New name: ' . l:src . ' -> ', l:src)
     if l:dst != ''
       call system('mv ' . l:src . ' ' . l:dst)
