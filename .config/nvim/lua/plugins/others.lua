@@ -49,12 +49,9 @@ local oil_opts = {
     ['gy'] = {
       desc = 'Yank full path of the entry under the cursor',
       callback = function()
-        local base = require('oil').get_cursor_entry().name
-        local dir = require('oil').get_current_dir()
-
-        vim.fn.setreg('"', dir .. base)
+        require('oil.actions').yank_entry.callback(':p')
         vim.cmd.doautocmd('TextYankPost')
-        vim.fn['YankToClipboard'](vim.fn.getreg('"'))
+        vim.fn['YankToClipboard'](vim.fn.getreg(vim.v.register))
       end,
     }
   },
