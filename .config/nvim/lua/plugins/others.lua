@@ -32,6 +32,37 @@ local function kulala_init()
   vim.api.nvim_create_user_command('KulalaScratchpad', function() require('kulala').scratchpad() end, {})
 end
 
+local oil_opts = {
+  skip_confirm_for_simple_edits = true,
+  keymaps = {
+    ['gd'] = {
+      desc = 'Toggle file detail view',
+      callback = function()
+        Detail = not Detail
+        if Detail then
+          require('oil').set_columns({ 'permissions', 'size', 'mtime', 'icon' })
+        else
+          require('oil').set_columns({ 'icon' })
+        end
+      end,
+    },
+    ['gy'] = {
+      desc = 'Yank full path of the entry under the cursor',
+      callback = function()
+        local base = require('oil').get_cursor_entry().name
+        local dir = require('oil').get_current_dir()
+
+        vim.fn.setreg('"', dir .. base)
+        vim.cmd.doautocmd('TextYankPost')
+        vim.fn['YankToClipboard'](vim.fn.getreg('"'))
+      end,
+    }
+  },
+  view_options = {
+    show_hidden = true,
+  },
+}
+
 return {
   {
     'https://github.com/AndrewRadev/linediff.vim',
@@ -85,4 +116,15 @@ return {
     ft = 'http',
     cmd = 'KulalaScratchpad',
   },
+  {
+    'https://github.com/stevearc/oil.nvim',
+    dependencies = { "https://github.com/nvim-tree/nvim-web-devicons" },
+    lazy = false,
+    keys = {
+      { '<leader>e',     '<Plug>(oil)' },
+      { '<Plug>(oil)',   '<Cmd>Oil<CR>' },
+      { '<Plug>(oil)\\', '<Cmd>Oil<CR><Cmd>vs<CR>' },
+    },
+    opts = oil_opts,
+  }
 }

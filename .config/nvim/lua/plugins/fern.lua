@@ -47,6 +47,17 @@ local function fern_config()
       vim.keymap.set('n', 'x', [[<Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>]],
         { buffer = true, silent = true })
       vim.keymap.set('n', '<Tab>', '<Plug>(fern-action-mark)<Down>', { buffer = true })
+      vim.keymap.set('n', 'o', function()
+        vim.cmd [[silent! exe "norm! \<Plug>(fern-action-yank)"]]
+        local path = vim.fn.getreg('"')
+        local stat = vim.loop.fs_stat(path)
+        vim.cmd [[silent! exe "norm! \<Plug>(fern-close-drawer)"]]
+        if stat.type == 'directory' then
+          vim.cmd('Oil ' .. path)
+        else
+          vim.cmd('Oil ' .. path:match('^(.*[/])'))
+        end
+      end, { buffer = true })
       if vim.fn.maparg('N', 'n') == '' then
         vim.keymap.del('n', 'N', { buffer = true })
       end
