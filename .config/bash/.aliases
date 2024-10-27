@@ -341,15 +341,6 @@ if type rsync &> /dev/null; then
   }
 fi
 
-if type ranger &> /dev/null; then
-  function r() {
-    if [ -z "${RANGER_LEVEL}" ]; then
-      ranger --cmd="tab_new" --cmd="tab_move -1" "$@"
-    else
-      exit
-    fi
-  }
-fi
 if type devcontainer &> /dev/null; then
   alias devc=devcontainer
   alias devcu='devcontainer up --workspace-folder .'

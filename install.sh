@@ -52,21 +52,6 @@ else
   echo "${source_bashrc}" >> ${HOME}/.bashrc
 fi
 
-# setup ranger
-if has ranger; then
-  mkdir -p ${XDG_CONFIG_HOME}/ranger
-  rangerfiles="
-  commands.py
-  rc.conf
-  "
-  echo "${rangerfiles}" | xargs -I{} ln -sf ${DOT_DIR}/.config/ranger/{} ${XDG_CONFIG_HOME}/ranger/{}
-
-  mkdir -p ${XDG_CONFIG_HOME}/ranger/plugins
-  if [ ! -d ${XDG_CONFIG_HOME}/ranger/plugins/zoxide ]; then
-    git clone --depth 1 https://github.com/jchook/ranger-zoxide.git ${XDG_CONFIG_HOME}/ranger/plugins/zoxide
-  fi
-fi
-
 mkdir -p ${HOME}/.local/bin
 binfiles="
 backup_history
