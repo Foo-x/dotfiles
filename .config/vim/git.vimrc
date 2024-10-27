@@ -1,13 +1,5 @@
-" options {{{
-" gitgutter
-let g:gitgutter_set_sign_backgrounds=1
-let g:gitgutter_preview_win_floating=0
-let g:gitgutter_sign_priority=20
-" }}}
-
 " keymap {{{
 nmap <Space>g <Plug>(git)
-nnoremap <Plug>(git) <Plug>(GitGutterPreviewHunk)<C-w>P
 nnoremap <Plug>(git)<Space> :<C-u>tab Git<Space>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
 nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
@@ -31,8 +23,6 @@ nnoremap <Plug>(git)sd <Cmd>Git stash drop<CR>
 nnoremap <Plug>(git)sp <Cmd>Git stash pop<CR>
 nnoremap <Plug>(git)i <Cmd>exe 'split ' . trim(system('git rev-parse --show-toplevel')) . '/.git/info/exclude'<CR>
 
-nnoremap <C-j> <Plug>(GitGutterNextHunk)
-nnoremap <C-k> <Plug>(GitGutterPrevHunk)
 nnoremap <F9> :<C-u>GV --all<CR>
 nnoremap <S-F9> :<C-u>GV --name-status --all<CR>
 " file history
@@ -49,14 +39,6 @@ cnoreabbr gmt G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t 
 cnoreabbr gv GV --all
 "" file history
 cnoreabbr gvf GV! --all
-
-" diffview.nvim
-if has('nvim')
-  cnoreabbr dv DiffviewOpen
-  cnoreabbr dvh DiffviewFileHistory --all
-  cnoreabbr dvhh DiffviewFileHistory % --all
-endif
-" }}}
 
 " autocmd {{{
 augroup GitSpellCheck
@@ -121,7 +103,6 @@ augroup Git
   autocmd!
   autocmd FileType fugitive,git,GV setlocal isk+=-
   autocmd FileType fugitive,git,GV nnoremap <buffer><silent> co :<C-u>G checkout <cword><CR>
-  autocmd FileType GV nnoremap <buffer><silent> <CR> :<C-u>call feedkeys(".\<lt>C-u>DiffviewOpen\<lt>C-e>^!\<lt>CR>")<CR>
   autocmd FileType GV nnoremap <buffer><silent> u <Cmd>call GvUpdate()<CR>
   autocmd FileType GV nnoremap <buffer><silent> a <Cmd>call GvToggleAll()<CR>
   autocmd FileType GV nnoremap <buffer><silent> d <Cmd>call GvToggleDefaultBranch()<CR>

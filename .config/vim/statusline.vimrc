@@ -31,11 +31,10 @@ if has('nvim')
       let l:diagnostics_status = printf('  %d  %d  %d 󰌵 %d', l:error_cnt, l:warn_cnt, l:info_cnt, l:hint_cnt)
     endif
 
-    let l:codeium_status = ' %3{codeium#GetStatusString()}'
+    let l:codeium_status = exists('*codeium#GetStatusString') ? ' %3{codeium#GetStatusString()}' : ''
     let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
-    let l:pinned_status = v:lua.require("stickybuf").is_pinned() ? ' ' : ''
 
-    return ' ' . l:common . w:git_status_cache.value . l:diagnostics_status . l:codeium_status . l:autosave_status . l:pinned_status . ' '
+    return ' ' . l:common . w:git_status_cache.value . l:diagnostics_status . l:codeium_status . l:autosave_status . ' '
   endf
   set statusline=%{%MyStatusline()%}
   set winbar=\ %f%m%r%h%w

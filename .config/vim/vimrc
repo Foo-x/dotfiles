@@ -3,13 +3,23 @@ let $XDG_CACHE_HOME=get(environ(), 'XDG_CACHE_HOME', $HOME . '/.cache')
 let $XDG_DATA_HOME=get(environ(), 'XDG_DATA_HOME', $HOME . '/.local/share')
 let $XDG_STATE_HOME=get(environ(), 'XDG_STATE_HOME', $HOME . '/.local/state')
 
-let g:loaded_matchit            = 1
+let g:loaded_matchit = 1
 
 set runtimepath^=$XDG_CONFIG_HOME/vim
 set runtimepath+=$XDG_DATA_HOME/vim
 set runtimepath+=$XDG_CONFIG_HOME/vim/after
-set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
-set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
+
+set runtimepath+=$XDG_DATA_HOME/nvim/lazy/iceberg.vim
+set runtimepath+=$XDG_DATA_HOME/nvim/lazy/bullets.vim
+set runtimepath+=$XDG_DATA_HOME/nvim/lazy/previm
+set runtimepath+=$XDG_DATA_HOME/nvim/lazy/fzf.vim
+set runtimepath+=~/.fzf
+set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-fugitive
+set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-rhubarb
+set runtimepath+=$XDG_DATA_HOME/nvim/lazy/gv.vim
+if !has('nvim')
+  color iceberg
+endif
 
 set backspace=indent,eol,start
 set encoding=utf-8
@@ -100,10 +110,6 @@ augroup SessionLoad
   autocmd SessionLoadPost * if !g:save_session | let g:save_session = v:true | call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 }) | endif
   autocmd VimLeave * if g:save_session | mks! | endif
 augroup END
-augroup GitGutter
-  autocmd!
-  autocmd VimEnter * GitGutterLineNrHighlightsEnable
-augroup END
 
 augroup Fold
   autocmd!
@@ -130,5 +136,3 @@ augroup CmdWin
   autocmd CmdwinEnter : g/\v^w%[qa!]$/d
   autocmd CmdWinEnter * nnoremap <buffer> q <Cmd>q<CR>
 augroup END
-
-let test#strategy = 'toggleterm'

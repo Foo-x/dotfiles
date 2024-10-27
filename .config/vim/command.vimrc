@@ -205,6 +205,27 @@ function s:show_highlight_group()
 endfunction
 command! ShowHighlightGroup call s:show_highlight_group()
 
+fun! s:delete_current_file()
+  let l:current_file = expand('%:p')
+  if l:current_file == '' || !filereadable(l:current_file)
+    echo 'No such file: "' . l:current_file . '"'
+    return
+  endif
+
+  let l:confirm = confirm('Delete "' . l:current_file . '"?', "&yes\n&No", 2)
+  if l:confirm == 1
+    let l:alt_bufinfo = getbufinfo('#')
+    if len(l:alt_bufinfo) > 0 && l:alt_bufinfo[0].listed
+      b#
+    else
+      bp
+    endif
+    call delete(l:current_file)
+    echo 'Deleted: "' . l:current_file . '"'
+  endif
+endf
+command! DeleteCurrentFile call s:delete_current_file()
+
 command! Typos !typos %
 command! TyposAll !typos
 

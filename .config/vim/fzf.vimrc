@@ -1,10 +1,7 @@
-" options {{{
-set rtp+=~/.fzf
-" }}}
-
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
-nnoremap <Plug>(fzf) :<C-u>Files<CR>
+nnoremap <Plug>(fzf) :<C-u>HistoryWS<CR>
+nnoremap <Plug>(fzf)f :<C-u>Files<CR>
 nnoremap <Plug>(fzf)e :<C-u>FFern<CR>
 nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
@@ -116,13 +113,4 @@ command! -bang ATV call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "ATV> "'
 \ })))
-
-fun! s:fern_reveal(line)
-  exe 'Fern . -drawer -reveal=' . a:line
-endf
-command! FFern exe "norm \<Plug>(fern-close-drawer)" | call fzf#run(fzf#wrap({
-  \ 'source': 'bfs d',
-  \ 'sink': function('s:fern_reveal'),
-  \ 'options': '--prompt "FFern> "'
-\ }))
 " }}}
