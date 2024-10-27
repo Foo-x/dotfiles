@@ -2,7 +2,11 @@
 
 __vipe() {
   local f=$(mktemp)
-  cat > $f
+  if [ -p /dev/stdin ]; then
+    cat
+  else
+    echo
+  fi > $f
   $EDITOR $f < /dev/tty > /dev/tty
   cat $f
   \rm $f
