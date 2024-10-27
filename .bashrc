@@ -44,6 +44,9 @@ fi
 if type zoxide &> /dev/null; then
   . <(zoxide init bash)
 fi
+if type just &> /dev/null; then
+  . <(just --completions bash)
+fi
 if type terraform &> /dev/null; then
   complete -C terraform terraform
   complete -C terraform tf

@@ -142,7 +142,7 @@ fi
 
 # install neovim
 if ! has nvim; then
-  mise use -gy neovim@nightly
+  mise use -gy neovim@stable
 fi
 
 # install ripgrep
@@ -210,6 +210,11 @@ fi
 # install typos
 if ! has typos; then
   mise use -gy typos
+fi
+
+# install just
+if ! has just; then
+  mise use -gy just
 fi
 
 # install yargs
