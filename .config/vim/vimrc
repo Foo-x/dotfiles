@@ -9,15 +9,15 @@ set runtimepath^=$XDG_CONFIG_HOME/vim
 set runtimepath+=$XDG_DATA_HOME/vim
 set runtimepath+=$XDG_CONFIG_HOME/vim/after
 
-set runtimepath+=$XDG_DATA_HOME/nvim/lazy/iceberg.vim
-set runtimepath+=$XDG_DATA_HOME/nvim/lazy/bullets.vim
-set runtimepath+=$XDG_DATA_HOME/nvim/lazy/previm
-set runtimepath+=$XDG_DATA_HOME/nvim/lazy/fzf.vim
-set runtimepath+=~/.fzf
-set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-fugitive
-set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-rhubarb
-set runtimepath+=$XDG_DATA_HOME/nvim/lazy/gv.vim
 if !has('nvim')
+  set runtimepath+=$XDG_DATA_HOME/nvim/lazy/bullets.vim
+  set runtimepath+=$XDG_DATA_HOME/nvim/lazy/previm
+  set runtimepath+=$XDG_DATA_HOME/nvim/lazy/fzf.vim
+  set runtimepath+=~/.fzf
+  set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-fugitive
+  set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-rhubarb
+  set runtimepath+=$XDG_DATA_HOME/nvim/lazy/gv.vim
+  set runtimepath+=$XDG_DATA_HOME/nvim/lazy/iceberg.vim
   color iceberg
 endif
 
