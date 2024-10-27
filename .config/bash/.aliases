@@ -86,7 +86,7 @@ alias kmdn='(cd ${XDG_DATA_HOME}/kanbanmd && cat 2_ready.md <(echo) 3_doing.md |
 alias vis='touch Session.vim && vi +"doautocmd SessionLoadPost" -S'
 alias vig='vi -c "DiffviewOpen" -c "on|1bw"'
 alias viq='vi -c "cfile"'
-alias vit='\rm startuptime.log &> /dev/null; vi --startuptime startuptime.log +"sl 300m | q" && vi startuptime.log'
+alias vit='\rm startuptime.log &> /dev/null; vi --startuptime startuptime.log +"sl 300m | q" && vi startuptime.log && \rm startuptime.log &> /dev/null'
 alias memo='vi +"call timer_start(&updatetime + 100, { -> execute('\''set buftype=nofile'\'') })"'
 
 # date
