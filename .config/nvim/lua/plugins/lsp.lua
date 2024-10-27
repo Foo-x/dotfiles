@@ -139,6 +139,8 @@ local function mason_lspconfig_config(_, opts)
           char = '▏',
         },
       })
+
+      SetupColor()
     end,
   })
 

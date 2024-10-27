@@ -8,3 +8,5 @@ vim.cmd.exe('"source" $XDG_CONFIG_HOME . "/vim/vimrc"')
 
 require('user.commands')
 require('user.spzenhan')
+
+SetupColor()

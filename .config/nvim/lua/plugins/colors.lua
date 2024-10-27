@@ -101,7 +101,7 @@ end, {
 
 vim.cmd('hi netrwMarkFile ctermbg=darkmagenta')
 
-local function noirbuddy_config()
+function SetupColor()
   vim.cmd('NoirbuddySlate')
 end
 
@@ -123,8 +123,6 @@ return {
     dependencies = {
       { 'https://github.com/tjdevries/colorbuddy.nvim' }
     },
-    lazy = false,
-    priority = 1000,
-    config = noirbuddy_config,
+    lazy = true,
   },
 }
