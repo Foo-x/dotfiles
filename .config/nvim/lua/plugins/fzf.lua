@@ -10,13 +10,18 @@ local function fzf_config()
     \ }))
 
     fun! s:oil_open(line)
-      let l:dir = substitute(a:line, '^\s*[.0-9]*\s*', '', '')
+      let l:dir = substitute(a:line, '^\s\+[.0-9]\+\s\+', '', '')
       exe 'Oil ' . l:dir
     endf
     command! FOil call fzf#run(fzf#wrap({
+      \ 'source': 'bfs d',
+      \ 'sink': function('s:oil_open'),
+      \ 'options': '--prompt "Oil> " --preview "ls --dereference-command-line -1 --sort=time --color=always {}"'
+    \ }))
+    command! FZoxide call fzf#run(fzf#wrap({
       \ 'source': 'zoxide query --list --score',
       \ 'sink': function('s:oil_open'),
-      \ 'options': '--prompt "Oil> " --preview "ls --dereference-command-line -1 --sort=time --color=always {2}"'
+      \ 'options': '--prompt "Zoxide> " --preview "ls --dereference-command-line -1 --sort=time --color=always {2}"'
     \ }))
   ]]
 end
@@ -33,6 +38,7 @@ return {
     keys = {
       { '<Plug>(fzf)e', '<Cmd>FFern<CR>' },
       { '<Plug>(fzf)o', '<Cmd>FOil<CR>' },
+      { '<Plug>(fzf)z', '<Cmd>FZoxide<CR>' },
     },
     config = fzf_config
   },

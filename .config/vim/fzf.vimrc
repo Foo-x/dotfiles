@@ -1,8 +1,7 @@
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
-nnoremap <Plug>(fzf) :<C-u>HistoryWS<CR>
+nnoremap <Plug>(fzf) :<C-u>GFiles<CR>
 nnoremap <Plug>(fzf)f :<C-u>Files<CR>
-nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
 nnoremap <Plug>(fzf)H :<C-u>History<CR>
 nnoremap <Plug>(fzf)ar :<C-u>Args<CR>

@@ -14,7 +14,7 @@ local function kmd_syntax()
   vim.cmd [[
     windo syntax match KmdContext display " @\S\+"
     windo syntax match KmdTag display " +\S\+"
-    windo syntax match KmdDue display " \~\d\{4\}-\d\{2\}-\d\{2\}"
+    windo syntax match KmdDue display " \~\d\{4\}[-/]\?\d\{2\}[-/]\?\d\{2\}"
   ]]
 end
 

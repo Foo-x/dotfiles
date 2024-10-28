@@ -55,6 +55,16 @@ local function mason_lspconfig_opts()
         }
       end
 
+      if server == 'lua_ls' then
+        opts.settings = {
+          Lua = {
+            diagnostics = {
+              globals = { 'vim' },
+            },
+          },
+        }
+      end
+
       require('lspconfig')[server].setup(opts)
     end,
   }

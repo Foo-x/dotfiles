@@ -88,7 +88,6 @@ alias vig='vi -c "DiffviewOpen" -c "on|1bw"'
 alias viq='vi -c "cfile"'
 alias vit='\rm startuptime.log &> /dev/null; vi --startuptime startuptime.log +"sl 300m | q" && vi startuptime.log && \rm startuptime.log &> /dev/null'
 alias memo='vi +"call timer_start(&updatetime + 100, { -> execute('\''set buftype=nofile'\'') })"'
-alias o='vi . +"vs"'
 
 # date
 alias dt='date'
@@ -250,6 +249,10 @@ function fcd() {
   if [[ -n "$dir" ]]; then
     cd "$dir"
   fi
+}
+
+function o() {
+  vi ${1:-.} +"vs"
 }
 
 function check_truecolor() {

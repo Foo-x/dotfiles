@@ -51,9 +51,19 @@ local oil_opts = {
       callback = function()
         require('oil.actions').yank_entry.callback(':p')
         vim.cmd.doautocmd('TextYankPost')
-        vim.fn['YankToClipboard'](vim.fn.getreg(vim.v.register))
+        if vim.v.register == '"' then
+          vim.fn['YankToClipboard'](vim.fn.getreg(vim.v.register))
+        end
       end,
-    }
+    },
+    ['gY'] = {
+      desc = 'Yank full path of all entries',
+      callback = function()
+        vim.fn.setreg('o', '')
+        vim.cmd([[2,$g/^/exe 'norm "Ogy' | let @O="\n"]])
+        vim.fn.setreg('"', vim.fn.getreg('o'))
+      end,
+    },
   },
   view_options = {
     show_hidden = true,
