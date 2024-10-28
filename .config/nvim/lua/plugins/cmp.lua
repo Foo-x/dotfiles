@@ -11,10 +11,10 @@ local function cmp_config()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
   end
 
-  vim.api.nvim_create_autocmd('BufNew', {
+  vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNew' }, {
     group = vim.api.nvim_create_augroup('CmpSetup', {}),
     callback = function()
-      if vim.bo.filetype == 'markdown' then
+      if vim.bo.filetype == 'markdown' or vim.b.cmp_loaded then
         return
       end
 
@@ -49,7 +49,7 @@ local function cmp_config()
             end,
           }),
           ['<S-Tab>'] = cmp.mapping({
-            i = function()
+            i = function(fallback)
               if cmp.visible() then
                 cmp.select_prev_item()
               elseif vim.fn['vsnip#jumpable'](-1) == 1 then
@@ -79,6 +79,7 @@ local function cmp_config()
           ghost_text = true,
         },
       })
+      vim.b.cmp_loaded = true
     end
   })
 
@@ -145,11 +146,10 @@ local function cmp_config()
 end
 
 local function codeium_init()
-  vim.g.codeium_enabled = false
+  vim.g.codeium_enabled = true
 end
 
 local function codeium_config()
-  vim.g.codeium_enabled = true
   if vim.g.codeium_enabled then
     vim.g.codeium_disable_bindings = 1
     vim.keymap.set('i', "<M-'>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
@@ -158,6 +158,8 @@ local function codeium_config()
     vim.keymap.set('i', '<M-]>', function() return vim.fn['codeium#CycleOrComplete']() end,
       { expr = true, silent = true })
     vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+
+    vim.cmd('CodeiumEnable')
   end
 end
 

@@ -83,7 +83,7 @@ vim.api.nvim_create_user_command('NoirbuddySlate', function()
     hi LspReferenceText guibg=#323232
     hi LspReferenceRead guibg=#323232
     hi LspReferenceWrite guibg=#323232
-    hi link CodeiumSuggestion NonText
+    hi link CodeiumSuggestion ColorColumn
   ]]
 
   require('leap').init_highlight(true)
