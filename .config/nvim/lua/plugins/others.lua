@@ -64,6 +64,15 @@ local oil_opts = {
         vim.fn.setreg('"', vim.fn.getreg('o'))
       end,
     },
+    ['`'] = false,
+    ['~'] = false,
+    ['g\\'] = false,
+    ['<C-s>'] = false,
+    ['<C-h>'] = false,
+    ['<C-t>'] = false,
+    ['<leader>\\'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
+    ['<leader>_'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
+    ['<leader>t'] = { 'actions.select', opts = { tab = true }, desc = 'Open the entry in new tab' },
   },
   view_options = {
     show_hidden = true,
@@ -129,8 +138,8 @@ return {
     lazy = false,
     keys = {
       { '<leader>e',     '<Plug>(oil)' },
-      { '<Plug>(oil)',   '<Cmd>Oil<CR>' },
-      { '<Plug>(oil)\\', '<Cmd>Oil<CR><Cmd>vs<CR>' },
+      { '<Plug>(oil)e',  '<Cmd>Oil<CR>' },
+      { '<Plug>(oil)\\', '<Cmd>tabnew<CR><Cmd>Oil<CR><Cmd>vs<CR>' },
     },
     opts = oil_opts,
   }
