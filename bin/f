@@ -107,9 +107,11 @@ await yargs(process.argv.slice(2))
       .command(['chp [args]'], 'fzf git cherry-pick', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1` }}`).stdout.toString();
-        if (target) {
-          await $`${{ raw: `git cherry-pick ${process.argv.slice(4)} ${target}` }}`;
+        const target = Buffer.alloc(10);
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git cherry-pick ${process.argv.slice(4)} ${cid}`;
         }
       })
       .command(['rb [query]', 'rebase'], 'fzf git rebase', (yargs: any) => {
@@ -119,7 +121,9 @@ await yargs(process.argv.slice(2))
         await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
 
         const cid = target.toString().replace(/\0|\n/g, '');
-        await $`git rebase ${cid}`.nothrow();
+        if (cid) {
+          await $`git rebase ${cid}`;
+        }
       })
       .command(['rbi [query]'], 'fzf git rebase -i', (yargs: any) => {
         yargs.strict(false);
@@ -128,7 +132,9 @@ await yargs(process.argv.slice(2))
         await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
 
         const cid = target.toString().replace(/\0|\n/g, '');
-        await $`git rebase -i ${cid} > /dev/tty`.nothrow();
+        if (cid) {
+          await $`git rebase -i ${cid} > /dev/tty`;
+        }
       })
       .command(['bis [query]'], 'fzf git bisect start', (yargs: any) => {
         yargs.strict(false);
@@ -137,74 +143,92 @@ await yargs(process.argv.slice(2))
         await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
 
         const cid = target.toString().replace(/\0|\n/g, '');
-        await $`git bisect start @ ${cid}`.nothrow();
+        if (cid) {
+          await $`git bisect start @ ${cid}`;
+        }
       })
       .command(['cf [args]'], 'fzf git commit --fixup', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
-        if (target) {
-          await $`${{ raw: `git commit --fixup ${target} ${process.argv.slice(4)}` }}`;
+        const target = Buffer.alloc(10);
+        await $`git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git commit --fixup ${cid} ${process.argv.slice(4)}`.nothrow();
         }
       })
       .command(['cF [args]'], 'fzf git commit --fixup and rebase', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
-        if (target) {
-          await $`${{ raw: `git commit --fixup ${target} ${process.argv.slice(4)}` }}`;
-          await $`${{ raw: `git -c sequence.editor=true rebase -i --autosquash ${target}^` }}`;
+        const target = Buffer.alloc(10);
+        await $`git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git commit --fixup ${cid} ${process.argv.slice(4)}`.nothrow();
+          await $`git -c sequence.editor=true rebase -i --autosquash ${cid}^`;
         }
       })
       .command(['ca [args]'], 'fzf git commit --fixup amend', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
-        if (target) {
-          await $`${{ raw: `git commit --fixup amend:${target} ${process.argv.slice(4)} > /dev/tty` }}`;
+        const target = Buffer.alloc(10);
+        await $`git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git commit --fixup amend:${cid} ${process.argv.slice(4)} > /dev/tty`;
         }
       })
       .command(['cA [args]'], 'fzf git commit --fixup amend and rebase', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
-        if (target) {
-          await $`${{ raw: `git commit --fixup amend:${target} ${process.argv.slice(4)} > /dev/tty` }}`;
-          await $`${{ raw: `git -c sequence.editor=true rebase -i --autosquash ${target}^ > /dev/tty` }}`;
+        const target = Buffer.alloc(10);
+        await $`git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git commit --fixup amend:${cid} ${process.argv.slice(4)} > /dev/tty`;
+          await $`git -c sequence.editor=true rebase -i --autosquash ${cid}^ > /dev/tty`;
         }
       })
       .command(['cr [args]'], 'fzf git commit --fixup reword', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
-        if (target) {
-          await $`${{ raw: `git commit --fixup reword:${target} ${process.argv.slice(4)} > /dev/tty` }}`;
+        const target = Buffer.alloc(10);
+        await $`git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git commit --fixup reword:${cid} ${process.argv.slice(4)} > /dev/tty`;
         }
       })
       .command(['cR [args]'], 'fzf git commit --fixup reword and rebase', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
-        if (target) {
-          await $`${{ raw: `git commit --fixup reword:${target} ${process.argv.slice(4)} > /dev/tty` }}`;
-          await $`${{ raw: `git -c sequence.editor=true rebase -i --autosquash ${target}^ > /dev/tty` }}`;
+        const target = Buffer.alloc(10);
+        await $`git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git commit --fixup reword:${cid} ${process.argv.slice(4)} > /dev/tty`;
+          await $`git -c sequence.editor=true rebase -i --autosquash ${cid}^ > /dev/tty`;
         }
       })
       .command(['cs [args]'], 'fzf git commit --squash', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
-        if (target) {
-          await $`${{ raw: `git commit --squash ${target} ${process.argv.slice(4)} > /dev/tty` }}`;
+        const target = Buffer.alloc(10);
+        await $`git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git commit --squash ${cid} ${process.argv.slice(4)} > /dev/tty`.nothrow();
         }
       })
       .command(['cS [args]'], 'fzf git commit --squash and rebase', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %"` }}`).stdout.toString().split(' ')[0];
-        if (target) {
-          await $`${{ raw: `git commit --squash ${target} ${process.argv.slice(4)} > /dev/tty` }}`;
-          await $`${{ raw: `git rebase -i --autosquash ${target}^ > /dev/tty` }}`;
+        const target = Buffer.alloc(10);
+        await $`git bcl | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        const cid = target.toString().replace(/\0|\n/g, '');
+        if (cid) {
+          await $`git commit --squash ${cid} ${process.argv.slice(4)} > /dev/tty`.nothrow();
+          await $`git rebase -i --autosquash ${cid}^ > /dev/tty`;
         }
       })
   })
