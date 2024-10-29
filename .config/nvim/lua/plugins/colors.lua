@@ -3,6 +3,8 @@ local function kmd_syntax()
     hi link KmdContext Changed
     hi link KmdTag Added
     hi link KmdDue Removed
+    hi link KmdHighPriority KmdDue
+    hi link KmdLowPriority Comment
   ]]
 
   -- do nothing if kmd syntax is already set
@@ -15,6 +17,8 @@ local function kmd_syntax()
     windo syntax match KmdContext display " @\S\+"
     windo syntax match KmdTag display " +\S\+"
     windo syntax match KmdDue display " \~\d\{4\}[-/]\?\d\{2\}[-/]\?\d\{2\}"
+    windo syntax match KmdHighPriority display " (H) "
+    windo syntax match KmdLowPriority display " (L) "
   ]]
 end
 
