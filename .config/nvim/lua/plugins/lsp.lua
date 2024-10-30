@@ -131,6 +131,11 @@ local function mason_lspconfig_config(_, opts)
 
       vim.diagnostic.config({
         severity_sort = true,
+        virtual_text = {
+          severity = {
+            min = vim.diagnostic.severity.WARN,
+          },
+        },
       })
 
       local client = vim.lsp.get_client_by_id(ev.data.client_id)

@@ -253,7 +253,7 @@ function fcd() {
 }
 
 function o() {
-  vi ${1:-.} +"vs"
+  vi ${1:-.} +"sp" +"windo vs"
 }
 
 function check_truecolor() {

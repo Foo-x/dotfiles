@@ -66,10 +66,13 @@ local oil_opts = {
     },
     ['`'] = false,
     ['~'] = false,
+    ['-'] = false,
     ['g\\'] = false,
     ['<C-s>'] = false,
     ['<C-h>'] = false,
     ['<C-t>'] = false,
+    ['<'] = 'actions.parent',
+    ['>'] = 'actions.select',
     ['<leader>\\'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
     ['<leader>_'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
     ['<leader>t'] = { 'actions.select', opts = { tab = true }, desc = 'Open the entry in new tab' },
@@ -139,7 +142,7 @@ return {
     keys = {
       { '<leader>e',     '<Plug>(oil)' },
       { '<Plug>(oil)e',  '<Cmd>Oil<CR>' },
-      { '<Plug>(oil)\\', '<Cmd>tabnew<CR><Cmd>Oil<CR><Cmd>vs<CR>' },
+      { '<Plug>(oil)\\', '<Cmd>tabnew<CR><Cmd>Oil<CR><Cmd>sp<CR><Cmd>windo vs<CR>' },
     },
     opts = oil_opts,
   }

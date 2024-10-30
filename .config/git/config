@@ -124,6 +124,7 @@
     acp = !git add --all && git commit && git push
     acep = !git add --all && git commit --allow-empty-message -m '' && git push
     f = fetch
+    fa = fetch --all
     rv = remote -vv
     ra = remote add
     rsu = remote set-url
