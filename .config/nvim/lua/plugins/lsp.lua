@@ -173,6 +173,7 @@ local function mason_null_ls_opts()
     'phpcs',
     'php-cs-fixer',
     'shfmt',
+    'stylua',
   }
   if vim.fn.executable('npm') == 1 then
     for _, v in pairs({
@@ -181,11 +182,6 @@ local function mason_null_ls_opts()
       'markuplint',
       'prettier',
       'sql-formatter',
-    }) do table.insert(ensure_installed, v) end
-  end
-  if vim.fn.executable('tar') == 1 and vim.fn.executable('xz') == 1 then
-    for _, v in pairs({
-      'shellcheck',
     }) do table.insert(ensure_installed, v) end
   end
   return {
@@ -216,6 +212,7 @@ local function mason_null_ls_config(_, opts)
         extra_args = { '-i', '2', '-sr' },
       }),
       null_ls.builtins.formatting.sql_formatter,
+      null_ls.builtins.formatting.stylua,
     }
   })
 end
