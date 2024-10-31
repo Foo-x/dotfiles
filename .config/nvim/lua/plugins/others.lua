@@ -1,6 +1,6 @@
 local colorizer_opts = {
   filetypes = {
-    'css'
+    'css',
   },
 }
 
@@ -29,7 +29,9 @@ local function kulala_init()
       ['http'] = 'http',
     },
   })
-  vim.api.nvim_create_user_command('KulalaScratchpad', function() require('kulala').scratchpad() end, {})
+  vim.api.nvim_create_user_command('KulalaScratchpad', function()
+    require('kulala').scratchpad()
+  end, {})
 end
 
 local oil_opts = {
@@ -74,13 +76,30 @@ local oil_opts = {
     ['<'] = 'actions.parent',
     ['>'] = 'actions.select',
     ['<leader>\\'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
-    ['<leader>_'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
+    ['<leader>_'] = {
+      'actions.select',
+      opts = { horizontal = true },
+      desc = 'Open the entry in a horizontal split',
+    },
     ['<leader>t'] = { 'actions.select', opts = { tab = true }, desc = 'Open the entry in new tab' },
   },
   view_options = {
     show_hidden = true,
   },
 }
+
+local function oil_config(_, opts)
+  require('oil').setup(opts)
+  vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+    group = vim.api.nvim_create_augroup('OilConfig', {}),
+    pattern = 'oil://*',
+    callback = function()
+      if vim.fn.executable('zoxide') then
+        os.execute('zoxide add ' .. string.match(vim.fn.bufname(), 'oil://(.+)/'))
+      end
+    end,
+  })
+end
 
 return {
   {
@@ -122,7 +141,7 @@ return {
   {
     'https://github.com/kylechui/nvim-surround',
     event = 'VeryLazy',
-    opts = {}
+    opts = {},
   },
   {
     'https://github.com/chrisgrieser/nvim-various-textobjs',
@@ -140,10 +159,11 @@ return {
     dependencies = { "https://github.com/nvim-tree/nvim-web-devicons" },
     lazy = false,
     keys = {
-      { '<leader>e',     '<Plug>(oil)' },
-      { '<Plug>(oil)e',  '<Cmd>Oil<CR>' },
+      { '<leader>e', '<Plug>(oil)' },
+      { '<Plug>(oil)e', '<Cmd>Oil<CR>' },
       { '<Plug>(oil)\\', '<Cmd>tabnew<CR><Cmd>Oil<CR><Cmd>sp<CR><Cmd>windo vs<CR>' },
     },
     opts = oil_opts,
-  }
+    config = oil_config,
+  },
 }
