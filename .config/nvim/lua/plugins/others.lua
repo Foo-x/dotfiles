@@ -90,13 +90,19 @@ local oil_opts = {
 
 local function oil_config(_, opts)
   require('oil').setup(opts)
-  vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  vim.api.nvim_create_autocmd('User', {
     group = vim.api.nvim_create_augroup('OilConfig', {}),
-    pattern = 'oil://*',
+    pattern = 'VeryLazy',
     callback = function()
-      if vim.fn.executable('zoxide') then
-        os.execute('zoxide add ' .. string.match(vim.fn.bufname(), 'oil://(.+)/'))
-      end
+      vim.api.nvim_create_autocmd('BufWinEnter', {
+        group = vim.api.nvim_create_augroup('OilConfig', {}),
+        pattern = 'oil://*',
+        callback = function()
+          if vim.fn.executable('zoxide') then
+            os.execute('zoxide add ' .. string.match(vim.fn.bufname(), 'oil://(.+)/'))
+          end
+        end,
+      })
     end,
   })
 end

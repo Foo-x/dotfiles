@@ -232,6 +232,24 @@ command! DeleteCurrentFile call s:delete_current_file()
 command! Typos !typos %
 command! TyposAll !typos
 
+fun! s:vsplit_output(command) range
+  let l:input = getline(a:firstline, a:lastline)
+  let l:input_to_command = join(l:input, "\n") . "\n"
+  let l:output = split(system(a:command, l:input_to_command), "\n")
+  vsplit
+  enew
+  call setline(1, ['◆入力', ''])
+  call append(line('$'), l:input + [''])
+  call append(line('$'), ['◆出力', ''])
+  call append(line('$'), l:output + [''])
+  set buftype=nofile
+  set readonly
+endf
+command! -range AiChat <line1>,<line2>call s:vsplit_output('ai')
+command! -range AiChatEnglish <line1>,<line2>call s:vsplit_output('ai -r english')
+command! -range AiChatJapanese <line1>,<line2>call s:vsplit_output('ai -r japanese')
+command! -range AiChatPolish <line1>,<line2>call s:vsplit_output('ai -r polish')
+
 if has('nvim')
   command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif
   command! VirtualTextToggle lua vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
