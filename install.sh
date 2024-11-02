@@ -263,7 +263,7 @@ vimrc_files=$(cd ${DOT_DIR}/.config/vim && \ls -1 *vimrc)
 printf "${vimrc_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/vim/{} ${XDG_CONFIG_HOME}/vim/{}
 
 # setup nvim
-nvim_files=$(cd ${DOT_DIR}/.config/nvim && \ls -1)
+nvim_files=$(cd ${DOT_DIR}/.config/nvim && \ls -1F)
 printf "${nvim_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
 
 # setup vsnip
