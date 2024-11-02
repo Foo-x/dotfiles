@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # crontab -e
-# * * * * * /usr/bin/env python ${HOME}/.dotfiles/bin/dedup_history
+# * * * * * export HISTFILE="${HOME}/.local/state/bash/history" && /usr/bin/env python ${HOME}/.dotfiles/bin/dedup_history
 
 import operator
 import re
