@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+# crontab -e
+# * * * * * /usr/bin/env python ${HOME}/.dotfiles/bin/dedup_history
+
+import operator
+import re
+from os import getenv
+from os.path import expanduser
+from typing import Dict, List, Optional
+
+timestamp_pattern = re.compile("^#\d+$")
+history_path = expanduser(getenv("HISTFILE", "~/.bash_history"))
+
+
+def load_history() -> List[str]:
+    with open(history_path) as f:
+        return f.read().splitlines()
+
+
+def extract_last_command(history: List[str]) -> Optional[str]:
+    try:
+        last_timestamp_line_num = next(
+            i
+            for i, line in reversed(list(enumerate(history)))
+            if timestamp_pattern.fullmatch(line)
+        )
+        return "\n".join(history[last_timestamp_line_num + 1 :])
+    except:
+        return
+
+
+def deduplicate_history(history: List[str]) -> List[str]:
+    commands: Dict[str, str] = {}
+    command = ""
+    timestamp = ""
+    for line in history:
+        if timestamp_pattern.fullmatch(line):
+            if command:
+                commands[command.strip()] = timestamp
+                command = ""
+            timestamp = line
+        else:
+            command += line + "\n"
+
+    if command:
+        commands[command.strip()] = timestamp
+
+    result: List[str] = []
+    sorted_commands = sorted(commands.items(), key=operator.itemgetter(1))
+    for command, timestamp in sorted_commands:
+        result.append(timestamp)
+        result.append(command)
+
+    return result
+
+
+def update_history(new_history: List[str]):
+    out = "\n".join(new_history) + "\n"
+    with open(history_path, "w") as f:
+        f.write(out)
+
+
+def main():
+    history = load_history()
+    if len(history) <= 1:
+        return
+
+    last_command = extract_last_command(history)
+    if not last_command:
+        return
+
+    new_history = deduplicate_history(history)
+    update_history(new_history)
+
+
+main()
