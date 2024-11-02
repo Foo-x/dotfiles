@@ -109,15 +109,13 @@ function dispatch_prompt_command() {
 }
 export PROMPT_COMMAND='dispatch_prompt_command'
 
-function __dedup_history() {
+function __histsave() {
   history -a
   history -c
   history -r
 }
 
-if type python &> /dev/null || type python3 &> /dev/null; then
-  export PROMPT_COMMAND_HISTSAVE='__dedup_history'
-fi
+export PROMPT_COMMAND_HISTSAVE='__histsave'
 
 function lsgit() {
   ls -A
