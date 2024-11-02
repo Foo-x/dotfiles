@@ -154,6 +154,7 @@
     re = reset
     res = reset --soft
     reh = reset --hard
+    rek = reset --keep
     us = reset @  # unstage
 
     # diff
