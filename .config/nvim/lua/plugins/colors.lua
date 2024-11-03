@@ -1,11 +1,11 @@
 local function kmd_syntax()
-  vim.cmd [[
+  vim.cmd([[
     hi link KmdContext Changed
     hi link KmdTag Added
     hi link KmdDue Removed
     hi link KmdHighPriority KmdDue
     hi link KmdLowPriority Comment
-  ]]
+  ]])
 
   -- do nothing if kmd syntax is already set
   local syntax_list = vim.api.nvim_exec2('syntax list', { output = true }).output
@@ -13,13 +13,18 @@ local function kmd_syntax()
     return
   end
 
-  vim.cmd [[
-    windo syntax match KmdContext display " @\S\+"
-    windo syntax match KmdTag display " +\S\+"
-    windo syntax match KmdDue display " \~\d\{4\}[-/]\?\d\{2\}[-/]\?\d\{2\}"
-    windo syntax match KmdHighPriority display " (H) "
-    windo syntax match KmdLowPriority display " (L) "
-  ]]
+  for _, wininfo in ipairs(vim.fn.getwininfo()) do
+    vim.fn.win_execute(
+      wininfo.winid,
+      [[
+        syntax match KmdContext display " @\S\+"
+        syntax match KmdTag display " +\S\+"
+        syntax match KmdDue display " \~\d\{4\}[-/]\?\d\{2\}[-/]\?\d\{2\}"
+        syntax match KmdHighPriority display " (H) "
+        syntax match KmdLowPriority display " (L) "
+      ]]
+    )
+  end
 end
 
 vim.api.nvim_create_user_command('Everforest', function()
@@ -34,7 +39,7 @@ vim.api.nvim_create_user_command('Everforest', function()
 end, {})
 
 vim.api.nvim_create_user_command('Iceberg', function()
-  vim.cmd [[
+  vim.cmd([[
     color iceberg
     hi GitGutterAdd guibg=none
     hi GitGutterChange guibg=none
@@ -42,7 +47,7 @@ vim.api.nvim_create_user_command('Iceberg', function()
     hi GitGutterChangeDelete guibg=none
     hi SignColumn guibg=none
     hi FoldColumn guibg=none
-  ]]
+  ]])
   kmd_syntax()
 end, {})
 
@@ -62,9 +67,9 @@ vim.api.nvim_create_user_command('NoirbuddySlate', function()
       diff_add = '#6688AA',
       diff_change = '#77AA77',
       diff_delete = '#AA6666',
-    }
+    },
   })
-  vim.cmd [[
+  vim.cmd([[
     hi DiffText guifg=#f5f5f5 guibg=#336633
     hi GitGutterAdd guifg=#6688AA
     hi GitGutterChange guifg=#77AA77
@@ -88,7 +93,7 @@ vim.api.nvim_create_user_command('NoirbuddySlate', function()
     hi LspReferenceRead guibg=#323232
     hi LspReferenceWrite guibg=#323232
     hi link CodeiumSuggestion ColorColumn
-  ]]
+  ]])
 
   require('leap').init_highlight(true)
   kmd_syntax()
@@ -125,7 +130,7 @@ return {
   {
     'https://github.com/jesseleite/nvim-noirbuddy',
     dependencies = {
-      { 'https://github.com/tjdevries/colorbuddy.nvim' }
+      { 'https://github.com/tjdevries/colorbuddy.nvim' },
     },
     lazy = true,
   },
