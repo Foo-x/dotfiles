@@ -39,6 +39,7 @@ if !exists('g:insert_print_templates')
   let g:insert_print_templates.typescriptreact = 'console.log(`${performance.now() / 1000}s {}`);'
   let g:insert_print_templates.vue = 'console.log(`${performance.now() / 1000}s {}`);'
   let g:insert_print_templates.lua = 'print(os.clock() .. "s {}")'
+  let g:insert_print_templates.sh = 'date "+%s.%6Ns {}"'
 endif
 
 if !exists('g:insert_print_text')
