@@ -31,6 +31,7 @@ local function kulala_init()
   })
   vim.api.nvim_create_user_command('KulalaScratchpad', function()
     require('kulala').scratchpad()
+    vim.bo.buftype = 'nofile'
   end, {})
 end
 
@@ -64,8 +65,6 @@ local function kulala_config(_, opts)
     group = vim.api.nvim_create_augroup('Kulala', {}),
     pattern = { 'http' },
     callback = function()
-      vim.bo.buftype = 'nofile'
-
       vim.keymap.set('n', '<CR>', require('kulala').run, { buffer = 0, desc = 'Execute the request' })
       vim.keymap.set('n', '[r', require('kulala').jump_prev, { buffer = 0, desc = 'Jump to the previous request' })
       vim.keymap.set('n', ']r', require('kulala').jump_next, { buffer = 0, desc = 'Jump to the next request' })
@@ -217,7 +216,6 @@ return {
     'https://github.com/mistweaverco/kulala.nvim',
     init = kulala_init,
     ft = 'http',
-    cmd = 'KulalaScratchpad',
     opts = kulala_opts,
     config = kulala_config,
   },
