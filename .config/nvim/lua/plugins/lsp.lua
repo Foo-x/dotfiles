@@ -1,5 +1,20 @@
 local DOT_DIR = vim.fn.get(vim.fn.environ(), 'DOT_DIR', vim.env.HOME .. '/.dotfiles')
 
+vim.g.format_on_save = false
+vim.api.nvim_create_user_command('EnableFormatOnSave', function()
+  vim.g.format_on_save = true
+end, {})
+vim.api.nvim_create_user_command('DisableFormatOnSave', function()
+  vim.g.format_on_save = false
+end, {})
+vim.api.nvim_create_user_command('ListCodeActions', function()
+  for _, server in ipairs(vim.lsp.get_active_clients()) do
+    print(server.name)
+    local codeActionProvider = server.server_capabilities.codeActionProvider
+    print('  ' .. vim.inspect(type(codeActionProvider) == 'table' and codeActionProvider.codeActionKinds or {}))
+  end
+end, {})
+
 local function mason_lspconfig_opts()
   local ensure_installed = {
     'lua_ls',
@@ -114,26 +129,52 @@ local function mason_lspconfig_config(_, opts)
       vim.keymap.set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, { buffer = ev.buf })
       vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = ev.buf })
       vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf })
-      if
-        contains({
-          'javascript',
-          'javascriptreact',
-          'typescript',
-          'typescriptreact',
-          'vue',
-        }, vim.bo.filetype)
-      then
-        vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
+
+      local function format(async)
+        if
+          contains({
+            'javascript',
+            'javascriptreact',
+            'typescript',
+            'typescriptreact',
+            'vue',
+          }, vim.bo.filetype)
+        then
           if vim.fn.exists(':EslintFixAll') == 2 then
             vim.cmd([[EslintFixAll]])
           end
-          vim.lsp.buf.format({ async = true, name = 'null-ls' })
-        end, { buffer = ev.buf })
-      else
-        vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
-          vim.lsp.buf.format({ async = true })
-        end, { buffer = ev.buf })
+          vim.lsp.buf.format({ async = async, name = 'null-ls' })
+        else
+          vim.lsp.buf.format({ async = async })
+        end
+        for _, action in pairs({
+          'source.removeUnused',
+          'source.addMissingImports',
+          'source.organizeImports',
+          'source.fixAll',
+        }) do
+          vim.lsp.buf.code_action({
+            context = {
+              only = { action },
+            },
+            apply = true,
+          })
+        end
       end
+
+      vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
+        format(true)
+      end, { buffer = ev.buf })
+
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('FormatOnSave' .. ev.buf, {}),
+        buffer = ev.buf,
+        callback = function()
+          if vim.g.format_on_save then
+            format(false)
+          end
+        end,
+      })
 
       vim.diagnostic.config({
         severity_sort = true,
