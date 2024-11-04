@@ -104,6 +104,7 @@ fi
 if ! has mise; then
   curl https://mise.jdx.dev/install.sh | sh
 fi
+export PATH="${XDG_DATA_HOME}/mise/shims:${PATH}"
 
 # install node
 if ! has node; then
