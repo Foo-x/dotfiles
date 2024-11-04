@@ -60,7 +60,14 @@ export LESS_TERMCAP_ue=$'\E[0m'     # Ends underline.
 
 export GIT_PAGER=delta
 
-[[ "${WSL_DISTRO_NAME}" ]] && export BROWSER=wslview
+if [[ "${WSL_DISTRO_NAME}" ]]; then
+  export BROWSER=wslview
+  if [[ $(uname -r) == *WSL2 ]]; then
+    export WSL_VERSION=2
+  else
+    export WSL_VERSION=1
+  fi
+fi
 
 export LANG=C
 LOCALE_LIST="$(locale -a)"
