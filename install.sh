@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-DOT_DIR="${HOME}/.dotfiles"
+export DOT_DIR="${HOME}/.dotfiles"
 XDG_CONFIG_HOME="${HOME}/.config"
 XDG_CACHE_HOME="${HOME}/.cache"
 XDG_DATA_HOME="${HOME}/.local/share"
