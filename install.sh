@@ -54,7 +54,6 @@ fi
 
 mkdir -p ${HOME}/.local/bin
 binfiles="
-backup_history
 nvimdirdiff
 f
 vipe

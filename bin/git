@@ -2,12 +2,12 @@
 
 function is_win_dir() {
   case $(pwd -P) in
-    /mnt/*) return $(true);;
-    *) return $(false);;
+  /mnt/*) return $(true) ;;
+  *) return $(false) ;;
   esac
 }
 
-if is_win_dir && type git.exe &> /dev/null; then
+if is_win_dir && type git.exe &> /dev/null && [[ ${WSL_VERSION} == 2 ]]; then
   git.exe "$@"
 else
   /usr/bin/git "$@"
