@@ -22,7 +22,9 @@ local function mason_lspconfig_opts()
       'ts_ls',
       'vimls',
       'yamlls',
-    }) do table.insert(ensure_installed, v) end
+    }) do
+      table.insert(ensure_installed, v)
+    end
   end
   local handlers = {
     function(server)
@@ -32,26 +34,25 @@ local function mason_lspconfig_opts()
           if vim.b.large_buf then
             client.stop()
           end
-        end
+        end,
       }
 
       if server == 'ts_ls' then
         opts.init_options = {
           plugins = {
             {
-              name = "@vue/typescript-plugin",
-              location = vim.trim(vim.fn.system('npm config get prefix')) ..
-                  '/lib/node_modules/@vue/typescript-plugin',
-              languages = { "vue" },
+              name = '@vue/typescript-plugin',
+              location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
+              languages = { 'vue' },
             },
           },
         }
         opts.filetypes = {
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-          "vue",
+          'javascript',
+          'javascriptreact',
+          'typescript',
+          'typescriptreact',
+          'vue',
         }
       end
 
@@ -60,6 +61,9 @@ local function mason_lspconfig_opts()
           Lua = {
             diagnostics = {
               globals = { 'vim' },
+            },
+            format = {
+              enable = false,
             },
           },
         }
@@ -110,13 +114,15 @@ local function mason_lspconfig_config(_, opts)
       vim.keymap.set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, { buffer = ev.buf })
       vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = ev.buf })
       vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf })
-      if contains({
-            "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-            "vue",
-          }, vim.bo.filetype) then
+      if
+        contains({
+          'javascript',
+          'javascriptreact',
+          'typescript',
+          'typescriptreact',
+          'vue',
+        }, vim.bo.filetype)
+      then
         vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
           if vim.fn.exists(':EslintFixAll') == 2 then
             vim.cmd([[EslintFixAll]])
@@ -140,14 +146,14 @@ local function mason_lspconfig_config(_, opts)
 
       local client = vim.lsp.get_client_by_id(ev.data.client_id)
       if client.supports_method('textDocument/documentHighlight') then
-        vim.cmd [[
+        vim.cmd([[
               set updatetime=300
               augroup lsp_document_highlight
                 autocmd!
                 autocmd CursorHold,CursorHoldI <buffer> silent! lua vim.lsp.buf.document_highlight()
                 autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
               augroup END
-            ]]
+            ]])
       end
       require('ibl').setup({
         indent = {
@@ -159,9 +165,9 @@ local function mason_lspconfig_config(_, opts)
     end,
   })
 
-  local signs = { Error = " ", Warn = " ", Info = " ", Hint = "󰌵 " }
+  local signs = { Error = ' ', Warn = ' ', Info = ' ', Hint = '󰌵 ' }
   for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
+    local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
 
@@ -182,7 +188,9 @@ local function mason_null_ls_opts()
       'markuplint',
       'prettier',
       'sql-formatter',
-    }) do table.insert(ensure_installed, v) end
+    }) do
+      table.insert(ensure_installed, v)
+    end
   end
   return {
     ensure_installed = ensure_installed,
@@ -198,7 +206,7 @@ local function mason_null_ls_config(_, opts)
     sources = {
       null_ls.builtins.diagnostics.markdownlint.with({
         extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
-        method = null_ls.methods.DIAGNOSTICS_ON_SAVE
+        method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
       }),
       null_ls.builtins.formatting.markdownlint.with({
         extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
@@ -213,14 +221,14 @@ local function mason_null_ls_config(_, opts)
       }),
       null_ls.builtins.formatting.sql_formatter,
       null_ls.builtins.formatting.stylua,
-    }
+    },
   })
 end
 
 local lsp_signature_opts = {
   bind = true,
   handler_opts = {
-    border = 'single'
+    border = 'single',
   },
   select_signature_key = '<M-n>',
   move_cursor_key = '<M-x>',
@@ -242,9 +250,9 @@ return {
       {
         'https://github.com/antosha417/nvim-lsp-file-operations',
         dependencies = {
-          'https://github.com/nvim-lua/plenary.nvim'
+          'https://github.com/nvim-lua/plenary.nvim',
         },
-        opts = {}
+        opts = {},
       },
     },
     opts = mason_lspconfig_opts,
@@ -258,9 +266,9 @@ return {
       {
         'https://github.com/nvimtools/none-ls.nvim',
         dependencies = {
-          'https://github.com/nvim-lua/plenary.nvim'
+          'https://github.com/nvim-lua/plenary.nvim',
         },
-      }
+      },
     },
     opts = mason_null_ls_opts,
     config = mason_null_ls_config,

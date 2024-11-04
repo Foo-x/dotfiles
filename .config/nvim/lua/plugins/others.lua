@@ -34,6 +34,65 @@ local function kulala_init()
   end, {})
 end
 
+local kulala_opts = {
+  default_view = 'headers_body',
+  scratchpad_default_contents = {
+    '@MY_TOKEN_NAME=my_token_value',
+    '',
+    '# @name scratchpad_get',
+    'GET https://httpbin.org/get HTTP/1.1',
+    '',
+    '###',
+    '',
+    '# @name scratchpad_post',
+    'POST https://httpbin.org/post HTTP/1.1',
+    'accept: application/json',
+    'content-type: application/json',
+    '',
+    '{',
+    '  "foo": "bar"',
+    '}',
+  },
+  winbar = true,
+  default_winbar_panes = { 'headers_body', 'stats' },
+}
+
+local function kulala_config(_, opts)
+  require('kulala').setup(opts)
+
+  vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('Kulala', {}),
+    pattern = { 'http' },
+    callback = function()
+      vim.bo.buftype = 'nofile'
+
+      vim.keymap.set('n', '<CR>', require('kulala').run, { buffer = 0, desc = 'Execute the request' })
+      vim.keymap.set('n', '[r', require('kulala').jump_prev, { buffer = 0, desc = 'Jump to the previous request' })
+      vim.keymap.set('n', ']r', require('kulala').jump_next, { buffer = 0, desc = 'Jump to the next request' })
+      vim.keymap.set('n', '<Space>k', '<Plug>(kulala)', { buffer = 0 })
+      vim.keymap.set('n', '<Plug>(kulala)r', require('kulala').replay, { buffer = 0, desc = 'Replay the last run' })
+      vim.keymap.set(
+        'n',
+        '<Plug>(kulala)i',
+        require('kulala').inspect,
+        { buffer = 0, desc = 'Inspect the current request' }
+      )
+      vim.keymap.set(
+        'n',
+        '<Plug>(kulala)y',
+        require('kulala').copy,
+        { buffer = 0, desc = 'Copy the current request as a curl command' }
+      )
+      vim.keymap.set(
+        'n',
+        '<Plug>(kulala)p',
+        require('kulala').from_curl,
+        { buffer = 0, desc = 'Paste curl from clipboard as http request' }
+      )
+    end,
+  })
+end
+
 local oil_opts = {
   skip_confirm_for_simple_edits = true,
   keymaps = {
@@ -159,10 +218,12 @@ return {
     init = kulala_init,
     ft = 'http',
     cmd = 'KulalaScratchpad',
+    opts = kulala_opts,
+    config = kulala_config,
   },
   {
     'https://github.com/stevearc/oil.nvim',
-    dependencies = { "https://github.com/nvim-tree/nvim-web-devicons" },
+    dependencies = { 'https://github.com/nvim-tree/nvim-web-devicons' },
     lazy = false,
     keys = {
       { '<leader>e', '<Plug>(oil)' },

@@ -37,46 +37,28 @@ export HISTSIZE=100000
 export HISTFILE=${XDG_STATE_HOME}/bash/history
 export HISTFILESIZE=100000
 export HISTTIMEFORMAT='%F %T '
-export HISTCONTROL=ignorespace  # not save commands that space-beginned and duplicated to history
+export HISTCONTROL=ignorespace # not save commands that space-beginned and duplicated to history
 export HISTIGNORE='?:??:pwd:history:cd*:exit:clear'
 
-if [ "$TMUX" ]; then
-    export PATH=$(echo "$PATH" | sed -E 's#(.*):?.+.vscode-server[^:]+:#\1#')
-fi
-if type mise &> /dev/null; then
-    export PATH="${XDG_DATA_HOME}/mise/shims:$PATH"
-fi
-if type bun &> /dev/null; then
-    export PATH="$(bun pm -g bin 2> /dev/null):$PATH"
-fi
-if [ "${WSL_DISTRO_NAME}" ]; then
-    export PATH="/mnt/c/Users/$(powershell.exe '$env:username' | tr -d '\r')/Documents/spzenhan:$PATH"
-fi
+export PATH="${XDG_DATA_HOME}/mise/shims:$PATH"
+export PATH="${XDG_CACHE_HOME}/.bun/bin:$PATH"
 
 export EDITOR='nvim -p'
 export SUDO_EDITOR='$(type -p nvim)'
 
 export VIMINIT='let $MYVIMRC = has("nvim") ? "$XDG_CONFIG_HOME/nvim/init.lua" : "$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC'
 
-export PAGER='more'
-if type less &> /dev/null; then
-  export PAGER='less'
-  export LESS='RFMi'
-  export LESS_TERMCAP_mb=$'\E[1;31m'   # Begins blinking.
-  export LESS_TERMCAP_md=$'\E[36m'     # Begins bold.
-  export LESS_TERMCAP_so=$'\E[47;30m'  # Begins standout-mode.
-  export LESS_TERMCAP_us=$'\E[1;36m'   # Begins underline.
-  export LESS_TERMCAP_me=$'\E[0m'      # Ends mode.
-  export LESS_TERMCAP_se=$'\E[0m'      # Ends standout-mode.
-  export LESS_TERMCAP_ue=$'\E[0m'      # Ends underline.
-fi
+export PAGER='less'
+export LESS='RFMi'
+export LESS_TERMCAP_mb=$'\E[1;31m'  # Begins blinking.
+export LESS_TERMCAP_md=$'\E[36m'    # Begins bold.
+export LESS_TERMCAP_so=$'\E[47;30m' # Begins standout-mode.
+export LESS_TERMCAP_us=$'\E[1;36m'  # Begins underline.
+export LESS_TERMCAP_me=$'\E[0m'     # Ends mode.
+export LESS_TERMCAP_se=$'\E[0m'     # Ends standout-mode.
+export LESS_TERMCAP_ue=$'\E[0m'     # Ends underline.
 
-if type diff-highlight &> /dev/null; then
-  export GIT_PAGER='diff-highlight | ${PAGER}'
-fi
-if type delta &> /dev/null; then
-  export GIT_PAGER=delta
-fi
+export GIT_PAGER=delta
 
 [[ "${WSL_DISTRO_NAME}" ]] && export BROWSER=wslview
 
@@ -87,18 +69,16 @@ if [[ "${LOCALE_LIST}" =~ C.UTF-8|C.utf8 ]]; then
 fi
 
 case $- in
-  *i*)
-    stty start ''
-    stty stop ''
-    ;;
+*i*)
+  stty start ''
+  stty stop ''
+  ;;
 esac
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0'
 export FZF_DEFAULT_COMMAND="fd --hidden -tf -tl | sort"
 
-if type rg &> /dev/null; then
-  export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
-fi
+export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
 
 # exec commands after each commands
 function dispatch_prompt_command() {
@@ -119,7 +99,7 @@ export PROMPT_COMMAND_HISTSAVE='__histsave'
 
 function lsgit() {
   ls -A
-  if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = "true" ] ; then
+  if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = "true" ]; then
     echo
     git status -sb
   fi
@@ -151,4 +131,6 @@ export PROMPT_COMMAND_LSGIT_ENTER='lsgit_enter'
 # prompt
 . ${DOT_DIR}/.config/bash/.exports_git_ps1
 
-export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf \"\[\e[${__blue_ansi_pccs_bright_foreground}m\]& \")\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w\[\e[${__gy65_ansi_pccs_foreground}m\]\$(type __git_ps1 > /dev/null 2>&1 && __git_ps1 \" %s\")\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy65_ansi_pccs_foreground}m\]\")\\$\[\e[m\] \")"
+export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf \"\[\e[${__blue_ansi_pccs_bright_foreground}m\]& \")\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w\[\e[${__gy65_ansi_pccs_foreground}m\]\$(__git_ps1 \" %s\")\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy65_ansi_pccs_foreground}m\]\")\\$\[\e[m\] \")"
+
+# vim: ft=sh

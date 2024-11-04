@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function is_win_dir() {
-  case $PWD/ in
+  case $(pwd -P) in
     /mnt/*) return $(true);;
     *) return $(false);;
   esac

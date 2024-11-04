@@ -4,15 +4,14 @@
 
 - curl
 - git
+- less
 
 
 ### Optional
 
 - [bash-completion](https://github.com/scop/bash-completion)
 - tmux
-- git diff-highlight
 - vim
-- neovim
 
 
 ## Installation

@@ -12,6 +12,7 @@ local function fern_config()
     callback = function()
       vim.fn['glyph_palette#apply']()
       vim.fn['glyph_palette#defaults#highlight']()
+      vim.fn['fern_git_status#init']()
 
       vim.keymap.set('n', '<Plug>(fern-close-drawer)', '<Cmd>FernDo close -drawer -stay<CR>', { remap = true })
       vim.keymap.set('n', '<Plug>(fern-action-open-and-close)', '<Plug>(fern-action-open)<Plug>(fern-close-drawer)',

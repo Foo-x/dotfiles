@@ -89,6 +89,9 @@ alias viq='vi -c "cfile"'
 alias vit='\rm startuptime.log &> /dev/null; vi --startuptime startuptime.log +"sl 300m | q" && vi startuptime.log && \rm startuptime.log &> /dev/null'
 alias memo='vi +"call timer_start(&updatetime + 100, { -> execute('\''set buftype=nofile'\'') })"'
 alias ltail='less -n +F --follow-name'
+alias envedit='envtmp=$(mktemp); export -p > $envtmp; $EDITOR $envtmp; . $envtmp; \rm $envtmp; unset envtmp'
+alias bench_disk_read='dd if=bench_disk_1g of=/dev/null bs=1M count=1000 iflag=direct status=progress'
+alias bench_disk_write='dd if=/dev/urandom of=bench_disk_1g bs=1M count=1000 oflag=direct status=progress'
 
 # date
 alias dt='date'
@@ -194,6 +197,11 @@ alias tfv='terraform validate'
 alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tfd='terraform destroy'
+
+# devcontainer
+alias devc=devcontainer
+alias devcu='devcontainer up --workspace-folder .'
+alias devcx='devcontainer exec --workspace-folder .'
 
 # browse
 alias al='cat ~/.dotfiles/.config/bash/.aliases | $PAGER'
@@ -345,12 +353,6 @@ if type rsync &> /dev/null; then
   }
 fi
 
-if type devcontainer &> /dev/null; then
-  alias devc=devcontainer
-  alias devcu='devcontainer up --workspace-folder .'
-  alias devcx='devcontainer exec --workspace-folder .'
-fi
-
 if [[ "${WSL_DISTRO_NAME}" ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'
@@ -374,3 +376,5 @@ if [[ "${WSL_DISTRO_NAME}" ]]; then
     esac
   }
 fi
+
+# vim:ft=sh

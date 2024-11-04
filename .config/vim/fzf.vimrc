@@ -1,7 +1,10 @@
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
 nnoremap <Plug>(fzf) :<C-u>GFiles<CR>
+"" files in git status
+nnoremap <Plug>(fzf)? :<C-u>GFiles?<CR>
 nnoremap <Plug>(fzf)f :<C-u>Files<CR>
+nnoremap <Plug>(fzf)i :<C-u>FilesNoIgnore<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
 nnoremap <Plug>(fzf)H :<C-u>History<CR>
 nnoremap <Plug>(fzf)ar :<C-u>Args<CR>
@@ -11,8 +14,10 @@ nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
 " }}}
 
 " command {{{
-cnoreabbr <expr> ff getcmdtype() == ':' && getcmdline() ==# 'ff' ? 'Files' : 'ff'
 cnoreabbr <expr> fg getcmdtype() == ':' && getcmdline() ==# 'fg' ? 'GFiles' : 'fg'
+cnoreabbr <expr> f? getcmdtype() == ':' && getcmdline() ==# 'f?' ? 'GFiles?' : 'f?'
+cnoreabbr <expr> ff getcmdtype() == ':' && getcmdline() ==# 'ff' ? 'Files' : 'ff'
+cnoreabbr <expr> fi getcmdtype() == ':' && getcmdline() ==# 'fi' ? 'FilesNoIgnore' : 'fi'
 cnoreabbr <expr> fh getcmdtype() == ':' && getcmdline() ==# 'fh' ? 'HistoryWS' : 'fh'
 cnoreabbr <expr> fha getcmdtype() == ':' && getcmdline() ==# 'fha' ? 'History' : 'fha'
 cnoreabbr <expr> fhe getcmdtype() == ':' && getcmdline() ==# 'fhe' ? 'Helptags' : 'fhe'
@@ -66,6 +71,7 @@ command! -bang GAddArgs call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:fzf_argadd(lines, <bang>0) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "GAddArgs> "'
 \ }))
+command! FilesNoIgnore let _fzf_default_command_tmp=$FZF_DEFAULT_COMMAND | let $FZF_DEFAULT_COMMAND='fd --hidden -tf -tl -I' | exe 'Files' | let $FZF_DEFAULT_COMMAND=_fzf_default_command_tmp
 
 fun! s:open_buffers_in_new_tab(is_vert, lines)
   let l:lines = map(filter(a:lines, 'len(v:val)'), {_, line -> split(line, '	')[-1]})

@@ -208,7 +208,7 @@ if ! bun pm ls -g | grep -q yargs; then
 fi
 
 exe_files="
-fetch_completions.sh
+setup_completions.sh
 fetch_git_prompt.sh
 "
 echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
@@ -237,10 +237,9 @@ ln -sf ${DOT_DIR}/aichat/roles ${XDG_CONFIG_HOME}/aichat
 
 # setup spzenhan
 if [ "${WSL_DISTRO_NAME}" ]; then
-  SPZENHAN_DIR=/mnt/c/Users/$(powershell.exe '$env:username' | tr -d '\r')/Documents/spzenhan
-  if [ ! -x ${SPZENHAN_DIR}/spzenhan.exe ]; then
-    mkdir -p ${SPZENHAN_DIR}
-    curl -Lo ${SPZENHAN_DIR}/spzenhan.exe https://github.com/kaz399/spzenhan.vim/raw/master/zenhan/spzenhan.exe
+  if [ ! -x ${HOME}/.local/bin/spzenhan.exe ]; then
+    curl -Lo ${HOME}/.local/bin/spzenhan.exe https://github.com/kaz399/spzenhan.vim/raw/master/zenhan/spzenhan.exe
+    chmod +x ${HOME}/.local/bin/spzenhan.exe
   fi
 fi
 

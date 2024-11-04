@@ -16,41 +16,11 @@ shopt -s histverify
 . ${DOT_DIR}/.config/bash/.exports
 . ${DOT_DIR}/.config/bash/.aliases_cdb
 
-if type pacman &> /dev/null; then
-  . ${DOT_DIR}/.config/bash/.aliases_arch
-fi
-
 for completion in ${DOT_DIR}/completion/*; do
   . ${completion}
 done
-. <(f completion)
-
-if type rustup &> /dev/null; then
-  eval "$(rustup completions bash)"
-  eval "$(rustup completions bash cargo)"
-fi
-if type gh &> /dev/null; then
-  eval "$(gh completion -s bash)"
-fi
-if type npm &> /dev/null; then
-  . <(npm completion)
-fi
-if type docker &> /dev/null; then
-  . <(docker completion bash)
-fi
-if type mise &> /dev/null; then
-  . <(mise completion bash)
-fi
-if type zoxide &> /dev/null; then
-  . <(zoxide init bash)
-fi
-if type just &> /dev/null; then
-  . <(just --completions bash)
-fi
-if type terraform &> /dev/null; then
-  complete -C terraform terraform
-  complete -C terraform tf
-fi
+complete -C terraform terraform
+complete -C terraform tf
 
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
   . /usr/share/bash-completion/bash_completion
