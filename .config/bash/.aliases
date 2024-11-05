@@ -267,7 +267,7 @@ function bench_disk() {
   echo write:
   dd if=/dev/urandom of=$f bs=1M count=1000 oflag=direct conv=fdatasync status=progress
   echo
-  echo 3 > /proc/sys/vm/drop_caches
+  echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null
   echo read:
   dd if=$f of=/dev/null bs=1M count=1000 iflag=direct status=progress
   \rm $f
