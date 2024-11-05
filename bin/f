@@ -1,8 +1,7 @@
 #!/usr/bin/env -S bun --silent
 
-import { basename } from 'path';
 import { $ } from 'bun';
-import path from 'path';
+import path, { basename } from 'path';
 
 const globalRoot = (await $`bun pm -g ls 2> /dev/null | head -n1 | cut -d' ' -f1`.text()).trim();
 const yargsPath = path.join(globalRoot, 'node_modules', 'yargs', 'yargs');
@@ -67,6 +66,7 @@ await yargs(process.argv.slice(2))
         const remoteBranches = await $`git --no-pager branch --remote --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mremote%09%1B[m%(refname:short)%(end)%(end)"`.text();
         const tags = await $`git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}'`.text();
         const branches = localBranches + remoteBranches + tags;
+        console.log(branches)
         const current = await $`git symbolic-ref --short HEAD 2> /dev/null`.nothrow().text() || 'detached HEAD';
 
         const target = Buffer.alloc(300);
@@ -385,12 +385,36 @@ await yargs(process.argv.slice(2))
       .command(['u [query]', 'use'], 'fzf mise use -g', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
+        const corePlugins = await $`mise plugin ls --core`.text();
+        const plugins = await $`mise plugin ls-remote`.text();
+        const allPlugins = corePlugins + plugins;
+        const target = Buffer.alloc(50);
+        await $`echo ${allPlugins.replaceAll('*', '')} | sort | fzf -1 -q '${process.argv[4] || '\0'}' > ${target}`;
+        if (target) {
+          await $`${{ raw: `mise use -g ${target.toString().replace(/\0|\n/g, '')}` }}`;
+        }
+      })
+      .command(['ul [query]'], 'fzf mise use (local)', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const corePlugins = await $`mise plugin ls --core`.text();
+        const plugins = await $`mise plugin ls-remote`.text();
+        const allPlugins = corePlugins + plugins;
+        const target = Buffer.alloc(50);
+        await $`echo ${allPlugins.replaceAll('*', '')} | sort | fzf -1 -q '${process.argv[4] || '\0'}' > ${target}`;
+        if (target) {
+          await $`${{ raw: `mise use ${target.toString().replace(/\0|\n/g, '')}` }}`;
+        }
+      })
+      .command(['uv [query]'], 'fzf mise use -g (installed plugins with version)', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
         const target = (await $`${{ raw: `mise ls-remote --all | fzf --tac -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
         if (target) {
           await $`${{ raw: `mise use -g ${target}` }}`;
         }
       })
-      .command(['ul [query]'], 'fzf mise use (local)', (yargs: any) => {
+      .command(['uvl [query]'], 'fzf mise use (local installed plugins with version)', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
         const target = (await $`${{ raw: `mise ls-remote --all | fzf --tac -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
@@ -425,3 +449,4 @@ await yargs(process.argv.slice(2))
   .scriptName(basename(import.meta.filename))
   .parse();
 
+// vim: ft=javascript

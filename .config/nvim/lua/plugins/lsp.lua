@@ -1,18 +1,11 @@
 local DOT_DIR = vim.fn.get(vim.fn.environ(), 'DOT_DIR', vim.env.HOME .. '/.dotfiles')
 
 vim.g.format_on_save = false
-vim.api.nvim_create_user_command('EnableFormatOnSave', function()
+vim.api.nvim_create_user_command('FormatOnSaveEnable', function()
   vim.g.format_on_save = true
 end, {})
-vim.api.nvim_create_user_command('DisableFormatOnSave', function()
+vim.api.nvim_create_user_command('FormatOnSaveDisable', function()
   vim.g.format_on_save = false
-end, {})
-vim.api.nvim_create_user_command('ListCodeActions', function()
-  for _, server in ipairs(vim.lsp.get_active_clients()) do
-    print(server.name)
-    local codeActionProvider = server.server_capabilities.codeActionProvider
-    print('  ' .. vim.inspect(type(codeActionProvider) == 'table' and codeActionProvider.codeActionKinds or {}))
-  end
 end, {})
 
 local function mason_lspconfig_opts()
@@ -130,6 +123,35 @@ local function mason_lspconfig_config(_, opts)
       vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = ev.buf })
       vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf })
 
+      vim.api.nvim_buf_create_user_command(ev.buf, 'CodeAction', function(arg)
+        vim.lsp.buf.code_action({
+          context = {
+            only = { arg.args },
+          },
+          apply = true,
+        })
+      end, { nargs = 1 })
+      vim.api.nvim_buf_create_user_command(ev.buf, 'CodeActionList', function()
+        for _, server in ipairs(vim.lsp.get_active_clients()) do
+          print(server.name)
+          local codeActionProvider = server.server_capabilities.codeActionProvider
+          print('  ' .. vim.inspect(type(codeActionProvider) == 'table' and codeActionProvider.codeActionKinds or {}))
+        end
+      end, {})
+      vim.api.nvim_buf_create_user_command(ev.buf, 'CodeActionAllCommon', function()
+        vim.lsp.buf.code_action({
+          context = {
+            only = {
+              'source.removeUnused',
+              'source.addMissingImports',
+              'source.organizeImports',
+              'source.fixAll',
+            },
+          },
+          apply = true,
+        })
+      end, {})
+
       local function format(async)
         if
           contains({
@@ -146,19 +168,6 @@ local function mason_lspconfig_config(_, opts)
           vim.lsp.buf.format({ async = async, name = 'null-ls' })
         else
           vim.lsp.buf.format({ async = async })
-        end
-        for _, action in pairs({
-          'source.removeUnused',
-          'source.addMissingImports',
-          'source.organizeImports',
-          'source.fixAll',
-        }) do
-          vim.lsp.buf.code_action({
-            context = {
-              only = { action },
-            },
-            apply = true,
-          })
         end
       end
 
