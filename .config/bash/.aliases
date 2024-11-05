@@ -262,15 +262,18 @@ function o() {
   vi ${1:-.} +"sp" +"windo vs"
 }
 
+alias bench_disk_write='dd if=/dev/urandom of=bench_disk_1g bs=1M count=1000 oflag=direct conv=fdatasync status=progress'
+alias bench_disk_read='dd if=bench_disk_1g of=/dev/null bs=1M count=1000 iflag=direct status=progress'
 function bench_disk() {
-  local f=bench_disk_1g
   echo write:
-  dd if=/dev/urandom of=$f bs=1M count=1000 oflag=direct conv=fdatasync status=progress
+  bench_disk_write
   echo
-  echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null
+  if [ -f /proc/sys/vm/drop_caches ]; then
+    echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null
+  fi
   echo read:
-  dd if=$f of=/dev/null bs=1M count=1000 iflag=direct status=progress
-  \rm $f
+  bench_disk_read
+  \rm bench_disk_1g
 }
 
 function check_truecolor() {
