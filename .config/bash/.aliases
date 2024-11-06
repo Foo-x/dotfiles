@@ -59,6 +59,7 @@ alias lnb='ln -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias mvb='mv -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias we='watchexec'
 alias ai='aichat'
+alias nuc='nu --stdin -c'
 
 # others
 alias relogin='exec $SHELL -l'

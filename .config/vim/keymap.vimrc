@@ -131,9 +131,6 @@ nnoremap L <Cmd>tabnext<CR>
 nnoremap <Plug>(tab)H <Cmd>tabmove -<CR>
 nnoremap <Plug>(tab)L <Cmd>tabmove +<CR>
 
-nmap <Space>r <Plug>(reload)
-nnoremap <Plug>(reload) :<C-u>source $MYVIMRC<CR>
-
 nnoremap <C-s> :<C-u>update<CR>
 
 "" not to yunk

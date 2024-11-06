@@ -4,6 +4,7 @@ nnoremap <Plug>(fzf) :<C-u>GFiles<CR>
 "" files in git status
 nnoremap <Plug>(fzf)? :<C-u>GFiles?<CR>
 nnoremap <Plug>(fzf)f :<C-u>Files<CR>
+nnoremap <Plug>(fzf). <Cmd>call <SID>files_cursor()<CR>
 nnoremap <Plug>(fzf)i :<C-u>FilesNoIgnore<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
 nnoremap <Plug>(fzf)H :<C-u>History<CR>
@@ -11,6 +12,9 @@ nnoremap <Plug>(fzf)ar :<C-u>Args<CR>
 nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs<CR>
 nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
 nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
+
+vnoremap <Space>f <Plug>(fzf)
+vnoremap <Plug>(fzf). <Esc><Cmd>normal gv<CR><Cmd>call <SID>files_cursor()<CR>
 " }}}
 
 " command {{{
@@ -89,6 +93,19 @@ fun! s:open_buffers_in_new_tab(is_vert, lines)
     endif
   endfor
   winc t
+endf
+
+fun! s:files_cursor()
+  if mode() == 'v'
+    let l:selected = join(getregion(getpos("'<"), getpos("'>")), '')
+    call fzf#vim#files('', fzf#vim#with_preview({
+      \ 'options': '--query ' . l:selected
+    \ }))
+    return
+  endif
+  call fzf#vim#files('', fzf#vim#with_preview({
+    \ 'options': '--query ' . expand('<cword>')
+  \ }))
 endf
 
 command! -bang TS call fzf#vim#files(<q-args>, fzf#vim#with_preview({

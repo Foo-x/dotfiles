@@ -251,6 +251,8 @@ command! -range AiChatEnglish <line1>,<line2>call s:vsplit_output('ai -r english
 command! -range AiChatJapanese <line1>,<line2>call s:vsplit_output('ai -r japanese')
 command! -range AiChatPolish <line1>,<line2>call s:vsplit_output('ai -r polish')
 
+command! Reload source $MYVIMRC
+
 if has('nvim')
   command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif
   command! VirtualTextToggle lua vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
