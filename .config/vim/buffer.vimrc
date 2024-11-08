@@ -19,6 +19,7 @@ nnoremap <Plug>(buffer)ar :<C-u>ATwoRow<CR>
 command! BufOnly silent! %bd|e#|bd#
 command! TQ if tabpagenr('$') > 1 | tabclose | else | qa | endif
 command! -bar WUP windo update
+command! ScratchTab tabnew | set buftype=nofile
 cnoreabbr WQ WUP \| TQ
 
 fun! DeleteBuffers(command, bufnrs)

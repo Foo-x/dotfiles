@@ -1,6 +1,6 @@
 " keymap {{{
 nmap <Space>g <Plug>(git)
-nnoremap <Plug>(git)<Space> :<C-u>tab Git<Space>
+nnoremap <Plug>(git)<CR> :<C-u>tab Git<Space>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
 nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
 nnoremap <Plug>(git)cc <Cmd>silent !tmux new-window 'git commit; read -n 1 -s -p "press any key to close ..."'<CR>

@@ -8,7 +8,7 @@ endif
 
 " keymap {{{
 nnoremap <Space>r <Plug>(grep)
-nnoremap <Plug>(grep)<Space> :<C-u>silent grep!<Space>
+nnoremap <Plug>(grep)<CR> :<C-u>silent grep!<Space>
 nnoremap <Plug>(grep). :<C-u>silent grep! '<C-r>=expand('<cword>')<CR>'<Space>
 
 vnoremap <Space>r <Plug>(grep)

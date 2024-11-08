@@ -11,13 +11,13 @@ local function toggleterm_config(_, opts)
     vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { buffer = 0 })
   end
 
-  vim.cmd [[
+  vim.cmd([[
   augroup ToggleTerm
     autocmd!
     autocmd TermOpen term://* lua set_terminal_keymaps()
     autocmd FileType fzf lua vim.keymap.del("t", "<Esc>", { buffer = 0 })
   augroup END
-  ]]
+  ]])
 
   local Terminal = require('toggleterm.terminal').Terminal
   local common = Terminal:new({ id = 1, direction = 'tab', on_open = set_terminal_keymaps })
@@ -37,17 +37,34 @@ local function toggleterm_config(_, opts)
   local function term_exec_git_background(cmd)
     git:send('git ' .. cmd, true)
   end
-  vim.keymap.set('n', '<Plug>(git)<Space>',
-    ':2TermExec size=' .. vim.o.columns / 2 .. ' cmd="git "<Left>')
-  vim.keymap.set('n', '<Plug>(git)b', function() term_exec_git('branch') end)
-  vim.keymap.set('n', '<Plug>(git)ba', function() term_exec_git('branch -a') end)
-  vim.keymap.set('n', '<Plug>(git)bv', function() term_exec_git('branch -avv') end)
-  vim.keymap.set('n', '<Plug>(git)s', function() term_exec_git('status -sb') end)
-  vim.keymap.set('n', '<Plug>(git)f', function() term_exec_git_background('fetch') end)
-  vim.keymap.set('n', '<Plug>(git)p', function() term_exec_git_background('pull') end)
-  vim.keymap.set('n', '<Plug>(git)pp', function() term_exec_git_background('pp') end)
-  vim.keymap.set('n', '<Plug>(git)ps', function() term_exec_git('push') end)
-  vim.keymap.set('n', '<Plug>(git)sl', function() term_exec_git('stash list') end)
+  vim.keymap.set('n', '<Plug>(git)<CR>', ':2TermExec size=' .. vim.o.columns / 2 .. ' cmd="git "<Left>')
+  vim.keymap.set('n', '<Plug>(git)b', function()
+    term_exec_git('branch')
+  end)
+  vim.keymap.set('n', '<Plug>(git)ba', function()
+    term_exec_git('branch -a')
+  end)
+  vim.keymap.set('n', '<Plug>(git)bv', function()
+    term_exec_git('branch -avv')
+  end)
+  vim.keymap.set('n', '<Plug>(git)s', function()
+    term_exec_git('status -sb')
+  end)
+  vim.keymap.set('n', '<Plug>(git)f', function()
+    term_exec_git_background('fetch')
+  end)
+  vim.keymap.set('n', '<Plug>(git)p', function()
+    term_exec_git_background('pull')
+  end)
+  vim.keymap.set('n', '<Plug>(git)pp', function()
+    term_exec_git_background('pp')
+  end)
+  vim.keymap.set('n', '<Plug>(git)ps', function()
+    term_exec_git('push')
+  end)
+  vim.keymap.set('n', '<Plug>(git)sl', function()
+    term_exec_git('stash list')
+  end)
   -- set g:termx<count> and then type <count><Space>x to execute set command
   -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
   -- if <count> is 1, it can be omitted on typing

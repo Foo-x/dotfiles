@@ -1,6 +1,6 @@
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
-nnoremap <Plug>(fzf) :<C-u>GFiles<CR>
+nnoremap <Plug>(fzf)<CR> :<C-u>GFiles<CR>
 "" files in git status
 nnoremap <Plug>(fzf)? :<C-u>GFiles?<CR>
 nnoremap <Plug>(fzf)f :<C-u>Files<CR>
