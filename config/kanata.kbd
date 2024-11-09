@@ -1,16 +1,17 @@
 (defcfg
   process-unmapped-keys yes
+  sequence-timeout 200
+  sequence-input-mode hidden-delay-type
 )
 
 (defsrc)
 
 (defalias
-  caps (tap-hold 200 100 hnk (layer-while-held caps-layer))
-  lsft (tap-hold 200 100 mhnk lsft)
+  caps (tap-hold-press 200 200 hnk (layer-while-held caps-layer))
+  lsft (tap-hold-press 200 200 mhnk lsft)
   rsft (layer-while-held rsft-layer)
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
-  f (tap-hold-release-timeout 200 500 f (layer-while-held f-layer) f)
 )
 
 (deflayermap (base-layer)
@@ -19,7 +20,7 @@
   rsft @rsft
   rctl @rctl
   spc @spc
-  f @f
+  f (macro sldr 10 f)
 
   lalt (tap-hold 200 100 (layer-switch lalt-layer) alt)
 )
@@ -30,7 +31,6 @@
   rsft @rsft
   rctl @rctl
   spc @spc
-  f @f
 
   h lft
   j down
@@ -94,6 +94,10 @@
   bks lrld
 )
 
-(deflayermap (f-layer)
-  j enter
+(defseq
+  enter (f j)
+)
+
+(deffakekeys
+  enter enter
 )
