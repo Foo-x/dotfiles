@@ -1,0 +1,99 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc)
+
+(defalias
+  caps (tap-hold 200 100 hnk (layer-while-held caps-layer))
+  lsft (tap-hold 200 100 mhnk lsft)
+  rsft (layer-while-held rsft-layer)
+  rctl (layer-while-held rctl-layer)
+  spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
+  f (tap-hold-release-timeout 200 500 f (layer-while-held f-layer) f)
+)
+
+(deflayermap (base-layer)
+  caps @caps
+  lsft @lsft
+  rsft @rsft
+  rctl @rctl
+  spc @spc
+  f @f
+
+  lalt (tap-hold 200 100 (layer-switch lalt-layer) alt)
+)
+
+(deflayermap (lalt-layer)
+  caps @caps
+  lsft @lsft
+  rsft @rsft
+  rctl @rctl
+  spc @spc
+  f @f
+
+  h lft
+  j down
+  k up
+  l rght
+  u home
+  m end
+  i pgup
+  , pgdn
+  o bks
+  p del
+  q esc
+  lalt (tap-hold 200 100 (layer-switch base-layer) alt)
+)
+
+(deflayermap (caps-layer)
+  h lft
+  j down
+  k up
+  l rght
+  u home
+  m end
+  i pgup
+  , pgdn
+  o bks
+  p del
+  q esc
+)
+
+(deflayermap (rsft-layer)
+  q (unicode ^)
+  d (unicode %)
+  f (unicode &)
+  2 f2
+)
+
+(platform (win)
+  (deflayermap (rctl-layer)
+    lft M-C-lft
+    rght M-C-rght
+  )
+)
+
+(deflayermap (spc-layer)
+  n 0
+  m 1
+  , 2
+  . 3
+  j 4
+  k 5
+  l 6
+  u 7
+  i 8
+  o 9
+  8 /
+  9 (unicode *)
+  0 =
+  p -
+  ; +
+  / .
+  bks lrld
+)
+
+(deflayermap (f-layer)
+  j enter
+)
