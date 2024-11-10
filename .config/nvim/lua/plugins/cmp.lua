@@ -155,12 +155,22 @@ end
 local function codeium_config()
   if vim.g.codeium_enabled then
     vim.g.codeium_disable_bindings = 1
+
+    vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+
+    -- without kanata
     vim.keymap.set('i', "<M-'>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
     vim.keymap.set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
       { expr = true, silent = true })
     vim.keymap.set('i', '<M-]>', function() return vim.fn['codeium#CycleOrComplete']() end,
       { expr = true, silent = true })
-    vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+
+    -- with kanata
+    vim.keymap.set('i', '<F7>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+    vim.keymap.set('i', '<F8>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
+      { expr = true, silent = true })
+    vim.keymap.set('i', '<F14>', function() return vim.fn['codeium#CycleOrComplete']() end,
+      { expr = true, silent = true })
 
     vim.cmd('CodeiumEnable')
   end

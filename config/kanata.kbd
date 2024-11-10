@@ -9,11 +9,11 @@
 (defalias
   caps (tap-hold-press 200 200 hnk (layer-while-held caps-layer))
   lsft (tap-hold-press 200 200 mhnk lsft)
+  rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
   [ bks
   ] del
-  rsft esc
   ' enter
 )
 
@@ -81,6 +81,33 @@
   ; (unicode r#"""#)
 
   2 f2
+)
+
+(deflayermap (rsft-layer)
+  1 f1
+  2 f2
+  3 f3
+  4 f4
+  5 f5
+  6 f6
+  q f7
+  w f8
+  e f9
+  r f10
+  t f11
+  y f12
+  a f13
+  s f14
+  d f15
+  f f16
+  g f17
+  h f18
+  z f19
+  x f20
+  c f21
+  v f22
+  b f23
+  n f24
 )
 
 (platform (win)
