@@ -9,18 +9,23 @@
 (defalias
   caps (tap-hold-press 200 200 hnk (layer-while-held caps-layer))
   lsft (tap-hold-press 200 200 mhnk lsft)
-  rsft (layer-while-held rsft-layer)
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
+  [ bks
+  ] del
+  rsft esc
+  ' enter
 )
 
 (deflayermap (base-layer)
   caps @caps
   lsft @lsft
-  rsft @rsft
   rctl @rctl
   spc @spc
-  f (macro sldr 10 f)
+  [ @[
+  ] @]
+  ' @'
+  rsft @rsft
 
   lalt (tap-hold 200 100 (layer-switch lalt-layer) alt)
 )
@@ -28,53 +33,13 @@
 (deflayermap (lalt-layer)
   caps @caps
   lsft @lsft
-  rsft @rsft
   rctl @rctl
   spc @spc
+  [ @[
+  ] @]
+  ' @'
+  rsft @rsft
 
-  h lft
-  j down
-  k up
-  l rght
-  u home
-  m end
-  i pgup
-  , pgdn
-  o bks
-  p del
-  q esc
-  lalt (tap-hold 200 100 (layer-switch base-layer) alt)
-)
-
-(deflayermap (caps-layer)
-  h lft
-  j down
-  k up
-  l rght
-  u home
-  m end
-  i pgup
-  , pgdn
-  o bks
-  p del
-  q esc
-)
-
-(deflayermap (rsft-layer)
-  q (unicode ^)
-  d (unicode %)
-  f (unicode &)
-  2 f2
-)
-
-(platform (win)
-  (deflayermap (rctl-layer)
-    lft M-C-lft
-    rght M-C-rght
-  )
-)
-
-(deflayermap (spc-layer)
   n 0
   m 1
   , 2
@@ -91,13 +56,49 @@
   p -
   ; +
   / .
+
+  lalt (tap-hold 200 100 (layer-switch base-layer) alt)
+)
+
+(deflayermap (caps-layer)
+  q -
+  w (unicode _)
+  e =
+  r +
+  a \
+  s (unicode ^)
+  d (unicode %)
+  f (unicode &)
+  z (unicode |)
+
+  j (unicode "(")
+  k (unicode ")")
+  u [
+  i ]
+  m (unicode {)
+  , (unicode })
+  l '
+  ; (unicode r#"""#)
+
+  2 f2
+)
+
+(platform (win)
+  (deflayermap (rctl-layer)
+    lft M-C-lft
+    rght M-C-rght
+  )
+)
+
+(deflayermap (spc-layer)
+  h lft
+  j down
+  k up
+  l rght
+  u home
+  m end
+  i pgup
+  , pgdn
+
   bks lrld
-)
-
-(defseq
-  enter (f j)
-)
-
-(deffakekeys
-  enter enter
 )
