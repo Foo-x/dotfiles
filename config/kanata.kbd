@@ -12,9 +12,6 @@
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
-  [ bks
-  ] del
-  ' enter
 )
 
 (deflayermap (base-layer)
@@ -22,9 +19,6 @@
   lsft @lsft
   rctl @rctl
   spc @spc
-  [ @[
-  ] @]
-  ' @'
   rsft @rsft
 
   lalt (tap-hold 200 100 (layer-switch lalt-layer) alt)
@@ -35,9 +29,6 @@
   lsft @lsft
   rctl @rctl
   spc @spc
-  [ @[
-  ] @]
-  ' @'
   rsft @rsft
 
   n 0
@@ -77,8 +68,10 @@
   i ]
   m (unicode {)
   , (unicode })
-  l '
-  ; (unicode r#"""#)
+
+  o bks
+  p del
+  ; enter
 
   2 f2
 )

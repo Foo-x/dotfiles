@@ -64,7 +64,6 @@ alias nuc='nu --stdin -c'
 # others
 alias relogin='exec $SHELL -l'
 alias osver='cat /etc/*release'
-alias mirror='rsync --delete'
 alias chownme='chown $USER:$USER'
 alias chownmeR='chown -R $USER:$USER'
 alias cctypes='echo "Conventional Commits"; echo; echo "
@@ -334,6 +333,7 @@ function ansi_cht() {
 if type rsync &> /dev/null; then
   alias rsync='rsync -aPvh'
   alias rsyncb='rsync --backup --suffix=.`date +%Y%m%d_%H%M%S`'
+  alias mirror='rsync --delete'
 
   function incr_bak() {
     local base="$2"

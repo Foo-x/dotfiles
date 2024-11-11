@@ -21,7 +21,7 @@ local function fzf_config()
     command! FZoxide call fzf#run(fzf#wrap({
       \ 'source': 'zoxide query --list --score',
       \ 'sink': function('s:oil_open'),
-      \ 'options': '--prompt "Zoxide> " --preview "ls --dereference-command-line -1 --sort=time --color=always {2}"'
+      \ 'options': '--prompt "Zoxide> " --exact --no-sort --preview "ls --dereference-command-line -1 --sort=time --color=always {2}"'
     \ }))
   ]]
 end
