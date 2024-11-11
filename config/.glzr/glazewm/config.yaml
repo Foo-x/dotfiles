@@ -2,7 +2,10 @@ general:
   # Commands to run when the WM has started. This is useful for running a
   # script or launching another application.
   # Example: The below command launches Zebar.
-  startup_commands: ['shell-exec zebar']
+  startup_commands:
+    - 'shell-exec zebar'
+    - 'focus --workspace b1'
+    - 'focus --workspace a1'
 
   # Commands to run just before the WM is shutdown.
   # Example: The below command kills Zebar.
@@ -20,7 +23,7 @@ general:
 
   cursor_jump:
     # Whether to automatically move the cursor on the specified trigger.
-    enabled: true
+    enabled: false
 
     # Trigger for cursor jump:
     # - 'monitor_focus': Jump when focus changes between monitors.
