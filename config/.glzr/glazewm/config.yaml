@@ -239,12 +239,12 @@ keybindings:
     bindings: ['f23+space']
 
   # Change the focused window to be floating.
-  # - commands: ['toggle-floating --centered']
-  #   bindings: ['alt+shift+space']
+  - commands: ['toggle-floating --centered']
+    bindings: ['f23+x']
 
   # Change the focused window to be tiling.
-  # - commands: ['toggle-tiling']
-  #   bindings: ['alt+t']
+  - commands: ['toggle-tiling']
+    bindings: ['f23+c']
 
   # Change the focused window to be fullscreen.
   - commands: ['toggle-fullscreen']
