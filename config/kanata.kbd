@@ -2,53 +2,21 @@
   process-unmapped-keys yes
   sequence-timeout 200
   sequence-input-mode hidden-delay-type
+  concurrent-tap-hold yes
 )
 
 (defsrc)
 
-(defalias
+(defchordsv2-experimental
+  (lsft spc) rsft 200 first-release ()
+)
+
+(deflayermap (base-layer)
   caps (tap-hold-press 200 200 hnk (layer-while-held caps-layer))
   lsft (tap-hold-press 200 200 mhnk lsft)
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
-)
-
-(deflayermap (base-layer)
-  caps @caps
-  lsft @lsft
-  rctl @rctl
-  spc @spc
-  rsft @rsft
-
-  lalt (tap-hold 200 100 (layer-switch lalt-layer) alt)
-)
-
-(deflayermap (lalt-layer)
-  caps @caps
-  lsft @lsft
-  rctl @rctl
-  spc @spc
-  rsft @rsft
-
-  n 0
-  m 1
-  , 2
-  . 3
-  j 4
-  k 5
-  l 6
-  u 7
-  i 8
-  o 9
-  8 /
-  9 (unicode *)
-  0 =
-  p -
-  ; +
-  / .
-
-  lalt (tap-hold 200 100 (layer-switch base-layer) alt)
 )
 
 (deflayermap (caps-layer)
@@ -62,18 +30,41 @@
   f (unicode &)
   z (unicode |)
 
-  j (unicode "(")
-  k (unicode ")")
-  u [
-  i ]
-  m (unicode {)
-  , (unicode })
+  y f13
+  u f14
+  i f15
+  o f16
+  h f17
+  j f18
+  k f19
+  l f20
+  n f21
+  m f22
+  , f23
+  . f24
 
-  o bks
-  p del
+  spc (layer-while-held caps-space-layer)
+
+  p bks
+  [ del
   ; enter
 
   2 f2
+)
+
+(deflayermap (caps-space-layer)
+  y RC-f13
+  u RC-f14
+  i RC-f15
+  o RC-f16
+  h RC-f17
+  j RC-f18
+  k RC-f19
+  l RC-f20
+  n RC-f21
+  m RC-f22
+  , RC-f23
+  . RC-f24
 )
 
 (deflayermap (rsft-layer)
@@ -103,14 +94,31 @@
   n f24
 )
 
-(platform (win)
-  (deflayermap (rctl-layer)
-    lft M-C-lft
-    rght M-C-rght
-  )
+(deflayermap (rctl-layer)
+  lft M-C-lft
+  rght M-C-rght
+
+  ___ (multi rctl _)
 )
 
 (deflayermap (spc-layer)
+  z 0
+  x 1
+  c 2
+  v 3
+  s 4
+  d 5
+  f 6
+  w 7
+  e 8
+  r 9
+  3 /
+  4 (unicode *)
+  5 =
+  t -
+  g +
+  b .
+
   h lft
   j down
   k up

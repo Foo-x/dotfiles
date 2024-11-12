@@ -194,23 +194,23 @@ binding_modes:
 keybindings:
   # Shift focus in a given direction.
   - commands: ['focus --direction left']
-    bindings: ['f23+s']
-  - commands: ['focus --direction right']
-    bindings: ['f23+f']
-  - commands: ['focus --direction up']
-    bindings: ['f23+e']
+    bindings: ['f17']
   - commands: ['focus --direction down']
-    bindings: ['f23+d']
+    bindings: ['f18']
+  - commands: ['focus --direction up']
+    bindings: ['f19']
+  - commands: ['focus --direction right']
+    bindings: ['f20']
 
   # Move focused window in a given direction.
   - commands: ['move --direction left']
-    bindings: ['f24+s']
-  - commands: ['move --direction right']
-    bindings: ['f24+f']
-  - commands: ['move --direction up']
-    bindings: ['f24+e']
+    bindings: ['ctrl+f17']
   - commands: ['move --direction down']
-    bindings: ['f24+d']
+    bindings: ['ctrl+f18']
+  - commands: ['move --direction up']
+    bindings: ['ctrl+f19']
+  - commands: ['move --direction right']
+    bindings: ['ctrl+f20']
 
   # Resize focused window by a percentage or pixel amount.
   # - commands: ['resize --width -2%']
@@ -235,43 +235,43 @@ keybindings:
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
   - commands: ['toggle-tiling-direction']
-    bindings: ['f23+v']
+    bindings: ['f24']
 
   # Change focus from tiling windows -> floating -> fullscreen.
   - commands: ['wm-cycle-focus']
-    bindings: ['f23+space']
+    bindings: ['ctrl+rshift+n']
 
   # Change the focused window to be floating.
   - commands: ['toggle-floating --centered']
-    bindings: ['f23+x']
+    bindings: ['f15']
 
   # Change the focused window to be tiling.
   - commands: ['toggle-tiling']
-    bindings: ['f23+c']
+    bindings: ['f16']
 
   # Change the focused window to be fullscreen.
   - commands: ['toggle-fullscreen']
-    bindings: ['f23+m']
+    bindings: ['f22']
 
   # Minimize focused window.
   - commands: ['toggle-minimized']
-    bindings: ['f23+n']
+    bindings: ['f21']
 
   # Close focused window.
   - commands: ['close']
-    bindings: ['f23+q']
+    bindings: ['f13']
 
   # Kill GlazeWM process safely.
   - commands: ['wm-exit']
-    bindings: ['f23+shift+q']
+    bindings: ['ctrl+rshift+y']
 
   # Re-evaluate configuration file.
   - commands: ['wm-reload-config']
-    bindings: ['f23+back']
+    bindings: ['ctrl+rshift+back']
 
   # Redraw all windows.
   - commands: ['wm-redraw']
-    bindings: ['f23+shift+w']
+    bindings: ['rshift+r']
 
   # Launch CMD terminal. Alternatively, use `shell-exec wt` or
   # `shell-exec %ProgramFiles%/Git/git-bash.exe` to start Windows
@@ -291,37 +291,37 @@ keybindings:
 
   # Change focus to a workspace defined in `workspaces` config.
   - commands: ['focus --workspace a1']
-    bindings: ['rctrl+1']
+    bindings: ['rshift+a']
   - commands: ['focus --workspace a2']
-    bindings: ['rctrl+2']
+    bindings: ['rshift+s']
   - commands: ['focus --workspace a3']
-    bindings: ['rctrl+q']
+    bindings: ['rshift+d']
   - commands: ['focus --workspace a4']
-    bindings: ['rctrl+w']
+    bindings: ['rshift+f']
   - commands: ['focus --workspace a5']
-    bindings: ['rctrl+a']
+    bindings: ['rshift+z']
   - commands: ['focus --workspace a6']
-    bindings: ['rctrl+s']
+    bindings: ['rshift+x']
   - commands: ['focus --workspace a7']
-    bindings: ['rctrl+z']
+    bindings: ['rshift+c']
   - commands: ['focus --workspace a8']
-    bindings: ['rctrl+x']
+    bindings: ['rshift+v']
   - commands: ['focus --workspace b1']
-    bindings: ['rctrl+3']
+    bindings: ['rshift+j']
   - commands: ['focus --workspace b2']
-    bindings: ['rctrl+4']
+    bindings: ['rshift+k']
   - commands: ['focus --workspace b3']
-    bindings: ['rctrl+e']
+    bindings: ['rshift+l']
   - commands: ['focus --workspace b4']
-    bindings: ['rctrl+r']
+    bindings: ['rshift+;']
   - commands: ['focus --workspace b5']
-    bindings: ['rctrl+d']
+    bindings: ['rshift+m']
   - commands: ['focus --workspace b6']
-    bindings: ['rctrl+f']
+    bindings: ['rshift+,']
   - commands: ['focus --workspace b7']
-    bindings: ['rctrl+c']
+    bindings: ['rshift+.']
   - commands: ['focus --workspace b8']
-    bindings: ['rctrl+v']
+    bindings: ['rshift+/']
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
@@ -336,34 +336,34 @@ keybindings:
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ['move --workspace a1', 'focus --workspace a1']
-    bindings: ['rctrl+shift+1']
+    bindings: ['alt+rshift+a']
   - commands: ['move --workspace a2', 'focus --workspace a2']
-    bindings: ['rctrl+shift+2']
+    bindings: ['alt+rshift+s']
   - commands: ['move --workspace a3', 'focus --workspace a3']
-    bindings: ['rctrl+shift+q']
+    bindings: ['alt+rshift+d']
   - commands: ['move --workspace a4', 'focus --workspace a4']
-    bindings: ['rctrl+shift+w']
+    bindings: ['alt+rshift+f']
   - commands: ['move --workspace a5', 'focus --workspace a5']
-    bindings: ['rctrl+shift+a']
+    bindings: ['alt+rshift+z']
   - commands: ['move --workspace a6', 'focus --workspace a6']
-    bindings: ['rctrl+shift+s']
+    bindings: ['alt+rshift+x']
   - commands: ['move --workspace a7', 'focus --workspace a7']
-    bindings: ['rctrl+shift+z']
+    bindings: ['alt+rshift+c']
   - commands: ['move --workspace a8', 'focus --workspace a8']
-    bindings: ['rctrl+shift+x']
+    bindings: ['alt+rshift+v']
   - commands: ['move --workspace b1', 'focus --workspace b1']
-    bindings: ['rctrl+shift+3']
+    bindings: ['alt+rshift+j']
   - commands: ['move --workspace b2', 'focus --workspace b2']
-    bindings: ['rctrl+shift+4']
+    bindings: ['alt+rshift+k']
   - commands: ['move --workspace b3', 'focus --workspace b3']
-    bindings: ['rctrl+shift+e']
+    bindings: ['alt+rshift+l']
   - commands: ['move --workspace b4', 'focus --workspace b4']
-    bindings: ['rctrl+shift+r']
+    bindings: ['alt+rshift+;']
   - commands: ['move --workspace b5', 'focus --workspace b5']
-    bindings: ['rctrl+shift+d']
+    bindings: ['alt+rshift+m']
   - commands: ['move --workspace b6', 'focus --workspace b6']
-    bindings: ['rctrl+shift+f']
+    bindings: ['alt+rshift+,']
   - commands: ['move --workspace b7', 'focus --workspace b7']
-    bindings: ['rctrl+shift+c']
+    bindings: ['alt+rshift+.']
   - commands: ['move --workspace b8', 'focus --workspace b8']
-    bindings: ['rctrl+shift+v']
+    bindings: ['alt+rshift+/']
