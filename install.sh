@@ -236,7 +236,7 @@ mkdir -p ${XDG_CONFIG_HOME}/aichat
 ln -sf ${DOT_DIR}/aichat/roles ${XDG_CONFIG_HOME}/aichat
 
 # setup spzenhan
-if [ "${WSL_DISTRO_NAME}" ]; then
+if uname -r | \grep -iq 'microsoft'; then
   if [ ! -x ${HOME}/.local/bin/spzenhan.exe ]; then
     curl -Lo ${HOME}/.local/bin/spzenhan.exe https://github.com/kaz399/spzenhan.vim/raw/master/zenhan/spzenhan.exe
     chmod +x ${HOME}/.local/bin/spzenhan.exe

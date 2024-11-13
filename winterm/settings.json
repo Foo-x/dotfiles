@@ -5,6 +5,7 @@
     [
         {
             "command": "paste",
+            "id": "User.paste",
             "keys": "ctrl+shift+v"
         },
         {
@@ -36,24 +37,32 @@
             "keys": "alt+shift+plus"
         },
         {
+            "command": "unbound",
+            "keys": "ctrl+shift+space"
+        },
+        {
             "command": 
             {
                 "action": "closeTab"
             },
+            "id": "User.closeTab.0",
             "keys": "ctrl+shift+c"
         },
         {
             "command": "openNewTabDropdown",
+            "id": "User.openNewTabDropdown",
             "keys": "ctrl+shift+t"
         }
     ],
     "alwaysOnTop": false,
+    "alwaysShowTabs": true,
     "centerOnLaunch": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
+    "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "disableAnimations": false,
     "firstWindowPreference": "defaultProfile",
-    "launchMode": "maximizedFocus",
+    "launchMode": "focus",
     "newTabMenu": 
     [
         {
@@ -65,8 +74,131 @@
         "defaults": 
         {
             "colorScheme": "One Half Dark"
-        }
+        },
+        "list": 
+        [
+            {
+                "font": 
+                {
+                    "face": "FirgeNerd Console",
+                    "size": 11.5
+                },
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": true,
+                "name": "\u30b3\u30de\u30f3\u30c9 \u30d7\u30ed\u30f3\u30d7\u30c8"
+            },
+            {
+                "adjustIndistinguishableColors": "never",
+                "antialiasingMode": "grayscale",
+                "bellStyle": "none",
+                "colorScheme": "One Half Dark",
+                "commandline": "wsl.exe ~ -d Ubuntu",
+                "experimental.retroTerminalEffect": false,
+                "font": 
+                {
+                    "face": "FirgeNerd Console",
+                    "features": {},
+                    "size": 11.5,
+                    "weight": "normal"
+                },
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": false,
+                "intenseTextStyle": "bright",
+                "name": "Ubuntu",
+                "opacity": 100,
+                "padding": "8",
+                "scrollbarState": "hidden",
+                "source": "Windows.Terminal.Wsl",
+                "startingDirectory": "%USERPROFILE%",
+                "useAcrylic": false
+            },
+            {
+                "colorScheme": "Solarized Dark",
+                "font": 
+                {
+                    "face": "FirgeNerd Console",
+                    "size": 11.5
+                },
+                "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
+                "hidden": false,
+                "name": "Debian",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": true,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "bellStyle": "none",
+                "commandline": "wsl.exe ~ -d kali-linux",
+                "font": 
+                {
+                    "face": "FirgeNerd"
+                },
+                "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
+                "hidden": false,
+                "name": "kali-linux",
+                "source": "Windows.Terminal.Wsl",
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "font": 
+                {
+                    "face": "FirgeNerd Console"
+                },
+                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+                "hidden": true,
+                "name": "Ubuntu",
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+            },
+            {
+                "guid": "{809982d8-6706-5fcb-bbea-3f93fbf3e430}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{1c8419c7-5f28-5207-99fe-707b70f88104}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{963ff2f7-6aed-5ce3-9d91-90d99571f53a}",
+                "hidden": true,
+                "name": "Ubuntu-24.04",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "font": 
+                {
+                    "face": "FirgeNerd Console",
+                    "size": 11.5
+                },
+                "guid": "{d8e96812-b789-5068-a5ae-10b2fb53e95f}",
+                "hidden": false,
+                "name": "Ubuntu 24.04.1 LTS",
+                "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
+            }
+        ]
     },
+    "schemes": [],
+    "showTabsInTitlebar": true,
     "startOnUserLogin": true,
-    "themes": []
+    "tabWidthMode": "titleLength",
+    "themes": [],
+    "useAcrylicInTabRow": false
 }

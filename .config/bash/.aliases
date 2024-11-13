@@ -367,7 +367,7 @@ if type rsync &> /dev/null; then
   }
 fi
 
-if [[ "${WSL_DISTRO_NAME}" ]]; then
+if [[ ${IS_WSL} == 1 ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'
   alias mklink='cmd.exe /c mklink'

@@ -35,6 +35,9 @@ fi
 
 if type tmux &> /dev/null; then
   if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
-    tmux attach
+    if [[ ${IS_WSL} == 1 ]] && ! \grep -iq 'appendWindowsPath *= *false' /etc/wsl.conf; then
+      while ! [[ "$PATH" =~ '/mnt/c/windows/system32' ]]; do sleep 0.2; done
+    fi
+    while ! tmux attach &> /dev/null; do sleep 0.2; done
   fi
 fi

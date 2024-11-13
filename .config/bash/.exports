@@ -60,7 +60,10 @@ export LESS_TERMCAP_ue=$'\E[0m'     # Ends underline.
 
 export GIT_PAGER=delta
 
-if [[ "${WSL_DISTRO_NAME}" ]]; then
+IS_WSL="$(if uname -r | \grep -iq 'microsoft'; then echo 1; else echo 0; fi)"
+export IS_WSL
+
+if [[ ${IS_WSL} == 1 ]]; then
   export BROWSER=wslview
   if [[ $(uname -r) == *WSL2 ]]; then
     export WSL_VERSION=2
