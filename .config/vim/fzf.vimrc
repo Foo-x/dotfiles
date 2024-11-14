@@ -1,9 +1,9 @@
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
-nnoremap <Plug>(fzf)<CR> :<C-u>GFiles<CR>
+nnoremap <Plug>(fzf)<CR> :<C-u>Files<CR>
 "" files in git status
 nnoremap <Plug>(fzf)? :<C-u>GFiles?<CR>
-nnoremap <Plug>(fzf)f :<C-u>Files<CR>
+nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
 nnoremap <Plug>(fzf). <Cmd>call <SID>files_cursor()<CR>
 nnoremap <Plug>(fzf)i :<C-u>FilesNoIgnore<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
