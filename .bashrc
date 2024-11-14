@@ -34,7 +34,7 @@ if [ -d ${HOME}/.fzf-tab-completion ]; then
 fi
 
 if type tmux &> /dev/null; then
-  if [[ ${SHLVL} == 1 && ${TERM_PROGRAM} != 'vscode' ]]; then
+  if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' ]]; then
     if [[ ${IS_WSL} == 1 ]] && ! \grep -iq 'appendWindowsPath *= *false' /etc/wsl.conf; then
       while ! [[ "$PATH" =~ '/mnt/c/windows/system32' ]]; do sleep 0.2; done
     fi

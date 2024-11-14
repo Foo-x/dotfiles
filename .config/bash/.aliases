@@ -36,6 +36,7 @@ alias grep='grep --color=auto -nIE --exclude-dir=.git --exclude-dir=node_modules
 alias rg="rg --hidden -g '!.git'"
 alias fd="fd --hidden"
 alias dirs='dirs -v'
+alias pgrep='pgrep -fa'
 
 # shorten
 alias g=git
