@@ -4,6 +4,7 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_STATE_HOME="${HOME}/.local/state"
+export XDG_RUNTIME_DIR="/run/user/${UID}"
 
 . ${DOT_DIR}/.config/bash/.exports_color
 
@@ -141,6 +142,7 @@ export PROMPT_COMMAND_LSGIT_ENTER='lsgit_enter'
 # prompt
 . ${DOT_DIR}/.config/bash/.exports_git_ps1
 
-export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf '\[\e[${__blue_ansi_pccs_bright_foreground}m\]& ')\$([ \"\$LOCAL_PS1\" ] && printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]$LOCAL_PS1|' )\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w\[\e[${__gy65_ansi_pccs_foreground}m\]\$(__git_ps1 \" %s\")\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy65_ansi_pccs_foreground}m\]\")\\$\[\e[m\] \")"
+export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf '\[\e[${__blue_ansi_pccs_bright_foreground}m\]& ')\$([ \"\$LOCAL_PS1\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\$LOCAL_PS1|\" )\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w\[\e[${__gy65_ansi_pccs_foreground}m\]\$(__git_ps1 \" %s\") \${CONTEXT}\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy65_ansi_pccs_foreground}m\]\")\\$\[\e[m\] \")"
+export PS0='$(tput sc)\[\e[2A\]\[\e[$((COLUMNS-7))G\]\[\e[${__gy65_ansi_pccs_foreground}m\]\t\[\e[m\]$(tput rc)'
 
 # vim: ft=sh

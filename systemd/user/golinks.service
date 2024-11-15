@@ -1,0 +1,13 @@
+[Unit]
+Description=Start golinks
+
+[Service]
+Type=simple
+Restart=always
+Environment=NAME=golinks
+ExecStart=/usr/bin/docker run --rm -v ${HOME}/.dotfiles/routes:/golinks/routes -p 80:80 --name=${NAME} ghcr.io/foo-x/golinks
+ExecStop=/usr/bin/docker stop ${NAME}
+ExecReload=/usr/bin/docker restart ${NAME}
+
+[Install]
+WantedBy=default.target

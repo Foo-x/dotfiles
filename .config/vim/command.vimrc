@@ -158,7 +158,11 @@ augroup UseEasyRegname
 augroup END
 
 fun! YankToClipboard(str)
-  call setreg('+', a:str)
+  if has('nvim')
+    call setreg('+', a:str)
+  else
+    call system('pbcopy', @")
+  endif
 endf
 fun! s:yank_to_clipboard()
   if get(v:event, 'regname', '_') ==# ''

@@ -30,18 +30,18 @@
   f (unicode &)
   z (unicode |)
 
-  y f13
-  u f14
-  i f15
-  o f16
-  h f17
-  j f18
-  k f19
-  l f20
-  n f21
-  m f22
-  , f23
-  . f24
+  y RS-f13
+  u RS-f14
+  i RS-f15
+  o RS-f16
+  h RS-f17
+  j RS-f18
+  k RS-f19
+  l RS-f20
+  n RS-f21
+  m RS-f22
+  , RS-f23
+  . RS-f24
 
   spc (layer-while-held caps-space-layer)
 
@@ -92,6 +92,8 @@
   v f22
   b f23
   n f24
+
+  ___ (multi rsft _)
 )
 
 (deflayermap (rctl-layer)
