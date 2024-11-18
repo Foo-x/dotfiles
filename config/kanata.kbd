@@ -17,6 +17,7 @@
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
+  rmet (tap-dance 200 (rmet (layer-switch game-layer)))
 )
 
 (deflayermap (caps-layer)
@@ -131,4 +132,10 @@
   , pgdn
 
   grv lrld
+)
+
+(deflayermap (game-layer)
+  caps XX
+
+  rmet (tap-dance 200 (rmet (layer-switch base-layer)))
 )
