@@ -23,7 +23,11 @@ command! TabcloseRight +,$tabdo tabclose
 
 " insert_print
 if !exists('g:insert_print_prefix')
-  let g:insert_print_prefix = '+++++ 🔴🟠🟡🟢🔵🟣🟤 $FILENAME:$LINENO '
+  let g:insert_print_prefix = '+++++ $RANDOM_EMOJI $FILENAME:$LINENO '
+endif
+
+if !exists('g:insert_print_emoji_list')
+  let g:insert_print_emoji_list = '😆😇🤔😑😎👻💛💚💙💜💯💥💫💦💤👌👍🙏💪👀🐒🐈🐇🐾🐣🐬🍀🍇🍉🍒🍔🍥🍡🍺🚀🌙🌈🔥💧✨🎈🎉🏀🎲🎨🔔💡📖📝🔰✅🔴🔵🥕🧐🧡🥪🧬🟠🟡🟢🟣🟥🟧🟨🟩🟦🟪🪶🪃'
 endif
 
 if !exists('g:insert_print_suffix')
@@ -54,12 +58,14 @@ fun! s:insert_print()
 
   let l:line_template = get(g:insert_print_templates, &filetype, '{}')
   if l:line_template =~ '\$0'
-    let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . g:insert_print_cur . '. ' . g:insert_print_suffix, '')
+    let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . '[' . g:insert_print_cur . '] ' . g:insert_print_suffix, '')
   else
-    let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . g:insert_print_cur . '. ' . g:insert_print_text . g:insert_print_suffix, '')
+    let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . '[' . g:insert_print_cur . '] ' . g:insert_print_text . g:insert_print_suffix, '')
   endif
   let l:insert_print_line = substitute(l:insert_print_line, '$FILENAME', expand('%'), '')
   let l:insert_print_line = substitute(l:insert_print_line, '$LINENO', line('.') + 1, '')
+  let l:random_emoji = strcharpart(g:insert_print_emoji_list, rand() % strchars(g:insert_print_emoji_list), 1)
+  let l:insert_print_line = substitute(l:insert_print_line, '$RANDOM_EMOJI', l:random_emoji, '')
   put=l:insert_print_line
   norm! ==
   " move cursor to $0 or eol
