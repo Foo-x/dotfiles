@@ -98,10 +98,14 @@ nnoremap <Plug>(window)j <C-w>j
 nnoremap <Plug>(window)k <C-w>k
 nnoremap <Plug>(window)l <C-w>l
 nnoremap <Plug>(window)w <C-w>w
-nnoremap <Plug>(window)H <Cmd>call MoveWindow('h')<CR>
-nnoremap <Plug>(window)J <Cmd>call MoveWindow('j')<CR>
-nnoremap <Plug>(window)K <Cmd>call MoveWindow('k')<CR>
-nnoremap <Plug>(window)L <Cmd>call MoveWindow('l')<CR>
+nnoremap <Plug>(window)H <Cmd>call SwapWindow('h')<CR>
+nnoremap <Plug>(window)J <Cmd>call SwapWindow('j')<CR>
+nnoremap <Plug>(window)K <Cmd>call SwapWindow('k')<CR>
+nnoremap <Plug>(window)L <Cmd>call SwapWindow('l')<CR>
+nnoremap <Plug>(window)<C-h> <Cmd>call MoveWindow('h')<CR>
+nnoremap <Plug>(window)<C-j> <Cmd>call MoveWindow('j')<CR>
+nnoremap <Plug>(window)<C-k> <Cmd>call MoveWindow('k')<CR>
+nnoremap <Plug>(window)<C-l> <Cmd>call MoveWindow('l')<CR>
 nnoremap <Plug>(window)f <C-w>f
 nnoremap <Plug>(window)F <C-w>F
 nnoremap <Plug>(window)gf <C-w>gF

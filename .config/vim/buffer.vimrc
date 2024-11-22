@@ -7,12 +7,20 @@ nmap <Space>b <Plug>(buffer)
 nnoremap <Plug>(buffer)h <C-^>
 nnoremap <Plug>(buffer)l :<C-u>ls<CR>
 nnoremap <Plug>(buffer)L :<C-u>ls!<CR>
-nnoremap <Plug>(buffer)g :<C-u>Grid<CR>
-nnoremap <Plug>(buffer)ag :<C-u>AGrid<CR>
-nnoremap <Plug>(buffer)c :<C-u>TwoCol<CR>
-nnoremap <Plug>(buffer)ac :<C-u>ATwoCol<CR>
-nnoremap <Plug>(buffer)r :<C-u>TwoRow<CR>
-nnoremap <Plug>(buffer)ar :<C-u>ATwoRow<CR>
+nnoremap <Plug>(buffer)g :<C-u>LayoutGrid<CR>
+nnoremap <Plug>(buffer)ag :<C-u>LayoutAGrid<CR>
+nnoremap <Plug>(buffer)\ :<C-u>LayoutTwoCol<CR>
+nnoremap <Plug>(buffer)a\ :<C-u>LayoutATwoCol<CR>
+nnoremap <Plug>(buffer)_ :<C-u>LayoutTwoRow<CR>
+nnoremap <Plug>(buffer)a_ :<C-u>LayoutATwoRow<CR>
+nnoremap <Plug>(buffer)p :<C-u>LayoutPi<CR>
+nnoremap <Plug>(buffer)ap :<C-u>LayoutAPi<CR>
+nnoremap <Plug>(buffer)c :<C-u>LayoutC<CR>
+nnoremap <Plug>(buffer)ac :<C-u>LayoutAC<CR>
+nnoremap <Plug>(buffer)b :<C-u>LayoutBps<CR>
+nnoremap <Plug>(buffer)ab :<C-u>LayoutABps<CR>
+nnoremap <Plug>(buffer)v :<C-u>LayoutVerticalBps<CR>
+nnoremap <Plug>(buffer)av :<C-u>LayoutAVerticalBps<CR>
 " }}}
 
 " command {{{
@@ -131,12 +139,20 @@ fun! s:fill_win(setup, bufs)
 
   winc t
 endf
-command! Grid call s:fill_win({ -> execute('split | windo vsplit') }, s:n_bufs(4))
-command! AGrid call s:fill_win({ -> execute('split | windo vsplit') }, s:n_arg_bufs(4))
-command! TwoCol call s:fill_win({ -> execute('vsplit') }, s:n_bufs(2))
-command! ATwoCol call  s:fill_win({ -> execute('vsplit') }, s:n_arg_bufs(2))
-command! TwoRow call s:fill_win({ -> execute('split') }, s:n_bufs(2))
-command! ATwoRow call  s:fill_win({ -> execute('split') }, s:n_arg_bufs(2))
+command! LayoutGrid call s:fill_win({ -> execute('split | windo vsplit') }, s:n_bufs(4))
+command! LayoutAGrid call s:fill_win({ -> execute('split | windo vsplit') }, s:n_arg_bufs(4))
+command! LayoutTwoCol call s:fill_win({ -> execute('vsplit') }, s:n_bufs(2))
+command! LayoutATwoCol call  s:fill_win({ -> execute('vsplit') }, s:n_arg_bufs(2))
+command! LayoutTwoRow call s:fill_win({ -> execute('split') }, s:n_bufs(2))
+command! LayoutATwoRow call  s:fill_win({ -> execute('split') }, s:n_arg_bufs(2))
+command! LayoutPi call s:fill_win({ -> execute('split | vsplit') }, s:n_bufs(3))
+command! LayoutAPi call  s:fill_win({ -> execute('split | vsplit') }, s:n_arg_bufs(3))
+command! LayoutC call s:fill_win({ -> execute('vsplit | split') }, s:n_bufs(3))
+command! LayoutAC call  s:fill_win({ -> execute('vsplit | split') }, s:n_arg_bufs(3))
+command! LayoutBps set eadirection=ver | call s:fill_win({ -> execute('vsplit | split | vsplit') }, s:n_bufs(4)) | set eadirection=both
+command! LayoutABps set eadirection=ver | call s:fill_win({ -> execute('vsplit | split | vsplit') }, s:n_arg_bufs(4)) | set eadirection=both
+command! LayoutVerticalBps set eadirection=hor | call s:fill_win({ -> execute('split | vsplit | split') }, s:n_bufs(4)) | set eadirection=both
+command! LayoutAVerticalBps set eadirection=hor | call s:fill_win({ -> execute('split | vsplit | split') }, s:n_arg_bufs(4)) | set eadirection=both
 
 fun! s:update_oldfiles(file)
   if !exists('v:oldfiles')

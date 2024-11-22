@@ -103,6 +103,7 @@
     a = add
     aa = add --all
     ai = add --interactive
+    an = add --intent-to-add
 
     # commit
     c = commit

@@ -23,15 +23,11 @@ command! TabcloseRight +,$tabdo tabclose
 
 " insert_print
 if !exists('g:insert_print_prefix')
-  let g:insert_print_prefix = '+++++ $RANDOM_EMOJI $FILENAME:$LINENO '
+  let g:insert_print_prefix = '+++++ $RANDOM_EMOJI $FILENAME:$LINENO [$CURRENT_INDEX] '
 endif
 
 if !exists('g:insert_print_emoji_list')
   let g:insert_print_emoji_list = '😆😇🤔😑😎👻💛💚💙💜💯💥💫💦💤👌👍🙏💪👀🐒🐈🐇🐾🐣🐬🍀🍇🍉🍒🍔🍥🍡🍺🚀🌙🌈🔥💧✨🎈🎉🏀🎲🎨🔔💡📖📝🔰✅🔴🔵🥕🧐🧡🥪🧬🟠🟡🟢🟣🟥🟧🟨🟩🟦🟪🪶🪃'
-endif
-
-if !exists('g:insert_print_suffix')
-  let g:insert_print_suffix = ''
 endif
 
 if !exists('g:insert_print_templates')
@@ -48,32 +44,26 @@ if !exists('g:insert_print_templates')
   let g:insert_print_templates.vim = 'echom "{}"'
 endif
 
-if !exists('g:insert_print_text')
-  let g:insert_print_text = '$0'
-endif
-
 fun! s:insert_print()
+  let l:random_emoji = strcharpart(g:insert_print_emoji_list, rand() % strchars(g:insert_print_emoji_list), 1)
+
   let g:insert_print_cur = get(g:, 'insert_print_cur', 0)
   let g:insert_print_cur += 1
 
-  let l:line_template = get(g:insert_print_templates, &filetype, '{}')
-  if l:line_template =~ '\$0'
-    let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . '[' . g:insert_print_cur . '] ' . g:insert_print_suffix, '')
-  else
-    let l:insert_print_line = substitute(l:line_template, '{}', g:insert_print_prefix . '[' . g:insert_print_cur . '] ' . g:insert_print_text . g:insert_print_suffix, '')
-  endif
-  let l:insert_print_line = substitute(l:insert_print_line, '$FILENAME', expand('%'), '')
-  let l:insert_print_line = substitute(l:insert_print_line, '$LINENO', line('.') + 1, '')
-  let l:random_emoji = strcharpart(g:insert_print_emoji_list, rand() % strchars(g:insert_print_emoji_list), 1)
-  let l:insert_print_line = substitute(l:insert_print_line, '$RANDOM_EMOJI', l:random_emoji, '')
+  let l:insert_print_line = get(g:insert_print_templates, &filetype, '{}')
+        \ ->substitute('{}', g:insert_print_prefix, '')
+        \ ->{ l -> l =~ '\$0' ? l : l . '$0' }()
+        \ ->substitute('$FILENAME', expand('%'), '')
+        \ ->substitute('$LINENO', line('.') + 1, '')
+        \ ->substitute('$RANDOM_EMOJI', l:random_emoji, '')
+        \ ->substitute('$CURRENT_INDEX', g:insert_print_cur, '')
+
   put=l:insert_print_line
   norm! ==
-  " move cursor to $0 or eol
-  if search('$0', '', line('.'))
-    norm! "_x"_x
-  else
-    norm! $
-  endif
+
+  " move cursor to $0
+  call search('$0', '', line('.'))
+  norm! "_x"_x
 endf
 fun! s:init_insert_print()
   if has_key(g:insert_print_templates, &filetype)
