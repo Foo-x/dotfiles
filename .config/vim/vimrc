@@ -17,6 +17,7 @@ if !has('nvim')
   set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-fugitive
   set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-rhubarb
   set runtimepath+=$XDG_DATA_HOME/nvim/lazy/gv.vim
+  set runtimepath+=$XDG_DATA_HOME/nvim/lazy/vim-abolish
   set runtimepath+=$XDG_DATA_HOME/nvim/lazy/iceberg.vim
   color iceberg
 endif

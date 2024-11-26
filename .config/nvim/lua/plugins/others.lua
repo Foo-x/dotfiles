@@ -195,6 +195,10 @@ return {
     },
   },
   {
+    'https://github.com/tpope/vim-abolish',
+    event = 'VeryLazy',
+  },
+  {
     'https://github.com/kevinhwang91/nvim-bqf',
     ft = 'qf',
     config = bqf_config,
