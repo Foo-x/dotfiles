@@ -194,23 +194,23 @@ binding_modes:
 keybindings:
   # Shift focus in a given direction.
   - commands: ['focus --direction left']
-    bindings: ['rshift+f17']
+    bindings: ['ralt+h']
   - commands: ['focus --direction down']
-    bindings: ['rshift+f18']
+    bindings: ['ralt+j']
   - commands: ['focus --direction up']
-    bindings: ['rshift+f19']
+    bindings: ['ralt+k']
   - commands: ['focus --direction right']
-    bindings: ['rshift+f20']
+    bindings: ['ralt+l']
 
   # Move focused window in a given direction.
   - commands: ['move --direction left']
-    bindings: ['ctrl+f17']
+    bindings: ['ralt+a']
   - commands: ['move --direction down']
-    bindings: ['ctrl+f18']
+    bindings: ['ralt+s']
   - commands: ['move --direction up']
-    bindings: ['ctrl+f19']
+    bindings: ['ralt+w']
   - commands: ['move --direction right']
-    bindings: ['ctrl+f20']
+    bindings: ['ralt+d']
 
   # Resize focused window by a percentage or pixel amount.
   # - commands: ['resize --width -2%']
@@ -235,43 +235,43 @@ keybindings:
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
   - commands: ['toggle-tiling-direction']
-    bindings: ['rshift+f24']
+    bindings: ['ralt+.']
 
   # Change focus from tiling windows -> floating -> fullscreen.
   - commands: ['wm-cycle-focus']
-    bindings: ['ctrl+rshift+n']
+    bindings: ['ralt+e']
 
   # Change the focused window to be floating.
   - commands: ['toggle-floating --centered']
-    bindings: ['rshift+f15']
+    bindings: ['ralt+i']
 
   # Change the focused window to be tiling.
   - commands: ['toggle-tiling']
-    bindings: ['rshift+f16']
+    bindings: ['ralt+o']
 
   # Change the focused window to be fullscreen.
   - commands: ['toggle-fullscreen']
-    bindings: ['rshift+f22']
+    bindings: ['ralt+m']
 
   # Minimize focused window.
   - commands: ['toggle-minimized']
-    bindings: ['rshift+f21']
+    bindings: ['ralt+n']
 
   # Close focused window.
   - commands: ['close']
-    bindings: ['rshift+f13']
+    bindings: ['ralt+q']
 
   # Kill GlazeWM process safely.
-  - commands: ['wm-exit']
-    bindings: ['ctrl+rshift+y']
+  # - commands: ['wm-exit']
+  #   bindings: ['ctrl+rshift+y']
 
   # Re-evaluate configuration file.
   - commands: ['wm-reload-config']
-    bindings: ['ctrl+rshift+back']
+    bindings: ['ralt+back']
 
   # Redraw all windows.
   - commands: ['wm-redraw']
-    bindings: ['rshift+r']
+    bindings: ['ralt+r']
 
   # Launch CMD terminal. Alternatively, use `shell-exec wt` or
   # `shell-exec %ProgramFiles%/Git/git-bash.exe` to start Windows
@@ -291,37 +291,37 @@ keybindings:
 
   # Change focus to a workspace defined in `workspaces` config.
   - commands: ['focus --workspace a1']
-    bindings: ['ralt+a']
+    bindings: ['ralt+lshift+a']
   - commands: ['focus --workspace a2']
-    bindings: ['ralt+s']
+    bindings: ['ralt+lshift+s']
   - commands: ['focus --workspace a3']
-    bindings: ['ralt+d']
+    bindings: ['ralt+lshift+d']
   - commands: ['focus --workspace a4']
-    bindings: ['ralt+f']
+    bindings: ['ralt+lshift+f']
   - commands: ['focus --workspace a5']
-    bindings: ['ralt+z']
+    bindings: ['ralt+lshift+z']
   - commands: ['focus --workspace a6']
-    bindings: ['ralt+x']
+    bindings: ['ralt+lshift+x']
   - commands: ['focus --workspace a7']
-    bindings: ['ralt+c']
+    bindings: ['ralt+lshift+c']
   - commands: ['focus --workspace a8']
-    bindings: ['ralt+v']
+    bindings: ['ralt+lshift+v']
   - commands: ['focus --workspace b1']
-    bindings: ['ralt+j']
+    bindings: ['ralt+lshift+j']
   - commands: ['focus --workspace b2']
-    bindings: ['ralt+k']
+    bindings: ['ralt+lshift+k']
   - commands: ['focus --workspace b3']
-    bindings: ['ralt+l']
+    bindings: ['ralt+lshift+l']
   - commands: ['focus --workspace b4']
-    bindings: ['ralt+;']
+    bindings: ['ralt+lshift+;']
   - commands: ['focus --workspace b5']
-    bindings: ['ralt+m']
+    bindings: ['ralt+lshift+m']
   - commands: ['focus --workspace b6']
-    bindings: ['ralt+,']
+    bindings: ['ralt+lshift+,']
   - commands: ['focus --workspace b7']
-    bindings: ['ralt+.']
+    bindings: ['ralt+lshift+.']
   - commands: ['focus --workspace b8']
-    bindings: ['ralt+/']
+    bindings: ['ralt+lshift+/']
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
@@ -336,34 +336,34 @@ keybindings:
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ['move --workspace a1']
-    bindings: ['lshift+ralt+a']
+    bindings: ['lctrl+ralt+a']
   - commands: ['move --workspace a2']
-    bindings: ['lshift+ralt+s']
+    bindings: ['lctrl+ralt+s']
   - commands: ['move --workspace a3']
-    bindings: ['lshift+ralt+d']
+    bindings: ['lctrl+ralt+d']
   - commands: ['move --workspace a4']
-    bindings: ['lshift+ralt+f']
+    bindings: ['lctrl+ralt+f']
   - commands: ['move --workspace a5']
-    bindings: ['lshift+ralt+z']
+    bindings: ['lctrl+ralt+z']
   - commands: ['move --workspace a6']
-    bindings: ['lshift+ralt+x']
+    bindings: ['lctrl+ralt+x']
   - commands: ['move --workspace a7']
-    bindings: ['lshift+ralt+c']
+    bindings: ['lctrl+ralt+c']
   - commands: ['move --workspace a8']
-    bindings: ['lshift+ralt+v']
+    bindings: ['lctrl+ralt+v']
   - commands: ['move --workspace b1']
-    bindings: ['lshift+ralt+j']
+    bindings: ['lctrl+ralt+j']
   - commands: ['move --workspace b2']
-    bindings: ['lshift+ralt+k']
+    bindings: ['lctrl+ralt+k']
   - commands: ['move --workspace b3']
-    bindings: ['lshift+ralt+l']
+    bindings: ['lctrl+ralt+l']
   - commands: ['move --workspace b4']
-    bindings: ['lshift+ralt+;']
+    bindings: ['lctrl+ralt+;']
   - commands: ['move --workspace b5']
-    bindings: ['lshift+ralt+m']
+    bindings: ['lctrl+ralt+m']
   - commands: ['move --workspace b6']
-    bindings: ['lshift+ralt+,']
+    bindings: ['lctrl+ralt+,']
   - commands: ['move --workspace b7']
-    bindings: ['lshift+ralt+.']
+    bindings: ['lctrl+ralt+.']
   - commands: ['move --workspace b8']
-    bindings: ['lshift+ralt+/']
+    bindings: ['lctrl+ralt+/']

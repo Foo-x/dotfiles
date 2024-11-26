@@ -9,6 +9,8 @@
 
 (defchordsv2-experimental
   (lsft spc) rsft 200 first-release ()
+  (lsft rsft) (layer-while-held lsft-rsft-layer) 200 first-release ()
+  (lctl rsft) (layer-while-held lctl-rsft-layer) 200 first-release ()
 )
 
 (deflayermap (base-layer)
@@ -18,54 +20,53 @@
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
   rmet (tap-dance 200 (rmet (layer-switch game-layer)))
+
+  ;; switch numbers and symbols
+  1 (fork (unicode !) (unicode 1) (lsft))
+  2 (fork (unicode @) (unicode 2) (lsft))
+  3 (fork (unicode #) (unicode 3) (lsft))
+  4 (fork (unicode $) (unicode 4) (lsft))
+  8 (fork (unicode *) (unicode 8) (lsft))
+  9 (fork (unicode "(") (unicode 9) (lsft))
+  0 (fork (unicode ")") (unicode 0) (lsft))
 )
 
 (deflayermap (caps-layer)
-  q -
-  w (unicode _)
-  e =
-  r +
-  a \
-  s (unicode ^)
-  d (unicode %)
-  f (unicode &)
-  z (unicode |)
+  ;; -+*/%
+  q +
+  w -
+  e (unicode *)
+  r /
+  t (unicode %)
 
-  y RS-f13
-  u RS-f14
-  i RS-f15
-  o RS-f16
-  h RS-f17
-  j RS-f18
-  k RS-f19
-  l RS-f20
-  n RS-f21
-  m RS-f22
-  , RS-f23
-  . RS-f24
+  ;; and, or, not, equal, optional
+  a (unicode &)
+  s (unicode |)
+  d (unicode !)
+  f =
+  g (unicode ?)
 
-  spc (layer-while-held caps-space-layer)
+  ;; first, end
+  z (unicode ^)
+  x (unicode $)
+
+  ;; parentheses
+  j (unicode "(")
+  k (unicode ")")
+
+  ;; others
+  c _
+  v (unicode \)
+  b (unicode ~)
+  ' (unicode `)
+  u (unicode @)
+  i (unicode #)
 
   p bks
   [ del
   ; enter
 
   2 f2
-)
-
-(deflayermap (caps-space-layer)
-  y RC-f13
-  u RC-f14
-  i RC-f15
-  o RC-f16
-  h RC-f17
-  j RC-f18
-  k RC-f19
-  l RC-f20
-  n RC-f21
-  m RC-f22
-  , RC-f23
-  . RC-f24
 )
 
 (deflayermap (rsft-layer)
@@ -95,6 +96,64 @@
   n f24
 
   ___ (multi rsft _)
+)
+
+(deflayermap (lsft-rsft-layer)
+  1 RS-f1
+  2 RS-f2
+  3 RS-f3
+  4 RS-f4
+  5 RS-f5
+  6 RS-f6
+  q RS-f7
+  w RS-f8
+  e RS-f9
+  r RS-f10
+  t RS-f11
+  y RS-f12
+  a RS-f13
+  s RS-f14
+  d RS-f15
+  f RS-f16
+  g RS-f17
+  h RS-f18
+  z RS-f19
+  x RS-f20
+  c RS-f21
+  v RS-f22
+  b RS-f23
+  n RS-f24
+
+  ___ (multi lsft rsft _)
+)
+
+(deflayermap (lctl-rsft-layer)
+  1 RC-f1
+  2 RC-f2
+  3 RC-f3
+  4 RC-f4
+  5 RC-f5
+  6 RC-f6
+  q RC-f7
+  w RC-f8
+  e RC-f9
+  r RC-f10
+  t RC-f11
+  y RC-f12
+  a RC-f13
+  s RC-f14
+  d RC-f15
+  f RC-f16
+  g RC-f17
+  h RC-f18
+  z RC-f19
+  x RC-f20
+  c RC-f21
+  v RC-f22
+  b RC-f23
+  n RC-f24
+
+  ___ (multi lctl rsft _)
 )
 
 (deflayermap (rctl-layer)
