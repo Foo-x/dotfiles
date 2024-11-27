@@ -1,75 +1,109 @@
 (defcfg
-  process-unmapped-keys yes
+  process-unmapped-keys no
   sequence-timeout 200
   sequence-input-mode hidden-delay-type
   concurrent-tap-hold yes
 )
 
-(defsrc)
+(defsrc
+  grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
+  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
+  caps   a      s      d      f      g      h      j      k      l      ;      '      ret
+  lsft   z      x      c      v      b      n      m      ,      .      /      rsft
+  lctl   lmet   lalt                 spc                  ralt   rmet   rctl
+)
+
+(deflayer base
+  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
+  @btab  a      s      d      f      g      h      j      k      l      ;      '      @b]    @b\
+  @bcap  z      x      c      v      b      n      m      ,      .      /      @b'    @bent
+  @blsft @bz    @bx    @bc    @bv    @bb    @bn    @bm    @b,    @b.    @b/    @brsft
+  @blctl @blmet @blalt               @bspc                @bralt @brmet @brctl
+)
+
+(deflayer qwerty
+  grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
+  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
+  @qcap  a      s      d      f      g      h      j      k      l      ;      '      ret
+  lsft   z      x      c      v      b      n      m      ,      .      /      rsft
+  lctl   lmet   lalt                 spc                  ralt   @qrmet rctl
+)
+
+(defalias
+  ;; base layer
+  btab  lctl
+  bcap  ent
+  blsft lsft
+  blctl lctl
+
+  b]    (tap-hold-press 200 200 ent (layer-while-held b]-layer))
+  b\    (layer-while-held b\-layer)
+  b'    (tap-hold-press 200 200 esc (layer-while-held b'-layer))
+  bent  rsft
+  brsft XX
+
+  bz    lmet
+  bx    lalt
+  bc    (tap-hold-press 200 200 mhnk lsft)
+  bv    bks
+  bb    del
+  bn    (tap-hold-press 200 200 hnk (layer-while-held bm-layer))
+  bm    ralt
+  b,    (tap-dance 200 (rmet (layer-switch qwerty)))
+  b.    XX
+  b/    XX
+  blmet lmet
+  blalt (multi lalt (layer-while-held blalt-layer))
+  bspc  (tap-hold-release-timeout 200 500 spc (layer-while-held bspc-layer) spc)
+  bralt ralt
+  brmet rmet
+  brctl (layer-while-held brctl-layer)
+
+  ;; qwerty layer
+  qcap  XX
+  qrmet (tap-dance 200 (rmet (layer-switch base)))
+)
 
 (defchordsv2-experimental
-  (lsft spc) rsft 200 first-release ()
-  (lsft rsft) (layer-while-held lsft-rsft-layer) 200 first-release ()
-  (lctl rsft) (layer-while-held lctl-rsft-layer) 200 first-release ()
+  (x tab) (multi lalt tab) 200 all-released ()
 )
 
-(deflayermap (base-layer)
-  caps (tap-hold-press 200 200 hnk (layer-while-held caps-layer))
-  lsft (tap-hold-press 200 200 mhnk lsft)
-  rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
-  rctl (layer-while-held rctl-layer)
-  spc (tap-hold-release-timeout 200 500 spc (layer-while-held spc-layer) spc)
-  rmet (tap-dance 200 (rmet (layer-switch game-layer)))
-
-  ;; switch numbers and symbols
-  1 (fork (unicode !) (unicode 1) (lsft))
-  2 (fork (unicode @) (unicode 2) (lsft))
-  3 (fork (unicode #) (unicode 3) (lsft))
-  4 (fork (unicode $) (unicode 4) (lsft))
-  8 (fork (unicode *) (unicode 8) (lsft))
-  9 (fork (unicode "(") (unicode 9) (lsft))
-  0 (fork (unicode ")") (unicode 0) (lsft))
-)
-
-(deflayermap (caps-layer)
+(deflayermap (bm-layer)
   ;; -+*/%
-  q +
-  w -
-  e (unicode *)
-  r /
-  t (unicode %)
+  1 +
+  2 -
+  3 (unicode *)
+  4 /
+  5 (unicode %)
 
   ;; and, or, not, equal, optional
-  a (unicode &)
-  s (unicode |)
-  d (unicode !)
-  f =
-  g (unicode ?)
+  q (unicode &)
+  w (unicode |)
+  e (unicode !)
+  r =
+  t (unicode ?)
 
   ;; first, end
-  z (unicode ^)
-  x (unicode $)
+  a (unicode ^)
+  s (unicode $)
 
   ;; parentheses
-  j (unicode "(")
-  k (unicode ")")
+  u (unicode "(")
+  i (unicode ")")
 
   ;; others
-  c _
-  v (unicode \)
-  b (unicode ~)
-  ' (unicode `)
-  u (unicode @)
-  i (unicode #)
+  d _
+  f (unicode \)
+  g (unicode ~)
+  [ (unicode `)
+  7 (unicode @)
+  8 (unicode #)
 
-  p bks
-  [ del
-  ; enter
-
-  2 f2
+  0 bks
+  - del
 )
 
-(deflayermap (rsft-layer)
+(deflayermap (b]-layer)
   1 f1
   2 f2
   3 f3
@@ -94,11 +128,9 @@
   v f22
   b f23
   n f24
-
-  ___ (multi rsft _)
 )
 
-(deflayermap (lsft-rsft-layer)
+(deflayermap (b\-layer)
   1 RS-f1
   2 RS-f2
   3 RS-f3
@@ -123,11 +155,9 @@
   v RS-f22
   b RS-f23
   n RS-f24
-
-  ___ (multi lsft rsft _)
 )
 
-(deflayermap (lctl-rsft-layer)
+(deflayermap (b'-layer)
   1 RC-f1
   2 RC-f2
   3 RC-f3
@@ -152,18 +182,14 @@
   v RC-f22
   b RC-f23
   n RC-f24
-
-  ___ (multi lctl rsft _)
 )
 
-(deflayermap (rctl-layer)
+(deflayermap (brctl-layer)
   lft M-C-lft
   rght M-C-rght
-
-  ___ (multi rctl _)
 )
 
-(deflayermap (spc-layer)
+(deflayermap (bspc-layer)
   z 0
   x 1
   c 2
@@ -181,20 +207,18 @@
   g +
   b .
 
-  h lft
-  j down
-  k up
-  l rght
-  u home
-  m end
-  i pgup
-  , pgdn
+  y lft
+  u down
+  i up
+  o rght
+  7 home
+  j end
+  8 pgup
+  k pgdn
 
   grv lrld
 )
 
-(deflayermap (game-layer)
-  caps XX
-
-  rmet (tap-dance 200 (rmet (layer-switch base-layer)))
+(deflayermap (blalt-layer)
+  tab tab
 )
