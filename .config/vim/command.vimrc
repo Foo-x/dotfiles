@@ -51,12 +51,13 @@ fun! s:insert_print()
   let g:insert_print_cur += 1
 
   let l:insert_print_line = get(g:insert_print_templates, &filetype, '{}')
-        \ ->substitute('{}', g:insert_print_prefix, '')
-        \ ->{ l -> l =~ '\$0' ? l : l . '$0' }()
-        \ ->substitute('$FILENAME', expand('%'), '')
-        \ ->substitute('$LINENO', line('.') + 1, '')
-        \ ->substitute('$RANDOM_EMOJI', l:random_emoji, '')
-        \ ->substitute('$CURRENT_INDEX', g:insert_print_cur, '')
+      \ ->{ l -> l =~ '\$0'
+      \   ? substitute(l, '{}', g:insert_print_prefix, '')
+      \   : substitute(l, '{}', g:insert_print_prefix . '$0', '') }()
+      \ ->substitute('$FILENAME', expand('%'), '')
+      \ ->substitute('$LINENO', line('.') + 1, '')
+      \ ->substitute('$RANDOM_EMOJI', l:random_emoji, '')
+      \ ->substitute('$CURRENT_INDEX', g:insert_print_cur, '')
 
   put=l:insert_print_line
   norm! ==
