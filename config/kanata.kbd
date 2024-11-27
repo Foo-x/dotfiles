@@ -25,14 +25,14 @@
   grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
   tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
   @qcap  a      s      d      f      g      h      j      k      l      ;      '      ret
-  lsft   z      x      c      v      b      n      m      ,      .      /      rsft
+  lsft   z      x      c      v      b      n      m      ,      .      /      @qrsft
   lctl   lmet   lalt                 spc                  ralt   @qrmet rctl
 )
 
 (defalias
   ;; base layer
   btab  lctl
-  bcap  ent
+  bcap  esc
   blsft lsft
   blctl lctl
 
@@ -46,10 +46,10 @@
   bx    lalt
   bc    (tap-hold-press 200 200 mhnk lsft)
   bv    bks
-  bb    del
-  bn    (tap-hold-press 200 200 hnk (layer-while-held bm-layer))
-  bm    ralt
-  b,    (tap-dance 200 (rmet (layer-switch qwerty)))
+  bb    (tap-hold-press 200 200 ent (layer-while-held bb-layer))
+  bn    (tap-hold-press 200 200 hnk ralt)
+  bm    (tap-dance 200 (rmet (layer-switch qwerty)))
+  b,    XX
   b.    XX
   b/    XX
   blmet lmet
@@ -62,13 +62,10 @@
   ;; qwerty layer
   qcap  XX
   qrmet (tap-dance 200 (rmet (layer-switch base)))
+  qrsft (tap-dance 200 (rmet (layer-switch base)))
 )
 
-(defchordsv2-experimental
-  (x tab) (multi lalt tab) 200 all-released ()
-)
-
-(deflayermap (bm-layer)
+(deflayermap (bb-layer)
   ;; -+*/%
   1 +
   2 -
@@ -92,15 +89,14 @@
   i (unicode ")")
 
   ;; others
-  d _
+  d (unicode _)
   f (unicode \)
   g (unicode ~)
   [ (unicode `)
   7 (unicode @)
   8 (unicode #)
 
-  0 bks
-  - del
+  v del
 )
 
 (deflayermap (b]-layer)
