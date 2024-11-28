@@ -1,105 +1,73 @@
 (defcfg
-  process-unmapped-keys no
+  process-unmapped-keys yes
   sequence-timeout 200
   sequence-input-mode hidden-delay-type
   concurrent-tap-hold yes
 )
 
-(defsrc
-  grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
-  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
-  caps   a      s      d      f      g      h      j      k      l      ;      '      ret
-  lsft   z      x      c      v      b      n      m      ,      .      /      rsft
-  lctl   lmet   lalt                 spc                  ralt   rmet   rctl
+(defsrc)
+
+(defchordsv2-experimental
+  (rsft rctl) (layer-while-held rsft-rctl-layer) 200 first-release ()
 )
 
-(deflayer base
-  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
-  @btab  a      s      d      f      g      h      j      k      l      ;      '      @b]    @b\
-  @bcap  z      x      c      v      b      n      m      ,      .      /      @b'    @bent
-  @blsft @bz    @bx    @bc    @bv    @bb    @bn    @bm    @b,    @b.    @b/    @brsft
-  @blctl @blmet @blalt               @bspc                @bralt @brmet @brctl
+(deflayermap (base-layer)
+  caps (tap-hold-press 200 200 XX (layer-while-held caps-layer))
+  lalt (tap-hold-press 200 200 mhnk lalt)
+  ralt (tap-hold-press 200 200 hnk ralt)
+  rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
+  rctl (layer-while-held rctl-layer)
+  spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
+  rmet (tap-dance 200 (XX (layer-switch game-layer)))
+
+  ;; switch numbers and symbols
+  1 (fork S-1 (unshift 1) (lsft))
+  2 (fork S-2 (unshift 2) (lsft))
+  3 (fork S-3 (unshift 3) (lsft))
+  4 (fork S-4 (unshift 4) (lsft))
+  5 (fork S-5 (unshift 5) (lsft))
+  6 (fork S-6 (unshift 6) (lsft))
+  7 (fork S-7 (unshift 7) (lsft))
+  8 (fork S-8 (unshift 8) (lsft))
+  9 (fork S-9 (unshift 9) (lsft))
+  0 (fork S-0 (unshift 0) (lsft))
 )
 
-(deflayer qwerty
-  grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
-  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
-  @qcap  a      s      d      f      g      h      j      k      l      ;      '      ret
-  lsft   z      x      c      v      b      n      m      ,      .      /      @qrsft
-  lctl   lmet   lalt                 spc                  ralt   @qrmet rctl
-)
-
-(defalias
-  ;; base layer
-  btab  lctl
-  bcap  esc
-  blsft lsft
-  blctl lctl
-
-  b]    (tap-hold-press 200 200 ent (layer-while-held b]-layer))
-  b\    (layer-while-held b\-layer)
-  b'    (tap-hold-press 200 200 esc (layer-while-held b'-layer))
-  bent  rsft
-  brsft XX
-
-  bz    lmet
-  bx    lalt
-  bc    (tap-hold-press 200 200 mhnk lsft)
-  bv    bks
-  bb    (tap-hold-press 200 200 ent (layer-while-held bb-layer))
-  bn    (tap-hold-press 200 200 hnk ralt)
-  bm    (tap-dance 200 (XX (layer-switch qwerty)))
-  b,    XX
-  b.    XX
-  b/    XX
-  blmet lmet
-  blalt (multi lalt (layer-while-held blalt-layer))
-  bspc  (tap-hold-release 200 200 spc (layer-while-held bspc-layer))
-  bralt ralt
-  brmet rmet
-  brctl (layer-while-held brctl-layer)
-
-  ;; qwerty layer
-  qcap  XX
-  qrmet (tap-dance 200 (rmet (layer-switch base)))
-  qrsft (tap-dance 200 (rsft (layer-switch base)))
-)
-
-(deflayermap (bb-layer)
-  ;; -+*/%
-  1 +
-  2 -
-  3 S-8 ;; *
-  4 /
-  5 S-5 ;; %
+(deflayermap (caps-layer)
+  ;; +-*/%
+  q +
+  w -
+  e S-8 ;; *
+  r /
+  t S-5 ;; %
 
   ;; and, or, not, equal, optional
-  q S-7 ;; &
-  w S-\ ;; |
-  e S-1 ;; !
-  r =
-  t S-/ ;; ?
+  a S-7 ;; &
+  s S-\ ;; |
+  d S-1 ;; !
+  f =
+  g S-/ ;; ?
 
   ;; first, end
-  a S-6 ;; ^
-  s S-4 ;; $
+  z S-6 ;; ^
+  x S-4 ;; $
 
   ;; parentheses
-  u S-9 ;; (
-  i S-0 ;; )
+  j S-9 ;; (
+  k S-0 ;; )
 
   ;; others
-  d S-- ;; _
-  f \
-  g S-` ;; ~
-  [ `
-  7 S-2 ;; @
-  8 S-3 ;; #
+  c S-- ;; _
+  v \
+  b S-` ;; ~
 
-  v del
+  ' `
+
+  u bks
+  i del
 )
 
-(deflayermap (b]-layer)
+(deflayermap (rsft-layer)
   1 f1
   2 f2
   3 f3
@@ -124,9 +92,11 @@
   v f22
   b f23
   n f24
+
+  ___ (multi rsft _)
 )
 
-(deflayermap (b\-layer)
+(deflayermap (rctl-layer)
   1 RS-f1
   2 RS-f2
   3 RS-f3
@@ -151,9 +121,14 @@
   v RS-f22
   b RS-f23
   n RS-f24
+
+  lft M-C-lft
+  rght M-C-rght
+
+  ___ (multi rctl _)
 )
 
-(deflayermap (b'-layer)
+(deflayermap (rsft-rctl-layer)
   1 RC-f1
   2 RC-f2
   3 RC-f3
@@ -178,14 +153,11 @@
   v RC-f22
   b RC-f23
   n RC-f24
+
+  ___ (multi rsft rctl _)
 )
 
-(deflayermap (brctl-layer)
-  lft M-C-lft
-  rght M-C-rght
-)
-
-(deflayermap (bspc-layer)
+(deflayermap (spc-layer)
   z 0
   x 1
   c 2
@@ -203,18 +175,21 @@
   g +
   b .
 
-  y lft
-  u down
-  i up
-  o rght
-  7 home
-  j end
-  8 pgup
-  k pgdn
+  h lft
+  j down
+  k up
+  l rght
+  u home
+  m end
+  i pgup
+  , pgdn
 
   grv lrld
 )
 
-(deflayermap (blalt-layer)
-  tab tab
+(deflayermap (game-layer)
+  caps XX
+
+  rmet (tap-dance 200 (XX (layer-switch base-layer)))
+  rsft (tap-dance 200 (rsft (layer-switch base-layer)))
 )
