@@ -48,13 +48,13 @@
   bv    bks
   bb    (tap-hold-press 200 200 ent (layer-while-held bb-layer))
   bn    (tap-hold-press 200 200 hnk ralt)
-  bm    (tap-dance 200 (rmet (layer-switch qwerty)))
+  bm    (tap-dance 200 (XX (layer-switch qwerty)))
   b,    XX
   b.    XX
   b/    XX
   blmet lmet
   blalt (multi lalt (layer-while-held blalt-layer))
-  bspc  (tap-hold-release-timeout 200 500 spc (layer-while-held bspc-layer) spc)
+  bspc  (tap-hold-release 200 200 spc (layer-while-held bspc-layer))
   bralt ralt
   brmet rmet
   brctl (layer-while-held brctl-layer)
@@ -62,7 +62,7 @@
   ;; qwerty layer
   qcap  XX
   qrmet (tap-dance 200 (rmet (layer-switch base)))
-  qrsft (tap-dance 200 (rmet (layer-switch base)))
+  qrsft (tap-dance 200 (rsft (layer-switch base)))
 )
 
 (deflayermap (bb-layer)
