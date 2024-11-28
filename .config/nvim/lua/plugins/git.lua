@@ -179,6 +179,9 @@ return {
   {
     'https://github.com/sindrets/diffview.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+    keys = {
+      { '<F10>', '<Cmd>DiffviewFileHistory % --all<CR>' }
+    },
     dependencies = {
       'https://github.com/nvim-tree/nvim-web-devicons',
     },

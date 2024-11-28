@@ -25,8 +25,10 @@ nnoremap <Plug>(git)i <Cmd>exe 'split ' . trim(system('git rev-parse --show-topl
 
 nnoremap <F9> :<C-u>GV --all<CR>
 nnoremap <S-F9> :<C-u>GV --name-status --all<CR>
-" file history
-nnoremap <F10> :<C-u>GV! --all<CR>
+if !has('nvim')
+  " file history
+  nnoremap <F10> :<C-u>GV! --all<CR>
+endif
 " }}}
 "
 " command {{{
