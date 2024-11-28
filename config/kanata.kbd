@@ -158,21 +158,21 @@
 )
 
 (deflayermap (spc-layer)
-  z 0
-  x 1
-  c 2
-  v 3
-  s 4
-  d 5
-  f 6
-  w 7
-  e 8
-  r 9
-  3 /
-  4 (unicode *)
+  q 1
+  w 2
+  e 3
+  r 4
+  t 5
+  a 6
+  s 7
+  d 8
+  f 9
+  g 0
+  1 +
+  2 -
+  3 (unicode *)
+  4 /
   5 =
-  t -
-  g +
   b .
 
   h lft
