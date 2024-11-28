@@ -69,32 +69,32 @@
   ;; -+*/%
   1 +
   2 -
-  3 (unicode *)
+  3 S-8 ;; *
   4 /
-  5 (unicode %)
+  5 S-5 ;; %
 
   ;; and, or, not, equal, optional
-  q (unicode &)
-  w (unicode |)
-  e (unicode !)
+  q S-7 ;; &
+  w S-\ ;; |
+  e S-1 ;; !
   r =
-  t (unicode ?)
+  t S-/ ;; ?
 
   ;; first, end
-  a (unicode ^)
-  s (unicode $)
+  a S-6 ;; ^
+  s S-4 ;; $
 
   ;; parentheses
-  u (unicode "(")
-  i (unicode ")")
+  u S-9 ;; (
+  i S-0 ;; )
 
   ;; others
-  d (unicode _)
-  f (unicode \)
-  g (unicode ~)
-  [ (unicode `)
-  7 (unicode @)
-  8 (unicode #)
+  d S-- ;; _
+  f \
+  g S-` ;; ~
+  [ `
+  7 S-2 ;; @
+  8 S-3 ;; #
 
   v del
 )
