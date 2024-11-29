@@ -440,6 +440,11 @@ await yargs(process.argv.slice(2))
         }
       })
   })
+  .command(['o', 'open'], 'fzf open', (yargs: any) => {
+    yargs.strict(false);
+  }, async () => {
+    await $`${{ raw: `fzf -m --header "Tab: toggle" | xargs -i bash -c 'open "{}"'` }}`;
+  })
   .completion()
   .usage('$0 <subcmd>')
   .help()

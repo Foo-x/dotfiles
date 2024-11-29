@@ -19,18 +19,6 @@
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
   rmet (tap-dance 200 (XX (layer-switch game-layer)))
-
-  ;; switch numbers and symbols
-  1 (fork S-1 (unshift 1) (lsft))
-  2 (fork S-2 (unshift 2) (lsft))
-  3 (fork S-3 (unshift 3) (lsft))
-  4 (fork S-4 (unshift 4) (lsft))
-  5 (fork S-5 (unshift 5) (lsft))
-  6 (fork S-6 (unshift 6) (lsft))
-  7 (fork S-7 (unshift 7) (lsft))
-  8 (fork S-8 (unshift 8) (lsft))
-  9 (fork S-9 (unshift 9) (lsft))
-  0 (fork S-0 (unshift 0) (lsft))
 )
 
 (deflayermap (caps-layer)

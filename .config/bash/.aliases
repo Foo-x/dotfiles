@@ -383,6 +383,8 @@ if [[ ${IS_WSL} == 1 ]]; then
       wslview "$1"
     fi
   }
+  # to use with bash -c
+  export -f open
 
   function is_win_dir() {
     case $PWD/ in

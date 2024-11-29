@@ -55,6 +55,9 @@ return {
       { '<leader>oc', ':<C-u>OtherClear<CR>',  silent = true },
     },
     opts = other_opts,
+    config = function(_, opts)
+      require('other-nvim').setup(opts)
+    end,
   },
   {
     'https://github.com/ggandor/leap.nvim',
