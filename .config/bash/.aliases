@@ -203,6 +203,15 @@ alias devc=devcontainer
 alias devcu='devcontainer up --workspace-folder .'
 alias devcx='devcontainer exec --workspace-folder .'
 
+# nix
+alias nr='nix run'
+alias nd='nix develop'
+alias nfc='nix flake check'
+alias nfi='nix flake init'
+alias nfig='nix flake init --template templates#utils-generic'
+alias nfs='nix flake show'
+alias ngc='nix store gc'
+
 # browse
 alias al='cat ~/.dotfiles/.config/bash/.aliases | $PAGER'
 alias bashrc='$PAGER ~/.dotfiles/.bashrc'
@@ -329,6 +338,12 @@ function ansi_cht() {
     echo
     echo 'reset: \e[0m'
   } | less -R
+}
+
+function nix_update() {
+  cd "${DOT_DIR}" || return
+  nix run .#update
+  cd - || return
 }
 
 if type rsync &> /dev/null; then

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 is_win_dir() {
   case $(pwd -P) in
@@ -16,5 +16,5 @@ is_win_dir() {
 if is_win_dir && type git.exe > /dev/null 2>&1 && [ ${WSL_VERSION} = 2 ]; then
   git.exe "$@"
 else
-  /usr/bin/git "$@"
+  $(type -aP git | sed -n 2p) "$@"
 fi

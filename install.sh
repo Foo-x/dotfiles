@@ -99,83 +99,21 @@ if [ ! -d ${TMUX_DIR}/tmux-continuum ]; then
   git clone --depth 1 https://github.com/tmux-plugins/tmux-continuum.git ${TMUX_DIR}/tmux-continuum
 fi
 
+# install nix
+if ! has nix; then
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+fi
+
 # install mise
 if ! has mise; then
   curl https://mise.jdx.dev/install.sh | sh
 fi
 export PATH="${XDG_DATA_HOME}/mise/shims:${PATH}"
 
-# install node
-if ! has node; then
-  mise use -gy node
-fi
-
-# install bun
-if ! has bun; then
-  mise use -gy bun
-fi
-
-# install delta
-if ! has delta; then
-  mise use -gy delta
-fi
-
-# install bat
-if ! has bat; then
-  mise use -gy bat
-fi
-
-# install neovim
-if ! has nvim; then
-  mise use -gy neovim@stable
-fi
-
-# install ripgrep
-if ! has rg; then
-  mise use -gy ripgrep
-fi
+# setup ripgrep
 mkdir -p "${XDG_CONFIG_HOME}/ripgrep"
 ln -sf "${DOT_DIR}/.config/ripgrep/ripgreprc" "${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
 
-# install dust
-if ! has dust; then
-  mise use -gy dust
-fi
-
-# install fd
-if ! has fd; then
-  mise use -gy fd
-fi
-
-# install watchexec
-if ! has watchexec; then
-  mise use -gy watchexec
-fi
-
-# install hyperfine
-if ! has hyperfine; then
-  mise use -gy hyperfine
-fi
-
-# setup usage
-if ! has usage; then
-  mise use -gy usage
-fi
-
-# install zoxide
-if ! has zoxide; then
-  mise use -gy zoxide
-fi
-
-# install jq
-if ! has jq; then
-  mise use -gy jq
-fi
-
-# setup gh
-if ! has gh; then
-  mise use -gy github-cli
-fi
 if has gh; then
   {
     gh alias set --clobber cl 'repo clone'
@@ -192,16 +130,6 @@ if has gh; then
   } > /dev/null 2>&1
 fi
 
-# install typos
-if ! has typos; then
-  mise use -gy typos
-fi
-
-# install just
-if ! has just; then
-  mise use -gy just
-fi
-
 # install yargs
 if ! bun pm ls -g | grep -q yargs; then
   bun install -g yargs
@@ -213,25 +141,7 @@ fetch_git_prompt.sh
 "
 echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 
-# install aichat
-if ! has aichat; then
-  ver=v0.22.0
-  asset=
-  if [ "$(uname -s)" = 'Darwin' ]; then
-    asset="aichat-${ver}-$(uname -m)-apple-darwin.tar.gz"
-  elif [ "$(uname -s)" = 'Linux' ]; then
-    asset="aichat-${ver}-$(uname -m)-unknown-linux-musl.tar.gz"
-  fi
-  if [ -n "${asset}" ]; then
-    (
-      cd /tmp || :
-      curl -LO "https://github.com/sigoden/aichat/releases/download/${ver}/${asset}"
-      tar xvf "${asset}"
-      mv aichat ${HOME}/.local/bin/aichat
-      rm -f "${asset}"
-    )
-  fi
-fi
+# setup aichat
 mkdir -p ${XDG_CONFIG_HOME}/aichat
 ln -sf ${DOT_DIR}/aichat/roles ${XDG_CONFIG_HOME}/aichat
 
