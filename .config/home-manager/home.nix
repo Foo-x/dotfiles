@@ -38,6 +38,7 @@ in
       just
       neovim
       nodejs_22
+      python313
       ripgrep
       tmux
       typos

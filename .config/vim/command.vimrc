@@ -22,26 +22,43 @@ command! -nargs=+ -complete=file EditMultiple silent! argdelete * | AA <args> | 
 command! TabcloseRight +,$tabdo tabclose
 
 " insert_print
+if !exists('g:insert_print_marker')
+  let g:insert_print_marker = repeat('+', 5)
+endif
+
 if !exists('g:insert_print_prefix')
-  let g:insert_print_prefix = '+++++ $RANDOM_EMOJI $FILENAME:$LINENO [$CURRENT_INDEX] '
+  let g:insert_print_prefix = '$MARKER $RANDOM_EMOJI $FILENAME:$LINENO [$CURRENT_INDEX] '
 endif
 
 if !exists('g:insert_print_emoji_list')
   let g:insert_print_emoji_list = '😆😇🤔😑😎👻💛💚💙💜💯💥💫💦💤👌👍🙏💪👀🐒🐈🐇🐾🐣🐬🍀🍇🍉🍒🍔🍥🍡🍺🚀🌙🌈🔥💧✨🎈🎉🏀🎲🎨🔔💡📖📝🔰✅🔴🔵🥕🧐🧡🥪🧬🟠🟡🟢🟣🟥🟧🟨🟩🟦🟪🪶🪃'
 endif
 
+if !exists('g:insert_print_timestamp')
+  let g:insert_print_timestamp = {}
+  " needs `from datetime import datetime`
+  let g:insert_print_timestamp.python = 'datetime.now().strftime("%H:%M:%S.%f")[:-3]'
+  let g:insert_print_timestamp.javascript = 'new Date().toLocaleTimeString("ja-JP", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.typescript = 'new Date().toLocaleTimeString("ja-JP", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.typescriptreact = 'new Date().toLocaleTimeString("ja-JP", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.vue = 'new Date().toLocaleTimeString("ja-JP", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.lua = 'os.date("%H:%M:%S")'
+  let g:insert_print_timestamp.vim = 'strftime("%H:%M:%S")'
+  let g:insert_print_timestamp.sh = 'date +%T.%3N'
+  let g:insert_print_timestamp.bash = 'date +%T.%3N'
+endif
+
 if !exists('g:insert_print_templates')
   let g:insert_print_templates = {}
-  " needs `import time`
-  let g:insert_print_templates.python = 'print(f"{time.perf_counter()}s {}")'
-  let g:insert_print_templates.javascript = 'console.log(`${performance.now() / 1000}s {}`);'
-  let g:insert_print_templates.typescript = 'console.log(`${performance.now() / 1000}s {}`);'
-  let g:insert_print_templates.typescriptreact = 'console.log(`${performance.now() / 1000}s {}`);'
-  let g:insert_print_templates.vue = 'console.log(`${performance.now() / 1000}s {}`);'
-  let g:insert_print_templates.lua = 'print(os.clock() .. "s {}")'
-  let g:insert_print_templates.sh = 'date "+%s.%6Ns {}"'
-  let g:insert_print_templates.bash = 'date "+%s.%6Ns {}"'
-  let g:insert_print_templates.vim = 'echom "{}"'
+  let g:insert_print_templates.python = 'print($TIMESTAMP + f" {}")'
+  let g:insert_print_templates.javascript = 'console.debug($TIMESTAMP + ` {}`);'
+  let g:insert_print_templates.typescript = 'console.debug($TIMESTAMP + ` {}`);'
+  let g:insert_print_templates.typescriptreact = 'console.debug($TIMESTAMP + ` {}`);'
+  let g:insert_print_templates.vue = 'console.debug($TIMESTAMP + ` {}`);'
+  let g:insert_print_templates.lua = 'print($TIMESTAMP .. " {}")'
+  let g:insert_print_templates.vim = 'echom $TIMESTAMP . " {}"'
+  let g:insert_print_templates.sh = 'printf "%s {}" $($TIMESTAMP)'
+  let g:insert_print_templates.bash = 'printf "%s {}" $($TIMESTAMP)'
 endif
 
 fun! s:insert_print()
@@ -54,10 +71,12 @@ fun! s:insert_print()
       \ ->{ l -> l =~ '\$0'
       \   ? substitute(l, '{}', g:insert_print_prefix, '')
       \   : substitute(l, '{}', g:insert_print_prefix . '$0', '') }()
+      \ ->substitute('$MARKER', g:insert_print_marker, '')
       \ ->substitute('$FILENAME', expand('%'), '')
       \ ->substitute('$LINENO', line('.') + 1, '')
       \ ->substitute('$RANDOM_EMOJI', l:random_emoji, '')
       \ ->substitute('$CURRENT_INDEX', g:insert_print_cur, '')
+      \ ->substitute('$TIMESTAMP', get(g:insert_print_timestamp, &filetype, ''), '')
 
   put=l:insert_print_line
   norm! ==
@@ -66,6 +85,13 @@ fun! s:insert_print()
   call search('$0', '', line('.'))
   norm! "_x"_x
 endf
+fun! s:clean_insert_print()
+  exe 'silent grep! -F ' . g:insert_print_marker
+  cdo delete
+  cfdo update
+  cclose
+endf
+command! CleanInsertPrint call s:clean_insert_print()
 fun! s:init_insert_print()
   if has_key(g:insert_print_templates, &filetype)
     command! -buffer InsertPrint call s:insert_print()
