@@ -14,22 +14,21 @@ local function fern_config()
       vim.fn['glyph_palette#defaults#highlight']()
       vim.fn['fern_git_status#init']()
 
-      vim.keymap.set('n', '<Plug>(fern-close-drawer)', '<Cmd>FernDo close -drawer -stay<CR>', { remap = true })
-      vim.keymap.set('n', '<Plug>(fern-action-open-and-close)', '<Plug>(fern-action-open)<Plug>(fern-close-drawer)',
-        { buffer = true, silent = true, remap = true })
-      vim.keymap.set('n', '<Plug>(fern-my-open-or-expand)',
-        [[fern#smart#leaf('<Plug>(fern-action-open-and-close)', '<Plug>(fern-action-expand)')]],
-        { buffer = true, remap = true, expr = true, replace_keycodes = false })
+      vim.keymap.set(
+        'n',
+        '<Plug>(fern-my-open-or-expand)',
+        [[fern#smart#leaf('<Plug>(fern-action-open)', '<Plug>(fern-action-expand)')]],
+        { buffer = true, remap = true, expr = true, replace_keycodes = false }
+      )
       vim.keymap.set('n', '<CR>', '<Plug>(fern-my-open-or-expand)', { buffer = true })
       vim.keymap.set('n', 'i', '<Nop>', { buffer = true })
       vim.keymap.set('n', 'in', '<Plug>(fern-action-new-file)', { buffer = true })
       vim.keymap.set('n', 'iN', '<Plug>(fern-action-new-dir)', { buffer = true })
       vim.keymap.set('n', 'l', '<Plug>(fern-my-open-or-expand)', { buffer = true })
-      vim.keymap.set('n', 't', '<Plug>(fern-action-open:tabedit)gt<Plug>(fern-close-drawer)gT', { buffer = true })
+      vim.keymap.set('n', 't', '<Plug>(fern-action-open:tabedit)gt<C-o>gT', { buffer = true })
       vim.keymap.set('n', 'D', '<Plug>(fern-action-remove=)', { buffer = true })
-      vim.keymap.set('n', 's', '<Plug>(fern-action-open:select)<Plug>(fern-close-drawer)', { buffer = true })
       vim.keymap.set('n', 'm', function()
-        vim.cmd [[silent! exe "norm! \<Plug>(fern-action-yank)"]]
+        vim.cmd([[silent! exe "norm! \<Plug>(fern-action-yank)"]])
         local src = vim.fn.getreg('"')
         local dst = vim.fn.input('New name: ' .. src .. ' -> ', src)
         if dst ~= '' then
@@ -42,17 +41,20 @@ local function fern_config()
               vim.cmd.tabprevious()
             end
           end
-          vim.cmd [[silent! exe "norm! \<Plug>(fern-action-reload)"]]
+          vim.cmd([[silent! exe "norm! \<Plug>(fern-action-reload)"]])
         end
       end, { buffer = true })
-      vim.keymap.set('n', 'x', [[<Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>]],
-        { buffer = true, silent = true })
+      vim.keymap.set(
+        'n',
+        'x',
+        [[<Plug>(fern-action-yank)<Cmd>call system('open ' . getreg('"'))<CR>]],
+        { buffer = true, silent = true }
+      )
       vim.keymap.set('n', '<Tab>', '<Plug>(fern-action-mark)<Down>', { buffer = true })
       vim.keymap.set('n', 'o', function()
-        vim.cmd [[silent! exe "norm! \<Plug>(fern-action-yank)"]]
+        vim.cmd([[silent! exe "norm! \<Plug>(fern-action-yank)"]])
         local path = vim.fn.getreg('"')
         local stat = vim.loop.fs_stat(path)
-        vim.cmd [[silent! exe "norm! \<Plug>(fern-close-drawer)"]]
         if stat.type == 'directory' then
           vim.cmd('Oil ' .. path)
         else
@@ -77,7 +79,7 @@ return {
     },
     cmd = 'Fern',
     keys = {
-      { '<Space>e', ":<C-u>exe 'Fern . -drawer -reveal=% -toggle -width=' . (&columns / 3)<CR>", silent = true },
+      { '<Space>e', ':<C-u>Fern . -reveal=%<CR>', silent = true },
     },
     init = fern_init,
     config = fern_config,

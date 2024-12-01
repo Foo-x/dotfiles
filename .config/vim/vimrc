@@ -138,3 +138,8 @@ augroup CmdWin
   autocmd CmdwinEnter : g/\v^w%[qa!]$/d
   autocmd CmdWinEnter * nnoremap <buffer> q <Cmd>q<CR>
 augroup END
+augroup Memo
+  autocmd!
+  autocmd TabLeave .local/memo.md let g:memo_tabpagenr = tabpagenr()
+  autocmd TabEnter * if exists('g:memo_tabpagenr') | exe 'tabclose' g:memo_tabpagenr | unlet g:memo_tabpagenr | endif
+augroup END

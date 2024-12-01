@@ -12,6 +12,7 @@ nnoremap <Plug>(fzf)ar :<C-u>Args<CR>
 nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs<CR>
 nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
 nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
+nnoremap <Plug>(fzf)b :<C-u>Bookmarks<CR>
 
 vnoremap <Space>f <Plug>(fzf)
 vnoremap <Plug>(fzf). <Esc><Cmd>normal gv<CR><Cmd>call <SID>files_cursor()<CR>
@@ -108,6 +109,17 @@ fun! s:files_cursor()
   \ }))
 endf
 
+fun! s:gf(line)
+  let l:file = split(a:line, '[^[:fname:]]\+')
+  let l:filename = l:file[0]
+  let l:line = get(l:file, 1, 0)
+  let l:column = get(l:file, 2, 0)
+  exe 'e ' . l:filename
+  if l:line != 0
+    call cursor(l:line, l:column)
+  endif
+endf
+
 command! -bang TS call fzf#vim#files(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "TS> "'
@@ -133,5 +145,11 @@ command! -bang ATV call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': argv(),
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "ATV> "'
+\ })))
+
+command! Bookmarks call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \ 'source': 'cat .local/bookmarks.txt | sed "/^#\|^$/d"',
+  \ 'sink': function('s:gf'),
+  \ 'options': '--prompt "Bookmarks> "'
 \ })))
 " }}}

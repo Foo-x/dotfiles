@@ -138,12 +138,6 @@ local function diffview_config(_, opts)
       end
     end,
   })
-  vim.api.nvim_create_autocmd('TabClosed', {
-    group = diffview_close_augroup,
-    callback = function(_)
-      vim.g.diffview_tabpagenr = -1
-    end,
-  })
 
   require('diffview').setup(opts)
 end

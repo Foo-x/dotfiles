@@ -22,32 +22,34 @@
 )
 
 (deflayermap (caps-layer)
+  ;; use macro for keys with shift not to enable capslock
+
   ;; +-*/%
   q +
   w -
-  e S-8 ;; *
+  e (macro S-8) ;; *
   r /
-  t S-5 ;; %
+  t (macro S-5) ;; %
 
   ;; and, or, not, equal, optional
-  a S-7 ;; &
-  s S-\ ;; |
-  d S-1 ;; !
+  a (macro S-7) ;; &
+  s (macro S-\) ;; |
+  d (macro S-1) ;; !
   f =
-  g S-/ ;; ?
+  g (macro S-/) ;; ?
 
   ;; first, end
-  z S-6 ;; ^
-  x S-4 ;; $
+  z (macro S-6) ;; ^
+  x (macro S-4) ;; $
 
   ;; parentheses
-  j S-9 ;; (
-  k S-0 ;; )
+  j (macro S-9) ;; (
+  k (macro S-0) ;; )
 
   ;; others
-  c S-- ;; _
+  c (macro S--) ;; _
   v \
-  b S-` ;; ~
+  b (macro S-`) ;; ~
 
   ' `
 

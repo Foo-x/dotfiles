@@ -135,6 +135,9 @@ nnoremap L <Cmd>tabnext<CR>
 nnoremap <Plug>(tab)H <Cmd>tabmove -<CR>
 nnoremap <Plug>(tab)L <Cmd>tabmove +<CR>
 
+nnoremap <Space><Space>b <Cmd>exe 'e .local/bookmarks.txt'<CR>
+nnoremap <Space><Space>m <Cmd>-tabnew .local/memo.md<CR>
+
 nnoremap <C-s> :<C-u>update<CR>
 
 "" not to yunk
@@ -144,10 +147,10 @@ nnoremap s "_s
 nnoremap S "_S
 
 "" format all lines
-nnoremap <Space>= gg=G
+nnoremap <Space>= gg=G<C-o>
 
 "" yank all lines
-nnoremap <Space>y ggyG
+nnoremap <Space>y ggyG<C-o>
 
 "" select all
 nnoremap <Space>v ggVG
