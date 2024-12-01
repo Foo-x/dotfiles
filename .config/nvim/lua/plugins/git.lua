@@ -90,7 +90,7 @@ local function diffview_opts()
   return {
     hooks = {
       view_leave = function()
-        vim.g.diffview_tabpagenr = vim.fn.tabpagenr()
+        vim.g.diffview_leave = true
       end,
     },
     keymaps = {
@@ -132,9 +132,9 @@ local function diffview_config(_, opts)
   vim.api.nvim_create_autocmd('TabEnter', {
     group = diffview_close_augroup,
     callback = function(_)
-      if vim.g.diffview_tabpagenr > 0 then
-        vim.cmd.tabclose(vim.g.diffview_tabpagenr)
-        vim.g.diffview_tabpagenr = -1
+      if vim.g.diffview_leave and vim.fn.tabpagenr('#') ~= 0 then
+        vim.cmd.tabclose(vim.fn.tabpagenr('#'))
+        vim.g.diffview_leave = nil
       end
     end,
   })

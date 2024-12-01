@@ -293,6 +293,27 @@ command! -range AiChatEnglish <line1>,<line2>call s:aichat_output('ai -r english
 command! -range AiChatJapanese <line1>,<line2>call s:aichat_output('ai -r japanese')
 command! -range AiChatPolish <line1>,<line2>call s:aichat_output('ai -r polish')
 
+fun! s:kanbanmd()
+  set equalalways
+
+  -tabnew
+
+  tcd $XDG_DATA_HOME/kanbanmd
+
+  e 1_backlog.md
+  sp 4_blocked.md
+  vs 5_done.md
+  winc t
+  vs 2_ready.md
+  vs 3_doing.md
+
+  let t:autosave=v:true
+
+  set noequalalways
+endf
+command! Kanbanmd call s:kanbanmd()
+nnoremap <Space><Space>k <Cmd>Kanbanmd<CR>
+
 command! Reload source $MYVIMRC
 
 if has('nvim')

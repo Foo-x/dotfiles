@@ -81,7 +81,7 @@ style		Changes that do not affect the meaning of the code (white-space, formatti
 test		Adding missing tests or correcting existing tests
 "'
 # not to use subshell to restore with tmux session
-alias kmd='cd ${XDG_DATA_HOME}/kanbanmd; vi 1_backlog.md +"sp 4_blocked.md | vs 5_done.md | winc t | vs 2_ready.md | vs 3_doing.md" +"let t:autosave=v:true" +"doautocmd SessionLoadPost"; cd -'
+alias kmd='vi +"Kanbanmd" +"+tabclose" +"doautocmd SessionLoadPost"'
 alias kmdh='$PAGER ${XDG_DATA_HOME}/kanbanmd/README.md'
 alias kmdn='(cd ${XDG_DATA_HOME}/kanbanmd && cat 2_ready.md <(echo) 3_doing.md | $PAGER)'
 alias vis='touch Session.vim && vi +"doautocmd SessionLoadPost" -S'

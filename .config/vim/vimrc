@@ -140,6 +140,11 @@ augroup CmdWin
 augroup END
 augroup Memo
   autocmd!
-  autocmd TabLeave .local/memo.md let g:memo_tabpagenr = tabpagenr()
-  autocmd TabEnter * if exists('g:memo_tabpagenr') | exe 'tabclose' g:memo_tabpagenr | unlet g:memo_tabpagenr | endif
+  autocmd TabLeave .local/memo.md let g:memo_leave = v:true
+  autocmd TabEnter * if get(g:, 'memo_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | unlet g:memo_leave | endif
+augroup END
+augroup Kanbanmd
+  autocmd!
+  autocmd TabLeave $XDG_DATA_HOME/kanbanmd/*.md let g:kmd_leave = v:true
+  autocmd TabEnter * if get(g:, 'kmd_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | unlet g:kmd_leave | endif
 augroup END
