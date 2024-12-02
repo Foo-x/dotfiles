@@ -57,8 +57,8 @@ if !exists('g:insert_print_templates')
   let g:insert_print_templates.vue = 'console.debug($TIMESTAMP + ` {}`);'
   let g:insert_print_templates.lua = 'print($TIMESTAMP .. " {}")'
   let g:insert_print_templates.vim = 'echom $TIMESTAMP . " {}"'
-  let g:insert_print_templates.sh = 'printf "%s {}" $($TIMESTAMP)'
-  let g:insert_print_templates.bash = 'printf "%s {}" $($TIMESTAMP)'
+  let g:insert_print_templates.sh = 'printf "%s {}\n" $($TIMESTAMP)'
+  let g:insert_print_templates.bash = 'printf "%s {}\n" $($TIMESTAMP)' 
 endif
 
 fun! s:insert_print()
@@ -86,6 +86,7 @@ fun! s:insert_print()
   norm! "_x"_x
 endf
 fun! s:clean_insert_print()
+  wall
   exe 'silent grep! -F ' . g:insert_print_marker
   cdo delete
   cfdo update

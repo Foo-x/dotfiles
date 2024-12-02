@@ -284,6 +284,10 @@ keybindings:
   #   bindings: ['rctrl+g']
   # - commands: ['focus --prev-workspace']
   #   bindings: ['rctrl+a']
+  - commands: ['focus --next-active-workspace']
+    bindings: ['ralt+tab']
+  - commands: ['focus --prev-active-workspace']
+    bindings: ['ralt+shift+tab']
 
   # Focus the workspace that last had focus.
   # - commands: ['focus --recent-workspace']
