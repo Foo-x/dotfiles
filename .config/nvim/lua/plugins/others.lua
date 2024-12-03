@@ -140,7 +140,7 @@ local oil_opts = {
       desc = 'Open the entry in a horizontal split',
     },
     ['<leader>o'] = {
-      "<Cmd>exe '!open ' . expand('%:p')[6:]<CR>",
+      "<Cmd>exe 'silent !open ' . expand('%:p')[6:]<CR>",
       desc = 'Open current directory with the external file explorer',
     },
     ['<leader>t'] = { 'actions.select', opts = { tab = true }, desc = 'Open the entry in new tab' },

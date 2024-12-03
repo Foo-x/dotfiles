@@ -346,6 +346,12 @@ function nix_update() {
   cd - || return
 }
 
+function nix_switch_home() {
+  cd "${DOT_DIR}" || return
+  nix run .#switch-home
+  cd - || return
+}
+
 if type rsync &> /dev/null; then
   alias rsync='rsync -aPvh'
   alias rsyncb='rsync --backup --suffix=.`date +%Y%m%d_%H%M%S`'

@@ -108,9 +108,11 @@ augroup Git
   autocmd FileType GV nnoremap <buffer><silent> u <Cmd>call GvUpdate()<CR>
   autocmd FileType GV nnoremap <buffer><silent> a <Cmd>call GvToggleAll()<CR>
   autocmd FileType GV nnoremap <buffer><silent> d <Cmd>call GvToggleDefaultBranch()<CR>
-  autocmd FileType GV nnoremap <buffer><silent> b <Cmd>call GvToggleBaseBranch()<CR>
+  autocmd FileType GV nnoremap <buffer><silent> bb <Cmd>call GvToggleBaseBranch()<CR>
   autocmd FileType GV nnoremap <buffer><silent> <C-n> <Cmd>call GvToggleNameStatus()<CR>
   autocmd FileType GV nnoremap <buffer><silent> m <Cmd>call GvToggleMessage()<CR>
+  autocmd FileType GV nnoremap <buffer><silent> rb :<C-u>G rebase <cword><CR>
+  autocmd FileType GV nnoremap <buffer><silent> chp :<C-u>G cherry-pick <cword><CR>
   autocmd FileType GV nnoremap <buffer><silent> cf :<C-u>G commit --fixup <cword><CR>
   autocmd FileType GV nnoremap <buffer><silent> cF :<C-u>G commit --fixup <cword><CR>:G -c sequence.editor=true rebase -i --autosquash <cword>^<CR>
   autocmd FileType GV nnoremap <buffer><silent> ca :<C-u>G commit --fixup amend:<cword><CR>
@@ -120,6 +122,7 @@ augroup Git
   autocmd FileType GV nnoremap <buffer><silent> cs :<C-u>G commit --squash <cword><CR>
   autocmd FileType GV nnoremap <buffer><silent> cS :<C-u>G commit --squash <cword><CR>:G rebase -i --autosquash <cword>^<CR>
   autocmd FileType GV nnoremap <buffer><silent> me :<C-u>G merge <cword><CR>
+  autocmd FileType GV nnoremap <buffer><silent> bi :<C-u>G bisect start @ <cword><CR>
   autocmd FileType diff,git setlocal foldmethod=expr foldexpr=s:diff_fold()
 augroup END
 " }}}

@@ -102,13 +102,11 @@ fi
 # install nix
 if ! has nix; then
   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  cd "${DOT_DIR}"
+  nix run .#switch-home
+  cd -
 fi
-
-# install mise
-if ! has mise; then
-  curl https://mise.jdx.dev/install.sh | sh
-fi
-export PATH="${XDG_DATA_HOME}/mise/shims:${PATH}"
 
 # setup ripgrep
 mkdir -p "${XDG_CONFIG_HOME}/ripgrep"

@@ -41,6 +41,10 @@ nnoremap ]} "_ya{%
 nnoremap ]) "_ya(%
 nnoremap ]t vat<Esc>
 
+"" go to unmatched braces/parentheses
+nnoremap )} ]}
+nnoremap )) ])
+
 noremap <Space>h ^
 nnoremap <Space>l $
 noremap <Space>m %

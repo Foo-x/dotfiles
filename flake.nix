@@ -24,8 +24,15 @@
             echo "Updating flake ..."
             nix flake update
             echo "Updating home-manager ..."
-            nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig --impure
+            nix run .#switch-home
             echo "Update complete!"
+          '');
+        };
+        apps.switch-home = {
+          type = "app";
+          program = toString (pkgs.writeShellScript "switch-home" ''
+            set -e
+            nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig --impure
           '');
         };
       }

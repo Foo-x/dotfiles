@@ -16,5 +16,5 @@ is_win_dir() {
 if is_win_dir && type git.exe > /dev/null 2>&1 && [ ${WSL_VERSION} = 2 ]; then
   git.exe "$@"
 else
-  $(type -aP git | sed -n 2p) "$@"
+  $(type -aP git | \grep -v '.local/bin/git' | head -n1) "$@"
 fi
