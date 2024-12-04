@@ -243,8 +243,8 @@ local function diffview_config(_, opts)
     callback = function(_)
       if vim.g.diffview_leave and vim.fn.tabpagenr('#') ~= 0 then
         vim.cmd.tabclose(vim.fn.tabpagenr('#'))
-        vim.g.diffview_leave = nil
       end
+      vim.g.diffview_leave = nil
     end,
   })
 
