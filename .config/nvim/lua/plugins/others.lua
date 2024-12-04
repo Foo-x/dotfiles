@@ -232,9 +232,7 @@ return {
     dependencies = { 'https://github.com/nvim-tree/nvim-web-devicons' },
     lazy = false,
     keys = {
-      { '<leader>e', '<Plug>(oil)' },
-      { '<Plug>(oil)e', '<Cmd>Oil<CR>' },
-      { '<Plug>(oil)\\', '<Cmd>tabnew<CR><Cmd>Oil<CR><Cmd>sp<CR><Cmd>windo vs<CR>' },
+      { '<leader>e', '<Cmd>Oil<CR>' },
     },
     opts = oil_opts,
     config = oil_config,
