@@ -42,6 +42,7 @@ in
       ripgrep
       tmux
       typos
+      unison
       vim
       watchexec
       zoxide

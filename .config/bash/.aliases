@@ -43,14 +43,9 @@ alias g=git
 alias h=history
 alias j=jobs
 
-if type vim &> /dev/null; then
-  alias vi=vim
-fi
-if type nvim &> /dev/null; then
-  alias vi=nvim
-  alias nview='nvim -R'
-  alias view=nview
-fi
+alias vi=nvim
+alias nview='nvim -R'
+alias view=nview
 
 alias md=mkdir
 alias gr=grep
@@ -223,6 +218,15 @@ alias dal='alias | \grep "='\''docker[^-]" | $PAGER'
 alias dcal='alias | \grep "='\''docker compose" | $PAGER'
 alias bdot='vi ~/.dotfiles'
 
+
+# rsync
+alias rsync='rsync -aPvh'
+alias rsyncb='rsync --backup --suffix=.`date +%Y%m%d_%H%M%S`'
+alias mirror='rsync --delete'
+
+# unison
+alias unisonw='unison -repeat watch -prefer newer'
+
 function with_env() {
   (
     set -a
@@ -352,42 +356,36 @@ function nix_switch_home() {
   cd - || return
 }
 
-if type rsync &> /dev/null; then
-  alias rsync='rsync -aPvh'
-  alias rsyncb='rsync --backup --suffix=.`date +%Y%m%d_%H%M%S`'
-  alias mirror='rsync --delete'
+function incr_bak() {
+  local base="$2"
 
-  function incr_bak() {
-    local base="$2"
+  mkdir -p "${base}"
 
-    mkdir -p "${base}"
+  local latest="../$(\ls ${base} | tail -n 1)"
 
-    local latest="../$(\ls ${base} | tail -n 1)"
+  rsync --link-dest="${latest}" "$1" "${base}/$(date +%Y%m%d_%H%M%S)"
+}
 
-    rsync --link-dest="${latest}" "$1" "${base}/$(date +%Y%m%d_%H%M%S)"
-  }
+function incr_bak_from_remote() {
+  # incr_bak_from_remote foo bar user@host -i baz.pem
+  local base="$2" src="$3" auth="${@:4}"
 
-  function incr_bak_from_remote() {
-    # incr_bak_from_remote foo bar user@host -i baz.pem
-    local base="$2" src="$3" auth="${@:4}"
+  mkdir -p "${base}"
 
-    mkdir -p "${base}"
+  local latest="../$(\ls ${base} | tail -n 1)"
 
-    local latest="../$(\ls ${base} | tail -n 1)"
+  rsync --link-dest="${latest}" -e "ssh ${auth}" "${src}:$1" "${base}/$(date +%Y%m%d_%H%M%S)"
+}
 
-    rsync --link-dest="${latest}" -e "ssh ${auth}" "${src}:$1" "${base}/$(date +%Y%m%d_%H%M%S)"
-  }
+function incr_bak_to_remote() {
+  # incr_bak_to_remote foo bar user@host -i baz.pem
+  local base="$2" dest="$3" auth="${@:4}"
 
-  function incr_bak_to_remote() {
-    # incr_bak_to_remote foo bar user@host -i baz.pem
-    local base="$2" dest="$3" auth="${@:4}"
+  ssh "${auth}" "${dest}" "mkdir -p ${base}"
+  local latest="../$(ssh "${@:4}" "${dest}" "\ls ${base} | tail -n 1")"
 
-    ssh "${auth}" "${dest}" "mkdir -p ${base}"
-    local latest="../$(ssh "${@:4}" "${dest}" "\ls ${base} | tail -n 1")"
-
-    rsync --link-dest="${latest}" "$1" -e "ssh ${auth}" "${dest}:${base}/$(date +%Y%m%d_%H%M%S)"
-  }
-fi
+  rsync --link-dest="${latest}" "$1" -e "ssh ${auth}" "${dest}:${base}/$(date +%Y%m%d_%H%M%S)"
+}
 
 if [[ ${IS_WSL} == 1 ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'

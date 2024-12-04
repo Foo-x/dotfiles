@@ -126,8 +126,8 @@ nnoremap <Space>1 <C-w>t
 nnoremap <Space>2 <C-w>t<C-w>l
 nnoremap <Space>3 <C-w>t<C-w>j
 nnoremap <Space>4 <C-w>b
-nnoremap <Tab> <C-w>w
-nnoremap <S-Tab> <C-w>W
+nnoremap <Right> <C-w>w
+nnoremap <Left> <C-w>W
 
 nmap <Space>t <Plug>(tab)
 nnoremap <Plug>(tab)t <Cmd>tabnew<CR>

@@ -58,7 +58,7 @@ if !exists('g:insert_print_templates')
   let g:insert_print_templates.lua = 'print($TIMESTAMP .. " {}")'
   let g:insert_print_templates.vim = 'echom $TIMESTAMP . " {}"'
   let g:insert_print_templates.sh = 'printf "%s {}\n" $($TIMESTAMP)'
-  let g:insert_print_templates.bash = 'printf "%s {}\n" $($TIMESTAMP)' 
+  let g:insert_print_templates.bash = 'printf "%s {}\n" $($TIMESTAMP)'
 endif
 
 fun! s:insert_print()
