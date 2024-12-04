@@ -217,7 +217,8 @@ alias tmconf='$PAGER $XDG_CONFIG_HOME/tmux/tmux.conf'
 alias dal='alias | \grep "='\''docker[^-]" | $PAGER'
 alias dcal='alias | \grep "='\''docker compose" | $PAGER'
 alias bdot='vi ~/.dotfiles'
-
+alias tfal='alias | \grep "='\''terraform" | $PAGER'
+alias nal='alias | \grep "='\''nix" | $PAGER'
 
 # rsync
 alias rsync='rsync -aPvh'
