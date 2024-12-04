@@ -2,7 +2,7 @@ if has('nvim')
   fun! s:update_git_status_cache(cache, jobid, data, event_type)
     let l:value = join(a:data, "\n")
     if l:value != ''
-      let a:cache.value = substitute(l:value, '%', '%%', 'g')
+      let a:cache.value = ' ' . substitute(l:value, '%', '%%', 'g')
       redrawstatus
     endif
   endf
@@ -14,7 +14,7 @@ if has('nvim')
     if (reltimefloat(reltime()) - w:git_status_cache.time) > 1
       let l:dir = expand('%:h')
       if isdirectory(l:dir)
-        call jobstart('. ${DOT_DIR}/.config/bash/.exports_git_ps1 && __git_ps1 " %s"', {'on_stdout': function('s:update_git_status_cache', [w:git_status_cache]), 'cwd': l:dir})
+        call jobstart('. ${DOT_DIR}/.config/bash/.exports_git_ps1 && __my_git_ps1', {'on_stdout': function('s:update_git_status_cache', [w:git_status_cache]), 'cwd': l:dir})
       else
         let w:git_status_cache.value = ''
       endif

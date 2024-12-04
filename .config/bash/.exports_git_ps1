@@ -1,9 +1,97 @@
-. ${DOT_DIR}/.config/bash/git-prompt.sh
+function __my_git_ps1() {
+  # tested on git 2.47.0
+  local status
+  local regex
+  local branch
+  local no_commit dirty_state stash untracked file
+  local sparse
+  local ahead_behind ahead_behind_tmp upstream_tmp ahead_behind_commits ahead_behind_commits_tmp upstream
+  local operation
+  local conflict
 
-GIT_PS1_SHOWDIRTYSTATE=1  # show if there are changed files '*' for unstaged and '+' for staged
-GIT_PS1_SHOWSTASHSTATE=1  # show '$' if something is stashed
-GIT_PS1_SHOWUNTRACKEDFILES=1  # show '%' if there are untracked files
-GIT_PS1_STATESEPARATOR='|'  # separator between the branch name and the state symbols
-GIT_PS1_SHOWUPSTREAM='verbose name'  # show diff from upstream
-GIT_PS1_DESCRIBE_STYLE=branch  # show detached HEAD as relative to branch
-GIT_PS1_SHOWCONFLICTSTATE=yes  # show '|CONFLICT' if there are conflicts
+  if ! status=$(git status --show-stash 2> /dev/null); then
+    return
+  fi
+
+  # branch
+  regex='HEAD detached at ([[:print:]]+)'
+  if [[ $status =~ $regex ]]; then
+    branch="(${BASH_REMATCH[1]})"
+  fi
+  regex='On branch ([[:print:]]+)'
+  if [[ $status =~ $regex ]]; then
+    branch="${BASH_REMATCH[1]}"
+  fi
+
+  # file
+  if [[ $status =~ 'No commits yet' ]]; then
+    no_commit='#'
+  fi
+  if [[ $status =~ 'Changes not staged for commit' || $status =~ 'Unmerged paths' ]]; then
+    dirty_state='*'
+  fi
+  if [[ $status =~ 'Changes to be committed' || $status =~ 'Unmerged paths' ]]; then
+    dirty_state="${dirty_state}+"
+  fi
+  if [[ $status =~ 'Unmerged paths' ]]; then
+    dirty_state='*+'
+    conflict='|CONFLICT'
+  fi
+  if [[ $status =~ 'Your stash' ]]; then
+    stash='$'
+  fi
+  if [[ $status =~ 'Untracked files' ]]; then
+    untracked='%'
+  fi
+  file="${no_commit}${dirty_state}${stash}${untracked}"
+  file="${file:+|${file}}"
+
+  # sparse
+  if [[ $status =~ 'You are in a sparse checkout' ]]; then
+    sparse='|SPARSE'
+  fi
+
+  # upstream
+  regex="Your branch is (.+) '([^']+)'([^,.]*)"
+  if [[ $status =~ $regex ]]; then
+    ahead_behind_tmp="${BASH_REMATCH[1]}"
+    upstream_tmp="${BASH_REMATCH[2]}"
+    ahead_behind_commits_tmp="${BASH_REMATCH[3]}"
+    if [[ $ahead_behind_tmp == 'ahead of' ]]; then
+      ahead_behind='+'
+    elif [[ $ahead_behind_tmp == 'behind' ]]; then
+      ahead_behind='-'
+    else
+      ahead_behind='='
+    fi
+
+    regex="by (.+) commit"
+    if [[ $ahead_behind_commits_tmp =~ $regex ]]; then
+      ahead_behind_commits="${BASH_REMATCH[1]}"
+    else
+      ahead_behind_commits=''
+    fi
+    upstream="|u${ahead_behind}${ahead_behind_commits} ${upstream_tmp}"
+  fi
+  regex="Your branch and '([^']+)' have diverged,[[:cntrl:]]and have (.+) and (.+) different commits"
+  if [[ $status =~ $regex ]]; then
+    upstream_tmp="${BASH_REMATCH[1]}"
+    upstream="|u+${BASH_REMATCH[2]}-${BASH_REMATCH[3]} ${upstream_tmp}"
+  fi
+
+  # operation
+  if [[ $status =~ 'You are currently bisecting' ]]; then
+    operation='|BISECTING'
+  fi
+  regex="You are currently rebasing branch '([^']+)'"
+  if [[ $status =~ $regex ]]; then
+    operation='|REBASE'
+    branch="${BASH_REMATCH[1]}"
+  fi
+  if [[ $status =~ 'you are still merging' || $status =~ 'You have unmerged paths' ]]; then
+    operation='|MERGING'
+  fi
+
+  printf "%s" "${branch}${file}${sparse}${upstream}${operation}${conflict}"
+}
+

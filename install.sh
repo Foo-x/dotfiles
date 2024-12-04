@@ -135,7 +135,6 @@ fi
 
 exe_files="
 setup_completions.sh
-fetch_git_prompt.sh
 "
 echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 
