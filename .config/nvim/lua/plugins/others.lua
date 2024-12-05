@@ -232,7 +232,7 @@ return {
     dependencies = { 'https://github.com/nvim-tree/nvim-web-devicons' },
     lazy = false,
     keys = {
-      { '<leader>e', '<Cmd>Oil<CR>' },
+      { '<Space>e', '<Cmd>Oil<CR>' },
     },
     opts = oil_opts,
     config = oil_config,

@@ -79,7 +79,7 @@ return {
     },
     cmd = 'Fern',
     keys = {
-      { '<Space>e', ':<C-u>Fern . -reveal=%<CR>', silent = true },
+      { '<leader>e', ':<C-u>Fern . -reveal=%<CR>', silent = true },
     },
     init = fern_init,
     config = fern_config,

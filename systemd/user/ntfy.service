@@ -1,0 +1,13 @@
+[Unit]
+Description=Start ntfy
+
+[Service]
+Type=simple
+Restart=always
+Environment=NAME=ntfy
+ExecStart=/usr/bin/docker run --rm --env VIRTUAL_HOST=ntfy --env CERT_NAME=default --name=${NAME} binwiederhier/ntfy:v2.11.0 serve
+ExecStop=/usr/bin/docker stop ${NAME}
+ExecReload=/usr/bin/docker restart ${NAME}
+
+[Install]
+WantedBy=default.target
