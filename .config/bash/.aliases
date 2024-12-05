@@ -87,18 +87,17 @@ alias scratch='vi +"call timer_start(&updatetime + 100, { -> execute('\''set buf
 alias memo='vi .local/memo.md'
 alias ltail='less -n +F --follow-name'
 alias envedit='envtmp=$(mktemp); export -p > $envtmp; $EDITOR $envtmp; . $envtmp; \rm $envtmp; unset envtmp'
-alias ntfy='curl -k https://ntfy/ntfy -d'
-alias ntfy-='curl -k https://ntfy/ntfy -d @-'
+alias ntfy='curl -k https://ntfy.x.localhost/ntfy -d'
+alias ntfy-='curl -k https://ntfy.x.localhost/ntfy -d @-'
 
 # openssl
 alias ossl='openssl'
 alias ossltext='openssl x509 -text --noout -in'
 function osslgencerts() {
-  # osslgencerts <key> <csr> <crt> <days> <san>
-  openssl genrsa 2048 > "$1"
-  openssl req -new -key "$1" -out "$2"
-  openssl x509 -req -signkey "$1" -in "$2" -out "$3" -days "$4" -extfile <(echo "subjectAltName=$5")
+  # osslgencerts <key> <crt> <days> <san>
+  openssl req -x509 -newkey rsa:4096 -noenc -keyout "$1" -out "$2" -days "$3" -addext "subjectAltName = $4"
 }
+alias genlocalcerts='openssl req -x509 -newkey rsa:4096 -noenc -keyout default.key -out default.crt -subj "/CN=localhost" -days 36500 -addext "subjectAltName = DNS:localhost, DNS:x.localhost, DNS:*.x.localhost"'
 
 # date
 alias dt='date'
