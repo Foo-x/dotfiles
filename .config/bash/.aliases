@@ -238,6 +238,8 @@ alias mirror='rsync --delete'
 
 # unison
 alias unisonw='unison -repeat watch -prefer newer'
+## for WSL <-> Windows
+alias unisonww='unison -repeat 0 -prefer newer'
 
 function with_env() {
   (

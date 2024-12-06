@@ -1,7 +1,7 @@
 local function fzf_config()
   vim.cmd [[
     fun! s:fern_reveal(line)
-      exe 'Fern . -drawer -reveal=' . a:line
+      exe 'Fern . -reveal=' . a:line
     endf
     command! FFern exe "norm \<Plug>(fern-close-drawer)" | call fzf#run(fzf#wrap({
       \ 'source': 'bfs d',
@@ -36,7 +36,7 @@ return {
     },
     event = 'VeryLazy',
     keys = {
-      { '<Plug>(fzf)e', '<Cmd>FFern<CR>' },
+      { '<Plug>(fzf)f', '<Cmd>FFern<CR>' },
       { '<Plug>(fzf)o', '<Cmd>FOil<CR>' },
       { '<Plug>(fzf)z', '<Cmd>FZoxide<CR>' },
     },

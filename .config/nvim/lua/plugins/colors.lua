@@ -20,6 +20,7 @@ local function kmd_syntax()
         syntax match KmdContext display " @\S\+"
         syntax match KmdTag display " +\S\+"
         syntax match KmdDue display " \~\d\{4\}[-/]\?\d\{2\}[-/]\?\d\{2\}"
+        syntax match KmdDue display " \~TODAY"
         syntax match KmdHighPriority display " (H) "
         syntax match KmdLowPriority display " (L) "
       ]]
