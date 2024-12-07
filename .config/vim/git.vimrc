@@ -1,6 +1,6 @@
 " keymap {{{
 nmap <Space>g <Plug>(git)
-nnoremap <Plug>(git)<CR> :<C-u>tab Git<Space>
+nnoremap <Plug>(git) <Nop>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
 nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
 if has('nvim')
@@ -11,23 +11,24 @@ if has('nvim')
   nnoremap <Plug>(git)ce <Cmd>1TermExec cmd='git commit --amend --no-edit'<CR>
   nnoremap <Plug>(git)cE <Cmd>1TermExec cmd='git commit --amend --no-edit -n'<CR>
 else
+  nnoremap <Plug>(git)<Space> :<C-u>tab Git<Space>
   nnoremap <Plug>(git)cc <Cmd>silent !tmux new-window 'git commit; read -n 1 -s -p "press any key to close ..."'<CR>
   nnoremap <Plug>(git)cC <Cmd>silent !tmux new-window 'git commit -n; read -n 1 -s -p "press any key to close ..."'<CR>
   nnoremap <Plug>(git)ca <Cmd>silent !tmux new-window 'git commit --amend; read -n 1 -s -p "press any key to close ..."'<CR>
   nnoremap <Plug>(git)cA <Cmd>silent !tmux new-window 'git commit --amend -n; read -n 1 -s -p "press any key to close ..."'<CR>
   nnoremap <Plug>(git)ce <Cmd>silent !tmux new-window 'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."'<CR>
   nnoremap <Plug>(git)cE <Cmd>silent !tmux new-window 'git commit --amend --no-edit -n; read -n 1 -s -p "press any key to close ..."'<CR>
+  nnoremap <Plug>(git)b<CR> <Cmd>Git branch<CR>
+  nnoremap <Plug>(git)ba <Cmd>Git branch -a<CR>
+  nnoremap <Plug>(git)bv <Cmd>Git branch -avv<CR>
+  nnoremap <Plug>(git)s<CR> <Cmd>Git status -sb<CR>
+  nnoremap <Plug>(git)f <Cmd>Git fetch<CR>
+  nnoremap <Plug>(git)p<CR> <Cmd>Git pull<CR>
+  nnoremap <Plug>(git)pp <Cmd>Git pp<CR>
+  nnoremap <Plug>(git)ps <Cmd>Git push<CR>
+  nnoremap <Plug>(git)sl <Cmd>Git stash list<CR>
 endif
-nnoremap <Plug>(git)b<CR> <Cmd>Git branch<CR>
-nnoremap <Plug>(git)ba <Cmd>Git branch -a<CR>
-nnoremap <Plug>(git)bv <Cmd>Git branch -avv<CR>
-nnoremap <Plug>(git)s<CR> <Cmd>Git status -sb<CR>
-nnoremap <Plug>(git)f <Cmd>Git fetch<CR>
-nnoremap <Plug>(git)p<CR> <Cmd>Git pull<CR>
-nnoremap <Plug>(git)pp <Cmd>Git pp<CR>
-nnoremap <Plug>(git)ps <Cmd>Git push<CR>
 nnoremap <Plug>(git)ss <Cmd>Git stash<CR>
-nnoremap <Plug>(git)sl <Cmd>Git stash list<CR>
 nnoremap <Plug>(git)sd <Cmd>Git stash drop<CR>
 nnoremap <Plug>(git)sp <Cmd>Git stash pop<CR>
 nnoremap <Plug>(git)i <Cmd>exe 'split ' . trim(system('git rev-parse --show-toplevel')) . '/.git/info/exclude'<CR>

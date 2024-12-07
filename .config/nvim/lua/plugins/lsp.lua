@@ -211,7 +211,7 @@ local function mason_lspconfig_config(_, opts)
         },
       })
 
-      SetupColor()
+      KmdSyntax()
     end,
   })
 

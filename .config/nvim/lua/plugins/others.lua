@@ -20,7 +20,9 @@ local function bqf_config()
 end
 
 local various_textobjs_opts = {
-  useDefaultKeymaps = true,
+  keymaps = {
+    useDefaults = true,
+  },
 }
 
 local function kulala_init()

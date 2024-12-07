@@ -1,4 +1,4 @@
-local function kmd_syntax()
+function KmdSyntax()
   vim.cmd([[
     hi link KmdContext Changed
     hi link KmdTag Added
@@ -36,7 +36,7 @@ vim.api.nvim_create_user_command('Everforest', function()
   vim.cmd('hi GitGutterChange guifg=' .. palette['blue'][1])
   vim.cmd('hi GitGutterDelete guifg=' .. palette['red'][1])
   vim.cmd('hi GitGutterChangeDelete guifg=' .. palette['purple'][1])
-  kmd_syntax()
+  KmdSyntax()
 end, {})
 
 vim.api.nvim_create_user_command('Iceberg', function()
@@ -49,7 +49,7 @@ vim.api.nvim_create_user_command('Iceberg', function()
     hi SignColumn guibg=none
     hi FoldColumn guibg=none
   ]])
-  kmd_syntax()
+  KmdSyntax()
 end, {})
 
 vim.api.nvim_create_user_command('Base16GrayscaleDark', function()
@@ -97,11 +97,11 @@ vim.api.nvim_create_user_command('NoirbuddySlate', function()
   ]])
 
   require('leap').init_highlight(true)
-  kmd_syntax()
+  KmdSyntax()
 end, {})
 
 vim.api.nvim_create_user_command('Color', function(param)
-  vim.cmd(param)
+  vim.cmd(param.args)
 end, {
   nargs = 1,
   complete = function()

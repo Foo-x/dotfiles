@@ -1,12 +1,13 @@
 local function gitgutter_init()
   vim.g.gitgutter_set_sign_backgrounds = 1
-  vim.g.gitgutter_preview_win_floating = 0
+  vim.g.gitgutter_sign_modified_removed = '*'
   vim.g.gitgutter_sign_priority = 20
+  vim.g.gitgutter_preview_win_floating = 1
 end
 
 local function gitgutter_config()
   vim.cmd('GitGutterLineNrHighlightsEnable')
-  vim.keymap.set('n', '<Plug>(git)', '<Plug>(GitGutterPreviewHunk)<C-w>P')
+  vim.keymap.set('n', '<Plug>(git)<CR>', '<Plug>(GitGutterPreviewHunk)')
   vim.keymap.set('n', '<C-j>', '<Plug>(GitGutterNextHunk)')
   vim.keymap.set('n', '<C-k>', '<Plug>(GitGutterPrevHunk)')
 end

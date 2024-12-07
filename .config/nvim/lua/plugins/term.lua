@@ -39,7 +39,7 @@ local function toggleterm_config(_, opts)
   local function term_exec_git_background(cmd)
     git:send('git ' .. cmd, true)
   end
-  vim.keymap.set('n', '<Plug>(git)<CR>', ':2TermExec size=' .. vim.o.columns / 2 .. ' cmd="git "<Left>')
+  vim.keymap.set('n', '<Plug>(git)<Space>', ':2TermExec size=' .. vim.o.columns / 2 .. ' cmd="git "<Left>')
   vim.keymap.set('n', '<Plug>(git)b<CR>', function()
     term_exec_git('branch')
   end)
