@@ -18,12 +18,12 @@ else
   nnoremap <Plug>(git)ce <Cmd>silent !tmux new-window 'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."'<CR>
   nnoremap <Plug>(git)cE <Cmd>silent !tmux new-window 'git commit --amend --no-edit -n; read -n 1 -s -p "press any key to close ..."'<CR>
 endif
-nnoremap <Plug>(git)b <Cmd>Git branch<CR>
+nnoremap <Plug>(git)b<CR> <Cmd>Git branch<CR>
 nnoremap <Plug>(git)ba <Cmd>Git branch -a<CR>
 nnoremap <Plug>(git)bv <Cmd>Git branch -avv<CR>
-nnoremap <Plug>(git)s <Cmd>Git status -sb<CR>
+nnoremap <Plug>(git)s<CR> <Cmd>Git status -sb<CR>
 nnoremap <Plug>(git)f <Cmd>Git fetch<CR>
-nnoremap <Plug>(git)p <Cmd>Git pull<CR>
+nnoremap <Plug>(git)p<CR> <Cmd>Git pull<CR>
 nnoremap <Plug>(git)pp <Cmd>Git pp<CR>
 nnoremap <Plug>(git)ps <Cmd>Git push<CR>
 nnoremap <Plug>(git)ss <Cmd>Git stash<CR>
