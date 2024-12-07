@@ -7,22 +7,24 @@ local function toggleterm_config(_, opts)
   local toggleterm = require('toggleterm')
   toggleterm.setup(opts)
 
-  function _G.set_terminal_keymaps()
+  function _G.on_open_toggleterm()
+    vim.o.list = false
+
     vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { buffer = 0 })
   end
 
   vim.cmd([[
   augroup ToggleTerm
     autocmd!
-    autocmd TermOpen term://* lua set_terminal_keymaps()
+    autocmd TermOpen term://* lua on_open_toggleterm()
     autocmd FileType fzf lua vim.keymap.del("t", "<Esc>", { buffer = 0 })
   augroup END
   ]])
 
   local Terminal = require('toggleterm.terminal').Terminal
-  local common = Terminal:new({ id = 1, direction = 'tab', on_open = set_terminal_keymaps })
+  local common = Terminal:new({ id = 1, direction = 'tab', on_open = on_open_toggleterm })
   common:spawn()
-  local git = Terminal:new({ id = 2, display_name = 'git', direction = 'vertical', on_open = set_terminal_keymaps })
+  local git = Terminal:new({ id = 2, display_name = 'git', direction = 'vertical', on_open = on_open_toggleterm })
   git:spawn()
 
   local function term_exec_git(cmd)

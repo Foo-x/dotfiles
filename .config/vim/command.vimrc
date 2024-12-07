@@ -23,11 +23,12 @@ command! TabcloseRight +,$tabdo tabclose
 
 " insert_print
 if !exists('g:insert_print_marker')
-  let g:insert_print_marker = repeat('+', 5)
+  " split not to match with grep
+  let g:insert_print_marker = '[' . 'INSERT_PRINT' . ']'
 endif
 
 if !exists('g:insert_print_prefix')
-  let g:insert_print_prefix = '$MARKER $RANDOM_EMOJI $FILENAME:$LINENO [$CURRENT_INDEX] '
+  let g:insert_print_prefix = '$MARKER $EMOJI $FILENAME:$LINENO [$INDEX] '
 endif
 
 if !exists('g:insert_print_emoji_list')
@@ -38,10 +39,10 @@ if !exists('g:insert_print_timestamp')
   let g:insert_print_timestamp = {}
   " needs `from datetime import datetime`
   let g:insert_print_timestamp.python = 'datetime.now().strftime("%H:%M:%S.%f")[:-3]'
-  let g:insert_print_timestamp.javascript = 'new Date().toLocaleTimeString("ja-JP", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
-  let g:insert_print_timestamp.typescript = 'new Date().toLocaleTimeString("ja-JP", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
-  let g:insert_print_timestamp.typescriptreact = 'new Date().toLocaleTimeString("ja-JP", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
-  let g:insert_print_timestamp.vue = 'new Date().toLocaleTimeString("ja-JP", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.javascript = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.typescript = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.typescriptreact = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.vue = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
   let g:insert_print_timestamp.lua = 'os.date("%H:%M:%S")'
   let g:insert_print_timestamp.vim = 'strftime("%H:%M:%S")'
   let g:insert_print_timestamp.sh = 'date +%T.%3N'
@@ -62,10 +63,10 @@ if !exists('g:insert_print_templates')
 endif
 
 fun! s:insert_print()
-  let l:random_emoji = strcharpart(g:insert_print_emoji_list, rand() % strchars(g:insert_print_emoji_list), 1)
+  let l:emoji = strcharpart(g:insert_print_emoji_list, rand() % strchars(g:insert_print_emoji_list), 1)
 
-  let g:insert_print_cur = get(g:, 'insert_print_cur', 0)
-  let g:insert_print_cur += 1
+  let s:insert_print_index = get(s:, 'insert_print_index', 0)
+  let s:insert_print_index += 1
 
   let l:insert_print_line = get(g:insert_print_templates, &filetype, '{}')
       \ ->{ l -> l =~ '\$0'
@@ -74,8 +75,8 @@ fun! s:insert_print()
       \ ->substitute('$MARKER', g:insert_print_marker, '')
       \ ->substitute('$FILENAME', expand('%'), '')
       \ ->substitute('$LINENO', line('.') + 1, '')
-      \ ->substitute('$RANDOM_EMOJI', l:random_emoji, '')
-      \ ->substitute('$CURRENT_INDEX', g:insert_print_cur, '')
+      \ ->substitute('$EMOJI', l:emoji, '')
+      \ ->substitute('$INDEX', s:insert_print_index, '')
       \ ->substitute('$TIMESTAMP', get(g:insert_print_timestamp, &filetype, ''), '')
 
   put=l:insert_print_line

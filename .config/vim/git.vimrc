@@ -3,12 +3,21 @@ nmap <Space>g <Plug>(git)
 nnoremap <Plug>(git)<CR> :<C-u>tab Git<Space>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
 nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
-nnoremap <Plug>(git)cc <Cmd>silent !tmux new-window 'git commit; read -n 1 -s -p "press any key to close ..."'<CR>
-nnoremap <Plug>(git)cC <Cmd>silent !tmux new-window 'git commit -n; read -n 1 -s -p "press any key to close ..."'<CR>
-nnoremap <Plug>(git)ca <Cmd>silent !tmux new-window 'git commit --amend; read -n 1 -s -p "press any key to close ..."'<CR>
-nnoremap <Plug>(git)cA <Cmd>silent !tmux new-window 'git commit --amend -n; read -n 1 -s -p "press any key to close ..."'<CR>
-nnoremap <Plug>(git)ce <Cmd>silent !tmux new-window 'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."'<CR>
-nnoremap <Plug>(git)cE <Cmd>silent !tmux new-window 'git commit --amend --no-edit -n; read -n 1 -s -p "press any key to close ..."'<CR>
+if has('nvim')
+  nnoremap <Plug>(git)cc <Cmd>1TermExec cmd='git commit'<CR>
+  nnoremap <Plug>(git)cC <Cmd>1TermExec cmd='git commit -n'<CR>
+  nnoremap <Plug>(git)ca <Cmd>1TermExec cmd='git commit --amend'<CR>
+  nnoremap <Plug>(git)cA <Cmd>1TermExec cmd='git commit --amend -n'<CR>
+  nnoremap <Plug>(git)ce <Cmd>1TermExec cmd='git commit --amend --no-edit'<CR>
+  nnoremap <Plug>(git)cE <Cmd>1TermExec cmd='git commit --amend --no-edit -n'<CR>
+else
+  nnoremap <Plug>(git)cc <Cmd>silent !tmux new-window 'git commit; read -n 1 -s -p "press any key to close ..."'<CR>
+  nnoremap <Plug>(git)cC <Cmd>silent !tmux new-window 'git commit -n; read -n 1 -s -p "press any key to close ..."'<CR>
+  nnoremap <Plug>(git)ca <Cmd>silent !tmux new-window 'git commit --amend; read -n 1 -s -p "press any key to close ..."'<CR>
+  nnoremap <Plug>(git)cA <Cmd>silent !tmux new-window 'git commit --amend -n; read -n 1 -s -p "press any key to close ..."'<CR>
+  nnoremap <Plug>(git)ce <Cmd>silent !tmux new-window 'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."'<CR>
+  nnoremap <Plug>(git)cE <Cmd>silent !tmux new-window 'git commit --amend --no-edit -n; read -n 1 -s -p "press any key to close ..."'<CR>
+endif
 nnoremap <Plug>(git)b <Cmd>Git branch<CR>
 nnoremap <Plug>(git)ba <Cmd>Git branch -a<CR>
 nnoremap <Plug>(git)bv <Cmd>Git branch -avv<CR>

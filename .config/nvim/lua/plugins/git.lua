@@ -22,89 +22,89 @@ local function gv_config()
       end, { buffer = 0, expr = true, silent = true })
       vim.keymap.set('n', 'rb<CR>', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git rebase ]]
+        return [[<Cmd>1TermExec cmd='git rebase ]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'rbi', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git rebase -i ]]
+        return [[<Cmd>1TermExec cmd='git rebase -i ]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'chp', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git cherry-pick ]]
+        return [[<Cmd>1TermExec cmd='git cherry-pick ]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cf', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git commit --fixup ]]
+        return [[<Cmd>1TermExec cmd='git commit --fixup ]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cF', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git commit --fixup ]]
+        return [[<Cmd>1TermExec cmd='git commit --fixup ]]
           .. sha
           .. [[ && git -c sequence.editor=true rebase -i --autosquash ]]
           .. sha
-          .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [[^'<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'ca', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git commit --fixup amend:]]
+        return [[<Cmd>1TermExec cmd='git commit --fixup amend:]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cA', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git commit --fixup amend:]]
+        return [[<Cmd>1TermExec cmd='git commit --fixup amend:]]
           .. sha
           .. [[ && git -c sequence.editor=true rebase -i --autosquash ]]
           .. sha
-          .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [[^'<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cr', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git commit --fixup reword:]]
+        return [[<Cmd>1TermExec cmd='git commit --fixup reword:]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cR', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git commit --fixup reword:]]
+        return [[<Cmd>1TermExec cmd='git commit --fixup reword:]]
           .. sha
           .. [[ && git -c sequence.editor=true rebase -i --autosquash ]]
           .. sha
-          .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [[^'<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cs', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git commit --squash ]]
+        return [[<Cmd>1TermExec cmd='git commit --squash ]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cS', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git commit --squash ]]
+        return [[<Cmd>1TermExec cmd='git commit --squash ]]
           .. sha
           .. [[ && git rebase -i --autosquash ]]
           .. sha
-          .. [[^; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [[^'<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'me', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git merge ]]
+        return [[<Cmd>1TermExec cmd='git merge ]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'bi', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>silent !tmux new-window 'git bisect start @ ]]
+        return [[<Cmd>1TermExec cmd='git bisect start @ ]]
           .. sha
-          .. [[; read -n 1 -s -p "press any key to close ..."'<CR>]]
+          .. [['<CR>]]
       end, { buffer = 0, expr = true })
     end,
   })
@@ -175,37 +175,37 @@ local function diffview_opts()
         {
           'n',
           'cc',
-          '<Cmd>tabclose <bar> silent !tmux new-window \'git commit; read -n 1 -s -p "press any key to close ..."\'<CR>',
+          '<Cmd>tabclose <bar> 1TermExec cmd="git commit"<CR>',
           { desc = 'Commit' },
         },
         {
           'n',
           'cC',
-          '<Cmd>tabclose <bar> silent !tmux new-window \'git commit -n; read -n 1 -s -p "press any key to close ..."\'<CR>',
+          '<Cmd>tabclose <bar> 1TermExec cmd="git commit -n"<CR>',
           { desc = 'Commit no verify' },
         },
         {
           'n',
           'ca',
-          '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend; read -n 1 -s -p "press any key to close ..."\'<CR>',
+          '<Cmd>tabclose <bar> 1TermExec cmd="git commit --amend"<CR>',
           { desc = 'Commit amend' },
         },
         {
           'n',
           'cA',
-          '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend -n; read -n 1 -s -p "press any key to close ..."\'<CR>',
+          '<Cmd>tabclose <bar> 1TermExec cmd="git commit --amend -n"<CR>',
           { desc = 'Commit amend no verify' },
         },
         {
           'n',
           'ce',
-          '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit; read -n 1 -s -p "press any key to close ..."\'<CR>',
+          '<Cmd>tabclose <bar> 1TermExec cmd="git commit --amend --no-edit"<CR>',
           { desc = 'Commit amend no edit' },
         },
         {
           'n',
           'cE',
-          '<Cmd>tabclose <bar> silent !tmux new-window \'git commit --amend --no-edit -n; read -n 1 -s -p "press any key to close ..."\'<CR>',
+          '<Cmd>tabclose <bar> 1TermExec cmd="git commit --amend --no-edit -n"<CR>',
           { desc = 'Commit amend no edit no-verify' },
         },
         {
