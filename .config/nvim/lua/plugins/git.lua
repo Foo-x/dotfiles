@@ -23,89 +23,89 @@ local function gv_config()
       end, { buffer = 0, expr = true, silent = true })
       vim.keymap.set('n', 'rb<CR>', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git rebase ]]
+        return [[<Cmd>1TermExecTab git rebase ]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'rbi', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git rebase -i ]]
+        return [[<Cmd>1TermExecTab git rebase -i ]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'chp', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git cherry-pick ]]
+        return [[<Cmd>1TermExecTab git cherry-pick ]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cf', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git commit --fixup ]]
+        return [[<Cmd>1TermExecTab git commit --fixup ]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cF', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git commit --fixup ]]
+        return [[<Cmd>1TermExecTab git commit --fixup ]]
           .. sha
           .. [[ && git -c sequence.editor=true rebase -i --autosquash ]]
           .. sha
-          .. [[^'<CR>]]
+          .. [[^<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'ca', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git commit --fixup amend:]]
+        return [[<Cmd>1TermExecTab git commit --fixup amend:]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cA', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git commit --fixup amend:]]
+        return [[<Cmd>1TermExecTab git commit --fixup amend:]]
           .. sha
           .. [[ && git -c sequence.editor=true rebase -i --autosquash ]]
           .. sha
-          .. [[^'<CR>]]
+          .. [[^<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cr', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git commit --fixup reword:]]
+        return [[<Cmd>1TermExecTab git commit --fixup reword:]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cR', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git commit --fixup reword:]]
+        return [[<Cmd>1TermExecTab git commit --fixup reword:]]
           .. sha
           .. [[ && git -c sequence.editor=true rebase -i --autosquash ]]
           .. sha
-          .. [[^'<CR>]]
+          .. [[^<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cs', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git commit --squash ]]
+        return [[<Cmd>1TermExecTab git commit --squash ]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cS', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git commit --squash ]]
+        return [[<Cmd>1TermExecTab git commit --squash ]]
           .. sha
           .. [[ && git rebase -i --autosquash ]]
           .. sha
-          .. [[^'<CR>]]
+          .. [[^<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'me', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git merge ]]
+        return [[<Cmd>1TermExecTab git merge ]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'bi', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExec cmd='git bisect start @ ]]
+        return [[<Cmd>1TermExecTab git bisect start @ ]]
           .. sha
-          .. [['<CR>]]
+          .. [[<CR>]]
       end, { buffer = 0, expr = true })
     end,
   })
@@ -176,37 +176,37 @@ local function diffview_opts()
         {
           'n',
           'cc',
-          '<Cmd>tabclose <bar> 1TermExec cmd="git commit"<CR>',
+          '<Cmd>tabclose <bar> 1TermExecTab git commit<CR>',
           { desc = 'Commit' },
         },
         {
           'n',
           'cC',
-          '<Cmd>tabclose <bar> 1TermExec cmd="git commit -n"<CR>',
+          '<Cmd>tabclose <bar> 1TermExecTab git commit -n<CR>',
           { desc = 'Commit no verify' },
         },
         {
           'n',
           'ca',
-          '<Cmd>tabclose <bar> 1TermExec cmd="git commit --amend"<CR>',
+          '<Cmd>tabclose <bar> 1TermExecTab git commit --amend<CR>',
           { desc = 'Commit amend' },
         },
         {
           'n',
           'cA',
-          '<Cmd>tabclose <bar> 1TermExec cmd="git commit --amend -n"<CR>',
+          '<Cmd>tabclose <bar> 1TermExecTab git commit --amend -n<CR>',
           { desc = 'Commit amend no verify' },
         },
         {
           'n',
           'ce',
-          '<Cmd>tabclose <bar> 1TermExec cmd="git commit --amend --no-edit"<CR>',
+          '<Cmd>tabclose <bar> 1TermExecTab git commit --amend --no-edit<CR>',
           { desc = 'Commit amend no edit' },
         },
         {
           'n',
           'cE',
-          '<Cmd>tabclose <bar> 1TermExec cmd="git commit --amend --no-edit -n"<CR>',
+          '<Cmd>tabclose <bar> 1TermExecTab git commit --amend --no-edit -n<CR>',
           { desc = 'Commit amend no edit no-verify' },
         },
         {

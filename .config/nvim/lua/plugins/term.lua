@@ -1,7 +1,4 @@
-local toggleterm_opts = {
-  open_mapping = [[<c-\>]],
-  direction = 'tab',
-}
+local toggleterm_opts = {}
 
 local function toggleterm_config(_, opts)
   local toggleterm = require('toggleterm')
@@ -9,6 +6,7 @@ local function toggleterm_config(_, opts)
 
   function _G.on_open_toggleterm()
     vim.o.list = false
+    vim.o.winfixwidth = false
 
     vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { buffer = 0 })
   end
@@ -27,46 +25,48 @@ local function toggleterm_config(_, opts)
   local git = Terminal:new({ id = 2, display_name = 'git', direction = 'vertical', on_open = on_open_toggleterm })
   git:spawn()
 
-  local function term_exec_git(cmd)
-    if not git:is_open() then
-      git:open(vim.o.columns / 2)
-    end
-    git:send('git ' .. cmd, true)
+  vim.api.nvim_create_user_command('TermExecVertical', function(param)
+    vim.cmd(
+      math.max(param.count, 1)
+        .. 'TermExec direction="vertical" size='
+        .. vim.o.columns / 2
+        .. ' cmd="'
+        .. param.args
+        .. '"'
+    )
     vim.schedule(function()
       vim.cmd.stopinsert()
     end)
-  end
-  local function term_exec_git_background(cmd)
-    git:send('git ' .. cmd, true)
-  end
-  vim.keymap.set('n', '<Plug>(git)<Space>', ':2TermExec size=' .. vim.o.columns / 2 .. ' cmd="git "<Left>')
-  vim.keymap.set('n', '<Plug>(git)b<CR>', function()
-    term_exec_git('branch')
-  end)
-  vim.keymap.set('n', '<Plug>(git)ba', function()
-    term_exec_git('branch -a')
-  end)
-  vim.keymap.set('n', '<Plug>(git)bv', function()
-    term_exec_git('branch -avv')
-  end)
-  vim.keymap.set('n', '<Plug>(git)s<CR>', function()
-    term_exec_git('status -sb')
-  end)
-  vim.keymap.set('n', '<Plug>(git)f', function()
-    term_exec_git_background('fetch')
-  end)
-  vim.keymap.set('n', '<Plug>(git)p<CR>', function()
-    term_exec_git_background('pull')
-  end)
-  vim.keymap.set('n', '<Plug>(git)pp', function()
-    term_exec_git_background('pp')
-  end)
-  vim.keymap.set('n', '<Plug>(git)ps', function()
-    term_exec_git('push')
-  end)
-  vim.keymap.set('n', '<Plug>(git)sl', function()
-    term_exec_git('stash list')
-  end)
+  end, { nargs = '+', range = true })
+  vim.api.nvim_create_user_command('TermExecTab', function(param)
+    vim.cmd(math.max(param.count, 1) .. 'TermExec direction="tab" cmd="' .. param.args .. '"')
+    vim.schedule(function()
+      vim.cmd.stopinsert()
+    end)
+  end, { nargs = '+', range = true })
+  vim.api.nvim_create_user_command('TermExecBackground', function(param)
+    vim.cmd(math.max(param.count, 1) .. 'TermExec open=0 cmd="' .. param.args .. '"')
+    vim.schedule(function()
+      vim.cmd.stopinsert()
+    end)
+  end, { nargs = '+', range = true })
+
+  vim.keymap.set({ 'n', 't' }, '<C-t>', function()
+    return '<Cmd>' .. vim.v.count .. 'ToggleTerm direction="tab"<CR>'
+  end, { expr = true })
+  vim.keymap.set({ 'n', 't' }, '<C-\\>', function()
+    return '<Cmd>' .. vim.v.count .. 'ToggleTerm direction="vertical" size=' .. vim.o.columns / 2 .. '<CR>'
+  end, { expr = true })
+  vim.keymap.set('n', '<Plug>(git)<Space>', ':<C-u>2TermExecVertical cmd="git "<Left>')
+  vim.keymap.set('n', '<Plug>(git)b<CR>', '<Cmd>2TermExecVertical git branch<CR>')
+  vim.keymap.set('n', '<Plug>(git)ba', '<Cmd>2TermExecVertical git branch -a<CR>')
+  vim.keymap.set('n', '<Plug>(git)bv', '<Cmd>2TermExecVertical git branch -avv<CR>')
+  vim.keymap.set('n', '<Plug>(git)s<CR>', '<Cmd>2TermExecVertical git status -sb<CR>')
+  vim.keymap.set('n', '<Plug>(git)f', '<Cmd>2TermExecBackground git fetch<CR>')
+  vim.keymap.set('n', '<Plug>(git)p<CR>', '<Cmd>2TermExecBackground git pull<CR>')
+  vim.keymap.set('n', '<Plug>(git)pp', '<Cmd>2TermExecBackground git pp<CR>')
+  vim.keymap.set('n', '<Plug>(git)ps', '<Cmd>2TermExecVertical git push<CR>')
+  vim.keymap.set('n', '<Plug>(git)sl', '<Cmd>2TermExecVertical git stash list<CR>')
   -- set g:termx<count> and then type <count><Space>x to execute set command
   -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
   -- if <count> is 1, it can be omitted on typing

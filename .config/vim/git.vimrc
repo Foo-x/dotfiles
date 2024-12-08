@@ -4,12 +4,12 @@ nnoremap <Plug>(git) <Nop>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
 nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
 if has('nvim')
-  nnoremap <Plug>(git)cc <Cmd>1TermExec cmd='git commit'<CR>
-  nnoremap <Plug>(git)cC <Cmd>1TermExec cmd='git commit -n'<CR>
-  nnoremap <Plug>(git)ca <Cmd>1TermExec cmd='git commit --amend'<CR>
-  nnoremap <Plug>(git)cA <Cmd>1TermExec cmd='git commit --amend -n'<CR>
-  nnoremap <Plug>(git)ce <Cmd>1TermExec cmd='git commit --amend --no-edit'<CR>
-  nnoremap <Plug>(git)cE <Cmd>1TermExec cmd='git commit --amend --no-edit -n'<CR>
+  nnoremap <Plug>(git)cc <Cmd>1TermExecTab git commit<CR>
+  nnoremap <Plug>(git)cC <Cmd>1TermExecTab git commit -n<CR>
+  nnoremap <Plug>(git)ca <Cmd>1TermExecTab git commit --amend<CR>
+  nnoremap <Plug>(git)cA <Cmd>1TermExecTab git commit --amend -n<CR>
+  nnoremap <Plug>(git)ce <Cmd>1TermExecTab git commit --amend --no-edit<CR>
+  nnoremap <Plug>(git)cE <Cmd>1TermExecTab git commit --amend --no-edit -n<CR>
 else
   nnoremap <Plug>(git)<Space> :<C-u>tab Git<Space>
   nnoremap <Plug>(git)cc <Cmd>silent !tmux new-window 'git commit; read -n 1 -s -p "press any key to close ..."'<CR>
