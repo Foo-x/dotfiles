@@ -24,6 +24,8 @@ local function toggleterm_config(_, opts)
   common:spawn()
   local git = Terminal:new({ id = 2, display_name = 'git', direction = 'vertical', on_open = on_open_toggleterm })
   git:spawn()
+  local termx = Terminal:new({ id = 3, display_name = 'termx', direction = 'tab', on_open = on_open_toggleterm })
+  termx:spawn()
 
   vim.api.nvim_create_user_command('TermExecVertical', function(param)
     vim.cmd(
@@ -57,7 +59,7 @@ local function toggleterm_config(_, opts)
   vim.keymap.set({ 'n', 't' }, '<C-\\>', function()
     return '<Cmd>' .. vim.v.count .. 'ToggleTerm direction="vertical" size=' .. vim.o.columns / 2 .. '<CR>'
   end, { expr = true })
-  vim.keymap.set('n', '<Plug>(git)<Space>', ':<C-u>2TermExecVertical cmd="git "<Left>')
+  vim.keymap.set('n', '<Plug>(git)<Space>', ':<C-u>2TermExecVertical git ')
   vim.keymap.set('n', '<Plug>(git)b<CR>', '<Cmd>2TermExecVertical git branch<CR>')
   vim.keymap.set('n', '<Plug>(git)ba', '<Cmd>2TermExecVertical git branch -a<CR>')
   vim.keymap.set('n', '<Plug>(git)bv', '<Cmd>2TermExecVertical git branch -avv<CR>')
@@ -69,12 +71,12 @@ local function toggleterm_config(_, opts)
   vim.keymap.set('n', '<Plug>(git)sl', '<Cmd>2TermExecVertical git stash list<CR>')
   -- set g:termx<count> and then type <count><Space>x to execute set command
   -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
-  -- if <count> is 1, it can be omitted on typing
+  -- if <count> is 1, it can be omitted
   vim.keymap.set('n', '<Space>x', function()
-    local cmd = vim.g['termx' .. vim.v.count1]
-    if cmd then
-      toggleterm.exec(cmd)
-    end
+    vim.cmd('3TermExec cmd="' .. vim.g['termx' .. vim.v.count1] .. '"')
+    vim.schedule(function()
+      vim.cmd.stopinsert()
+    end)
   end)
 end
 
