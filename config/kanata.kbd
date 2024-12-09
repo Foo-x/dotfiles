@@ -53,8 +53,8 @@
 
   ' `
 
-  u bks
-  i del
+  h bks
+  l del
 )
 
 (deflayermap (rsft-layer)
