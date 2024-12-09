@@ -165,6 +165,7 @@
     da = diff @
     dm = diff --diff-filter=M   # modified
     dnm = diff --diff-filter=m  # not modified
+    con = diff --name-only --diff-filter=U --relative  # conflicts
     du = !git ls-files --others --exclude-standard | xargs -r wc -l  # untracked
     dt = difftool -d
     dbd = "!git diff $(git db)..@"
