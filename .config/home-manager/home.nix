@@ -31,6 +31,7 @@ in
       delta
       dust
       fd
+      fre
       gh
       git
       hyperfine

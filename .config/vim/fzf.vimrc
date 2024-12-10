@@ -13,6 +13,7 @@ nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs<CR>
 nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
 nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
 nnoremap <Plug>(fzf)b :<C-u>Bookmarks<CR>
+nnoremap <Plug>(fzf)<Space> :<C-u>Frecency<CR>
 
 vnoremap <Space>f <Plug>(fzf)
 vnoremap <Plug>(fzf). <Esc><Cmd>normal gv<CR><Cmd>call <SID>files_cursor()<CR>
@@ -151,5 +152,15 @@ command! Bookmarks call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': 'cat .local/bookmarks.txt | sed "/^#\|^$/d"',
   \ 'sink': function('s:gf'),
   \ 'options': '--prompt "Bookmarks> "'
+\ })))
+
+fun! s:frecency(line)
+  let l:dir = substitute(a:line, '^\s*[.0-9]\+\s\+', '', '')
+  exe 'edit ' . l:dir
+endf
+command! Frecency call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \ 'source': 'fre --store .local/fre.json --stat',
+  \ 'sink': function('s:frecency'),
+  \ 'options': '--prompt "Frecency> "'
 \ })))
 " }}}

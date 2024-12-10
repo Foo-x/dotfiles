@@ -142,6 +142,9 @@ nnoremap L <Cmd>tabnext<CR>
 nnoremap <Plug>(tab)H <Cmd>tabmove -<CR>
 nnoremap <Plug>(tab)L <Cmd>tabmove +<CR>
 
+nmap <C-f> <Plug>(file)
+nnoremap <Plug>(file)<C-y> <Cmd>CopyFilename<CR>
+
 nnoremap <Space><Space>b <Cmd>exe 'e .local/bookmarks.txt'<CR>
 nnoremap <Space><Space>m <Cmd>-tabnew .local/memo.md<CR>
 
