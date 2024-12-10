@@ -25,6 +25,13 @@ local treesitter_opts = {
     'vim',
   },
   sync_install = false,
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      node_incremental = 'v',
+      node_decremental = 'V',
+    },
+  },
   textobjects = {
     select = {
       enable = true,
@@ -40,21 +47,25 @@ local treesitter_opts = {
       enable = true,
       set_jumps = true,
       goto_next_start = {
+        [']c'] = '@comment.outer',
         [']f'] = '@function.outer',
         [']s'] = { query = '@scope', query_group = 'locals' },
         [']z'] = { query = '@fold', query_group = 'folds' },
       },
       goto_next_end = {
+        [']C'] = '@comment.outer',
         [']F'] = '@function.outer',
         [']S'] = { query = '@scope', query_group = 'locals' },
         [']Z'] = { query = '@fold', query_group = 'folds' },
       },
       goto_previous_start = {
+        ['[c'] = '@comment.outer',
         ['[f'] = '@function.outer',
         ['[s'] = { query = '@scope', query_group = 'locals' },
         ['[z'] = { query = '@fold', query_group = 'folds' },
       },
       goto_previous_end = {
+        ['[C'] = '@comment.outer',
         ['[F'] = '@function.outer',
         ['[S'] = { query = '@scope', query_group = 'locals' },
         ['[Z'] = { query = '@fold', query_group = 'folds' },
@@ -95,8 +106,14 @@ local treesitter_opts = {
 }
 
 local function treesitter_config(_, opts)
-  if vim.fn.executable('cc') == 1 or vim.fn.executable('gcc') == 1 or vim.fn.executable('clang') == 1 or vim.fn.executable('cl') == 1 or vim.fn.executable('zig') == 1 then
-    require("nvim-treesitter.install").prefer_git = true
+  if
+    vim.fn.executable('cc') == 1
+    or vim.fn.executable('gcc') == 1
+    or vim.fn.executable('clang') == 1
+    or vim.fn.executable('cl') == 1
+    or vim.fn.executable('zig') == 1
+  then
+    require('nvim-treesitter.install').prefer_git = true
     require('nvim-treesitter.configs').setup(opts)
 
     vim.keymap.set('n', '[c', require('treesitter-context').go_to_context)
