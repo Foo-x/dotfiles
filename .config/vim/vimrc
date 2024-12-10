@@ -149,10 +149,3 @@ augroup Kanbanmd
   autocmd BufRead,BufNewFile $XDG_DATA_HOME/kanbanmd/*.md nnoremap <buffer> <Space>k <Cmd>if getline('.') =~ '\~TODAY' \| s/ \~TODAY// \| else \| exe 'norm A ~TODAY' \| endif<CR>
   autocmd TabEnter * if get(g:, 'kmd_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | endif | let g:kmd_leave = v:false
 augroup END
-
-if executable('fre')
-  augroup Fre
-    autocmd!
-    autocmd VimEnter * autocmd BufWinEnter * if &buftype == '' | call jobstart('fre --store .local/fre.json --add ' . expand('%')) | endif
-  augroup END
-endif
