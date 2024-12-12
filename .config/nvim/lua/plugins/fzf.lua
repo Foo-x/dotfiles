@@ -6,7 +6,7 @@ local function fzf_config()
     command! FFern exe "norm \<Plug>(fern-close-drawer)" | call fzf#run(fzf#wrap({
       \ 'source': 'bfs d',
       \ 'sink': function('s:fern_reveal'),
-      \ 'options': '--prompt "Fern> "'
+      \ 'options': '--prompt "Fern> " --preview "ls --dereference-command-line -1 --sort=time --color=always {}"'
     \ }))
 
     fun! s:oil_open(line)

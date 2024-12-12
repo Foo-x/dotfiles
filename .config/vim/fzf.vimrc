@@ -161,6 +161,7 @@ endf
 command! Frecency call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': 'fre --store .local/fre.json --stat',
   \ 'sink': function('s:frecency'),
-  \ 'options': '--prompt "Frecency> "'
+  \ 'options': '--prompt "Frecency> " --no-sort',
+  \ 'placeholder': '{2}'
 \ })))
 " }}}
