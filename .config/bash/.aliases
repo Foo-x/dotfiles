@@ -217,6 +217,7 @@ alias nfi='nix flake init'
 alias nfig='nix flake init --template templates#utils-generic'
 alias nfs='nix flake show'
 alias ngc='nix store gc'
+alias npd='nix profile diff-closures'
 
 # browse
 alias al='cat ~/.dotfiles/.config/bash/.aliases | $PAGER'
