@@ -14,6 +14,9 @@ nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
 nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
 nnoremap <Plug>(fzf)b :<C-u>Bookmarks<CR>
 nnoremap <Plug>(fzf)<Space> :<C-u>Frecency<CR>
+if executable('rg')
+  nnoremap <Plug>(fzf)r :<C-u>Rg<CR>
+endif
 
 vnoremap <Space>f <Plug>(fzf)
 vnoremap <Plug>(fzf). <Esc><Cmd>normal gv<CR><Cmd>call <SID>files_cursor()<CR>
