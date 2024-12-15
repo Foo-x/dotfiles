@@ -177,4 +177,9 @@ printf "${nvim_files}" | xargs -I{} ln -sfT ${DOT_DIR}/.config/nvim/{} ${XDG_CON
 # setup vsnip
 ln -sfn ${DOT_DIR}/snippets ${HOME}/.vsnip
 
+# setup ctags
+mkdir -p ${XDG_CONFIG_HOME}/ctags
+ctags_files=$(cd ${DOT_DIR}/.config/ctags && \ls -1)
+printf "${ctags_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/ctags/{} ${XDG_CONFIG_HOME}/ctags/{}
+
 echo "Done."

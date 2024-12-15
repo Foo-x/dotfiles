@@ -44,6 +44,7 @@ in
       tmux
       typos
       unison
+      universal-ctags
       vim
       watchexec
       zoxide

@@ -1,21 +1,22 @@
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
-nnoremap <Plug>(fzf)<CR> :<C-u>Files<CR>
+nnoremap <Plug>(fzf)<CR> :<C-u>Files!<CR>
 "" files in git status
-nnoremap <Plug>(fzf)? :<C-u>GFiles?<CR>
-nnoremap <Plug>(fzf)g :<C-u>GFiles<CR>
+nnoremap <Plug>(fzf)? :<C-u>GFiles!?<CR>
+nnoremap <Plug>(fzf)g :<C-u>GFiles!<CR>
 nnoremap <Plug>(fzf). <Cmd>call <SID>files_cursor()<CR>
 nnoremap <Plug>(fzf)i :<C-u>FilesNoIgnore<CR>
-nnoremap <Plug>(fzf)h :<C-u>HistoryWS<CR>
-nnoremap <Plug>(fzf)H :<C-u>History<CR>
-nnoremap <Plug>(fzf)ar :<C-u>Args<CR>
-nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs<CR>
+nnoremap <Plug>(fzf)h :<C-u>HistoryWS!<CR>
+nnoremap <Plug>(fzf)H :<C-u>History!<CR>
+nnoremap <Plug>(fzf); :<C-u>Tags!<CR>
+nnoremap <Plug>(fzf)ar :<C-u>Args!<CR>
+nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs!<CR>
 nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
 nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
-nnoremap <Plug>(fzf)b :<C-u>Bookmarks<CR>
-nnoremap <Plug>(fzf)<Space> :<C-u>Frecency<CR>
+nnoremap <Plug>(fzf)b :<C-u>Bookmarks!<CR>
+nnoremap <Plug>(fzf)<Space> :<C-u>Frecency!<CR>
 if executable('rg')
-  nnoremap <Plug>(fzf)r :<C-u>Rg<CR>
+  nnoremap <Plug>(fzf)r :<C-u>Rg!<CR>
 endif
 
 vnoremap <Space>f <Plug>(fzf)
@@ -54,8 +55,8 @@ command! FBW call fzf#vim#buffers(map(getbufinfo(), 'v:val.bufnr'), fzf#vim#with
 \ }))
 
 command! Args call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': argv(), 'options': '--prompt "Args> "'}), 0))
-command! History call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': filter(copy(v:oldfiles[1:]), 'filereadable(v:val)'), 'options': '--prompt "History> "'}), 0))
-command! HistoryWS call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': filter(copy(v:oldfiles[1:]), 'filereadable(v:val) && v:val =~ "^" . getcwd()'), 'options': '--prompt "HistoryWS> "'}), 0))
+command! -bang History call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': filter(copy(v:oldfiles[1:]), 'filereadable(v:val)'), 'options': '--prompt "History> "'}), <bang>0))
+command! -bang HistoryWS call fzf#run(fzf#wrap(fzf#vim#with_preview({'source': filter(copy(v:oldfiles[1:]), 'filereadable(v:val) && v:val =~ "^" . getcwd()'), 'options': '--prompt "HistoryWS> "'}), <bang>0))
 fun! s:fzf_argdelete(lines)
   let l:args = join(map(a:lines, 'fnameescape(v:val)'))
   exe 'argdelete' l:args
@@ -75,12 +76,12 @@ endf
 command! -bang AddArgs call fzf#vim#files(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:fzf_argadd(lines, <bang>0) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "AddArgs> "'
-\ }))
+\ }), v:true)
 command! -bang GAddArgs call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:fzf_argadd(lines, <bang>0) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "GAddArgs> "'
-\ }))
-command! FilesNoIgnore let _fzf_default_command_tmp=$FZF_DEFAULT_COMMAND | let $FZF_DEFAULT_COMMAND='fd --hidden -tf -tl -I' | exe 'Files' | let $FZF_DEFAULT_COMMAND=_fzf_default_command_tmp
+\ }), v:true)
+command! FilesNoIgnore let _fzf_default_command_tmp=$FZF_DEFAULT_COMMAND | let $FZF_DEFAULT_COMMAND='fd --hidden -tf -tl -I' | exe 'Files!' | let $FZF_DEFAULT_COMMAND=_fzf_default_command_tmp
 
 fun! s:open_buffers_in_new_tab(is_vert, lines)
   let l:lines = map(filter(a:lines, 'len(v:val)'), {_, line -> split(line, '	')[-1]})
@@ -105,12 +106,12 @@ fun! s:files_cursor()
     let l:selected = join(getregion(getpos("'<"), getpos("'>")), '')
     call fzf#vim#files('', fzf#vim#with_preview({
       \ 'options': '--query ' . l:selected
-    \ }))
+    \ }), v:true)
     return
   endif
   call fzf#vim#files('', fzf#vim#with_preview({
     \ 'options': '--query ' . expand('<cword>')
-  \ }))
+  \ }), v:true)
 endf
 
 fun! s:gf(line)
@@ -127,44 +128,44 @@ endf
 command! -bang TS call fzf#vim#files(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "TS> "'
-\ }))
+\ }), <bang>0)
 command! -bang TV call fzf#vim#files(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "TV> "'
-\ }))
+\ }), <bang>0)
 command! -bang GTS call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "GTS> "'
-\ }))
+\ }), <bang>0)
 command! -bang GTV call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "GTV> "'
-\ }))
+\ }), <bang>0)
 command! -bang ATS call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': argv(),
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(0, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "ATS> "'
-\ })))
+  \ }), <bang>0))
 command! -bang ATV call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': argv(),
   \ 'sink*': { lines -> s:open_buffers_in_new_tab(1, lines) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "ATV> "'
-\ })))
+  \ }), <bang>0))
 
-command! Bookmarks call fzf#run(fzf#wrap(fzf#vim#with_preview({
+command! -bang Bookmarks call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': 'cat .local/bookmarks.txt | sed "/^#\|^$/d"',
   \ 'sink': function('s:gf'),
   \ 'options': '--prompt "Bookmarks> "'
-\ })))
+  \ }), <bang>0))
 
 fun! s:frecency(line)
   let l:dir = substitute(a:line, '^\s*[.0-9]\+\s\+', '', '')
   exe 'edit ' . l:dir
 endf
-command! Frecency call fzf#run(fzf#wrap(fzf#vim#with_preview({
+command! -bang Frecency call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': 'fre --store .local/fre.json --stat',
   \ 'sink': function('s:frecency'),
   \ 'options': '--prompt "Frecency> " --no-sort',
   \ 'placeholder': '{2}'
-\ })))
+  \ }), <bang>0))
 " }}}
