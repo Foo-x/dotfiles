@@ -96,7 +96,6 @@ vim.api.nvim_create_user_command('NoirbuddySlate', function()
     hi link CodeiumSuggestion ColorColumn
   ]])
 
-  require('leap').init_highlight(true)
   KmdSyntax()
 end, {})
 

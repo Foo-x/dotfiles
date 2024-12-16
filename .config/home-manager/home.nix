@@ -29,6 +29,7 @@ in
       bun
       curl
       delta
+      deno
       dust
       fd
       fre

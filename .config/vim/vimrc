@@ -110,7 +110,7 @@ augroup SessionLoad
   let g:save_session = v:false
   " save a session every 1 min
   autocmd SessionLoadPost * if !g:save_session | let g:save_session = v:true | call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 }) | endif
-  autocmd VimLeave * if g:save_session | mks! | endif
+  " autocmd VimLeave * if g:save_session | mks! | endif
 augroup END
 
 augroup Fold
@@ -149,9 +149,3 @@ augroup Kanbanmd
   autocmd BufRead,BufNewFile $XDG_DATA_HOME/kanbanmd/*.md nnoremap <buffer> <Space>k <Cmd>if getline('.') =~ '\~TODAY' \| s/ \~TODAY// \| else \| exe 'norm A ~TODAY' \| endif<CR>
   autocmd TabEnter * if get(g:, 'kmd_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | endif | let g:kmd_leave = v:false
 augroup END
-if executable('rg') && executable('ctags')
-  augroup Ctags
-   autocmd!
-   autocmd FileWritePost,BufWritePost * call jobstart('rg --files | ctags -R -L -')
-  augroup END
-endif

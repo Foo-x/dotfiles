@@ -54,13 +54,15 @@ fun! MyTabline()
     let l:buflist = tabpagebuflist(l:i)
     let l:winnr = tabpagewinnr(l:i)
     let l:bufname = bufname(l:buflist->get(l:winnr - 1))
-    if l:bufname =~ '://'
+    if gettabvar(l:i, 'tabname') != ''
+      let l:name = gettabvar(l:i, 'tabname')
+    elseif l:bufname =~ '://'
       let l:name = printf('[%s]', split(l:bufname, '://')[0])
     else
       let l:fname = fnamemodify(l:bufname, ':t')
       let l:name = len(l:fname) ? l:fname : '[?]'
     endif
-    if getbufvar(l:bufname, '&modified')
+    if len(filter(copy(l:buflist), 'getbufvar(v:val, "&modified")'))
       let l:flag = '[+]'
     else
       let l:flag = ''

@@ -5,7 +5,7 @@ local aerial_opts = {
         require('aerial').select()
         require('aerial').close()
       end,
-    }
+    },
   },
   filter_kind = false,
 }
@@ -15,12 +15,12 @@ local other_opts = {
     {
       pattern = 'src/resources/views/(.*).blade.php',
       target = 'src/app/Http/%1.php',
-      transformer = 'capitalize_by_slash'
+      transformer = 'capitalize_by_slash',
     },
     {
       pattern = 'src/app/Http/(.*).php',
       target = 'src/resources/views/%1.blade.php',
-      transformer = 'lowercase'
+      transformer = 'lowercase',
     },
   },
   transformers = {
@@ -33,7 +33,79 @@ local other_opts = {
       return input:gsub('^%u', string.lower):gsub('/%u', string.lower):gsub('%u', function(s)
         return '-' .. s:lower()
       end)
-    end
+    end,
+  },
+}
+
+local flash_opts = {
+  jump = {
+    autojump = true,
+  },
+  modes = {
+    char = {
+      enabled = false,
+    },
+  },
+}
+
+local flash_keys = {
+  {
+    'f',
+    mode = { 'n', 'x', 'o' },
+    function()
+      require('flash').jump({
+        search = {
+          forward = true,
+          wrap = false,
+        },
+      })
+    end,
+    desc = 'Flash inclusive forward',
+  },
+  {
+    'F',
+    mode = { 'n', 'x', 'o' },
+    function()
+      require('flash').jump({
+        search = {
+          forward = false,
+          wrap = false,
+        },
+      })
+    end,
+    desc = 'Flash inclusive backward',
+  },
+  {
+    't',
+    mode = { 'n', 'x', 'o' },
+    function()
+      require('flash').jump({
+        search = {
+          forward = true,
+          wrap = false,
+        },
+        jump = {
+          offset = -1,
+        },
+      })
+    end,
+    desc = 'Flash exclusive forward',
+  },
+  {
+    'T',
+    mode = { 'n', 'x', 'o' },
+    function()
+      require('flash').jump({
+        search = {
+          forward = false,
+          wrap = false,
+        },
+        jump = {
+          offset = 1,
+        },
+      })
+    end,
+    desc = 'Flash exclusive backward',
   },
 }
 
@@ -48,11 +120,11 @@ return {
   {
     'https://github.com/rgroli/other.nvim',
     keys = {
-      { '<leader>oo', ':<C-u>Other<CR>',       silent = true },
+      { '<leader>oo', ':<C-u>Other<CR>', silent = true },
       { '<leader>ot', ':<C-u>OtherTabNew<CR>', silent = true },
-      { '<leader>os', ':<C-u>OtherSplit<CR>',  silent = true },
+      { '<leader>os', ':<C-u>OtherSplit<CR>', silent = true },
       { '<leader>ov', ':<C-u>OtherVSplit<CR>', silent = true },
-      { '<leader>oc', ':<C-u>OtherClear<CR>',  silent = true },
+      { '<leader>oc', ':<C-u>OtherClear<CR>', silent = true },
     },
     opts = other_opts,
     config = function(_, opts)
@@ -60,12 +132,17 @@ return {
     end,
   },
   {
-    'https://github.com/ggandor/leap.nvim',
-    keys = {
-      { 'f', '<Plug>(leap-forward-to)' },
-      { 'F', '<Plug>(leap-backward-to)' },
-      { 't', '<Plug>(leap-forward-till)' },
-      { 'T', '<Plug>(leap-backward-till)' },
+    'https://github.com/folke/flash.nvim',
+    event = 'VeryLazy',
+    opts = flash_opts,
+    keys = flash_keys,
+  },
+  {
+    'https://github.com/lambdalisue/vim-kensaku',
+    event = { 'CmdlineEnter' },
+    dependencies = {
+      'https://github.com/vim-denops/denops.vim',
     },
+    enabled = false,
   },
 }
