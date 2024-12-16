@@ -38,9 +38,6 @@ local other_opts = {
 }
 
 local flash_opts = {
-  jump = {
-    autojump = true,
-  },
   modes = {
     char = {
       enabled = false,
