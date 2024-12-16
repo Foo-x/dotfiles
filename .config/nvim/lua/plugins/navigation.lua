@@ -50,59 +50,29 @@ local flash_keys = {
     'f',
     mode = { 'n', 'x', 'o' },
     function()
-      require('flash').jump({
-        search = {
-          forward = true,
-          wrap = false,
-        },
-      })
+      require('flash').jump()
     end,
-    desc = 'Flash inclusive forward',
-  },
-  {
-    'F',
-    mode = { 'n', 'x', 'o' },
-    function()
-      require('flash').jump({
-        search = {
-          forward = false,
-          wrap = false,
-        },
-      })
-    end,
-    desc = 'Flash inclusive backward',
+    desc = 'Flash inclusive',
   },
   {
     't',
     mode = { 'n', 'x', 'o' },
     function()
       require('flash').jump({
-        search = {
-          forward = true,
-          wrap = false,
-        },
-        jump = {
-          offset = -1,
-        },
+        action = function(match, state)
+          local Jump = require('flash.jump')
+          local cur_pos = vim.api.nvim_win_get_cursor(0)
+          if match.pos[1] < cur_pos[1] or (match.pos[1] == cur_pos[1] and match.pos[2] < cur_pos[2]) then
+            state.opts.jump.offset = 1
+          else
+            state.opts.jump.offset = -1
+          end
+          Jump.jump(match, state)
+          Jump.on_jump(state)
+        end,
       })
     end,
-    desc = 'Flash exclusive forward',
-  },
-  {
-    'T',
-    mode = { 'n', 'x', 'o' },
-    function()
-      require('flash').jump({
-        search = {
-          forward = false,
-          wrap = false,
-        },
-        jump = {
-          offset = 1,
-        },
-      })
-    end,
-    desc = 'Flash exclusive backward',
+    desc = 'Flash exclusive',
   },
 }
 
