@@ -45,6 +45,25 @@ local flash_opts = {
   },
 }
 
+local flash_exclusive_action = function(match, state)
+  local Jump = require('flash.jump')
+  local cur_pos = vim.api.nvim_win_get_cursor(0)
+  if match.pos[1] < cur_pos[1] or (match.pos[1] == cur_pos[1] and match.pos[2] < cur_pos[2]) then
+    state.opts.jump.offset = 1
+  else
+    state.opts.jump.offset = -1
+  end
+  Jump.jump(match, state)
+  Jump.on_jump(state)
+end
+
+local flash_migemo_mode = function(s)
+  return vim.fn['kensaku#query'](s)
+end
+
+-- without vowels
+local flash_migemo_labels = 'sdfghjklqwrtypzxcvbnm'
+
 local flash_keys = {
   {
     'f',
@@ -59,22 +78,43 @@ local flash_keys = {
     mode = { 'n', 'x', 'o' },
     function()
       require('flash').jump({
-        action = function(match, state)
-          local Jump = require('flash.jump')
-          local cur_pos = vim.api.nvim_win_get_cursor(0)
-          if match.pos[1] < cur_pos[1] or (match.pos[1] == cur_pos[1] and match.pos[2] < cur_pos[2]) then
-            state.opts.jump.offset = 1
-          else
-            state.opts.jump.offset = -1
-          end
-          Jump.jump(match, state)
-          Jump.on_jump(state)
-        end,
+        action = flash_exclusive_action,
       })
     end,
     desc = 'Flash exclusive',
   },
+  {
+    'F',
+    mode = { 'n', 'x', 'o' },
+    function()
+      require('flash').jump({
+        labels = flash_migemo_labels,
+        search = {
+          mode = flash_migemo_mode,
+        },
+      })
+    end,
+    desc = 'Flash inclusive migemo',
+  },
+  {
+    'T',
+    mode = { 'n', 'x', 'o' },
+    function()
+      require('flash').jump({
+        labels = flash_migemo_labels,
+        search = {
+          mode = flash_migemo_mode,
+        },
+        action = flash_exclusive_action,
+      })
+    end,
+    desc = 'Flash exclusive migemo',
+  },
 }
+
+local function kensaku_search_config()
+  vim.keymap.set('c', '<C-j>', '<Plug>(kensaku-search-replace)<CR>')
+end
 
 return {
   {
@@ -105,11 +145,12 @@ return {
     keys = flash_keys,
   },
   {
-    'https://github.com/lambdalisue/vim-kensaku',
-    event = { 'CmdlineEnter' },
+    'https://github.com/lambdalisue/vim-kensaku-search',
+    event = 'VeryLazy',
     dependencies = {
+      'https://github.com/lambdalisue/vim-kensaku',
       'https://github.com/vim-denops/denops.vim',
     },
-    enabled = false,
+    config = kensaku_search_config,
   },
 }
