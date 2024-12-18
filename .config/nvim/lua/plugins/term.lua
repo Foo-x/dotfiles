@@ -8,14 +8,14 @@ local function toggleterm_config(_, opts)
     vim.o.list = false
     vim.o.winfixwidth = false
 
-    vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { buffer = 0 })
+    vim.keymap.set('t', '<C-]>', [[<C-\><C-n>]], { buffer = 0 })
   end
 
   vim.cmd([[
   augroup ToggleTerm
     autocmd!
     autocmd TermOpen term://* lua on_open_toggleterm()
-    autocmd FileType fzf lua vim.keymap.del("t", "<Esc>", { buffer = 0 })
+    autocmd FileType fzf lua vim.keymap.del("t", "<C-]>", { buffer = 0 })
   augroup END
   ]])
 
@@ -69,6 +69,13 @@ local function toggleterm_config(_, opts)
   vim.keymap.set('n', '<Plug>(git)pp', '<Cmd>2TermExecBackground git pp<CR>')
   vim.keymap.set('n', '<Plug>(git)ps', '<Cmd>2TermExecVertical git push<CR>')
   vim.keymap.set('n', '<Plug>(git)sl', '<Cmd>2TermExecVertical git stash list<CR>')
+  vim.keymap.set('n', '<Plug>(git)ui', function()
+    Terminal:new({
+      cmd = 'gitui',
+      direction = 'tab',
+      close_on_exit = true,
+    }):toggle()
+  end)
   -- set g:termx<count> and then type <count><Space>x to execute set command
   -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
   -- if <count> is 1, it can be omitted

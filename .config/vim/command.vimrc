@@ -10,7 +10,7 @@ cnoreabbr <expr> add getcmdtype() == ':' && getcmdline() ==# 'add' ? 'argdedupe'
 cnoremap <expr> ; getcmdtype() == ':' && empty(getcmdline()) ? "\<Esc>q:" : ';'
 cnoremap <expr> / getcmdtype() == '/' && empty(getcmdline()) ? "\<Esc>q/" : '/'
 cnoremap <expr> ? getcmdtype() == '?' && empty(getcmdline()) ? "\<Esc>q?" : '?'
-cnoremap <expr> gd getcmdtype() == ':' && empty(getcmdline()) ? "g//d_\<Left>\<Left>\<Left>" : 'gd'
+cnoremap <expr> gdd getcmdtype() == ':' && empty(getcmdline()) ? "g//d_\<Left>\<Left>\<Left>" : 'gd'
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 

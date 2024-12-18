@@ -261,7 +261,7 @@ return {
   },
   {
     'https://github.com/tpope/vim-fugitive',
-    cmd = { 'G', 'Git' },
+    cmd = { 'G', 'Git', 'Gdiffsplit', 'Gvdiffsplit' },
     dependencies = {
       {
         'https://github.com/tpope/vim-rhubarb',
