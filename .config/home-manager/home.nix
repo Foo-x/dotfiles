@@ -35,6 +35,7 @@ in
       fre
       gh
       git
+      gitui
       hyperfine
       jq
       just

@@ -56,6 +56,7 @@ alias mvb='mv -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias we='watchexec'
 alias ai='aichat'
 alias nuc='nu --stdin -c'
+alias gui='gitui'
 
 # others
 alias relogin='exec $SHELL -l'

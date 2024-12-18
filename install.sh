@@ -182,4 +182,7 @@ mkdir -p ${XDG_CONFIG_HOME}/ctags
 ctags_files=$(cd ${DOT_DIR}/.config/ctags && \ls -1)
 printf "${ctags_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/ctags/{} ${XDG_CONFIG_HOME}/ctags/{}
 
+# setup gitui
+ln -sf ${DOT_DIR}/.config/gitui ${XDG_CONFIG_HOME}
+
 echo "Done."

@@ -43,8 +43,8 @@ if !exists('g:insert_print_timestamp')
   let g:insert_print_timestamp.typescript = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
   let g:insert_print_timestamp.typescriptreact = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
   let g:insert_print_timestamp.vue = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
-  let g:insert_print_timestamp.lua = 'os.date("%H:%M:%S")'
-  let g:insert_print_timestamp.vim = 'strftime("%H:%M:%S")'
+  let g:insert_print_timestamp.lua = 'os.date("%H:%M:%S") .. " " .. os.clock()'
+  let g:insert_print_timestamp.vim = 'trim(system("date +%T.%3N"))'
   let g:insert_print_timestamp.sh = 'date +%T.%3N'
   let g:insert_print_timestamp.bash = 'date +%T.%3N'
 endif
