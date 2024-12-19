@@ -110,6 +110,14 @@ local flash_keys = {
     end,
     desc = 'Flash exclusive migemo',
   },
+  {
+    ':',
+    mode = { 'n', 'x', 'o' },
+    function()
+      require('flash').jump({ continue = true })
+    end,
+    desc = 'Flash continue last search',
+  },
 }
 
 local function kensaku_search_config()

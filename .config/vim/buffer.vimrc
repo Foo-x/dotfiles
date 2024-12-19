@@ -29,6 +29,7 @@ command! TQ if tabpagenr('$') > 1 | tabclose | else | qa | endif
 command! -bar WUP windo update
 command! ScratchTab tabnew | set buftype=nofile
 cnoreabbr WQ WUP \| TQ
+cnoreabbr tq TQ
 
 fun! DeleteBuffers(command, bufnrs)
   let l:bufnames = map(copy(a:bufnrs), {_, val -> bufname(str2nr(val))})

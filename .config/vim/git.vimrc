@@ -1,7 +1,7 @@
 " keymap {{{
 nmap <Space>g <Plug>(git)
 nnoremap <Plug>(git) <Nop>
-nnoremap <Plug>(git)d :<C-u>Gvdiffsplit<CR>
+nnoremap <Plug>(git)d :<C-u>tab Gvdiffsplit \| winc H<CR>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
 nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
 if has('nvim')
@@ -45,7 +45,7 @@ endif
 " command {{{
 " vim-fugitive
 cnoreabbr <expr> G getcmdtype() == ':' && getcmdline() ==# 'G' ? 'tab Git' : 'G'
-cnoreabbr gdv Gvdiffsplit
+cnoreabbr gdv tab Gvdiffsplit \| winc H
 cnoreabbr gdt G difftool -y
 cnoreabbr gmt G mergetool -y \| .,$tabdo on \| Gvdiffsplit! \| winc J \| winc t \| Gvdiffsplit :1 \| winc j
 
