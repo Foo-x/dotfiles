@@ -63,6 +63,9 @@ set viminfo-='100
 set foldmethod=indent
 set background=dark
 set noequalalways
+set sessionoptions-=blank
+set sessionoptions-=buffers
+set sessionoptions-=help
 if has('nvim')
   set foldexpr=nvim_treesitter#foldexpr()
   set foldcolumn=auto
@@ -111,8 +114,8 @@ augroup SessionLoad
   fun! s:session_load_post()
     if !g:save_session
       let g:save_session = v:true
-      " save a session every 1 min
-      call timer_start(60 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })
+      " save a session every 1 sec
+      call timer_start(1 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })
     endif
 
     " clean diffview tabs and buffers
@@ -132,7 +135,6 @@ augroup SessionLoad
     endfor
   endf
   autocmd SessionLoadPost * call s:session_load_post()
-  autocmd BufEnter,VimLeave * if g:save_session | mks! | endif
 augroup END
 
 augroup Fold

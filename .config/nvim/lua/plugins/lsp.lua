@@ -16,7 +16,6 @@ local function mason_lspconfig_opts()
   }
   if vim.fn.executable('npm') == 1 then
     for _, v in pairs({
-      'bashls',
       'cssls',
       'cssmodules_ls',
       'dockerls',

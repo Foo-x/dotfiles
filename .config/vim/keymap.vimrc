@@ -185,11 +185,12 @@ inoremap ｊｊ <Esc>
 inoremap <C-l> <Del>
 inoremap <C-z> <C-o>u
 inoremap <C-y> <C-o><C-r>
-inoremap <C-v>u <C-r>=nr2char(0x)<Left>
+inoremap <C-v>u <C-r><C-r>=nr2char(0x)<Left>
 inoremap <C-s> <Esc>:<C-u>update<CR>gi
 inoremap <Left> <C-g>U<Left>
 inoremap <Right> <C-g>U<Right>
 inoremap <CR> <C-g>u<CR>
+inoremap <C-d> <C-k>
 
 imap <C-f> <Plug>(i_file)
 inoremap <Plug>(i_file) <Nop>

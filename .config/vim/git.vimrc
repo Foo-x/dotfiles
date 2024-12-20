@@ -1,7 +1,7 @@
 " keymap {{{
 nmap <Space>g <Plug>(git)
 nnoremap <Plug>(git) <Nop>
-nnoremap <Plug>(git)d :<C-u>tab Gvdiffsplit \| winc H<CR>
+nnoremap <Plug>(git)d :<C-u>exe 'tab Gvdiffsplit' \| winc H<CR>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
 nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
 if has('nvim')
