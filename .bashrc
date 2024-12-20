@@ -16,22 +16,27 @@ shopt -s histverify
 . ${DOT_DIR}/.config/bash/.exports
 . ${DOT_DIR}/.config/bash/.aliases_cdb
 
-for completion in ${DOT_DIR}/completion/*; do
-  . ${completion}
-done
 complete -C terraform terraform
 complete -C terraform tf
 
-if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-  . /usr/share/bash-completion/bash_completion
-  . ${DOT_DIR}/.config/bash/complete_alias
-fi
+. ${DOT_DIR}/.config/bash/complete_alias
 
 if [ -d ${HOME}/.fzf-tab-completion ]; then
   . ${HOME}/.fzf-tab-completion/bash/fzf-bash-completion.sh
   # bind S-tab to fzf bash completion
   bind -x '"\e[Z": fzf_bash_completion'
 fi
+
+function _lazy_complete() {
+  if alias | cut -c7- | \grep -q "^$1="; then
+    complete -F _complete_alias "$1"
+    return 124
+  fi
+  . "${DOT_DIR}/completion/$1.completion.bash" &> /dev/null && return 124
+  # . "/etc/bash_completion.d/$1.sh" &> /dev/null && return 124
+}
+
+complete -D -F _lazy_complete -o bashdefault -o default
 
 if type tmux &> /dev/null; then
   if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' ]]; then
