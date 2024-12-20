@@ -22,9 +22,14 @@ complete -C terraform tf
 . ${DOT_DIR}/.config/bash/complete_alias
 
 if [ -d ${HOME}/.fzf-tab-completion ]; then
-  . ${HOME}/.fzf-tab-completion/bash/fzf-bash-completion.sh
+  function _lazy_fzf_bash_completion() {
+    if ! type fzf_bash_completion &> /dev/null; then
+      . ${HOME}/.fzf-tab-completion/bash/fzf-bash-completion.sh
+    fi
+    fzf_bash_completion
+  }
   # bind S-tab to fzf bash completion
-  bind -x '"\e[Z": fzf_bash_completion'
+  bind -x '"\e[Z": _lazy_fzf_bash_completion'
 fi
 
 function _lazy_complete() {
