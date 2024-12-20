@@ -404,6 +404,18 @@ function incr_bak_to_remote() {
   rsync --link-dest="${latest}" "$1" -e "ssh ${auth}" "${dest}:${base}/$(date +%Y%m%d_%H%M%S)"
 }
 
+function path_append() {
+  path_remove "$1"
+  export PATH="$PATH:$1"
+}
+function path_prepend() {
+  path_remove "$1"
+  export PATH="$1:$PATH"
+}
+function path_remove() {
+  export PATH=$(echo $PATH | tr ':' '\n' | \grep -v "$1" | tr '\n' ':')
+}
+
 if [[ ${IS_WSL} == 1 ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'
@@ -423,11 +435,27 @@ if [[ ${IS_WSL} == 1 ]]; then
   export -f open
 
   function is_win_dir() {
-    case $PWD/ in
-    /mnt/*) return $(true) ;;
-    *) return $(false) ;;
+    case $(pwd -P) in
+    /mnt/*)
+      true
+      return
+      ;;
+    *)
+      false
+      return
+      ;;
     esac
   }
+
+  function update_git_path() {
+    local git_exe_path
+    if is_win_dir && type git.exe > /dev/null 2>&1 && [ ${WSL_VERSION} = 2 ]; then
+      path_prepend "${HOME}/.local/bin/win_git"
+    else
+      path_remove "${HOME}/.local/bin/win_git"
+    fi
+  }
+  update_git_path
 fi
 
 # vim:ft=sh

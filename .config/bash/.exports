@@ -123,6 +123,14 @@ function lsgit_cd() {
 }
 export PROMPT_COMMAND_LSGIT_CD='lsgit_cd'
 
+function update_git_path_cd() {
+  if [ "${UPDATE_GIT_PATH_DIR:-${PWD}}" != "${PWD}" ]; then
+    update_git_path
+  fi
+  UPDATE_GIT_PATH_DIR=${PWD}
+}
+export PROMPT_COMMAND_UPDATE_GIT_PATH_CD='update_git_path_cd'
+
 trap '((cmdcnt++))' DEBUG
 function lsgit_enter() {
   local splitted_prompts oldifs

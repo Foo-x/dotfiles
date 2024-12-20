@@ -59,7 +59,7 @@ f
 vipe
 bfs
 mmdc
-git
+win_git
 "
 echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 export PATH="${HOME}/.local/bin:${PATH}"

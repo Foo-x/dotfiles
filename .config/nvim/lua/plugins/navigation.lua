@@ -67,7 +67,7 @@ local flash_migemo_labels = 'sdfghjklqwrtypzxcvbnm'
 local flash_keys = {
   {
     'f',
-    mode = { 'n', 'x', 'o' },
+    mode = { 'n', 'x' },
     function()
       require('flash').jump()
     end,
@@ -75,7 +75,7 @@ local flash_keys = {
   },
   {
     't',
-    mode = { 'n', 'x', 'o' },
+    mode = { 'n', 'x' },
     function()
       require('flash').jump({
         action = flash_exclusive_action,
@@ -85,7 +85,7 @@ local flash_keys = {
   },
   {
     'F',
-    mode = { 'n', 'x', 'o' },
+    mode = { 'n', 'x' },
     function()
       require('flash').jump({
         labels = flash_migemo_labels,
@@ -98,7 +98,7 @@ local flash_keys = {
   },
   {
     'T',
-    mode = { 'n', 'x', 'o' },
+    mode = { 'n', 'x' },
     function()
       require('flash').jump({
         labels = flash_migemo_labels,
@@ -112,7 +112,7 @@ local flash_keys = {
   },
   {
     ':',
-    mode = { 'n', 'x', 'o' },
+    mode = { 'n', 'x' },
     function()
       require('flash').jump({ continue = true })
     end,
