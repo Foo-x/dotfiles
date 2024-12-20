@@ -38,7 +38,6 @@ function _lazy_complete() {
     return 124
   fi
   . "${DOT_DIR}/completion/$1.completion.bash" &> /dev/null && return 124
-  # . "/etc/bash_completion.d/$1.sh" &> /dev/null && return 124
 }
 
 complete -D -F _lazy_complete -o bashdefault -o default

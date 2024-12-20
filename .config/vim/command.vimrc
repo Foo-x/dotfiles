@@ -94,6 +94,7 @@ fun! s:clean_insert_print()
   cclose
 endf
 command! CleanInsertPrint call s:clean_insert_print()
+command! CleanInsertPrintInCurrentBuffer update | exe 'g/\V' . g:insert_print_marker . '/d' | update
 fun! s:init_insert_print()
   if has_key(g:insert_print_templates, &filetype)
     command! -buffer InsertPrint call s:insert_print()

@@ -447,7 +447,7 @@ if [[ ${IS_WSL} == 1 ]]; then
     esac
   }
 
-  # not to branch on runtime but change path to improve performance
+  # not branch at runtime but change path to improve performance
   function update_git_path() {
     local git_exe_path
     if is_win_dir && type git.exe > /dev/null 2>&1 && [ ${WSL_VERSION} = 2 ]; then
