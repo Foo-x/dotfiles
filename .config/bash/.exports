@@ -70,6 +70,17 @@ if [[ ${IS_WSL} == 1 ]]; then
   else
     export WSL_VERSION=1
   fi
+
+  path_append '/mnt/c/Windows/system32'
+  if [[ -d '/mnt/c/Program Files/Git/cmd' ]]; then
+    path_append '/mnt/c/Program Files/Git/cmd'
+  fi
+  if [[ -d '/mnt/c/Windows/System32/WindowsPowerShell/v1.0' ]]; then
+    path_append '/mnt/c/Windows/System32/WindowsPowerShell/v1.0'
+  fi
+  if [[ -d '/mnt/c/Program Files/PowerShell/7' ]]; then
+    path_append '/mnt/c/Program Files/PowerShell/7'
+  fi
 fi
 
 export LANG=C

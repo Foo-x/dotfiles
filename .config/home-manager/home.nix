@@ -36,6 +36,7 @@ in
       gh
       git
       gitui
+      graphviz
       hyperfine
       jq
       just

@@ -12,7 +12,7 @@ alias ...='cd ...'
 alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias ws='cd ~/workspace'
-alias dot='cd ~/.dotfiles'
+alias dotf='cd ~/.dotfiles'
 alias cdg='cd $(git rev-parse --show-toplevel)' # cd to toplevel of git repo
 function mkcd() { mkdir -p "$1" && cd "$1"; }
 
@@ -402,6 +402,31 @@ function incr_bak_to_remote() {
   local latest="../$(ssh "${@:4}" "${dest}" "\ls ${base} | tail -n 1")"
 
   rsync --link-dest="${latest}" "$1" -e "ssh ${auth}" "${dest}:${base}/$(date +%Y%m%d_%H%M%S)"
+}
+
+# https://github.com/sverweij/dependency-cruiser
+function depcruise_dot_png() {
+  depcruise -T dot "$1" -I "$1" | dot -T png
+}
+
+function depcruise_dot_svg() {
+  depcruise -T dot "$1" -I "$1" | dot -T svg
+}
+
+function depcruise_dot_html() {
+  depcruise -T dot "$1" -I "$1" | dot -T svg | depcruise-wrap-stream-in-html
+}
+
+function depcruise_ddot_png() {
+  depcruise -T ddot "$1" -I "$1" | dot -T png
+}
+
+function depcruise_ddot_svg() {
+  depcruise -T ddot "$1" -I "$1" | dot -T svg
+}
+
+function depcruise_ddot_html() {
+  depcruise -T ddot "$1" -I "$1" | dot -T svg | depcruise-wrap-stream-in-html
 }
 
 function path_append() {

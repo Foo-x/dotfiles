@@ -21,6 +21,8 @@ complete -C terraform tf
 
 . ${DOT_DIR}/.config/bash/complete_alias
 
+eval "$(zoxide init bash --cmd cd)"
+
 if [ -d ${HOME}/.fzf-tab-completion ]; then
   function _lazy_fzf_bash_completion() {
     if ! type fzf_bash_completion &> /dev/null; then

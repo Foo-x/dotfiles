@@ -5,7 +5,7 @@ return {
   },
   {
     'https://github.com/previm/previm',
-    ft = 'markdown',
+    ft = { 'markdown', 'mermaid' },
   },
   {
     'https://github.com/dhruvasagar/vim-table-mode',
