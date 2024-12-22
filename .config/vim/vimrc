@@ -115,7 +115,7 @@ augroup SessionLoad
     if !g:save_session
       let g:save_session = v:true
       " save a session every 1 sec
-      call timer_start(1 * 1000, { t -> execute('mks!') }, { 'repeat': -1 })
+      call timer_start(1 * 1000, { t -> execute('silent! mks!') }, { 'repeat': -1 })
     endif
 
     " clean diffview tabs and buffers
