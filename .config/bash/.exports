@@ -97,7 +97,7 @@ case $- in
 esac
 
 export FZF_DEFAULT_OPTS='--reverse --cycle --bind "change:top" -0 --wrap'
-export FZF_DEFAULT_COMMAND="fd --hidden -tf -tl | sort"
+export FZF_DEFAULT_COMMAND="fd --hidden -E '.git/objects/' -tf -tl | sort"
 
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
 
