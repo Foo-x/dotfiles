@@ -39,6 +39,10 @@ function _lazy_complete() {
     complete -F _complete_alias "$1"
     return 124
   fi
+  if [[ $1 == 'jj' ]]; then
+    . <(jj util completion bash)
+    return 124
+  fi
   . "${DOT_DIR}/completion/$1.completion.bash" &> /dev/null && return 124
 }
 

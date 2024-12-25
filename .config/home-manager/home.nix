@@ -39,6 +39,7 @@ in
       graphviz
       hyperfine
       jq
+      jujutsu
       just
       neovim
       nodejs_22
