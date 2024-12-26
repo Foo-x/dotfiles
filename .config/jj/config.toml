@@ -7,10 +7,10 @@ private-commits = "description(glob:'private:*')"
 aba = ["abandon"]
 
 # commit
-cm = ["commit"]
-cmi = ["commit", "--interactive"]
-cmm = ["commit", "--message"]
-cmim = ["commit", "--interactive", "--message"]
+c = ["commit"]
+ci = ["commit", "--interactive"]
+cm = ["commit", "--message"]
+cim = ["commit", "--interactive", "--message"]
 
 # desc
 d = ["describe"]

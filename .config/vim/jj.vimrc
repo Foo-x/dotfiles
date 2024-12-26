@@ -59,6 +59,7 @@ augroup Jujutsu
     autocmd FileType jjlog nnoremap <buffer><silent> s <Cmd>call JvToggleSummary()<CR>
     autocmd FileType jjlog nnoremap <buffer><silent> d <Cmd>call JvToggleDescription()<CR>
     autocmd FileType jjlog nnoremap <buffer><silent> <leader>aba <Cmd>exe '2TermExecBackground jj abandon <cword>' \| sleep 100m \| call JvUpdate()<CR>
+    autocmd FileType jjlog nnoremap <buffer> <leader>bs :<C-u>2TermExecBackground jj bookmark set --revision <cword><Space>
     autocmd FileType jjlog nnoremap <buffer><silent> <leader>d <Cmd>1TermExecTab jj describe <cword><CR>
     autocmd FileType jjlog nnoremap <buffer><silent> <leader>e <Cmd>exe '2TermExecBackground jj edit <cword>' \| sleep 100m \| call JvUpdate()<CR>
     autocmd FileType jjlog nnoremap <buffer><silent> <leader>n<CR> <Cmd>exe '2TermExecBackground jj new <cword>' \| sleep 100m \| call JvUpdate()<CR>
