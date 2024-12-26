@@ -424,6 +424,11 @@ function jcb() {
   fi
 }
 
+function jgpb() {
+  jj branch set "$1" --revision "$2"
+  jj git push --bookmark "$1"
+}
+
 # https://github.com/sverweij/dependency-cruiser
 function depcruise_dot_png() {
   depcruise -T dot "$1" -I "$1" | dot -T png
