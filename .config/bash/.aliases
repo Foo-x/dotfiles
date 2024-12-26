@@ -425,7 +425,7 @@ function jcb() {
 }
 
 function jgpb() {
-  jj branch set "$1" --revision "$2"
+  jj bookmark set "$1" --revision "$2"
   jj git push --bookmark "$1"
 }
 
