@@ -162,6 +162,14 @@ augroup AutoSave
   autocmd!
   autocmd CursorHold * call s:autosave()
 augroup END
+command! AutoSaveEnableGlobal let g:autosave=1
+command! AutoSaveEnableTab let t:autosave=1
+command! AutoSaveEnableWindow let w:autosave=1
+command! AutoSaveEnableBuffer let b:autosave=1
+command! AutoSaveDisableGlobal let g:autosave=0
+command! AutoSaveDisableTab let t:autosave=0
+command! AutoSaveDisableWindow let w:autosave=0
+command! AutoSaveDisableBuffer let b:autosave=0
 command! AutoSaveToggleGlobal let g:autosave=!get(g:, 'autosave', 0)
 command! AutoSaveToggleTab let t:autosave=!get(t:, 'autosave', 0)
 command! AutoSaveToggleWindow let w:autosave=!get(w:, 'autosave', 0)

@@ -96,10 +96,13 @@ local function toggleterm_config(_, opts)
   vim.keymap.set('n', '<Plug>(jj)gp<CR>', '<Cmd>2TermExecVertical jj git push<CR>')
   vim.keymap.set('n', '<Plug>(jj)gpb', ':<C-u>2TermExecVertical jj git push --bookmark ')
   vim.keymap.set('n', '<Plug>(jj)n', '<Cmd>2TermExecVertical jj new<CR>')
+  vim.keymap.set('n', '<Plug>(jj)sh', '<Cmd>1TermExecTab jj show<CR>')
   vim.keymap.set('n', '<Plug>(jj)sp<CR>', '<Cmd>1TermExecTab jj split<CR>')
   vim.keymap.set('n', '<Plug>(jj)spp', '<Cmd>1TermExecTab jj split --parallel<CR>')
   vim.keymap.set('n', '<Plug>(jj)sq<CR>', '<Cmd>2TermExecVertical jj squash<CR>')
   vim.keymap.set('n', '<Plug>(jj)sqi', '<Cmd>1TermExecTab jj squash --interactive<CR>')
+  vim.keymap.set('n', '<Plug>(jj)st', '<Cmd>2TermExecVertical jj st<CR>')
+  vim.keymap.set('n', '<Plug>(jj)u', '<Cmd>2TermExecBackground jj undo<CR>')
 
   -- set g:termx<count> and then type <count><Space>x to execute set command
   -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal

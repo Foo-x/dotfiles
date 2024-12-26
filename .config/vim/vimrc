@@ -165,6 +165,7 @@ augroup END
 augroup Memo
   autocmd!
   autocmd TabLeave .local/memo.md let g:memo_leave = v:true
+  autocmd BufEnter .local/memo.md ++once AutoSaveEnableBuffer
   autocmd TabEnter * if get(g:, 'memo_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | endif | let g:memo_leave = v:false
 augroup END
 augroup Kanbanmd
@@ -172,8 +173,4 @@ augroup Kanbanmd
   autocmd TabLeave $XDG_DATA_HOME/kanbanmd/*.md let g:kmd_leave = v:true
   autocmd BufRead,BufNewFile $XDG_DATA_HOME/kanbanmd/*.md nnoremap <buffer> <Space>k <Cmd>if getline('.') =~ '\~TODAY' \| s/ \~TODAY// \| else \| exe 'norm A ~TODAY' \| endif<CR>
   autocmd TabEnter * if get(g:, 'kmd_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | endif | let g:kmd_leave = v:false
-augroup END
-augroup Jujutsu
-  autocmd!
-  autocmd FileType jj JujutsuDescribeTemplate
 augroup END

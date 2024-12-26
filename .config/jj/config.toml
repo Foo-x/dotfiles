@@ -43,12 +43,12 @@ ls = ["log", "--summary"]
 lst = ["log", "--stat"]
 
 ## log all
-la = ["log", "--revisions", "::@"]
-lda = ["log", "--template", "builtin_log_compact_full_description", "--revisions", "::@"]
-lga = ["log", "--git", "--revisions", "::@"]
-lpa = ["log", "--patch", "--revisions", "::@"]
-lsa = ["log", "--summary", "--revisions", "::@"]
-lsta = ["log", "--stat", "--revisions", "::@"]
+la = ["log", "--revisions", "::"]
+lda = ["log", "--template", "builtin_log_compact_full_description", "--revisions", "::"]
+lga = ["log", "--git", "--revisions", "::"]
+lpa = ["log", "--patch", "--revisions", "::"]
+lsa = ["log", "--summary", "--revisions", "::"]
+lsta = ["log", "--stat", "--revisions", "::"]
 
 # new
 n = ["new"]
