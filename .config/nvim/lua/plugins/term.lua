@@ -59,7 +59,15 @@ local function toggleterm_config(_, opts)
   vim.keymap.set({ 'n', 't' }, '<C-\\>', function()
     return '<Cmd>' .. vim.v.count .. 'ToggleTerm direction="vertical" size=' .. vim.o.columns / 2 .. '<CR>'
   end, { expr = true })
+
+  -- git
   vim.keymap.set('n', '<Plug>(git)<Space>', ':<C-u>2TermExecVertical git ')
+  vim.keymap.set('n', '<Plug>(git)cc', '<Cmd>1TermExecTab git commit<CR>')
+  vim.keymap.set('n', '<Plug>(git)cC', '<Cmd>1TermExecTab git commit -n<CR>')
+  vim.keymap.set('n', '<Plug>(git)ca', '<Cmd>1TermExecTab git commit --amend<CR>')
+  vim.keymap.set('n', '<Plug>(git)cA', '<Cmd>1TermExecTab git commit --amend -n<CR>')
+  vim.keymap.set('n', '<Plug>(git)ce', '<Cmd>1TermExecTab git commit --amend --no-edit<CR>')
+  vim.keymap.set('n', '<Plug>(git)cE', '<Cmd>1TermExecTab git commit --amend --no-edit -n<CR>')
   vim.keymap.set('n', '<Plug>(git)b<CR>', '<Cmd>2TermExecVertical git branch<CR>')
   vim.keymap.set('n', '<Plug>(git)ba', '<Cmd>2TermExecVertical git branch -a<CR>')
   vim.keymap.set('n', '<Plug>(git)bv', '<Cmd>2TermExecVertical git branch -avv<CR>')
@@ -76,6 +84,23 @@ local function toggleterm_config(_, opts)
       close_on_exit = true,
     }):toggle()
   end)
+
+  -- jj
+  vim.keymap.set('n', '<Plug>(jj)<Space>', ':<C-u>2TermExecVertical jj ')
+  vim.keymap.set('n', '<Plug>(jj)bc', ':<C-u>2TermExecVertical jj bookmark create ')
+  vim.keymap.set('n', '<Plug>(jj)bl', '<Cmd>2TermExecVertical jj bookmark list<CR>')
+  vim.keymap.set('n', '<Plug>(jj)c<CR>', '<Cmd>1TermExecTab jj commit<CR>')
+  vim.keymap.set('n', '<Plug>(jj)ci', '<Cmd>1TermExecTab jj commit --interactive<CR>')
+  vim.keymap.set('n', '<Plug>(jj)d', '<Cmd>1TermExecTab jj describe<CR>')
+  vim.keymap.set('n', '<Plug>(jj)gf', '<Cmd>2TermExecBackground jj git fetch<CR>')
+  vim.keymap.set('n', '<Plug>(jj)gp<CR>', '<Cmd>2TermExecVertical jj git push<CR>')
+  vim.keymap.set('n', '<Plug>(jj)gpb', ':<C-u>2TermExecVertical jj git push --bookmark ')
+  vim.keymap.set('n', '<Plug>(jj)n', '<Cmd>2TermExecVertical jj new<CR>')
+  vim.keymap.set('n', '<Plug>(jj)sp<CR>', '<Cmd>1TermExecTab jj split<CR>')
+  vim.keymap.set('n', '<Plug>(jj)spp', '<Cmd>1TermExecTab jj split --parallel<CR>')
+  vim.keymap.set('n', '<Plug>(jj)sq<CR>', '<Cmd>2TermExecVertical jj squash<CR>')
+  vim.keymap.set('n', '<Plug>(jj)sqi', '<Cmd>1TermExecTab jj squash --interactive<CR>')
+
   -- set g:termx<count> and then type <count><Space>x to execute set command
   -- i.e. let g:termx1 = 'echo foo' then type 1<Space>x will execute 'echo foo' in terminal
   -- if <count> is 1, it can be omitted

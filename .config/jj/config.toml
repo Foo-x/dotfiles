@@ -6,6 +6,12 @@ private-commits = "description(glob:'private:*')"
 # abandon
 aba = ["abandon"]
 
+# commit
+cm = ["commit"]
+cmi = ["commit", "--interactive"]
+cmm = ["commit", "--message"]
+cmim = ["commit", "--interactive", "--message"]
+
 # desc
 d = ["describe"]
 dm = ["describe", "--message"]
@@ -30,27 +36,40 @@ grl = ["git", "remote", "list"]
 
 # log
 l = ["log"]
-ls = ["log", "--summary"]
-lst = ["log", "--stat"]
 ld = ["log", "--template", "builtin_log_compact_full_description"]
 lg = ["log", "--git"]
 lp = ["log", "--patch"]
+ls = ["log", "--summary"]
+lst = ["log", "--stat"]
 
 ## log all
 la = ["log", "--revisions", "::@"]
-lsa = ["log", "--summary", "--revisions", "::@"]
-lsta = ["log", "--stat", "--revisions", "::@"]
 lda = ["log", "--template", "builtin_log_compact_full_description", "--revisions", "::@"]
 lga = ["log", "--git", "--revisions", "::@"]
 lpa = ["log", "--patch", "--revisions", "::@"]
+lsa = ["log", "--summary", "--revisions", "::@"]
+lsta = ["log", "--stat", "--revisions", "::@"]
 
 # new
 n = ["new"]
-nn = ["new", "--no-edit"]
 nm = ["new", "--message"]
+nn = ["new", "--no-edit"]
 nnm = ["new", "--no-edit", "--message"]
+
+# rebase
+rb = ["rebase"]
+rbb = ["rebase", "--branch"]
+rbr = ["rebase", "--revisions"]
+rbs = ["rebase", "--source"]
+
+# split
+sp = ["split"]
+spp = ["split", "--parallel"]
+spr = ["split", "--revision"]
+sppr = ["split", "--parallel", "--revision"]
 
 # squash
 sq = ["squash"]
+sqi = ["squash", "--interactive"]
 sqt = ["squash", "--into"]
 sqit = ["squash", "--interactive", "--into"]
