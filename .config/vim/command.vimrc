@@ -317,6 +317,8 @@ endf
 command! Kanbanmd call s:kanbanmd()
 nnoremap <Space><Space>k <Cmd>Kanbanmd<CR>
 
+command! JujutsuDescribeTemplate %d_ | exe 'r !jj_desc_template' | 0 | d_
+
 command! Reload source $MYVIMRC
 
 if has('nvim')

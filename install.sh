@@ -54,14 +54,15 @@ fi
 
 mkdir -p ${HOME}/.local/bin
 binfiles="
-nvimdirdiff
-f
-vipe
 bfs
+f
+jj_desc_template
 mmdc
+nvimdirdiff
+vipe
 win_git
 "
-echo "${binfiles}" | xargs -I{} ln -sf ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
+echo "${binfiles}" | xargs -I{} ln -sfT ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 export PATH="${HOME}/.local/bin:${PATH}"
 
 touch ${HOME}/.user_profile

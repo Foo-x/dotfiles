@@ -41,7 +41,7 @@ alias pgrep='pgrep -fa'
 # shorten
 alias g=git
 alias h=history
-alias j=jobs
+alias j=jj
 
 alias vi=nvim
 alias nview='nvim -R'
@@ -233,6 +233,7 @@ alias dcal='alias | \grep "='\''docker compose" | $PAGER'
 alias bdot='vi ~/.dotfiles'
 alias tfal='alias | \grep "='\''terraform" | $PAGER'
 alias nal='alias | \grep "='\''nix" | $PAGER'
+alias jal='jj config list | \grep "^aliases"'
 
 # rsync
 alias rsync='rsync -aPvh'
@@ -402,6 +403,25 @@ function incr_bak_to_remote() {
   local latest="../$(ssh "${@:4}" "${dest}" "\ls ${base} | tail -n 1")"
 
   rsync --link-dest="${latest}" "$1" -e "ssh ${auth}" "${dest}:${base}/$(date +%Y%m%d_%H%M%S)"
+}
+
+# jj
+function jca() {
+  jj new --no-edit --insert-after "$1"
+  jj squash --keep-emptied --into "${1}+" "${@:2}"
+  # undo if failed
+  if [ $? -ne 0 ]; then
+    jj undo
+  fi
+}
+
+function jcb() {
+  jj new --no-edit --insert-before "$1"
+  jj squash --keep-emptied --into "${1}-" "${@:2}"
+  # undo if failed
+  if [ $? -ne 0 ]; then
+    jj undo
+  fi
 }
 
 # https://github.com/sverweij/dependency-cruiser

@@ -1,0 +1,56 @@
+[ui]
+default-command = "log"
+[git]
+private-commits = "description(glob:'private:*')"
+[aliases]
+# abandon
+aba = ["abandon"]
+
+# desc
+d = ["describe"]
+dm = ["describe", "--message"]
+
+# edit
+e = ["edit"]
+
+# git
+g = ["git"]
+gi = ["git", "init"]
+gic = ["git", "init", "--colocate"]
+gcl = ["git", "clone"]
+gclc = ["git", "clone", "--colocate"]
+gf = ["git", "fetch"]
+gfa = ["git", "fetch", "--all-remotes"]
+gp = ["git", "push"]
+gpn = ["git", "push", "--dry-run"]
+gpb = ["git", "push", "--bookmark"]
+gpnb = ["git", "push", "--dry-run", "--bookmark"]
+gr = ["git", "remote"]
+grl = ["git", "remote", "list"]
+
+# log
+l = ["log"]
+ls = ["log", "--summary"]
+lst = ["log", "--stat"]
+ld = ["log", "--template", "builtin_log_compact_full_description"]
+lg = ["log", "--git"]
+lp = ["log", "--patch"]
+
+## log all
+la = ["log", "--revisions", "::@"]
+lsa = ["log", "--summary", "--revisions", "::@"]
+lsta = ["log", "--stat", "--revisions", "::@"]
+lda = ["log", "--template", "builtin_log_compact_full_description", "--revisions", "::@"]
+lga = ["log", "--git", "--revisions", "::@"]
+lpa = ["log", "--patch", "--revisions", "::@"]
+
+# new
+n = ["new"]
+nn = ["new", "--no-edit"]
+nm = ["new", "--message"]
+nnm = ["new", "--no-edit", "--message"]
+
+# squash
+sq = ["squash"]
+sqt = ["squash", "--into"]
+sqit = ["squash", "--interactive", "--into"]
