@@ -100,9 +100,6 @@ local treesitter_opts = {
   indent = {
     enable = true,
   },
-  autotag = {
-    enable = true,
-  },
 }
 
 local function treesitter_config(_, opts)
@@ -115,6 +112,7 @@ local function treesitter_config(_, opts)
   then
     require('nvim-treesitter.install').prefer_git = true
     require('nvim-treesitter.configs').setup(opts)
+    require('nvim-ts-autotag').setup()
 
     vim.keymap.set('n', '[c', require('treesitter-context').go_to_context)
   end
