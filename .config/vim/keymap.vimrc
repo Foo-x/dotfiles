@@ -146,7 +146,7 @@ nmap <C-f> <Plug>(file)
 nnoremap <Plug>(file)<C-y> <Cmd>CopyFilename<CR>
 
 nnoremap <Space><Space>b <Cmd>exe 'e .local/bookmarks.txt'<CR>
-nnoremap <Space><Space>m <Cmd>-tabnew .local/memo.md<CR>
+nnoremap <Space><Space>m <Cmd>tabnew .local/memo.md<CR>
 
 nnoremap <C-s> :<C-u>update<CR>
 

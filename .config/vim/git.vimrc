@@ -2,6 +2,8 @@
 nmap <Space>g <Plug>(git)
 nnoremap <Plug>(git) <Nop>
 nnoremap <Plug>(git)d :<C-u>exe 'tab Gvdiffsplit' \| winc H<CR>
+nnoremap <Plug>(git)l :<C-u>GV --all<CR>
+nnoremap <Plug>(git). :<C-u>GV! --all<CR>
 nnoremap <Plug>(git)co :<C-u>Git checkout<Space>
 nnoremap <Plug>(git)cb :<C-u>Git cb<Space>
 if !has('nvim')
@@ -28,7 +30,6 @@ nnoremap <Plug>(git)sp <Cmd>Git stash pop<CR>
 nnoremap <Plug>(git)i <Cmd>exe 'split ' . trim(system('git rev-parse --show-toplevel')) . '/.git/info/exclude'<CR>
 
 nnoremap <F9> :<C-u>GV --all<CR>
-nnoremap <S-F9> :<C-u>GV --name-status --all<CR>
 if !has('nvim')
   " file history
   nnoremap <F10> :<C-u>GV! --all<CR>
@@ -129,5 +130,6 @@ augroup Git
   autocmd FileType GV nnoremap <buffer><silent> me :<C-u>G merge <cword><CR>
   autocmd FileType GV nnoremap <buffer><silent> bi :<C-u>G bisect start @ <cword><CR>
   autocmd FileType diff,git setlocal foldmethod=expr foldexpr=s:diff_fold()
+  autocmd FileType GV tabmove +
 augroup END
 " }}}

@@ -16,6 +16,16 @@ cim = ["commit", "--interactive", "--message"]
 d = ["describe"]
 dm = ["describe", "--message"]
 
+# diff
+df = ["diff"]
+dfs = ["diff", "--summary"]
+dfst = ["diff", "--stat"]
+dfg = ["diff", "--git"]
+dfc = ["diff", "--color-words"]
+
+# diffedit
+de = ["diffedit"]
+
 # edit
 e = ["edit"]
 
@@ -61,6 +71,9 @@ rb = ["rebase"]
 rbb = ["rebase", "--branch"]
 rbr = ["rebase", "--revisions"]
 rbs = ["rebase", "--source"]
+
+# restore
+rs = ["restore"]
 
 # split
 sp = ["split"]

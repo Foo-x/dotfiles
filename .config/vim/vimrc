@@ -166,11 +166,19 @@ augroup Memo
   autocmd!
   autocmd TabLeave .local/memo.md let g:memo_leave = v:true
   autocmd BufEnter .local/memo.md ++once AutoSaveEnableBuffer
+  autocmd TabClosed * let g:memo_leave = v:false
   autocmd TabEnter * if get(g:, 'memo_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | endif | let g:memo_leave = v:false
 augroup END
 augroup Kanbanmd
   autocmd!
   autocmd TabLeave $XDG_DATA_HOME/kanbanmd/*.md let g:kmd_leave = v:true
   autocmd BufRead,BufNewFile $XDG_DATA_HOME/kanbanmd/*.md nnoremap <buffer> <Space>k <Cmd>if getline('.') =~ '\~TODAY' \| s/ \~TODAY// \| else \| exe 'norm A ~TODAY' \| endif<CR>
+  autocmd TabClosed * let g:kmd_leave = v:false
   autocmd TabEnter * if get(g:, 'kmd_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | endif | let g:kmd_leave = v:false
+augroup END
+augroup ActivateLeftOnTabClose
+  autocmd!
+  autocmd TabEnter * let s:after_tab_leave = v:false
+  autocmd TabLeave * let s:after_tab_leave = v:true
+  autocmd TabClosed * if get(s:, 'after_tab_leave', v:false) && tabpagenr() != 1 && tabpagenr() == expand('<afile>') | tabprevious | endif | echom 'bbb'
 augroup END

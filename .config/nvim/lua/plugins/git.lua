@@ -248,6 +248,12 @@ local function diffview_config(_, opts)
       vim.g.diffview_leave = nil
     end,
   })
+  vim.api.nvim_create_autocmd('TabClosed', {
+    group = diffview_close_augroup,
+    callback = function(_)
+      vim.g.diffview_leave = nil
+    end,
+  })
 
   require('diffview').setup(opts)
 end

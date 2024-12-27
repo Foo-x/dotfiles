@@ -307,7 +307,7 @@ command! -range AiChatPolish <line1>,<line2>call s:aichat_output('ai -r polish')
 fun! s:kanbanmd()
   set equalalways
 
-  -tabnew
+  tabnew
 
   tcd $XDG_DATA_HOME/kanbanmd
 

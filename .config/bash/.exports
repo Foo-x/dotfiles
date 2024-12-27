@@ -120,6 +120,13 @@ export PROMPT_COMMAND_HISTSAVE='__histsave'
 
 function lsgit() {
   ls -A
+  if jj root &> /dev/null; then
+    echo
+    jj diff --summary
+    echo
+    jj log
+    return
+  fi
   if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = "true" ]; then
     echo
     git status -sb
