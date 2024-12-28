@@ -50,6 +50,7 @@ in
       unison
       universal-ctags
       vim
+      vscode-langservers-extracted
       watchexec
       zoxide
     ];

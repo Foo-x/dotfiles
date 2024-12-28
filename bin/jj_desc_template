@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-jj log -n1 --no-graph -T description
-
-echo
-
 cat << EOF
 JJ: Subject
 JJ: 

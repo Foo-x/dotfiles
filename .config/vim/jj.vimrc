@@ -92,6 +92,8 @@ fun! JovToggleStat()
   call JovToggleOption('--stat')
 endf
 
+command! JujutsuDescribeTemplate call search('JJ:') | silent ,$d_ | silent exe 'r !jj_desc_template' | 0
+
 if has('nvim')
   command! -nargs=+ Jj 1TermExecTab jj <args>
 

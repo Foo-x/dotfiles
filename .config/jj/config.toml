@@ -1,5 +1,16 @@
 [ui]
+conflict-marker-style = "git"
 default-command = "log"
+diff.format = "git"
+merge-editor = "nvim"
+pager = "delta"
+[merge-tools.nvim]
+merge-args = ["-f", "-d", "$output", "-M",
+    "$left", "$base", "$right",
+    "-c", "wincmd J", "-c", "set modifiable",
+    "-c", "set write"]
+program = "nvim"
+merge-tool-edits-conflict-markers = true
 [git]
 private-commits = "description(glob:'private:*')"
 [aliases]
