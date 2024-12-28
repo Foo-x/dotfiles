@@ -124,6 +124,11 @@ if has('nvim')
   command! -nargs=* JjDiffStat 2TermExecVertical jj diff --stat <args>
   command! -nargs=* JjDiffGit 1TermExecTab jj diff --git <args>
   command! -nargs=* JjDiffColorWords 1TermExecTab jj diff --color-words <args>
+  command! -nargs=* JjDiffParent 1TermExecTab jj diff --revision @- <args>
+  command! -nargs=* JjDiffParentSummary 2TermExecVertical jj diff --summary --revision @- <args>
+  command! -nargs=* JjDiffParentStat 2TermExecVertical jj diff --stat --revision @- <args>
+  command! -nargs=* JjDiffParentGit 1TermExecTab jj diff --git --revision @- <args>
+  command! -nargs=* JjDiffParentColorWords 1TermExecTab jj diff --color-words --revision @- <args>
 
   " diffedit
   command! -nargs=* JjDiffedit 1TermExecTab jj diffedit <args>
