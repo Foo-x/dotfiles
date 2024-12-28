@@ -180,7 +180,7 @@ nnoremap <Space>, A,<Esc>
 nnoremap <M-z> :<C-u>set wrap!<CR>
 
 " insert mode
-inoremap jj <Esc>
+inoremap jk <Esc>
 inoremap ｊｊ <Esc>
 inoremap <C-l> <Del>
 inoremap <C-z> <C-o>u
