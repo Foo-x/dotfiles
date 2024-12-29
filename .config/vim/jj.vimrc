@@ -237,8 +237,8 @@ augroup Jujutsu
     autocmd FileType jjlog nnoremap <buffer><silent> <leader>rbrb <Cmd>exe '2TermExecBackground jj rebase --revisions @ --insert-before <cword>' \| sleep 100m \| call JvUpdate()<CR>
 
     "" show
-    autocmd FileType jjlog nnoremap <buffer><silent> <leader>sh <Cmd>1TermExecTab jj show <cword><CR>
-    autocmd FileType jjlog nnoremap <buffer><silent> <CR> <Cmd>1TermExecTab jj show <cword><CR>
+    autocmd FileType jjlog nnoremap <buffer><silent> <leader>sh <Cmd>2TermExecVertical jj show <cword><CR>
+    autocmd FileType jjlog nnoremap <buffer><silent> <CR> <Cmd>2TermExecVertical jj show <cword><CR>
 
     "" split
     autocmd FileType jjlog nnoremap <buffer><silent> <leader>sp<CR> <Cmd>1TermExecTab jj split --revision <cword><CR>
@@ -293,10 +293,10 @@ augroup Jujutsu
     autocmd FileType jjlog command! -nargs=* -buffer JjRebaseRevisionInsertBefore exe '2TermExecBackground jj rebase --revisions @ --insert-before <cword> <args>' | sleep 100m | call JvUpdate()
 
     "" show
-    autocmd FileType jjlog command! -nargs=* -buffer JjShow 1TermExecTab jj show <cword> <args>
-    autocmd FileType jjlog command! -nargs=* -buffer JjShowSummary 1TermExecTab jj show --summary <cword> <args>
-    autocmd FileType jjlog command! -nargs=* -buffer JjShowStat 1TermExecTab jj show --stat <cword> <args>
-    autocmd FileType jjlog command! -nargs=* -buffer JjShowGit 1TermExecTab jj show --git <cword> <args>
+    autocmd FileType jjlog command! -nargs=* -buffer JjShow 2TermExecVertical jj show <cword> <args>
+    autocmd FileType jjlog command! -nargs=* -buffer JjShowSummary 2TermExecVertical jj show --summary <cword> <args>
+    autocmd FileType jjlog command! -nargs=* -buffer JjShowStat 2TermExecVertical jj show --stat <cword> <args>
+    autocmd FileType jjlog command! -nargs=* -buffer JjShowGit 2TermExecVertical jj show --git <cword> <args>
 
     "" split
     autocmd FileType jjlog command! -nargs=* -buffer JjSplit 1TermExecTab jj split --revision <cword> <args>
@@ -309,12 +309,12 @@ augroup Jujutsu
     " jjoplog
     " keymap
     autocmd FileType jjoplog nnoremap <buffer><silent> <leader>u <Cmd>exe '2TermExecBackground jj undo <cword>' \| sleep 100m \| call JovUpdate()<CR>
-    autocmd FileType jjoplog nnoremap <buffer><silent> <leader>s <Cmd>1TermExecTab jj operation show --patch <cword><CR>
-    autocmd FileType jjoplog nnoremap <buffer><silent> <CR> <Cmd>1TermExecTab jj operation show --patch <cword><CR>
+    autocmd FileType jjoplog nnoremap <buffer><silent> <leader>s <Cmd>2TermExecVertical jj operation show --patch <cword><CR>
+    autocmd FileType jjoplog nnoremap <buffer><silent> <CR> <Cmd>2TermExecVertical jj operation show --patch <cword><CR>
 
     " command
     autocmd FileType jjoplog command! -nargs=* -buffer JjOperationUndo exe '2TermExecBackground jj undo <cword> <args>' | sleep 100m | call JvUpdate()
-    autocmd FileType jjoplog command! -nargs=* -buffer JjOperationShow 1TermExecTab jj operation show <cword> <args>
+    autocmd FileType jjoplog command! -nargs=* -buffer JjOperationShow 2TermExecVertical jj operation show <cword> <args>
     " autoclose on tableave
     autocmd FileType jjlog autocmd TabLeave <buffer> let g:jjlog_leave = v:true
     autocmd TabClosed * let g:jjlog_leave = v:false

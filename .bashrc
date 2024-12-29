@@ -43,7 +43,14 @@ function _lazy_complete() {
     . <(jj util completion bash)
     return 124
   fi
-  . "${DOT_DIR}/completion/$1.completion.bash" &> /dev/null && return 124
+  if [ -f "${DOT_DIR}/completion/$1.completion.bash" ]; then
+    . "${DOT_DIR}/completion/$1.completion.bash" &> /dev/null
+    return 124
+  fi
+  if [ -f "/usr/share/bash-completion/completions/$1" ]; then
+    . "/usr/share/bash-completion/completions/$1" &> /dev/null
+    return 124
+  fi
 }
 
 complete -D -F _lazy_complete -o bashdefault -o default

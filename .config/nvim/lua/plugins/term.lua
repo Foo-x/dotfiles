@@ -1,4 +1,6 @@
-local toggleterm_opts = {}
+local toggleterm_opts = {
+  start_in_insert = false,
+}
 
 local function toggleterm_config(_, opts)
   local toggleterm = require('toggleterm')
@@ -15,6 +17,7 @@ local function toggleterm_config(_, opts)
   augroup ToggleTerm
     autocmd!
     autocmd TermOpen term://* lua on_open_toggleterm()
+    autocmd BufEnter * if &buftype ==# 'terminal' | sleep 1m | startinsert | endif
     autocmd FileType fzf lua vim.keymap.del("t", "<C-]>", { buffer = 0 })
   augroup END
   ]])
@@ -36,21 +39,12 @@ local function toggleterm_config(_, opts)
         .. param.args
         .. '"'
     )
-    vim.schedule(function()
-      vim.cmd.stopinsert()
-    end)
   end, { nargs = '+', range = true })
   vim.api.nvim_create_user_command('TermExecTab', function(param)
     vim.cmd(math.max(param.count, 1) .. 'TermExec direction="tab" cmd="' .. param.args .. '"')
-    vim.schedule(function()
-      vim.cmd.stopinsert()
-    end)
   end, { nargs = '+', range = true })
   vim.api.nvim_create_user_command('TermExecBackground', function(param)
     vim.cmd(math.max(param.count, 1) .. 'TermExec open=0 cmd="' .. param.args .. '"')
-    vim.schedule(function()
-      vim.cmd.stopinsert()
-    end)
   end, { nargs = '+', range = true })
 
   vim.keymap.set({ 'n', 't' }, '<C-t>', function()
@@ -111,9 +105,6 @@ local function toggleterm_config(_, opts)
   -- if <count> is 1, it can be omitted
   vim.keymap.set('n', '<Space>x', function()
     vim.cmd('3TermExec cmd="' .. vim.g['termx' .. vim.v.count1] .. '"')
-    vim.schedule(function()
-      vim.cmd.stopinsert()
-    end)
   end)
 end
 

@@ -1,4 +1,4 @@
-if !executable('rg') || !executable('ctags')
+if !has('nvim') || !executable('rg') || !executable('ctags')
   finish
 endif
 
