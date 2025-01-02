@@ -48,3 +48,9 @@ echo
 echo "JJ: Logs"
 echo "JJ: "
 jj log --no-graph -T '"\n" ++ description.first_line()' --revisions 'ancestors(@-, 30)' | tail -n+2 | sed 's/^/JJ: /'
+
+echo
+echo
+
+echo "JJ: Diff"
+jj log -n1 --no-graph -T 'indent("JJ:     ", diff.git())'
