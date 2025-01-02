@@ -86,6 +86,9 @@ rbs = ["rebase", "--source"]
 # restore
 rs = ["restore"]
 
+# show
+sh = ["show"]
+
 # split
 sp = ["split"]
 spp = ["split", "--parallel"]

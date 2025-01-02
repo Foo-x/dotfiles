@@ -180,5 +180,5 @@ augroup ActivateLeftOnTabClose
   autocmd!
   autocmd TabEnter * let s:after_tab_leave = v:false
   autocmd TabLeave * let s:after_tab_leave = v:true
-  autocmd TabClosed * if get(s:, 'after_tab_leave', v:false) && tabpagenr() != 1 && tabpagenr() == expand('<afile>') | tabprevious | endif | echom 'bbb'
+  autocmd TabClosed * if get(s:, 'after_tab_leave', v:false) && tabpagenr() != 1 && tabpagenr() == expand('<afile>') | tabprevious | endif
 augroup END

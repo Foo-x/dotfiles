@@ -270,8 +270,26 @@ augroup Jujutsu
     autocmd FileType jjlog command! -buffer JjEdit exe '2TermExecBackground jj edit <cword>' | sleep 100m | call JvUpdate()
 
     "" git bookmark set push
-    autocmd FileType jjlog command! -nargs=1 JjGitBookmarkSetPush exe '2TermExecVertical jj bookmark set <args> --revision <cword>; jj git push --bookmark <args>'
-    autocmd FileType jjlog command! -nargs=1 JjGitBookmarkSetPushDryRun exe '2TermExecVertical jj bookmark set <args> --revision <cword>; jj git push --dry-run --bookmark <args>; jj undo'
+    fun! s:jgpb(bookmark = '')
+      if a:bookmark == ''
+        let l:bookmark = trim(system('git db'))
+      else
+        let l:bookmark = a:bookmark
+      endif
+      exe '2TermExecVertical jj bookmark set ' . l:bookmark . ' --revision <cword>; jj git push --bookmark ' . l:bookmark
+    endf
+    autocmd FileType jjlog command! -nargs=? JjGitPushBookmarkSet call s:jgpb(<q-args>)
+    fun! s:jgpnb(bookmark = '')
+      if a:bookmark == ''
+        let l:bookmark = trim(system('git db'))
+      else
+        let l:bookmark = a:bookmark
+      endif
+      exe '2TermExecVertical jj bookmark set ' . l:bookmark . ' --revision <cword>; jj git push --dry-run --bookmark ' . l:bookmark . '; jj undo'
+    endf
+    autocmd FileType jjlog command! -nargs=? JjGitPushDryRunBookmarkSet call s:jgpnb(<q-args>)
+    cnoreabbr jgpb JjGitPushBookmarkSet
+    cnoreabbr jgpnb JjGitPushDryRunBookmarkSet
 
     "" new
     autocmd FileType jjlog command! -nargs=* -buffer JjNew exe '2TermExecBackground jj new <cword>' | sleep 100m | call JvUpdate()

@@ -294,6 +294,8 @@
     features = readable
     true-color = always
     syntax-theme = ansi
+    wrap-max-lines = unlimited
+    wrap-right-percent = 0.1
 [delta "readable"]
     line-numbers = true
     side-by-side = true

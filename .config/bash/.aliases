@@ -425,13 +425,19 @@ function jcb() {
 }
 
 function jgpb() {
-  jj bookmark set "$1" --revision "$2"
-  jj git push --bookmark "$1"
+  local bookmark target
+  bookmark="${1:-$(git db)}"
+  target="${2:-@}"
+  jj bookmark set "${bookmark}" --revision "${target}"
+  jj git push --bookmark "${bookmark}"
 }
 
 function jgpnb() {
-  jj bookmark set "$1" --revision "$2"
-  jj git push --dry-run --bookmark "$1"
+  local bookmark target
+  bookmark="${1:-$(git db)}"
+  target="${2:-@}"
+  jj bookmark set "${bookmark}" --revision "${target}"
+  jj git push --dry-run --bookmark "${bookmark}"
   jj undo
 }
 
