@@ -171,10 +171,6 @@ local function oil_config(_, opts)
   })
 end
 
-local dmacro_config = function()
-  vim.keymap.set({ 'i', 'n' }, '<C-a>', '<Plug>(dmacro-play-macro)')
-end
-
 return {
   {
     'https://github.com/AndrewRadev/linediff.vim',
@@ -242,10 +238,5 @@ return {
     },
     opts = oil_opts,
     config = oil_config,
-  },
-  {
-    'https://github.com/tani/dmacro.vim',
-    event = 'VeryLazy',
-    config = dmacro_config,
   },
 }
