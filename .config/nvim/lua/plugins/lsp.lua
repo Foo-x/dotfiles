@@ -283,6 +283,17 @@ local lsp_signature_opts = {
   move_cursor_key = '<M-x>',
 }
 
+local lean_config = function(_, opts)
+  require('lean').setup(opts)
+  vim.cmd[[
+  augroup Lean
+    autocmd!
+    autocmd FileType leaninfo nunmap <buffer> J| nnoremap <buffer> J <C-f>
+    autocmd FileType leaninfo nunmap <buffer> K| nnoremap <buffer> K <C-b>
+  augroup END
+  ]]
+end
+
 return {
   {
     'https://github.com/j-hui/fidget.nvim',
@@ -326,5 +337,17 @@ return {
     'https://github.com/ray-x/lsp_signature.nvim',
     event = { 'VeryLazy' },
     opts = lsp_signature_opts,
+  },
+  {
+    'https://github.com/Julian/lean.nvim',
+    event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+    dependencies = {
+      'https://github.com/neovim/nvim-lspconfig',
+      'https://github.com/nvim-lua/plenary.nvim',
+    },
+    opts = {
+      mappings = true,
+    },
+    config = lean_config,
   },
 }
