@@ -161,4 +161,12 @@ return {
     },
     config = kensaku_search_config,
   },
+  {
+    'https://github.com/Bakudankun/BackAndForward.vim',
+    event = 'VeryLazy',
+    keys = {
+      { '<Space><C-o>', '<Plug>(backandforward-back)' },
+      { '<Space><C-i>', '<Plug>(backandforward-forward)' },
+    },
+  },
 }
