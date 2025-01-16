@@ -23,6 +23,7 @@ local treesitter_opts = {
     'tsv',
     'tsx',
     'vim',
+    'rust',
   },
   sync_install = false,
   incremental_selection = {
