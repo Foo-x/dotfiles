@@ -19,6 +19,45 @@ local function bqf_config()
   })
 end
 
+local function surround_config()
+  require('nvim-surround').setup({
+    surrounds = {
+      ['k'] = {
+        add = { '「', '」' },
+        find = function()
+          return require('nvim-surround.config').get_selection({
+            pattern = '「.-」',
+          })
+        end,
+        delete = '^(.)().-(.)()$',
+      },
+      ['b'] = {
+        add = { '**', '**' },
+        find = function()
+          local c = vim.pesc('**')
+          return require('nvim-surround.config').get_selection({
+            pattern = c .. '.-' .. c,
+          })
+        end,
+        delete = '^(..)().-(..)()$',
+      },
+      ['S'] = {
+        add = { '~~', '~~' },
+        find = function()
+          local c = vim.pesc('~~')
+          return require('nvim-surround.config').get_selection({
+            pattern = c .. '.-' .. c,
+          })
+        end,
+        delete = '^(..)().-(..)()$',
+      },
+    },
+    aliases = {
+      ['b'] = 'b',
+    }
+  })
+end
+
 local various_textobjs_opts = {
   keymaps = {
     useDefaults = true,
@@ -215,7 +254,7 @@ return {
   {
     'https://github.com/kylechui/nvim-surround',
     event = 'VeryLazy',
-    opts = {},
+    config = surround_config,
   },
   {
     'https://github.com/chrisgrieser/nvim-various-textobjs',
