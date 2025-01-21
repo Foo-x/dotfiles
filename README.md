@@ -7,13 +7,6 @@
 - less
 
 
-### Optional
-
-- [bash-completion](https://github.com/scop/bash-completion)
-- tmux
-- vim
-
-
 ## Installation
 
 ```bash

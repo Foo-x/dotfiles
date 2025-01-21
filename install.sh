@@ -160,9 +160,9 @@ fi
 
 # setup kanbanmd
 if [ ! -d ${XDG_DATA_HOME}/kanbanmd ]; then
-  cp -r kanbanmd ${XDG_DATA_HOME}
+  cp -r ${DOT_DIR}/kanbanmd ${XDG_DATA_HOME}
 else
-  \cp kanbanmd/README.md ${XDG_DATA_HOME}/kanbanmd
+  \cp ${DOT_DIR}/kanbanmd/README.md ${XDG_DATA_HOME}/kanbanmd
 fi
 
 # setup vim

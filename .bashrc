@@ -57,9 +57,6 @@ complete -D -F _lazy_complete -o bashdefault -o default
 
 if type tmux &> /dev/null; then
   if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' ]]; then
-    if [[ ${IS_WSL} == 1 ]] && ! \grep -iq 'appendWindowsPath *= *false' /etc/wsl.conf; then
-      while ! [[ "$PATH" =~ '/mnt/c/windows/system32' ]]; do sleep 0.2; done
-    fi
-    while ! tmux attach &> /dev/null; do sleep 0.2; done
+    while ! tmux new -A &> /dev/null; do sleep 0.2; done
   fi
 fi
