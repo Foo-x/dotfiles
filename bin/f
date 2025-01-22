@@ -422,13 +422,22 @@ await yargs(process.argv.slice(2))
           await $`${{ raw: `mise use ${target}` }}`;
         }
       })
-      .command(['rm [query]', 'un', 'uninstall'], 'fzf mise uninstall', (yargs: any) => {
+      .command(['rm [query]', 'unuse'], 'fzf mise unuse', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        const target = (await $`${{ raw: `mise ls --no-header | sed -E 's/([^ ]+[ ]+[^ ]+).+/\\1/' | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        const target = (await $`${{ raw: `mise ls --no-header | sed -E 's/([^ ]+[ ]+[^ ]+).*/\\1/' | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
         if (target) {
           const actual = target.replace(/ +/, '@');
           await $`${{ raw: `mise rm ${actual}` }}`;
+        }
+      })
+      .command(['un [query]', 'uninstall'], 'fzf mise uninstall', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls --no-header | sed -E 's/([^ ]+[ ]+[^ ]+).*/\\1/' | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          const actual = target.replace(/ +/, '@');
+          await $`${{ raw: `mise uninstall ${actual}` }}`;
         }
       })
       .command(['prm [query]', 'pun'], 'fzf mise plugins uninstall', (yargs: any) => {
