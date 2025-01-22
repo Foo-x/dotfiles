@@ -25,6 +25,7 @@ in
 
     packages = with pkgs; [
       aichat
+      awscli2
       bat
       bun
       curl
@@ -41,10 +42,12 @@ in
       jq
       jujutsu
       just
+      mise
       neovim
       nodejs_22
       python313
       ripgrep
+      terraform
       tmux
       typos
       unison

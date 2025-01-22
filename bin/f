@@ -363,6 +363,83 @@ await yargs(process.argv.slice(2))
         await $`${{ raw: `docker volume ls | sed 1d | fzf --no-sort -q '${process.argv[4] || '\0'}' -m --tac -n 2 | awk '{ print $NF }' | xargs -r docker volume rm` }}`;
       })
   })
+  .command(['m <subcmd>', 'mise'], 'fzf mise', (yargs: any) => {
+    yargs
+      .command(['i [query]', 'install'], 'fzf mise install', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls-remote --all | fzf --tac -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `mise install ${target}` }}`;
+        }
+      })
+      .command(['pi [query]'], 'fzf mise plugins install', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise p ls-remote | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          const actual = target.replace(/[ *]+/, '');
+          await $`${{ raw: `mise plugins install -y ${actual}` }}`;
+        }
+      })
+      .command(['u [query]', 'use'], 'fzf mise use -g', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const corePlugins = await $`mise plugin ls --core`.text();
+        const plugins = await $`mise plugin ls-remote`.text();
+        const allPlugins = corePlugins + plugins;
+        const target = Buffer.alloc(50);
+        await $`echo ${allPlugins.replaceAll('*', '')} | sort | fzf -1 -q '${process.argv[4] || '\0'}' > ${target}`;
+        if (target) {
+          await $`${{ raw: `mise use -g ${target.toString().replace(/\0|\n/g, '')}` }}`.nothrow();
+        }
+      })
+      .command(['ul [query]'], 'fzf mise use (local)', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const corePlugins = await $`mise plugin ls --core`.text();
+        const plugins = await $`mise plugin ls-remote`.text();
+        const allPlugins = corePlugins + plugins;
+        const target = Buffer.alloc(50);
+        await $`echo ${allPlugins.replaceAll('*', '')} | sort | fzf -1 -q '${process.argv[4] || '\0'}' > ${target}`;
+        if (target) {
+          await $`${{ raw: `mise use ${target.toString().replace(/\0|\n/g, '')}` }}`.nothrow();
+        }
+      })
+      .command(['uv [query]'], 'fzf mise use -g (installed plugins with version)', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls-remote --all | fzf --tac -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `mise use -g ${target}` }}`;
+        }
+      })
+      .command(['uvl [query]'], 'fzf mise use (local installed plugins with version)', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls-remote --all | fzf --tac -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `mise use ${target}` }}`;
+        }
+      })
+      .command(['rm [query]', 'un', 'uninstall'], 'fzf mise uninstall', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise ls --no-header | sed -E 's/([^ ]+[ ]+[^ ]+).+/\\1/' | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          const actual = target.replace(/ +/, '@');
+          await $`${{ raw: `mise rm ${actual}` }}`;
+        }
+      })
+      .command(['prm [query]', 'pun'], 'fzf mise plugins uninstall', (yargs: any) => {
+        yargs.strict(false);
+      }, async () => {
+        const target = (await $`${{ raw: `mise plugins ls | fzf -1 -q '${process.argv[4] || '\0'}'` }}`).stdout.toString();
+        if (target) {
+          await $`${{ raw: `mise plugins rm ${target}` }}`;
+        }
+      })
+  })
   .command(['o', 'open'], 'fzf open', (yargs: any) => {
     yargs.strict(false);
   }, async () => {
