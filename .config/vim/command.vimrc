@@ -327,6 +327,9 @@ nnoremap <Space><Space>k <Cmd>Kanbanmd<CR>
 
 command! Reload source $MYVIMRC
 
+command! QfGitDiff cexpr system('git jump --stdout diff')
+command! QfTypos cexpr system('typos --format brief')
+
 if has('nvim')
   command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif
   command! VirtualTextToggle lua vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
