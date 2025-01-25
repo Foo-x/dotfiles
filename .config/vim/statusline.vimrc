@@ -31,19 +31,10 @@ if has('nvim')
       let l:diagnostics_status = printf('  %d  %d  %d 󰌵 %d', l:error_cnt, l:warn_cnt, l:info_cnt, l:hint_cnt)
     endif
 
-    if get(g:, 'codeium_enabled', v:false)
-      if v:lua.require('codeium.virtual_text').status().state == 'idle'
-        let l:codeium_status = '    '
-      else
-        let l:codeium_status = ' %3{v:lua.require("codeium.virtual_text").status_string()}'
-      endif
-    else
-      let l:codeium_status = ''
-    endif
     let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
     let l:format_on_save_status = get(g:, 'format_on_save', 0) ? ' ' : ''
 
-    return ' ' . l:common . w:git_status_cache.value . l:diagnostics_status . l:codeium_status . l:autosave_status . l:format_on_save_status . ' '
+    return ' ' . l:common . w:git_status_cache.value . l:diagnostics_status . l:autosave_status . l:format_on_save_status . ' '
   endf
   set statusline=%{%MyStatusline()%}
   set winbar=\ %f%m%r%h%w

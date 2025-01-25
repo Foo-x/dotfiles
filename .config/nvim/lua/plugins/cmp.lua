@@ -36,7 +36,7 @@ local function cmp_config()
         ['<Tab>'] = cmp.mapping({
           i = function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             elseif vim.fn['vsnip#jumpable'](1) == 1 then
               feedkey('<Plug>(vsnip-jump-next)', '')
             elseif has_words_before() then
@@ -57,6 +57,7 @@ local function cmp_config()
         }),
       }),
       sources = cmp.config.sources({
+        { name = 'copilot' },
         { name = 'codeium' },
         { name = 'nvim_lsp' },
         { name = 'vsnip' },
@@ -73,6 +74,7 @@ local function cmp_config()
             vsnip = '[snip]',
           },
           symbol_map = {
+            Copilot = '',
             Codeium = '',
           },
         }),
@@ -152,25 +154,20 @@ local function codeium_init()
   vim.g.codeium_enabled = true
 end
 
-local function codeium_opts()
-  return {
-    virtual_text = {
-      enabled = true,
-      key_bindings = {
-        accept = "<M-'>",
-        clear = '<C-]>',
-        next = '<M-]>',
-        prev = '<M-[>',
-      },
-    },
-  }
-end
-
 local function codeium_config(_, opts)
   if vim.g.codeium_enabled then
     require('codeium').setup(opts)
   end
 end
+
+local copilot_opts = {
+  panel = {
+    enabled = false,
+  },
+  suggestion = {
+    enabled = false,
+  },
+}
 
 return {
   {
@@ -192,12 +189,27 @@ return {
   {
     'https://github.com/Exafunction/codeium.nvim',
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'hrsh7th/nvim-cmp',
+      'https://github.com/nvim-lua/plenary.nvim',
+      'https://github.com/hrsh7th/nvim-cmp',
     },
     event = 'InsertEnter',
     init = codeium_init,
-    opts = codeium_opts,
+    opts = {},
     config = codeium_config,
+  },
+  {
+    'https://github.com/zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
+    opts = copilot_opts,
+  },
+  {
+    -- there is a issue that it won't suggest on empty line
+    -- but if you put space, it will work
+    'https://github.com/zbirenbaum/copilot-cmp',
+    dependencies = {
+      'https://github.com/zbirenbaum/copilot.lua',
+    },
+    event = 'InsertEnter',
+    opts = {},
   },
 }

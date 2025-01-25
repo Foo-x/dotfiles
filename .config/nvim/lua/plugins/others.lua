@@ -201,6 +201,63 @@ local function oil_config(_, opts)
   })
 end
 
+local copilot_chat_opts = {
+  model = 'claude-3.5-sonnet',
+  window = {
+    layout = 'float',
+    relative = 'cursor',
+    width = 1,
+    height = 0.4,
+    row = 1,
+  },
+  prompts = {
+    Explain = {
+      prompt = '> /COPILOT_EXPLAIN\n\n選択されたコードの説明を段落をつけて書いてください。',
+    },
+    Review = {
+      prompt = '> /COPILOT_REVIEW\n\n選択されたコードをレビューしてください。',
+    },
+    Fix = {
+      prompt = '> /COPILOT_GENERATE\n\nこのコードには問題があります。バグを修正したコードに書き換えてください。',
+    },
+    Optimize = {
+      prompt = '> /COPILOT_GENERATE\n\n選択されたコードを最適化し、パフォーマンスと可読性を向上させてください。',
+    },
+    Docs = {
+      prompt = '> /COPILOT_GENERATE\n\n選択されたコードにドキュメンテーションコメントを追加してください。',
+    },
+    Tests = {
+      prompt = '> /COPILOT_GENERATE\n\nコードのテストを生成してください。',
+    },
+  },
+}
+
+local function copilot_chat_config(_, opts)
+  local chat = require('CopilotChat')
+  chat.setup(opts)
+
+  local copilot_chat_prompts = {}
+  for k, _ in pairs(require('CopilotChat.actions').prompt_actions().actions) do
+    copilot_chat_prompts[#copilot_chat_prompts + 1] = k
+  end
+  vim.g.copilot_chat_prompts = copilot_chat_prompts
+
+  vim.keymap.set('n', '<Space>c', '<Plug>(copilot_chat)')
+  vim.keymap.set('n', '<Plug>(copilot_chat)c', function()
+    local input = vim.fn.input('Quick Chat: ')
+    if input ~= '' then
+      chat.ask(input, { selection = require('CopilotChat.select').buffer })
+    end
+  end, { desc = 'Quick Chat' })
+  vim.keymap.set('n', '<Plug>(copilot_chat)<Space>', chat.toggle, { desc = 'Toggle Chat' })
+  vim.keymap.set(
+    'n',
+    '<Plug>(copilot_chat)p',
+    [[<Cmd>call fzf#run(fzf#wrap({'source': g:copilot_chat_prompts, 'sink': { prompt -> execute('CopilotChat' . prompt) }, 'options': '--prompt "CopilotChat> "'}))<CR>]],
+    { desc = 'Select Chat Prompt' }
+  )
+end
+
 return {
   {
     'https://github.com/AndrewRadev/linediff.vim',
@@ -272,5 +329,15 @@ return {
     },
     opts = oil_opts,
     config = oil_config,
+  },
+  {
+    'https://github.com/CopilotC-Nvim/CopilotChat.nvim',
+    dependencies = {
+      { 'https://github.com/github/copilot.lua' },
+      { 'https://github.com/nvim-lua/plenary.nvim' },
+    },
+    event = 'VeryLazy',
+    opts = copilot_chat_opts,
+    config = copilot_chat_config,
   },
 }
