@@ -115,7 +115,7 @@ local function mason_lspconfig_config(_, opts)
     callback = function(ev)
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf })
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf })
-      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = ev.buf })
+      vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { buffer = ev.buf })
       vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = ev.buf })
       vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = ev.buf })
       vim.keymap.set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, { buffer = ev.buf })
@@ -285,13 +285,13 @@ local lsp_signature_opts = {
 
 local lean_config = function(_, opts)
   require('lean').setup(opts)
-  vim.cmd[[
+  vim.cmd([[
   augroup Lean
     autocmd!
     autocmd FileType leaninfo nunmap <buffer> J| nnoremap <buffer> J <C-f>
     autocmd FileType leaninfo nunmap <buffer> K| nnoremap <buffer> K <C-b>
   augroup END
-  ]]
+  ]])
 end
 
 return {

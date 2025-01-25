@@ -42,6 +42,7 @@ in
       git
       gitui
       graphviz
+      gron
       hyperfine
       jq
       jujutsu
