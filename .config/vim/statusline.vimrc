@@ -31,7 +31,15 @@ if has('nvim')
       let l:diagnostics_status = printf('  %d  %d  %d 󰌵 %d', l:error_cnt, l:warn_cnt, l:info_cnt, l:hint_cnt)
     endif
 
-    let l:codeium_status = exists('*codeium#GetStatusString') ? ' %3{codeium#GetStatusString()}' : ''
+    if get(g:, 'codeium_enabled', v:false)
+      if v:lua.require('codeium.virtual_text').status().state == 'idle'
+        let l:codeium_status = '    '
+      else
+        let l:codeium_status = ' %3{v:lua.require("codeium.virtual_text").status_string()}'
+      endif
+    else
+      let l:codeium_status = ''
+    endif
     let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
     let l:format_on_save_status = get(g:, 'format_on_save', 0) ? ' ' : ''
 

@@ -4,7 +4,7 @@ local function cmp_config()
 
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
   end
 
   local feedkey = function(key, mode)
@@ -57,6 +57,7 @@ local function cmp_config()
         }),
       }),
       sources = cmp.config.sources({
+        { name = 'codeium' },
         { name = 'nvim_lsp' },
         { name = 'vsnip' },
         { name = 'buffer' },
@@ -70,7 +71,10 @@ local function cmp_config()
             nvim_lsp = '[lsp]',
             path = '[path]',
             vsnip = '[snip]',
-          }
+          },
+          symbol_map = {
+            Codeium = '',
+          },
         }),
       },
       experimental = {
@@ -80,21 +84,18 @@ local function cmp_config()
     vim.b.cmp_loaded = true
   end
 
-  vim.api.nvim_create_autocmd({'BufNew'}, {
+  vim.api.nvim_create_autocmd({ 'BufNew' }, {
     group = vim.api.nvim_create_augroup('CmpSetup', {}),
-    callback = setup_for_buffer
+    callback = setup_for_buffer,
   })
   setup_for_buffer()
 
-  cmp.event:on(
-    'confirm_done',
-    require('nvim-autopairs.completion.cmp').on_confirm_done()
-  )
+  cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
 
   cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-      { name = 'buffer' }
+      { name = 'buffer' },
     },
     formatting = {
       format = lspkind.cmp_format({
@@ -128,17 +129,16 @@ local function cmp_config()
       },
     },
     enabled = function()
-      local result = not vim.regex('r\\%[ead] \\?!\\|w\\%[rite] !\\|^w!!\\|^!\\|silent!'):match_str(vim.fn
-        .getcmdline())
+      local result = not vim.regex('r\\%[ead] \\?!\\|w\\%[rite] !\\|^w!!\\|^!\\|silent!'):match_str(vim.fn.getcmdline())
       if not result then
         cmp.close()
       end
       return result
     end,
     sources = cmp.config.sources({
-      { name = 'path' }
+      { name = 'path' },
     }, {
-      { name = 'cmdline' }
+      { name = 'cmdline' },
     }),
     formatting = {
       format = lspkind.cmp_format({
@@ -152,27 +152,23 @@ local function codeium_init()
   vim.g.codeium_enabled = true
 end
 
-local function codeium_config()
+local function codeium_opts()
+  return {
+    virtual_text = {
+      enabled = true,
+      key_bindings = {
+        accept = "<M-'>",
+        clear = '<C-]>',
+        next = '<M-]>',
+        prev = '<M-[>',
+      },
+    },
+  }
+end
+
+local function codeium_config(_, opts)
   if vim.g.codeium_enabled then
-    vim.g.codeium_disable_bindings = 1
-
-    vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-
-    -- without kanata
-    vim.keymap.set('i', "<M-'>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-    vim.keymap.set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
-      { expr = true, silent = true })
-    vim.keymap.set('i', '<M-]>', function() return vim.fn['codeium#CycleOrComplete']() end,
-      { expr = true, silent = true })
-
-    -- with kanata
-    vim.keymap.set('i', '<F7>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-    vim.keymap.set('i', '<F8>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
-      { expr = true, silent = true })
-    vim.keymap.set('i', '<F14>', function() return vim.fn['codeium#CycleOrComplete']() end,
-      { expr = true, silent = true })
-
-    vim.cmd('CodeiumEnable')
+    require('codeium').setup(opts)
   end
 end
 
@@ -189,14 +185,19 @@ return {
       'https://github.com/hrsh7th/vim-vsnip',
       'https://github.com/hrsh7th/cmp-vsnip',
       'https://github.com/rafamadriz/friendly-snippets',
-      { 'https://github.com/windwp/nvim-autopairs', opts = {} }
+      { 'https://github.com/windwp/nvim-autopairs', opts = {} },
     },
     config = cmp_config,
   },
   {
-    'https://github.com/Exafunction/codeium.vim',
+    'https://github.com/Exafunction/codeium.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'hrsh7th/nvim-cmp',
+    },
     event = 'InsertEnter',
     init = codeium_init,
+    opts = codeium_opts,
     config = codeium_config,
   },
 }
