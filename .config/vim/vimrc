@@ -143,7 +143,7 @@ augroup Fold
 augroup END
 augroup AutoOpenQuickFixWindow
   autocmd!
-  autocmd QuickFixCmdPost * cw
+  autocmd QuickFixCmdPost * cw | if has('nvim') | exe "lua vim.schedule(function() require('quicker').refresh() end)" | endif
 augroup END
 augroup AutoRead
   autocmd!

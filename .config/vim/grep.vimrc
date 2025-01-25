@@ -3,7 +3,7 @@ set grepformat^=%f:%l:%c:%m
 set grepprg=git\ grep\ --no-index\ --exclude-standard\ --no-color\ -n\ --column\ -I\ -P
 if executable('rg')
   " `rg | sort` is faster than `rg --sort`
-  let &grepprg='rg --vimgrep $* \| sort'
+  let &grepprg='rg --vimgrep $* \| sort -dV'
 endif
 " }}}
 

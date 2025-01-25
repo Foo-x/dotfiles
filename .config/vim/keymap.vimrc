@@ -103,6 +103,7 @@ nnoremap <Plug>(window)j <C-w>j
 nnoremap <Plug>(window)k <C-w>k
 nnoremap <Plug>(window)l <C-w>l
 nnoremap <Plug>(window)w <C-w>w
+nnoremap <Plug>(window)p <C-w>p
 nnoremap <Plug>(window)H <Cmd>call SwapWindow('h')<CR>
 nnoremap <Plug>(window)J <Cmd>call SwapWindow('j')<CR>
 nnoremap <Plug>(window)K <Cmd>call SwapWindow('k')<CR>

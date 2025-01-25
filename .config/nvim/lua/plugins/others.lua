@@ -4,19 +4,10 @@ local colorizer_opts = {
   },
 }
 
-local function bqf_config()
-  vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('BqfConfig', {}),
-    pattern = 'qf',
-    callback = function()
-      vim.cmd('BqfDisable')
-      vim.cmd('BqfEnable')
-      vim.keymap.set('n', '<Plug>(quickfix)r', function()
-        vim.cmd('BqfDisable')
-        vim.cmd('BqfEnable')
-      end, { buffer = true })
-    end,
-  })
+local function quicker_config()
+  local quicker = require('quicker')
+  quicker.setup()
+  vim.keymap.set('n', '<Plug>(quickfix)r', quicker.refresh)
 end
 
 local function surround_config()
@@ -54,7 +45,7 @@ local function surround_config()
     },
     aliases = {
       ['b'] = 'b',
-    }
+    },
   })
 end
 
@@ -242,7 +233,11 @@ return {
   {
     'https://github.com/kevinhwang91/nvim-bqf',
     ft = 'qf',
-    config = bqf_config,
+  },
+  {
+    'https://github.com/stevearc/quicker.nvim',
+    ft = 'qf',
+    config = quicker_config,
   },
   {
     'https://github.com/numToStr/Comment.nvim',
