@@ -4,25 +4,25 @@
     # log
     ## oneline
     l = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S'"
-    la = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --exclude 'refs/*' --all"
+    la = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --branches --tags --remotes"
     dbl = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' $(git db)..@"
     bcl = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' $(git bc)..@"
 
     ## oneline + changed files
     lc = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status"
-    lca = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)%n\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status --exclude 'refs/*' --all"
+    lca = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)%n\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status --branches --tags --remotes"
     dblc = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status $(git db)..@"
     bclc = "!git log --graph --color --date-order --pretty=\"%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)\" --date=format-local:'%Y-%m-%d %H:%M:%S' --name-status $(git bc)..@"
 
     ## message
     lm = "!git log --graph --color --date-order --date=format-local:'%Y-%m-%d %H:%M:%S'"
-    lma = "!git log --graph --color --date-order --date=format-local:'%Y-%m-%d %H:%M:%S' --exclude 'refs/*' --all"
+    lma = "!git log --graph --color --date-order --date=format-local:'%Y-%m-%d %H:%M:%S' --branches --tags --remotes"
     dblm = "!git log --graph --color --date-order --date=format-local:'%Y-%m-%d %H:%M:%S' $(git db)..@"
     bclm = "!git log --graph --color --date-order --date=format-local:'%Y-%m-%d %H:%M:%S' $(git bc)..@"
 
     ## detail
     ld = log -p --decorate --color
-    lda = log -p --decorate --color --exclude 'refs/*' --all
+    lda = log -p --decorate --color --branches --tags --remotes
     dbld = "!git log -p --decorate --color $(git db)..@"
     bcld = "!git log -p --decorate --color $(git bc)..@"
 

@@ -123,7 +123,7 @@ function lsgit() {
   ls -A
   if jj root &> /dev/null; then
     echo
-    jj diff --summary
+    PAGER=cat jj diff --summary
     echo
     jj log
     return

@@ -84,7 +84,7 @@ await yargs(process.argv.slice(2))
         yargs.strict(false);
       }, async () => {
         const target = Buffer.alloc(10);
-        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --exclude 'refs/*' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --branches --tags --remotes ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
 
         const cid = target.toString().replace(/\0|\n/g, '');
         await $`git checkout ${cid}`.nothrow();
@@ -102,13 +102,13 @@ await yargs(process.argv.slice(2))
       .command(['id [path]'], 'fzf git output commit id', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
-        await $`${{ raw: `git rev-parse $(git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --exclude 'refs/*' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1)` }}`;
+        await $`${{ raw: `git rev-parse $(git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --branches --tags --remotes ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1)` }}`;
       })
       .command(['chp [args]'], 'fzf git cherry-pick', (yargs: any) => {
         yargs.strict(false);
       }, async () => {
         const target = Buffer.alloc(10);
-        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --exclude 'refs/*' --all | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --branches --tags --remotes | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
         const cid = target.toString().replace(/\0|\n/g, '');
         if (cid) {
           await $`git cherry-pick ${process.argv.slice(4)} ${cid}`;
@@ -118,7 +118,7 @@ await yargs(process.argv.slice(2))
         yargs.strict(false);
       }, async () => {
         const target = Buffer.alloc(10);
-        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --exclude 'refs/*' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --branches --tags --remotes ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
 
         const cid = target.toString().replace(/\0|\n/g, '');
         if (cid) {
@@ -129,7 +129,7 @@ await yargs(process.argv.slice(2))
         yargs.strict(false);
       }, async () => {
         const target = Buffer.alloc(10);
-        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --exclude 'refs/*' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --branches --tags --remotes ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
 
         const cid = target.toString().replace(/\0|\n/g, '');
         if (cid) {
@@ -140,7 +140,7 @@ await yargs(process.argv.slice(2))
         yargs.strict(false);
       }, async () => {
         const target = Buffer.alloc(10);
-        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --exclude 'refs/*' --all ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
+        await $`git log --graph --color --date-order --format="%C(#6c9ac5)%h%C(reset) %C(#afc0d1)%cd%C(reset)%C(auto)%d%Creset %s %C(#5d7ea0)@%an%C(reset)" --date=format-local:'%Y-%m-%d %H:%M:%S' --branches --tags --remotes ${process.argv[4] || ''} | fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | \grep -Eo '[a-f0-9]+' | head -1 | xargs -I % git diff-tree --no-commit-id --name-status -r %" | \grep -Eo '[a-f0-9]+' | head -1 > ${target}`;
 
         const cid = target.toString().replace(/\0|\n/g, '');
         if (cid) {

@@ -10,6 +10,15 @@ local function quicker_config()
   vim.keymap.set('n', '<Plug>(quickfix)r', quicker.refresh)
 end
 
+local function comment_config()
+  require('ts_context_commentstring').setup({
+    enable_autocmd = false,
+  })
+  require('Comment').setup({
+    pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+  })
+end
+
 local function surround_config()
   require('nvim-surround').setup({
     surrounds = {
@@ -290,6 +299,11 @@ return {
   {
     'https://github.com/kevinhwang91/nvim-bqf',
     ft = 'qf',
+    opts = {
+      func_map = {
+        ptoggleitem = '',
+      },
+    },
   },
   {
     'https://github.com/stevearc/quicker.nvim',
@@ -298,10 +312,14 @@ return {
   },
   {
     'https://github.com/numToStr/Comment.nvim',
+    dependencies = {
+      'https://github.com/JoosepAlviste/nvim-ts-context-commentstring',
+    },
     keys = {
       { '<C-_>', '<Plug>(comment_toggle_linewise_current)' },
       { '<C-_>', '<Plug>(comment_toggle_linewise_visual)', mode = 'v' },
     },
+    config = comment_config,
   },
   {
     'https://github.com/kylechui/nvim-surround',

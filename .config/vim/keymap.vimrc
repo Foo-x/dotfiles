@@ -158,10 +158,10 @@ nnoremap s "_s
 nnoremap S "_S
 
 "" format all lines
-nnoremap <Space>= gg=G<C-o>
+nnoremap <Space>= gg=G``
 
 "" yank all lines
-nnoremap <Space>y ggyG<C-o>
+nnoremap <Space>y ggyG``
 
 "" select all
 nnoremap <Space>v ggVG

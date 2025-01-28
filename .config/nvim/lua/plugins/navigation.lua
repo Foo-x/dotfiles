@@ -69,24 +69,6 @@ local flash_keys = {
     'f',
     mode = { 'n', 'x' },
     function()
-      require('flash').jump()
-    end,
-    desc = 'Flash inclusive',
-  },
-  {
-    't',
-    mode = { 'n', 'x' },
-    function()
-      require('flash').jump({
-        action = flash_exclusive_action,
-      })
-    end,
-    desc = 'Flash exclusive',
-  },
-  {
-    'F',
-    mode = { 'n', 'x' },
-    function()
       require('flash').jump({
         labels = flash_migemo_labels,
         search = {
@@ -97,7 +79,7 @@ local flash_keys = {
     desc = 'Flash inclusive migemo',
   },
   {
-    'T',
+    't',
     mode = { 'n', 'x' },
     function()
       require('flash').jump({
@@ -109,6 +91,24 @@ local flash_keys = {
       })
     end,
     desc = 'Flash exclusive migemo',
+  },
+  {
+    'F',
+    mode = { 'n', 'x' },
+    function()
+      require('flash').jump()
+    end,
+    desc = 'Flash inclusive',
+  },
+  {
+    'T',
+    mode = { 'n', 'x' },
+    function()
+      require('flash').jump({
+        action = flash_exclusive_action,
+      })
+    end,
+    desc = 'Flash exclusive',
   },
   {
     ':',
