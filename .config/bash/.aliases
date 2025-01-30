@@ -222,6 +222,9 @@ alias nfs='nix flake show'
 alias ngc='nix store gc'
 alias npd='nix profile diff-closures'
 
+# devbox
+alias deb='devbox'
+
 # browse
 alias al='cat ~/.dotfiles/.config/bash/.aliases | $PAGER'
 alias bashrc='$PAGER ~/.dotfiles/.bashrc'

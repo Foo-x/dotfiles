@@ -12,6 +12,8 @@ shopt -u histappend
 shopt -s histreedit
 shopt -s histverify
 
+eval "$(devbox global shellenv --init-hook)" 2> /dev/null
+
 . ${DOT_DIR}/.config/bash/.aliases
 . ${DOT_DIR}/.config/bash/.exports
 . ${DOT_DIR}/.config/bash/.aliases_cdb
@@ -36,11 +38,21 @@ fi
 
 function _lazy_complete() {
   if alias | cut -c7- | \grep -q "^$1="; then
+    if [[ $1 == 'j' ]]; then
+      . <(jj util completion bash)
+    fi
+    if [[ $1 == 'deb' ]]; then
+      . <(devbox completion bash)
+    fi
     complete -F _complete_alias "$1"
     return 124
   fi
   if [[ $1 == 'jj' ]]; then
     . <(jj util completion bash)
+    return 124
+  fi
+  if [[ $1 == 'devbox' ]]; then
+    . <(devbox completion bash)
     return 124
   fi
   if [ -f "${DOT_DIR}/completion/$1.completion.bash" ]; then
