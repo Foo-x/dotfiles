@@ -104,18 +104,15 @@ fi
 if ! has nix; then
   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  cd "${DOT_DIR}"
+  nix run .#switch-home
+  cd -
 fi
 
 # install devbox
 if ! has devbox; then
   curl -fsSL https://get.jetify.com/devbox | bash
 fi
-devboxfiles="
-devbox.json
-devbox.lock
-"
-echo "${devboxfiles}" | xargs -I{} ln -sfT "${DOT_DIR}/devbox/{}" "${XDG_DATA_HOME}/devbox/global/default/{}"
-eval "$(devbox global shellenv --install --init-hook)" 2> /dev/null
 
 # setup ripgrep
 mkdir -p "${XDG_CONFIG_HOME}/ripgrep"

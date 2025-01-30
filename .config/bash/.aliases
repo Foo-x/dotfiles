@@ -490,16 +490,6 @@ if [[ ${IS_WSL} == 1 ]]; then
   alias clip=pbcopy
   alias pbpaste="powershell.exe -command '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; Get-Clipboard'"
 
-  function open() {
-    if [ -e "$1" ]; then
-      wslview "$(wslpath -w "$1")"
-    else
-      wslview "$1"
-    fi
-  }
-  # to use with bash -c
-  export -f open
-
   function is_win_dir() {
     case $(pwd -P) in
     /mnt/*)
