@@ -35,8 +35,8 @@ if [ -d ${HOME}/.fzf-tab-completion ]; then
 fi
 
 function _lazy_complete() {
-  # alias that starts with the fixed string of the command
-  if alias | cut -c7- | \grep -qP "^\Q$1=\E"; then
+  if [[ $1 == 'deb' ]]; then
+    . <(devbox completion bash)
     complete -F _complete_alias "$1"
     return 124
   fi
@@ -46,6 +46,11 @@ function _lazy_complete() {
   fi
   if [[ $1 == 'devbox' ]]; then
     . <(devbox completion bash)
+    return 124
+  fi
+  # alias that starts with the fixed string of the command
+  if alias | cut -c7- | \grep -qP "^\Q$1=\E"; then
+    complete -F _complete_alias "$1"
     return 124
   fi
   if [ -f "${DOT_DIR}/completion/$1.completion.bash" ]; then
