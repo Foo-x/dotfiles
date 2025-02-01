@@ -1,5 +1,6 @@
 let g:previm_open_cmd = 'open'
 let g:previm_show_header = 0
+let g:previm_custom_css_path = '~/.dotfiles/config/previm.css'
 
 fun! s:init_markdown()
   nnoremap <silent><buffer> <Leader>x <Cmd>ToggleCheckbox<CR>
