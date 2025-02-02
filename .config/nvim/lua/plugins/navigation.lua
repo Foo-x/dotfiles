@@ -111,6 +111,23 @@ local flash_keys = {
     desc = 'Flash exclusive',
   },
   {
+    'j',
+    mode = { 'o' },
+    function()
+      require('flash').jump({
+        labels = flash_migemo_labels,
+        search = {
+          mode = flash_migemo_mode,
+        },
+        remote_op = {
+          restore = true,
+          motion = true,
+        },
+      })
+    end,
+    desc = 'Flash remote migemo',
+  },
+  {
     ':',
     mode = { 'n', 'x' },
     function()
