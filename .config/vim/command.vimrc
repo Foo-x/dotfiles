@@ -1,5 +1,4 @@
 cnoreabbr w!! w !sudo tee > /dev/null %
-cnoreabbr e% expand('%')
 
 " argument list
 cnoreabbr <expr> ar getcmdtype() == ':' && getcmdline() ==# 'ar' ? 'args' : 'ar'
@@ -11,6 +10,8 @@ cnoremap <expr> ; getcmdtype() == ':' && empty(getcmdline()) ? "\<Esc>q:" : ';'
 cnoremap <expr> / getcmdtype() == '/' && empty(getcmdline()) ? "\<Esc>q/" : '/'
 cnoremap <expr> ? getcmdtype() == '?' && empty(getcmdline()) ? "\<Esc>q?" : '?'
 cnoremap <expr> gdd getcmdtype() == ':' && empty(getcmdline()) ? "g//d_\<Left>\<Left>\<Left>" : 'gd'
+cnoremap <expr> e%: getcmdtype() == ':' ? "expand('%:')\<Left>\<Left>" : 'e%:'
+cnoremap <expr> e%<Space> getcmdtype() == ':' ? "expand('%') " : 'e%'
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
@@ -177,6 +178,7 @@ command! AutoSaveToggleBuffer let b:autosave=!get(b:, 'autosave', 0)
 command! AutoSaveClear let g:autosave=0 | let t:autosave=0 | let w:autosave=0 | let b:autosave=0
 command! AutoSaveInfo echom 'g:' . get(g:, 'autosave', 0) | echom 't:' . get(t:, 'autosave', 0) | echom 'w:' . get(w:, 'autosave', 0) | echom 'b:' . get(b:, 'autosave', 0)
 
+command! CopyDirname let @"=expand('%:h') | doautocmd TextYankPost | call YankToClipboard(@")
 command! CopyFilename let @"=expand('%') | doautocmd TextYankPost | call YankToClipboard(@")
 command! CopyFilenameAbsolute let @"=expand('%:p') | silent! doautocmd TextYankPost | call YankToClipboard(@")
 command! CopyFilenameBasename let @"=expand('%:t') | silent! doautocmd TextYankPost | call YankToClipboard(@")
