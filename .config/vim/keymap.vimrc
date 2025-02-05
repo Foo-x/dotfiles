@@ -75,6 +75,7 @@ nnoremap <Plug>(quickfix)l :<C-u>cnewer<CR>
 nnoremap <expr> <Plug>(quickfix)H ':<C-u>' . (v:count > 0 ? v:count : '') . 'chistory<CR>'
 nnoremap <Plug>(quickfix)e <Cmd>exe 'e' &errorfile<CR>
 nnoremap <Plug>(quickfix)i <Cmd>exe 'silent grep! -F ' . g:insert_print_marker<CR>
+nnoremap <Plug>(quickfix)r :<C-u>cclose \| cw<CR>
 "" toggle quickfix
 nnoremap <expr> <Plug>(quickfix)t empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
 

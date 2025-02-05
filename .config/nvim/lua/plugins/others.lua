@@ -7,7 +7,6 @@ local colorizer_opts = {
 local function quicker_config()
   local quicker = require('quicker')
   quicker.setup()
-  vim.keymap.set('n', '<Plug>(quickfix)r', quicker.refresh)
 end
 
 local function comment_config()
@@ -351,7 +350,7 @@ return {
   {
     'https://github.com/CopilotC-Nvim/CopilotChat.nvim',
     dependencies = {
-      { 'https://github.com/github/copilot.lua' },
+      { 'https://github.com/zbirenbaum/copilot.lua' },
       { 'https://github.com/nvim-lua/plenary.nvim' },
     },
     event = 'VeryLazy',

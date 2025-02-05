@@ -114,6 +114,11 @@ if ! has devbox; then
   curl -fsSL https://get.jetify.com/devbox | bash
 fi
 
+# install hotspots
+if ! has hotspots; then
+  curl -fsSL https://raw.githubusercontent.com/Foo-x/hotspots/refs/heads/master/hotspots -o ${HOME}/.local/bin/hotspots
+fi
+
 # setup ripgrep
 mkdir -p "${XDG_CONFIG_HOME}/ripgrep"
 ln -sf "${DOT_DIR}/.config/ripgrep/ripgreprc" "${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
