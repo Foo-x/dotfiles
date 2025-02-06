@@ -183,7 +183,7 @@ nnoremap <M-z> :<C-u>set wrap!<CR>
 
 " insert mode
 inoremap jk <Esc>
-inoremap ｊｊ <Esc>
+inoremap ｊｋ <Esc>
 inoremap <C-l> <Del>
 inoremap <C-z> <C-o>u
 inoremap <C-y> <C-o><C-r>
