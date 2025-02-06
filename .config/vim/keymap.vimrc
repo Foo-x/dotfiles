@@ -1,11 +1,9 @@
 " normal mode
 "" display lines downward
 nnoremap j gj
-nnoremap <Down> gj
 
 "" display lines upward
 nnoremap k gk
-nnoremap <Up> gk
 
 noremap Y y$
 nnoremap U <C-r>
@@ -129,8 +127,10 @@ nnoremap <Space>1 <C-w>t
 nnoremap <Space>2 <C-w>t<C-w>l
 nnoremap <Space>3 <C-w>t<C-w>j
 nnoremap <Space>4 <C-w>b
-nnoremap <Right> <C-w>w
-nnoremap <Left> <C-w>W
+nnoremap <Left> <C-w>h
+nnoremap <Down> <C-w>j
+nnoremap <Up> <C-w>k
+nnoremap <Right> <C-w>l
 
 nmap <Space>t <Plug>(tab)
 nnoremap <Plug>(tab)t <Cmd>tabnew<CR>
