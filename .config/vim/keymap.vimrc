@@ -152,6 +152,12 @@ nnoremap <Space><Space>m <Cmd>tabnew .local/memo.md<CR>
 
 nnoremap <C-s> :<C-u>update<CR>
 
+"" move cursor to center/top/bottom
+nmap zz zz<sid>(z1)
+nnoremap <script> <sid>(z1)z zt<sid>(z2)
+nnoremap <script> <sid>(z2)z zb<sid>(z3)
+nnoremap <script> <sid>(z3)z zz<sid>(z1)
+
 "" not to yunk
 nnoremap x "_x
 nnoremap X "_X
