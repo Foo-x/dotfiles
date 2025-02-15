@@ -58,7 +58,13 @@ local flash_exclusive_action = function(match, state)
 end
 
 local flash_migemo_mode = function(s)
-  return vim.fn['kensaku#query'](s)
+  -- split by space, convert with migemo, and join with space
+  return table.concat(
+    vim.tbl_map(function(w)
+      return vim.fn['kensaku#query'](w)
+    end, vim.split(s, ' ')),
+    ' '
+  )
 end
 
 -- without vowels
