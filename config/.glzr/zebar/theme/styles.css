@@ -11,7 +11,7 @@ i {
 
 body {
   color: rgb(255 255 255 / 90%);
-  font-family: 'Firge35Nerd', ui-monospace, monospace;
+  font-family: 'Firge35Nerd Console', ui-monospace, monospace;
   font-size: 13px;
   overflow: hidden;
 }
