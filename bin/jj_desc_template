@@ -53,4 +53,5 @@ echo
 echo
 
 echo "JJ: Diff"
-jj log -n1 --no-graph -T 'indent("JJ:     ", diff.git())'
+echo "JJ: ignore-rest"
+jj log -n1 --no-graph -T 'diff.git()'
