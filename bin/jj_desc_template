@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cat << EOF
+cat <<.
 JJ: Subject
 JJ: 
 JJ: <type>[(<scope>)][!]: <description>
@@ -18,25 +18,25 @@ JJ: style     Changes that do not affect the meaning of the code (white-space, f
 JJ: test      Adding missing tests or correcting existing tests
 JJ: 
 JJ: 50 char ------------------------------------>|
-EOF
+.
 
 echo
 
-cat << EOF
+cat <<.
 JJ: Body
 JJ: 
 JJ: 72 char ---------------------------------------------------------->|
-EOF
+.
 
 echo
 
-cat << EOF
+cat <<.
 JJ: Footer
 JJ: 
 JJ: BREAKING-CHANGE: <description>
 JJ: Refs: <id>
 JJ: Closes <id>
-EOF
+.
 
 echo
 

@@ -40,12 +40,14 @@ in
       graphviz
       gron
       hyperfine
+      jo
       jq
       jujutsu
       just
       mise
       neovim
       nodejs_22
+      nushell
       python313
       ripgrep
       terraform
