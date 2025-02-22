@@ -143,6 +143,11 @@ fi
 if ! bun pm ls -g | grep -q yargs; then
   bun install -g yargs
 fi
+# install wsl-open
+IS_WSL="$(if uname -r | \grep -iq 'microsoft'; then echo 1; else echo 0; fi)"
+if [ ${IS_WSL} = 1 ] && ! has wsl-open; then
+  bun install -g wsl-open
+fi
 
 exe_files="
 setup_completions.sh

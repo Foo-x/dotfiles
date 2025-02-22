@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+# split not to match with itself
+if git grep --cached -F '[''INSERT_PRINT'']'; then
+  exit 1
+fi
+
 LOCAL_HOOK="$(git rev-parse --show-toplevel)/.git/hooks/$(basename $0)"
 
 if [ -x "$LOCAL_HOOK" ]; then
