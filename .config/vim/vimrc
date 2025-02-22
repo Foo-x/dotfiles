@@ -66,6 +66,7 @@ set noequalalways
 set sessionoptions-=blank
 set sessionoptions-=buffers
 set sessionoptions-=help
+set conceallevel=2
 if has('nvim')
   set foldexpr=nvim_treesitter#foldexpr()
   set foldcolumn=auto
