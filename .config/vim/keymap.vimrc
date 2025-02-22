@@ -5,7 +5,7 @@ nnoremap j gj
 "" display lines upward
 nnoremap k gk
 
-noremap Y y$
+nnoremap Y y$
 nnoremap U <C-r>
 
 nnoremap + <C-a>
@@ -43,15 +43,15 @@ nnoremap ]t vat<Esc>
 nnoremap )} ]}
 nnoremap )) ])
 
-noremap <Space>h ^
+nnoremap <Space>h ^
 nnoremap <Space>l $
-noremap <Space>m %
+nnoremap <Space>m %
 
 nnoremap <Space>o :<C-u>a<CR><CR>.<CR>
 nnoremap <Space>O :<C-u>i<CR><CR>.<CR>
 
-nnoremap <S-j> <C-f>
-nnoremap <S-k> <C-b>
+nnoremap J <C-f>
+nnoremap K <C-b>
 
 nmap <Space>a <Plug>(argument)
 nnoremap <Plug>(argument)r :<C-u>Args<CR>
