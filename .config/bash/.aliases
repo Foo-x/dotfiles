@@ -428,23 +428,6 @@ function jcb() {
   fi
 }
 
-function jgpb() {
-  local target bookmark
-  target="${1:-@}"
-  bookmark="${2:-$(git db)}"
-  jj bookmark set "${bookmark}" --revision "${target}"
-  jj git push --bookmark "${bookmark}"
-}
-
-function jgpnb() {
-  local target bookmark
-  target="${1:-@}"
-  bookmark="${2:-$(git db)}"
-  jj bookmark set "${bookmark}" --revision "${target}"
-  jj git push --dry-run --bookmark "${bookmark}"
-  jj undo
-}
-
 # https://github.com/sverweij/dependency-cruiser
 function depcruise_dot_png() {
   depcruise -T dot "$1" -I "$1" "${@:2}" | dot -T png
