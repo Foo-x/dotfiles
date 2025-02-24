@@ -7,7 +7,7 @@ local function cmp_config()
   end
 
   local function setup_for_buffer()
-    if vim.bo.filetype == 'markdown' or vim.b.cmp_loaded then
+    if vim.b.cmp_loaded then
       return
     end
 

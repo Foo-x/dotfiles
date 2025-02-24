@@ -53,10 +53,10 @@ endif
 if !exists('g:insert_print_templates')
   let g:insert_print_templates = {}
   let g:insert_print_templates.python = 'print($TIMESTAMP + f" {}")'
-  let g:insert_print_templates.javascript = 'console.debug($TIMESTAMP + ` {}`);'
-  let g:insert_print_templates.typescript = 'console.debug($TIMESTAMP + ` {}`);'
-  let g:insert_print_templates.typescriptreact = 'console.debug($TIMESTAMP + ` {}`);'
-  let g:insert_print_templates.vue = 'console.debug($TIMESTAMP + ` {}`);'
+  let g:insert_print_templates.javascript = 'console.debug(`${$TIMESTAMP} {}`);'
+  let g:insert_print_templates.typescript = 'console.debug(`${$TIMESTAMP} {}`);'
+  let g:insert_print_templates.typescriptreact = 'console.debug(`${$TIMESTAMP} {}`);'
+  let g:insert_print_templates.vue = 'console.debug(`${$TIMESTAMP} {}`);'
   let g:insert_print_templates.lua = 'print($TIMESTAMP .. " {}")'
   let g:insert_print_templates.vim = 'echom $TIMESTAMP . " {}"'
   let g:insert_print_templates.sh = 'printf "%s {}\n" $($TIMESTAMP)'
