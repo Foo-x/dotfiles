@@ -48,7 +48,6 @@ in
       neovim
       nodejs_22
       nushell
-      obsidian
       python313
       ripgrep
       terraform
