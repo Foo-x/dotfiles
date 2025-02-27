@@ -133,7 +133,7 @@ nnoremap <Up> <C-w>k
 nnoremap <Right> <C-w>l
 
 nmap <Space>t <Plug>(tab)
-nnoremap <Plug>(tab)t <Cmd>tabnew<CR>
+nnoremap <Plug>(tab)t <Cmd>tabnew \| LayoutTwoCol<CR>
 nnoremap <Plug>(tab)f <Cmd>tabfirst<CR>
 nnoremap <Plug>(tab)c <Cmd>tabclose<CR>
 nnoremap <Plug>(tab)o <Cmd>tabonly<CR>
