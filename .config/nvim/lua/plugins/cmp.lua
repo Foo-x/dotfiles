@@ -81,7 +81,7 @@ local function cmp_config()
     vim.b.cmp_loaded = true
   end
 
-  vim.api.nvim_create_autocmd({ 'BufNew' }, {
+  vim.api.nvim_create_autocmd({ 'BufReadPre' }, {
     group = vim.api.nvim_create_augroup('CmpSetup', {}),
     callback = setup_for_buffer,
   })

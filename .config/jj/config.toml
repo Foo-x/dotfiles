@@ -13,6 +13,7 @@ program = "nvim"
 merge-tool-edits-conflict-markers = true
 [git]
 private-commits = "description(glob:'private:*')"
+push-new-bookmarks = true
 [aliases]
 # abandon
 aba = ["abandon"]
