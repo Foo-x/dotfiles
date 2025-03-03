@@ -14,6 +14,9 @@ merge-tool-edits-conflict-markers = true
 [git]
 private-commits = "description(glob:'private:*')"
 push-new-bookmarks = true
+[experimental-advance-branches]
+enabled-branches = ["glob:*"]
+disabled-branches = ["main", "master", "develop"]
 [aliases]
 # abandon
 aba = ["abandon"]
