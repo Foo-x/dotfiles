@@ -119,28 +119,31 @@ function __histsave() {
 
 export PROMPT_COMMAND_HISTSAVE='__histsave'
 
-function lsgit() {
-  ls -A
+function vcs_status() {
   if jj root &> /dev/null; then
-    echo
     PAGER=cat jj diff --summary
     echo
     jj log
     return
   fi
   if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = "true" ]; then
-    echo
     git status -sb
   fi
 }
 
-function lsgit_cd() {
-  if [ "${LSGIT_DIR:-${PWD}}" != "${PWD}" ]; then
-    lsgit
-  fi
-  LSGIT_DIR=${PWD}
+function ls_vcs_status() {
+  ls -A
+  echo
+  vcs_status
 }
-export PROMPT_COMMAND_LSGIT_CD='lsgit_cd'
+
+function ls_vcs_status_cd() {
+  if [ "${LS_VCS_STATUS_DIR:-${PWD}}" != "${PWD}" ]; then
+    ls_vcs_status
+  fi
+  LS_VCS_STATUS_DIR=${PWD}
+}
+export PROMPT_COMMAND_LS_VCS_STATUS_CD='ls_vcs_status_cd'
 
 function update_git_path_cd() {
   if [ "${UPDATE_GIT_PATH_DIR:-${PWD}}" != "${PWD}" ]; then
@@ -151,19 +154,19 @@ function update_git_path_cd() {
 export PROMPT_COMMAND_UPDATE_GIT_PATH_CD='update_git_path_cd'
 
 trap '((cmdcnt++))' DEBUG
-function lsgit_enter() {
+function empty_enter() {
   local splitted_prompts oldifs
   oldifs=$IFS
   IFS=';' splitted_prompts=(${PROMPT_COMMAND})
   IFS=$oldifs
 
-  if [ $((lsgit_enter_cnt + ${#splitted_prompts[@]})) = ${cmdcnt} ]; then
-    lsgit
+  if [ $((empty_enter_cnt + ${#splitted_prompts[@]})) = ${cmdcnt} ]; then
+    vcs_status
   fi
 
-  lsgit_enter_cnt=${cmdcnt}
+  empty_enter_cnt=${cmdcnt}
 }
-export PROMPT_COMMAND_LSGIT_ENTER='lsgit_enter'
+export PROMPT_COMMAND_EMPTY_ENTER='empty_enter'
 
 # prompt
 . ${DOT_DIR}/.config/bash/.exports_git_ps1
