@@ -14,6 +14,21 @@ merge-tool-edits-conflict-markers = true
 [git]
 private-commits = "description(glob:'private:*')"
 push-new-bookmarks = true
+[templates]
+draft_commit_description = '''
+concat(
+  description,
+  "\nJJ: ChangeId: ",
+  change_id,
+  "\n",
+  surround(
+    "\nJJ: This commit contains the following changes:\n", "",
+    indent("JJ:     ", diff.summary()),
+  ),
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
 [experimental-advance-branches]
 enabled-branches = ["glob:*"]
 disabled-branches = ["main", "master", "develop"]

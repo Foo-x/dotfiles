@@ -92,7 +92,15 @@ fun! JovToggleStat()
   call JovToggleOption('--stat')
 endf
 
-command! JujutsuDescribeTemplate call search('JJ:') | silent ,$d_ | silent exe 'r !jj_desc_template' | 0
+fun! s:jujutsu_describe_template()
+  call search('JJ: ChangeId: \zs')
+  let l:change_id = strpart(getline('.'), col('.') - 1)
+  call search('JJ:')
+  silent ,$d_
+  silent exe 'r !jj_desc_template ' . l:change_id
+  0
+endf
+command! JujutsuDescribeTemplate call s:jujutsu_describe_template()
 
 if has('nvim')
   command! -nargs=+ Jj 1TermExecTab jj <args>
@@ -193,7 +201,7 @@ endif
 
 augroup Jujutsu
   autocmd!
-  autocmd FileType jj JujutsuDescribeTemplate
+  autocmd FileType jj,jjdescription JujutsuDescribeTemplate
   autocmd FileType jjlog nnoremap <buffer><silent> q <Cmd>tabclose<CR>
   autocmd FileType jjlog nnoremap <buffer><silent> u <Cmd>call JvUpdate()<CR>
   autocmd FileType jjlog nnoremap <buffer><silent> a <Cmd>call JvToggleAll()<CR>
