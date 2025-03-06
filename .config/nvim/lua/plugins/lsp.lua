@@ -102,14 +102,6 @@ local function mason_lspconfig_config(_, opts)
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist)
   vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist)
 
-  local function contains(table, element)
-    for _, value in pairs(table) do
-      if value == element then
-        return true
-      end
-    end
-    return false
-  end
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('LspConfig', {}),
     callback = function(ev)
@@ -151,19 +143,17 @@ local function mason_lspconfig_config(_, opts)
         })
       end, {})
 
+      vim.b.has_null_ls = false
+      for _, client in ipairs(vim.lsp.get_active_clients()) do
+        if client.name == 'null-ls' then
+          vim.b.has_null_ls = true
+        end
+      end
       local function format(async)
-        if
-          contains({
-            'javascript',
-            'javascriptreact',
-            'typescript',
-            'typescriptreact',
-            'vue',
-          }, vim.bo.filetype)
-        then
-          if vim.fn.exists(':EslintFixAll') == 2 then
-            vim.cmd([[EslintFixAll]])
-          end
+        if vim.fn.exists(':EslintFixAll') == 2 then
+          vim.cmd([[EslintFixAll]])
+        end
+        if vim.b.has_null_ls then
           vim.lsp.buf.format({ async = async, name = 'null-ls' })
         else
           vim.lsp.buf.format({ async = async })

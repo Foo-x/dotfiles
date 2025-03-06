@@ -411,6 +411,7 @@ function incr_bak_to_remote() {
 }
 
 # jj
+## commit after
 function jca() {
   jj new --no-edit --insert-after "$1"
   jj squash --keep-emptied --into "${1}+" "${@:2}"
@@ -420,6 +421,7 @@ function jca() {
   fi
 }
 
+## commit before
 function jcb() {
   jj new --no-edit --insert-before "$1"
   jj squash --keep-emptied --into "${1}-" "${@:2}"
@@ -427,6 +429,11 @@ function jcb() {
   if [ $? -ne 0 ]; then
     jj undo
   fi
+}
+
+## squash descendants
+function jsqd() {
+  jj squash --from "$1+::" --into "$1"
 }
 
 # https://github.com/sverweij/dependency-cruiser

@@ -95,6 +95,7 @@ n = ["new"]
 nm = ["new", "--message"]
 nn = ["new", "--no-edit"]
 nnm = ["new", "--no-edit", "--message"]
+nt = ["new", "trunk()"]
 
 # rebase
 rb = ["rebase"]
