@@ -222,7 +222,7 @@
       (key-history w 1)
       (key-history y 1)
       (key-history z 1)
-    ) (macro a n n) break
+    ) (macro a (unicode ん)) break
     () z break
   )
   ;; -inn
@@ -246,7 +246,7 @@
       (key-history w 1)
       (key-history y 1)
       (key-history z 1)
-    ) (macro i n n) break
+    ) (macro i (unicode ん)) break
     () k break
   )
   ;; -unn
@@ -270,7 +270,7 @@
       (key-history w 1)
       (key-history y 1)
       (key-history z 1)
-    ) (macro u n n) break
+    ) (macro u (unicode ん)) break
     () j break
   )
   ;; -enn
@@ -294,7 +294,7 @@
       (key-history w 1)
       (key-history y 1)
       (key-history z 1)
-    ) (macro e n n) break
+    ) (macro e (unicode ん)) break
     () (macro sldr d) break
   )
   ;; -onn
@@ -318,7 +318,7 @@
       (key-history w 1)
       (key-history y 1)
       (key-history z 1)
-    ) (macro o n n) break
+    ) (macro o (unicode ん)) break
     () l break
   )
 
