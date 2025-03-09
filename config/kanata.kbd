@@ -1,20 +1,19 @@
 (defcfg
   process-unmapped-keys yes
-  sequence-timeout 200
   sequence-input-mode hidden-delay-type
   concurrent-tap-hold yes
 )
 
 (defsrc)
 
-(defchordsv2-experimental
+(defchordsv2
   (rsft rctl) (layer-while-held rsft-rctl-layer) 200 first-release ()
 )
 
 (deflayermap (base-layer)
   caps (tap-hold-press 200 200 XX (layer-while-held caps-layer))
   lalt (tap-hold-press 200 200 mhnk lalt)
-  ralt (tap-hold-press 200 200 hnk ralt)
+  ralt (tap-hold-press 200 200 (multi hnk (layer-switch azik-layer)) ralt)
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
@@ -163,6 +162,263 @@
   , pgdn
 
   grv lrld
+)
+
+(defvirtualkeys
+  thi (macro t h i)
+  twu (macro t w u)
+  dhi (macro d h i)
+  dwu (macro d w u)
+  who (macro w h o)
+)
+(defseq
+  thi (t g i)
+  twu (t g u)
+  dhi (d c i)
+  dwu (d c u)
+  who (w s o)
+)
+
+(deflayermap (azik-layer)
+  caps (tap-hold-press 200 200 XX (layer-while-held caps-layer))
+  lalt (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
+  rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
+  rctl (layer-while-held rctl-layer)
+  spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
+  a (tap-hold 200 200 a lctl)
+  rmet (tap-dance 200 (XX (layer-switch game-layer)))
+
+  ;; original
+  ; (unicode っ)
+  ' -
+
+  t (macro sldr t)
+
+  x (macro s h)
+  c (switch
+    ((not (key-history d 1))) (macro c h) break
+    () c break
+  )
+
+  ;; 撥音
+  ;; -ann
+  z (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro a n n) break
+    () z break
+  )
+  ;; -inn
+  k (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro i n n) break
+    () k break
+  )
+  ;; -unn
+  j (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro u n n) break
+    () j break
+  )
+  ;; -enn
+  d (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro e n n) break
+    () (macro sldr d) break
+  )
+  ;; -onn
+  l (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro o n n) break
+    () l break
+  )
+
+  ;; 二重母音
+  ;; -ai, ん
+  q (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro a i) break
+    () (unicode ん) break
+  )
+  ;; -uu
+  h (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro u u) break
+    () h break
+  )
+  ;; -ei
+  w (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro e i) break
+    () (macro sldr w) break
+  )
+  ;; -ou
+  p (switch
+    (
+      (key-history b 1)
+      (key-history c 1)
+      (key-history d 1)
+      (key-history f 1)
+      (key-history g 1)
+      (key-history h 1)
+      (key-history j 1)
+      (key-history k 1)
+      (key-history m 1)
+      (key-history n 1)
+      (key-history p 1)
+      (key-history r 1)
+      (key-history s 1)
+      (key-history t 1)
+      (key-history v 1)
+      (key-history w 1)
+      (key-history y 1)
+      (key-history z 1)
+    ) (macro o u) break
+    () p break
+  )
 )
 
 (deflayermap (game-layer)
