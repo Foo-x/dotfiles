@@ -14,6 +14,7 @@
   caps (tap-hold-press 200 200 XX (layer-while-held caps-layer))
   lalt (tap-hold-press 200 200 mhnk lalt)
   ralt (tap-hold-press 200 200 (multi hnk (layer-switch azik-layer)) ralt)
+  hnk (multi hnk (layer-switch azik-layer))
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
@@ -182,6 +183,7 @@
 (deflayermap (azik-layer)
   caps (tap-hold-press 200 200 XX (layer-while-held caps-layer))
   lalt (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
+  mhnk (multi mhnk (layer-switch base-layer))
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
@@ -197,6 +199,7 @@
   x (macro s h)
   c (switch
     ((not (key-history d 1))) (macro c h) break
+    ((key-history lctl 1)) C-c break
     () c break
   )
 
@@ -223,6 +226,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro a (unicode ん)) break
+    ((key-history lctl 1)) C-z break
     () z break
   )
   ;; -inn
@@ -247,6 +251,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro i (unicode ん)) break
+    ((key-history lctl 1)) C-k break
     () k break
   )
   ;; -unn
@@ -271,6 +276,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro u (unicode ん)) break
+    ((key-history lctl 1)) C-j break
     () j break
   )
   ;; -enn
@@ -295,6 +301,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro e (unicode ん)) break
+    ((key-history lctl 1)) C-d break
     () (macro sldr d) break
   )
   ;; -onn
@@ -319,6 +326,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro o (unicode ん)) break
+    ((key-history lctl 1)) C-l break
     () l break
   )
 
@@ -345,6 +353,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro a i) break
+    ((key-history lctl 1)) C-q break
     () (unicode ん) break
   )
   ;; -uu
@@ -369,6 +378,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro u u) break
+    ((key-history lctl 1)) C-h break
     () h break
   )
   ;; -ei
@@ -393,6 +403,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro e i) break
+    ((key-history lctl 1)) C-w break
     () (macro sldr w) break
   )
   ;; -ou
@@ -417,6 +428,7 @@
       (key-history y 1)
       (key-history z 1)
     ) (macro o u) break
+    ((key-history lctl 1)) C-p break
     () p break
   )
 )

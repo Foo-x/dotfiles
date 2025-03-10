@@ -102,6 +102,10 @@ rb = ["rebase"]
 rbb = ["rebase", "--branch"]
 rbr = ["rebase", "--revisions"]
 rbs = ["rebase", "--source"]
+rbt = ["rebase", "--destination", "trunk()"]
+rbtb = ["rebase", "--destination", "trunk()", "--branch"]
+rbtr = ["rebase", "--destination", "trunk()", "--revisions"]
+rbts = ["rebase", "--destination", "trunk()", "--source"]
 
 # restore
 rs = ["restore"]
