@@ -199,7 +199,6 @@
 
   x (switch
     ((key-history lctl 1)) C-x break
-    ((not (key-history d 1)))  break
     () (macro s h) break
   )
   c (switch
