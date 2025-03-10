@@ -170,6 +170,40 @@
   ltu (unicode っ)
 )
 
+(defvar
+  consonants_history (
+    (key-history k 1)
+    (key-history g 1)
+    (key-history s 1)
+    (key-history z 1)
+    (key-history t 1)
+    (key-history d 1)
+    (key-history n 1)
+    (key-history h 1)
+    (key-history b 1)
+    (key-history p 1)
+    (key-history v 1)
+    (key-history m 1)
+    (key-history y 1)
+    (key-history r 1)
+    (key-history w 1)
+  )
+  contracted_consonants_history (
+    (key-history k 1)
+    (key-history g 1)
+    (key-history s 1)
+    (key-history z 1)
+    (key-history t 1)
+    (key-history d 1)
+    (key-history n 1)
+    (key-history h 1)
+    (key-history b 1)
+    (key-history p 1)
+    (key-history m 1)
+    (key-history r 1)
+  )
+)
+
 (deflayermap (kitsune-layer)
   caps (tap-hold-press 200 200 XX (layer-while-held caps-layer))
   lalt (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
@@ -177,13 +211,14 @@
   ralt (tap-hold-press 200 200 hnk ralt)
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
-  spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
+  spc (tap-hold-release 200 200 spc (layer-while-held kitsune-spc-layer))
   rmet (tap-dance 200 (XX (layer-switch original-layer)))
   lctl (layer-while-held original-layer)
 
   ;; 母音
   j (switch
     ((input real lctl)) C-j break
+    ((input real spc)) XX break
     ((input-history virtual v_nodo 2)) (macro a (unicode ん)) break
     ((input-history virtual v_gaiyou 2)) (unicode ぁ) break
     ((input-history virtual v_t 2)) (macro t y a) break
@@ -193,6 +228,7 @@
   )
   i (switch
     ((input real lctl)) C-i break
+    ((input real spc)) XX break
     ((input-history virtual v_nodo 2)) (macro i (unicode ん)) break
     ((input-history virtual v_gaiyou 2)) (unicode ぃ) break
     ((input-history virtual v_t 2)) (macro t h i) break
@@ -202,6 +238,7 @@
   )
   k (switch
     ((input real lctl)) C-k break
+    ((input real spc)) XX break
     ((input-history virtual v_nodo 2)) (macro u (unicode ん)) break
     ((input-history virtual v_gaiyou 2)) (unicode ぅ) break
     ((input-history virtual v_t 2)) (macro t w u) break
@@ -211,6 +248,7 @@
   )
   o (switch
     ((input real lctl)) C-o break
+    ((input real spc)) XX break
     ((input-history virtual v_nodo 2)) (macro e (unicode ん)) break
     ((input-history virtual v_gaiyou 2)) (unicode ぇ) break
     ((input-history virtual v_t 2)) (macro t y e) break
@@ -220,6 +258,7 @@
   )
   m (switch
     ((input real lctl)) C-m break
+    ((input real spc)) XX break
     ((input-history virtual v_nodo 2)) (macro o (unicode ん)) break
     ((input-history virtual v_gaiyou 2)) (unicode ぉ) break
     ((input-history virtual v_t 2)) (macro t y o) break
@@ -232,6 +271,7 @@
   ;; 子音
   a (switch
     ((input real lctl)) C-a break
+    ((input real spc)) XX break
     ((key-history t 1)) (macro t h u) break
     ((key-history d 1)) (macro d h u) break
     ((input-history virtual v_gaiyou 2)) (on-press tap-vkey v_h) break
@@ -240,11 +280,13 @@
   )
   z (switch
     ((input real lctl)) C-z break
+    ((input real spc)) XX break
     ((input-history virtual v_gaiyou 2)) v break
     () b break
   )
   q (switch
     ((input real lctl)) C-q break
+    ((input real spc)) XX break
     ((input-history virtual v_gaiyou 2)) (macro p y) break
     () p break
   )
@@ -252,80 +294,29 @@
   ;; 拗音
   u (switch
     ((input real lctl)) C-u break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history m 1)
-      (key-history r 1)
-    ) (macro y a) break
+    ((input real spc)) XX break
+    $contracted_consonants_history (macro y a) break
     () (on-press tap-vkey ltu) break
   )
   h (switch
     ((input real lctl)) C-h break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history m 1)
-      (key-history r 1)
-    ) (macro y u) break
+    ((input real spc)) XX break
+    $contracted_consonants_history (macro y u) break
     ;; 外来語/拗音
     () (on-press tap-vkey v_gaiyou) break
   )
   n (switch
     ((input real lctl)) C-n break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history m 1)
-      (key-history r 1)
-    ) (macro y o) break
+    ((input real spc)) XX break
+    $contracted_consonants_history (macro y o) break
     () (unicode ん) break
   )
 
   ;; 撥音
   f (switch
     ((input real lctl)) C-f break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro a (unicode ん)) break
+    ((input real spc)) XX break
+    $consonants_history (macro a (unicode ん)) break
     ((input-history virtual v_t 2)) (macro t y a (unicode ん)) break
     ((input-history virtual v_d 2)) (macro d y a (unicode ん)) break
     ((input-history virtual v_h 2)) (macro f a (unicode ん)) break
@@ -334,23 +325,8 @@
   )
   e (switch
     ((input real lctl)) C-e break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro i (unicode ん)) break
+    ((input real spc)) XX break
+    $consonants_history (macro i (unicode ん)) break
     ((input-history virtual v_t 2)) (macro t h i (unicode ん)) break
     ((input-history virtual v_d 2)) (macro d h i (unicode ん)) break
     ((input-history virtual v_h 2)) (macro f i (unicode ん)) break
@@ -359,23 +335,8 @@
   )
   d (switch
     ((input real lctl)) C-d break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro u (unicode ん)) break
+    ((input real spc)) XX break
+    $consonants_history (macro u (unicode ん)) break
     ((input-history virtual v_t 2)) (macro t w u (unicode ん)) break
     ((input-history virtual v_d 2)) (macro d w u (unicode ん)) break
     ((input-history virtual v_h 2)) (macro f y u (unicode ん)) break
@@ -384,23 +345,8 @@
   )
   w (switch
     ((input real lctl)) C-w break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro e (unicode ん)) break
+    ((input real spc)) XX break
+    $consonants_history (macro e (unicode ん)) break
     ((input-history virtual v_t 2)) (macro t y e (unicode ん)) break
     ((input-history virtual v_d 2)) (macro d y e (unicode ん)) break
     ((input-history virtual v_h 2)) (macro f e (unicode ん)) break
@@ -409,23 +355,8 @@
   )
   v (switch
     ((input real lctl)) C-v break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro o (unicode ん)) break
+    ((input real spc)) XX break
+    $consonants_history (macro o (unicode ん)) break
     ((input-history virtual v_t 2)) (macro t y o (unicode ん)) break
     ((input-history virtual v_d 2)) (macro d y o (unicode ん)) break
     ((input-history virtual v_h 2)) (macro f o (unicode ん)) break
@@ -437,23 +368,8 @@
   ;; 二重母音
   s (switch
     ((input real lctl)) C-s break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro a i) break
+    ((input real spc)) XX break
+    $consonants_history (macro a i) break
     ((input-history virtual v_t 2)) (macro t y a i) break
     ((input-history virtual v_d 2)) (macro d y a i) break
     ((input-history virtual v_h 2)) (macro f a i) break
@@ -462,23 +378,8 @@
   )
   c (switch
     ((input real lctl)) C-c break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro e i) break
+    ((input real spc)) XX break
+    $consonants_history (macro e i) break
     ((input-history virtual v_t 2)) (macro t y e i) break
     ((input-history virtual v_d 2)) (macro d y e i) break
     ((input-history virtual v_h 2)) (macro f e i) break
@@ -486,46 +387,15 @@
   )
   l (switch
     ((input real lctl)) C-l break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro u u) break
+    ((input real spc)) XX break
+    $consonants_history (macro u u) break
     ((input-history virtual v_t 2)) (macro t y u u) break
     ((input-history virtual v_d 2)) (macro d y u u) break
     ((input-history virtual v_h 2)) (macro f y u u) break
     () l break
   )
   , (switch
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro o u) break
+    $consonants_history (macro o u) break
     ((input-history virtual v_t 2)) (macro t y o u) break
     ((input-history virtual v_d 2)) (macro d y o u) break
     ((input-history virtual v_h 2)) (macro f o u) break
@@ -535,23 +405,7 @@
 
   ;; -aku
   ; (switch
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro a k u) break
+    $consonants_history (macro a k u) break
     ((input-history virtual v_t 2)) (macro t y a k u) break
     ((input-history virtual v_d 2)) (macro d y a k u) break
     ((input-history virtual v_h 2)) (macro f a k u) break
@@ -559,23 +413,7 @@
   )
   ;; -oku
   . (switch
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro o k u) break
+    $consonants_history (macro o k u) break
     ((input-history virtual v_t 2)) (macro t y o k u) break
     ((input-history virtual v_d 2)) (macro d y o k u) break
     ((input-history virtual v_h 2)) (macro f o k u) break
@@ -585,23 +423,8 @@
   ;; -eki
   p (switch
     ((input real lctl)) C-p break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro e k i) break
+    ((input real spc)) XX break
+    $consonants_history (macro e k i) break
     ((input-history virtual v_t 2)) (macro t y e k i) break
     ((input-history virtual v_d 2)) (macro d y e k i) break
     ((input-history virtual v_h 2)) (macro f e k i) break
@@ -611,23 +434,8 @@
   ;; -ltu
   g (switch
     ((input real lctl)) C-g break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro a (on-press tap-vkey ltu)) break
+    ((input real spc)) XX break
+    $consonants_history (macro a (on-press tap-vkey ltu)) break
     ((input-history virtual v_t 2)) (macro t y a (on-press tap-vkey ltu)) break
     ((input-history virtual v_d 2)) (macro d y a (on-press tap-vkey ltu)) break
     ((input-history virtual v_h 2)) (macro f a (on-press tap-vkey ltu)) break
@@ -636,23 +444,8 @@
   )
   b (switch
     ((input real lctl)) C-b break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro i (on-press tap-vkey ltu)) break
+    ((input real spc)) XX break
+    $consonants_history (macro i (on-press tap-vkey ltu)) break
     ((input-history virtual v_t 2)) (macro t h i (on-press tap-vkey ltu)) break
     ((input-history virtual v_d 2)) (macro d h i (on-press tap-vkey ltu)) break
     ((input-history virtual v_h 2)) (macro f i (on-press tap-vkey ltu)) break
@@ -661,23 +454,8 @@
   )
   y (switch
     ((input real lctl)) C-y break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro u (on-press tap-vkey ltu)) break
+    ((input real spc)) XX break
+    $consonants_history (macro u (on-press tap-vkey ltu)) break
     ((input-history virtual v_t 2)) (macro t y u (on-press tap-vkey ltu)) break
     ((input-history virtual v_d 2)) (macro d y u (on-press tap-vkey ltu)) break
     ((input-history virtual v_h 2)) (macro f y u (on-press tap-vkey ltu)) break
@@ -685,23 +463,8 @@
   )
   t (switch
     ((input real lctl)) C-t break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro e (on-press tap-vkey ltu)) break
+    ((input real spc)) XX break
+    $consonants_history (macro e (on-press tap-vkey ltu)) break
     ((input-history virtual v_t 2)) (macro t y e (on-press tap-vkey ltu)) break
     ((input-history virtual v_d 2)) (macro d y e (on-press tap-vkey ltu)) break
     ((input-history virtual v_h 2)) (macro f e (on-press tap-vkey ltu)) break
@@ -710,23 +473,8 @@
   )
   r (switch
     ((input real lctl)) C-r break
-    (
-      (key-history k 1)
-      (key-history g 1)
-      (key-history s 1)
-      (key-history z 1)
-      (key-history t 1)
-      (key-history d 1)
-      (key-history n 1)
-      (key-history h 1)
-      (key-history b 1)
-      (key-history p 1)
-      (key-history v 1)
-      (key-history m 1)
-      (key-history y 1)
-      (key-history r 1)
-      (key-history w 1)
-    ) (macro o (on-press tap-vkey ltu)) break
+    ((input real spc)) XX break
+    $consonants_history (macro o (on-press tap-vkey ltu)) break
     ((input-history virtual v_t 2)) (macro t y o (on-press tap-vkey ltu)) break
     ((input-history virtual v_d 2)) (macro d y o (on-press tap-vkey ltu)) break
     ((input-history virtual v_h 2)) (macro f o (on-press tap-vkey ltu)) break
@@ -738,10 +486,18 @@
   ;; -ltu -> -tu
   x (switch
     ((input real lctl)) C-x break
+    ((input real spc)) XX break
     ((input-history virtual ltu 2)) (macro bks t u) break
     ((input-history virtual v_gaiyou 2)) (macro m y) break
     () m break
   )
+)
+
+(deflayermap (kitsune-spc-layer)
+  grv lrld
+
+  ;; abjad
+  ;; TODO
 )
 
 (deflayermap (original-layer)
