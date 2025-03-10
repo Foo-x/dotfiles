@@ -31,12 +31,17 @@
   r (macro S-6) ;; ^
   t (macro S-4) ;; $
 
-  ;; parentheses
-  j (macro S-9) ;; (
-  k (macro S-0) ;; )
+  h lft
+  j down
+  k up
+  l rght
+  u home
+  m end
+  i pgup
+  , pgdn
 
-  h bks
-  l del
+  n bks
+  . del
 
   ___ (multi lctl _)
 )
@@ -151,15 +156,6 @@
   4 /
   5 =
   b .
-
-  h lft
-  j down
-  k up
-  l rght
-  u home
-  m end
-  i pgup
-  , pgdn
 
   grv lrld
 )
