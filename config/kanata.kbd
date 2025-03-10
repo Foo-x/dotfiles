@@ -184,6 +184,7 @@
   caps (tap-hold-press 200 200 XX (layer-while-held caps-layer))
   lalt (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
   mhnk (multi mhnk (layer-switch base-layer))
+  ralt (tap-hold-press 200 200 hnk ralt)
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
@@ -196,10 +197,14 @@
 
   t (macro sldr t)
 
-  x (macro s h)
+  x (switch
+    ((key-history lctl 1)) C-x break
+    ((not (key-history d 1)))  break
+    () (macro s h) break
+  )
   c (switch
-    ((not (key-history d 1))) (macro c h) break
     ((key-history lctl 1)) C-c break
+    ((not (key-history d 1))) (macro c h) break
     () c break
   )
 
