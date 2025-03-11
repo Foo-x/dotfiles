@@ -275,7 +275,6 @@
     ((key-history t 1)) (macro t h u) break
     ((key-history d 1)) (macro d h u) break
     ((input-history virtual v_gaiyou 2)) (on-press tap-vkey v_h) break
-    ((input-history virtual v_gaiyou 2)) (on-press tap-vkey v_h) break
     () h break
   )
   z (switch
@@ -330,8 +329,7 @@
     ((input-history virtual v_t 2)) (macro t h i (unicode ん)) break
     ((input-history virtual v_d 2)) (macro d h i (unicode ん)) break
     ((input-history virtual v_h 2)) (macro f i (unicode ん)) break
-    ((input-history virtual v_gaiyou 2)) (macro z y) break
-    () z break
+    () y break
   )
   d (switch
     ((input real lctl)) C-d break
@@ -383,7 +381,8 @@
     ((input-history virtual v_t 2)) (macro t y e i) break
     ((input-history virtual v_d 2)) (macro d y e i) break
     ((input-history virtual v_h 2)) (macro f e i) break
-    () y break
+    ((input-history virtual v_gaiyou 2)) (macro z y) break
+    () z break
   )
   l (switch
     ((input real lctl)) C-l break
@@ -494,10 +493,34 @@
 )
 
 (deflayermap (kitsune-spc-layer)
-  grv lrld
+  a a
+  b b
+  c c
+  d d
+  e e
+  f f
+  g g
+  h h
+  i i
+  j j
+  k k
+  l l
+  m m
+  n n
+  o o
+  p p
+  q q
+  r r
+  s s
+  t t
+  u u
+  v v
+  w w
+  x x
+  y y
+  z z
 
-  ;; abjad
-  ;; TODO
+  grv lrld
 )
 
 (deflayermap (original-layer)
