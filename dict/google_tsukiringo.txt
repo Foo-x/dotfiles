@@ -1,10 +1,8 @@
--		ー
-~		〜
--- for US keyboard
--- [		「
--- ]		」
-]		「
-\		」
+# replace # with tab on JIS keyboard
+-	ー
+~	〜
+[#「
+]	「
 
 q		せ
 せe	ぁ
@@ -14,10 +12,10 @@ w		こ
 こe	ぃ
 こi	ご
 
-e		ょ
+e	ょ
 
 r		ら
-らe	け
+らe		け
 らi	げ
 けi	げ
 
@@ -26,7 +24,7 @@ t		さ
 さi	ざ
 
 y		や
-やe	ほ
+やe		ほ
 やi	ぼ
 ほi	ぼ
 
@@ -37,7 +35,7 @@ u		す
 i	゛
 
 o		ん
-んe	み
+んe		み
 んi	ぴ
 みi	ぴ
 
@@ -45,19 +43,21 @@ p		ゃ
 ゃe	ぉ
 ゃi	;
 
--- for US keyboard
--- @		ー
+@##ー
 [		ー
 ーe	ぅ
 ーi	:
 
--- for US keyboard
--- \		き
+]#」
+\	」
+# remap caps lock to \ on JIS keyboard
+\##き
+# remap caps lock to ` on US keyboard
 `		き
 きi	ぎ
 
 a		れ
-れe	ふ
+れe		ふ
 れi	ぶ
 ふi	ぶ
 
@@ -85,7 +85,7 @@ j		か
 かi	が
 
 k		い
-いe	ま
+いe		ま
 いi	ぱ
 まi	ぱ
 
@@ -98,10 +98,9 @@ l		う
 るi	べ
 へi	べ
 
--- for US keyboard
--- :		っ
+:##っ
 '		っ
-っe	む
+っe		む
 っi	ぷ
 むi	ぷ
 
@@ -116,17 +115,17 @@ c		に
 にi	ｗ
 
 v		の
-のe	も
+のe		も
 のi	ぽ
 もi	ぽ
 
 b		ゅ
-ゅe	ひ
+ゅe		ひ
 ゅi	び
 ひi	び
 
 n		な
-なe	そ
+なe		そ
 なi	ぞ
 そi	ぞ
 
@@ -165,5 +164,4 @@ m		た
 8.	8.
 9.	9.
 0.	0.
--- for US keyboard
--- _		・
+_#・
