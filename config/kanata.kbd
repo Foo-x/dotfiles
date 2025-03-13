@@ -25,7 +25,10 @@
 )
 
 (deflayermap (caps-layer)
-  ;; use macro for keys with shift not to enable capslock
+  ;; avoid enabling capslock
+  caps XX
+
+  ;; use macro for keys with shift to avoid enabling capslock
 
   ;; and, or, %, first, end
   q (macro S-7) ;; &
@@ -33,6 +36,10 @@
   e (macro S-5) ;; %
   r (macro S-6) ;; ^
   t (macro S-4) ;; $
+
+  h bks
+  j ent
+  l del
 
   ___ (multi lctl _)
 )
@@ -157,15 +164,12 @@
   i pgup
   , pgdn
 
-  b bks
-  n ent
-  . del
-
   grv lrld
 )
 
 (deflayermap (tsukiringo-layer)
-  caps grv
+  caps (tap-hold-press 200 200 XX (layer-while-held tsukiringo-caps-layer))
+  lsft grv
   lalt (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
   mhnk (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
   ralt (tap-hold-press 200 200 hnk ralt)
@@ -176,25 +180,37 @@
   rmet (tap-dance 200 (XX (layer-switch original-layer)))
 
   1 (switch
-    ((input real lsft)) (unicode ！) break
+    ((input real caps)) (unicode ！) break
     () (macro q e) break ;; ぁ
   )
   2 (switch
-    ((input real lsft)) (unicode ＠) break
+    ((input real caps)) (unicode ＠) break
     () (macro w e) break ;; ぃ
   )
   3 (switch
-    ((input real lsft)) (unicode ＃) break
+    ((input real caps)) (unicode ＃) break
     () (macro [ e) break ;; ぅ
   )
   4 (switch
-    ((input real lsft)) (unicode ＄) break
+    ((input real caps)) (unicode ＄) break
     () (macro / e) break ;; ぇ
   )
   5 (switch
-    ((input real lsft)) (unicode ％) break
+    ((input real caps)) (unicode ％) break
     () (macro p e) break ;; ぉ
   )
+)
+
+(deflayermap (tsukiringo-caps-layer)
+  ;; avoid enabling capslock
+  caps XX
+
+  ;; ASCII escape sequence
+  h bks
+  j ent
+  l del
+
+  ___ (multi lsft _)
 )
 
 (deflayermap (original-layer)
