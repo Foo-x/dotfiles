@@ -173,11 +173,26 @@
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
   rmet (tap-dance 200 (XX (layer-switch original-layer)))
 
-  1 (macro q e) ;; ぁ
-  2 (macro w e) ;; ぃ
-  3 (macro [ e) ;; ぅ
-  4 (macro / e) ;; ぇ
-  5 (macro p e) ;; ぉ
+  1 (switch
+    ((input real lsft)) (unicode ！) break
+    () (macro q e) break ;; ぁ
+  )
+  2 (switch
+    ((input real lsft)) (unicode ＠) break
+    () (macro w e) break ;; ぃ
+  )
+  3 (switch
+    ((input real lsft)) (unicode ＃) break
+    () (macro [ e) break ;; ぅ
+  )
+  4 (switch
+    ((input real lsft)) (unicode ＄) break
+    () (macro / e) break ;; ぇ
+  )
+  5 (switch
+    ((input real lsft)) (unicode ％) break
+    () (macro p e) break ;; ぉ
+  )
 )
 
 (deflayermap (original-layer)
