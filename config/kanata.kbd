@@ -8,6 +8,8 @@
 
 (defchordsv2
   (rsft rctl) (layer-while-held rsft-rctl-layer) 200 first-release ()
+  (lsft spc) (multi mhnk (layer-switch base-layer)) 200 first-release ()
+  (rsft spc) (multi hnk (layer-switch tsukiringo-layer)) 200 first-release ()
 )
 
 (deflayermap (base-layer)
@@ -144,7 +146,7 @@
   3 (unicode *)
   4 /
   5 =
-  b .
+  z .
 
   h lft
   j down
@@ -155,9 +157,9 @@
   i pgup
   , pgdn
 
-  n bks
+  b bks
+  n ent
   . del
-  ; ent
 
   grv lrld
 )
