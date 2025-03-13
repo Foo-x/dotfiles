@@ -169,7 +169,7 @@
 
 (deflayermap (tsukiringo-layer)
   caps (tap-hold-press 200 200 XX (layer-while-held tsukiringo-caps-layer))
-  lsft grv
+  lsft (tap-hold-release 200 200 grv lsft)
   lalt (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
   mhnk (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
   ralt (tap-hold-press 200 200 hnk ralt)
