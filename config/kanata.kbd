@@ -13,11 +13,11 @@
 )
 
 (deflayermap (base-layer)
-  caps (tap-hold-press 200 200 XX (layer-while-held caps-layer))
-  lalt (tap-hold-press 200 200 mhnk lalt)
-  mhnk (tap-hold-press 200 200 mhnk lalt)
-  ralt (tap-hold-press 200 200 (multi hnk (layer-switch tsukiringo-layer)) ralt)
-  hnk (tap-hold-press 200 200 (multi hnk (layer-switch tsukiringo-layer)) ralt)
+  caps bks
+  lalt (tap-hold-press 200 200 XX lalt)
+  mhnk (tap-hold-press 200 200 XX lalt)
+  ralt (tap-hold-press 200 200 XX ralt)
+  hnk (tap-hold-press 200 200 XX ralt)
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
@@ -149,7 +149,12 @@
   3 (unicode *)
   4 /
   5 =
-  z .
+
+  z (macro S-7) ;; &
+  x (macro S-\) ;; |
+  c (macro S-5) ;; %
+  v (macro S-6) ;; ^
+  b (macro S-4) ;; $
 
   h lft
   j down
@@ -160,18 +165,18 @@
   i pgup
   , pgdn
 
-  n bks
   . del
 
   grv lrld
 )
 
 (deflayermap (tsukiringo-layer)
-  caps grv
-  lalt (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
-  mhnk (tap-hold-press 200 200 (multi mhnk (layer-switch base-layer)) lalt)
-  ralt (tap-hold-press 200 200 hnk ralt)
-  hnk (tap-hold-press 200 200 hnk ralt)
+  caps bks
+  lsft (tap-hold-release 200 200 grv lsft)
+  lalt (tap-hold-press 200 200 XX lalt)
+  mhnk (tap-hold-press 200 200 XX lalt)
+  ralt (tap-hold-press 200 200 XX ralt)
+  hnk (tap-hold-press 200 200 XX ralt)
   rsft (tap-hold-press 200 200 esc (layer-while-held rsft-layer))
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
