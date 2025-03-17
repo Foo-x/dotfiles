@@ -122,6 +122,9 @@ nnoremap <Plug>(window)> <C-w>>
 nnoremap <Plug>(window)< <C-w><
 nnoremap <Plug>(window)+ <C-w>+
 nnoremap <Plug>(window)- <C-w>-
+"" copy and paste a window
+nnoremap <Plug>(window)y <Cmd>let @w=expand('%')<CR>
+nnoremap <Plug>(window)p <Cmd>exe 'e ' . @w<CR>
 nnoremap <Plug>(window)t <Cmd>tab split<CR>
 nnoremap <Space>1 <C-w>t
 nnoremap <Space>2 <C-w>t<C-w>l
