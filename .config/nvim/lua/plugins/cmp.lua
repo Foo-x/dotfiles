@@ -149,6 +149,14 @@ local function codeium_init()
   vim.g.codeium_enabled = true
 end
 
+local codeium_opts = {
+  virtual_text = {
+    filetypes = {
+      oil = false,
+    },
+  },
+}
+
 local function codeium_config(_, opts)
   if vim.g.codeium_enabled then
     require('codeium').setup(opts)
@@ -161,6 +169,9 @@ local copilot_opts = {
   },
   suggestion = {
     enabled = false,
+  },
+  filetypes = {
+    oil = false,
   },
 }
 
@@ -189,7 +200,7 @@ return {
     },
     event = 'InsertEnter',
     init = codeium_init,
-    opts = {},
+    opts = codeium_opts,
     config = codeium_config,
   },
   {
