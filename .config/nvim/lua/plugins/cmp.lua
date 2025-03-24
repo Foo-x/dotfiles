@@ -1,3 +1,10 @@
+local function cmp_init()
+  vim.g.vsnip_filetypes = {
+    typescript = { 'javascript' },
+    typescriptreact = { 'javascript' },
+  }
+end
+
 local function cmp_config()
   local cmp = require('cmp')
   local lspkind = require('lspkind')
@@ -190,6 +197,7 @@ return {
       'https://github.com/rafamadriz/friendly-snippets',
       { 'https://github.com/windwp/nvim-autopairs', opts = {} },
     },
+    init = cmp_init,
     config = cmp_config,
   },
   {

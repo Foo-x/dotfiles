@@ -27,6 +27,24 @@
       "export default $2;"
     ]
   },
+  "act": {
+    "prefix": "act",
+    "body": [
+      "act(() => {",
+      "  $0",
+      "});"
+    ],
+    "description": "testing-library act"
+  },
+  "act async": {
+    "prefix": "acta",
+    "body": [
+      "await act(async () => {",
+      "  $0",
+      "});"
+    ],
+    "description": "testing-library act async"
+  },
   "TEA Component": {
     "prefix": "teaComponent",
     "body": [
