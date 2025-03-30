@@ -135,7 +135,7 @@ if has gh; then
     gh alias set --clobber openr 'repo view -w'
     gh alias set --clobber openi 'issue view -w'
     gh alias set --clobber openp 'pr view -w'
-    gh alias set --clobber --shell sync 'gh repo sync $(git config --get remote.origin.url | \grep -oP "(?<=:).+(?=\.)")'
+    gh alias set --clobber --shell sync 'gh repo sync $(git config --get remote.origin.url | \grep -oP "(?<=/)[^/.]+?/[^.]+")'
   } > /dev/null 2>&1
 fi
 
