@@ -210,7 +210,7 @@ local function oil_config(_, opts)
 end
 
 local copilot_chat_opts = {
-  model = 'claude-3.5-sonnet',
+  model = 'claude-3.7-sonnet',
   window = {
     layout = 'float',
     relative = 'cursor',
@@ -220,10 +220,10 @@ local copilot_chat_opts = {
   },
   prompts = {
     Explain = {
-      prompt = '> /COPILOT_EXPLAIN\n\n選択されたコードの説明を段落をつけて書いてください。',
+      prompt = '> /COPILOT_EXPLAIN\n\n選択されたコードの説明を段落をつけて日本語で書いてください。',
     },
     Review = {
-      prompt = '> /COPILOT_REVIEW\n\n選択されたコードをレビューしてください。',
+      prompt = '> /COPILOT_REVIEW\n\n選択されたコードを日本語でレビューしてください。',
     },
     Fix = {
       prompt = '> /COPILOT_GENERATE\n\nこのコードには問題があります。バグを修正したコードに書き換えてください。',
