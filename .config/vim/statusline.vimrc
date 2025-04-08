@@ -21,7 +21,7 @@ if has('nvim')
       let w:git_status_cache.time = reltimefloat(reltime())
     endif
 
-    if luaeval('vim.inspect(vim.lsp.buf_get_clients())') == '{}'
+    if luaeval('vim.inspect(vim.lsp.get_clients({bufnr=0}))') == '{}'
       let l:diagnostics_status = ''
     else
       let l:error_cnt = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })')

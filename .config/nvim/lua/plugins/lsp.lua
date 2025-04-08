@@ -123,7 +123,7 @@ local function mason_lspconfig_config(_, opts)
         })
       end, { nargs = 1 })
       vim.api.nvim_buf_create_user_command(ev.buf, 'CodeActionList', function()
-        for _, server in ipairs(vim.lsp.get_active_clients()) do
+        for _, server in ipairs(vim.lsp.get_clients()) do
           print(server.name)
           local codeActionProvider = server.server_capabilities.codeActionProvider
           print('  ' .. vim.inspect(type(codeActionProvider) == 'table' and codeActionProvider.codeActionKinds or {}))
@@ -144,7 +144,7 @@ local function mason_lspconfig_config(_, opts)
       end, {})
 
       vim.b.has_null_ls = false
-      for _, client in ipairs(vim.lsp.get_active_clients()) do
+      for _, client in ipairs(vim.lsp.get_clients()) do
         if client.name == 'null-ls' then
           vim.b.has_null_ls = true
         end
@@ -184,7 +184,7 @@ local function mason_lspconfig_config(_, opts)
       })
 
       local client = vim.lsp.get_client_by_id(ev.data.client_id)
-      if client.supports_method('textDocument/documentHighlight') then
+      if client:supports_method('textDocument/documentHighlight') then
         vim.cmd([[
               set updatetime=300
               augroup lsp_document_highlight
@@ -204,11 +204,16 @@ local function mason_lspconfig_config(_, opts)
     end,
   })
 
-  local signs = { Error = ' ', Warn = ' ', Info = ' ', Hint = '󰌵 ' }
-  for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
+  vim.diagnostic.config({
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = ' ',
+        [vim.diagnostic.severity.WARN] = ' ',
+        [vim.diagnostic.severity.INFO] = ' ',
+        [vim.diagnostic.severity.HINT] = '󰌵 ',
+      },
+    },
+  })
 
   vim.cmd('LspStart')
 end
