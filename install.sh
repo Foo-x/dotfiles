@@ -201,4 +201,7 @@ printf "${ctags_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/ctags/{} ${XDG_CO
 # setup gitui
 ln -sf ${DOT_DIR}/.config/gitui ${XDG_CONFIG_HOME}
 
+# setup mcphub
+ln -sf ${DOT_DIR}/.config/mcphub ${XDG_CONFIG_HOME}
+
 echo "Done."

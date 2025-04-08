@@ -58,7 +58,12 @@ local function cmp_config()
           end,
         }),
       }),
-      sources = cmp.config.sources({
+      sources = vim.bo.filetype == 'codecompanion' and cmp.config.sources({
+        { name = 'codecompanion_models' },
+        { name = 'codecompanion_slash_commands' },
+        { name = 'codecompanion_tools' },
+        { name = 'codecompanion_variables' },
+      }) or cmp.config.sources({
         { name = 'copilot' },
         { name = 'codeium' },
         { name = 'nvim_lsp' },
@@ -88,7 +93,7 @@ local function cmp_config()
     vim.b.cmp_loaded = true
   end
 
-  vim.api.nvim_create_autocmd({ 'BufReadPre' }, {
+  vim.api.nvim_create_autocmd({ 'BufEnter' }, {
     group = vim.api.nvim_create_augroup('CmpSetup', {}),
     callback = setup_for_buffer,
   })

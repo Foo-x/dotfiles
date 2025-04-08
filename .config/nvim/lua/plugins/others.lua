@@ -209,62 +209,143 @@ local function oil_config(_, opts)
   })
 end
 
-local copilot_chat_opts = {
-  model = 'claude-3.7-sonnet',
-  window = {
-    layout = 'float',
-    relative = 'cursor',
-    width = 1,
-    height = 0.4,
-    row = 1,
+local codecompanion_opts = {
+  opts = {
+    language = 'Japanese',
   },
-  prompts = {
-    Explain = {
-      prompt = '> /COPILOT_EXPLAIN\n\n選択されたコードの説明を段落をつけて日本語で書いてください。',
+  display = {
+    chat = {
+      auto_scroll = false,
+      show_header_separator = true,
     },
-    Review = {
-      prompt = '> /COPILOT_REVIEW\n\n選択されたコードを日本語でレビューしてください。',
+  },
+  strategies = {
+    chat = {
+      adapter = 'copilot',
+      roles = {
+        llm = function(adapter)
+          return '  CodeCompanion (' .. adapter.formatted_name .. ')'
+        end,
+        user = '  Me',
+      },
+      keymaps = {
+        send = {
+          modes = { n = '<C-j>', i = '<C-j>' }, -- Ctrl+Enter
+        },
+      },
+      tools = {
+        ['mcp'] = {
+          callback = function()
+            return require('mcphub.extensions.codecompanion')
+          end,
+          description = 'Call tools and resources from the MCP Servers',
+        },
+      },
     },
-    Fix = {
-      prompt = '> /COPILOT_GENERATE\n\nこのコードには問題があります。バグを修正したコードに書き換えてください。',
+    inline = {
+      adapter = 'copilot',
     },
-    Optimize = {
-      prompt = '> /COPILOT_GENERATE\n\n選択されたコードを最適化し、パフォーマンスと可読性を向上させてください。',
+  },
+  adapters = {
+    copilot = function()
+      return require('codecompanion.adapters').extend('copilot', {
+        schema = {
+          model = {
+            default = 'claude-3.7-sonnet',
+          },
+        },
+      })
+    end,
+  },
+  prompt_library = {
+    ['Review Code'] = {
+      strategy = 'chat',
+      description = 'コードレビューを行います',
+      opts = {
+        short_name = 'review',
+        modes = { 'v' },
+        auto_submit = true,
+        stop_context_insertion = true,
+      },
+      prompts = {
+        {
+          role = 'system',
+          content = function(context)
+            return 'あなたは優れた ' .. context.filetype .. ' の開発者です。'
+          end,
+        },
+        {
+          role = 'user',
+          content = function(context)
+            return '@full_stack_dev #buffer:'
+              .. context.start_line
+              .. '-'
+              .. context.end_line
+              .. ' 以下の観点でコードをレビューして、変更を適用してください。\n\n'
+              .. '1. 保守性\n'
+              .. '2. 可読性\n'
+              .. '3. ドキュメンテーション\n'
+              .. '4. 命名\n'
+              .. '5. パフォーマンス\n'
+              .. '6. セキュリティ\n'
+              .. '7. バリデーション\n'
+              .. '8. エラーハンドリング\n'
+              .. '9. 単一責任原則\n'
+              .. '10. 凝集度\n'
+              .. '11. 結合度\n'
+              .. '12. コナーセンス\n'
+              .. '13. テスタビリティ\n'
+              .. '14. バグの有無\n'
+          end,
+        },
+      },
     },
-    Docs = {
-      prompt = '> /COPILOT_GENERATE\n\n選択されたコードにドキュメンテーションコメントを追加してください。',
+    ['Translate to English'] = {
+      strategy = 'inline',
+      description = '選択したテキストを英語に翻訳します',
+      opts = {
+        short_name = 'trans_to_en',
+        modes = { 'v' },
+        adapter = {
+          name = 'copilot',
+          model = 'gpt-4o',
+        },
+      },
+      prompts = {
+        {
+          role = 'system',
+          content = 'あなたは優れた開発者であり、日本語と英語のプロ翻訳者でもあります。',
+        },
+        {
+          role = 'user',
+          content = '<user_prompt>選択したテキストを英語に変換してください。</user_prompt>',
+        },
+      },
     },
-    Tests = {
-      prompt = '> /COPILOT_GENERATE\n\nコードのテストを生成してください。',
+    ['Translate to Japanese'] = {
+      strategy = 'inline',
+      description = '選択したテキストを日本語に翻訳します',
+      opts = {
+        short_name = 'trans_to_ja',
+        modes = { 'v' },
+        adapter = {
+          name = 'copilot',
+          model = 'gpt-4o',
+        },
+      },
+      prompts = {
+        {
+          role = 'system',
+          content = 'あなたは優れた開発者であり、日本語と英語のプロ翻訳者でもあります。',
+        },
+        {
+          role = 'user',
+          content = '<user_prompt>選択したテキストを日本語に変換してください。</user_prompt>',
+        },
+      },
     },
   },
 }
-
-local function copilot_chat_config(_, opts)
-  local chat = require('CopilotChat')
-  chat.setup(opts)
-
-  local copilot_chat_prompts = {}
-  for k, _ in pairs(require('CopilotChat.actions').prompt_actions().actions) do
-    copilot_chat_prompts[#copilot_chat_prompts + 1] = k
-  end
-  vim.g.copilot_chat_prompts = copilot_chat_prompts
-
-  vim.keymap.set('n', '<Space>c', '<Plug>(copilot_chat)')
-  vim.keymap.set('n', '<Plug>(copilot_chat)c', function()
-    local input = vim.fn.input('Quick Chat: ')
-    if input ~= '' then
-      chat.ask(input, { selection = require('CopilotChat.select').buffer })
-    end
-  end, { desc = 'Quick Chat' })
-  vim.keymap.set('n', '<Plug>(copilot_chat)<Space>', chat.toggle, { desc = 'Toggle Chat' })
-  vim.keymap.set(
-    'n',
-    '<Plug>(copilot_chat)p',
-    [[<Cmd>call fzf#run(fzf#wrap({'source': g:copilot_chat_prompts, 'sink': { prompt -> execute('CopilotChat' . prompt) }, 'options': '--prompt "CopilotChat> "'}))<CR>]],
-    { desc = 'Select Chat Prompt' }
-  )
-end
 
 return {
   {
@@ -348,13 +429,53 @@ return {
     config = oil_config,
   },
   {
-    'https://github.com/CopilotC-Nvim/CopilotChat.nvim',
+    'https://github.com/olimorris/codecompanion.nvim',
+    opts = codecompanion_opts,
     dependencies = {
-      { 'https://github.com/zbirenbaum/copilot.lua' },
-      { 'https://github.com/nvim-lua/plenary.nvim' },
+      'https://github.com/nvim-lua/plenary.nvim',
+      'https://github.com/nvim-treesitter/nvim-treesitter',
     },
     event = 'VeryLazy',
-    opts = copilot_chat_opts,
-    config = copilot_chat_config,
+    keys = {
+      {
+        '<Space>cc',
+        ':CodeCompanion<CR>',
+        mode = { 'n', 'v' },
+        silent = true,
+      },
+      {
+        '<Space>c<Enter>',
+        ':CodeCompanionChat Add<CR>',
+        mode = { 'n', 'v' },
+        silent = true,
+      },
+      {
+        '<Space>cv',
+        ':CodeCompanionChat Toggle<CR>',
+        mode = { 'n' },
+        silent = true,
+      },
+      {
+        '<Space>ca',
+        ':CodeCompanionAction<CR>',
+        mode = { 'n', 'v' },
+        silent = true,
+      },
+      {
+        '<Space>cr',
+        ':CodeCompanion /review<CR>',
+        mode = { 'v' },
+        silent = true,
+      },
+    },
+  },
+  {
+    'https://github.com/ravitemer/mcphub.nvim',
+    dependencies = {
+      'https://github.com/nvim-lua/plenary.nvim',
+    },
+    event = 'VeryLazy',
+    build = 'bun install -g mcp-hub@latest',
+    opts = {},
   },
 }
