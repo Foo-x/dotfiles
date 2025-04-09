@@ -99,19 +99,23 @@ vim.api.nvim_create_user_command('NoirbuddySlate', function()
   KmdSyntax()
 end, {})
 
+vim.api.nvim_create_user_command('CatppuccinMocha', function()
+  vim.cmd('color catppuccin-mocha')
+end, {})
+
 vim.api.nvim_create_user_command('Color', function(param)
   vim.cmd(param.args)
 end, {
   nargs = 1,
   complete = function()
-    return { 'Everforest', 'Iceberg', 'Base16GrayscaleDark', 'NoirbuddySlate' }
+    return { 'Everforest', 'Iceberg', 'Base16GrayscaleDark', 'NoirbuddySlate', 'CatppuccinMocha' }
   end,
 })
 
 vim.cmd('hi netrwMarkFile ctermbg=darkmagenta')
 
 function SetupColor()
-  vim.cmd('NoirbuddySlate')
+  vim.cmd('CatppuccinMocha')
 end
 
 return {
@@ -134,4 +138,5 @@ return {
     },
     lazy = true,
   },
+  { 'https://github.com/catppuccin/nvim', name = 'catppuccin', lazy = true },
 }
