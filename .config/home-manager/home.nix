@@ -55,6 +55,7 @@ in
       typos
       unison
       universal-ctags
+      uv
       vim
       vscode-langservers-extracted
       watchexec
