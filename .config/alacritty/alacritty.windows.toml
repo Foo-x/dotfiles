@@ -1,0 +1,18 @@
+[terminal]
+shell = "wsl"
+
+[window]
+decorations = "None"
+
+[font]
+#normal = { family = "FirgeNerd Console" }
+normal = { family = "Moralerspace Argon HWNF" }
+size = 12
+
+[keyboard]
+bindings = [
+  { key = "C", mods = "Control|Shift", action = "Quit" },
+  { key = "-", mods = "Control", action = "DecreaseFontSize" },
+  { key = "=", mods = "Control", action = "IncreaseFontSize" },
+  { key = "0", mods = "Control", action = "ResetFontSize" },
+]

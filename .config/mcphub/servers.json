@@ -3,6 +3,19 @@
     "foo-x": {
       "command": "bunx",
       "args": ["sitemcp", "https://foo-x.com", "-m", "/blog/**"]
+    },
+    "tsunagi": {
+      "command": "bunx",
+      "args": [
+        "sitemcp",
+        "https://foo-x.github.io/tsunagi/",
+        "-m",
+        "/tsunagi/**"
+      ]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"]
     }
   }
 }

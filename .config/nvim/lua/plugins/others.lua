@@ -232,6 +232,13 @@ local codecompanion_opts = {
         send = {
           modes = { n = '<C-j>', i = '<C-j>' }, -- Ctrl+Enter
         },
+        clear = {
+          modes = {
+            n = 'gD',
+          },
+          callback = 'keymaps.clear',
+          description = 'Clear Chat',
+        },
       },
       tools = {
         ['mcp'] = {
