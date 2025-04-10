@@ -105,6 +105,7 @@ local function toggleterm_config(_, opts)
   -- if <count> is 1, it can be omitted
   vim.keymap.set('n', '<Space>x', function()
     vim.cmd('3TermExec cmd="' .. vim.g['termx' .. vim.v.count1] .. '"')
+    vim.keymap.set('n', '<Leader>t', '<Cmd>TestLast<CR>')
   end)
 end
 

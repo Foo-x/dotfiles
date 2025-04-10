@@ -10,7 +10,9 @@
         "sitemcp",
         "https://foo-x.github.io/tsunagi/",
         "-m",
-        "/tsunagi/**"
+        "/tsunagi/**",
+        "-t",
+        "pathname"
       ]
     },
     "fetch": {
