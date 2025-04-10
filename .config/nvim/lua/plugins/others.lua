@@ -247,6 +247,9 @@ local codecompanion_opts = {
           end,
           description = 'Call tools and resources from the MCP Servers',
         },
+        opts = {
+          auto_submit_success = true,
+        },
       },
     },
     inline = {
