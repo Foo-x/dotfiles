@@ -1,9 +1,5 @@
 {
   "mcpServers": {
-    "foo-x": {
-      "command": "bunx",
-      "args": ["sitemcp", "https://foo-x.com", "-m", "/blog/**"]
-    },
     "tsunagi": {
       "command": "bunx",
       "args": [
@@ -18,6 +14,20 @@
     "fetch": {
       "command": "uvx",
       "args": ["mcp-server-fetch"]
+    },
+    "github": {
+      "command": "bunx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+      }
+    },
+    "filesystem": {
+      "command": "bunx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "~/workspace"
+      ]
     }
   }
 }

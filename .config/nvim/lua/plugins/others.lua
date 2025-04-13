@@ -215,7 +215,6 @@ local codecompanion_opts = {
   },
   display = {
     chat = {
-      auto_scroll = false,
       show_header_separator = true,
     },
   },
