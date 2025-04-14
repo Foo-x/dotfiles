@@ -260,7 +260,7 @@ local codecompanion_opts = {
       return require('codecompanion.adapters').extend('copilot', {
         schema = {
           model = {
-            default = 'claude-3.7-sonnet',
+            default = 'gemini-2.5-pro',
           },
         },
       })
@@ -272,15 +272,19 @@ local codecompanion_opts = {
       description = 'コードレビューを行います',
       opts = {
         short_name = 'review',
-        modes = { 'v' },
         auto_submit = true,
+        is_slash_cmd = true,
         stop_context_insertion = true,
       },
       prompts = {
+        -- for visual mode
         {
           role = 'system',
           content = function(context)
             return 'あなたは優れた ' .. context.filetype .. ' の開発者です。'
+          end,
+          condition = function(context)
+            return context.is_visual
           end,
         },
         {
@@ -305,6 +309,41 @@ local codecompanion_opts = {
               .. '12. コナーセンス\n'
               .. '13. テスタビリティ\n'
               .. '14. バグの有無\n'
+          end,
+          condition = function(context)
+            return context.is_visual
+          end,
+        },
+        -- without visual mode
+        {
+          role = 'system',
+          content = function(context)
+            return 'あなたは優れた ' .. vim.bo[context.bufnr].filetype .. ' の開発者です。'
+          end,
+          condition = function(context)
+            return not context.is_visual
+          end,
+        },
+        {
+          role = 'user',
+          content = '@full_stack_dev #buffer'
+            .. ' 以下の観点でコードをレビューして、変更を適用してください。\n\n'
+            .. '1. 保守性\n'
+            .. '2. 可読性\n'
+            .. '3. ドキュメンテーション\n'
+            .. '4. 命名\n'
+            .. '5. パフォーマンス\n'
+            .. '6. セキュリティ\n'
+            .. '7. バリデーション\n'
+            .. '8. エラーハンドリング\n'
+            .. '9. 単一責任原則\n'
+            .. '10. 凝集度\n'
+            .. '11. 結合度\n'
+            .. '12. コナーセンス\n'
+            .. '13. テスタビリティ\n'
+            .. '14. バグの有無\n',
+          condition = function(context)
+            return not context.is_visual
           end,
         },
       },

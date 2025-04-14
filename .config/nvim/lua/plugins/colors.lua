@@ -101,6 +101,9 @@ end, {})
 
 vim.api.nvim_create_user_command('CatppuccinMocha', function()
   vim.cmd('color catppuccin-mocha')
+  vim.cmd([[
+    hi WinSeparator guifg=#54527c
+  ]])
 end, {})
 
 vim.api.nvim_create_user_command('Color', function(param)
