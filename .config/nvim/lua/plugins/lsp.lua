@@ -8,6 +8,14 @@ vim.api.nvim_create_user_command('FormatOnSaveDisable', function()
   vim.g.format_on_save = false
 end, {})
 
+vim.api.nvim_create_user_command('VirtualTextToggle', function()
+  if vim.diagnostic.config().virtual_text then
+    vim.diagnostic.config({ virtual_text = false })
+  else
+    vim.diagnostic.config({ virtual_text = true })
+  end
+end, {})
+
 local function mason_lspconfig_opts()
   local ensure_installed = {
     'lua_ls',
@@ -176,11 +184,6 @@ local function mason_lspconfig_config(_, opts)
 
       vim.diagnostic.config({
         severity_sort = true,
-        virtual_text = {
-          severity = {
-            min = vim.diagnostic.severity.WARN,
-          },
-        },
       })
 
       local client = vim.lsp.get_client_by_id(ev.data.client_id)

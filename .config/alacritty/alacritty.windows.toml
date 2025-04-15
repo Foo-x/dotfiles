@@ -17,4 +17,7 @@ size = 12
 [keyboard]
 bindings = [
   { key = "C", mods = "Control|Shift", action = "Quit" },
+  # pass through
+  { key = "Space", mods = "Control", chars = "\u0000" },
+  { key = "/", mods = "Control", chars = "\u001f" },
 ]
