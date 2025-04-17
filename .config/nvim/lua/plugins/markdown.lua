@@ -11,4 +11,8 @@ return {
     'https://github.com/dhruvasagar/vim-table-mode',
     ft = 'markdown',
   },
+  {
+    'https://github.com/mattn/vim-maketable',
+    ft = 'markdown',
+  },
 }
