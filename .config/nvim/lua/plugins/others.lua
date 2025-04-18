@@ -348,15 +348,15 @@ local codecompanion_opts = {
         },
       },
     },
-    ['Translate to English'] = {
+    ['Translate to English (inline)'] = {
       strategy = 'inline',
-      description = '選択したテキストを英語に翻訳します',
+      description = '選択したテキストを英語に翻訳します (inline)',
       opts = {
-        short_name = 'trans_to_en',
+        short_name = 'trans_to_en_inline',
         modes = { 'v' },
         adapter = {
           name = 'copilot',
-          model = 'gpt-4o',
+          model = 'gpt-4.1',
         },
       },
       prompts = {
@@ -370,15 +370,15 @@ local codecompanion_opts = {
         },
       },
     },
-    ['Translate to Japanese'] = {
+    ['Translate to Japanese (inline)'] = {
       strategy = 'inline',
-      description = '選択したテキストを日本語に翻訳します',
+      description = '選択したテキストを日本語に翻訳します (inline)',
       opts = {
-        short_name = 'trans_to_ja',
+        short_name = 'trans_to_ja_inline',
         modes = { 'v' },
         adapter = {
           name = 'copilot',
-          model = 'gpt-4o',
+          model = 'gpt-4.1',
         },
       },
       prompts = {
@@ -389,6 +389,106 @@ local codecompanion_opts = {
         {
           role = 'user',
           content = '<user_prompt>選択したテキストを日本語に変換してください。</user_prompt>',
+        },
+      },
+    },
+    ['Translate to English (chat)'] = {
+      strategy = 'chat',
+      description = '選択したテキストを英語に翻訳します (chat)',
+      opts = {
+        short_name = 'trans_to_en_chat',
+        auto_submit = true,
+        stop_context_insertion = true,
+        modes = { 'v' },
+        adapter = {
+          name = 'copilot',
+          model = 'gpt-4.1',
+        },
+      },
+      prompts = {
+        {
+          role = 'system',
+          content = 'あなたは優れた開発者であり、日本語と英語のプロ翻訳者でもあります。',
+        },
+        {
+          role = 'user',
+          content = function(context)
+            return [[
+入力を英語に変換してください。
+英文はカジュアルな表現とフォーマルな表現をそれぞれ3つずつ出力してください。
+また、翻訳した英文のニュアンスをそれぞれ日本語で説明してください。原文は不要です。
+指定したフォーマットで出力してください。
+
+◆入力
+]] .. vim.fn.join(
+              vim.fn.getregion(
+                { 0, context.start_line, context.start_col, 0 },
+                { 0, context.end_line, context.end_col, 0 }
+              ),
+              '\n'
+            ) .. [[
+
+
+◆出力のフォーマット
+**カジュアルな表現**
+
+1. [英文1]
+-> [英文1のニュアンス]
+
+2. [英文2]
+-> [英文2のニュアンス]
+
+3. [英文3]
+-> [英文3のニュアンス]
+
+**フォーマルな表現**
+
+1. [英文1]
+-> [英文1のニュアンス]
+
+2. [英文2]
+-> [英文2のニュアンス]
+
+3. [英文3]
+-> [英文3のニュアンス]
+]]
+          end,
+        },
+      },
+    },
+    ['Translate to Japanese (chat)'] = {
+      strategy = 'chat',
+      description = '選択したテキストを日本語に翻訳します (chat)',
+      opts = {
+        short_name = 'trans_to_ja_chat',
+        auto_submit = true,
+        stop_context_insertion = true,
+        modes = { 'v' },
+        adapter = {
+          name = 'copilot',
+          model = 'gpt-4.1',
+        },
+      },
+      prompts = {
+        {
+          role = 'system',
+          content = 'あなたは優れた開発者であり、日本語と英語のプロ翻訳者でもあります。',
+        },
+        {
+          role = 'user',
+          content = function(context)
+            return [[
+入力を日本語に変換してください。
+
+◆入力
+]] .. vim.fn.join(
+              vim.fn.getregion(
+                { 0, context.start_line, context.start_col, 0 },
+                { 0, context.end_line, context.end_col, 0 }
+              ),
+              '\n'
+            )
+          end,
         },
       },
     },
@@ -487,7 +587,7 @@ return {
     keys = {
       {
         '<Space>cc',
-        ':CodeCompanion<CR>',
+        ':CodeCompanion',
         mode = { 'n', 'v' },
         silent = true,
       },

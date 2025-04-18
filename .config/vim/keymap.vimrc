@@ -47,6 +47,9 @@ nnoremap <Space>h ^
 nnoremap <Space>l $
 nnoremap <Space>m %
 
+nnoremap [<Space> :<C-u>i<CR><CR>.<CR>
+nnoremap ]<Space> :<C-u>a<CR><CR>.<CR>
+
 nnoremap J <C-f>
 nnoremap K <C-b>
 
