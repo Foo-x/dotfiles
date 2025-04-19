@@ -367,6 +367,10 @@ function ansi_cht() {
   } | less -R
 }
 
+function gg() {
+  open "https://google.com/search?q=$1"
+}
+
 function nix_update() {
   cd "${DOT_DIR}" || return
   nix run .#update
@@ -506,4 +510,4 @@ if [[ ${IS_WSL} == 1 ]]; then
   update_git_path
 fi
 
-# vim:ft=sh
+# vim:ft=sh sw=2
