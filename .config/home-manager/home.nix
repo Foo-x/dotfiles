@@ -25,6 +25,7 @@ in
 
     packages = with pkgs; [
       aichat
+      aider-chat
       awscli2
       bat
       bun

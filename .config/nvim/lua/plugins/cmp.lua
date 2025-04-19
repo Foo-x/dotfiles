@@ -99,7 +99,14 @@ local function cmp_config()
   })
   setup_for_buffer()
 
-  cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
+  cmp.event:on(
+    'confirm_done',
+    require('nvim-autopairs.completion.cmp').on_confirm_done({
+      filetypes = {
+        codecompanion = false,
+      },
+    })
+  )
 
   cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),

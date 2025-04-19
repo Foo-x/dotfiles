@@ -1,0 +1,4 @@
+# set GEMINI_API_KEY env
+model: gemini/gemini-2.5-flash-preview-04-17
+chat-language: Japanese
+dark-mode: true

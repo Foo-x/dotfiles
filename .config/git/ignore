@@ -35,6 +35,9 @@ target/
 # VSCode
 .vscode-server/
 
+# aider
+.aider*
+
 # Windows
 [Dd]esktop.ini
 Thumbs.db

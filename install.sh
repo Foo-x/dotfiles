@@ -209,4 +209,7 @@ ln -sf ${DOT_DIR}/.config/gitui ${XDG_CONFIG_HOME}
 # setup mcphub
 ln -sf ${DOT_DIR}/.config/mcphub ${XDG_CONFIG_HOME}
 
+# setup aider
+ln -sf "${DOT_DIR}/aider/.aider.conf.yml" "${HOME}/.aider.conf.yml"
+
 echo "Done."
