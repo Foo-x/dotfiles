@@ -22,6 +22,9 @@
   rctl (layer-while-held rctl-layer)
   spc (tap-hold-release 200 200 spc (layer-while-held spc-layer))
   rmet (tap-dance 200 (XX (layer-switch original-layer)))
+
+  ;; set macro as you like
+  f8 (macro f8)
 )
 
 (deflayermap (caps-layer)
