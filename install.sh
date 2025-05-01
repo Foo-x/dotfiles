@@ -57,7 +57,6 @@ binfiles="
 bfs
 f
 jj_desc_template
-mmdc
 nvimdirdiff
 vipe
 win_git

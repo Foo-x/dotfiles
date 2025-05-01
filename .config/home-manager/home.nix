@@ -45,6 +45,7 @@ in
       jq
       jujutsu
       just
+      mermaid-cli
       mise
       neovim
       nodejs_22
