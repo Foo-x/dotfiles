@@ -92,6 +92,8 @@ lsta = ["log", "--stat", "--revisions", "::"]
 
 # new
 n = ["new"]
+na = ["new", "--insert-after"]
+nb = ["new", "--insert-before"]
 nm = ["new", "--message"]
 nn = ["new", "--no-edit"]
 nnm = ["new", "--no-edit", "--message"]
