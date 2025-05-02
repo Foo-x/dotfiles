@@ -84,6 +84,14 @@ echo "${gitconfig_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/git/{} ${XDG_CO
 [ -f ${HOME}/.gitconfig ] && mv ${HOME}/.gitconfig ${XDG_CONFIG_HOME}/git/config
 sh ${DOT_DIR}/.config/git/config_dynamic
 
+# setup jj
+JJ_DIR=${XDG_CONFIG_HOME}/jj
+mkdir -p ${JJ_DIR}
+ln -sf ${DOT_DIR}/.config/jj/config.toml ${JJ_DIR}/config.toml
+JJ_CONF_DIR=${JJ_DIR}/conf.d
+mkdir -p ${JJ_CONF_DIR}
+touch ${JJ_CONF_DIR}/user.toml
+
 # setup tmux
 TMUX_DIR=${XDG_CONFIG_HOME}/tmux
 mkdir -p ${TMUX_DIR}
