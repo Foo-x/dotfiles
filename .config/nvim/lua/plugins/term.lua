@@ -109,7 +109,11 @@ local function toggleterm_config(_, opts)
 end
 
 local function vim_test_init()
-  vim.g['test#strategy'] = 'toggleterm'
+  vim.g['test#strategy'] = {
+    nearest = 'toggleterm',
+    file = 'dispatch',
+    suite = 'dispatch',
+  }
   vim.keymap.set('n', '<Leader>t', '<Cmd>TestLast<CR>')
 end
 
@@ -122,7 +126,10 @@ return {
   },
   {
     'https://github.com/vim-test/vim-test',
-    cmd = { 'TestNearest', 'TestClass', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit' },
+    dependencies = {
+      'https://github.com/tpope/vim-dispatch',
+    },
+    cmd = { 'TestNearest', 'TestFile', 'TestSuite', 'TestLast' },
     init = vim_test_init,
   },
 }
