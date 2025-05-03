@@ -16,11 +16,15 @@ vim.api.nvim_create_user_command('VirtualTextToggle', function()
   end
 end, {})
 
-local function mason_lspconfig_opts()
+local function mason_lspconfig_config(_)
+  require('mason').setup()
+
   local ensure_installed = {
+    'bashls',
     'lua_ls',
     'marksman',
     'rust_analyzer',
+    'typos_lsp',
   }
   if vim.fn.executable('npm') == 1 then
     for _, v in pairs({
@@ -41,19 +45,30 @@ local function mason_lspconfig_opts()
       table.insert(ensure_installed, v)
     end
   end
-  local handlers = {
+  require('mason-lspconfig').setup({
+    ensure_installed = ensure_installed,
+  })
+
+  local lspconfig = require('lspconfig')
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  local on_attach = function(client)
+    if vim.b.large_buf then
+      client.stop()
+    end
+  end
+  require('mason-lspconfig').setup_handlers({
     function(server)
       local opts = {
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
-        on_attach = function(client)
-          if vim.b.large_buf then
-            client.stop()
-          end
-        end,
+        capabilities = capabilities,
+        on_attach = on_attach,
       }
-
-      if server == 'ts_ls' then
-        opts.init_options = {
+      lspconfig[server].setup(opts)
+    end,
+    ['ts_ls'] = function()
+      local opts = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        init_options = {
           plugins = {
             {
               name = '@vue/typescript-plugin',
@@ -61,18 +76,22 @@ local function mason_lspconfig_opts()
               languages = { 'vue' },
             },
           },
-        }
-        opts.filetypes = {
+        },
+        filetypes = {
           'javascript',
           'javascriptreact',
           'typescript',
           'typescriptreact',
           'vue',
-        }
-      end
-
-      if server == 'lua_ls' then
-        opts.settings = {
+        },
+      }
+      lspconfig['ts_ls'].setup(opts)
+    end,
+    ['lua_ls'] = function()
+      local opts = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
           Lua = {
             diagnostics = {
               globals = { 'vim' },
@@ -81,21 +100,12 @@ local function mason_lspconfig_opts()
               enable = false,
             },
           },
-        }
-      end
-
-      require('lspconfig')[server].setup(opts)
+        },
+      }
+      lspconfig['lua_ls'].setup(opts)
     end,
-  }
-  return {
-    ensure_installed = ensure_installed,
-    handlers = handlers,
-  }
-end
+  })
 
-local function mason_lspconfig_config(_, opts)
-  require('mason').setup()
-  require('mason-lspconfig').setup(opts)
   vim.keymap.set('n', 'M', function()
     local ft = vim.bo.filetype
     if ft == 'vim' or ft == 'help' then
@@ -313,7 +323,6 @@ return {
         opts = {},
       },
     },
-    opts = mason_lspconfig_opts,
     config = mason_lspconfig_config,
   },
   {

@@ -52,6 +52,8 @@ in
       nushell
       python313
       ripgrep
+      shellcheck
+      shfmt
       terraform
       tmux
       typos
