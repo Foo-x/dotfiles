@@ -19,8 +19,38 @@ end, {})
 local function mason_lspconfig_config(_)
   require('mason').setup()
 
+  vim.lsp.config('lua_ls', {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim' },
+        },
+        format = {
+          enable = false,
+        },
+      },
+    },
+  })
+  vim.lsp.config('ts_ls', {
+    init_options = {
+      plugins = {
+        {
+          name = '@vue/typescript-plugin',
+          location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
+          languages = { 'vue' },
+        },
+      },
+    },
+    filetypes = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+      'vue',
+    },
+  })
+
   local ensure_installed = {
-    'bashls',
     'lua_ls',
     'marksman',
     'rust_analyzer',
@@ -28,6 +58,7 @@ local function mason_lspconfig_config(_)
   }
   if vim.fn.executable('npm') == 1 then
     for _, v in pairs({
+      'bashls',
       'cssls',
       'cssmodules_ls',
       'dockerls',
@@ -49,63 +80,6 @@ local function mason_lspconfig_config(_)
     ensure_installed = ensure_installed,
   })
 
-  local lspconfig = require('lspconfig')
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  local on_attach = function(client)
-    if vim.b.large_buf then
-      client.stop()
-    end
-  end
-  require('mason-lspconfig').setup_handlers({
-    function(server)
-      local opts = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
-      lspconfig[server].setup(opts)
-    end,
-    ['ts_ls'] = function()
-      local opts = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        init_options = {
-          plugins = {
-            {
-              name = '@vue/typescript-plugin',
-              location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
-              languages = { 'vue' },
-            },
-          },
-        },
-        filetypes = {
-          'javascript',
-          'javascriptreact',
-          'typescript',
-          'typescriptreact',
-          'vue',
-        },
-      }
-      lspconfig['ts_ls'].setup(opts)
-    end,
-    ['lua_ls'] = function()
-      local opts = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            format = {
-              enable = false,
-            },
-          },
-        },
-      }
-      lspconfig['lua_ls'].setup(opts)
-    end,
-  })
-
   vim.keymap.set('n', 'M', function()
     local ft = vim.bo.filetype
     if ft == 'vim' or ft == 'help' then
@@ -123,6 +97,10 @@ local function mason_lspconfig_config(_)
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('LspConfig', {}),
     callback = function(ev)
+      if vim.b.large_buf then
+        vim.lsp.buf_detach_client(ev.buf, ev.data.client_id)
+        return
+      end
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf })
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf })
       vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { buffer = ev.buf })
@@ -227,8 +205,6 @@ local function mason_lspconfig_config(_)
       },
     },
   })
-
-  vim.cmd('LspStart')
 end
 
 local function mason_null_ls_opts()
@@ -310,7 +286,6 @@ return {
   },
   {
     'https://github.com/williamboman/mason-lspconfig.nvim',
-    event = { 'VeryLazy' },
     dependencies = {
       'https://github.com/neovim/nvim-lspconfig',
       'https://github.com/williamboman/mason.nvim',
