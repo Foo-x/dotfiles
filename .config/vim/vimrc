@@ -67,6 +67,7 @@ set sessionoptions-=blank
 set sessionoptions-=buffers
 set sessionoptions-=help
 set sessionoptions-=folds
+set shell=$SHELL\ -l
 if has('nvim')
   set foldexpr=nvim_treesitter#foldexpr()
   set foldcolumn=auto

@@ -205,6 +205,11 @@ local function mason_lspconfig_config(_)
       },
     },
   })
+
+  vim.cmd('tabdo windo edit')
+  if vim.g.save_session then
+    vim.cmd('silent! so Session.vim')
+  end
 end
 
 local function mason_null_ls_opts()
@@ -286,6 +291,7 @@ return {
   },
   {
     'https://github.com/williamboman/mason-lspconfig.nvim',
+    event = { 'VeryLazy' },
     dependencies = {
       'https://github.com/neovim/nvim-lspconfig',
       'https://github.com/williamboman/mason.nvim',
