@@ -206,7 +206,7 @@ local function mason_lspconfig_config(_)
     },
   })
 
-  vim.cmd('tabdo windo edit')
+  vim.cmd('silent! tabdo windo edit')
   if vim.g.save_session then
     vim.cmd('silent! so Session.vim')
   end
