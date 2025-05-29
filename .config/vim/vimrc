@@ -145,7 +145,7 @@ augroup Fold
 augroup END
 augroup AutoOpenQuickFixWindow
   autocmd!
-  autocmd QuickFixCmdPost * lua vim.schedule(function() vim.cmd('cw') end)
+  autocmd QuickFixCmdPost * lua vim.schedule(function() vim.cmd('botright cw') end)
 augroup END
 augroup AutoRead
   autocmd!

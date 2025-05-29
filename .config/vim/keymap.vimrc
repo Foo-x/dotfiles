@@ -65,7 +65,7 @@ nnoremap <Plug>(quickfix)k :<C-u>cbefore<CR>
 nnoremap <Plug>(quickfix)j :<C-u>cafter<CR>
 nnoremap <Plug>(quickfix)w :<C-u>cwindow<CR>
 nnoremap <Plug>(quickfix)c :<C-u>cclose<CR>
-nnoremap <Plug>(quickfix)o :<C-u>copen<CR>
+nnoremap <Plug>(quickfix)o :<C-u>botright copen<CR>
 nnoremap <Plug>(quickfix). :<C-u>cgetbuffer<CR>
 nnoremap <Plug>(quickfix)f :<C-u>cgetfile<CR>
 nnoremap <Plug>(quickfix)h :<C-u>colder<CR>
@@ -73,9 +73,9 @@ nnoremap <Plug>(quickfix)l :<C-u>cnewer<CR>
 nnoremap <expr> <Plug>(quickfix)H ':<C-u>' . (v:count > 0 ? v:count : '') . 'chistory<CR>'
 nnoremap <Plug>(quickfix)e <Cmd>exe 'e' &errorfile<CR>
 nnoremap <Plug>(quickfix)i <Cmd>exe 'silent grep! -F ' . g:insert_print_marker<CR>
-nnoremap <Plug>(quickfix)r :<C-u>cclose \| cw<CR>
+nnoremap <Plug>(quickfix)r :<C-u>cclose \| botright cw<CR>
 "" toggle quickfix
-nnoremap <expr> <Plug>(quickfix)t empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
+nnoremap <expr> <Plug>(quickfix)t empty(filter(getwininfo(), 'v:val.quickfix')) ? ':botright copen<CR>' : ':cclose<CR>'
 
 nmap <Space><Space>l <Plug>(location)
 nnoremap <Plug>(location)n :<C-u>lnext<CR>

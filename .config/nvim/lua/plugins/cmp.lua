@@ -192,7 +192,6 @@ local copilot_opts = {
   filetypes = {
     oil = false,
   },
-  copilot_model = 'gpt-4o-copilot',
 }
 
 return {
