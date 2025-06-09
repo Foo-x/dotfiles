@@ -68,6 +68,7 @@ set sessionoptions-=buffers
 set sessionoptions-=help
 set sessionoptions-=folds
 set shell=$SHELL\ -l
+set noshowcmd
 if has('nvim')
   set foldexpr=nvim_treesitter#foldexpr()
   set foldcolumn=auto
@@ -183,4 +184,9 @@ augroup ActivateLeftOnTabClose
   autocmd TabEnter * let s:after_tab_leave = v:false
   autocmd TabLeave * let s:after_tab_leave = v:true
   autocmd TabClosed * if get(s:, 'after_tab_leave', v:false) && tabpagenr() != 1 && tabpagenr() == expand('<afile>') | tabprevious | endif
+augroup END
+augroup ShowCmd
+  autocmd!
+  autocmd ModeChanged *:n* set noshowcmd
+  autocmd ModeChanged *:[^n]* set showcmd
 augroup END

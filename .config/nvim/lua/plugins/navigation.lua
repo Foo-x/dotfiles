@@ -151,7 +151,8 @@ return {
   {
     'https://github.com/stevearc/aerial.nvim',
     keys = {
-      { '<M-.>', '<Cmd>AerialToggle<CR>' },
+      { '<leader>a', '<Cmd>AerialNavToggle<CR>' },
+      { '<leader>A', '<Cmd>AerialToggle<CR>' },
     },
     opts = aerial_opts,
   },
