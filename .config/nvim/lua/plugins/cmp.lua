@@ -1,7 +1,7 @@
 local function cmp_init()
   vim.g.vsnip_filetypes = {
     typescript = { 'javascript' },
-    typescriptreact = { 'javascript' },
+    typescriptreact = { 'typescriptreact', 'javascript' },
   }
 end
 
