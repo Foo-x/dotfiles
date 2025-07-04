@@ -1,7 +1,7 @@
 [ui]
 conflict-marker-style = "git"
 default-command = "log"
-diff.format = "git"
+diff-formatter = ":git"
 merge-editor = "nvim"
 pager = "delta"
 [merge-tools.nvim]

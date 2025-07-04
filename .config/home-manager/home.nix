@@ -48,7 +48,7 @@ in
       mermaid-cli
       mise
       neovim
-      nodejs_22
+      nodejs_24
       nushell
       python313
       ripgrep
