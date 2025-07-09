@@ -1,3 +1,5 @@
 default: true
 ul-indent: false
 no-multiple-blanks: false
+no-duplicate-heading:
+  siblings_only: true
