@@ -417,6 +417,8 @@ function incr_bak_to_remote() {
 }
 
 # jj
+alias jgfn='jj git fetch && jj new "trunk()"'
+
 ## commit after
 function jca() {
   jj new --no-edit --insert-after "$1"

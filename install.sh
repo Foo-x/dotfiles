@@ -138,6 +138,7 @@ if has gh; then
     gh alias set --clobber cr 'repo create'
     gh alias set --clobber il 'issue list'
     gh alias set --clobber co 'pr checkout'
+    gh alias set --clobber cod 'pr checkout --detach'
     gh alias set --clobber al 'alias list'
     gh alias set --clobber openr 'repo view -w'
     gh alias set --clobber openi 'issue view -w'
