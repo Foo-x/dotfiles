@@ -94,6 +94,7 @@ alias envedit='envtmp=$(mktemp); export -p > $envtmp; $EDITOR $envtmp; . $envtmp
 alias ntfy='curl -k https://ntfy.x.localhost/ntfy -d'
 alias ntfy-='curl -k https://ntfy.x.localhost/ntfy -d @-'
 alias cti='rg --files | ctags -R -L -'
+alias svenv='source .venv/bin/activate'
 
 # openssl
 alias ossl='openssl'
