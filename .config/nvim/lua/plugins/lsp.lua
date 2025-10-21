@@ -106,7 +106,7 @@ local function mason_lspconfig_config(_)
       vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { buffer = ev.buf })
       vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = ev.buf })
       vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = ev.buf })
-      vim.keymap.set({ 'n', 'i' }, '<M-m>', vim.lsp.buf.signature_help, { buffer = ev.buf })
+      vim.keymap.set({ 'n', 'i' }, '<M-m>', require('lsp_signature').toggle_float_win, { buffer = ev.buf })
       vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = ev.buf })
       vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf })
 
