@@ -34,6 +34,8 @@ LS_COLORS="*.bak=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
 LS_COLORS="*.tmp=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
 export LS_COLORS
 
+export TF_PLUGIN_CACHE_DIR="${XDG_CACHE_HOME}/terraform/plugins"
+
 export HISTSIZE=100000
 export HISTFILE=${XDG_STATE_HOME}/bash/history
 export HISTFILESIZE=100000

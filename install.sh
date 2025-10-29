@@ -220,4 +220,7 @@ ln -sf ${DOT_DIR}/.config/mcphub ${XDG_CONFIG_HOME}
 # setup aider
 ln -sf "${DOT_DIR}/aider/.aider.conf.yml" "${HOME}/.aider.conf.yml"
 
+# setup terraform
+mkdir -p "${XDG_CACHE_HOME}/terraform/plugins"
+
 echo "Done."
