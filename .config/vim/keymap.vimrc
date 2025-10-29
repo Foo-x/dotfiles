@@ -243,6 +243,7 @@ vnoremap < <gv
 "" move to end after yank
 vnoremap <silent> y y`]
 
+vnoremap <Space>h ^
 vnoremap <Space>l $h
 
 vnoremap <Space>s( <Esc>`<i(<Esc>`>la)<Esc>
