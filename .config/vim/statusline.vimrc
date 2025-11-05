@@ -1,5 +1,5 @@
 if has('nvim')
-  fun! s:update_git_status_cache(cache, jobid, data, event_type)
+  fun! s:update_repo_status_cache(cache, jobid, data, event_type)
     let l:value = join(a:data, "\n")
     if l:value != ''
       let a:cache.value = ' ' . substitute(l:value, '%', '%%', 'g')
@@ -8,17 +8,17 @@ if has('nvim')
   endf
   fun! MyStatusline()
     let l:common = '%=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
-    if ! exists('w:git_status_cache')
-      let w:git_status_cache = { 'time': 0, 'value': '' }
+    if ! exists('w:repo_status_cache')
+      let w:repo_status_cache = { 'time': 0, 'value': '' }
     endif
-    if (reltimefloat(reltime()) - w:git_status_cache.time) > 1
+    if (reltimefloat(reltime()) - w:repo_status_cache.time) > 1
       let l:dir = expand('%:h')
       if isdirectory(l:dir)
-        call jobstart('. ${DOT_DIR}/.config/bash/.exports_git_ps1 && __my_git_ps1', {'on_stdout': function('s:update_git_status_cache', [w:git_status_cache]), 'cwd': l:dir})
+        call jobstart('if jj root > /dev/null 2>&1; then __jj_ps1; else . ${DOT_DIR}/.config/bash/.exports_git_ps1 && __my_git_ps1; fi', {'on_stdout': function('s:update_repo_status_cache', [w:repo_status_cache]), 'cwd': l:dir})
       else
-        let w:git_status_cache.value = ''
+        let w:repo_status_cache.value = ''
       endif
-      let w:git_status_cache.time = reltimefloat(reltime())
+      let w:repo_status_cache.time = reltimefloat(reltime())
     endif
 
     if luaeval('vim.inspect(vim.lsp.get_clients({bufnr=0}))') == '{}'
@@ -34,7 +34,7 @@ if has('nvim')
     let l:autosave_status = get(g:, 'autosave', 0) || get(t:, 'autosave', 0) || get(w:, 'autosave', 0) || get(b:, 'autosave', 0) ? ' 󰓦' : ''
     let l:format_on_save_status = get(g:, 'format_on_save', 0) ? ' ' : ''
 
-    return ' ' . l:common . w:git_status_cache.value . l:diagnostics_status . l:autosave_status . l:format_on_save_status . ' '
+    return ' ' . l:common . w:repo_status_cache.value . l:diagnostics_status . l:autosave_status . l:format_on_save_status . ' '
   endf
   set statusline=%{%MyStatusline()%}
   set winbar=\ %f%m%r%h%w

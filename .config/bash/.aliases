@@ -482,6 +482,18 @@ function path_remove() {
   export PATH=$(echo $PATH | tr ':' '\n' | \grep -v "$1" | tr '\n' ':')
 }
 
+function __jj_ps1() {
+  local bookmark
+  local diff
+
+  bookmark="$(jj log -r 'ancestors(@) & bookmarks()' --no-graph --template 'bookmarks' -n 1)"
+  if [ -n "$(jj diff --summary)" ]; then
+    diff='|*'
+  fi
+
+  printf "%s" "${bookmark}${diff}"
+}
+
 if [[ ${IS_WSL} == 1 ]]; then
   alias hostip='\grep nameserver /etc/resolv.conf | cut -d" " -f2'
   alias cmdc='cmd.exe /c'
