@@ -81,7 +81,7 @@ command! -bang GAddArgs call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
   \ 'sink*': { lines -> s:fzf_argadd(lines, <bang>0) },
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "GAddArgs> "'
 \ }), v:true)
-command! FilesNoIgnore let _fzf_default_command_tmp=$FZF_DEFAULT_COMMAND | let $FZF_DEFAULT_COMMAND='fd --hidden -E ".git/objects/" -tf -tl -I' | exe 'Files!' | let $FZF_DEFAULT_COMMAND=_fzf_default_command_tmp
+command! FilesNoIgnore let _fzf_default_command_tmp=$FZF_DEFAULT_COMMAND | let $FZF_DEFAULT_COMMAND='fd --hidden -E ".git/{objects,refs,logs}" -E "node_modules" -E ".jj" -tf -tl -I' | exe 'Files!' | let $FZF_DEFAULT_COMMAND=_fzf_default_command_tmp
 
 fun! s:open_buffers_in_new_tab(is_vert, lines)
   let l:lines = map(filter(a:lines, 'len(v:val)'), {_, line -> split(line, '	')[-1]})
