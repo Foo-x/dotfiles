@@ -24,7 +24,6 @@ in
     stateVersion = "24.05";
 
     packages = with pkgs; [
-      aichat
       aider-chat
       awscli2
       bat
@@ -37,7 +36,6 @@ in
       fre
       gh
       git
-      gitui
       graphviz
       gron
       hyperfine

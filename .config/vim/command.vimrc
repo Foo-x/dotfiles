@@ -279,33 +279,6 @@ command! DeleteCurrentFile call s:delete_current_file()
 command! Typos !typos %
 command! TyposAll !typos
 
-let g:aichat_bufnr = -1
-fun! s:aichat_output(command) range
-  let l:input = getline(a:firstline, a:lastline)
-  let l:input_to_command = join(l:input, "\n") . "\n"
-  let l:output = split(system(a:command, l:input_to_command), "\n")
-
-  if !bufexists(g:aichat_bufnr)
-    let g:aichat_bufnr = bufadd('')
-    exe 'vert sbuffer ' . g:aichat_bufnr
-    set buftype=nofile
-    call setline(1, ['◆入力', ''])
-  else
-    exe 'vert sbuffer ' . g:aichat_bufnr
-    call append(line('$'), ['---', ''])
-    call append(line('$'), ['◆入力', ''])
-  endif
-
-  call append(line('$'), l:input + [''])
-  call append(line('$'), ['◆出力', ''])
-  call append(line('$'), l:output + [''])
-  $
-endf
-command! -range AiChat <line1>,<line2>call s:aichat_output('ai')
-command! -range AiChatEnglish <line1>,<line2>call s:aichat_output('ai -r english')
-command! -range AiChatJapanese <line1>,<line2>call s:aichat_output('ai -r japanese')
-command! -range AiChatPolish <line1>,<line2>call s:aichat_output('ai -r polish')
-
 fun! s:kanbanmd()
   set equalalways
 

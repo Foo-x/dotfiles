@@ -167,10 +167,6 @@ if [ ! -d ${HOME}/.alacritty-theme ]; then
   git clone --depth 1 https://github.com/alacritty/alacritty-theme ${HOME}/.alacritty-theme
 fi
 
-# setup aichat
-mkdir -p ${XDG_CONFIG_HOME}/aichat
-ln -sf ${DOT_DIR}/aichat/roles ${XDG_CONFIG_HOME}/aichat
-
 # setup spzenhan
 if uname -r | \grep -iq 'microsoft'; then
   if [ ! -x ${HOME}/.local/bin/spzenhan.exe ]; then
