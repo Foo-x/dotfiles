@@ -250,15 +250,17 @@ local codecompanion_opts = {
     },
   },
   adapters = {
-    copilot = function()
-      return require('codecompanion.adapters').extend('copilot', {
-        schema = {
-          model = {
-            default = 'gemini-2.5-pro',
+    http = {
+      copilot = function()
+        return require('codecompanion.adapters').extend('copilot', {
+          schema = {
+            model = {
+              default = 'claude-sonnet-4.5',
+            },
           },
-        },
-      })
-    end,
+        })
+      end,
+    },
   },
   prompt_library = {
     ['Review Code'] = {
@@ -350,7 +352,7 @@ local codecompanion_opts = {
         modes = { 'v' },
         adapter = {
           name = 'copilot',
-          model = 'gpt-4.1',
+          model = 'gpt-5.1',
         },
       },
       prompts = {
@@ -372,7 +374,7 @@ local codecompanion_opts = {
         modes = { 'v' },
         adapter = {
           name = 'copilot',
-          model = 'gpt-4.1',
+          model = 'gpt-5.1',
         },
       },
       prompts = {
@@ -396,7 +398,7 @@ local codecompanion_opts = {
         modes = { 'v' },
         adapter = {
           name = 'copilot',
-          model = 'gpt-4.1',
+          model = 'gpt-5.1',
         },
       },
       prompts = {
@@ -460,7 +462,7 @@ local codecompanion_opts = {
         modes = { 'v' },
         adapter = {
           name = 'copilot',
-          model = 'gpt-4.1',
+          model = 'gpt-5.1',
         },
       },
       prompts = {

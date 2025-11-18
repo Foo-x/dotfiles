@@ -500,6 +500,7 @@ if [[ ${IS_WSL} == 1 ]]; then
   alias pbcopy="iconv -t utf16 | tail -c +3 | clip.exe"
   alias clip=pbcopy
   alias pbpaste="powershell.exe -command '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; Get-Clipboard'"
+  alias winhome='command cd $(wslpath $(powershell.exe '\''$env:USERPROFILE'\''))'
 
   function is_win_dir() {
     case $(pwd -P) in
@@ -516,7 +517,6 @@ if [[ ${IS_WSL} == 1 ]]; then
 
   # not branch at runtime but change path to improve performance
   function update_git_path() {
-    local git_exe_path
     if is_win_dir && type git.exe > /dev/null 2>&1 && [ ${WSL_VERSION} = 2 ]; then
       path_prepend "${HOME}/.local/bin/win_git"
     else
