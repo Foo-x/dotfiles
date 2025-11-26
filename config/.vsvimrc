@@ -45,8 +45,8 @@ nnoremap <Space>d ggdG
 
 nnoremap <silent> p p`]
 
-nnoremap <Space>o o<Esc>
-nnoremap <Space>O O<Esc>
+nnoremap <Space>o :put _<CR>:-<CR>
+nnoremap <Space>O :put! _<CR>:+<CR>
 
 nnoremap <Space>; A;<Esc>
 nnoremap <Space>, A,<Esc>
