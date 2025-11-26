@@ -13,7 +13,6 @@ nnoremap - <C-x>
 
 nnoremap ; :
 nnoremap : ;
-nnoremap , @:
 
 nnoremap gf gF
 
@@ -183,6 +182,9 @@ nnoremap <silent> p p`]
 
 "" select last pasted
 nnoremap gpv `[v`]
+
+nnoremap <Space>o <Cmd>call append(line('.'),'')<CR>
+nnoremap <Space>O <Cmd>call append(line('.')-1,'')<CR>
 
 nnoremap <Space>; A;<Esc>
 nnoremap <Space>, A,<Esc>

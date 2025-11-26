@@ -13,6 +13,9 @@ nnoremap U <C-r>
 nnoremap + <C-a>
 nnoremap - <C-x>
 
+nnoremap ; :
+nnoremap : ;
+
 "" not to go next
 nnoremap * *N
 
@@ -28,7 +31,25 @@ nnoremap X "_X
 nnoremap s "_s
 nnoremap S "_S
 
+"" format all lines
+nnoremap <Space>= gg=G``
+
+"" yank all lines
+nnoremap <Space>y ggyG``
+
+"" select all
+nnoremap <Space>v ggVG
+
+"" delete all
+nnoremap <Space>d ggdG
+
 nnoremap <silent> p p`]
+
+nnoremap <Space>o o<Esc>
+nnoremap <Space>O O<Esc>
+
+nnoremap <Space>; A;<Esc>
+nnoremap <Space>, A,<Esc>
 
 inoremap jk <Esc>
 
@@ -42,6 +63,9 @@ vnoremap + <C-a>gv
 vnoremap - <C-x>gv
 vnoremap g+ g<C-a>gv
 vnoremap g- g<C-x>gv
+
+vnoremap ; :
+vnoremap : ;
 
 "" not to override register on paste
 vnoremap p pgvy
