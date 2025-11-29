@@ -169,6 +169,7 @@
   , pgdn
 
   . del
+  caps ret
 
   grv lrld
 )

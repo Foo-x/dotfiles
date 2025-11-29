@@ -169,6 +169,8 @@ window_rules:
         window_class: { regex: 'HwndWrapper' }
       - window_process: { equals: 'msrdc' }
       - window_process: { equals: 'mstsc' }
+      # Visual Studio
+      - window_process: { equals: 'devenv' }
 
 binding_modes:
 #   # When enabled, the focused window can be resized via arrow keys or HJKL.
