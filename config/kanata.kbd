@@ -152,6 +152,7 @@
   3 (unicode *)
   4 /
   5 =
+  tab .
 
   z (macro S-7) ;; &
   x (macro S-\) ;; |
