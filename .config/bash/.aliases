@@ -240,7 +240,6 @@ alias dcal='alias | \grep "='\''docker compose" | $PAGER'
 alias bdot='vi ~/.dotfiles'
 alias tfal='alias | \grep "='\''terraform" | $PAGER'
 alias nal='alias | \grep "='\''nix" | $PAGER'
-alias jal='jj config list | \grep "^aliases"'
 
 # rsync
 alias rsync='rsync -aPvh'
@@ -414,34 +413,6 @@ function incr_bak_to_remote() {
   local latest="../$(ssh "${@:4}" "${dest}" "\ls ${base} | tail -n 1")"
 
   rsync --link-dest="${latest}" "$1" -e "ssh ${auth}" "${dest}:${base}/$(date +%Y%m%d_%H%M%S)"
-}
-
-# jj
-alias jgfn='jj git fetch && jj new "trunk()"'
-
-## commit after
-function jca() {
-  jj new --no-edit --insert-after "$1"
-  jj squash --keep-emptied --into "${1}+" "${@:2}"
-  # undo if failed
-  if [ $? -ne 0 ]; then
-    jj undo
-  fi
-}
-
-## commit before
-function jcb() {
-  jj new --no-edit --insert-before "$1"
-  jj squash --keep-emptied --into "${1}-" "${@:2}"
-  # undo if failed
-  if [ $? -ne 0 ]; then
-    jj undo
-  fi
-}
-
-## squash descendants
-function jsqd() {
-  jj squash --from "$1+::" --into "$1"
 }
 
 # https://github.com/sverweij/dependency-cruiser

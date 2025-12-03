@@ -29,9 +29,9 @@ concat(
   diff.git(),
 )
 '''
-[experimental-advance-branches]
-enabled-branches = ["glob:*"]
-disabled-branches = ["main", "master", "develop"]
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+'closest_pushable(to)' = 'heads(::to & ~description(exact:"") & (~empty() | merges()))'
 [aliases]
 # abandon
 aba = ["abandon"]
@@ -41,6 +41,12 @@ c = ["commit"]
 ci = ["commit", "--interactive"]
 cm = ["commit", "--message"]
 cim = ["commit", "--interactive", "--message"]
+
+## commit and tug
+C = ["util", "exec", "--", "bash", "-c", """
+  jj commit
+  jj tug
+""", ""]
 
 # desc
 d = ["describe"]
@@ -74,6 +80,12 @@ gpnb = ["git", "push", "--dry-run", "--bookmark"]
 gr = ["git", "remote"]
 grl = ["git", "remote", "list"]
 
+## git fetch and nt
+gfn = ["util", "exec", "--", "bash", "-c", """
+  jj git fetch
+  jj nt
+""", ""]
+
 # log
 l = ["log"]
 ld = ["log", "--template", "builtin_log_compact_full_description"]
@@ -98,6 +110,12 @@ nm = ["new", "--message"]
 nn = ["new", "--no-edit"]
 nnm = ["new", "--no-edit", "--message"]
 nt = ["new", "trunk()"]
+
+## new and tug
+N = ["util", "exec", "--", "bash", "-c", """
+  jj new $1
+  jj tug
+""", ""]
 
 # rebase
 rb = ["rebase"]
@@ -126,3 +144,15 @@ sq = ["squash"]
 sqi = ["squash", "--interactive"]
 sqt = ["squash", "--into"]
 sqit = ["squash", "--interactive", "--into"]
+
+## squash descendants
+sqd = ["util", "exec", "--", "bash", "-c", """
+  jj squash --from "$1+::" --into "$1"
+""", ""]
+
+# list aliases
+al = ["util", "exec", "--", "bash", "-c", """
+  jj config list | grep "^aliases"
+""", ""]
+
+tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
