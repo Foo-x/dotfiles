@@ -243,7 +243,7 @@ keybindings:
 
   # Change focus from tiling windows -> floating -> fullscreen.
   - commands: ['wm-cycle-focus']
-    bindings: ['ralt+escape']
+    bindings: ['ralt+e']
 
   # Change the focused window to be floating.
   - commands: ['toggle-floating --centered']
@@ -294,8 +294,8 @@ keybindings:
     bindings: ['ralt+shift+tab']
 
   # Focus the workspace that last had focus.
-  # - commands: ['focus --recent-workspace']
-  #   bindings: ['alt+d']
+  - commands: ['focus --recent-workspace']
+    bindings: ['ralt+escape']
 
   # Change focus to a workspace defined in `workspaces` config.
   - commands: ['focus --workspace a1']
