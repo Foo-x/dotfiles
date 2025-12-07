@@ -58,7 +58,6 @@ alias we='watchexec'
 alias aid='aider'
 alias aidw='aider --watch-files'
 alias nuc='nu --stdin -c'
-alias gui='gitui'
 
 # others
 alias relogin='exec $SHELL -l'
@@ -371,6 +370,18 @@ function ansi_cht() {
 function gg() {
   open "https://google.com/search?q=$1"
 }
+
+function fetch_gitignore() (
+  set -e
+  local out
+  out="$(
+    set -e
+    for arg in "$@"; do
+      curl -sSf "https://raw.githubusercontent.com/github/gitignore/main/${arg}.gitignore"
+    done
+  )"
+  echo "$out"
+)
 
 function nix_update() {
   cd "${DOT_DIR}" || return
