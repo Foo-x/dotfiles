@@ -32,28 +32,18 @@ local function mason_lspconfig_config(_)
     },
   })
   vim.lsp.config('ts_ls', {
-    init_options = {
-      plugins = {
-        {
-          name = '@vue/typescript-plugin',
-          location = vim.trim(vim.fn.system('npm config get prefix')) .. '/lib/node_modules/@vue/typescript-plugin',
-          languages = { 'vue' },
-        },
-      },
-    },
     filetypes = {
       'javascript',
       'javascriptreact',
       'typescript',
       'typescriptreact',
-      'vue',
     },
   })
 
   local ensure_installed = {
     'lua_ls',
     'marksman',
-    'rust_analyzer',
+    -- 'rust_analyzer',
     'typos_lsp',
   }
   if vim.fn.executable('npm') == 1 then
@@ -65,7 +55,7 @@ local function mason_lspconfig_config(_)
       'docker_compose_language_service',
       'eslint',
       'html',
-      'intelephense',
+      -- 'intelephense',
       'jsonls',
       'pyright',
       'sqlls',
@@ -209,14 +199,14 @@ end
 
 local function mason_null_ls_opts()
   local ensure_installed = {
-    'phpcs',
-    'php-cs-fixer',
+    -- 'phpcs',
+    -- 'php-cs-fixer',
     'shfmt',
     'stylua',
   }
   if vim.fn.executable('npm') == 1 then
     for _, v in pairs({
-      'blade-formatter',
+      -- 'blade-formatter',
       'markdownlint',
       'markuplint',
       'prettier',
