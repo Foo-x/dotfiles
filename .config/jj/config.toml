@@ -44,8 +44,7 @@ cim = ["commit", "--interactive", "--message"]
 
 ## commit and tug
 C = ["util", "exec", "--", "bash", "-c", """
-  jj commit
-  jj tug
+  jj commit && jj tug
 """, ""]
 
 # desc
@@ -151,8 +150,6 @@ sqd = ["util", "exec", "--", "bash", "-c", """
 """, ""]
 
 # list aliases
-al = ["util", "exec", "--", "bash", "-c", """
-  jj config list | grep "^aliases"
-""", ""]
+al = ["config", "list", "aliases"]
 
 tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
