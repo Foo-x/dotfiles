@@ -147,13 +147,13 @@ function ls_vcs_status_cd() {
 }
 export PROMPT_COMMAND_LS_VCS_STATUS_CD='ls_vcs_status_cd'
 
-function update_git_path_cd() {
-  if [ "${UPDATE_GIT_PATH_DIR:-${PWD}}" != "${PWD}" ]; then
-    update_git_path
-  fi
-  UPDATE_GIT_PATH_DIR=${PWD}
-}
-export PROMPT_COMMAND_UPDATE_GIT_PATH_CD='update_git_path_cd'
+# function update_git_path_cd() {
+#   if [ "${UPDATE_GIT_PATH_DIR:-${PWD}}" != "${PWD}" ]; then
+#     update_git_path
+#   fi
+#   UPDATE_GIT_PATH_DIR=${PWD}
+# }
+# export PROMPT_COMMAND_UPDATE_GIT_PATH_CD='update_git_path_cd'
 
 trap '((cmdcnt++))' DEBUG
 function empty_enter() {

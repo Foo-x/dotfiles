@@ -505,7 +505,7 @@ if [[ ${IS_WSL} == 1 ]]; then
       path_remove "${HOME}/.local/bin/win_git"
     fi
   }
-  update_git_path
+  # update_git_path
 fi
 
 # vim:ft=sh sw=2

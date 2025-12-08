@@ -1,0 +1,6 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\nmap h goBack\nmap l goForward\nmap H previousTab\nmap L nextTab\nmap J scrollPageDown\nmap K scrollPageUp",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>,次のページ,次へ",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<,前のページ,前へ",
+  "settingsVersion": "2.3.1"
+}
