@@ -1,4 +1,4 @@
-if vim.fn.executable('spzenhan.exe') then
+if vim.fn.executable('spzenhan.exe') == 1 then
   vim.api.nvim_create_autocmd('InsertLeave', {
     group = vim.api.nvim_create_augroup('SpzenhanAutoOff', {}),
     callback = function()

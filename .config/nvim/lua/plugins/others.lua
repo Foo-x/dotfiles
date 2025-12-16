@@ -200,7 +200,7 @@ local function oil_config(_, opts)
         group = vim.api.nvim_create_augroup('OilConfig', {}),
         pattern = 'oil://*',
         callback = function()
-          if vim.fn.executable('zoxide') then
+          if vim.fn.executable('zoxide') == 1 then
             os.execute('zoxide add ' .. string.match(vim.fn.bufname(), 'oil://(.+)/'))
           end
         end,
