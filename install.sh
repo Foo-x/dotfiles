@@ -219,4 +219,8 @@ ln -sf "${DOT_DIR}/aider/.aider.conf.yml" "${HOME}/.aider.conf.yml"
 # setup terraform
 mkdir -p "${XDG_CACHE_HOME}/terraform/plugins"
 
+# setup kanata
+mkdir -p "${XDG_CONFIG_HOME}/kanata"
+ln -sf "${DOT_DIR}/config/kanata.kbd" "${XDG_CONFIG_HOME}/kanata/kanata.kbd"
+
 echo "Done."

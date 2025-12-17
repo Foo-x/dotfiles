@@ -508,4 +508,8 @@ if [[ ${IS_WSL} == 1 ]]; then
   # update_git_path
 fi
 
+if [[ "$XDG_CURRENT_DESKTOP" == "Hyprland" ]]; then
+  alias restart_waybar='pkill waybar; hyprctl dispatch exec waybar'
+fi
+
 # vim:ft=sh sw=2
