@@ -223,4 +223,14 @@ mkdir -p "${XDG_CACHE_HOME}/terraform/plugins"
 mkdir -p "${XDG_CONFIG_HOME}/kanata"
 ln -sf "${DOT_DIR}/config/kanata.kbd" "${XDG_CONFIG_HOME}/kanata/kanata.kbd"
 
+# setup waybar
+if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+  mkdir -p ${XDG_CONFIG_HOME}/waybar
+  waybarfiles="
+  config.jsonc
+  style.css
+  "
+  echo "${waybarfiles}" | xargs -I{} ln -sf ${DOT_DIR}/.config/waybar/{} ${XDG_CONFIG_HOME}/waybar/{}
+fi
+
 echo "Done."
