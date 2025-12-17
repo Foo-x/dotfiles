@@ -1,0 +1,8 @@
+[general]
+import = [
+  "~/.alacritty-theme/themes/catppuccin_mocha.toml",
+]
+
+[font]
+normal = { family = "Firge Nerd Console" }
+size = 12

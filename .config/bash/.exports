@@ -89,7 +89,7 @@ fi
 export LANG=C
 LOCALE_LIST="$(locale -a)"
 if [[ "${LOCALE_LIST}" =~ C.UTF-8|C.utf8 ]]; then
-  export LC_CTYPE='C.UTF-8'
+  export LC_ALL='C.UTF-8'
 fi
 
 case $- in
@@ -155,6 +155,12 @@ export PROMPT_COMMAND_LS_VCS_STATUS_CD='ls_vcs_status_cd'
 # }
 # export PROMPT_COMMAND_UPDATE_GIT_PATH_CD='update_git_path_cd'
 
+
+if type __systemd_osc_context_precmdline &> /dev/null; then
+  __systemd_osc_context_offset=2
+else
+  __systemd_osc_context_offset=0
+fi
 trap '((cmdcnt++))' DEBUG
 function empty_enter() {
   local splitted_prompts oldifs
@@ -162,7 +168,7 @@ function empty_enter() {
   IFS=';' splitted_prompts=(${PROMPT_COMMAND})
   IFS=$oldifs
 
-  if [ $((empty_enter_cnt + ${#splitted_prompts[@]})) = ${cmdcnt} ]; then
+  if [ $((empty_enter_cnt + ${#splitted_prompts[@]} + ${__systemd_osc_context_offset})) = ${cmdcnt} ]; then
     vcs_status
   fi
 

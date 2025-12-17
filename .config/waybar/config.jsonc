@@ -6,7 +6,7 @@
   "margin-left": 10,
   "margin-right": 10,
   "height": 41,
-  "modules-left": ["cpu", "memory"],
+  "modules-left": ["cpu", "memory", "temperature"],
   "modules-center": ["hyprland/workspaces"],
   "modules-right": [
     "pulseaudio",
@@ -27,6 +27,15 @@
   "memory": {
     "interval": 3,
     "format": "<span color='#f38ba8'> </span> <span color='#cdd6f4'>{used:0.1f}G</span>",
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "<span color='#f9e2af'>{icon}</span> <span color='#cdd6f4'>{temperatureC}°C</span>",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
   },
 
   "hyprland/workspaces": {
@@ -54,28 +63,6 @@
       "persistent": "",
       "focused": "",
       "default": "",
-    },
-    "persistent-workspaces": {
-      "DP-3": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-      ],
-      "DP-4": [
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-      ],
     },
     "show-special": true
   },

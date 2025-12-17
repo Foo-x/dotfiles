@@ -162,10 +162,11 @@ setup_completions.sh
 "
 echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 
-# install alacritty theme
+# setup alacritty
 if [ ! -d ${HOME}/.alacritty-theme ]; then
   git clone --depth 1 https://github.com/alacritty/alacritty-theme ${HOME}/.alacritty-theme
 fi
+ln -sf ${DOT_DIR}/.config/alacritty/alacritty.toml ${XDG_CONFIG_HOME}/alacritty/alacritty.toml
 
 # setup spzenhan
 if uname -r | \grep -iq 'microsoft'; then
@@ -233,8 +234,8 @@ fi
 if ! has luarocks; then
   printf "\e[93minstall luarocks\e[0m\n"
 fi
-if ! has tree-sitter-cli; then
-  printf "\e[93minstall tree-sitter-cli\e[0m\n"
+if ! has tree-sitter; then
+  printf "\e[93minstall tree-sitter-cli >= 0.26.1\e[0m\n"
 fi
 
 echo "Done."

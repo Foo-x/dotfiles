@@ -64,6 +64,7 @@ tooltip {
 #pulseaudio,
 #pulseaudio.microphone,
 #workspaces,
+#temperature,
 #memory,
 #tray {
   background: #1e1e2e;
@@ -135,6 +136,12 @@ tooltip {
   margin-right: 0px;
 }
 
+#temperature {
+  border-radius: 0px 13px 13px 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 #bluetooth {
   color: #89b4fa;
   border-radius: 0px 13px 13px 0px;
@@ -144,7 +151,7 @@ tooltip {
 
 #pulseaudio {
   color: #89b4fa;
-  border-radius: 0px 0px 0px 0px;
+  border-radius: 13px 0px 0px 13px;
   margin-right: 0px;
   margin-left: 0px;
 }
