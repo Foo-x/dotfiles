@@ -207,9 +207,6 @@ mkdir -p ${XDG_CONFIG_HOME}/ctags
 ctags_files=$(cd ${DOT_DIR}/.config/ctags && \ls -1)
 printf "${ctags_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/ctags/{} ${XDG_CONFIG_HOME}/ctags/{}
 
-# setup gitui
-ln -sf ${DOT_DIR}/.config/gitui ${XDG_CONFIG_HOME}
-
 # setup mcphub
 ln -sf ${DOT_DIR}/.config/mcphub ${XDG_CONFIG_HOME}
 
@@ -231,6 +228,13 @@ if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
   style.css
   "
   echo "${waybarfiles}" | xargs -I{} ln -sf ${DOT_DIR}/.config/waybar/{} ${XDG_CONFIG_HOME}/waybar/{}
+fi
+
+if ! has luarocks; then
+  printf "\e[93minstall luarocks\e[0m\n"
+fi
+if ! has tree-sitter-cli; then
+  printf "\e[93minstall tree-sitter-cli\e[0m\n"
 fi
 
 echo "Done."

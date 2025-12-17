@@ -71,13 +71,6 @@ local function toggleterm_config(_, opts)
   vim.keymap.set('n', '<Plug>(git)pp', '<Cmd>2TermExecBackground git pp<CR>')
   vim.keymap.set('n', '<Plug>(git)ps', '<Cmd>2TermExecVertical git push<CR>')
   vim.keymap.set('n', '<Plug>(git)sl', '<Cmd>2TermExecVertical git stash list<CR>')
-  vim.keymap.set('n', '<Plug>(git)ui', function()
-    Terminal:new({
-      cmd = 'gitui',
-      direction = 'tab',
-      close_on_exit = true,
-    }):toggle()
-  end)
 
   -- jj
   vim.keymap.set('n', '<Plug>(jj)<Space>', ':<C-u>1TermExecTab jj ')
