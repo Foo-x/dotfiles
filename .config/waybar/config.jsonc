@@ -12,7 +12,6 @@
     "pulseaudio",
     "pulseaudio#microphone",
     "clock",
-    "separator",
     "tray",
   ],
 
@@ -99,11 +98,8 @@
     "format": "<span color='#89b4fa'>󰥔 </span><span color='#cdd6f4'>{:%Y-%m-%d %T}</span>",
     },
   },
-  "separator": {
-    "format": " | ",
-  },
   "tray": {
     "icon-size": 16,
-    "spacing": 2,
+    "spacing": 5,
   },
 }
