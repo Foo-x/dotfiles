@@ -171,6 +171,24 @@ window_rules:
       - window_process: { equals: 'mstsc' }
       # Visual Studio
       - window_process: { equals: 'devenv' }
+      # Godot
+      - window_process: { regex: 'Godot.*' }
+  - commands: ['move --workspace a1']
+    match:
+      - window_process: { equals: 'vivaldi' }
+  - commands: ['move --workspace a2']
+    match:
+      - window_process: { equals: 'alacritty' }
+  - commands: ['move --workspace b1']
+    match:
+      - window_process: { equals: 'brave' }
+  - commands: ['move --workspace b3']
+    match:
+      - window_process: { equals: 'Spotify' }
+  - commands: ['move --workspace b4']
+    match:
+      - window_process: { equals: 'Code' }
+
 
 binding_modes:
 #   # When enabled, the focused window can be resized via arrow keys or HJKL.

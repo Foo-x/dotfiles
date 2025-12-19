@@ -1,4 +1,5 @@
 git-prompt.sh
-/completion
+/completion/*
+!/completion/bun.completion.bash
 /routes/local.json
 !.aider.conf*

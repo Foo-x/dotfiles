@@ -166,6 +166,7 @@ echo "${exe_files}" | xargs -I{} sh ${DOT_DIR}/{}
 if [ ! -d ${HOME}/.alacritty-theme ]; then
   git clone --depth 1 https://github.com/alacritty/alacritty-theme ${HOME}/.alacritty-theme
 fi
+mkdir -p ${XDG_CONFIG_HOME}/alacritty
 ln -sf ${DOT_DIR}/.config/alacritty/alacritty.toml ${XDG_CONFIG_HOME}/alacritty/alacritty.toml
 
 # setup spzenhan

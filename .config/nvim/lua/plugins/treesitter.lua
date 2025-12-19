@@ -146,6 +146,7 @@ return {
       'https://github.com/windwp/nvim-ts-autotag',
       'https://github.com/nvim-treesitter/nvim-treesitter-context',
     },
+    branch = 'main',
     -- treesitter cannot load with VeryLazy
     event = 'CursorHold',
     build = ':TSUpdate',

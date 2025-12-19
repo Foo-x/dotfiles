@@ -22,7 +22,6 @@ cd completion
 
 fetch git https://github.com/git/git/raw/master/contrib/completion/git-completion.bash
 fetch tmux https://raw.githubusercontent.com/Bash-it/bash-it/master/completion/available/tmux.completion.bash
-fetch bun https://raw.githubusercontent.com/oven-sh/bun/main/completions/bun.bash
 
 create f 'f completion'
 create rustup 'rustup completions bash'
