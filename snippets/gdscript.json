@@ -1,0 +1,11 @@
+{
+  "onready": {
+    "prefix": [
+      "onready"
+    ],
+    "body": [
+      "onready var ${1:name} = $$2"
+    ]
+  }
+}
+
