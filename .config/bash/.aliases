@@ -34,7 +34,7 @@ alias mv='mv -iv'
 alias rm='rm -iv'
 alias free='free -h'
 alias grep='grep --color=auto -nIE --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=..' # use regexp and show line numbers
-alias rg="rg --hidden -g '!.git'"
+alias rg="rg --hidden -g '!.git' -g '!.jj'"
 alias fd="fd --hidden"
 alias dirs='dirs -v'
 alias pgrep='pgrep -fa'
