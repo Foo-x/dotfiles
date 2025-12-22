@@ -106,19 +106,41 @@ vim.api.nvim_create_user_command('CatppuccinMocha', function()
   ]])
 end, {})
 
+vim.api.nvim_create_user_command('CatppuccinMacchiato', function()
+  vim.cmd('color catppuccin-macchiato')
+  vim.cmd([[
+    hi WinSeparator guifg=#54527c
+  ]])
+end, {})
+
+vim.api.nvim_create_user_command('CatppuccinFrappe', function()
+  vim.cmd('color catppuccin-frappe')
+  vim.cmd([[
+    hi WinSeparator guifg=#54527c
+  ]])
+end, {})
+
 vim.api.nvim_create_user_command('Color', function(param)
   vim.cmd(param.args)
 end, {
   nargs = 1,
   complete = function()
-    return { 'Everforest', 'Iceberg', 'Base16GrayscaleDark', 'NoirbuddySlate', 'CatppuccinMocha' }
+    return {
+      'Everforest',
+      'Iceberg',
+      'Base16GrayscaleDark',
+      'NoirbuddySlate',
+      'CatppuccinMocha',
+      'CatppuccinMacchiato',
+      'CatppuccinFrappe',
+    }
   end,
 })
 
 vim.cmd('hi netrwMarkFile ctermbg=darkmagenta')
 
 function SetupColor()
-  vim.cmd('CatppuccinMocha')
+  vim.cmd('CatppuccinMacchiato')
 end
 
 return {

@@ -3,7 +3,7 @@ shell = "wsl"
 
 [general]
 import = [
-  "themes\\catppuccin_mocha.toml",
+  "themes\\catppuccin_macchiato.toml",
 ]
 
 [window]
