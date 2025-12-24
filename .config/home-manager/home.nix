@@ -39,6 +39,7 @@ in
       graphviz
       gron
       hyperfine
+      jjui
       jo
       jq
       jujutsu
