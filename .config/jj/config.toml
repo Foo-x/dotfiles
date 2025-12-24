@@ -14,7 +14,8 @@ program = "nvim"
 merge-tool-edits-conflict-markers = true
 [git]
 private-commits = "description(glob:'private:*')"
-push-new-bookmarks = true
+[remotes.origin]
+auto-track-bookmarks = "glob:*"
 [templates]
 draft_commit_description = '''
 concat(
