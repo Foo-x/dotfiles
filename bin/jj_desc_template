@@ -40,18 +40,8 @@ JJ: Closes <id>
 
 echo
 
-echo "JJ: This commit contains the following changes:"
-jj log -n1 --no-graph -T 'indent("JJ:     ", diff.summary())' --revisions "${1:-@}"
-
-echo
-
 echo "JJ: Logs"
 echo "JJ: "
 jj log --no-graph -T '"\n" ++ description.first_line()' --revisions "ancestors(${1:-@}-, 20)" | tail -n+2 | head -n20 | sed 's/^/JJ: /'
 
 echo
-echo
-
-echo "JJ: Diff"
-echo "JJ: ignore-rest"
-jj log -n1 --no-graph -T 'diff.git()' --revisions "${1:-@}"

@@ -23,27 +23,19 @@ local function gv_config()
       end, { buffer = 0, expr = true, silent = true })
       vim.keymap.set('n', 'rb<CR>', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git rebase ]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git rebase ]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'rbi', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git rebase -i ]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git rebase -i ]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'chp', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git cherry-pick ]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git cherry-pick ]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cf', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git commit --fixup ]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git commit --fixup ]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cF', function()
         local sha = vim.fn.expand('<cword>')
@@ -55,9 +47,7 @@ local function gv_config()
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'ca', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git commit --fixup amend:]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git commit --fixup amend:]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cA', function()
         local sha = vim.fn.expand('<cword>')
@@ -69,9 +59,7 @@ local function gv_config()
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cr', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git commit --fixup reword:]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git commit --fixup reword:]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cR', function()
         local sha = vim.fn.expand('<cword>')
@@ -83,9 +71,7 @@ local function gv_config()
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cs', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git commit --squash ]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git commit --squash ]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'cS', function()
         local sha = vim.fn.expand('<cword>')
@@ -97,15 +83,11 @@ local function gv_config()
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'me', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git merge ]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git merge ]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
       vim.keymap.set('n', 'bi', function()
         local sha = vim.fn.expand('<cword>')
-        return [[<Cmd>1TermExecTab git bisect start @ ]]
-          .. sha
-          .. [[<CR>]]
+        return [[<Cmd>1TermExecTab git bisect start @ ]] .. sha .. [[<CR>]]
       end, { buffer = 0, expr = true })
     end,
   })
@@ -298,5 +280,16 @@ return {
     init = diffview_init,
     opts = diffview_opts,
     config = diffview_config,
+  },
+  {
+    'https://github.com/julienvincent/hunk.nvim',
+    dependencies = {
+      'https://github.com/MunifTanjim/nui.nvim',
+      'https://github.com/nvim-tree/nvim-web-devicons',
+    },
+    cmd = { 'DiffEditor' },
+    config = function()
+      require('hunk').setup()
+    end,
   },
 }

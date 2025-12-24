@@ -2,6 +2,7 @@
 conflict-marker-style = "git"
 default-command = "log"
 diff-formatter = ":git"
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 merge-editor = "nvim"
 pager = "delta"
 [merge-tools.nvim]

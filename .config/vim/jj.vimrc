@@ -104,8 +104,9 @@ fun! s:jujutsu_describe_template()
   call search('JJ: ChangeId: \zs')
   let l:change_id = strpart(getline('.'), col('.') - 1)
   call search('JJ:')
-  silent ,$d_
+  silent ,$d t
   silent exe 'r !jj_desc_template ' . l:change_id
+  silent pu t
   0
 endf
 command! JujutsuDescribeTemplate call s:jujutsu_describe_template()
