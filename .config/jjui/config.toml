@@ -1,0 +1,11 @@
+[custom_commands."show oplog diff patch"]
+key = ["s"]
+args = ["op", "show",  "$operation_id", "--patch", "--color", "always"]
+show = "diff"
+[custom_commands."new note commit"]
+key_sequence = ["z", "n"]
+args = ["new", "--no-edit", "-A", "$change_id"]
+desc = "TODO notes as empty commits"
+
+[preview]
+revision_command = ["show", "--color", "always", "-r", "$change_id", "--config", "ui.diff-formatter=delta-non-split"]

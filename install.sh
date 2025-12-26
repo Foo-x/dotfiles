@@ -222,6 +222,10 @@ mkdir -p "${XDG_CACHE_HOME}/terraform/plugins"
 mkdir -p "${XDG_CONFIG_HOME}/kanata"
 ln -sf "${DOT_DIR}/config/kanata.kbd" "${XDG_CONFIG_HOME}/kanata/kanata.kbd"
 
+# setup jjui
+mkdir -p "${XDG_CONFIG_HOME}/jjui"
+ln -sf "${DOT_DIR}/.config/jjui/config.toml" "${XDG_CONFIG_HOME}/jjui/config.toml"
+
 # setup waybar
 if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
   mkdir -p ${XDG_CONFIG_HOME}/waybar

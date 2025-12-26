@@ -1,7 +1,7 @@
 [ui]
 conflict-marker-style = "git"
 default-command = "log"
-diff-formatter = ":git"
+diff-formatter = "delta-split"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 merge-editor = "nvim"
 pager = "delta"
@@ -12,6 +12,12 @@ merge-args = ["-f", "-d", "$output", "-M",
     "-c", "set write"]
 program = "nvim"
 merge-tool-edits-conflict-markers = true
+[merge-tools.delta-split]
+program = "bash"
+diff-args = ["-c", "delta --width $width --features split $left $right || true"]
+[merge-tools.delta-non-split]
+program = "bash"
+diff-args = ["-c", "delta --width $width --features non-split $left $right || true"]
 [git]
 private-commits = "description(glob:'private:*')"
 [remotes.origin]

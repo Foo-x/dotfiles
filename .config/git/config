@@ -291,14 +291,16 @@
 [delta]
     navigate = true
     commit-decoration-style = box
-    features = readable
+    features = split
     true-color = always
     syntax-theme = ansi
     wrap-max-lines = unlimited
     wrap-right-percent = 0.1
-[delta "readable"]
     line-numbers = true
+[delta "split"]
     side-by-side = true
+[delta "non-split"]
+    side-by-side = false
 [commit]
     template = ~/.dotfiles/.config/git/commit_template
     verbose = true
