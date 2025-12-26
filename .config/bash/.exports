@@ -63,6 +63,8 @@ export LESS_TERMCAP_ue=$'\E[0m'     # Ends underline.
 
 export GIT_PAGER=delta
 
+export MANPAGER='nvim +Man!'
+
 IS_WSL="$(if uname -r | \grep -iq 'microsoft'; then echo 1; else echo 0; fi)"
 export IS_WSL
 
