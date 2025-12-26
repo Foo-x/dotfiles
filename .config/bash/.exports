@@ -182,6 +182,5 @@ export PROMPT_COMMAND_EMPTY_ENTER='empty_enter'
 . ${DOT_DIR}/.config/bash/.exports_git_ps1
 
 export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf '\[\e[${__blue_ansi_pccs_bright_foreground}m\]& ')\$([ \"\$LOCAL_PS1\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\$LOCAL_PS1|\" )\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w\[\e[${__gy65_ansi_pccs_foreground}m\] \$(__my_git_ps1) \${CONTEXT}\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy65_ansi_pccs_foreground}m\]\")\\$\[\e[m\] \")"
-export PS0='$(tput sc)\[\e[2A\]\[\e[$((COLUMNS-7))G\]\[\e[${__gy65_ansi_pccs_foreground}m\]\t\[\e[m\]$(tput rc)'
 
 # vim: ft=sh

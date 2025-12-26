@@ -58,6 +58,7 @@ alias we='watchexec'
 alias aid='aider'
 alias aidw='aider --watch-files'
 alias nuc='nu --stdin -c'
+alias jui=jjui
 
 # others
 alias relogin='exec $SHELL -l'
@@ -198,6 +199,7 @@ alias tmn='tmux new'
 alias tmnw='tmux neww'
 alias tmr='tmux rename'
 alias tmrw='tmux renamew'
+alias tmcapture='tmux capture-pane -pS - | view'
 alias tmreload='tmux source-file $XDG_CONFIG_HOME/tmux/tmux.conf'
 
 # terraform
