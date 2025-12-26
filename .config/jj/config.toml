@@ -40,9 +40,11 @@ concat(
 [revset-aliases]
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
 'closest_pushable(to)' = 'heads(::to & ~description(exact:"") & (~empty() | merges()))'
+'empty_empty()' = 'description(exact:"") & empty() ~ root()'
 [aliases]
 # abandon
 aba = ["abandon"]
+clean = ["abandon", "empty_empty()"]
 
 # commit
 c = ["commit"]
