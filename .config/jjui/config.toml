@@ -2,6 +2,14 @@
 key = ["s"]
 args = ["op", "show",  "$operation_id", "--patch", "--color", "always"]
 show = "diff"
+[custom_commands."new note commit"]
+key_sequence = ["z", "n"]
+args = ["new", "--no-edit", "-A", "$change_id"]
+desc = "TODO notes as empty commits"
+[custom_commands."commit and tug"]
+key = ["C"]
+args = ["util", "exec",  "--", "bash", "-c", """jj edit $change_id && jj commit && jj tug"""]
+show = "interactive"
 
 [preview]
 revision_command = ["show", "--color", "always", "-r", "$change_id", "--config", "ui.diff-formatter=delta-non-split"]
