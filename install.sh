@@ -5,6 +5,7 @@ XDG_CONFIG_HOME="${HOME}/.config"
 XDG_CACHE_HOME="${HOME}/.cache"
 XDG_DATA_HOME="${HOME}/.local/share"
 XDG_STATE_HOME="${HOME}/.local/state"
+XDG_SCREENSHOTS_DIR="${XDG_DATA_HOME}/screenshots"
 
 has() {
   type "$1" > /dev/null 2>&1
@@ -31,6 +32,7 @@ mkdir -p ${XDG_CONFIG_HOME}
 mkdir -p ${XDG_CACHE_HOME}
 mkdir -p ${XDG_DATA_HOME}
 mkdir -p ${XDG_STATE_HOME}
+mkdir -p ${XDG_SCREENSHOTS_DIR}
 
 # install fzf
 if [ ! -d ${HOME}/.fzf ]; then
@@ -123,7 +125,8 @@ fi
 
 # install hotspots
 if ! has hotspots; then
-  curl -fsSL https://raw.githubusercontent.com/Foo-x/hotspots/refs/heads/master/hotspots -o ${HOME}/.local/bin/hotspots
+  curl -fsSL https://raw.githubusercontent.com/Foo-x/hotspots/refs/heads/master/hotspots -o "${HOME}/.local/bin/hotspots"
+  chmod +x "${HOME}/.local/bin/hotspots"
 fi
 
 # setup ripgrep

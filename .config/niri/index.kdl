@@ -1,0 +1,6 @@
+include "./input.kdl"
+include "./output.kdl"
+include "./layout.kdl"
+include "./binds.kdl"
+include "./environment.kdl"
+include "./misc.kdl"

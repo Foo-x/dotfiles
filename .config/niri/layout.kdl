@@ -1,0 +1,33 @@
+layout {
+    gaps 1
+    center-focused-column "never"
+    default-column-display "tabbed"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width {}
+
+    focus-ring {
+        width 1
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+
+    border {
+        off
+    }
+
+    tab-indicator {
+        hide-when-single-tab
+        place-within-column
+    }
+
+    struts {
+      left 64
+      right 64
+    }
+}
