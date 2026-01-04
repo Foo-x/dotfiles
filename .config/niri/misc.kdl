@@ -32,9 +32,18 @@ window-rule {
     default-column-width { proportion 1.0; }
 }
 
+window-rule {
+    match app-id="^Godot$" title="DEBUG"
+    open-floating true
+}
+
 prefer-no-csd
 
 screenshot-path "~/.local/share/screenshots/%Y%m%d_%H%M%S.png"
+
+cursor {
+    hide-after-inactive-ms 3000
+}
 
 hotkey-overlay {
     skip-at-startup
