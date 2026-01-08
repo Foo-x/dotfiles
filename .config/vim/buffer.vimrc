@@ -7,8 +7,8 @@ nmap <Space>b <Plug>(buffer)
 nnoremap <Plug>(buffer)h <C-^>
 nnoremap <Plug>(buffer)l :<C-u>ls<CR>
 nnoremap <Plug>(buffer)L :<C-u>ls!<CR>
-nnoremap <Plug>(buffer)g :<C-u>LayoutGrid<CR>
-nnoremap <Plug>(buffer)ag :<C-u>LayoutAGrid<CR>
+nnoremap <Plug>(buffer)g :<C-u>LayoutGrid 2 2<CR>
+nnoremap <Plug>(buffer)ag :<C-u>LayoutAGrid 2 2<CR>
 nnoremap <Plug>(buffer)\ :<C-u>LayoutTwoCol<CR>
 nnoremap <Plug>(buffer)a\ :<C-u>LayoutATwoCol<CR>
 nnoremap <Plug>(buffer)_ :<C-u>LayoutTwoRow<CR>
@@ -140,12 +140,49 @@ fun! s:fill_win(setup, bufs)
 
   winc t
 endf
-command! LayoutGrid call s:fill_win({ -> execute('split | windo vsplit') }, s:n_bufs(4))
-command! LayoutAGrid call s:fill_win({ -> execute('split | windo vsplit') }, s:n_arg_bufs(4))
-command! LayoutTwoCol call s:fill_win({ -> execute('vsplit') }, s:n_bufs(2))
-command! LayoutATwoCol call  s:fill_win({ -> execute('vsplit') }, s:n_arg_bufs(2))
-command! LayoutTwoRow call s:fill_win({ -> execute('split') }, s:n_bufs(2))
-command! LayoutATwoRow call  s:fill_win({ -> execute('split') }, s:n_arg_bufs(2))
+
+fun! s:create_grid_layout(rows, cols)
+  silent! only
+
+  " create cols
+  for c in range(2, a:cols)
+    vsplit
+  endfor
+
+  " create rows for each cols
+  wincmd t
+  for col in range(1, a:cols)
+    for r in range(2, a:rows)
+      split
+    endfor
+
+    if col < a:cols
+      wincmd l
+    endif
+  endfor
+
+  " make windows the same height and width
+  wincmd t
+  wincmd =
+endf
+
+fun! s:layout_grid(rows, cols)
+  call s:fill_win({ -> s:create_grid_layout(a:rows, a:cols) }, s:n_bufs(a:rows * a:cols))
+endf
+fun! s:layout_agrid(rows, cols)
+  call s:fill_win({ -> s:create_grid_layout(a:rows, a:cols) }, s:n_arg_bufs(a:rows * a:cols))
+endf
+
+command! -nargs=* LayoutGrid call s:layout_grid(<f-args>)
+command! -nargs=* LayoutAGrid call s:layout_agrid(<f-args>)
+command! LayoutTwoCol call s:layout_grid(1, 2)
+command! LayoutATwoCol call s:layout_agrid(1, 2)
+command! LayoutTwoRow call s:layout_grid(2, 1)
+command! LayoutATwoRow call  s:layout_agrid(2, 1)
+command! Layout22 call s:layout_grid(2, 2)
+command! LayoutA22 call s:layout_agrid(2, 2)
+command! Layout23 call s:layout_grid(2, 3)
+command! LayoutA23 call s:layout_agrid(2, 3)
 command! LayoutPi call s:fill_win({ -> execute('split | vsplit') }, s:n_bufs(3))
 command! LayoutAPi call  s:fill_win({ -> execute('split | vsplit') }, s:n_arg_bufs(3))
 command! LayoutC call s:fill_win({ -> execute('vsplit | split') }, s:n_bufs(3))
