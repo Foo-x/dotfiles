@@ -4,7 +4,7 @@ endif
 
 augroup Fre
   autocmd!
-  autocmd VimEnter * autocmd BufWinEnter * if g:fre_active && filereadable(expand('%:~:.')) && bufname() !~ '^\.local/.\+' | call jobstart('fre --store .local/fre.json --add ' . expand('%:~:.') . '&& echo >> .local/fre.json') | endif
+  autocmd VimEnter * autocmd BufWinEnter * if g:fre_active && filereadable(expand('%:~:.')) && bufname() !~ '\v^(\.local/.+)|(/.+)' | call jobstart('fre --store .local/fre.json --add ' . expand('%:~:.') . '&& echo >> .local/fre.json') | endif
 augroup END
 
 let g:fre_active = filereadable('.local/fre.json')

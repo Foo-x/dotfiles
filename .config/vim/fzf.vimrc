@@ -8,9 +8,10 @@ nnoremap <Plug>(fzf). <Cmd>call <SID>files_cursor()<CR>
 nnoremap <Plug>(fzf)i :<C-u>FilesNoIgnore<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS!<CR>
 nnoremap <Plug>(fzf)H :<C-u>History!<CR>
+nnoremap <Plug>(fzf)m :<C-u>BMarks<CR>
 nnoremap <Plug>(fzf); :<C-u>Tags!<CR>
-nnoremap <Plug>(fzf)ar :<C-u>Args!<CR>
-nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs!<CR>
+nnoremap <Plug>(fzf)ar :<C-u>Args<CR>
+nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs<CR>
 nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
 nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
 nnoremap <Plug>(fzf)b :<C-u>Bookmarks!<CR>
@@ -153,7 +154,7 @@ command! -bang ATV call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ }), <bang>0))
 
 command! -bang Bookmarks call fzf#run(fzf#wrap(fzf#vim#with_preview({
-  \ 'source': 'cat .local/bookmarks.txt | sed "/^#\|^$/d"',
+  \ 'source': 'cat .local/bookmarks.txt | sed "/^#\|^\s*$/d"',
   \ 'sink': function('s:gf'),
   \ 'options': '--prompt "Bookmarks> "'
   \ }), <bang>0))
@@ -165,7 +166,7 @@ endf
 command! -bang Frecency call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': 'fre --store .local/fre.json --stat',
   \ 'sink': function('s:frecency'),
-  \ 'options': '--prompt "Frecency> " --no-sort',
+  \ 'options': '--prompt "Frecency> " --no-sort -n 2',
   \ 'placeholder': '{2}'
   \ }), <bang>0))
 " }}}

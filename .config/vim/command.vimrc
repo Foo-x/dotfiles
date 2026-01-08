@@ -186,6 +186,22 @@ command! CopyFilenameBasenameWithoutExtension let @"=expand('%:t:r') | silent! d
 command! CopyFilenameWithCursorPosition let @"=expand('%') . ":" . line('.') . ":" . col('.') | silent! doautocmd TextYankPost | call YankToClipboard(@")
 command! CopyFilenameAbsoluteWithCursorPosition let @"=expand('%:p') . ":" . line('.') . ":" . col('.') | silent! doautocmd TextYankPost | call YankToClipboard(@")
 
+function! s:add_bookmark()
+  if empty(expand('%:p'))
+    return
+  endif
+
+  let l:file = expand('%')
+  let l:bookmark_file = expand('.local/bookmarks.txt')
+
+  call mkdir(fnamemodify(l:bookmark_file, ':h'), 'p')
+
+  call writefile([l:file], l:bookmark_file, 'a')
+
+  echom 'Bookmarked: ' . l:file
+endfunction
+command! AddBookmark call s:add_bookmark()
+
 " save yanked text to the operator register too
 " change -> c, delete -> d, yank -> y
 " https://blog.atusy.net/2023/12/17/vim-easy-to-remember-regnames/

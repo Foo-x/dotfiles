@@ -78,9 +78,11 @@ revert		Reverts a previous commit
 style		Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 test		Adding missing tests or correcting existing tests
 "'
-alias kmd='vi +"Kanbanmd" +"-tabclose"'
+# not to use subshell to restore with tmux session
+alias kmd='vi +"Kanbanmd" +"-tabclose" +"doautocmd SessionLoadPost"'
 alias kmdh='$PAGER ${XDG_DATA_HOME}/kanbanmd/README.md'
 alias kmdn='(cd ${XDG_DATA_HOME}/kanbanmd && cat 2_ready.md <(echo) 3_doing.md | $PAGER)'
+alias vis='touch Session.vim && vi +"doautocmd SessionLoadPost" -S'
 alias vig='vi -c "DiffviewOpen" -c "on|1bw"'
 alias viq='vi -c "cfile"'
 alias vit='\rm startuptime.log &> /dev/null; vi --startuptime startuptime.log +"sl 300m | q" && vi startuptime.log && \rm startuptime.log &> /dev/null'

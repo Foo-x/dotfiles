@@ -111,6 +111,35 @@ let &t_te.="\e[0 q"
 let $BASH_ENV="$HOME/.dotfiles/.config/bash/.aliases"
 
 " autocmd
+augroup SessionLoad
+  autocmd!
+  let g:save_session = v:false
+  fun! s:session_load_post()
+    if !g:save_session
+      let g:save_session = v:true
+      " save a session every 1 sec
+      call timer_start(1 * 1000, { t -> execute('silent! mks!') }, { 'repeat': -1 })
+    endif
+
+    " clean diffview tabs and buffers
+    let l:tabs = gettabinfo()
+    for l:tab in l:tabs
+      for l:winid in l:tab.windows
+        if bufname(winbufnr(l:winid)) =~ '^diffview://'
+          exe 'tabclose' l:tab.tabnr
+          break
+        endif
+      endfor
+    endfor
+    for l:bufnr in range(1, bufnr('$'))
+      if bufname(l:bufnr) =~ '^diffview://'
+        exe 'bwipeout' l:bufnr
+      endif
+    endfor
+  endf
+  autocmd SessionLoadPost * call s:session_load_post()
+augroup END
+
 augroup Fold
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
@@ -138,10 +167,7 @@ augroup CmdWin
 augroup END
 augroup Memo
   autocmd!
-  autocmd TabLeave .local/memo.md let g:memo_leave = v:true
   autocmd BufEnter .local/memo.md ++once AutoSaveEnableBuffer
-  autocmd TabClosed * let g:memo_leave = v:false
-  autocmd TabEnter * if get(g:, 'memo_leave', v:false) && tabpagenr('#') != 0 | exe 'tabclose' tabpagenr('#') | endif | let g:memo_leave = v:false
 augroup END
 augroup Kanbanmd
   autocmd!
