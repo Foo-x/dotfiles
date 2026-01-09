@@ -1,12 +1,18 @@
 spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit
 spawn-sh-at-startup "wl-paste --watch cliphist store &"
 spawn-at-startup "vivaldi"
+spawn-at-startup "alacritty"
 spawn-at-startup "brave"
 spawn-at-startup "spotify"
 
 window-rule {
     match app-id="^Alacritty$"
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 1.0; }
+}
+
+window-rule {
+    match app-id="^Alacritty$" at-startup=true
+    open-on-workspace "browser"
 }
 
 window-rule {
