@@ -49,7 +49,7 @@ in
       neovim
       nodejs_24
       nushell
-      python313
+      python314
       ripgrep
       shellcheck
       shfmt
