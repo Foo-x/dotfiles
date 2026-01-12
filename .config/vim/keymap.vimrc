@@ -54,8 +54,8 @@ nnoremap K <C-b>
 
 nmap <Space>a <Plug>(argument)
 nnoremap <Plug>(argument)r :<C-u>Args<CR>
-nnoremap <Plug>(argument)n :<C-u>next<CR>
-nnoremap <Plug>(argument)p :<C-u>previous<CR>
+nnoremap <Plug>(argument)n :<C-u>NextOrFirst<CR>
+nnoremap <Plug>(argument)p :<C-u>PrevOrLast<CR>
 
 nmap <Space>q <Plug>(quickfix)
 nnoremap <Plug>(quickfix)n :<C-u>cnext<CR>

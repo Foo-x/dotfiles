@@ -19,6 +19,8 @@ command! -nargs=1 -complete=arglist A b <args>
 command! -nargs=* -complete=file -bar AA argadd <args> | argdedupe
 command! TabArgs tabnew | silent! argdo tab next
 command! -nargs=+ -complete=file EditMultiple silent! argdelete * | AA <args> | TabArgs
+command! NextOrFirst try | next | catch | first | endtry
+command! PrevOrLast try | prev | catch | last | endtry
 
 command! TabcloseRight +,$tabdo tabclose
 
@@ -40,10 +42,10 @@ if !exists('g:insert_print_timestamp')
   let g:insert_print_timestamp = {}
   " needs `from datetime import datetime`
   let g:insert_print_timestamp.python = 'datetime.now().strftime("%H:%M:%S.%f")[:-3]'
-  let g:insert_print_timestamp.javascript = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
-  let g:insert_print_timestamp.typescript = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
-  let g:insert_print_timestamp.typescriptreact = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
-  let g:insert_print_timestamp.vue = 'new Date().toLocaleTimeString("ja", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 })'
+  let g:insert_print_timestamp.javascript = 'new Date().toISOString().slice(11,-1)'
+  let g:insert_print_timestamp.typescript = 'new Date().toISOString().slice(11,-1)'
+  let g:insert_print_timestamp.typescriptreact = 'new Date().toISOString().slice(11,-1)'
+  let g:insert_print_timestamp.vue = 'new Date().toISOString().slice(11,-1)'
   let g:insert_print_timestamp.lua = 'os.date("%H:%M:%S") .. " " .. os.clock()'
   let g:insert_print_timestamp.vim = 'trim(system("date +%T.%3N"))'
   let g:insert_print_timestamp.sh = 'date +%T.%3N'
