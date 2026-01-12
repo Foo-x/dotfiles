@@ -53,9 +53,11 @@ nnoremap J <C-f>
 nnoremap K <C-b>
 
 nmap <Space>a <Plug>(argument)
+nnoremap <Plug>(argument) <Nop>
 nnoremap <Plug>(argument)r :<C-u>Args<CR>
-nnoremap <Plug>(argument)n :<C-u>NextOrFirst<CR>
-nnoremap <Plug>(argument)p :<C-u>PrevOrLast<CR>
+nnoremap <Plug>(argument)l :<C-u>args<CR>
+nnoremap <Plug>(argument)n :<C-u>silent! NextOrFirst<CR><Plug>(argument)
+nnoremap <Plug>(argument)p :<C-u>silent! PrevOrLast<CR><Plug>(argument)
 
 nmap <Space>q <Plug>(quickfix)
 nnoremap <Plug>(quickfix)n :<C-u>cnext<CR>
@@ -145,7 +147,7 @@ nnoremap L <Cmd>tabnext<CR>
 nnoremap <Plug>(tab)H <Cmd>tabmove -<CR>
 nnoremap <Plug>(tab)L <Cmd>tabmove +<CR>
 
-nnoremap <plug>(cgl)  <nop>
+nnoremap <plug>(cgl)  <Nop>
 nnoremap g; g;<plug>(cgl)
 nnoremap g, g,<plug>(cgl)
 nnoremap <plug>(cgl); g;<plug>(cgl)
