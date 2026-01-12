@@ -145,6 +145,12 @@ nnoremap L <Cmd>tabnext<CR>
 nnoremap <Plug>(tab)H <Cmd>tabmove -<CR>
 nnoremap <Plug>(tab)L <Cmd>tabmove +<CR>
 
+nnoremap <plug>(cgl)  <nop>
+nnoremap g; g;<plug>(cgl)
+nnoremap g, g,<plug>(cgl)
+nnoremap <plug>(cgl); g;<plug>(cgl)
+nnoremap <plug>(cgl), g,<plug>(cgl)
+
 nmap <C-f> <Plug>(file)
 nnoremap <Plug>(file)<C-y> <Cmd>CopyFilename<CR>
 
