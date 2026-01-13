@@ -318,6 +318,8 @@ endf
 command! Kanbanmd call s:kanbanmd()
 nnoremap <Space><Space>k <Cmd>Kanbanmd<CR>
 
+command! ToggleFocusMax let t:focus_max = !get(t:, 'focus_max', v:false) | vert resize | resize
+
 command! Reload source $MYVIMRC
 
 command! QfGitDiff cexpr system('git jump --stdout diff')
