@@ -14,6 +14,8 @@ nnoremap <Plug>(fzf)ar :<C-u>Args<CR>
 nnoremap <Plug>(fzf)ad :<C-u>DeleteArgs<CR>
 nnoremap <Plug>(fzf)aa :<C-u>AddArgs<CR>
 nnoremap <Plug>(fzf)ag :<C-u>GAddArgs<CR>
+nnoremap <Plug>(fzf)w :<C-u>Windows!<CR>
+nnoremap <Plug>(fzf)p :<C-u>Pins!<CR>
 nnoremap <Plug>(fzf)b :<C-u>Bookmarks!<CR>
 nnoremap <Plug>(fzf)<Space> :<C-u>Frecency!<CR>
 if executable('rg')
@@ -157,6 +159,11 @@ command! -bang Bookmarks call fzf#run(fzf#wrap(fzf#vim#with_preview({
   \ 'source': 'cat .local/bookmarks.txt | sed "/^#\|^\s*$/d"',
   \ 'sink': function('s:gf'),
   \ 'options': '--prompt "Bookmarks> "'
+  \ }), <bang>0))
+
+command! -bang Pins call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \ 'source': getwininfo()->filter('has_key(v:val.variables, "pin")')->map('v:val.variables.pin'),
+  \ 'options': '--prompt "Pins> "'
   \ }), <bang>0))
 
 fun! s:frecency(line)

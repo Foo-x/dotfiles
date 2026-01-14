@@ -333,6 +333,16 @@ command! Reload source $MYVIMRC
 command! QfGitDiff cexpr system('git jump --stdout diff')
 command! QfTypos cexpr system('typos --format brief')
 
+command! Pin if get(w:, 'pin', '!') == expand('%') | unlet w:pin | else | let w:pin = expand('%') | endif
+command! BackToPin exe 'e ' . w:pin
+
+fun! s:pin_all()
+  for l:win in getwininfo()->filter('v:val.tabnr == tabpagenr()')
+    call win_execute(l:win.winid, 'let w:pin = expand("%")')
+  endfor
+endf
+command! PinAll call s:pin_all()
+
 if has('nvim')
   command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif
 else

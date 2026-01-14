@@ -37,7 +37,17 @@ if has('nvim')
     return ' ' . l:common . w:repo_status_cache.value . l:diagnostics_status . l:autosave_status . l:format_on_save_status . ' '
   endf
   set statusline=%{%MyStatusline()%}
-  set winbar=\ %f%m%r%h%w
+  fun! MyWinBar()
+    if !exists('w:pin')
+      return '   %f%m%r%h%w'
+    elseif w:pin == expand('%')
+      return '  %f%m%r%h%w'
+    else
+      return '  %f%m%r%h%w'
+    endif
+  endf
+  " set winbar=\ %f%m%r%h%w
+  set winbar=%{%MyWinBar()%}
 else
   set statusline=\ %f%m%r%h%w\ %=%l,%v\ %p%%\ 
 endif

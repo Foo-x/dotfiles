@@ -121,6 +121,7 @@ nnoremap <Plug>(window)T <C-w>T
 nnoremap <Plug>(window)r <C-w>r
 nnoremap <Plug>(window)m <C-w>\|<C-w>_
 nnoremap <Plug>(window)= <C-w>=
+nnoremap <Plug>(window)<bar> <Cmd>horiz wincmd =<CR>
 nnoremap <Plug>(window)> <C-w>>
 nnoremap <Plug>(window)< <C-w><
 nnoremap <Plug>(window)+ <C-w>+
@@ -130,10 +131,6 @@ nnoremap <Plug>(window)y <Cmd>let @w=expand('%')<CR>
 nnoremap <Plug>(window)p <Cmd>exe 'e ' . @w<CR>
 nnoremap <Plug>(window)t <Cmd>tab split<CR>
 nnoremap <Plug>(window)<CR> <Cmd>ToggleFocusMax<CR>
-nnoremap <Space>1 <C-w>t
-nnoremap <Space>2 <C-w>t<C-w>l
-nnoremap <Space>3 <C-w>t<C-w>j
-nnoremap <Space>4 <C-w>b
 nnoremap <Left> <C-w>h
 nnoremap <Down> <C-w>j
 nnoremap <Up> <C-w>k
@@ -159,6 +156,11 @@ nnoremap <plug>(cgl), g,<plug>(cgl)
 
 nmap <C-f> <Plug>(file)
 nnoremap <Plug>(file)<C-y> <Cmd>CopyFilename<CR>
+
+nmap <Space>p <Plug>(pin)
+nnoremap <Plug>(pin) <Nop>
+nnoremap <Plug>(pin)p <Cmd>Pin<CR><Cmd>redraw!<CR>
+nnoremap <Plug>(pin)b <Cmd>BackToPin<CR>
 
 nnoremap <Space><Space>b <Cmd>exe 'e .local/bookmarks.txt'<CR>
 nnoremap <Space><Space>m <Cmd>tabnew .local/memo.md<CR>
