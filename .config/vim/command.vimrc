@@ -318,7 +318,15 @@ endf
 command! Kanbanmd call s:kanbanmd()
 nnoremap <Space><Space>k <Cmd>Kanbanmd<CR>
 
-command! ToggleFocusMax let t:focus_max = !get(t:, 'focus_max', v:false) | vert resize | resize
+fun! FocusMax()
+  resize
+
+  let l:qf_win = getqflist({'winid': 0})
+  if !empty(l:qf_win) && l:qf_win.winid != 0
+    call win_execute(l:qf_win.winid, 'resize 10')
+  endif
+endf
+command! ToggleFocusMax let t:focus_max = !get(t:, 'focus_max', v:false) | call FocusMax()
 
 command! Reload source $MYVIMRC
 

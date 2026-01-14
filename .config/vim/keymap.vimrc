@@ -94,8 +94,11 @@ nnoremap <Plug>(location)l :<C-u>lnewer<CR>
 nnoremap <expr> <Plug>(location)t empty(filter(getwininfo(), 'v:val.loclist')) ? ':lopen<CR>' : ':lclose<CR>'
 
 nmap <Space>w <Plug>(window)
+nnoremap <Plug>(window) <Nop>
 nnoremap <Plug>(window)_ <Cmd>split<CR>
+nnoremap <Space>- <Cmd>split<CR>
 nnoremap <Plug>(window)\ <Cmd>vsplit<CR>
+nnoremap <Space>\ <Cmd>vsplit<CR>
 nnoremap <Plug>(window)c <C-w>c
 nnoremap <Plug>(window)o <C-w>o
 nnoremap <Plug>(window)h <C-w>h
@@ -126,6 +129,7 @@ nnoremap <Plug>(window)- <C-w>-
 nnoremap <Plug>(window)y <Cmd>let @w=expand('%')<CR>
 nnoremap <Plug>(window)p <Cmd>exe 'e ' . @w<CR>
 nnoremap <Plug>(window)t <Cmd>tab split<CR>
+nnoremap <Plug>(window)<CR> <Cmd>ToggleFocusMax<CR>
 nnoremap <Space>1 <C-w>t
 nnoremap <Space>2 <C-w>t<C-w>l
 nnoremap <Space>3 <C-w>t<C-w>j

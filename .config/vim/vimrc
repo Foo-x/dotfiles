@@ -70,6 +70,7 @@ set sessionoptions-=folds
 set shell=$SHELL\ -l
 set noshowcmd
 set winminwidth=12
+set winminheight=0
 if has('nvim')
   set foldexpr=nvim_treesitter#foldexpr()
   set foldcolumn=auto
@@ -190,5 +191,5 @@ augroup ShowCmd
 augroup END
 augroup FocusMax
   autocmd!
-  autocmd WinEnter * if get(t:, 'focus_max', v:false) | vert resize | resize | endif
+  autocmd WinEnter * if get(t:, 'focus_max', v:false) | call FocusMax() | endif
 augroup END
