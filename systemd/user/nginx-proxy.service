@@ -5,7 +5,7 @@ Description=Start nginx-proxy
 Type=simple
 Restart=always
 Environment=NAME=nginx-proxy
-ExecStart=/usr/bin/docker run --rm -v /var/run/docker.sock:/tmp/docker.sock:ro -v ${HOME}/certs:/etc/nginx/certs -p 80:80 -p 443:443 --name=${NAME} nginxproxy/nginx-proxy:1.6
+ExecStart=/usr/bin/docker run --rm -v /var/run/docker.sock:/tmp/docker.sock:ro -v ${HOME}/certs:/etc/nginx/certs -p 80:80 -p 443:443 --name=${NAME} nginxproxy/nginx-proxy:1.9
 ExecStop=/usr/bin/docker stop ${NAME}
 ExecReload=/usr/bin/docker restart ${NAME}
 

@@ -5,7 +5,7 @@ Description=Start ntfy
 Type=simple
 Restart=always
 Environment=NAME=ntfy
-ExecStart=/usr/bin/docker run --rm --env VIRTUAL_HOST=ntfy.x.localhost --env CERT_NAME=default --name=${NAME} binwiederhier/ntfy:v2.11.0 serve
+ExecStart=/usr/bin/docker run --rm --env VIRTUAL_HOST=ntfy.x.localhost --env CERT_NAME=default --name=${NAME} binwiederhier/ntfy:v2.15.0 serve
 ExecStop=/usr/bin/docker stop ${NAME}
 ExecReload=/usr/bin/docker restart ${NAME}
 
