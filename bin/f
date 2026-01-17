@@ -3,11 +3,9 @@
 import { $ } from 'bun';
 import path, { basename } from 'path';
 
-const globalRoot = (await $`bun pm -g ls 2> /dev/null | head -n1 | cut -d' ' -f1`.text()).trim();
-const yargsPath = path.join(globalRoot, 'node_modules', 'yargs', 'yargs');
 let yargs: Function;
 try {
-  yargs = require(yargsPath);
+  yargs = require('yargs');
 } catch {
   console.info('Install yargs with "bun install -g yargs".');
   process.exit(1);
@@ -18,9 +16,6 @@ await yargs(process.argv.slice(2))
     yargs.strict(false);
   }, async () => {
     await $`${{ raw: `fzf -m --header "Tab: toggle" | xargs ${process.argv.slice(3).join(' ')}` }}`;
-  })
-  .command(['ex'], 'fzf execute after editing', {}, async () => {
-    await $`${{ raw: `fzf -m --header "Tab: toggle" | vipe | $SHELL` }}`;
   })
   .command(['e [query]', 'edit'], 'fzf edit with EDITOR', (yargs: any) => {
     yargs.strict(false);

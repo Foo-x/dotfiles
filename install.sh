@@ -62,6 +62,7 @@ jj_desc_template
 nvimdirdiff
 vipe
 win_git
+ntfy
 "
 echo "${binfiles}" | xargs -I{} ln -sfT ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 export PATH="${HOME}/.local/bin:${PATH}"

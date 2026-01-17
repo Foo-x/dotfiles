@@ -4,11 +4,9 @@ import { basename } from 'path';
 import { $ } from 'bun';
 import path from 'path';
 
-const globalRoot = (await $`bun pm -g ls 2> /dev/null | head -n1 | cut -d' ' -f1`.text()).trim();
-const yargsPath = path.join(globalRoot, 'node_modules', 'yargs', 'yargs');
 let yargs: Function;
 try {
-  yargs = require(yargsPath);
+  yargs = require('yargs');
 } catch {
   console.info('Install yargs with "bun install -g yargs".');
   process.exit(1);

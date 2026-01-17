@@ -1,6 +1,7 @@
 " keymap {{{
 nnoremap <Space>f <Plug>(fzf)
 nnoremap <Plug>(fzf)<CR> :<C-u>Files!<CR>
+nnoremap <Plug>(fzf)f :<C-u>FocusOrFiles!<CR>
 "" files in git status
 nnoremap <Plug>(fzf)? :<C-u>GFiles!?<CR>
 nnoremap <Plug>(fzf)g :<C-u>GFiles!<CR>
@@ -85,6 +86,46 @@ command! -bang GAddArgs call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "GAddArgs> "'
 \ }), v:true)
 command! FilesNoIgnore let _fzf_default_command_tmp=$FZF_DEFAULT_COMMAND | let $FZF_DEFAULT_COMMAND='fd --hidden -E ".git/{objects,refs,logs}" -E "node_modules" -E ".jj" -tf -tl -I' | exe 'Files!' | let $FZF_DEFAULT_COMMAND=_fzf_default_command_tmp
+
+fun! s:focus_or_files(line)
+  " current tab first
+  let l:win_count = winnr('$')
+  for l:win_nr in range(1, l:win_count)
+    let l:buf_nr = winbufnr(l:win_nr)
+    let l:buf_name = bufname(l:buf_nr)
+
+    if l:buf_name ==# a:line
+      execute l:win_nr . 'wincmd w'
+      return
+    endif
+  endfor
+
+  let l:current_tab = tabpagenr()
+  let l:tab_count = tabpagenr('$')
+  for l:tab_nr in range(1, l:tab_count)
+    if l:tab_nr == l:current_tab
+      continue
+    endif
+
+    let l:win_count = tabpagewinnr(l:tab_nr, '$')
+    for l:win_nr in range(1, l:win_count)
+      let l:buf_nr = tabpagebuflist(l:tab_nr)[l:win_nr - 1]
+      let l:buf_name = bufname(l:buf_nr)
+
+      if l:buf_name ==# a:line
+        execute 'tabnext ' . l:tab_nr
+        execute l:win_nr . 'wincmd w'
+        return
+      endif
+    endfor
+  endfor
+
+  execute 'e ' . a:line
+endf
+command! -bang FocusOrFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview({
+  \ 'sink': function('s:focus_or_files'),
+  \ 'options': '--prompt "FocusOrFiles> "'
+\ }), <bang>0)
 
 fun! s:open_buffers_in_new_tab(is_vert, lines)
   let l:lines = map(filter(a:lines, 'len(v:val)'), {_, line -> split(line, '	')[-1]})

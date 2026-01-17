@@ -1,0 +1,77 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "Bash(cp:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(less:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(which:*)",
+      "Bash(type:*)",
+      "Bash(echo:*)",
+      "Bash(pwd:*)",
+      "Bash(printf:*)",
+      "Bash(touch:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(diff:*)",
+      "Bash(ln:*)",
+      "Bash(tree:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run test:*)",
+      "Bash(terraform fmt:*)"
+    ],
+    "deny": [
+      "Bash(curl:*)",
+      "Read(env)",
+      "Read(.env)",
+      "Read(.envrc)",
+      "Read(.env.*)",
+      "Write(.env*)"
+    ],
+    "defaultMode": "plan"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ntfy 'claude notification'"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ntfy 'claude permission request'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ntfy 'claude stop'"
+          }
+        ]
+      }
+    ]
+  },
+  "language": "japanese"
+}

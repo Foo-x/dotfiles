@@ -36,7 +36,7 @@ return {
     },
     event = 'VeryLazy',
     keys = {
-      { '<Plug>(fzf)f', '<Cmd>FFern<CR>' },
+      { '<Plug>(fzf)e', '<Cmd>FFern<CR>' },
       { '<Plug>(fzf)o', '<Cmd>FOil<CR>' },
       { '<Plug>(fzf)z', '<Cmd>FZoxide<CR>' },
     },

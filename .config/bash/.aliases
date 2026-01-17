@@ -90,8 +90,6 @@ alias scratch='vi +"call timer_start(&updatetime + 100, { -> execute('\''set buf
 alias memo='vi .local/memo.md'
 alias ltail='less -n +F --follow-name'
 alias envedit='envtmp=$(mktemp); export -p > $envtmp; $EDITOR $envtmp; . $envtmp; \rm $envtmp; unset envtmp'
-alias ntfy='curl -k https://ntfy.x.localhost/ntfy -d'
-alias ntfy-='curl -k https://ntfy.x.localhost/ntfy -d @-'
 alias cti='rg --files | ctags -R -L -'
 alias svenv='source .venv/bin/activate'
 
