@@ -48,3 +48,5 @@ Thumbs.db
 
 # macOS
 .DS_Store
+
+**/.claude/settings.local.json

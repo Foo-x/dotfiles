@@ -80,6 +80,12 @@
     "command": "bun x ccusage statusline",
     "padding": 0
   },
+  "enabledPlugins": {
+    "code-review@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "cook@claude-code-cookbook": true
+  },
   "model": "opusplan",
   "language": "japanese",
   "promptSuggestionEnabled": false
