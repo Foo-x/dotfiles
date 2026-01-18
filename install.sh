@@ -160,6 +160,10 @@ IS_WSL="$(if uname -r | \grep -iq 'microsoft'; then echo 1; else echo 0; fi)"
 if [ ${IS_WSL} = 1 ] && ! has wsl-open; then
   bun install -g wsl-open
 fi
+# install jw
+if ! has jw; then
+  bun install -g github:foo-x/jw
+fi
 
 exe_files="
 setup_completions.sh
