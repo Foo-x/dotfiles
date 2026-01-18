@@ -44,22 +44,12 @@
     "defaultMode": "plan"
   },
   "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "ntfy \"claude notification ${CLAUDE_PROJECT_DIR} $(tmux display-message -p '#S:#I.#P')\""
-          }
-        ]
-      }
-    ],
     "PermissionRequest": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "ntfy \"claude permission request ${CLAUDE_PROJECT_DIR} $(tmux display-message -p '#S:#I.#P')\""
+            "command": "ntfy \"claude permission request ${CLAUDE_PROJECT_DIR}\""
           }
         ]
       }
@@ -69,7 +59,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "ntfy \"claude stop ${CLAUDE_PROJECT_DIR} $(tmux display-message -p '#S:#I.#P')\""
+            "command": "ntfy \"claude stop ${CLAUDE_PROJECT_DIR}\""
           }
         ]
       }
