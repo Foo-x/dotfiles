@@ -325,6 +325,12 @@ fun! FocusMax()
   if !empty(l:qf_win) && l:qf_win.winid != 0
     call win_execute(l:qf_win.winid, 'resize 10')
   endif
+
+  if t:focus_max
+    echo 'FocusMax on'
+  else
+    echo 'FocusMax off'
+  endif
 endf
 command! ToggleFocusMax let t:focus_max = !get(t:, 'focus_max', v:false) | call FocusMax()
 
