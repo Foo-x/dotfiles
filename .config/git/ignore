@@ -13,6 +13,9 @@ logs/
 .cache/
 tags
 
+# jwconfig
+.jwconfig
+
 # git worktree
 .gwt/
 
