@@ -50,7 +50,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "ntfy \"claude permission request ${CLAUDE_PROJECT_DIR}\""
+            "command": "push_ai \"claude permission request ${CLAUDE_PROJECT_DIR}\""
           }
         ]
       }
@@ -60,7 +60,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "ntfy \"claude stop ${CLAUDE_PROJECT_DIR}\""
+            "command": "push_ai \"claude stop ${CLAUDE_PROJECT_DIR}\""
           }
         ]
       }

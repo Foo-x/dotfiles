@@ -348,6 +348,7 @@ fun! s:pin_all()
   endfor
 endf
 command! PinAll call s:pin_all()
+cnoreabbr pa PinAll
 
 if has('nvim')
   command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif

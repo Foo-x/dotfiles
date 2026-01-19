@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+ai_stack="${XDG_CACHE_HOME}/.ai_stack"
+
+[[ ! -f "${ai_stack}" || ! -s "${ai_stack}" ]] && exit 0
+
+target_pane=$(tail -n 1 "${ai_stack}")
+sed -i '$d' "${ai_stack}"
+tmux switch-client -t "${target_pane}"

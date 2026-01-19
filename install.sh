@@ -63,6 +63,8 @@ nvimdirdiff
 vipe
 win_git
 ntfy
+push_ai
+switch_ai
 "
 echo "${binfiles}" | xargs -I{} ln -sfT ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 export PATH="${HOME}/.local/bin:${PATH}"

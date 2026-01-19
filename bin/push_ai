@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+tmux_pane=$(tmux display-message -p '#S:#I.#P')
+ai_stack="${XDG_CACHE_HOME}/.ai_stack"
+sed -i "/${tmux_pane}/d" "${ai_stack}"
+echo "${tmux_pane}" >> "${ai_stack}"
+
+curl -k https://ntfy.x.localhost/ntfy -d "$@"
