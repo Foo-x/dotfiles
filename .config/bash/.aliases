@@ -199,6 +199,14 @@ alias tmr='tmux rename'
 alias tmrw='tmux renamew'
 alias tmcapture='tmux capture-pane -pS - | view'
 alias tmreload='tmux source-file $XDG_CONFIG_HOME/tmux/tmux.conf'
+function tmf() {
+  tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index} #{pane_current_command} #{pane_current_path}" \
+  | awk -v str="$1" '$2 ~ str {print}' \
+  | fzf --prompt="Select Claude pane:  " --preview="tmux capture-pane -p -t {1}" \
+  | awk '{print $1}' \
+  | xargs -I {} tmux switch-client -t {}
+}
+alias tmc='tmf claude'
 
 # terraform
 alias tf='terraform'

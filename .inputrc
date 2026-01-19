@@ -61,10 +61,6 @@ $if Bash
     "\C-qn": " > /dev/null"
     "\C-qN": " > /dev/null 2>&1"
 
-    # cd to parent
-    # \e, = M-,
-    "\e,": "\C-e\C-ucd ..\C-m"
-
     # expand line
     "\C-q ": "\e\C-e "
     Space: magic-space
