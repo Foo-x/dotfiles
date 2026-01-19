@@ -126,9 +126,7 @@ export PROMPT_COMMAND_HISTSAVE='__histsave'
 
 function vcs_status() {
   if jj root &> /dev/null; then
-    PAGER=cat jj diff --summary
-    echo
-    jj log
+    jj status
     return
   fi
   if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = "true" ]; then

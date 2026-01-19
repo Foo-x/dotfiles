@@ -43,6 +43,7 @@
     ],
     "defaultMode": "plan"
   },
+  "model": "opusplan",
   "hooks": {
     "PermissionRequest": [
       {
@@ -74,9 +75,19 @@
     "code-review@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
-    "cook@claude-code-cookbook": true
+    "cook@claude-code-cookbook": true,
+    "backend-development@claude-code-workflows": true,
+    "documentation-generation@claude-code-workflows": true,
+    "tdd-workflows@claude-code-workflows": true,
+    "code-review-ai@claude-code-workflows": true,
+    "frontend-mobile-security@claude-code-workflows": true,
+    "application-performance@claude-code-workflows": true,
+    "backend-api-security@claude-code-workflows": true,
+    "code-refactoring@claude-code-workflows": true,
+    "cloud-infrastructure@claude-code-workflows": true,
+    "javascript-typescript@claude-code-workflows": true,
+    "security-scanning@claude-code-workflows": true
   },
-  "model": "opusplan",
   "language": "japanese",
   "promptSuggestionEnabled": false
 }
