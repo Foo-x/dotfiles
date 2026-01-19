@@ -55,6 +55,7 @@ in
       shfmt
       terraform
       tmux
+      tree
       typos
       unison
       universal-ctags
