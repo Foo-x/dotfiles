@@ -27,6 +27,7 @@
       "Bash(diff:*)",
       "Bash(ln:*)",
       "Bash(tree:*)",
+      "Bash(xargs:*)",
       "Bash(npm run lint)",
       "Bash(npm run test:*)",
       "Bash(bun run lint)",
@@ -50,7 +51,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "push_ai \"claude permission request ${CLAUDE_PROJECT_DIR}\""
+            "command": "push_ai \"$(tmux display-message -p '#S:#I.#P')\" \"claude permission request ${CLAUDE_PROJECT_DIR}\""
           }
         ]
       }
@@ -60,7 +61,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "push_ai \"claude stop ${CLAUDE_PROJECT_DIR}\""
+            "command": "push_ai \"$(tmux display-message -p '#S:#I.#P')\" \"claude stop ${CLAUDE_PROJECT_DIR}\""
           }
         ]
       }

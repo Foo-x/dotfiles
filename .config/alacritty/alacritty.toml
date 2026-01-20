@@ -5,7 +5,7 @@ import = [
 
 [font]
 normal = { family = "Firge Nerd Console" }
-size = 12
+size = 10
 
 [window]
 decorations = "None"
