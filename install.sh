@@ -219,12 +219,6 @@ mkdir -p ${XDG_CONFIG_HOME}/ctags
 ctags_files=$(cd ${DOT_DIR}/.config/ctags && \ls -1)
 printf "${ctags_files}" | xargs -I{} ln -sf ${DOT_DIR}/.config/ctags/{} ${XDG_CONFIG_HOME}/ctags/{}
 
-# setup mcphub
-ln -sf ${DOT_DIR}/.config/mcphub ${XDG_CONFIG_HOME}
-
-# setup aider
-ln -sf "${DOT_DIR}/aider/.aider.conf.yml" "${HOME}/.aider.conf.yml"
-
 # setup terraform
 mkdir -p "${XDG_CACHE_HOME}/terraform/plugins"
 

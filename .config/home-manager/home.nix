@@ -24,7 +24,6 @@ in
     stateVersion = "24.05";
 
     packages = with pkgs; [
-      aider-chat
       awscli2
       bat
       bun
