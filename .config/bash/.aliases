@@ -24,7 +24,15 @@ else
 fi
 alias la='ls -A'
 alias l1='ls -1A'
-alias ll='ls -lahi --time-style=+%c'
+function lless() {
+  local path="${1:-.}"
+  if [ -d "$path" ]; then
+    ls -lahi --time-style=+%c -- "$path"
+  else
+    less -- "$path"
+  fi
+}
+alias ll=lless
 alias mkdir='mkdir -p'
 alias df='df -h'
 alias du='du -h'
@@ -293,6 +301,18 @@ function fcd() {
 
   if [[ -n "$dir" ]]; then
     cd "$dir"
+  fi
+}
+
+function jwf() {
+  local selected
+  selected=$(jw list 2> /dev/null | command grep '✓' | fzf)
+  if [[ -n "$selected" ]]; then
+    local path
+    path=$(echo "$selected" | command grep -oP '\(\K[^)]+')
+    if [[ -n "$path" ]]; then
+      cd "$path" || return 1
+    fi
   fi
 }
 
