@@ -51,7 +51,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "push_ai \"$(tmux display-message -p '#S:#I.#P')\" \"claude permission request ${CLAUDE_PROJECT_DIR}\""
+            "command": "push_ai ${TMUX_PANE} \"claude permission request ${CLAUDE_PROJECT_DIR}\""
           }
         ]
       }
@@ -61,7 +61,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "push_ai \"$(tmux display-message -p '#S:#I.#P')\" \"claude stop ${CLAUDE_PROJECT_DIR}\""
+            "command": "push_ai ${TMUX_PANE} \"claude stop ${CLAUDE_PROJECT_DIR}\""
           }
         ]
       }
