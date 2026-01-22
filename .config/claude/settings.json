@@ -30,6 +30,7 @@
       "Bash(xargs:*)",
       "Bash(npm run lint)",
       "Bash(npm run test:*)",
+      "Bash(npm test:*)",
       "Bash(bun run lint)",
       "Bash(bun run test:*)",
       "Bash(terraform fmt:*)"
