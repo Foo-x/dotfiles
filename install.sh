@@ -239,6 +239,13 @@ if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
   echo "${waybarfiles}" | xargs -I{} ln -sf ${DOT_DIR}/.config/waybar/{} ${XDG_CONFIG_HOME}/waybar/{}
 fi
 
+# setup claude
+mkdir -p "${HOME}/.claude/skills"
+claude_skills="
+security-review-generator
+"
+echo "${claude_skills}" | xargs -I{} ln -sfn "${DOT_DIR}/claude/skills/{}" "${HOME}/.claude/skills/{}"
+
 if ! has luarocks; then
   printf "\e[93minstall luarocks\e[0m\n"
 fi

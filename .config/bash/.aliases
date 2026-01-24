@@ -302,9 +302,10 @@ function fcd() {
   fi
 }
 
+# jw
 function jwf() {
   local selected
-  selected=$(jw list 2> /dev/null | command grep '✓' | fzf)
+  selected=$(jw list 2> /dev/null | command grep -v '✗' | fzf -1 -n -2 -q "$1")
   if [[ -n "$selected" ]]; then
     local path
     path=$(echo "$selected" | command grep -oP '\(\K[^)]+')
@@ -313,6 +314,8 @@ function jwf() {
     fi
   fi
 }
+alias jwd='cd $(jw go)'
+alias jwl='jw list'
 
 function o() {
   vi ${1:-.} +"sp" +"windo vs"

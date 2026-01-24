@@ -1,0 +1,515 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Security Finding",
+  "description": "セキュリティ発見事項のスキーマ",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "severity",
+    "description",
+    "location"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "発見事項の一意ID（例: SEC-001）",
+      "pattern": "^SEC-[0-9]{3,}$"
+    },
+    "title": {
+      "type": "string",
+      "description": "発見事項のタイトル",
+      "minLength": 10,
+      "maxLength": 200
+    },
+    "severity": {
+      "type": "string",
+      "description": "重要度",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low",
+        "Info"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "脆弱性の詳細説明",
+      "minLength": 50
+    },
+    "location": {
+      "type": "object",
+      "description": "脆弱性の場所",
+      "required": [
+        "file"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "ファイルパス"
+        },
+        "line": {
+          "type": "integer",
+          "description": "行番号",
+          "minimum": 1
+        },
+        "line_end": {
+          "type": "integer",
+          "description": "終了行番号",
+          "minimum": 1
+        },
+        "column": {
+          "type": "integer",
+          "description": "列番号",
+          "minimum": 1
+        },
+        "function": {
+          "type": "string",
+          "description": "関数名またはメソッド名"
+        }
+      }
+    },
+    "owasp_category": {
+      "type": "string",
+      "description": "OWASP Top 10カテゴリ",
+      "pattern": "^A[0-9]{2}:20[0-9]{2} - .+$",
+      "examples": [
+        "A01:2021 - Broken Access Control",
+        "A02:2021 - Cryptographic Failures",
+        "A03:2021 - Injection"
+      ]
+    },
+    "owasp_api_category": {
+      "type": "string",
+      "description": "OWASP API Security Top 10カテゴリ",
+      "pattern": "^API[0-9]+ - .+$",
+      "examples": [
+        "API1 - Broken Object Level Authorization",
+        "API2 - Broken Authentication"
+      ]
+    },
+    "cwe_id": {
+      "type": "string",
+      "description": "CWE ID",
+      "pattern": "^CWE-[0-9]+$",
+      "examples": [
+        "CWE-89",
+        "CWE-79",
+        "CWE-787"
+      ]
+    },
+    "cve_id": {
+      "type": "string",
+      "description": "CVE ID（依存関係の脆弱性の場合）",
+      "pattern": "^CVE-[0-9]{4}-[0-9]+$",
+      "examples": [
+        "CVE-2024-1234"
+      ]
+    },
+    "cvss_score": {
+      "type": "number",
+      "description": "CVSS v3.1スコア",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "cvss_vector": {
+      "type": "string",
+      "description": "CVSS v3.1ベクター",
+      "pattern": "^CVSS:3\\.1/AV:[NALP]/AC:[LH]/PR:[NLH]/UI:[NR]/S:[UC]/C:[NLH]/I:[NLH]/A:[NLH]",
+      "examples": [
+        "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H"
+      ]
+    },
+    "dread_score": {
+      "type": "object",
+      "description": "DREADスコア",
+      "properties": {
+        "damage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "reproducibility": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "exploitability": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "affected_users": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "discoverability": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "total": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "平均スコア"
+        }
+      }
+    },
+    "impact": {
+      "type": "array",
+      "description": "影響のリスト",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "examples": [
+        [
+          "データベース全体の漏洩",
+          "データの改ざん",
+          "認証バイパス"
+        ]
+      ]
+    },
+    "business_impact": {
+      "type": "object",
+      "description": "ビジネス影響",
+      "properties": {
+        "confidentiality": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "None"
+          ]
+        },
+        "integrity": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "None"
+          ]
+        },
+        "availability": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "None"
+          ]
+        },
+        "financial_loss": {
+          "type": "number",
+          "description": "潜在的な金銭的損失（USD）",
+          "minimum": 0
+        },
+        "reputation_damage": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "None"
+          ]
+        }
+      }
+    },
+    "vulnerable_code": {
+      "type": "string",
+      "description": "脆弱なコードスニペット"
+    },
+    "fixed_code": {
+      "type": "string",
+      "description": "修正後のコードスニペット"
+    },
+    "reproduction_steps": {
+      "type": "array",
+      "description": "再現手順",
+      "items": {
+        "type": "string"
+      }
+    },
+    "poc": {
+      "type": "string",
+      "description": "概念実証（Proof of Concept）"
+    },
+    "remediation": {
+      "type": "object",
+      "description": "修正情報",
+      "required": [
+        "recommendation"
+      ],
+      "properties": {
+        "recommendation": {
+          "type": "string",
+          "description": "推奨される修正方法"
+        },
+        "effort": {
+          "type": "string",
+          "description": "修正工数",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ]
+        },
+        "cost": {
+          "type": "number",
+          "description": "推定修正コスト（USD）",
+          "minimum": 0
+        },
+        "priority": {
+          "type": "string",
+          "description": "優先度",
+          "enum": [
+            "P0",
+            "P1",
+            "P2",
+            "P3",
+            "P4"
+          ]
+        },
+        "deadline": {
+          "type": "string",
+          "description": "推奨期限",
+          "format": "date"
+        }
+      }
+    },
+    "compliance_mapping": {
+      "type": "object",
+      "description": "コンプライアンスフレームワークとのマッピング",
+      "properties": {
+        "soc2": {
+          "type": "array",
+          "description": "SOC 2要件",
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            [
+              "CC6.1",
+              "CC6.6"
+            ]
+          ]
+        },
+        "gdpr": {
+          "type": "array",
+          "description": "GDPR条項",
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            [
+              "Article 32"
+            ]
+          ]
+        },
+        "hipaa": {
+          "type": "array",
+          "description": "HIPAA要件",
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            [
+              "§164.312(a)(1)"
+            ]
+          ]
+        },
+        "pci_dss": {
+          "type": "array",
+          "description": "PCI DSS要件",
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            [
+              "Requirement 6.5.1"
+            ]
+          ]
+        },
+        "iso27001": {
+          "type": "array",
+          "description": "ISO 27001管理策",
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            [
+              "A.9.4.1"
+            ]
+          ]
+        }
+      }
+    },
+    "zero_trust_violation": {
+      "type": "boolean",
+      "description": "Zero Trust原則違反かどうか"
+    },
+    "stride_category": {
+      "type": "array",
+      "description": "STRIDE脅威カテゴリ",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Spoofing",
+          "Tampering",
+          "Repudiation",
+          "Information Disclosure",
+          "Denial of Service",
+          "Elevation of Privilege"
+        ]
+      }
+    },
+    "attack_vector": {
+      "type": "string",
+      "description": "攻撃ベクター",
+      "enum": [
+        "Network",
+        "Adjacent",
+        "Local",
+        "Physical"
+      ]
+    },
+    "references": {
+      "type": "array",
+      "description": "参考資料のURL",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "examples": [
+        [
+          "https://owasp.org/www-community/attacks/SQL_Injection",
+          "https://cwe.mitre.org/data/definitions/89.html"
+        ]
+      ]
+    },
+    "discovered_by": {
+      "type": "string",
+      "description": "発見者またはツール名",
+      "examples": [
+        "Manual Review",
+        "Semgrep",
+        "Backend Security Reviewer"
+      ]
+    },
+    "discovered_at": {
+      "type": "string",
+      "description": "発見日時",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "description": "ステータス",
+      "enum": [
+        "Open",
+        "In Progress",
+        "Fixed",
+        "Accepted Risk",
+        "False Positive",
+        "Wont Fix"
+      ],
+      "default": "Open"
+    },
+    "false_positive": {
+      "type": "boolean",
+      "description": "False Positiveかどうか",
+      "default": false
+    },
+    "metadata": {
+      "type": "object",
+      "description": "追加メタデータ",
+      "additionalProperties": true
+    }
+  },
+  "examples": [
+    {
+      "id": "SEC-001",
+      "title": "SQLインジェクション脆弱性",
+      "severity": "Critical",
+      "description": "ユーザー入力が適切にサニタイズされずにSQLクエリに使用されています。攻撃者はSQLインジェクションを通じてデータベース全体にアクセスできる可能性があります。",
+      "location": {
+        "file": "backend/api/users.py",
+        "line": 45,
+        "function": "get_users"
+      },
+      "owasp_category": "A03:2021 - Injection",
+      "cwe_id": "CWE-89",
+      "cvss_score": 9.8,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+      "dread_score": {
+        "damage": 10,
+        "reproducibility": 10,
+        "exploitability": 8,
+        "affected_users": 10,
+        "discoverability": 9,
+        "total": 9.4
+      },
+      "impact": [
+        "データベース全体の漏洩（顧客データ、認証情報等）",
+        "データの改ざん",
+        "認証バイパス",
+        "システムの完全な侵害"
+      ],
+      "business_impact": {
+        "confidentiality": "Critical",
+        "integrity": "Critical",
+        "availability": "High",
+        "financial_loss": 50000000,
+        "reputation_damage": "Critical"
+      },
+      "vulnerable_code": "@app.route('/api/users')\ndef get_users():\n    user_id = request.args.get('id')\n    query = f\"SELECT * FROM users WHERE id = {user_id}\"\n    cursor.execute(query)\n    return jsonify(cursor.fetchall())",
+      "fixed_code": "@app.route('/api/users')\ndef get_users():\n    user_id = request.args.get('id')\n    cursor.execute(\"SELECT * FROM users WHERE id = ?\", (user_id,))\n    return jsonify(cursor.fetchall())",
+      "reproduction_steps": [
+        "/api/users?id=1' OR '1'='1 にアクセス",
+        "すべてのユーザー情報が返却される"
+      ],
+      "poc": "curl \"https://api.example.com/api/users?id=1' OR '1'='1\"",
+      "remediation": {
+        "recommendation": "パラメータ化クエリを使用してSQLインジェクションを防止してください。",
+        "effort": "Low",
+        "cost": 2000,
+        "priority": "P0",
+        "deadline": "2024-02-01"
+      },
+      "compliance_mapping": {
+        "soc2": [
+          "CC6.1"
+        ],
+        "gdpr": [
+          "Article 32"
+        ],
+        "pci_dss": [
+          "Requirement 6.5.1"
+        ]
+      },
+      "zero_trust_violation": true,
+      "stride_category": [
+        "Information Disclosure",
+        "Tampering",
+        "Elevation of Privilege"
+      ],
+      "attack_vector": "Network",
+      "references": [
+        "https://owasp.org/www-community/attacks/SQL_Injection",
+        "https://cwe.mitre.org/data/definitions/89.html"
+      ],
+      "discovered_by": "Backend Security Reviewer",
+      "discovered_at": "2024-01-15T10:30:00Z",
+      "status": "Open",
+      "false_positive": false
+    }
+  ]
+}
