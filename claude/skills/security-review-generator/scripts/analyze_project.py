@@ -4,11 +4,10 @@
 技術スタックを検出し、プロジェクトタイプを特定
 """
 
-import os
 import json
 import sys
 from pathlib import Path
-from typing import Dict, List, Set, Optional
+from typing import Dict, List, Set
 
 
 class ProjectAnalyzer:
@@ -19,7 +18,6 @@ class ProjectAnalyzer:
         self.tech_stack: Set[str] = set()
         self.project_type: str = "unknown"
         self.entry_points: List[str] = []
-        self.dependencies: Dict[str, List[str]] = {}
         self.frameworks: Set[str] = set()
         self.languages: Set[str] = set()
 
@@ -27,7 +25,6 @@ class ProjectAnalyzer:
         """プロジェクト全体を分析"""
         self._detect_languages()
         self._detect_frameworks()
-        self._detect_dependencies()
         self._identify_entry_points()
         self._determine_project_type()
 
@@ -80,7 +77,6 @@ class ProjectAnalyzer:
                 data = json.load(f)
 
             deps = {**data.get('dependencies', {}), **data.get('devDependencies', {})}
-            self.dependencies['npm'] = list(deps.keys())
 
             # フレームワーク検出
             if 'react' in deps:
@@ -108,7 +104,6 @@ class ProjectAnalyzer:
                 lines = f.readlines()
 
             deps = [line.split('==')[0].split('>=')[0].strip() for line in lines if line.strip() and not line.startswith('#')]
-            self.dependencies['pip'] = deps
 
             # フレームワーク検出
             deps_lower = [d.lower() for d in deps]
@@ -228,10 +223,6 @@ class ProjectAnalyzer:
         except Exception as e:
             print(f"Warning: Failed to parse Gemfile: {e}", file=sys.stderr)
 
-    def _detect_dependencies(self):
-        """依存関係を検出（既に_detect_frameworksで実施）"""
-        pass
-
     def _identify_entry_points(self):
         """エントリーポイントを特定"""
         entry_point_patterns = [
@@ -301,13 +292,12 @@ class ProjectAnalyzer:
                 self.project_type = 'backend'
 
     def get_results(self) -> Dict:
-        """分析結果を取得"""
+        """分析結果を取得（依存関係は含まない）"""
         return {
             'project_type': self.project_type,
             'languages': list(self.languages),
             'frameworks': list(self.frameworks),
             'entry_points': self.entry_points,
-            'dependencies': self.dependencies,
             'recommended_subagents': self._get_recommended_subagents(),
         }
 

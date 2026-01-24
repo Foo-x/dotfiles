@@ -13,7 +13,7 @@ description: プロジェクトを分析し、最適化されたセキュリテ�
 
 Security Review Generator は、以下の機能を提供します：
 
-1. **プロジェクト分析**: 技術スタック、フレームワーク、依存関係を自動検出
+1. **プロジェクト分析**: 技術スタック、フレームワークを自動検出
 2. **カスタムスキル生成**: プロジェクト固有のセキュリティレビュースキルを生成
 3. **サブエージェント設定生成**: プロジェクトタイプに応じたサブエージェント設定ファイルを生成
 4. **レビュー基準のカスタマイズ**: 適用するコンプライアンス、脅威モデル、評価手法を選択可能
@@ -46,7 +46,7 @@ Security Review Generator は、以下の機能を提供します：
 
 1. **技術スタック検出**
    - `scripts/analyze_project.py` を実行
-   - 言語、フレームワーク、依存関係を特定
+   - 言語、フレームワークを特定
    - プロジェクトタイプを判定（Backend/Frontend/Fullstack/Infrastructure）
 
 2. **エントリーポイント特定**
@@ -62,23 +62,29 @@ Security Review Generator は、以下の機能を提供します：
 - **GDPR**: EU一般データ保護規則
 - **HIPAA**: 医療情報保護法（米国）
 - **PCI DSS**: クレジットカード情報保護基準
+- **すべて**: 全チェックを使用
 - **なし**: コンプライアンスチェック不要
 
 #### 脅威モデリング手法（複数選択可）
 - **STRIDE**: なりすまし、改ざん、否認、情報漏洩、DoS、権限昇格
 - **Attack Tree**: 攻撃経路の視覚化と評価
 - **PASTA**: 7段階リスクベース脅威モデリング
+- **すべて**: 全手法を使用
 - **なし**: 脅威モデリング不要
 
 #### リスク評価手法（複数選択可）
 - **CVSS v3.1**: 業界標準の脆弱性スコアリング
 - **DREAD**: Microsoft方式のリスク評価
 - **ビジネス影響度**: CIA + 財務・評判への影響
+- **すべて**: 全手法を使用
+- **なし**: リスク評価不要
 
 #### 脆弱性チェック項目
 - **OWASP Top 10**: Webアプリケーション脆弱性
 - **CWE Top 25**: 危険なソフトウェア脆弱性
 - **CVE/NVD/GitHub Advisory**: 依存関係の既知脆弱性
+- **すべて**: 全チェック項目を使用
+- **なし**: 脆弱性チェック不要
 
 ### Phase 3: スキルファイル生成
 
@@ -145,6 +151,18 @@ references/
 4. **リスク評価**: 選択された手法によるスコアリング
 5. **レポート生成**: `assets/report-template.md` に基づく詳細レポート
 
+### レポート出力先
+
+生成されたスキルがセキュリティレビューを実行すると、以下のファイルが**プロジェクトルート**に出力されます：
+
+```
+{project_root}/
+├── security-review-report.md    # メインレポート（エグゼクティブサマリー、技術詳細、改善ロードマップ）
+├── security-findings.json       # 発見事項の構造化データ（finding-schema.json 準拠）
+├── compliance-mapping.json      # コンプライアンスフレームワークとのマッピング
+└── security-roadmap.md          # 優先度付き改善ロードマップ
+```
+
 ### サブエージェント設定の内容
 
 各サブエージェント設定（`agents/*.md`）には以下が含まれます：
@@ -180,10 +198,6 @@ python scripts/analyze_project.py /path/to/project
   "languages": ["Python", "JavaScript"],
   "frameworks": ["Django", "React"],
   "entry_points": ["main.py", "index.js"],
-  "dependencies": {
-    "pip": ["django", "djangorestframework"],
-    "npm": ["react", "axios"]
-  },
   "recommended_subagents": [
     "backend-security",
     "frontend-security",
