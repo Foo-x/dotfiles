@@ -1,33 +1,43 @@
 ---
 name: security-review-generator
-description: プロジェクトを分析し、最適化されたセキュリティレビュースキルとサブエージェントを生成。バックエンド、フロントエンド、インフラに応じた専門レビューを実施。SOC2/GDPR等のコンプライアンス要件を確認し、OWASP Top 10/CWE/CVE/NVD/GitHub Advisory チェック、STRIDE/Attack Tree/PASTA分析、CVSS/DREAD/ビジネス影響度評価を実行。Zero Trust原則に従う。セキュリティ監査、脆弱性評価、コンプライアンスチェック時に使用。
+description: プロジェクトを分析し、最適化されたセキュリティレビュースキルとサブエージェント設定を生成するメタスキル。バックエンド、フロントエンド、インフラに応じた専門レビュースキルを自動生成。このスキル自体はセキュリティレビューを実行せず、レビュー用のスキルファイルを生成する。プロジェクト固有のセキュリティレビュー体制を構築したい時に使用。
 ---
 
 # Security Review Generator スキル
 
-このスキルは、プロジェクトを包括的に分析し、適切なセキュリティレビューを自動的に実行します。
+このスキルは、プロジェクトを分析し、そのプロジェクトに最適化されたセキュリティレビュースキルおよびサブエージェント設定を生成する**メタスキル**です。
+
+> **重要**: このスキル自体はセキュリティレビューを実行しません。セキュリティレビューを行うためのスキルファイルを生成します。
 
 ## 概要
 
 Security Review Generator は、以下の機能を提供します：
 
 1. **プロジェクト分析**: 技術スタック、フレームワーク、依存関係を自動検出
-2. **専門サブエージェント生成**: プロジェクトタイプに応じたセキュリティレビューエージェントを生成
-3. **包括的セキュリティ分析**: OWASP Top 10、CWE、CVE/NVD、脅威モデリング（STRIDE、Attack Tree、PASTA）
-4. **コンプライアンスチェック**: SOC 2、GDPR、HIPAA、PCI DSS対応
-5. **リスク評価**: CVSS、DREAD、ビジネス影響度分析
-6. **詳細レポート生成**: 優先度付き改善ロードマップと ROI 分析
+2. **カスタムスキル生成**: プロジェクト固有のセキュリティレビュースキルを生成
+3. **サブエージェント設定生成**: プロジェクトタイプに応じたサブエージェント設定ファイルを生成
+4. **レビュー基準のカスタマイズ**: 適用するコンプライアンス、脅威モデル、評価手法を選択可能
+
+## 生成されるファイル
+
+このスキルを実行すると、対象プロジェクトのルートに以下のファイルが生成されます：
+
+### 1. メインスキルファイル
+- `.claude/skills/security-review/SKILL.md` - 実際にセキュリティレビューを実行するスキル
+
+### 2. サブエージェント設定（プロジェクトタイプに応じて選択）
+- `.claude/skills/security-review/agents/backend-security-agent.md`
+- `.claude/skills/security-review/agents/frontend-security-agent.md`
+- `.claude/skills/security-review/agents/infrastructure-security-agent.md`
+- `.claude/skills/security-review/agents/api-security-agent.md`
+
+### 3. 参照ファイル（必要に応じてコピー）
+- `.claude/skills/security-review/references/` - 選択された手法のリファレンス
 
 ## 使用方法
 
 ```bash
 /security-review-generator
-```
-
-または、特定のプロジェクトパスを指定：
-
-```bash
-/security-review-generator /path/to/project
 ```
 
 ## ワークフロー
@@ -43,218 +53,117 @@ Security Review Generator は、以下の機能を提供します：
    - メインファイルの検出
    - データフローのマッピング
 
-### Phase 2: コンプライアンス確認
+### Phase 2: 生成オプションの確認
 
-ユーザーに適用可能なコンプライアンスフレームワークを確認：
+ユーザーに以下の設定を確認（AskUserQuestion）：
 
+#### コンプライアンスフレームワーク（複数選択可）
 - **SOC 2**: サービス組織のセキュリティ監査
 - **GDPR**: EU一般データ保護規則
 - **HIPAA**: 医療情報保護法（米国）
 - **PCI DSS**: クレジットカード情報保護基準
+- **なし**: コンプライアンスチェック不要
 
-### Phase 3: サブエージェント生成と並列実行
+#### 脅威モデリング手法（複数選択可）
+- **STRIDE**: なりすまし、改ざん、否認、情報漏洩、DoS、権限昇格
+- **Attack Tree**: 攻撃経路の視覚化と評価
+- **PASTA**: 7段階リスクベース脅威モデリング
+- **なし**: 脅威モデリング不要
 
-プロジェクトタイプに基づいて専門サブエージェントを生成し、Task ツールで並列実行：
+#### リスク評価手法（複数選択可）
+- **CVSS v3.1**: 業界標準の脆弱性スコアリング
+- **DREAD**: Microsoft方式のリスク評価
+- **ビジネス影響度**: CIA + 財務・評判への影響
 
-1. **Backend Security Reviewer**
-   - 認証・認可のチェック
-   - インジェクション攻撃対策
-   - データ保護と暗号化
-   - API セキュリティ
+#### 脆弱性チェック項目
+- **OWASP Top 10**: Webアプリケーション脆弱性
+- **CWE Top 25**: 危険なソフトウェア脆弱性
+- **CVE/NVD/GitHub Advisory**: 依存関係の既知脆弱性
 
-2. **Frontend Security Reviewer**
-   - XSS 対策
-   - CSRF 対策
-   - セキュアな認証フロー
-   - Third-party スクリプトのセキュリティ
+### Phase 3: スキルファイル生成
 
-3. **Infrastructure Security Reviewer**
-   - コンテナセキュリティ（Docker/Kubernetes）
-   - IaC セキュリティ（Terraform/CloudFormation）
-   - クラウドセキュリティ（AWS/Azure/GCP）
-   - CI/CD パイプラインセキュリティ
+プロジェクト分析結果とユーザー選択に基づいて、カスタマイズされたスキルファイルを生成：
 
-4. **API Security Reviewer**
-   - 認証・認可
-   - レート制限
-   - 入力検証
-   - OWASP API Top 10
+#### 3.1 メインスキル生成
 
-### Phase 4: セキュリティ分析（並列実行）
+プロジェクト固有の `SKILL.md` を生成：
+- 検出された技術スタックに特化したチェック項目
+- 選択されたコンプライアンス要件
+- 選択された脅威モデル・評価手法
+- プロジェクト固有の参照パス
 
-#### 4.1 脅威モデリング
+#### 3.2 サブエージェント設定生成
 
-**STRIDE 分析**:
-- Spoofing（なりすまし）
-- Tampering（改ざん）
-- Repudiation（否認）
-- Information Disclosure（情報漏洩）
-- Denial of Service（サービス拒否）
-- Elevation of Privilege（権限昇格）
+プロジェクトタイプに基づいて必要なサブエージェント設定を生成：
 
-**Attack Tree 分析**:
-- 攻撃経路の視覚化
-- 攻撃コストと成功率の評価
-- 防御策の優先順位付け
+| プロジェクトタイプ | 生成されるサブエージェント |
+|------------------|--------------------------|
+| Backend | backend-security, api-security |
+| Frontend | frontend-security |
+| Fullstack | backend-security, frontend-security, api-security |
+| Infrastructure | infrastructure-security |
+| Fullstack + Infra | 全サブエージェント |
 
-**PASTA フレームワーク**:
-1. Define Objectives（目的の定義）
-2. Define Technical Scope（技術範囲の定義）
-3. Application Decomposition（アプリケーション分解）
-4. Threat Analysis（脅威分析）
-5. Vulnerability Analysis（脆弱性分析）
-6. Attack Modeling（攻撃モデリング）
-7. Risk and Impact Analysis（リスクと影響の分析）
+各サブエージェント設定には以下が含まれます：
+- 実行プロンプトテンプレート
+- チェック項目リスト
+- 出力フォーマット仕様
+- 使用するリファレンスのパス
 
-#### 4.2 脆弱性チェック
+### Phase 4: リファレンスファイルのコピー
 
-**OWASP Top 10 動的取得**:
+選択された手法に必要なリファレンスファイルを `.claude/skills/security-review/references/` にコピー：
 
-WebFetchツールを使用して最新のOWASP Top 10情報を取得:
-- 最新版一覧: https://owasp.org/Top10/ (常に最新版にリダイレクト)
-- 取得したページからカテゴリリンクを抽出し、各カテゴリ詳細も取得
-- セッション内でキャッシュして再利用
-
-**CWE 動的取得**:
-
-WebFetchツールを使用して最新のCWE情報を取得:
-- Top 25最新版: https://cwe.mitre.org/top25/
-- CWE詳細API: https://cwe-api.mitre.org/api/v1/cwe/weakness/{id}
-- セッション内でキャッシュして再利用
-
-#### 4.3 依存関係スキャン
-
-- `scripts/vulnerability_lookup.py` を使用
-- CVE/NVD データベース検索
-- GitHub Advisory Database 検索
-- 既知の脆弱性のレポート生成
-
-#### 4.4 Zero Trust 検証
-
-すべてのコンポーネントで Zero Trust 原則を検証：
-
-1. **明示的な検証（Verify Explicitly）**
-   - すべてのアクセスで認証・認可を実施
-   - すべてのデータポイントで検証
-
-2. **最小権限アクセス（Least Privilege Access）**
-   - Just-In-Time（JIT）およびJust-Enough-Access（JEA）
-   - リスクベースの適応型ポリシー
-
-3. **侵害を想定（Assume Breach）**
-   - セグメンテーション
-   - エンドツーエンド暗号化
-   - 継続的な監視
-
-### Phase 5: リスク評価
-
-#### 5.1 CVSS v3.1 スコアリング
-
-各脆弱性に対して CVSS スコアを算出：
-
-- Attack Vector（AV）
-- Attack Complexity（AC）
-- Privileges Required（PR）
-- User Interaction（UI）
-- Scope（S）
-- Confidentiality Impact（C）
-- Integrity Impact（I）
-- Availability Impact（A）
-
-スコア範囲：
-- 9.0-10.0: Critical
-- 7.0-8.9: High
-- 4.0-6.9: Medium
-- 0.1-3.9: Low
-
-#### 5.2 DREAD リスク評価
-
-- Damage（損害の可能性）: 0-10
-- Reproducibility（再現性）: 0-10
-- Exploitability（悪用の容易さ）: 0-10
-- Affected users（影響を受けるユーザー）: 0-10
-- Discoverability（発見の容易さ）: 0-10
-
-#### 5.3 ビジネス影響度分析
-
-- **機密性（Confidentiality）**: Critical/High/Medium/Low
-- **完全性（Integrity）**: Critical/High/Medium/Low
-- **可用性（Availability）**: Critical/High/Medium/Low
-- **財務影響**: 潜在的な金銭的損失の計算
-- **評判への影響**: ブランド価値への影響評価
-
-#### 5.4 対策コスト vs リスク評価
-
-- 対策実装コストの算出
-- リスク軽減額の計算
-- ROI（投資対効果）の分析
-- 優先度マトリクスの作成
-
-### Phase 6: レポート生成
-
-#### 6.1 発見事項の統合
-
-すべてのサブエージェントからの発見事項を統合：
-
-- 重複の排除
-- 優先度順にソート
-- JSON スキーマに準拠したデータ構造化（`assets/finding-schema.json`）
-
-#### 6.2 コンプライアンスマッピング
-
-発見事項を各コンプライアンスフレームワークの要件にマッピング：
-
-```markdown
-| 発見事項 | SOC 2 | GDPR | HIPAA | PCI DSS |
-|---------|-------|------|-------|---------|
-| SEC-001 | CC6.1 | Art.32 | §164.312 | Req 6.5.1 |
+```
+references/
+├── stride-methodology.md        # STRIDE選択時
+├── attack-tree-patterns.md      # Attack Tree選択時
+├── pasta-framework.md           # PASTA選択時
+├── scoring-systems.md           # リスク評価手法
+├── zero-trust-checklist.md      # 常にコピー
+└── compliance-frameworks.md     # コンプライアンス選択時
 ```
 
-#### 6.3 改善ロードマップ生成
+### Phase 5: 使用方法の説明
 
-優先度付き改善計画を作成：
+生成完了後、以下を説明：
 
-**Phase 1: 即時対応（1-2週間）**
-- P0 優先度の脆弱性
-- Critical 重要度の問題
+1. **生成されたスキルの場所**
+2. **スキルの有効化方法**（CLAUDE.md への登録など）
+3. **実行方法**
+4. **カスタマイズのヒント**
 
-**Phase 2: 短期対応（1-2ヶ月）**
-- P1 優先度の脆弱性
-- High 重要度の問題
+## 生成されるスキルの仕様
 
-**Phase 3: 中期対応（3-6ヶ月）**
-- P2 優先度の脆弱性
-- Medium 重要度の問題
+### メインスキル（security-review/SKILL.md）の機能
 
-**Phase 4: 長期対応（6-12ヶ月）**
-- P3 優先度の脆弱性
-- Low 重要度の問題、戦略的改善
+生成されるスキルは以下の機能を持ちます：
 
-#### 6.4 最終レポート作成
+1. **並列サブエージェント実行**: Task ツールで複数のセキュリティレビューを並列実行
+2. **脆弱性チェック**: OWASP Top 10、CWE、CVE/NVD の動的取得と検証
+3. **脅威モデリング**: 選択された手法による分析
+4. **リスク評価**: 選択された手法によるスコアリング
+5. **レポート生成**: `assets/report-template.md` に基づく詳細レポート
 
-`assets/report-template.md` に基づいてレポートを生成：
+### サブエージェント設定の内容
 
-1. **エグゼクティブサマリー**
-   - 主要な発見事項
-   - 総合リスクレベル
-   - 即座の対応が必要な項目
+各サブエージェント設定（`agents/*.md`）には以下が含まれます：
 
-2. **技術的詳細**
-   - 各発見事項の詳細
-   - 再現手順
-   - 修正方法
+```markdown
+# {Agent Name} Security Agent
 
-3. **リスク評価**
-   - リスクマトリクス
-   - ビジネス影響分析
+## 役割
+{エージェントの責務の説明}
 
-4. **改善ロードマップ**
-   - フェーズ別の対応計画
-   - 工数とコストの見積もり
-   - ROI 分析
+## チェック項目
+{プロジェクト固有のチェックリスト}
 
-5. **コンプライアンスマッピング**
-   - 各フレームワークとの対応表
+## 実行プロンプト
+{Task ツールに渡すプロンプトテンプレート}
+
+## 出力フォーマット
+{findings.json スキーマに準拠した出力形式}
+```
 
 ## スクリプト使用方法
 
@@ -283,13 +192,13 @@ python scripts/analyze_project.py /path/to/project
 }
 ```
 
-### サブエージェント生成
+### サブエージェントプロンプト生成
 
 ```bash
 python scripts/generate_subagent.py references/subagent-templates backend-security context.json
 ```
 
-### 脆弱性検索
+### 脆弱性検索（生成されたスキルで使用）
 
 ```bash
 # 単一パッケージの検索
@@ -299,7 +208,7 @@ python scripts/vulnerability_lookup.py search django 4.2.0
 python scripts/vulnerability_lookup.py batch dependencies.json
 ```
 
-## リファレンスファイル
+## テンプレートリファレンス
 
 ### セキュリティフレームワーク
 
@@ -326,20 +235,28 @@ python scripts/vulnerability_lookup.py batch dependencies.json
 - `references/subagent-templates/infrastructure-security.md`: インフラレビュー
 - `references/subagent-templates/api-security.md`: API レビュー
 
-## 出力ファイル
+## 出力ディレクトリ構造
 
-### レポート
+スキル実行後にプロジェクトルートに生成される構造：
 
-デフォルトでは、以下のファイルが生成されます：
-
-- `security-review-report.md`: メインレポート
-- `findings.json`: 発見事項の JSON データ
-- `compliance-mapping.json`: コンプライアンスマッピング
-- `roadmap.md`: 改善ロードマップ
-
-### 発見事項スキーマ
-
-すべての発見事項は `assets/finding-schema.json` に準拠した JSON 形式で保存されます。
+```
+.claude/
+└── skills/
+    └── security-review/
+        ├── SKILL.md                    # メインスキル（セキュリティレビュー実行用）
+        ├── agents/
+        │   ├── backend-security-agent.md
+        │   ├── frontend-security-agent.md
+        │   ├── infrastructure-security-agent.md
+        │   └── api-security-agent.md
+        ├── assets/
+        │   ├── finding-schema.json     # 発見事項スキーマ
+        │   └── report-template.md      # レポートテンプレート
+        └── references/
+            ├── stride-methodology.md
+            ├── scoring-systems.md
+            └── ...（選択された手法のみ）
+```
 
 ## 実装例
 
@@ -350,123 +267,102 @@ python scripts/vulnerability_lookup.py batch dependencies.json
    ↓
 2. プロジェクトパスを取得（デフォルト: カレントディレクトリ）
    ↓
-3. analyze_project.py を実行
+3. analyze_project.py を実行してプロジェクト分析
    ↓
-4. ユーザーにコンプライアンス要件を確認（AskUserQuestion）
-   - SOC 2が必要か？
-   - GDPRが必要か？
-   - HIPAAが必要か？
-   - PCI DSSが必要か？
+4. ユーザーに生成オプションを確認（AskUserQuestion）
+   - コンプライアンスフレームワーク
+   - 脅威モデリング手法
+   - リスク評価手法
+   - 脆弱性チェック項目
    ↓
-5. 推奨サブエージェントを生成
+5. 必要なサブエージェント設定を特定
    ↓
-6. Task ツールで複数のサブエージェントを並列実行
-   - Backend Security Reviewer
-   - Frontend Security Reviewer
-   - Infrastructure Security Reviewer
-   - API Security Reviewer
+6. メインスキル（SKILL.md）を生成
+   - プロジェクト固有の設定を埋め込み
+   - 選択された手法のワークフローを構築
    ↓
-7. 各サブエージェントが発見事項を報告
+7. サブエージェント設定ファイルを生成
+   - テンプレートをカスタマイズ
+   - プロジェクト情報を埋め込み
    ↓
-8. 発見事項を統合・重複排除
+8. 必要なリファレンスファイルをコピー
    ↓
-9. リスク評価（CVSS、DREAD、ビジネス影響度）
+9. 生成結果をユーザーに報告
+   - 生成されたファイルの一覧
+   - スキルの有効化・実行方法
    ↓
-10. コンプライアンスマッピング
-   ↓
-11. 改善ロードマップ生成
-   ↓
-12. 最終レポート作成
-   ↓
-13. ユーザーにレポートを提示
+10. （任意）ユーザーが生成されたスキルを実行してセキュリティレビュー開始
 ```
 
 ## カスタマイズ
 
-### 新しいサブエージェントの追加
+### 新しいサブエージェントテンプレートの追加
 
 1. `references/subagent-templates/` に新しいテンプレートを追加
 2. `scripts/analyze_project.py` で推奨ロジックに追加
+3. `scripts/generate_subagent.py` でテンプレート読み込みを確認
 
 ### コンプライアンスフレームワークの追加
 
 1. `references/compliance-frameworks.md` に新しいフレームワークを追加
 2. `assets/finding-schema.json` の `compliance_mapping` に新しいプロパティを追加
+3. Phase 2 の選択肢に追加
 
 ### カスタムスコアリングシステムの追加
 
 1. `references/scoring-systems.md` に新しいシステムを追加
-2. レポートテンプレートに統合
+2. Phase 2 の選択肢に追加
 
 ## ベストプラクティス
 
-### スキル実行前
+### スキル生成時
 
-1. **プロジェクトのバックアップ**: レビュー前にバックアップを取得
-2. **依存関係の最新化**: `npm install` または `pip install` を実行
-3. **テスト環境での実行**: 本番環境ではなくテスト環境で実行
+1. **正確なプロジェクトパス**: 依存関係ファイルが含まれるルートディレクトリを指定
+2. **適切な手法選択**: プロジェクト規模とセキュリティ要件に応じて選択
+3. **コンプライアンス要件の確認**: 法的要件がある場合は必ず選択
 
-### レビュー中
+### 生成後
 
-1. **False Positive の確認**: 自動検出された脆弱性を手動で確認
-2. **コンテキストの考慮**: フレームワークの組み込み保護機能を考慮
-3. **優先順位の調整**: ビジネス要件に基づいて優先順位を調整
-
-### レビュー後
-
-1. **即座の対応**: P0 優先度の脆弱性を即座に修正
-2. **定期的なレビュー**: 四半期ごとまたはメジャーリリース前に実行
-3. **継続的改善**: DevSecOps パイプラインに統合
+1. **スキルのレビュー**: 生成された SKILL.md を確認し、必要に応じて調整
+2. **サブエージェントの調整**: プロジェクト固有のチェック項目を追加
+3. **テスト実行**: 小さなスコープでテスト実行してから本番利用
 
 ## トラブルシューティング
 
-### 依存関係のインストールエラー
-
-```bash
-# Python依存関係
-pip install -r requirements.txt
-
-# Node.js依存関係（該当する場合）
-npm install
-```
-
 ### スクリプト実行エラー
-
-スクリプトに実行権限を付与：
 
 ```bash
 chmod +x scripts/*.py
 ```
 
-### サブエージェントが起動しない
+### プロジェクト分析が不正確
 
-1. テンプレートファイルの存在確認
-2. プロジェクト分析結果の確認
-3. Task ツールのログを確認
+手動で `context.json` を作成して `generate_subagent.py` に渡すことで、正確な設定を生成できます。
+
+### 生成されたスキルが動作しない
+
+1. 生成された SKILL.md のパス参照を確認
+2. リファレンスファイルが正しくコピーされているか確認
 
 ## 制限事項
 
-1. **自動スキャンの限界**: すべての脆弱性を検出できるわけではない
-2. **False Positive**: 一部の発見事項は誤検知の可能性がある
-3. **ビジネスロジックの脆弱性**: カスタムビジネスロジックの脆弱性は手動レビューが必要
-4. **ゼロデイ脆弱性**: 既知の脆弱性のみ検出可能
+1. **生成のみ**: このスキル自体はセキュリティレビューを実行しない
+2. **テンプレートベース**: 完全なカスタマイズには手動編集が必要
+3. **言語/フレームワーク依存**: サポートされていない技術スタックは手動設定が必要
 
 ## FAQ
 
-**Q: どのくらいの時間がかかりますか？**
-A: プロジェクトサイズによりますが、小規模プロジェクトで5-10分、大規模プロジェクトで30-60分程度です。
+**Q: このスキルでセキュリティレビューできますか？**
+A: いいえ。このスキルはセキュリティレビューを行うスキルを「生成」します。生成後に、生成されたスキルを実行してください。
 
-**Q: レビュー結果は保存されますか？**
-A: はい、カレントディレクトリに `security-review-report.md` および関連ファイルが保存されます。
+**Q: 生成されたスキルはどこに保存されますか？**
+A: プロジェクトルートの `.claude/skills/security-review/` に保存されます。
 
-**Q: 複数のプロジェクトを一度にレビューできますか？**
-A: 現在は1プロジェクトずつのレビューを推奨していますが、スクリプトを直接実行することで複数プロジェクトに対応可能です。
+**Q: 既存のスキルを更新できますか？**
+A: はい。同じプロジェクトで再実行すると、既存のファイルを上書きするか確認されます。
 
-**Q: コンプライアンス認証を取得できますか？**
-A: このスキルはコンプライアンス要件への準拠をチェックしますが、認証取得には専門の監査機関が必要です。
-
-**Q: CI/CD パイプラインに統合できますか？**
-A: はい、スクリプトを直接実行することで CI/CD に統合可能です。
+**Q: 複数のプロジェクト用に異なるスキルを生成できますか？**
+A: はい。各プロジェクトで実行すると、それぞれのプロジェクトに最適化されたスキルが生成されます。
 
 ## サポート
 
