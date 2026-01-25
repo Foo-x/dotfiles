@@ -244,8 +244,9 @@ fi
 # setup claude
 mkdir -p "${HOME}/.claude/skills"
 claude_skills="
-security-review-generator
+architecture-md-generator-creator
 openapi-spec-generator-creator
+security-review-generator
 "
 echo "${claude_skills}" | xargs -I{} ln -sfn "${DOT_DIR}/claude/skills/{}" "${HOME}/.claude/skills/{}"
 
