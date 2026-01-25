@@ -1,5 +1,5 @@
 ---
-name: openapi-spec-generator
+name: openapi-spec-generator-creator
 description: OpenAPI 3.2仕様書生成スキルを作成するメタスキル。「OpenAPI生成スキルを作成」「API仕様書スキルを生成」等のリクエストで使用。
 ---
 
@@ -29,7 +29,7 @@ OpenAPI仕様書生成スキルを作成します。
 生成されるスキルは以下の構造を持ちます：
 
 ```
-.claude/skills/openapi-generator/
+.claude/skills/openapi-spec-generator/
 ├── SKILL.md                    # OpenAPI生成スキル
 └── references/
     └── openapi-32-schema.md    # OpenAPI 3.2スキーマリファレンス（共通）
@@ -38,7 +38,7 @@ OpenAPI仕様書生成スキルを作成します。
 **SKILL.mdの内容:**
 ```yaml
 ---
-name: openapi-generator
+name: openapi-spec-generator
 description: OpenAPI 3.2仕様書をYAML形式で生成。REST APIエンドポイントとスキーマを自動検出。
 ---
 
@@ -72,7 +72,7 @@ OpenAPI 3.2仕様の詳細は`references/openapi-32-schema.md`を参照してく
 生成したスキルファイルをディレクトリとして出力します。
 
 **出力先:**
-- デフォルト: `.claude/skills/openapi-generator/`
+- デフォルト: `.claude/skills/openapi-spec-generator/`
 - ユーザー指定があれば別のディレクトリ名を使用
 
 **実行手順:**
@@ -84,7 +84,7 @@ OpenAPI 3.2仕様の詳細は`references/openapi-32-schema.md`を参照してく
 ## 制約事項
 
 ### スキル生成の制約
-- スキル名は`openapi-generator`形式
+- スキル名は`openapi-spec-generator`形式
 - 出力ディレクトリは既存のものを上書きしない
 
 ### 生成されるスキルの制約
@@ -110,9 +110,9 @@ OpenAPI 3.2仕様の詳細は`references/openapi-32-schema.md`を参照してく
 ```
 # 1. メタスキルを実行（このスキル）
 ユーザー: 「OpenAPI生成スキルを作成して」
-→ .claude/skills/openapi-generator/ ディレクトリが生成される
+→ .claude/skills/openapi-spec-generator/ ディレクトリが生成される
 
 # 2. 生成されたスキルを使用
-ユーザー: 「openapi-generator スキルを使ってAPI仕様書を作成して」
+ユーザー: 「openapi-spec-generator スキルを使ってAPI仕様書を作成して」
 → openapi.yaml が生成される
 ```
