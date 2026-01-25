@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+SESSION_ID=$(cat | jq -r .session_id)
+
+if type niri &> /dev/null; then
+  echo "export WINDOW_ID=$(niri msg -j windows | nu --stdin -c 'from json | where is_focused | get id.0')" >> "/tmp/claude_${SESSION_ID}"
+fi

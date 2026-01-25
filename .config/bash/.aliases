@@ -63,7 +63,6 @@ alias cpb='cp -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias lnb='ln -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias mvb='mv -b --suffix=.`date +%Y%m%d_%H%M%S`'
 alias we='watchexec'
-alias nuc='nu --stdin -c'
 alias jui=jjui
 
 # others

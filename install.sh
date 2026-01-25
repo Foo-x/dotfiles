@@ -64,6 +64,8 @@ vipe
 win_git
 ntfy
 push_ai
+claude_session_start
+nuc
 "
 echo "${binfiles}" | xargs -I{} ln -sfT ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 export PATH="${HOME}/.local/bin:${PATH}"
