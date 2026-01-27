@@ -162,6 +162,7 @@ nnoremap <Plug>(pin) <Nop>
 nnoremap <Plug>(pin)p <Cmd>Pin<CR><Cmd>redraw!<CR>
 nnoremap <Plug>(pin)b <Cmd>BackToPin<CR>
 
+nnoremap <C-b> <Cmd>AddBookmark<CR>
 nnoremap <Space><Space>b <Cmd>exe 'e .local/bookmarks.txt'<CR>
 nnoremap <Space><Space>m <Cmd>tabnew .local/memo.md<CR>
 

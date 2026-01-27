@@ -249,6 +249,10 @@ security-review-generator
 "
 echo "${claude_skills}" | xargs -I{} ln -sfn "${DOT_DIR}/claude/skills/{}" "${HOME}/.claude/skills/{}"
 
+# setup nushell
+mkdir -p "${XDG_CONFIG_HOME}/nushell"
+ln -sfn "${DOT_DIR}/.config/nushell/autoload" "${XDG_CONFIG_HOME}/nushell/autoload"
+
 if ! has luarocks; then
   printf "\e[93minstall luarocks\e[0m\n"
 fi

@@ -3,8 +3,9 @@ cnoreabbr w!! w !sudo tee > /dev/null %
 " argument list
 cnoreabbr <expr> ar getcmdtype() == ':' && getcmdline() ==# 'ar' ? 'args' : 'ar'
 cnoreabbr <expr> ad getcmdtype() == ':' && getcmdline() ==# 'ad' ? 'argdelete' : 'ad'
-cnoreabbr <expr> ada getcmdtype() == ':' && getcmdline() ==# 'ada' ? 'argdelete *' : 'ada'
+cnoreabbr <expr> ada getcmdtype() == ':' && getcmdline() ==# 'ada' ? '%argdelete' : 'ada'
 cnoreabbr <expr> add getcmdtype() == ':' && getcmdline() ==# 'add' ? 'argdedupe' : 'add'
+cnoreabbr <expr> bta getcmdtype() == ':' && getcmdline() ==# 'bta' ? 'BookmarksToArgs' : 'bta'
 
 cnoremap <expr> ; getcmdtype() == ':' && empty(getcmdline()) ? "\<Esc>q:" : ';'
 cnoremap <expr> / getcmdtype() == '/' && empty(getcmdline()) ? "\<Esc>q/" : '/'
@@ -198,11 +199,47 @@ function! s:add_bookmark()
 
   call mkdir(fnamemodify(l:bookmark_file, ':h'), 'p')
 
-  call writefile([l:file], l:bookmark_file, 'a')
+  let l:existing = filereadable(l:bookmark_file) ? readfile(l:bookmark_file) : []
+  if index(l:existing, l:file) >= 0
+    echo 'Already bookmarked: ' . l:file
+    return
+  endif
 
-  echom 'Bookmarked: ' . l:file
+  call writefile([l:file], l:bookmark_file, 'a')
+  silent! call s:bookmarks_to_args()
+
+  echo 'Bookmarked: ' . l:file
 endfunction
 command! AddBookmark call s:add_bookmark()
+
+function! s:bookmarks_to_args()
+  let l:bookmark_file = expand('.local/bookmarks.txt')
+
+  if !filereadable(l:bookmark_file)
+    echo 'Bookmark file not found: ' . l:bookmark_file
+    return
+  endif
+
+  let l:lines = readfile(l:bookmark_file)
+  " 空行、空白のみの行、#で始まるコメント行を除外
+  let l:lines = filter(l:lines, 'v:val !~ "^\\s*$" && v:val !~ "^\\s*#"')
+
+  if empty(l:lines)
+    echo 'No bookmarks found'
+    return
+  endif
+
+  %argdelete
+  for l:file in l:lines
+    if filereadable(l:file)
+      execute 'argadd ' . fnameescape(l:file)
+    endif
+  endfor
+  argdedupe
+
+  echo 'Loaded ' . argc() . ' files to arglist'
+endfunction
+command! BookmarksToArgs call s:bookmarks_to_args()
 
 " save yanked text to the operator register too
 " change -> c, delete -> d, yank -> y

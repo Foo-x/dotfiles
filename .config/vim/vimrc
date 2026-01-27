@@ -191,5 +191,10 @@ augroup ShowCmd
 augroup END
 augroup FocusMax
   autocmd!
+  autocmd VimEnter * let t:focus_max = v:true | call FocusMax()
   autocmd WinEnter * if get(t:, 'focus_max', v:false) | call FocusMax() | endif
+augroup END
+augroup BookmarksToArgs
+  autocmd!
+  autocmd VimEnter * silent! BookmarksToArgs
 augroup END
