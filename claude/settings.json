@@ -50,16 +50,6 @@
   },
   "model": "opusplan",
   "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude_session_start"
-          }
-        ]
-      }
-    ],
     "PermissionRequest": [
       {
         "hooks": [

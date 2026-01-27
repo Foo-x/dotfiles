@@ -2,9 +2,4 @@
 
 tmux set -t "$1" -p @tmux_notification 1
 
-if type niri &> /dev/null; then
-    . "/tmp/claude_$(cat | jq -r .session_id)"
-    niri msg action set-window-urgent --id "${WINDOW_ID}"
-fi
-
 curl -k https://ntfy.x.localhost/ntfy -d "$2"
