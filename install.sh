@@ -136,6 +136,10 @@ fi
 mkdir -p "${XDG_CONFIG_HOME}/ripgrep"
 ln -sf "${DOT_DIR}/.config/ripgrep/ripgreprc" "${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
 
+# setup fd
+mkdir -p "${XDG_CONFIG_HOME}/fd"
+ln -sf "${DOT_DIR}/.config/fd/ignore" "${XDG_CONFIG_HOME}/fd/ignore"
+
 if has gh; then
   {
     gh alias set --clobber cl 'repo clone'
@@ -248,10 +252,6 @@ openapi-spec-generator-creator
 security-review-generator
 "
 echo "${claude_skills}" | xargs -I{} ln -sfn "${DOT_DIR}/claude/skills/{}" "${HOME}/.claude/skills/{}"
-
-# setup nushell
-mkdir -p "${XDG_CONFIG_HOME}/nushell"
-ln -sfn "${DOT_DIR}/.config/nushell/autoload" "${XDG_CONFIG_HOME}/nushell/autoload"
 
 if ! has luarocks; then
   printf "\e[93minstall luarocks\e[0m\n"

@@ -1,2 +1,5 @@
 # can disable with -s, --case-sensitive
 --smart-case
+--hidden
+--glob=!.git
+--glob=!.jj

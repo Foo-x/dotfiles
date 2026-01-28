@@ -41,11 +41,10 @@ alias ln='ln -iv'
 alias mv='mv -iv'
 alias rm='rm -iv'
 alias free='free -h'
-alias grep='grep --color=auto -nIE --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=..' # use regexp and show line numbers
-alias rg="rg --hidden -g '!.git' -g '!.jj'"
+alias grepr='grep --color=auto -nIE --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=..' # use regexp and show line numbers
 alias fd="fd --hidden"
-alias dirs='dirs -v'
-alias pgrep='pgrep -fa'
+alias dirsv='dirs -v'
+alias pgrepa='pgrep -fa'
 
 # shorten
 alias g=git

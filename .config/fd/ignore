@@ -1,0 +1,6 @@
+.git/*
+!.git/hooks
+!.git/info
+!.git/config
+.jj/*
+!.jj/repo/config.toml
