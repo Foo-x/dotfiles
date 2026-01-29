@@ -44,7 +44,7 @@ function __my_git_ps1() {
     untracked='%'
   fi
   file="${no_commit}${dirty_state}${stash}${untracked}"
-  file="${branch:+|}${file}"
+  file="${file:+|${file}}"
 
   # sparse
   if [[ $status =~ 'You are in a sparse checkout' ]]; then

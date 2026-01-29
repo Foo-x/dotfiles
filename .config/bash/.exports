@@ -188,7 +188,7 @@ __ps1+="\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && 
 __ps1+=" \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w"
 
 # Git情報
-__ps1+="\[\e[${__gy65_ansi_pccs_foreground}m\] \$(__my_git_ps1) \[\e[m\]"
+__ps1+="\[\e[${__gy65_ansi_pccs_foreground}m\] \$(if jj root &> /dev/null; then __jj_ps1; else __my_git_ps1; fi) \[\e[m\]"
 
 # コンテキスト
 __ps1+="\${CONTEXT}\n"
