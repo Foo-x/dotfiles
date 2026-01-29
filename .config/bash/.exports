@@ -173,6 +173,34 @@ export PROMPT_COMMAND_EMPTY_ENTER='empty_enter'
 # prompt
 . ${DOT_DIR}/.config/bash/.exports_git_ps1
 
-export PS1="\$(exit=\$?; printf '%s' \"\n\$([ \j -gt 0 ] && printf '\[\e[${__blue_ansi_pccs_bright_foreground}m\]& ')\$([ \"\$LOCAL_PS1\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\$LOCAL_PS1|\" )\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' ) \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w\[\e[${__gy65_ansi_pccs_foreground}m\] \$(__my_git_ps1) \[\e[m\]\${CONTEXT}\n\$([ \$exit = \"0\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy65_ansi_pccs_foreground}m\]\")\\$\[\e[m\] \")"
+__ps1="\n"
+
+# バックグラウンドジョブがあれば & を表示
+__ps1+="\$([ \j -gt 0 ] && printf '\[\e[${__blue_ansi_pccs_bright_foreground}m\]& ')"
+
+# LOCAL_PS1があれば表示
+__ps1+="\$([ \"\$LOCAL_PS1\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\$LOCAL_PS1|\" )"
+
+# ユーザー (SSH/Docker/LXC環境では下線付きでホストも表示)
+__ps1+="\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' )"
+
+# ディレクトリ
+__ps1+=" \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w"
+
+# Git情報
+__ps1+="\[\e[${__gy65_ansi_pccs_foreground}m\] \$(__my_git_ps1) \[\e[m\]"
+
+# コンテキスト
+__ps1+="\${CONTEXT}\n"
+
+# プロンプト記号 (終了コード0で青、それ以外でグレー)
+__ps1+="\$([ \$exit = \"0\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\" || printf \"\[\e[${__gy65_ansi_pccs_foreground}m\]\")"
+
+# プロンプト記号
+__ps1+="\\$\[\e[m\] "
+
+# 終了コードを保存してからPS1を展開
+export PS1="\$(exit=\$?; printf '%s' \"${__ps1}\")"
+unset __ps1
 
 # vim: ft=sh
