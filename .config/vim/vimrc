@@ -191,7 +191,7 @@ augroup ShowCmd
 augroup END
 augroup FocusMax
   autocmd!
-  autocmd VimEnter * let t:focus_max = v:true | call FocusMax()
+  autocmd VimEnter * if expand('%:p:h') != $XDG_DATA_HOME . '/kanbanmd' | let t:focus_max = v:true | call FocusMax() | endif
   autocmd WinEnter * if get(t:, 'focus_max', v:false) | call FocusMax() | endif
 augroup END
 augroup BookmarksToArgs
