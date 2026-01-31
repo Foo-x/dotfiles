@@ -248,7 +248,7 @@ fi
 mkdir -p "${HOME}/.claude/skills"
 claude_skills="
 architecture-md-generator-creator
-openapi-spec-generator-creator
+openapi-spec-generator
 refactoring-analyzer
 security-review-generator
 "
