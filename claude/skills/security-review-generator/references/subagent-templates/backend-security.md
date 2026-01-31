@@ -6,466 +6,164 @@
 
 - **言語**: {{LANGUAGES}}
 - **フレームワーク**: {{FRAMEWORKS}}
-- **プロジェクトタイプ**: {{PROJECT_TYPE}}
+- **データベース**: {{DATABASE}}
 
-## ミッション
-
-以下の観点からバックエンドアプリケーションの包括的なセキュリティレビューを実施してください：
-
-### 1. 認証とセッション管理
-
-**チェック項目:**
-- [ ] パスワードポリシー（最低12文字、複雑性要件）
-- [ ] パスワードハッシュ化（bcrypt、scrypt、Argon2）
-- [ ] ソルトの使用
-- [ ] セッションIDの暗号学的ランダム性
-- [ ] セッションタイムアウト設定
-- [ ] セッション固定攻撃対策
-- [ ] 多要素認証（MFA）の実装
-- [ ] アカウントロックアウト機能
-
-**検出パターン:**
-
-```python
-# Python - 危険なパターン
-import hashlib
-password_hash = hashlib.md5(password.encode()).hexdigest()  # MD5使用
-password_hash = hashlib.sha1(password.encode()).hexdigest()  # SHA1使用
-session['user_id'] = str(time.time())  # 予測可能なセッションID
-
-# Python - 安全なパターン
-import bcrypt
-password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-import secrets
-session_id = secrets.token_urlsafe(32)
-```
-
-```javascript
-// Node.js - 危険なパターン
-const crypto = require('crypto');
-const hash = crypto.createHash('md5').update(password).digest('hex');
-const sessionId = Date.now().toString();
-
-// Node.js - 安全なパターン
-const bcrypt = require('bcrypt');
-const hash = await bcrypt.hash(password, 10);
-const sessionId = crypto.randomBytes(32).toString('hex');
-```
-
-**レビュー手順:**
-1. 認証処理コードをGrep検索: `password|auth|login|session`
-2. ハッシュ関数の使用確認
-3. セッション生成ロジックの確認
-4. タイムアウト設定の確認
-
----
-
-### 2. 認可とアクセス制御
-
-**チェック項目:**
-- [ ] すべてのリソースアクセスで認可チェック
-- [ ] 最小権限の原則
-- [ ] RBAC（Role-Based Access Control）実装
-- [ ] 垂直権限昇格の防止
-- [ ] 水平権限昇格の防止（IDOR対策）
-- [ ] APIエンドポイントの認可
-
-**検出パターン:**
-
-```python
-# Python - 危険なパターン
-@app.route('/admin/users')
-@login_required  # ログインのみチェック、管理者権限チェックなし
-def admin_users():
-    return render_template('admin_users.html')
-
-@app.route('/api/users/<user_id>')
-def get_user(user_id):
-    # 認可チェックなし（IDOR）
-    user = User.query.get(user_id)
-    return jsonify(user.to_dict())
-
-# Python - 安全なパターン
-@app.route('/admin/users')
-@login_required
-@admin_required  # 管理者権限チェック
-def admin_users():
-    return render_template('admin_users.html')
-
-@app.route('/api/users/<user_id>')
-@login_required
-def get_user(user_id):
-    user = User.query.get(user_id)
-    current_user = get_current_user()
-
-    # オーナーシップチェック
-    if user.id != current_user.id and not current_user.is_admin:
-        abort(403)
-
-    return jsonify(user.to_dict())
-```
-
-**レビュー手順:**
-1. すべてのエンドポイントを列挙
-2. 認証デコレータの有無を確認
-3. 認可チェックの有無を確認
-4. IDOR脆弱性の可能性をチェック
-
----
-
-### 3. インジェクション攻撃対策
-
-**チェック項目:**
-- [ ] SQLインジェクション対策（パラメータ化クエリ）
-- [ ] NoSQLインジェクション対策
-- [ ] OSコマンドインジェクション対策
-- [ ] LDAPインジェクション対策
-- [ ] XPathインジェクション対策
-- [ ] SSRFインジェクション対策（Server-Side Template Injection）
-- [ ] ログインジェクション対策
-
-**検出パターン:**
-
-```python
-# Python - SQLインジェクション
-# 危険
-cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")
-cursor.execute("SELECT * FROM users WHERE name = '" + name + "'")
-
-# 安全
-cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
-cursor.execute("SELECT * FROM users WHERE name = %s", (name,))
-
-# Python - OSコマンドインジェクション
-# 危険
-os.system("ping " + ip_address)
-subprocess.call("ls " + directory, shell=True)
-
-# 安全
-subprocess.run(["ping", "-c", "1", ip_address])
-subprocess.run(["ls", directory])
-
-# Python - テンプレートインジェクション
-# 危険
-return render_template_string(user_input)
-
-# 安全
-return render_template('template.html', data=user_input)
-```
-
-```javascript
-// Node.js - SQLインジェクション
-// 危険
-db.query("SELECT * FROM users WHERE id = " + userId);
-
-// 安全
-db.query("SELECT * FROM users WHERE id = ?", [userId]);
-
-// Node.js - NoSQLインジェクション
-// 危険
-db.collection.find({ username: req.query.username });
-
-// 安全
-db.collection.find({ username: { $eq: req.query.username } });
-```
-
-**レビュー手順:**
-1. データベースクエリをGrep検索: `execute|query|find|SELECT|INSERT|UPDATE|DELETE`
-2. 文字列連結や補間の使用を確認
-3. OSコマンド実行をGrep検索: `system|exec|spawn|eval`
-4. テンプレートレンダリングを確認
-
----
-
-### 4. 暗号化とデータ保護
-
-**チェック項目:**
-- [ ] 機密データの暗号化（保存時）
-- [ ] 通信の暗号化（TLS 1.2以上）
-- [ ] 強力な暗号アルゴリズムの使用
-- [ ] ハードコードされた暗号鍵の排除
-- [ ] 適切な鍵管理
-- [ ] 機密データのログ出力防止
-
-**検出パターン:**
-
-```python
-# Python - 危険なパターン
-# 弱い暗号化
-from Crypto.Cipher import DES
-cipher = DES.new(key, DES.MODE_ECB)
-
-# ハードコードされた鍵
-SECRET_KEY = "hardcoded-secret-key-12345"
-
-# 平文でのパスワード保存
-user.password = request.form['password']
-
-# Python - 安全なパターン
-from cryptography.fernet import Fernet
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-
-# 環境変数から鍵を取得
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# パスワードのハッシュ化
-import bcrypt
-user.password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-```
-
-**レビュー手順:**
-1. 暗号化コードをGrep検索: `encrypt|cipher|crypto|AES|DES`
-2. ハードコードされたシークレットを検索: `SECRET|KEY|PASSWORD|TOKEN`
-3. TLS設定の確認
-4. ログ出力の確認
-
----
-
-### 5. 入力検証とサニタイゼーション
-
-**チェック項目:**
-- [ ] すべての入力の検証
-- [ ] ホワイトリストベースの検証
-- [ ] 型チェック
-- [ ] 範囲チェック
-- [ ] 長さ制限
-- [ ] 正規表現検証
-
-**検出パターン:**
-
-```python
-# Python - 危険なパターン
-age = int(request.form['age'])  # 検証なし
-
-# Python - 安全なパターン
-age = int(request.form['age'])
-if not 0 <= age <= 150:
-    raise ValueError("Invalid age")
-
-# または検証ライブラリ使用
-from wtforms import Form, IntegerField, validators
-
-class UserForm(Form):
-    age = IntegerField('Age', [
-        validators.NumberRange(min=0, max=150)
-    ])
-```
-
-```javascript
-// Node.js - 危険なパターン
-const age = parseInt(req.body.age);
-
-// Node.js - 安全なパターン（Joi使用）
-const Joi = require('joi');
-
-const schema = Joi.object({
-    age: Joi.number().integer().min(0).max(150).required()
-});
-
-const { error, value } = schema.validate(req.body);
-```
-
----
-
-### 6. エラー処理と情報漏洩
-
-**チェック項目:**
-- [ ] 汎用的なエラーメッセージ
-- [ ] スタックトレースの非表示（本番環境）
-- [ ] デバッグモードの無効化（本番環境）
-- [ ] エラーの適切なログ記録
-- [ ] 機密情報のエラーメッセージへの非含有
-
-**検出パターン:**
-
-```python
-# Python - 危険なパターン
-@app.errorhandler(Exception)
-def handle_error(error):
-    return str(error), 500  # スタックトレース露出
-
-# DEBUG設定
-DEBUG = True  # 本番環境で危険
-
-# Python - 安全なパターン
-@app.errorhandler(Exception)
-def handle_error(error):
-    logging.error(f"Error: {str(error)}", exc_info=True)
-    return jsonify({'error': 'An error occurred'}), 500
-
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-```
-
----
-
-### 7. ファイルアップロードセキュリティ
-
-**チェック項目:**
-- [ ] ファイルタイプの検証（ホワイトリスト）
-- [ ] ファイルサイズ制限
-- [ ] ファイル名のサニタイゼーション
-- [ ] アップロードディレクトリの実行権限削除
-- [ ] ウイルススキャン
-- [ ] Content-Typeの検証
-
-**検出パターン:**
-
-```python
-# Python - 危険なパターン
-file = request.files['file']
-file.save(os.path.join('/uploads', file.filename))
-
-# Python - 安全なパターン
-from werkzeug.utils import secure_filename
-
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg'}
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-file = request.files['file']
-if file and allowed_file(file.filename):
-    filename = secure_filename(file.filename)
-    file.save(os.path.join('/uploads', filename))
-```
-
----
-
-### 8. API セキュリティ
-
-**チェック項目:**
-- [ ] レート制限
-- [ ] CORS設定の適切性
-- [ ] APIキーの安全な管理
-- [ ] JWTトークンの検証
-- [ ] APIバージョニング
-
-**検出パターン:**
-
-```python
-# Python - レート制限
-from flask_limiter import Limiter
-
-limiter = Limiter(
-    app,
-    key_func=get_remote_address,
-    default_limits=["200 per day", "50 per hour"]
-)
-
-@app.route("/api/data")
-@limiter.limit("10 per minute")
-def api_data():
-    return jsonify(data)
-```
-
----
-
-### 9. 依存関係の脆弱性
-
-**チェック項目:**
-- [ ] 既知の脆弱性のあるライブラリ
-- [ ] 古いバージョンのフレームワーク
-- [ ] 定期的な更新
-
-**レビュー手順:**
-```bash
-# Python
-pip-audit
-safety check
-
-# Node.js
-npm audit
-npm outdated
-
-# Java
-mvn dependency-check:check
-```
-
----
-
-## レビュー実施手順
+## レビューフェーズ
 
 ### Phase 0: セキュリティリファレンスの取得
+SKILL.mdの指示に従い、必要なリファレンスファイルを取得してください。
 
-レビュー開始前に、WebFetchツールを使用して最新のセキュリティ情報を取得してください:
+### Phase 1: データベースセキュリティ
 
-**OWASP Top 10の取得**:
-1. `https://owasp.org/Top10/` から最新版のカテゴリ一覧を取得
-2. 各カテゴリの詳細ページを取得し、脆弱性パターンを把握
-3. 取得した情報をセッション内でキャッシュし、レビュー中に参照
+**チェック項目:**
+- SQLインジェクション対策（パラメータ化クエリ、ORM）
+- NoSQLインジェクション対策
+- データベース認証情報の安全な管理
+- 最小権限の原則（データベースユーザー）
+- 機密データの暗号化（保存時）
 
-**CWE Top 25の取得**:
-1. `https://cwe.mitre.org/top25/` から最新版のCWE Top 25を取得
-2. 必要に応じて `https://cwe-api.mitre.org/api/v1/cwe/weakness/{id}` から個別CWE詳細を取得
-3. 取得した情報をセッション内でキャッシュし、レビュー中に参照
+**危険パターン:** 文字列連結でのクエリ構築、平文パスワード、root権限使用
 
-### Phase 1: コード探索
-1. プロジェクト構造の理解
-2. エントリーポイントの特定
-3. 認証・認可フローの把握
+**安全パターン:** パラメータ化クエリ、ORM使用、環境変数での認証情報管理、AES-256暗号化
 
-### Phase 2: 脆弱性スキャン
-1. 取得したOWASP Top 10パターンとのマッチング
-2. 取得したCWEパターンとのマッチング
-3. 言語固有の脆弱性チェック
+---
 
-### Phase 3: 手動レビュー
-1. ビジネスロジックの検証
-2. カスタムセキュリティコントロールの評価
-3. 設定ファイルのレビュー
+### Phase 2: 認証とセッション管理
 
-### Phase 4: レポート作成
-1. 発見事項の文書化
-2. CVSSスコアリング
-3. 修正推奨事項の提供
+**チェック項目:**
+- パスワードハッシュ（bcrypt, Argon2, PBKDF2）
+- セッション管理のセキュリティ
+- セッションタイムアウト
+- セッション固定攻撃対策
+- CSRF対策
+
+**危険パターン:** 平文パスワード、弱いハッシュ（MD5, SHA1）、予測可能なセッションID
+
+**安全パターン:** bcrypt/Argon2、セキュアなセッションID生成、CSRFトークン
+
+---
+
+### Phase 3: 認可とアクセス制御
+
+**チェック項目:**
+- すべてのリソースアクセスで認可チェック
+- RBAC/ABACの実装
+- 最小権限の原則
+- 垂直・水平権限昇格対策
+
+**危険パターン:** 認可チェックなし、クライアント側のみの検証、ユーザーIDのみでアクセス許可
+
+**安全パターン:** サーバー側での認可チェック、リソース所有権検証、RBAC実装
+
+---
+
+### Phase 4: 入力検証とサニタイゼーション
+
+**チェック項目:**
+- すべての入力の検証
+- ホワイトリスト検証
+- ファイルアップロードのセキュリティ
+- パストラバーサル対策
+- コマンドインジェクション対策
+
+**危険パターン:** 未検証の入力、ブラックリスト検証のみ、ファイルタイプ検証なし
+
+**安全パターン:** ホワイトリスト検証、ファイルタイプとサイズの検証、パス正規化
+
+---
+
+### Phase 5: シークレット管理
+
+**チェック項目:**
+- APIキー、パスワード、トークンの安全な管理
+- ハードコードされたシークレットなし
+- 環境変数または専用のシークレット管理サービス使用
+- シークレットのローテーション
+
+**危険パターン:** ハードコードされたシークレット、Gitにコミットされた認証情報
+
+**安全パターン:** 環境変数、AWS Secrets Manager、HashiCorp Vault、定期的なローテーション
+
+---
+
+### Phase 6: エラー処理とロギング
+
+**チェック項目:**
+- 汎用的なエラーメッセージ
+- スタックトレースの非公開
+- 機密情報のログ記録禁止
+- 包括的なセキュリティイベントログ
+
+**危険パターン:** 詳細なエラーメッセージ、スタックトレースの公開、パスワードのログ記録
+
+**安全パターン:** 汎用エラーメッセージ、詳細ログ（内部のみ）、機密情報のマスキング
+
+---
+
+### Phase 7: 依存関係とサプライチェーン
+
+**チェック項目:**
+- 既知の脆弱性のあるライブラリ
+- 依存関係の定期的な更新
+- SBOMの作成
+- 脆弱性スキャン
+
+**危険パターン:** 古いバージョンのライブラリ、未パッチの脆弱性
+
+**安全パターン:** 定期的な依存関係更新、自動脆弱性スキャン、依存関係のロック
+
+---
+
+### Phase 8: セキュアな設定
+
+**チェック項目:**
+- デフォルト認証情報の変更
+- 不要なサービスの無効化
+- セキュリティヘッダーの設定
+- デバッグモードの無効化（本番環境）
+
+**危険パターン:** デフォルト認証情報、デバッグモード有効、セキュリティヘッダーなし
+
+**安全パターン:** 強力な認証情報、本番環境でのデバッグ無効化、適切なセキュリティヘッダー
+
+---
+
+### Phase 9: 暗号化
+
+**チェック項目:**
+- 機密データの暗号化（保存時、通信時）
+- 強力な暗号化アルゴリズム（AES-256）
+- 適切な鍵管理
+- TLS 1.2以上の使用
+
+**危険パターン:** 平文保存、弱い暗号化（DES, 3DES）、ハードコードされた鍵
+
+**安全パターン:** AES-256、TLS 1.2以上、専用の鍵管理サービス
+
+---
+
+## レビュー手順
+
+1. **コードベース探索**: バックエンド関連ファイル（models, services, controllers）を特定
+2. **データベース層**: SQLインジェクション、機密データ暗号化をチェック
+3. **認証・認可**: パスワードハッシュ、セッション管理、アクセス制御を確認
+4. **入力検証**: すべての入力処理でインジェクション脆弱性をチェック
+5. **シークレット管理**: ハードコードされたシークレット、認証情報の露出をチェック
+6. **リファレンス適用**: STRIDE、OWASP Top 10、Attack Tree分析を適用
 
 ## 出力フォーマット
 
-各発見事項について、以下の形式で報告してください：
+SKILL.mdで定義された共通フォーマットに従ってレポートを生成してください。
 
-```markdown
-## [発見事項ID]: [タイトル]
+## 参考: OWASP Top 10 2021
 
-**重要度**: Critical/High/Medium/Low
-
-**場所**: `ファイル名:行番号`
-
-**OWASP**: A0X:2021 - [カテゴリ]
-
-**CWE**: CWE-XXX
-
-**CVSSスコア**: X.X
-
-**説明**:
-[脆弱性の詳細説明]
-
-**影響**:
-- [影響1]
-- [影響2]
-
-**再現手順**:
-1. [手順1]
-2. [手順2]
-
-**修正方法**:
-```python
-# 修正後のコード例
-```
-
-**参考資料**:
-- [URL1]
-- [URL2]
-```
-
-## 重要な注意事項
-
-- **Evidence-First**: 必ず実際のコードを引用してください
-- **False Positiveの回避**: 確実な脆弱性のみ報告してください
-- **コンテキストを考慮**: フレームワークの組み込み保護機能を考慮してください
-- **優先順位付け**: リスクの高いものから報告してください
-
-## 開始してください
-
-上記の観点からバックエンドアプリケーションのセキュリティレビューを実施してください。
+1. A01:2021 - Broken Access Control
+2. A02:2021 - Cryptographic Failures
+3. A03:2021 - Injection
+4. A04:2021 - Insecure Design
+5. A05:2021 - Security Misconfiguration
+6. A06:2021 - Vulnerable and Outdated Components
+7. A07:2021 - Identification and Authentication Failures
+8. A08:2021 - Software and Data Integrity Failures
+9. A09:2021 - Security Logging and Monitoring Failures
+10. A10:2021 - Server-Side Request Forgery (SSRF)

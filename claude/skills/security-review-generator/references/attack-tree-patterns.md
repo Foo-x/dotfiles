@@ -1,6 +1,6 @@
 # Attack Tree 構築パターン
 
-Attack Tree（攻撃木）は、システムへの攻撃経路を視覚化し、分析するための階層的な手法です。
+Attack Tree（攻撃木）は、システムへの攻撃経路を階層的に視覚化・分析する手法です。
 
 ## Attack Tree の基本概念
 
@@ -20,10 +20,10 @@ Attack Tree（攻撃木）は、システムへの攻撃経路を視覚化し、
 - **OR**: いずれかの子ノードが成功すれば良い
 
 ### 属性
-- **Cost（コスト）**: 攻撃の実行コスト
-- **Difficulty（難易度）**: 攻撃の実行難易度
-- **Detection（検出可能性）**: 攻撃が検出される確率
-- **Success（成功率）**: 攻撃の成功確率
+- **Cost（コスト）**: 攻撃の実行コスト（Low/Medium/High）
+- **Difficulty（難易度）**: 攻撃の実行難易度（Low/Medium/High）
+- **Detection（検出可能性）**: 攻撃が検出される確率（Low/Medium/High）
+- **Success（成功率）**: 攻撃の成功確率（Low/Medium/High）
 
 ## パターン1: 不正アクセス
 
@@ -44,26 +44,10 @@ Attack Tree（攻撃木）は、システムへの攻撃経路を視覚化し、
     └── デフォルト認証情報
 ```
 
-### 属性評価
-```yaml
-ブルートフォース攻撃:
-  cost: Low
-  difficulty: Low (レート制限なしの場合)
-  detection: High
-  success: Medium
-
-SQLインジェクション:
-  cost: Low
-  difficulty: Medium
-  detection: Medium
-  success: High (脆弱性がある場合)
-
-フィッシング攻撃:
-  cost: Low
-  difficulty: Low
-  detection: Low
-  success: Medium
-```
+### 主要攻撃の属性
+- **ブルートフォース**: Cost=Low, Difficulty=Low, Detection=High, Success=Medium
+- **SQLインジェクション**: Cost=Low, Difficulty=Medium, Detection=Medium, Success=High
+- **フィッシング**: Cost=Low, Difficulty=Low, Detection=Low, Success=Medium
 
 ## パターン2: データ漏洩
 
@@ -92,22 +76,9 @@ SQLインジェクション:
 ```
 
 ### 対策マッピング
-```yaml
-SQLインジェクション:
-  - パラメータ化クエリ使用
-  - 入力検証
-  - WAF導入
-
-IDOR:
-  - すべてのリソースアクセスで認可チェック
-  - UUID使用
-  - アクセス制御リスト
-
-パストラバーサル:
-  - パス正規化
-  - ホワイトリスト検証
-  - chroot jail
-```
+- **SQLインジェクション**: パラメータ化クエリ、入力検証、WAF
+- **IDOR**: 認可チェック、UUID使用、アクセス制御リスト
+- **パストラバーサル**: パス正規化、ホワイトリスト検証、chroot jail
 
 ## パターン3: サービス妨害（DoS）
 
@@ -133,20 +104,9 @@ IDOR:
     └── XML Bomb
 ```
 
-### リスク評価
-```yaml
-DDoS攻撃:
-  impact: Critical
-  likelihood: Medium
-  detection: High
-  mitigation_cost: High
-
-ReDoS:
-  impact: High
-  likelihood: Low
-  detection: Medium
-  mitigation_cost: Low
-```
+### 主要攻撃のリスク評価
+- **DDoS**: Impact=Critical, Likelihood=Medium, Detection=High
+- **ReDoS**: Impact=High, Likelihood=Low, Detection=Medium
 
 ## パターン4: 権限昇格
 
@@ -208,20 +168,9 @@ ReDoS:
         └── コードの改ざん
 ```
 
-### 対策
-```yaml
-依存関係管理:
-  - SBOMの作成と管理
-  - 定期的な脆弱性スキャン
-  - 依存関係のロック（lock files）
-  - 信頼できるレジストリのみ使用
-
-CI/CDセキュリティ:
-  - シークレット管理（Vault, AWS Secrets Manager）
-  - パイプラインのコード化（Pipeline as Code）
-  - ビルド成果物の署名
-  - 最小権限でのジョブ実行
-```
+### サプライチェーン対策
+- **依存関係管理**: SBOMの作成、定期的な脆弱性スキャン、依存関係のロック、信頼できるレジストリのみ使用
+- **CI/CDセキュリティ**: シークレット管理、Pipeline as Code、ビルド成果物の署名、最小権限でのジョブ実行
 
 ## Attack Tree 分析テンプレート
 
@@ -238,17 +187,12 @@ CI/CDセキュリティ:
 **ステップ:**
 1. [ステップ1]
 2. [ステップ2]
-3. [ステップ3]
 
 **属性:**
 - コスト: Low/Medium/High
 - 難易度: Low/Medium/High
 - 検出可能性: Low/Medium/High
 - 成功率: Low/Medium/High
-
-**前提条件:**
-- [前提条件1]
-- [前提条件2]
 
 **対策:**
 - [対策1]
@@ -268,87 +212,3 @@ CI/CDセキュリティ:
 | 経路1 | Critical | 1 | Medium |
 | 経路2 | High | 2 | Low |
 ```
-
-## Mermaid記法でのAttack Tree
-
-```mermaid
-graph TD
-    A[不正アクセス] -->|OR| B[認証突破]
-    A -->|OR| C[認証バイパス]
-
-    B -->|OR| D[ブルートフォース]
-    B -->|OR| E[フィッシング]
-    B -->|OR| F[セッションハイジャック]
-
-    C -->|OR| G[SQLインジェクション]
-    C -->|OR| H[デフォルト認証情報]
-
-    D -->|AND| I[弱いパスワード]
-    D -->|AND| J[レート制限なし]
-```
-
-## 定量的分析
-
-### コスト計算
-```
-総コスト = Σ(各ステップのコスト)
-AND ノード: 最大コスト
-OR ノード: 最小コスト
-```
-
-### 成功確率計算
-```
-AND ノード: P(成功) = P1 × P2 × ... × Pn
-OR ノード: P(成功) = 1 - (1-P1) × (1-P2) × ... × (1-Pn)
-```
-
-### ROI（費用対効果）分析
-```
-ROI = (攻撃による利益 - 攻撃コスト) / 攻撃コスト
-```
-
-## ツール
-
-### 手動作成
-- Draw.io / diagrams.net
-- Microsoft Visio
-- Lucidchart
-
-### 自動化ツール
-- AttackTree+
-- ADTool (Attack-Defense Trees)
-- ThreatModeler
-
-### コードベース
-```python
-# Pythonでの簡易Attack Tree表現
-attack_tree = {
-    'goal': '不正アクセス',
-    'type': 'OR',
-    'children': [
-        {
-            'name': 'ブルートフォース',
-            'type': 'AND',
-            'cost': 'Low',
-            'difficulty': 'Low',
-            'detection': 'High',
-            'children': [
-                {'name': '弱いパスワード', 'cost': 0},
-                {'name': 'レート制限なし', 'cost': 0}
-            ]
-        },
-        {
-            'name': 'SQLインジェクション',
-            'cost': 'Low',
-            'difficulty': 'Medium',
-            'detection': 'Medium'
-        }
-    ]
-}
-```
-
-## 参考資料
-
-- [Attack Trees - Bruce Schneier](https://www.schneier.com/academic/archives/1999/12/attack_trees.html)
-- [OWASP Attack Trees](https://owasp.org/www-community/attacks/Attack_tree)
-- [MITRE ATT&CK Framework](https://attack.mitre.org/)
