@@ -89,6 +89,39 @@ description: |
 - **ファイルサイズ**: 行数、文字数
 - **関数/メソッドの長さ**: LOC（Lines of Code）
 
+#### 3.4 テストコード品質
+[references/test-smells.md](references/test-smells.md)と[references/principles.md](references/principles.md)のテスト原則を参照し、以下を評価:
+
+**Test Bloaters（テストの肥大化）**:
+- Eager Test（過度に詳細なテスト）
+- Obscure Test（不明瞭なテスト）
+- Long Test（長すぎるテスト）
+
+**Test Logic Smells（テストロジックの問題）**:
+- Conditional Test Logic（条件付きテストロジック）
+- Assertion Roulette（アサーションルーレット）
+- Sensitive Equality（敏感な等価性）
+
+**Test Isolation Smells（テスト分離の問題）**:
+- Shared State（共有状態）
+- Test Run War（テスト実行戦争）
+- Resource Optimism（リソース楽観主義）
+
+**Test Maintainability Smells（テスト保守性の問題）**:
+- Test Code Duplication（テストコードの重複）
+- Hard-Coded Test Data（ハードコードされたテストデータ）
+- Mystery Guest（謎のゲスト）
+
+**Test Double Smells（テストダブルの問題）**:
+- Mock Overuse（モックの過剰使用）
+- Leaky Mock（漏れやすいモック）
+
+**テスト品質原則**:
+- **FIRST原則**: Fast, Isolated, Repeatable, Self-Validating, Timely
+- **AAA/Given-When-Then**: テスト構造の明確性
+- **テストピラミッド**: 単体/統合/E2Eテストのバランス（バックエンド向け）
+- **テスティングトロフィー**: 統合テスト重視のバランス（フロントエンド向け）
+
 ### 4. Markdownレポートの生成と出力
 
 分析完了後、必ず以下の手順でMarkdownレポートファイルを生成します:
@@ -138,12 +171,15 @@ Writeツールを使用してMarkdownファイルとして保存します:
 - データ破損リスク
 - 循環依存
 - メモリリーク
+- テストの完全な欠如（重要機能）
 
 ### High（高）
 - SOLID原則の重大な違反
 - 大規模な重複コード
 - 極端に高い複雑度（CC > 15）
 - 大きすぎるクラス/メソッド（500行以上）
+- Test Run War（並列実行で競合するテスト）
+- Shared State（テスト間の状態共有）
 
 ### Medium（中）
 - 命名の問題
@@ -151,12 +187,18 @@ Writeツールを使用してMarkdownファイルとして保存します:
 - データクランプ
 - ネストの深さ（4階層以上）
 - Switch文の乱用
+- Eager Test（複数の関心事を検証）
+- Obscure Test（意図が不明瞭）
+- Test Code Duplication（テストコードの重複）
+- FIRST原則の違反（遅い、非独立、非再現）
 
 ### Low（低）
 - コメント不足
 - マジックナンバー
 - 一貫性のないフォーマット
 - 軽微な最適化機会
+- Hard-Coded Test Data（ハードコードされたテストデータ）
+- Assertion Roulette（説明のないアサーション）
 
 ## 分析のベストプラクティス
 
@@ -182,16 +224,24 @@ Writeツールを使用してMarkdownファイルとして保存します:
 - 型の曖昧さによる潜在的バグ
 - ダックタイピングの適切な使用
 - 実行時エラーのリスク
+- **テスト**: 型安全性を補うための充実したテストスイート
 
 ### 静的型付け言語（Java, C#, TypeScript, Go等）
 - 過剰な型階層
 - インターフェースの乱用/不足
 - ジェネリクスの適切な使用
+- **テスト**: モックフレームワークの適切な使用（Mockito, NSubstituteなど）
 
 ### 関数型プログラミング（Haskell, Elixir, Scala等）
 - 副作用の分離
 - イミュータビリティの徹底
 - 高階関数の適切な使用
+- **テスト**: プロパティベーステスト（QuickCheck, Hypothesis）の活用
+
+### テストフレームワーク別
+- **xUnit系（JUnit, NUnit, pytest）**: テストクラスの適切な構造化、フィクスチャ管理
+- **BDD系（Cucumber, RSpec, Jest）**: Given-When-Thenの明確性、シナリオの粒度
+- **モックライブラリ**: モックの過剰使用を避け、スタブで十分な場合は使い分ける
 
 ## 使用例
 
@@ -234,8 +284,9 @@ Assistant:
 
 ## 参照ドキュメント
 
-- [プログラミング原則](references/principles.md) - SOLID, DRY, KISS等の詳細解説
+- [プログラミング原則](references/principles.md) - SOLID, DRY, KISS等の詳細解説、テスト品質原則（FIRST、AAA/Given-When-Then、テストピラミッド、テスティングトロフィー）
 - [コードスメルカタログ](references/code-smells.md) - 検出可能なコードスメルの一覧
+- [テストスメルカタログ](references/test-smells.md) - テストコード特有のスメル（Test Bloaters, Test Logic, Test Isolation, Test Double等）
 - [品質メトリクス](references/metrics.md) - 測定可能な品質指標
 - [出力フォーマット](references/output-format.md) - レポートのテンプレートと優先度定義
 
