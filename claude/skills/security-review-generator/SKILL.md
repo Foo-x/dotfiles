@@ -1,6 +1,7 @@
 ---
 name: security-review-generator
 description: プロジェクトを分析し、最適化されたセキュリティレビュースキルとサブエージェント設定を生成するメタスキル。バックエンド、フロントエンド、インフラに応じた専門レビュースキルを自動生成。このスキル自体はセキュリティレビューを実行せず、レビュー用のスキルファイルを生成する。プロジェクト固有のセキュリティレビュー体制を構築したい時に使用。
+disable-model-invocation: true
 ---
 
 # Security Review Generator スキル

@@ -1,6 +1,7 @@
 ---
 name: openapi-spec-generator
 description: プロジェクトを分析してOpenAPI 3.x仕様書を自動生成するスキル。CLAUDE.mdやAGENT.mdからプロジェクト概要を読み取り、使用言語・フレームワークを自動検出してAPIエンドポイントを抽出する。以下の場合に使用:(1) 既存プロジェクトのAPI仕様書を作成したい時、(2) APIドキュメントを自動生成したい時、(3) OpenAPI/Swagger仕様書が必要な時
+disable-model-invocation: true
 ---
 
 # OpenAPI仕様書生成スキル

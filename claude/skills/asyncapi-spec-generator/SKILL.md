@@ -1,6 +1,7 @@
 ---
 name: asyncapi-spec-generator
 description: プロジェクトを分析してAsyncAPI 3.0.0仕様書を自動生成するスキル。CLAUDE.mdやAGENT.mdからプロジェクト概要を読み取り、使用プロトコル/基盤を検出し、チャンネル・メッセージ・オペレーション定義を抽出する。以下の場合に使用:(1) 既存プロジェクトのAsyncAPI仕様書を作成したい時、(2) イベント/メッセージAPIドキュメントを自動生成したい時、(3) AsyncAPI仕様書が必要な時
+disable-model-invocation: true
 ---
 
 # AsyncAPI仕様書生成スキル
