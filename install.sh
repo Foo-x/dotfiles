@@ -254,6 +254,7 @@ refactoring-analyzer
 security-review-generator
 spec
 tdd-feature-dev
+terraform-infra-analyzer
 "
 echo "${claude_skills}" | xargs -I{} ln -sfn "${DOT_DIR}/claude/skills/{}" "${HOME}/.claude/skills/{}"
 

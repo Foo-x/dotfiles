@@ -81,17 +81,6 @@
     "command": "bun x ccusage statusline",
     "padding": 0
   },
-  "enabledPlugins": {
-    "code-review@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "cook@claude-code-cookbook": true,
-    "backend-development@claude-code-workflows": true,
-    "code-review-ai@claude-code-workflows": true,
-    "application-performance@claude-code-workflows": true,
-    "code-refactoring@claude-code-workflows": true,
-    "cloud-infrastructure@claude-code-workflows": true
-  },
   "language": "japanese",
   "promptSuggestionEnabled": false
 }
