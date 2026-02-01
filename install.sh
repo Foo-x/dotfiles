@@ -253,6 +253,7 @@ openapi-spec-generator
 refactoring-analyzer
 security-review-generator
 spec
+tdd-feature-dev
 "
 echo "${claude_skills}" | xargs -I{} ln -sfn "${DOT_DIR}/claude/skills/{}" "${HOME}/.claude/skills/{}"
 
