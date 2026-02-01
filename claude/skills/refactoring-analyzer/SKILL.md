@@ -27,115 +27,82 @@ disable-model-invocation: true
 - 主要ファイルを特定（サイズ、複雑度、変更頻度）
 - 言語・フレームワークを識別
 
-### 3. 多角的分析
-以下の観点から分析を実施:
+### 3. 多角的分析（サブエージェント並列実行）
 
-#### 3.1 プログラミング原則の遵守
-[references/principles.md](references/principles.md)を参照し、以下を評価:
-- **SOLID原則**: 単一責任、オープン・クローズド、リスコフの置換、インターフェース分離、依存性逆転
-- **DRY原則**: 重複コードの検出
-- **KISS原則**: 不要な複雑性の特定
-- **YAGNI原則**: 過剰設計の検出
-- **関心の分離**: 責任の混在
-- **デメテルの法則**: 不適切な依存関係
-- **Composition over Inheritance**: 継承の乱用
-- **純粋関数**: 副作用のない、参照透過な関数の推進
-- **パッケージ設計原則**:
-  - **パッケージ凝集度**: REP（再利用・リリース等価）、CRP（共通再利用）、CCP（共通閉鎖）
-  - **パッケージ結合度**: ADP（非循環依存）、SDP（安定依存）、SAP（安定抽象化）
+以下の4つの分析を**サブエージェントで並列実行**します:
 
-#### 3.2 コードスメルの検出
-[references/code-smells.md](references/code-smells.md)を参照し、以下のカテゴリを検出:
+#### 3.1 プログラミング原則分析（サブエージェント使用）
+- **モデル**: `claude sonnet` or `codex high` or `gemini pro`
+- **プロンプトテンプレート**: `references/subagent-templates/principles-analyzer.md`
+- **参照ドキュメント**: `references/principles.md`
+- **分析内容**:
+  - SOLID原則の遵守状況
+  - DRY、KISS、YAGNI原則の評価
+  - 関心の分離、デメテルの法則、Composition over Inheritance
+  - 純粋関数の推進
+  - パッケージ設計原則（凝集度・結合度）
+- **出力形式**: JSON（違反のリスト、重大度、改善提案）
 
-**Bloaters（肥大化）**:
-- Long Method（長すぎるメソッド）
-- Large Class（大きすぎるクラス）
-- Long Parameter List（長すぎる引数リスト）
-- Primitive Obsession（プリミティブ型への執着）
-- Data Clumps（データの群れ）
+#### 3.2 コードスメル検出（サブエージェント使用）
+- **モデル**: `claude haiku` or `gpt mini high` or `gemini flash`
+- **プロンプトテンプレート**: `references/subagent-templates/code-smell-detector.md`
+- **参照ドキュメント**: `references/code-smells.md`
+- **分析内容**:
+  - Bloaters（肥大化）: Long Method, Large Class, Long Parameter List, Primitive Obsession, Data Clumps
+  - Object-Orientation Abusers（OO濫用）: Switch Statements, Temporary Field, Refused Bequest
+  - Change Preventers（変更妨害）: Divergent Change, Shotgun Surgery
+  - Dispensables（不要）: Dead Code, Duplicate Code, Speculative Generality
+  - Couplers（結合）: Feature Envy, Inappropriate Intimacy, Message Chains, Middle Man
+- **出力形式**: JSON（スメルのリスト、重大度、リファクタリング手法）
 
-**Object-Orientation Abusers（オブジェクト指向の濫用）**:
-- Switch Statements（switch文の乱用）
-- Temporary Field（一時的なフィールド）
-- Refused Bequest（親クラスの拒絶）
-- Alternative Classes with Different Interfaces（異なるインターフェースを持つ代替クラス）
+#### 3.3 品質メトリクス評価（サブエージェント使用）
+- **モデル**: `claude haiku` or `gpt mini high` or `gemini flash`
+- **プロンプトテンプレート**: `references/subagent-templates/metrics-evaluator.md`
+- **参照ドキュメント**: `references/metrics.md`
+- **分析内容**:
+  - 結合度（Coupling）: データ結合〜内容結合の評価
+  - コナーセンス（Connascence）: 静的・動的コナーセンスの測定
+  - 凝集度（Cohesion）: LCOMの計算
+  - 循環的複雑度（Cyclomatic Complexity）
+  - 認知的複雑度（Cognitive Complexity）
+  - ネストの深さ、行数、コメント密度
+- **出力形式**: JSON（メトリクス測定値、閾値超過箇所、改善提案）
 
-**Change Preventers（変更の妨害者）**:
-- Divergent Change（発散的変更）
-- Shotgun Surgery（散弾銃手術）
-- Parallel Inheritance Hierarchies（並行継承階層）
+#### 3.4 テストコード品質（サブエージェント使用）
+- **モデル**: `claude sonnet` or `codex high` or `gemini pro`
+- **プロンプトテンプレート**: `references/subagent-templates/test-quality-reviewer.md`
+- **参照ドキュメント**: `references/test-smells.md`, `references/principles.md`（テスト原則）
+- **分析内容**:
+  - Test Bloaters: Eager Test, Obscure Test, Long Test
+  - Test Logic: Conditional Test Logic, Assertion Roulette, Sensitive Equality
+  - Test Isolation: Shared State, Test Run War, Resource Optimism
+  - Test Maintainability: Test Code Duplication, Hard-Coded Test Data, Mystery Guest
+  - Test Double: Mock Overuse, Leaky Mock
+  - Test Principles: FIRST原則、AAA/Given-When-Then、テストピラミッド/トロフィー
+- **出力形式**: JSON（テストスメル、原則違反、テストバランス評価）
 
-**Dispensables（不要なもの）**:
-- Dead Code（デッドコード）
-- Speculative Generality（投機的一般化）
-- Duplicate Code（重複コード）
-- Lazy Class（怠惰なクラス）
-- Comments（過剰なコメント）
+### 4. 結果の統合とMarkdownレポートの生成
 
-**Couplers（結合の問題）**:
-- Feature Envy（機能への羨望）
-- Inappropriate Intimacy（不適切な関係）
-- Message Chains（メッセージチェーン）
-- Middle Man（仲介者）
+4つのサブエージェントから返されたJSON結果を統合し、Markdownレポートを生成します:
 
-#### 3.3 品質メトリクス評価
-[references/metrics.md](references/metrics.md)を参照し、以下を測定:
-- **結合度（Coupling）**: モジュール間の依存度
-- **コナーセンス（Connascence）**: モジュール間の依存関係の種類と強度（静的/動的）
-- **凝集度（Cohesion）**: モジュール内の関連性
-- **循環的複雑度（Cyclomatic Complexity）**: 制御フローの複雑さ
-- **認知的複雑度（Cognitive Complexity）**: 理解の困難さ
-- **ネストの深さ**: 条件分岐・ループのネスト
-- **ファイルサイズ**: 行数、文字数
-- **関数/メソッドの長さ**: LOC（Lines of Code）
+#### 4.1 サブエージェント結果の統合
+各サブエージェントのJSON出力を収集:
+- プログラミング原則分析: 原則違反のリスト
+- コードスメル検出: コードスメルのリスト
+- 品質メトリクス評価: メトリクス測定値
+- テストコード品質: テストスメルと原則違反
 
-#### 3.4 テストコード品質
-[references/test-smells.md](references/test-smells.md)と[references/principles.md](references/principles.md)のテスト原則を参照し、以下を評価:
-
-**Test Bloaters（テストの肥大化）**:
-- Eager Test（過度に詳細なテスト）
-- Obscure Test（不明瞭なテスト）
-- Long Test（長すぎるテスト）
-
-**Test Logic Smells（テストロジックの問題）**:
-- Conditional Test Logic（条件付きテストロジック）
-- Assertion Roulette（アサーションルーレット）
-- Sensitive Equality（敏感な等価性）
-
-**Test Isolation Smells（テスト分離の問題）**:
-- Shared State（共有状態）
-- Test Run War（テスト実行戦争）
-- Resource Optimism（リソース楽観主義）
-
-**Test Maintainability Smells（テスト保守性の問題）**:
-- Test Code Duplication（テストコードの重複）
-- Hard-Coded Test Data（ハードコードされたテストデータ）
-- Mystery Guest（謎のゲスト）
-
-**Test Double Smells（テストダブルの問題）**:
-- Mock Overuse（モックの過剰使用）
-- Leaky Mock（漏れやすいモック）
-
-**テスト品質原則**:
-- **FIRST原則**: Fast, Isolated, Repeatable, Self-Validating, Timely
-- **AAA/Given-When-Then**: テスト構造の明確性
-- **テストピラミッド**: 単体/統合/E2Eテストのバランス（バックエンド向け）
-- **テスティングトロフィー**: 統合テスト重視のバランス（フロントエンド向け）
-
-### 4. Markdownレポートの生成と出力
-
-分析完了後、必ず以下の手順でMarkdownレポートファイルを生成します:
-
-#### 4.1 レポートファイルの作成
+#### 4.2 レポートファイルの作成
 [references/output-format.md](references/output-format.md)の形式に従ってMarkdownレポートを作成:
 
+- 全サブエージェントの結果を統合
 - 優先度の割り当て（Critical / High / Medium / Low）
 - 問題の明確な説明
 - 現在のコード例
 - 改善後のコード例
 - 改善の効果
 
-#### 4.2 ファイル出力
+#### 4.3 ファイル出力
 Writeツールを使用してMarkdownファイルとして保存します:
 
 **ファイル名規則**:
@@ -150,18 +117,19 @@ Writeツールを使用してMarkdownファイルとして保存します:
 **必須セクション**:
 1. ヘッダー（分析対象、日時、検出項目数）
 2. エグゼクティブサマリー
-3. 検出項目サマリー
+3. 検出項目サマリー（原則違反、スメル、メトリクス、テスト品質）
 4. 詳細（各問題の詳細説明）
 5. 推奨実装順序
 
 **オプションセクション**:
 - メトリクスサマリー（複雑度分布、ファイルサイズ分布等）
+- テストバランス評価（ピラミッド/トロフィー）
 - 付録（用語集、参考リンク等）
 
-#### 4.3 出力の確認
+#### 4.4 出力の確認
 レポート生成後、ユーザーに以下を伝えます:
 - 生成されたファイルのパス
-- 検出項目数の概要
+- 検出項目数の概要（原則違反、スメル、メトリクス、テスト問題）
 - 優先度別の内訳
 
 ## 優先度の判断基準
@@ -249,33 +217,49 @@ Writeツールを使用してMarkdownファイルとして保存します:
 ```
 User: このプロジェクト全体をリファクタリング分析して
 Assistant:
-  [Globで構造を把握 → 主要ファイルをRead → 分析 → Markdownレポート生成]
+  [スコープ確認 → Globで構造を把握]
+  [4つのサブエージェントを並列実行]
+    - プログラミング原則分析（sonnet）
+    - コードスメル検出（haiku）
+    - 品質メトリクス評価（haiku）
+    - テストコード品質（sonnet）
+  [結果を統合 → Markdownレポート生成]
 
   レポートを生成しました: refactoring-report-20260131-143000.md
 
-  検出項目: 12件 (Critical: 0, High: 3, Medium: 6, Low: 3)
+  検出項目: 47件
+  - 原則違反: 12件 (High: 3, Medium: 6, Low: 3)
+  - コードスメル: 15件 (High: 4, Medium: 8, Low: 3)
+  - メトリクス問題: 18件 (High: 5, Medium: 9, Low: 4)
+  - テスト品質問題: 20件 (High: 4, Medium: 11, Low: 5)
+
   主要な問題:
-  1. UserServiceクラスの単一責任原則違反
-  2. 認証ロジックの重複コード
-  3. 複数の高複雑度メソッド
+  1. UserServiceクラスの単一責任原則違反（High）
+  2. 認証ロジックの重複コード（High）
+  3. processPaymentメソッドの循環的複雑度25（High）
+  4. テスト間の状態共有（High）
 ```
 
 ### 例2: 特定ファイルの詳細分析
 ```
 User: src/services/UserService.tsをリファクタリング分析して
 Assistant:
-  [ファイルを読み込み → 詳細分析 → Markdownレポート生成]
+  [ファイルを読み込み → 4つのサブエージェントを並列実行 → 結果統合]
 
   レポートを生成しました: refactoring-report-UserService-20260131-143500.md
 
-  検出項目: 5件 (High: 2, Medium: 2, Low: 1)
+  検出項目: 8件
+  - 原則違反: 2件 (High: 1, Medium: 1)
+  - コードスメル: 3件 (High: 1, Medium: 2)
+  - メトリクス問題: 2件 (Medium: 2)
+  - テスト品質問題: 1件 (Medium: 1)
 ```
 
 ### 例3: 特定の問題に焦点を当てた分析
 ```
 User: 重複コードを見つけて
 Assistant:
-  [DRY原則とDuplicate Codeスメルに焦点 → 検出 → Markdownレポート生成]
+  [DRY原則とDuplicate Codeスメルに焦点を当てたサブエージェント実行]
 
   レポートを生成しました: refactoring-report-duplicates-20260131-144000.md
 
@@ -284,11 +268,18 @@ Assistant:
 
 ## 参照ドキュメント
 
+### 基礎リファレンス
 - [プログラミング原則](references/principles.md) - SOLID, DRY, KISS等の詳細解説、テスト品質原則（FIRST、AAA/Given-When-Then、テストピラミッド、テスティングトロフィー）
 - [コードスメルカタログ](references/code-smells.md) - 検出可能なコードスメルの一覧
 - [テストスメルカタログ](references/test-smells.md) - テストコード特有のスメル（Test Bloaters, Test Logic, Test Isolation, Test Double等）
 - [品質メトリクス](references/metrics.md) - 測定可能な品質指標
 - [出力フォーマット](references/output-format.md) - レポートのテンプレートと優先度定義
+
+### サブエージェントテンプレート
+- [プログラミング原則分析](references/subagent-templates/principles-analyzer.md) - 原則違反検出サブエージェント（model: sonnet）
+- [コードスメル検出](references/subagent-templates/code-smell-detector.md) - コードスメル検出サブエージェント（model: haiku）
+- [品質メトリクス評価](references/subagent-templates/metrics-evaluator.md) - メトリクス測定サブエージェント（model: haiku）
+- [テストコード品質](references/subagent-templates/test-quality-reviewer.md) - テスト品質評価サブエージェント（model: sonnet）
 
 ## 注意事項
 
