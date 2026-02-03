@@ -43,7 +43,6 @@ local function mason_lspconfig_config(_)
   local ensure_installed = {
     'lua_ls',
     'marksman',
-    -- 'rust_analyzer',
     'typos_lsp',
   }
   if vim.fn.executable('npm') == 1 then
@@ -55,7 +54,6 @@ local function mason_lspconfig_config(_)
       'docker_compose_language_service',
       'eslint',
       'html',
-      -- 'intelephense',
       'jsonls',
       'pyright',
       'sqlls',
@@ -199,14 +197,12 @@ end
 
 local function mason_null_ls_opts()
   local ensure_installed = {
-    -- 'phpcs',
-    -- 'php-cs-fixer',
     'shfmt',
     'stylua',
   }
   if vim.fn.executable('npm') == 1 then
     for _, v in pairs({
-      -- 'blade-formatter',
+      'biome',
       'markdownlint',
       'markuplint',
       'prettier',
@@ -227,6 +223,9 @@ local function mason_null_ls_config(_, opts)
   local null_ls = require('null-ls')
   null_ls.setup({
     sources = {
+      null_ls.builtins.formatting.biome.with({
+          extra_args = { '--indent-style=space' }
+      }),
       null_ls.builtins.diagnostics.markdownlint.with({
         extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
@@ -234,9 +233,6 @@ local function mason_null_ls_config(_, opts)
       null_ls.builtins.formatting.markdownlint.with({
         extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },
       }),
-      null_ls.builtins.formatting.blade_formatter,
-      null_ls.builtins.diagnostics.phpcs,
-      null_ls.builtins.formatting.phpcsfixer,
       null_ls.builtins.diagnostics.markuplint,
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.formatting.shfmt.with({

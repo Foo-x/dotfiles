@@ -300,8 +300,20 @@ function fcd() {
   fi
 }
 
+function fws() {
+  local dir
+
+  dir=$(
+    command ls -1 "${HOME}/workspace" | fzf -q "$1"
+  )
+
+  if [[ -n "$dir" ]]; then
+    cd "$dir"
+  fi
+}
+
 # jw
-function jwf() {
+function fjw() {
   local selected
   selected=$(jw list 2> /dev/null | command grep -v '✗' | fzf -1 -n -2 -q "$1")
   if [[ -n "$selected" ]]; then
