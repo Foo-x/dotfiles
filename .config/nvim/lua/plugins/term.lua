@@ -108,6 +108,7 @@ local function vim_test_init()
     suite = 'dispatch',
   }
   vim.keymap.set('n', '<Leader>t', '<Cmd>TestLast<CR>')
+  vim.g['test#javascript#vitest#options'] = '--no-color'
 end
 
 return {

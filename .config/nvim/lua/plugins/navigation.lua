@@ -7,6 +7,11 @@ local aerial_opts = {
       end,
     },
   },
+  nav = {
+    keymaps = {
+      ['q'] = 'actions.close',
+    },
+  },
   filter_kind = false,
 }
 
@@ -155,6 +160,9 @@ return {
       { '<leader>A', '<Cmd>AerialToggle<CR>' },
     },
     opts = aerial_opts,
+    config = function(_, opts)
+      require('aerial').setup(opts)
+    end,
   },
   {
     'https://github.com/rgroli/other.nvim',
