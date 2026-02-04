@@ -82,6 +82,11 @@ gcl = ["git", "clone"]
 gclc = ["git", "clone", "--colocate"]
 gf = ["git", "fetch"]
 gfa = ["git", "fetch", "--all-remotes"]
+gfb = ["util", "exec", "--", "bash", "-c", """
+  __jj_bookmark=$(jj log -r 'closest_bookmark(@)' -G -T 'bookmarks' | sed 's/*//g' | cut -d' ' -f1)
+  jj git fetch
+  jj new ${__jj_bookmark}
+""", ""]
 gp = ["git", "push"]
 gpn = ["git", "push", "--dry-run"]
 gpb = ["git", "push", "--bookmark"]
