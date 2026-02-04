@@ -255,6 +255,7 @@ security-review-generator
 spec
 tdd-feature-dev
 terraform-infra-analyzer
+unit-testing-best-practices
 "
 echo "${claude_skills}" | xargs -I{} ln -sfn "${DOT_DIR}/claude/skills/{}" "${HOME}/.claude/skills/{}"
 
