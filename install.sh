@@ -250,6 +250,7 @@ claude_skills="
 architecture-md-generator
 asyncapi-spec-generator
 openapi-spec-generator
+programming-best-practices
 refactoring-analyzer
 security-review-generator
 sensitive-info-scanner
