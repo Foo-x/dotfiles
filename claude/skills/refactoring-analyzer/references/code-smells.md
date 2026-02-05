@@ -106,3 +106,22 @@
 **定義**: クラスが単に他クラスへの委譲しかしていない。
 **検出基準**: メソッドの大部分が委譲のみ、独自ロジックがほとんどない
 **リファクタリング手法**: Remove Middle Man、Inline Method
+
+---
+
+## Encapsulation Breakers（カプセル化の破壊）
+
+### Excessive Exposure（過度な公開）
+**定義**: 不必要にpublicにしているフィールドやメソッド。
+**検出基準**: 外部から使用されないpublicメンバー、内部実装の詳細を公開
+**リファクタリング手法**: Encapsulate Field、Change Access Modifier
+
+### Missing Access Modifier（アクセス修飾子の欠如）
+**定義**: 言語のデフォルトアクセスレベルに依存し、明示的な修飾子がない。
+**検出基準**: 修飾子なしのメンバー、意図が不明確な可視性
+**リファクタリング手法**: 明示的なアクセス修飾子の追加
+
+### Leaky Abstraction（漏洩する抽象）
+**定義**: 内部実装の詳細が公開APIを通じて漏れている。
+**検出基準**: 内部データ構造を直接返すpublicメソッド、可変オブジェクトをそのまま公開
+**リファクタリング手法**: Return Defensive Copy、Immutable Object
