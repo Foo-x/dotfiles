@@ -252,6 +252,7 @@ asyncapi-spec-generator
 openapi-spec-generator
 refactoring-analyzer
 security-review-generator
+sensitive-info-scanner
 spec
 tdd-feature-dev
 terraform-infra-analyzer
