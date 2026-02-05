@@ -11,6 +11,7 @@ endif
 nnoremap <Space>r <Plug>(grep)
 nnoremap <Plug>(grep)<CR> :<C-u>silent grep!<Space>
 nnoremap <Plug>(grep). :<C-u>silent grep! '<C-r>=expand('<cword>')<CR>'<Space>
+nnoremap <Plug>(grep)h :<C-u>GrepCurrentDir<Space>
 
 vnoremap <Space>r <Plug>(grep)
 vnoremap <Plug>(grep). <Esc>:<C-u>silent grep! -U "<C-r>=substitute(escape(join(getregion(getpos("'<"), getpos("'>")), '\n'), '"\\.+*?\|^$()[]{}#'), '\\n', 'n', 'g')<CR>"<Space>
@@ -25,4 +26,6 @@ fun! s:grep_cursor()
     let l:selected = join(getregion(getpos("'<"), getpos("'>")), '')
   endif
 endf
+
+command! -nargs=+ GrepCurrentDir exe 'silent grep! <args> ' . expand('%:h')
 " }}}
