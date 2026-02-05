@@ -314,7 +314,7 @@ function fws() {
   local dir
 
   dir=$(
-    command ls -1 "${HOME}/workspace" | fzf -q "$1"
+    command ls -1 "${HOME}/workspace" | fzf -1 -q "$1"
   )
 
   if [[ -n "$dir" ]]; then

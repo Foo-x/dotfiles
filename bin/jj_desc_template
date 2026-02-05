@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+echo "JJ: Closest bookmark: $(jj log --no-graph -r 'closest_bookmark(@)' -T 'bookmarks' | sed 's/*//g')"
+
+echo
+
 cat <<.
 JJ: Subject
 JJ: 
