@@ -227,28 +227,28 @@ python scripts/vulnerability_lookup.py batch dependencies.json
 
 ### セキュリティフレームワーク
 
-- `references/stride-methodology.md`: STRIDE 脅威モデリング手法
-- `references/attack-tree-patterns.md`: Attack Tree 構築パターン
-- `references/pasta-framework.md`: PASTA 7段階プロセス
+- `references/stride-methodology.md`
+- `references/attack-tree-patterns.md`
+- `references/pasta-framework.md`
 
 ### スコアリングシステム
 
-- `references/scoring-systems.md`: CVSS v3.1、DREAD、ビジネス影響度評価
+- `references/scoring-systems.md`
 
 ### セキュリティ原則
 
-- `references/zero-trust-checklist.md`: Zero Trust 原則チェックリスト
+- `references/zero-trust-checklist.md`
 
 ### コンプライアンス
 
-- `references/compliance-frameworks.md`: SOC 2、GDPR、HIPAA、PCI DSS マッピング
+- `references/compliance-frameworks.md`
 
 ### サブエージェントテンプレート
 
-- `references/subagent-templates/backend-security.md`: バックエンドレビュー
-- `references/subagent-templates/frontend-security.md`: フロントエンドレビュー
-- `references/subagent-templates/infrastructure-security.md`: インフラレビュー
-- `references/subagent-templates/api-security.md`: API レビュー
+- `references/subagent-templates/backend-security.md`
+- `references/subagent-templates/frontend-security.md`
+- `references/subagent-templates/infrastructure-security.md`
+- `references/subagent-templates/api-security.md`
 
 ## 出力ディレクトリ構造
 

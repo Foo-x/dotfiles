@@ -35,50 +35,24 @@ disable-model-invocation: true
 - **モデル**: `claude sonnet` or `codex high` or `gemini pro`
 - **プロンプトテンプレート**: `references/subagent-templates/principles-analyzer.md`
 - **参照ドキュメント**: `references/principles.md`
-- **分析内容**:
-  - SOLID原則の遵守状況
-  - DRY、KISS、YAGNI原則の評価
-  - 関心の分離、デメテルの法則、Composition over Inheritance
-  - 純粋関数の推進
-  - パッケージ設計原則（凝集度・結合度）
 - **出力形式**: JSON（違反のリスト、重大度、改善提案）
 
 #### 3.2 コードスメル検出（サブエージェント使用）
 - **モデル**: `claude haiku` or `gpt mini high` or `gemini flash`
 - **プロンプトテンプレート**: `references/subagent-templates/code-smell-detector.md`
 - **参照ドキュメント**: `references/code-smells.md`
-- **分析内容**:
-  - Bloaters（肥大化）: Long Method, Large Class, Long Parameter List, Primitive Obsession, Data Clumps
-  - Object-Orientation Abusers（OO濫用）: Switch Statements, Temporary Field, Refused Bequest
-  - Change Preventers（変更妨害）: Divergent Change, Shotgun Surgery
-  - Dispensables（不要）: Dead Code, Duplicate Code, Speculative Generality
-  - Couplers（結合）: Feature Envy, Inappropriate Intimacy, Message Chains, Middle Man
 - **出力形式**: JSON（スメルのリスト、重大度、リファクタリング手法）
 
 #### 3.3 品質メトリクス評価（サブエージェント使用）
 - **モデル**: `claude haiku` or `gpt mini high` or `gemini flash`
 - **プロンプトテンプレート**: `references/subagent-templates/metrics-evaluator.md`
 - **参照ドキュメント**: `references/metrics.md`
-- **分析内容**:
-  - 結合度（Coupling）: データ結合〜内容結合の評価
-  - コナーセンス（Connascence）: 静的・動的コナーセンスの測定
-  - 凝集度（Cohesion）: LCOMの計算
-  - 循環的複雑度（Cyclomatic Complexity）
-  - 認知的複雑度（Cognitive Complexity）
-  - ネストの深さ、行数、コメント密度
 - **出力形式**: JSON（メトリクス測定値、閾値超過箇所、改善提案）
 
 #### 3.4 テストコード品質（サブエージェント使用）
 - **モデル**: `claude sonnet` or `codex high` or `gemini pro`
 - **プロンプトテンプレート**: `references/subagent-templates/test-quality-reviewer.md`
 - **参照ドキュメント**: `references/test-smells.md`, `references/principles.md`（テスト原則）
-- **分析内容**:
-  - Test Bloaters: Eager Test, Obscure Test, Long Test
-  - Test Logic: Conditional Test Logic, Assertion Roulette, Sensitive Equality
-  - Test Isolation: Shared State, Test Run War, Resource Optimism
-  - Test Maintainability: Test Code Duplication, Hard-Coded Test Data
-  - Test Double: Mock Overuse, Leaky Mock
-  - Test Principles: FIRST原則、AAA、テストピラミッド/トロフィー
 - **出力形式**: JSON（テストスメル、原則違反、テストバランス評価）
 
 ### 4. 結果の統合とMarkdownレポートの生成
@@ -131,42 +105,6 @@ Writeツールを使用してMarkdownファイルとして保存します:
 - 生成されたファイルのパス
 - 検出項目数の概要（原則違反、スメル、メトリクス、テスト問題）
 - 優先度別の内訳
-
-## 優先度の判断基準
-
-### Critical（緊急）
-- セキュリティ脆弱性
-- データ破損リスク
-- 循環依存
-- メモリリーク
-- テストの完全な欠如（重要機能）
-
-### High（高）
-- SOLID原則の重大な違反
-- 大規模な重複コード
-- 極端に高い複雑度（CC > 15）
-- 大きすぎるクラス/メソッド（500行以上）
-- Test Run War（並列実行で競合するテスト）
-- Shared State（テスト間の状態共有）
-
-### Medium（中）
-- 命名の問題
-- 中程度の複雑度（CC 10-15）
-- データクランプ
-- ネストの深さ（4階層以上）
-- Switch文の乱用
-- Eager Test（複数の関心事を検証）
-- Obscure Test（意図が不明瞭）
-- Test Code Duplication（テストコードの重複）
-- FIRST原則の違反（遅い、非独立、非再現）
-
-### Low（低）
-- コメント不足
-- マジックナンバー
-- 一貫性のないフォーマット
-- 軽微な最適化機会
-- Hard-Coded Test Data（ハードコードされたテストデータ）
-- Assertion Roulette（説明のないアサーション）
 
 ## 分析のベストプラクティス
 
@@ -269,17 +207,17 @@ Assistant:
 ## 参照ドキュメント
 
 ### 基礎リファレンス
-- [プログラミング原則](references/principles.md) - SOLID, DRY, KISS等の詳細解説、テスト品質原則（FIRST、AAA、テストピラミッド、テスティングトロフィー）
-- [コードスメルカタログ](references/code-smells.md) - 検出可能なコードスメルの一覧
-- [テストスメルカタログ](references/test-smells.md) - テストコード特有のスメル（Test Bloaters, Test Logic, Test Isolation, Test Double等）
-- [品質メトリクス](references/metrics.md) - 測定可能な品質指標
-- [出力フォーマット](references/output-format.md) - レポートのテンプレートと優先度定義
+- [プログラミング原則](references/principles.md)
+- [コードスメルカタログ](references/code-smells.md)
+- [テストスメルカタログ](references/test-smells.md)
+- [品質メトリクス](references/metrics.md)
+- [出力フォーマット](references/output-format.md)
 
 ### サブエージェントテンプレート
-- [プログラミング原則分析](references/subagent-templates/principles-analyzer.md) - 原則違反検出サブエージェント（model: sonnet）
-- [コードスメル検出](references/subagent-templates/code-smell-detector.md) - コードスメル検出サブエージェント（model: haiku）
-- [品質メトリクス評価](references/subagent-templates/metrics-evaluator.md) - メトリクス測定サブエージェント（model: haiku）
-- [テストコード品質](references/subagent-templates/test-quality-reviewer.md) - テスト品質評価サブエージェント（model: sonnet）
+- [プログラミング原則分析](references/subagent-templates/principles-analyzer.md)
+- [コードスメル検出](references/subagent-templates/code-smell-detector.md)
+- [品質メトリクス評価](references/subagent-templates/metrics-evaluator.md)
+- [テストコード品質](references/subagent-templates/test-quality-reviewer.md)
 
 ## 注意事項
 

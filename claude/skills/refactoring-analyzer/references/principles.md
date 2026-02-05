@@ -294,6 +294,6 @@ Kent C. Doddsが提唱した、フロントエンド開発に最適化された�
 
 ## 関連リファレンス
 
-- [Code Smells](./code-smells.md) - 一般的なコードスメル
-- [Test Smells](./test-smells.md) - テストコード特有のスメル
-- [Refactoring Catalog](./refactoring-catalog.md) - リファクタリング技法
+- [Code Smells](./code-smells.md)
+- [Test Smells](./test-smells.md)
+- [Refactoring Catalog](./refactoring-catalog.md)

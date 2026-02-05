@@ -8,9 +8,6 @@
 分析を開始する前に、以下のドキュメントを必ず読み込んでください:
 
 - **`references/code-smells.md`**: コードスメルの詳細定義と検出基準
-  - 5つのカテゴリ(Bloaters、Object-Orientation Abusers、Change Preventers、Dispensables、Couplers)
-  - 各スメルの検出基準と具体例
-  - リファクタリング手法の説明
 
 ## 入力
 

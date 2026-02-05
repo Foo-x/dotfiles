@@ -1,6 +1,6 @@
 ---
 name: unit-testing-best-practices
-description: "言語非依存の単体テストベストプラクティスとガイドライン。テスト作成・レビュー・設計全般に使用。FIRST原則、AAA構造、モック指針、アンチパターンを含む。単体テストを書く際や既存テストのレビューを行う際に使用する。"
+description: "言語非依存の単体テストベストプラクティスとガイドライン。テスト作成・レビュー・設計全般に使用。単体テストを書く際や既存テストのレビューを行う際に使用する。"
 user-invocable: false
 ---
 
@@ -14,5 +14,5 @@ user-invocable: false
 
 ## 参照リソース
 
-- **テスト原則・実践ガイド:** `references/principles.md` — FIRST原則、AAAパターン、命名規則、モック指針、境界値カバー
-- **アンチパターン:** `references/anti-patterns.md` — よくある悪いパターンと改善例
+- `references/principles.md`
+- `references/anti-patterns.md`

@@ -26,15 +26,6 @@ disable-model-invocation: true
 
 EARS記法は、6つのパターンで要件を記述する構造化手法です：
 
-| パターン | 構文 | 用途 | 例 |
-|---------|------|------|-----|
-| **Ubiquitous** | システムは〜すること | 常に満たすべき基本要件 | システムはUTF-8でデータを保存すること |
-| **Event-driven** | WHEN [イベント], システムは〜すること | 特定イベント発生時の動作 | WHENユーザーがログインボタンを押下した時、システムは認証画面を表示すること |
-| **State-driven** | WHILE [状態], システムは〜すること | 特定状態での継続的動作 | WHILEファイルアップロード中、システムは進捗バーを表示すること |
-| **Optional** | WHERE [条件], システムは〜すること | オプション機能 | WHERE管理者権限がある場合、システムは削除ボタンを表示すること |
-| **Unwanted** | IF [条件], THEN システムは〜すること | エラー処理・例外対応 | IFパスワードが誤っている場合、THENシステムはエラーメッセージを表示すること |
-| **Complex** | 上記の組み合わせ | 複雑な要件 | WHILE接続中、WHENデータ受信時、システムは即座に画面を更新すること |
-
 詳細パターンとサンプルは `references/ears-patterns.md` を参照してください。
 
 ## 実行フロー
@@ -183,8 +174,8 @@ EARS記法は、6つのパターンで要件を記述する構造化手法です
 
 ## リファレンス
 
-- `references/ears-patterns.md`: 各パターンの詳細テンプレートと良い例・悪い例
-- `assets/requirements-template.md`: 要件定義書のMarkdownテンプレート
+- `references/ears-patterns.md`
+- `assets/requirements-template.md`
 
 ## 使用例
 

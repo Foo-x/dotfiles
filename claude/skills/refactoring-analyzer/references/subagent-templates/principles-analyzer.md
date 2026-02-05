@@ -8,11 +8,6 @@
 分析を開始する前に、以下のドキュメントを必ず読み込んでください:
 
 - **`references/principles.md`**: プログラミング原則の詳細定義と違反の兆候
-  - SOLID原則(SRP、OCP、LSP、ISP、DIP)
-  - 基本原則(DRY、KISS、YAGNI)
-  - 設計原則(関心の分離、デメテルの法則、Composition over Inheritance、純粋関数)
-  - パッケージ設計の原則(REP、CRP、CCP、ADP、SDP、SAP)
-  - 各原則の違反の兆候とリファクタリング手法
 
 ## 入力
 

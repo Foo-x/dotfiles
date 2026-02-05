@@ -79,5 +79,5 @@ Critical / High / Medium / Low / Info の件数
 
 ## 参照ドキュメント
 
-- `references/detection-guide.md` — 検出パターンの詳細と信頼度決定基準
-- `references/remediation-guide.md` — 検出後の対応ガイド（即時・短期・長期）
+- `references/detection-guide.md`
+- `references/remediation-guide.md`

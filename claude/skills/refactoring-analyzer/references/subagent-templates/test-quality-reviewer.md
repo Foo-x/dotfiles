@@ -8,18 +8,8 @@
 分析を開始する前に、以下のドキュメントを必ず読み込んでください:
 
 - **`references/test-smells.md`**: テストスメルの詳細定義と検出方法
-  - Test Bloaters(Eager Test、Obscure Test、Long Test)
-  - Test Logic Smells(Conditional Test Logic、Assertion Roulette、Sensitive Equality)
-  - Test Isolation Smells(Shared State、Test Run War、Resource Optimism)
-  - Test Maintainability Smells(Test Code Duplication、Hard-Coded Test Data)
-  - Test Double Smells(Mock Overuse、Leaky Mock)
-  - 各スメルの検出方法とリファクタリング手法
 
 - **`references/principles.md`**: テスト品質原則
-  - FIRST原則(Fast、Isolated、Repeatable、Self-Validating、Timely)
-  - AAA(Arrange-Act-Assert)パターン
-  - テストピラミッド/テスティングトロフィー
-  - テストダブルの使い分け(Dummy、Stub、Spy、Mock、Fake)
 
 ## 入力
 

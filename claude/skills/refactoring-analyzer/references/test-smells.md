@@ -305,5 +305,5 @@
 
 ## 関連リファレンス
 
-- [Refactoring Catalog](./refactoring-catalog.md) - 一般的なリファクタリング技法
-- [Principles](./principles.md) - テスト品質の原則（FIRST原則など）
+- [Refactoring Catalog](./refactoring-catalog.md)
+- [Principles](./principles.md)

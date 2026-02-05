@@ -128,5 +128,5 @@ flowchart TD
 ## References
 
 詳細なテンプレートと例については以下を参照:
-- `references/TEMPLATE.md` - ARCHITECTURE.mdの標準テンプレート
-- `references/EXAMPLES.md` - プロジェクトタイプ別の例
+- `references/TEMPLATE.md`
+- `references/EXAMPLES.md`

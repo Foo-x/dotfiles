@@ -8,12 +8,6 @@
 分析を開始する前に、以下のドキュメントを必ず読み込んでください:
 
 - **`references/metrics.md`**: 品質メトリクスの詳細定義と計算方法
-  - 結合度(Coupling)、コナーセンス(Connascence)
-  - 凝集度(Cohesion)、LCOM
-  - 循環的複雑度(Cyclomatic Complexity)
-  - 認知的複雑度(Cognitive Complexity)
-  - ネストの深さ、行数(LOC)、コメント密度
-  - 各メトリクスの計算式と評価基準
 
 ## 入力
 
