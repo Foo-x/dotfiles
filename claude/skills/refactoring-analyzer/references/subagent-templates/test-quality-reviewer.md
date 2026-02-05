@@ -11,14 +11,13 @@
   - Test Bloaters(Eager Test、Obscure Test、Long Test)
   - Test Logic Smells(Conditional Test Logic、Assertion Roulette、Sensitive Equality)
   - Test Isolation Smells(Shared State、Test Run War、Resource Optimism)
-  - Test Maintainability Smells(Test Code Duplication、Hard-Coded Test Data、Mystery Guest)
+  - Test Maintainability Smells(Test Code Duplication、Hard-Coded Test Data)
   - Test Double Smells(Mock Overuse、Leaky Mock)
   - 各スメルの検出方法とリファクタリング手法
 
 - **`references/principles.md`**: テスト品質原則
   - FIRST原則(Fast、Isolated、Repeatable、Self-Validating、Timely)
   - AAA(Arrange-Act-Assert)パターン
-  - Given-When-Thenパターン
   - テストピラミッド/テスティングトロフィー
   - テストダブルの使い分け(Dummy、Stub、Spy、Mock、Fake)
 
@@ -47,7 +46,7 @@
 4. **Test Principlesの評価**
    - `references/principles.md`のテスト品質原則に基づいて評価
    - FIRST原則の各項目を検証
-   - AAA/Given-When-Thenパターンの遵守を確認
+   - AAAパターンの遵守を確認
    - テストピラミッド/トロフィーのバランスを評価
 
 5. **改善提案の生成**

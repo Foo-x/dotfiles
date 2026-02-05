@@ -76,9 +76,9 @@ disable-model-invocation: true
   - Test Bloaters: Eager Test, Obscure Test, Long Test
   - Test Logic: Conditional Test Logic, Assertion Roulette, Sensitive Equality
   - Test Isolation: Shared State, Test Run War, Resource Optimism
-  - Test Maintainability: Test Code Duplication, Hard-Coded Test Data, Mystery Guest
+  - Test Maintainability: Test Code Duplication, Hard-Coded Test Data
   - Test Double: Mock Overuse, Leaky Mock
-  - Test Principles: FIRST原則、AAA/Given-When-Then、テストピラミッド/トロフィー
+  - Test Principles: FIRST原則、AAA、テストピラミッド/トロフィー
 - **出力形式**: JSON（テストスメル、原則違反、テストバランス評価）
 
 ### 4. 結果の統合とMarkdownレポートの生成
@@ -208,7 +208,7 @@ Writeツールを使用してMarkdownファイルとして保存します:
 
 ### テストフレームワーク別
 - **xUnit系（JUnit, NUnit, pytest）**: テストクラスの適切な構造化、フィクスチャ管理
-- **BDD系（Cucumber, RSpec, Jest）**: Given-When-Thenの明確性、シナリオの粒度
+- **BDD系（Cucumber, RSpec, Jest）**: シナリオの粒度
 - **モックライブラリ**: モックの過剰使用を避け、スタブで十分な場合は使い分ける
 
 ## 使用例
@@ -269,7 +269,7 @@ Assistant:
 ## 参照ドキュメント
 
 ### 基礎リファレンス
-- [プログラミング原則](references/principles.md) - SOLID, DRY, KISS等の詳細解説、テスト品質原則（FIRST、AAA/Given-When-Then、テストピラミッド、テスティングトロフィー）
+- [プログラミング原則](references/principles.md) - SOLID, DRY, KISS等の詳細解説、テスト品質原則（FIRST、AAA、テストピラミッド、テスティングトロフィー）
 - [コードスメルカタログ](references/code-smells.md) - 検出可能なコードスメルの一覧
 - [テストスメルカタログ](references/test-smells.md) - テストコード特有のスメル（Test Bloaters, Test Logic, Test Isolation, Test Double等）
 - [品質メトリクス](references/metrics.md) - 測定可能な品質指標
