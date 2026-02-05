@@ -8,13 +8,6 @@
 
 **問題:** テスト実行のために製品コードの構造や内部実装を変更する。
 
-```
-// 悪い例: テスト用のonly-for-testメソッドを追加
-class UserService:
-    def _internal_helper():  # テスト用にprivateをpublicにしている
-        ...
-```
-
 **改善:** テストは公開インターフェースを通じて検証する。内部実装が直接テスト可能にならない場合は設計を見直す。
 
 ---
@@ -47,15 +40,6 @@ class UserService:
 
 **問題:** テスト内のアサーション値がどこから来たのか分からない。
 
-```
-// 悪い例
-assert result == 3.14159
-
-// 良い例
-expected_pi_approx = math.pi
-assert round(result, 5) == round(expected_pi_approx, 5)
-```
-
 **改善:** 期待値には明確な変数名を使い、意味を示す。
 
 ---
@@ -79,15 +63,6 @@ assert round(result, 5) == round(expected_pi_approx, 5)
 ## 8. Conjugated Class (共役クラス - 過度モック)
 
 **問題:** 依存関係のすべてをモックにして、実際の動作が検証されなくなる。
-
-```
-// 悪い例: 全てをモックにして意味のない検証になっている
-mock_db = Mock()
-mock_logger = Mock()
-mock_email = Mock()
-result = create_user(mock_db, mock_logger, mock_email)
-assert mock_db.called  # 何も実際には検証されていない
-```
 
 **改善:** モックは必要な依存関係のみに限定する。「動作の検証」と「連携の検証」で用途を分ける。
 
