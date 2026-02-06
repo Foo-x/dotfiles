@@ -206,6 +206,9 @@ nnoremap <Space>, A,<Esc>
 
 nnoremap <M-z> :<C-u>set wrap!<CR>
 
+"" toggle cursor in the middle of the screen
+nnoremap <Space>z <Cmd>if &l:so == 999 \| setl so=-1 \| else \| setl so=999 \| endif<CR>
+
 " insert mode
 inoremap jk <Esc>
 inoremap ｊｋ <Esc>
