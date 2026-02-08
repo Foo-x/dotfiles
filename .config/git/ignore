@@ -22,6 +22,7 @@ tags
 # vim
 Session.vim
 *.sw?
+.nvim.lua
 
 # JavaScript
 node_modules/
