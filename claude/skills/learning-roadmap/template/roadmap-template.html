@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ROADMAP_TITLE}} - 学習ロードマップ</title>
+<style>
+/* ============================================
+   CSS Reset & Base
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #2563eb;
+  --primary-light: #dbeafe;
+  --primary-dark: #1d4ed8;
+  --secondary: #10b981;
+  --secondary-light: #d1fae5;
+  --accent: #f59e0b;
+  --accent-light: #fef3c7;
+  --error: #ef4444;
+  --error-light: #fee2e2;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --bg: #f9fafb;
+  --bg-white: #ffffff;
+  --border: #e5e7eb;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+  --radius: 8px;
+  --radius-lg: 12px;
+  --sidebar-width: 280px;
+  --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-stack);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-white);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.sidebar-header p {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+}
+
+.sidebar-nav {
+  padding: 1rem 0;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: background 0.2s, color 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a:focus-visible {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.sidebar-nav a.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-left-color: var(--primary);
+  font-weight: 600;
+}
+
+.sidebar-nav a .nav-icon {
+  width: 1.25rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sidebar-progress {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.sidebar-progress-label {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-percent {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 0.25rem;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+  max-width: 960px;
+  margin-right: auto;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 200;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 99;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1 { font-size: 2.5rem; font-weight: 800; line-height: 1.2; }
+h2 { font-size: 1.875rem; font-weight: 700; line-height: 1.3; margin-bottom: 1rem; }
+h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.75rem; }
+h4 { font-size: 1.125rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.5rem; }
+p { margin-bottom: 1rem; }
+
+/* ============================================
+   Components: Cards
+   ============================================ */
+.card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   Section: Dashboard
+   ============================================ */
+.section {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.stat-card .stat-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.stat-card .stat-label {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.review-alert {
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.review-alert .alert-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.review-alert .alert-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.review-alert .alert-count {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ============================================
+   Section: Overview
+   ============================================ */
+.overview-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.meta-item .meta-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.meta-item .meta-label {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.meta-item .meta-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.objectives-list {
+  list-style: none;
+  padding: 0;
+}
+
+.objectives-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.objectives-list li:last-child {
+  border-bottom: none;
+}
+
+.objectives-list .obj-icon {
+  color: var(--secondary);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+/* ============================================
+   Section: Modules (Accordion)
+   ============================================ */
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+}
+
+.phase-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.phase-header h3 {
+  margin-bottom: 0;
+}
+
+.module-accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: var(--bg-white);
+}
+
+.module-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-white);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: background 0.2s;
+}
+
+.module-trigger:hover,
+.module-trigger:focus-visible {
+  background: var(--primary-light);
+}
+
+.module-trigger .module-status {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  transition: all 0.3s;
+}
+
+.module-trigger .module-status.completed {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: white;
+}
+
+.module-trigger .module-title {
+  flex: 1;
+}
+
+.module-trigger .module-time {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.module-trigger .module-chevron {
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  color: var(--text-light);
+}
+
+.module-accordion.open .module-chevron {
+  transform: rotate(180deg);
+}
+
+.module-body {
+  display: none;
+  padding: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.module-accordion.open .module-body {
+  display: block;
+}
+
+.module-objectives {
+  background: var(--primary-light);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.module-objectives h4 {
+  color: var(--primary);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.module-objectives ul {
+  list-style: none;
+  padding: 0;
+}
+
+.module-objectives li {
+  font-size: 0.875rem;
+  padding: 0.25rem 0;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.module-objectives li::before {
+  content: '🎯';
+  position: absolute;
+  left: 0;
+}
+
+.module-content {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.module-content code {
+  background: #f1f5f9;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.module-content pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.module-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.module-resources {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.module-resources h4 {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.module-resources a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.module-resources a:hover {
+  text-decoration: underline;
+}
+
+.module-resources ul {
+  list-style: none;
+  padding: 0;
+}
+
+.module-resources li {
+  padding: 0.25rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.875rem;
+}
+
+.module-resources li::before {
+  content: '📚';
+  position: absolute;
+  left: 0;
+}
+
+.complete-module-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 1rem;
+}
+
+.complete-module-btn:hover {
+  background: #059669;
+}
+
+.complete-module-btn:active {
+  transform: scale(0.98);
+}
+
+.complete-module-btn:disabled {
+  background: var(--border);
+  color: var(--text-light);
+  cursor: default;
+}
+
+/* ============================================
+   Section: Quiz
+   ============================================ */
+.quiz-container {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.quiz-container h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.quiz-question {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-question .q-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-question .q-text {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.quiz-options {
+  list-style: none;
+  padding: 0;
+}
+
+.quiz-option {
+  margin-bottom: 0.5rem;
+}
+
+.quiz-option label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 0.875rem;
+}
+
+.quiz-option label:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.quiz-option input[type="radio"] {
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+  accent-color: var(--primary);
+}
+
+.quiz-option label.correct {
+  border-color: var(--secondary);
+  background: var(--secondary-light);
+}
+
+.quiz-option label.incorrect {
+  border-color: var(--error);
+  background: var(--error-light);
+}
+
+.quiz-feedback {
+  display: none;
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.quiz-feedback.show {
+  display: block;
+}
+
+.quiz-feedback.correct {
+  background: var(--secondary-light);
+  border-left: 4px solid var(--secondary);
+}
+
+.quiz-feedback.incorrect {
+  background: var(--error-light);
+  border-left: 4px solid var(--error);
+}
+
+.quiz-feedback .feedback-icon {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.quiz-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.quiz-submit-btn:hover {
+  background: var(--primary-dark);
+}
+
+.quiz-submit-btn:disabled {
+  background: var(--border);
+  cursor: default;
+}
+
+.quiz-score {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--primary-light);
+  border-radius: var(--radius);
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   Section: Spaced Repetition Calendar
+   ============================================ */
+.calendar-container {
+  overflow-x: auto;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  min-width: 350px;
+}
+
+.calendar-header-cell {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-light);
+  padding: 0.5rem;
+}
+
+.calendar-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  position: relative;
+  border: 1px solid transparent;
+  min-height: 48px;
+}
+
+.calendar-cell.today {
+  border: 2px solid var(--primary);
+  font-weight: 700;
+}
+
+.calendar-cell.has-review {
+  background: var(--primary-light);
+  cursor: pointer;
+}
+
+.calendar-cell.has-review:hover {
+  background: #bfdbfe;
+}
+
+.calendar-cell.review-done {
+  background: var(--secondary-light);
+}
+
+.calendar-cell.review-overdue {
+  background: var(--error-light);
+}
+
+.calendar-cell .review-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin-top: 2px;
+}
+
+.calendar-cell.review-done .review-dot {
+  background: var(--secondary);
+}
+
+.calendar-cell.review-overdue .review-dot {
+  background: var(--error);
+}
+
+.calendar-cell.empty {
+  visibility: hidden;
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.calendar-nav button {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--text);
+  transition: background 0.2s;
+}
+
+.calendar-nav button:hover {
+  background: var(--bg);
+}
+
+.calendar-nav .calendar-month-label {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-dot.scheduled { background: var(--primary-light); border: 1px solid var(--primary); }
+.legend-dot.done { background: var(--secondary-light); border: 1px solid var(--secondary); }
+.legend-dot.overdue { background: var(--error-light); border: 1px solid var(--error); }
+
+/* ============================================
+   Section: Interleaving
+   ============================================ */
+.interleaving-intro {
+  background: var(--accent-light);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.interleaving-intro strong {
+  color: var(--accent);
+}
+
+/* ============================================
+   Section: Projects
+   ============================================ */
+.project-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.project-card .project-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+.project-card .project-level.beginner {
+  background: var(--secondary-light);
+  color: #065f46;
+}
+
+.project-card .project-level.intermediate {
+  background: var(--accent-light);
+  color: #92400e;
+}
+
+.project-card .project-level.advanced {
+  background: var(--error-light);
+  color: #991b1b;
+}
+
+.project-card h4 {
+  margin-bottom: 0.5rem;
+}
+
+.project-card .project-desc {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.project-checklist {
+  list-style: none;
+  padding: 0;
+}
+
+.project-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+
+.project-checklist li:last-child {
+  border-bottom: none;
+}
+
+.project-checklist input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--secondary);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.project-checklist label {
+  cursor: pointer;
+  flex: 1;
+}
+
+.project-checklist input:checked + label {
+  text-decoration: line-through;
+  color: var(--text-light);
+}
+
+.project-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.project-progress .progress-bar-container {
+  flex: 1;
+}
+
+.project-hints {
+  margin-top: 1rem;
+}
+
+.project-hints summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  padding: 0.5rem 0;
+}
+
+.project-hints .hints-content {
+  padding: 1rem;
+  background: var(--bg);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   Section: Resources
+   ============================================ */
+.resource-category {
+  margin-bottom: 1.5rem;
+}
+
+.resource-category h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.resource-list {
+  list-style: none;
+  padding: 0;
+}
+
+.resource-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.resource-list li:last-child {
+  border-bottom: none;
+}
+
+.resource-list a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.resource-list a:hover {
+  text-decoration: underline;
+}
+
+.resource-list .resource-meta {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 0.125rem;
+}
+
+/* ============================================
+   Badges & Tags
+   ============================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.badge-primary { background: var(--primary-light); color: var(--primary); }
+.badge-success { background: var(--secondary-light); color: #065f46; }
+.badge-warning { background: var(--accent-light); color: #92400e; }
+.badge-error { background: var(--error-light); color: #991b1b; }
+
+/* ============================================
+   Toast Notification
+   ============================================ */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--text);
+  color: white;
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-md);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  max-width: 360px;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast.success {
+  background: var(--secondary);
+}
+
+/* ============================================
+   Data Reset Button
+   ============================================ */
+.reset-btn {
+  background: none;
+  border: 1px solid var(--error);
+  color: var(--error);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.reset-btn:hover {
+  background: var(--error);
+  color: white;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .mobile-overlay.show {
+    display: block;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+    padding-top: 4rem;
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .overview-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-legend {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Print
+   ============================================ */
+@media print {
+  .sidebar, .mobile-menu-btn, .toast, .complete-module-btn, .quiz-submit-btn, .reset-btn {
+    display: none !important;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  .section {
+    display: block !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+   Reduced Motion (Accessibility)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Focus Visible (Accessibility)
+   ============================================ */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  font-size: 0.875rem;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- Skip Link for Accessibility -->
+<a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+<!-- Mobile Menu Button -->
+<button class="mobile-menu-btn" aria-label="メニューを開く" onclick="toggleSidebar()">☰</button>
+<div class="mobile-overlay" onclick="toggleSidebar()"></div>
+
+<div class="app-container">
+  <!-- ==========================================
+       Sidebar Navigation
+       ========================================== -->
+  <nav class="sidebar" aria-label="メインナビゲーション">
+    <div class="sidebar-header">
+      <h1>{{ROADMAP_TITLE}}</h1>
+      <p>学習ロードマップ</p>
+    </div>
+
+    <div class="sidebar-nav">
+      <a href="#" class="active" data-section="dashboard" onclick="showSection('dashboard', this); return false;">
+        <span class="nav-icon" aria-hidden="true">📊</span>
+        ダッシュボード
+      </a>
+      <a href="#" data-section="overview" onclick="showSection('overview', this); return false;">
+        <span class="nav-icon" aria-hidden="true">📋</span>
+        概要
+      </a>
+      <a href="#" data-section="modules" onclick="showSection('modules', this); return false;">
+        <span class="nav-icon" aria-hidden="true">📖</span>
+        学習モジュール
+      </a>
+      <a href="#" data-section="calendar" onclick="showSection('calendar', this); return false;">
+        <span class="nav-icon" aria-hidden="true">📅</span>
+        復習カレンダー
+      </a>
+      <a href="#" data-section="interleaving" onclick="showSection('interleaving', this); return false;">
+        <span class="nav-icon" aria-hidden="true">🔀</span>
+        インターリービング
+      </a>
+      <a href="#" data-section="projects" onclick="showSection('projects', this); return false;">
+        <span class="nav-icon" aria-hidden="true">🛠️</span>
+        プロジェクト
+      </a>
+      <a href="#" data-section="resources" onclick="showSection('resources', this); return false;">
+        <span class="nav-icon" aria-hidden="true">🔗</span>
+        リソース集
+      </a>
+    </div>
+
+    <div class="sidebar-progress">
+      <div class="sidebar-progress-label">総合進捗</div>
+      <div class="progress-bar-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="総合進捗" id="sidebar-progress-container">
+        <div class="progress-bar-fill" id="sidebar-progress-bar" style="width: 0%"></div>
+      </div>
+      <div class="progress-percent" id="sidebar-progress-percent">0%</div>
+      <button class="reset-btn" style="margin-top: 0.75rem; width: 100%;" onclick="resetProgress()">
+        進捗をリセット
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       Main Content
+       ========================================== -->
+  <main class="main-content" id="main-content">
+
+    <!-- ========== Dashboard Section ========== -->
+    <section class="section active" id="section-dashboard" aria-label="ダッシュボード">
+      <h2>ダッシュボード</h2>
+
+      <div id="review-alert-container"></div>
+
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <div class="stat-icon" aria-hidden="true">📖</div>
+          <div class="stat-value" id="stat-modules-completed">0</div>
+          <div class="stat-label">完了モジュール</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" aria-hidden="true">✅</div>
+          <div class="stat-value" id="stat-quiz-avg">-</div>
+          <div class="stat-label">平均クイズスコア</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" aria-hidden="true">🔄</div>
+          <div class="stat-value" id="stat-reviews-done">0</div>
+          <div class="stat-label">完了復習</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" aria-hidden="true">🏆</div>
+          <div class="stat-value" id="stat-projects-done">0</div>
+          <div class="stat-label">完了プロジェクト</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>最近のアクティビティ</h3>
+        <div id="recent-activity">
+          <p style="color: var(--text-light); font-size: 0.875rem;">まだアクティビティはありません。学習を開始しましょう！</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Overview Section ========== -->
+    <section class="section" id="section-overview" aria-label="概要">
+      <h2>概要</h2>
+
+      <div class="overview-meta">
+        <div class="meta-item">
+          <span class="meta-icon" aria-hidden="true">⏱️</span>
+          <div>
+            <div class="meta-label">推定期間</div>
+            <div class="meta-value">{{ESTIMATED_DURATION}}</div>
+          </div>
+        </div>
+        <div class="meta-item">
+          <span class="meta-icon" aria-hidden="true">📅</span>
+          <div>
+            <div class="meta-label">週あたり</div>
+            <div class="meta-value">{{WEEKLY_HOURS}}</div>
+          </div>
+        </div>
+        <div class="meta-item">
+          <span class="meta-icon" aria-hidden="true">📊</span>
+          <div>
+            <div class="meta-label">難易度</div>
+            <div class="meta-value">{{DIFFICULTY}}</div>
+          </div>
+        </div>
+        <div class="meta-item">
+          <span class="meta-icon" aria-hidden="true">🎯</span>
+          <div>
+            <div class="meta-label">モジュール数</div>
+            <div class="meta-value" id="meta-module-count">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>前提条件</h3>
+        <div id="prerequisites">
+          {{PREREQUISITES}}
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>学習目標</h3>
+        <ul class="objectives-list" id="learning-objectives">
+          {{LEARNING_OBJECTIVES}}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== Modules Section ========== -->
+    <section class="section" id="section-modules" aria-label="学習モジュール">
+      <h2>学習モジュール</h2>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1.5rem;" aria-hidden="true">📈</span>
+          <div>
+            <div style="font-weight: 600;">全体進捗</div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem;">
+              <div class="progress-bar-container" style="flex: 1; height: 12px;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="モジュール進捗" id="modules-progress-container">
+                <div class="progress-bar-fill" id="modules-progress-bar" style="width: 0%; height: 100%;"></div>
+              </div>
+              <span id="modules-progress-text" style="font-weight: 700; color: var(--primary); min-width: 3rem;">0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="modules-container">
+        {{MODULES_CONTENT}}
+      </div>
+    </section>
+
+    <!-- ========== Calendar Section ========== -->
+    <section class="section" id="section-calendar" aria-label="復習カレンダー">
+      <h2>復習カレンダー</h2>
+
+      <div class="card">
+        <p style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 1.5rem;">
+          スペースド・リピティション方式で最適な復習間隔を管理します。
+          モジュールを完了すると、自動的に復習スケジュール（1日後・3日後・7日後・14日後・30日後）が設定されます。
+        </p>
+
+        <div class="calendar-nav">
+          <button onclick="navigateCalendar(-1)" aria-label="前月">◀ 前月</button>
+          <span class="calendar-month-label" id="calendar-month-label"></span>
+          <button onclick="navigateCalendar(1)" aria-label="翌月">翌月 ▶</button>
+        </div>
+
+        <div class="calendar-container">
+          <div class="calendar-grid" id="calendar-grid" role="grid" aria-label="復習カレンダー">
+            <!-- Generated by JS -->
+          </div>
+        </div>
+
+        <div class="calendar-legend" aria-label="凡例">
+          <div class="legend-item"><div class="legend-dot scheduled"></div> 復習予定</div>
+          <div class="legend-item"><div class="legend-dot done"></div> 完了</div>
+          <div class="legend-item"><div class="legend-dot overdue"></div> 期限超過</div>
+        </div>
+      </div>
+
+      <div class="card" id="upcoming-reviews-card">
+        <h3>今後の復習予定</h3>
+        <div id="upcoming-reviews-list">
+          <p style="color: var(--text-light); font-size: 0.875rem;">復習予定はまだありません。モジュールを完了して復習スケジュールを開始しましょう。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Interleaving Section ========== -->
+    <section class="section" id="section-interleaving" aria-label="インターリービング練習">
+      <h2>インターリービング練習</h2>
+
+      <div class="interleaving-intro">
+        <strong>インターリービングとは？</strong>
+        関連するトピックを混合して練習することで、概念の区別能力と長期記憶を強化します。
+        各フェーズで学んだ内容を横断的にテストします。
+      </div>
+
+      <div id="interleaving-container">
+        {{INTERLEAVING_CONTENT}}
+      </div>
+    </section>
+
+    <!-- ========== Projects Section ========== -->
+    <section class="section" id="section-projects" aria-label="プロジェクト">
+      <h2>実践プロジェクト</h2>
+
+      <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 1.5rem;">
+        段階的に複雑性が増すプロジェクトを通じて、学んだ知識を実践的に応用します。
+      </p>
+
+      <div id="projects-container">
+        {{PROJECTS_CONTENT}}
+      </div>
+    </section>
+
+    <!-- ========== Resources Section ========== -->
+    <section class="section" id="section-resources" aria-label="リソース集">
+      <h2>リソース集</h2>
+
+      <div id="resources-container">
+        {{RESOURCES_CONTENT}}
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+<script>
+/* ============================================
+   Data & State
+   ============================================ */
+const STORAGE_KEY = 'learning-roadmap-{{ROADMAP_ID}}';
+const REVIEW_INTERVALS = [1, 3, 7, 14, 30];
+
+/** ローカルタイムゾーンでYYYY-MM-DD形式の日付文字列を返す */
+function toLocalDateString(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + d;
+}
+
+let progress = loadProgress();
+
+function getDefaultProgress() {
+  const today = toLocalDateString(new Date());
+  return {
+    completedModules: [],
+    reviewSchedule: {},
+    quizScores: {},
+    projectProgress: {},
+    activities: [],
+    startDate: today,
+    lastAccess: today
+  };
+}
+
+function loadProgress() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const data = JSON.parse(saved);
+      data.lastAccess = toLocalDateString(new Date());
+      return data;
+    }
+  } catch (e) {
+    console.warn('Failed to load progress:', e);
+  }
+  return getDefaultProgress();
+}
+
+function saveProgress() {
+  try {
+    progress.lastAccess = toLocalDateString(new Date());
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  } catch (e) {
+    console.warn('Failed to save progress:', e);
+  }
+}
+
+function resetProgress() {
+  if (confirm('全ての進捗データをリセットしますか？この操作は取り消せません。')) {
+    progress = getDefaultProgress();
+    saveProgress();
+    updateAllUI();
+    showToast('進捗をリセットしました');
+  }
+}
+
+/* ============================================
+   Navigation
+   ============================================ */
+function showSection(sectionId, navEl) {
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  // Show target
+  const target = document.getElementById('section-' + sectionId);
+  if (target) target.classList.add('active');
+
+  // Update nav
+  document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+  if (navEl) navEl.classList.add('active');
+
+  // Close mobile sidebar
+  closeSidebar();
+
+  // Re-render section-specific content
+  if (sectionId === 'calendar') renderCalendar();
+  if (sectionId === 'dashboard') updateDashboard();
+}
+
+function toggleSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.mobile-overlay');
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+}
+
+function closeSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.mobile-overlay');
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+}
+
+/* ============================================
+   Module Completion
+   ============================================ */
+function toggleModule(moduleId) {
+  const accordion = document.getElementById('module-' + moduleId);
+  if (accordion) accordion.classList.toggle('open');
+}
+
+function completeModule(moduleId) {
+  if (progress.completedModules.includes(moduleId)) return;
+
+  progress.completedModules.push(moduleId);
+
+  // Set up spaced repetition schedule
+  const today = new Date();
+  progress.reviewSchedule[moduleId] = REVIEW_INTERVALS.map((interval, index) => {
+    const reviewDate = new Date(today);
+    reviewDate.setDate(reviewDate.getDate() + interval);
+    return {
+      date: toLocalDateString(reviewDate),
+      interval: interval,
+      label: '復習' + (index + 1) + ': ' + interval + '日後',
+      completed: false
+    };
+  });
+
+  // Add activity
+  addActivity('モジュール完了: ' + getModuleTitle(moduleId));
+
+  saveProgress();
+  updateAllUI();
+  showToast('モジュールを完了しました！復習スケジュールが設定されました。', 'success');
+}
+
+function getModuleTitle(moduleId) {
+  const trigger = document.querySelector('#module-' + moduleId + ' .module-title');
+  return trigger ? trigger.textContent : moduleId;
+}
+
+function addActivity(text) {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('ja-JP', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  progress.activities.unshift({ text: text, date: dateStr });
+  if (progress.activities.length > 20) progress.activities = progress.activities.slice(0, 20);
+}
+
+/* ============================================
+   Quiz Engine
+   ============================================ */
+function submitQuiz(moduleId, questionIndex) {
+  const name = 'quiz-' + moduleId + '-q' + questionIndex;
+  const selected = document.querySelector('input[name="' + name + '"]:checked');
+  if (!selected) {
+    showToast('選択肢を選んでください');
+    return;
+  }
+
+  const btn = selected.closest('.quiz-question').querySelector('.quiz-submit-btn');
+  btn.disabled = true;
+
+  // Disable all options for this question
+  document.querySelectorAll('input[name="' + name + '"]').forEach(input => {
+    input.disabled = true;
+  });
+
+  const isCorrect = selected.dataset.correct === 'true';
+  const correctFeedback = document.getElementById('feedback-correct-' + moduleId + '-q' + questionIndex);
+  const incorrectFeedback = document.getElementById('feedback-incorrect-' + moduleId + '-q' + questionIndex);
+
+  // Highlight options
+  document.querySelectorAll('input[name="' + name + '"]').forEach(input => {
+    const label = input.closest('.quiz-option').querySelector('label');
+    if (input.dataset.correct === 'true') {
+      label.classList.add('correct');
+    } else if (input === selected && !isCorrect) {
+      label.classList.add('incorrect');
+    }
+  });
+
+  // Show appropriate feedback
+  if (isCorrect) {
+    if (correctFeedback) { correctFeedback.classList.add('show'); }
+  } else {
+    if (incorrectFeedback) { incorrectFeedback.classList.add('show'); }
+  }
+
+  // Update scores
+  if (!progress.quizScores[moduleId]) {
+    progress.quizScores[moduleId] = { score: 0, total: 0, attempts: 0 };
+  }
+  progress.quizScores[moduleId].total++;
+  if (isCorrect) progress.quizScores[moduleId].score++;
+  progress.quizScores[moduleId].attempts++;
+
+  saveProgress();
+  updateQuizScoreDisplay(moduleId);
+  updateDashboard();
+}
+
+function updateQuizScoreDisplay(moduleId) {
+  const scoreEl = document.getElementById('quiz-score-' + moduleId);
+  if (scoreEl && progress.quizScores[moduleId]) {
+    const s = progress.quizScores[moduleId];
+    scoreEl.textContent = s.score + ' / ' + s.total + ' 正解';
+    scoreEl.closest('.quiz-score').style.display = 'flex';
+  }
+}
+
+/* ============================================
+   Spaced Repetition Calendar
+   ============================================ */
+let calendarDate = new Date();
+
+function navigateCalendar(direction) {
+  calendarDate.setMonth(calendarDate.getMonth() + direction);
+  renderCalendar();
+}
+
+function renderCalendar() {
+  const grid = document.getElementById('calendar-grid');
+  if (!grid) return;
+
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Label
+  const monthLabel = document.getElementById('calendar-month-label');
+  if (monthLabel) {
+    monthLabel.textContent = year + '年' + (month + 1) + '月';
+  }
+
+  // Build review map
+  const reviewMap = {};
+  for (const [moduleId, schedule] of Object.entries(progress.reviewSchedule)) {
+    for (const review of schedule) {
+      const dateKey = review.date;
+      if (!reviewMap[dateKey]) reviewMap[dateKey] = [];
+      reviewMap[dateKey].push({
+        moduleId: moduleId,
+        completed: review.completed,
+        label: review.label
+      });
+    }
+  }
+
+  // Days
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay();
+  const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+
+  let html = '';
+  dayNames.forEach(d => {
+    html += '<div class="calendar-header-cell" role="columnheader">' + d + '</div>';
+  });
+
+  // Empty cells before first day
+  for (let i = 0; i < firstDay; i++) {
+    html += '<div class="calendar-cell empty" role="gridcell"></div>';
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(year, month, day);
+    const dateKey = toLocalDateString(date);
+    const isToday = date.getTime() === today.getTime();
+    const reviews = reviewMap[dateKey];
+
+    let classes = 'calendar-cell';
+    if (isToday) classes += ' today';
+
+    if (reviews) {
+      const allDone = reviews.every(r => r.completed);
+      const anyOverdue = !allDone && date < today;
+
+      if (allDone) {
+        classes += ' review-done';
+      } else if (anyOverdue) {
+        classes += ' review-overdue';
+      } else {
+        classes += ' has-review';
+      }
+    }
+
+    const title = reviews ? reviews.map(r => getModuleTitle(r.moduleId) + ' - ' + r.label).join('\n') : '';
+
+    html += '<div class="' + classes + '" role="gridcell" ' +
+            (title ? 'title="' + title.replace(/"/g, '&quot;') + '"' : '') +
+            ' aria-label="' + (month + 1) + '月' + day + '日' +
+            (reviews ? ' 復習' + reviews.length + '件' : '') + '">' +
+            day +
+            (reviews ? '<div class="review-dot" aria-hidden="true"></div>' : '') +
+            '</div>';
+  }
+
+  grid.innerHTML = html;
+
+  // Update upcoming reviews list
+  updateUpcomingReviews();
+}
+
+function updateUpcomingReviews() {
+  const container = document.getElementById('upcoming-reviews-list');
+  if (!container) return;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const upcoming = [];
+  for (const [moduleId, schedule] of Object.entries(progress.reviewSchedule)) {
+    for (let i = 0; i < schedule.length; i++) {
+      const review = schedule[i];
+      if (!review.completed) {
+        const reviewDate = new Date(review.date);
+        reviewDate.setHours(0, 0, 0, 0);
+        upcoming.push({
+          moduleId: moduleId,
+          intervalIndex: i,
+          title: getModuleTitle(moduleId),
+          date: review.date,
+          dateObj: reviewDate,
+          label: review.label,
+          isOverdue: reviewDate < today,
+          isToday: reviewDate.getTime() === today.getTime()
+        });
+      }
+    }
+  }
+
+  upcoming.sort((a, b) => a.dateObj - b.dateObj);
+
+  if (upcoming.length === 0) {
+    container.innerHTML = '<p style="color: var(--text-light); font-size: 0.875rem;">復習予定はまだありません。</p>';
+    return;
+  }
+
+  let html = '<ul style="list-style: none; padding: 0;">';
+  upcoming.slice(0, 10).forEach(item => {
+    const dateLabel = item.isToday ? '今日' :
+                      item.isOverdue ? '期限超過' :
+                      new Date(item.date).toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' });
+    const badgeClass = item.isToday ? 'badge-warning' : item.isOverdue ? 'badge-error' : 'badge-primary';
+    const canComplete = item.isToday || item.isOverdue;
+
+    html += '<li style="display: flex; align-items: center; justify-content: space-between; padding: 0.625rem 0; border-bottom: 1px solid var(--border);">' +
+            '<div><strong style="font-size: 0.875rem;">' + item.title + '</strong>' +
+            '<div style="font-size: 0.75rem; color: var(--text-light);">' + item.label + '</div></div>' +
+            '<div style="display: flex; align-items: center; gap: 0.5rem;">' +
+            '<span class="badge ' + badgeClass + '">' + dateLabel + '</span>' +
+            (canComplete ? '<button onclick="completeReview(\'' + item.moduleId + '\',' + item.intervalIndex + ')" ' +
+              'style="background: var(--secondary); color: white; border: none; border-radius: var(--radius); padding: 0.25rem 0.625rem; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: inherit;" ' +
+              'aria-label="' + item.title + 'の復習を完了">完了</button>' : '') +
+            '</div></li>';
+  });
+  html += '</ul>';
+
+  container.innerHTML = html;
+}
+
+function completeReview(moduleId, intervalIndex) {
+  if (progress.reviewSchedule[moduleId] && progress.reviewSchedule[moduleId][intervalIndex]) {
+    progress.reviewSchedule[moduleId][intervalIndex].completed = true;
+    addActivity('復習完了: ' + getModuleTitle(moduleId));
+    saveProgress();
+    updateAllUI();
+    showToast('復習を完了しました！');
+  }
+}
+
+/* ============================================
+   Project Progress
+   ============================================ */
+function toggleProjectMilestone(projectId, milestoneIndex) {
+  if (!progress.projectProgress[projectId]) {
+    const checkboxes = document.querySelectorAll('#project-' + projectId + ' .project-checklist input');
+    progress.projectProgress[projectId] = {
+      started: true,
+      milestones: Array(checkboxes.length).fill(false),
+      completed: false
+    };
+  }
+
+  const proj = progress.projectProgress[projectId];
+  proj.milestones[milestoneIndex] = !proj.milestones[milestoneIndex];
+  proj.completed = proj.milestones.every(m => m);
+
+  if (proj.completed) {
+    addActivity('プロジェクト完了: ' + getProjectTitle(projectId));
+  }
+
+  saveProgress();
+  updateProjectProgress(projectId);
+  updateDashboard();
+  updateSidebarProgress();
+}
+
+function getProjectTitle(projectId) {
+  const el = document.querySelector('#project-' + projectId + ' h4');
+  return el ? el.textContent : projectId;
+}
+
+function updateProjectProgress(projectId) {
+  const proj = progress.projectProgress[projectId];
+  if (!proj) return;
+
+  const done = proj.milestones.filter(m => m).length;
+  const total = proj.milestones.length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  const bar = document.querySelector('#project-' + projectId + ' .progress-bar-fill');
+  const text = document.querySelector('#project-' + projectId + ' .project-progress-text');
+  if (bar) bar.style.width = pct + '%';
+  if (text) text.textContent = done + '/' + total + ' (' + pct + '%)';
+
+  // Sync checkboxes
+  const checkboxes = document.querySelectorAll('#project-' + projectId + ' .project-checklist input');
+  checkboxes.forEach((cb, i) => {
+    cb.checked = proj.milestones[i] || false;
+  });
+}
+
+/* ============================================
+   UI Updates
+   ============================================ */
+function updateAllUI() {
+  updateDashboard();
+  updateSidebarProgress();
+  updateModuleStates();
+  updateAllProjectProgress();
+  updateAllQuizScores();
+  renderCalendar();
+}
+
+function updateDashboard() {
+  // Completed modules
+  const totalModules = document.querySelectorAll('.module-accordion').length;
+  const completedCount = progress.completedModules.length;
+  const statModules = document.getElementById('stat-modules-completed');
+  if (statModules) statModules.textContent = completedCount + '/' + totalModules;
+
+  // Quiz average
+  const scores = Object.values(progress.quizScores);
+  const statQuiz = document.getElementById('stat-quiz-avg');
+  if (statQuiz) {
+    if (scores.length > 0) {
+      const totalScore = scores.reduce((sum, s) => sum + s.score, 0);
+      const totalQuestions = scores.reduce((sum, s) => sum + s.total, 0);
+      statQuiz.textContent = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) + '%' : '-';
+    } else {
+      statQuiz.textContent = '-';
+    }
+  }
+
+  // Reviews done
+  let reviewsDone = 0;
+  Object.values(progress.reviewSchedule).forEach(schedule => {
+    schedule.forEach(r => { if (r.completed) reviewsDone++; });
+  });
+  const statReviews = document.getElementById('stat-reviews-done');
+  if (statReviews) statReviews.textContent = reviewsDone;
+
+  // Projects done
+  const projectsDone = Object.values(progress.projectProgress).filter(p => p.completed).length;
+  const statProjects = document.getElementById('stat-projects-done');
+  if (statProjects) statProjects.textContent = projectsDone;
+
+  // Review alert
+  const alertContainer = document.getElementById('review-alert-container');
+  if (alertContainer) {
+    const today = toLocalDateString(new Date());
+    let todayReviewCount = 0;
+    let overdueCount = 0;
+    const todayDate = new Date();
+    todayDate.setHours(0, 0, 0, 0);
+
+    Object.values(progress.reviewSchedule).forEach(schedule => {
+      schedule.forEach(r => {
+        if (!r.completed) {
+          if (r.date === today) todayReviewCount++;
+          else if (new Date(r.date) < todayDate) overdueCount++;
+        }
+      });
+    });
+
+    let alertHtml = '';
+    if (todayReviewCount > 0) {
+      alertHtml += '<div class="review-alert"><span class="alert-icon" aria-hidden="true">📅</span>' +
+                   '<span class="alert-text">今日の復習が <span class="alert-count">' + todayReviewCount + '件</span> あります。復習カレンダーを確認してください。</span></div>';
+    }
+    if (overdueCount > 0) {
+      alertHtml += '<div class="review-alert" style="background: var(--error-light); border-color: var(--error);">' +
+                   '<span class="alert-icon" aria-hidden="true">⚠️</span>' +
+                   '<span class="alert-text">期限超過の復習が <span class="alert-count" style="color: var(--error);">' + overdueCount + '件</span> あります。</span></div>';
+    }
+    alertContainer.innerHTML = alertHtml;
+  }
+
+  // Recent activity
+  const activityContainer = document.getElementById('recent-activity');
+  if (activityContainer) {
+    if (progress.activities.length > 0) {
+      let html = '<ul style="list-style: none; padding: 0;">';
+      progress.activities.slice(0, 5).forEach(a => {
+        html += '<li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem;">' +
+                '<span style="color: var(--text-light); font-size: 0.75rem;">' + a.date + '</span> ' + a.text + '</li>';
+      });
+      html += '</ul>';
+      activityContainer.innerHTML = html;
+    }
+  }
+
+  // Module count on overview
+  const metaModuleCount = document.getElementById('meta-module-count');
+  if (metaModuleCount) metaModuleCount.textContent = totalModules;
+}
+
+function updateSidebarProgress() {
+  const totalModules = document.querySelectorAll('.module-accordion').length;
+  const completedCount = progress.completedModules.length;
+  const pct = totalModules > 0 ? Math.round((completedCount / totalModules) * 100) : 0;
+
+  const bar = document.getElementById('sidebar-progress-bar');
+  const text = document.getElementById('sidebar-progress-percent');
+  const barContainer = document.getElementById('sidebar-progress-container');
+  if (bar) bar.style.width = pct + '%';
+  if (text) text.textContent = pct + '%';
+  if (barContainer) barContainer.setAttribute('aria-valuenow', pct);
+
+  // Also update modules section bar
+  const mBar = document.getElementById('modules-progress-bar');
+  const mText = document.getElementById('modules-progress-text');
+  const mContainer = document.getElementById('modules-progress-container');
+  if (mBar) mBar.style.width = pct + '%';
+  if (mText) mText.textContent = pct + '%';
+  if (mContainer) mContainer.setAttribute('aria-valuenow', pct);
+}
+
+function updateModuleStates() {
+  progress.completedModules.forEach(moduleId => {
+    const statusEl = document.querySelector('#module-' + moduleId + ' .module-status');
+    if (statusEl) {
+      statusEl.classList.add('completed');
+      statusEl.innerHTML = '✓';
+    }
+    const btn = document.querySelector('#module-' + moduleId + ' .complete-module-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = '✓ 完了済み';
+    }
+  });
+}
+
+function updateAllProjectProgress() {
+  Object.keys(progress.projectProgress).forEach(projectId => {
+    updateProjectProgress(projectId);
+  });
+}
+
+function updateAllQuizScores() {
+  Object.keys(progress.quizScores).forEach(moduleId => {
+    updateQuizScoreDisplay(moduleId);
+  });
+}
+
+/* ============================================
+   Toast
+   ============================================ */
+function showToast(message, type) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast show' + (type === 'success' ? ' success' : '');
+  setTimeout(() => { toast.className = 'toast'; }, 3000);
+}
+
+/* ============================================
+   Initialization
+   ============================================ */
+document.addEventListener('DOMContentLoaded', function() {
+  updateAllUI();
+});
+</script>
+</body>
+</html>

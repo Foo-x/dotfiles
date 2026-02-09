@@ -192,7 +192,7 @@
   "promptSuggestionEnabled": false,
   "sandbox": {
     "enabled": true,
-    "autoAllowBashIfSandboxed": false,
+    "autoAllowBashIfSandboxed": true,
     "excludedCommands": ["git", "docker"]
   }
 }
