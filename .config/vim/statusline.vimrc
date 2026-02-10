@@ -7,7 +7,7 @@ if has('nvim')
     endif
   endf
   fun! MyStatusline()
-    let l:common = '%=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %y'
+    let l:common = '%=%l,%v %p%% %{&ff} %{&fenc!=""?&fenc:&enc} %{getcwd()} %y'
     if ! exists('w:repo_status_cache')
       let w:repo_status_cache = { 'time': 0, 'value': '' }
     endif

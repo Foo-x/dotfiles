@@ -105,6 +105,9 @@ disable-model-invocation: true
 - 例外処理は明示的にテスト
 - エラーメッセージも検証対象
 
+実装に関しては programming-best-practices スキルを参照する。
+テストに関しては unit-testing-best-practices スキルを参照する。
+
 ## Example Usage
 
 **ユーザーリクエスト例:**
