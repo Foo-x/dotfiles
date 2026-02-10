@@ -159,6 +159,9 @@ sqi = ["squash", "--interactive"]
 sqt = ["squash", "--into"]
 sqit = ["squash", "--interactive", "--into"]
 
+# workspace
+wsu = ["workspace", "update-stale"]
+
 ## squash descendants
 sqd = ["util", "exec", "--", "bash", "-c", """
   jj squash --from "$1+::" --into "$1"
