@@ -265,6 +265,7 @@ requirements-reviewer
 screen-transition-diagram
 security-review-generator
 sensitive-info-scanner
+spec
 tdd-feature-dev
 terraform-infra-analyzer
 unit-testing-best-practices
