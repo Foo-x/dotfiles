@@ -260,6 +260,7 @@ learning-roadmap
 openapi-spec-generator
 programming-best-practices
 refactoring-analyzer
+requirements-reviewer
 screen-transition-diagram
 security-review-generator
 sensitive-info-scanner
