@@ -151,7 +151,7 @@ export PROMPT_COMMAND_LS_VCS_STATUS_CD='ls_vcs_status_cd'
 
 
 if type __systemd_osc_context_precmdline &> /dev/null; then
-  __systemd_osc_context_offset=2
+  __systemd_osc_context_offset=3
 else
   __systemd_osc_context_offset=0
 fi

@@ -48,9 +48,6 @@ in
       neovim
       nodejs_24
       nushell
-      (python314.withPackages (ps: with ps; [
-        pyyaml
-      ]))
       ripgrep
       shellcheck
       shfmt
