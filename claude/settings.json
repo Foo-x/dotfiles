@@ -63,7 +63,9 @@
       "Bash(terraform plan *)",
       "Bash(terraform validate *)",
       "Bash(terraform fmt *)",
+      "Read(~/.claude/plugins/**)",
       "Read(~/.claude/skills/**)",
+      "Read(~/.dotfiles/claude/skills/**)",
       "WebFetch",
       "WebSearch"
     ],

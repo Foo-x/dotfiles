@@ -1,5 +1,5 @@
 ---
-name: spec
+name: rdd
 description: EARS記法を用いた要件定義書を作成するスキル。要件定義書の作成のみを行い、実装計画や実装は含まない。以下の場合に使用:(1)機能追加や改修の要件を明確化したい時、(2)受け入れ条件やエッジケースを整理したい時
 disable-model-invocation: true
 ---

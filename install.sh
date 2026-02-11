@@ -259,12 +259,12 @@ frontend-ux-a11y-reviewer
 learning-roadmap
 openapi-spec-generator
 programming-best-practices
+rdd
 refactoring-analyzer
 requirements-reviewer
 screen-transition-diagram
 security-review-generator
 sensitive-info-scanner
-spec
 tdd-feature-dev
 terraform-infra-analyzer
 unit-testing-best-practices
