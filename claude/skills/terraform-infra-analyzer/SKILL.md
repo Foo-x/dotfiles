@@ -1,6 +1,7 @@
 ---
 name: terraform-infra-analyzer
 description: TerraformプロジェクトのAWSインフラにおけるネットワーク接続性と権限設定を分析します。セキュリティグループ、IAMポリシー、NACLなどを解析し、リソース間の通信可否、不要な接続、権限の過不足を検出します。Terraformファイルやtfstateがあるプロジェクトで、インフラのセキュリティレビューやネットワーク接続の検証が必要な場合に使用します。
+disable-model-invocation: true
 ---
 
 # Terraform Infrastructure Analyzer
