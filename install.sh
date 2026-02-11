@@ -255,6 +255,7 @@ mkdir -p "${HOME}/.claude/skills"
 claude_skills="
 architecture-md-generator
 asyncapi-spec-generator
+frontend-ux-a11y-reviewer
 learning-roadmap
 openapi-spec-generator
 programming-best-practices
