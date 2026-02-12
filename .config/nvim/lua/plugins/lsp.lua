@@ -97,6 +97,26 @@ local function mason_lspconfig_config(_)
       vim.keymap.set({ 'n', 'i' }, '<M-m>', require('lsp_signature').toggle_float_win, { buffer = ev.buf })
       vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = ev.buf })
       vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf })
+      vim.keymap.set({ 'n', 'v' }, '<leader>cs', function()
+        vim.lsp.buf.code_action({
+          context = {
+            only = {
+              'source',
+            },
+          },
+          apply = true,
+        })
+      end, { buffer = ev.buf })
+      vim.keymap.set({ 'n', 'v' }, '<leader>cf', function()
+        vim.lsp.buf.code_action({
+          context = {
+            only = {
+              'source.fixAll',
+            },
+          },
+          apply = true,
+        })
+      end, { buffer = ev.buf })
 
       vim.api.nvim_buf_create_user_command(ev.buf, 'CodeAction', function(arg)
         vim.lsp.buf.code_action({
@@ -112,19 +132,6 @@ local function mason_lspconfig_config(_)
           local codeActionProvider = server.server_capabilities.codeActionProvider
           print('  ' .. vim.inspect(type(codeActionProvider) == 'table' and codeActionProvider.codeActionKinds or {}))
         end
-      end, {})
-      vim.api.nvim_buf_create_user_command(ev.buf, 'CodeActionAllCommon', function()
-        vim.lsp.buf.code_action({
-          context = {
-            only = {
-              'source.removeUnused',
-              'source.addMissingImports',
-              'source.organizeImports',
-              'source.fixAll',
-            },
-          },
-          apply = true,
-        })
       end, {})
 
       vim.b.has_null_ls = false
@@ -224,7 +231,7 @@ local function mason_null_ls_config(_, opts)
   null_ls.setup({
     sources = {
       null_ls.builtins.formatting.biome.with({
-          extra_args = { '--indent-style=space' }
+        extra_args = { '--indent-style=space' },
       }),
       null_ls.builtins.diagnostics.markdownlint.with({
         extra_args = { '-c', vim.fn.expand(DOT_DIR .. '/config/.markdownlint.yaml') },

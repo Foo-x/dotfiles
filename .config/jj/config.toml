@@ -28,7 +28,6 @@ concat(
   description,
   "\nJJ: ChangeId: ",
   change_id,
-  "\n",
   surround(
     "\nJJ: This commit contains the following changes:\n", "",
     indent("JJ:     ", diff.summary()),
@@ -169,5 +168,10 @@ sqd = ["util", "exec", "--", "bash", "-c", """
 
 # list aliases
 al = ["config", "list", "aliases"]
+
+# edit config
+coneu = ["config", "edit", "--user"]
+coner = ["config", "edit", "--repo"]
+conew = ["config", "edit", "--workspace"]
 
 tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
