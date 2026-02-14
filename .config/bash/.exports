@@ -59,6 +59,8 @@ export GIT_PAGER=delta
 
 export MANPAGER='nvim +Man!'
 
+export DISABLE_AUTOUPDATER=1
+
 IS_WSL="$(if uname -r | \grep -iq 'microsoft'; then echo 1; else echo 0; fi)"
 export IS_WSL
 
