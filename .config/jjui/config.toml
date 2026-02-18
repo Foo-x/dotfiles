@@ -1,3 +1,10 @@
+[revisions]
+revset = "::"
+
+[custom_commands."diff outside"]
+key = [";"]
+args = ["diff", "-r",  "$change_id", "--color", "always"]
+show = "interactive"
 [custom_commands."show oplog diff patch"]
 key = ["s"]
 args = ["op", "show",  "$operation_id", "--patch", "--color", "always"]
