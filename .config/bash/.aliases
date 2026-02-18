@@ -264,6 +264,16 @@ alias unisonw='unison -repeat watch -prefer newer'
 ## for WSL <-> Windows
 alias unisonww='unison -repeat 0 -prefer newer'
 
+function open() {
+  if type -f open &> /dev/null; then
+    command open "$@"
+  elif type xdg-open &> /dev/null; then
+    command xdg-open "$@"
+  else
+    return 1
+  fi
+}
+
 function with_env() {
   (
     set -a

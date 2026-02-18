@@ -65,6 +65,7 @@ win_git
 ntfy
 push_ai
 nuc
+ccsl
 "
 echo "${binfiles}" | xargs -I{} ln -sfT ${DOT_DIR}/bin/{} ${HOME}/.local/bin/{}
 export PATH="${HOME}/.local/bin:${PATH}"

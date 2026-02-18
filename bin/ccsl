@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+input=$(cat)
+
+model=$(echo "${input}" | jq -r '.model.display_name')
+dir=$(echo "${input}" | jq -r '.workspace.current_dir')
+
+blocks=$(bunx ccusage blocks -O)
+remaining=$(echo "${blocks}" | grep -oP ', \K(.+ remaining)')
+percent=$(echo "${blocks}" | grep -oP 'ACTIVE.+?\K([.\d]+%)')
+
+echo "🤖 ${model} | 📁 ${dir/${HOME}/\~} | ⏳ ${percent} (${remaining})"
+# vim:ft=sh
