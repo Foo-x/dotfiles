@@ -9,5 +9,10 @@ blocks=$(bunx ccusage blocks -O)
 remaining=$(echo "${blocks}" | grep -oP ', \K(.+ remaining)')
 percent=$(echo "${blocks}" | grep -oP 'ACTIVE.+?\K([.\d]+%)')
 
-echo "🤖 ${model} | 📁 ${dir/${HOME}/\~} | ⏳ ${percent} (${remaining})"
+if [ -n "$remaining" ]; then
+  echo "🤖 ${model} | 📁 ${dir/${HOME}/\~} | ⏳ ${percent} (${remaining})"
+else
+  echo "🤖 ${model} | 📁 ${dir/${HOME}/\~}"
+fi
+
 # vim:ft=sh
