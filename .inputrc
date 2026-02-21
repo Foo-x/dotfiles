@@ -64,4 +64,7 @@ $if Bash
     # expand line
     "\C-q ": "\e\C-e "
     Space: magic-space
+
+    # cd to parent
+    "\C-p": "\C-ucd ..\C-m"
 $endif
