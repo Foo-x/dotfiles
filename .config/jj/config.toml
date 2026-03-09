@@ -40,6 +40,9 @@ concat(
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
 'closest_pushable(to)' = 'heads(::to & ~description(exact:"") & (~empty() | merges()))'
 'empty_empty()' = 'description(exact:"") & empty() ~ root()'
+[revsets]
+bookmark-advance-to = 'closest_pushable(@)'
+bookmark-advance-from = 'closest_bookmark(@)'
 [aliases]
 # abandon
 aba = ["abandon"]
@@ -51,9 +54,9 @@ ci = ["commit", "--interactive"]
 cm = ["commit", "--message"]
 cim = ["commit", "--interactive", "--message"]
 
-## commit and tug
+## commit and advance bookmark
 C = ["util", "exec", "--", "bash", "-c", """
-  jj commit && jj tug
+  jj commit && jj bookmark advance
 """, ""]
 
 # desc
@@ -124,10 +127,10 @@ nn = ["new", "--no-edit"]
 nnm = ["new", "--no-edit", "--message"]
 nt = ["new", "trunk()"]
 
-## new and tug
+## new and advance bookmark
 N = ["util", "exec", "--", "bash", "-c", """
   jj new $1
-  jj tug
+  jj bookmark advance
 """, ""]
 
 # rebase
@@ -173,5 +176,3 @@ al = ["config", "list", "aliases"]
 coneu = ["config", "edit", "--user"]
 coner = ["config", "edit", "--repo"]
 conew = ["config", "edit", "--workspace"]
-
-tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
