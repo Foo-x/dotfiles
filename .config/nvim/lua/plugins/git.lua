@@ -240,6 +240,17 @@ local function diffview_config(_, opts)
   require('diffview').setup(opts)
 end
 
+local function hunk_config()
+  require('hunk').setup({
+    keys = {
+      tree = {
+        expand_node = { 'l' },
+        collapse_node = { 'h' },
+      },
+    },
+  })
+end
+
 return {
   {
     'https://github.com/airblade/vim-gitgutter',
@@ -288,8 +299,6 @@ return {
       'https://github.com/nvim-tree/nvim-web-devicons',
     },
     cmd = { 'DiffEditor' },
-    config = function()
-      require('hunk').setup()
-    end,
+    config = hunk_config,
   },
 }
