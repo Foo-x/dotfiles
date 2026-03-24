@@ -88,15 +88,6 @@ python scripts/analyze_permissions.py --state terraform.tfstate --output permiss
 ## 詳細...
 ```
 
-## トリガー条件
-
-このスキルは以下の場合に使用します:
-
-- ユーザーが「Terraformインフラを分析」「ネットワーク接続を確認」などと依頼した場合
-- セキュリティレビューやコンプライアンスチェックが必要な場合
-- インフラの権限設定を見直したい場合
-- プロジェクト内に`.tf`ファイルや`terraform.tfstate`が存在する場合
-
 ## リファレンス
 
 ### scripts/analyze_connectivity.py
