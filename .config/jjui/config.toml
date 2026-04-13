@@ -15,6 +15,7 @@ scope = "oplog"
 name = "commit and advance bookmark"
 lua = '''
 jj_interactive("util", "exec",  "--", "bash", "-c", "jj edit " .. context.change_id() .. " && jj commit && jj bookmark advance")
+revisions.refresh()
 '''
 [[bindings]]
 action = "commit and advance bookmark"
