@@ -1,22 +1,25 @@
 [revisions]
 revset = "::"
 
-[custom_commands."diff outside"]
-key = [";"]
-args = ["diff", "-r",  "$change_id", "--color", "always"]
-show = "interactive"
-[custom_commands."show oplog diff patch"]
-key = ["s"]
-args = ["op", "show",  "$operation_id", "--patch", "--color", "always"]
-show = "diff"
-[custom_commands."new note commit"]
-key_sequence = ["z", "n"]
-args = ["new", "--no-edit", "-A", "$change_id"]
-desc = "TODO notes as empty commits"
-[custom_commands."commit and advance bookmark"]
-key = ["C"]
-args = ["util", "exec",  "--", "bash", "-c", """jj edit $change_id && jj commit && jj bookmark advance"""]
-show = "interactive"
+[[actions]]
+name = "show oplog diff patch"
+lua = '''
+diff.show(jj("op", "show",  context.operation_id(), "--patch", "--color", "always"))
+'''
+[[bindings]]
+action = "show oplog diff patch"
+key = "s"
+scope = "oplog"
+
+[[actions]]
+name = "commit and advance bookmark"
+lua = '''
+jj_interactive("util", "exec",  "--", "bash", "-c", "jj edit " .. context.change_id() .. " && jj commit && jj bookmark advance")
+'''
+[[bindings]]
+action = "commit and advance bookmark"
+key = "C"
+scope = "revisions"
 
 [preview]
 revision_command = ["show", "--color", "always", "-r", "$change_id", "--config", "ui.diff-formatter=delta-non-split"]
