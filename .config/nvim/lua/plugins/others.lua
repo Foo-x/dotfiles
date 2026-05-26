@@ -290,4 +290,7 @@ return {
     opts = oil_opts,
     config = oil_config,
   },
+  {
+    'https://github.com/brianhuster/live-preview.nvim',
+  },
 }
