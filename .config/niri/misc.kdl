@@ -33,7 +33,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^spotify$"
+    match app-id="^Spotify$"
     open-on-workspace "music"
     default-column-width { proportion 1.0; }
 }
