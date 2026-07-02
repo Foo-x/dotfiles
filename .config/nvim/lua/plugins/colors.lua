@@ -123,6 +123,10 @@ vim.api.nvim_create_user_command('CatppuccinMocha', function()
   ]])
 end, {})
 
+vim.api.nvim_create_user_command('CatppuccinLatte', function()
+  vim.cmd('color catppuccin-latte')
+end, {})
+
 vim.api.nvim_create_user_command('CatppuccinMacchiato', function()
   vim.cmd('color catppuccin-macchiato')
   vim.cmd([[
@@ -157,7 +161,11 @@ end, {
 vim.cmd('hi netrwMarkFile ctermbg=darkmagenta')
 
 function SetupColor()
-  vim.cmd('CatppuccinMacchiato')
+  if vim.env.SH_THEME == 'light' then
+    vim.cmd('CatppuccinLatte')
+  else
+    vim.cmd('CatppuccinMacchiato')
+  end
 end
 
 return {

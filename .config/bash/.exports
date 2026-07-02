@@ -35,6 +35,15 @@ LS_COLORS="*.bak=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
 LS_COLORS="*.tmp=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
 export LS_COLORS
 
+# dark / light
+export SH_THEME='light'
+
+if [[ $SH_THEME == 'light' ]]; then
+  export BAT_THEME='Catppuccin Latte'
+else
+  export BAT_THEME='Catppuccin Macchiato'
+fi
+
 export TF_PLUGIN_CACHE_DIR="${XDG_CACHE_HOME}/terraform/plugins"
 
 export HISTSIZE=100000
@@ -187,7 +196,7 @@ __ps1+="\$([ \"\$LOCAL_PS1\" ] && printf \"\[\e[${__blue_ansi_pccs_lightp_foregr
 __ps1+="\$([ \"\$SSH_CONNECTION\" ] || \grep -q 'docker\|lxc' /proc/1/cgroup && printf '\[\e[4;${__blue_ansi_pccs_lightp_foreground}m\]\u@\h\[\e[m\]' || printf '\[\e[${__blue_ansi_pccs_lightp_foreground}m\]\u' )"
 
 # ディレクトリ
-__ps1+=" \[\e[${__blue_ansi_pccs_palep_foreground}m\]\w"
+__ps1+=" \$([ \"\$SH_THEME\" = 'light' ] && printf \"\[\e[${__blue_ansi_pccs_bright_foreground}m\]\w\" || printf \"\[\e[${__blue_ansi_pccs_palep_foreground}m\]\w\" )"
 
 # Git情報
 __ps1+="\[\e[${__gy65_ansi_pccs_foreground}m\] \$(if jj root &> /dev/null; then __jj_ps1; else __my_git_ps1; fi) \[\e[m\]"
