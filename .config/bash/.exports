@@ -36,7 +36,7 @@ LS_COLORS="*.tmp=${__gy55_ansi_pccs_foreground}:${LS_COLORS}"
 export LS_COLORS
 
 # dark / light
-export SH_THEME='light'
+export SH_THEME=${SH_THEME:-light}
 
 if [[ $SH_THEME == 'light' ]]; then
   export BAT_THEME='Catppuccin Latte'
