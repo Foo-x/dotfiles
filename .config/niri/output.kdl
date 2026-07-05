@@ -10,10 +10,6 @@ workspace "game" {
     open-on-output "DP-3"
 }
 
-workspace "game-dev" {
-    open-on-output "DP-3"
-}
-
 workspace "browser" {
     open-on-output "DP-4"
 }

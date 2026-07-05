@@ -14,10 +14,10 @@ program = "nvim"
 merge-tool-edits-conflict-markers = true
 [merge-tools.delta-split]
 program = "bash"
-diff-args = ["-c", "delta --width $width --features split $left $right || true"]
+diff-args = ["-c", "delta --syntax-theme \"$BAT_THEME\" --width $width --features split $left $right || true"]
 [merge-tools.delta-non-split]
 program = "bash"
-diff-args = ["-c", "delta --width $width --features non-split $left $right || true"]
+diff-args = ["-c", "delta --syntax-theme \"$BAT_THEME\" --width $width --features non-split $left $right || true"]
 [git]
 private-commits = "description(glob:'private:*')"
 [remotes.origin]
