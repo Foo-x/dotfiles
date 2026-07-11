@@ -163,7 +163,7 @@
       "Edit(~/.ssh/**)",
       "Edit(~/.aws/**)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
   "model": "opusplan",
   "hooks": {
@@ -195,6 +195,7 @@
   },
   "language": "japanese",
   "promptSuggestionEnabled": false,
+  "advisorModel": "fable",
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
