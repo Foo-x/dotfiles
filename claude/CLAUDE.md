@@ -6,8 +6,8 @@
 
 1. タスクを分解し、独立して並列実行できる部分がないか検討する
 2. ファイル特定、grep、リネームなど単純な作業は
-   Task(subagent_type: general-purpose, model: "haiku") に委譲する
+   Agent(subagent_type: general-purpose, model: "haiku") に委譲する
 4. セキュリティレビュー・アーキテクチャ判断など高難度な作業は
    model: "opus" で委譲する
 3. それ以外の標準的な作業は model: "sonnet" で委譲する
-5. 複数の独立した調査が必要な場合は、並列でTaskを複数起動する
+5. 複数の独立した調査が必要な場合は、並列でAgentを複数起動する
