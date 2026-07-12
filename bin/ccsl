@@ -4,15 +4,26 @@ input=$(cat)
 
 model=$(echo "${input}" | jq -r '.model.display_name')
 dir=$(echo "${input}" | jq -r '.workspace.current_dir')
+five_hour_percentage=$(echo "${input}" | jq -r '.rate_limits.five_hour.used_percentage')
+seven_day_percentage=$(echo "${input}" | jq -r '.rate_limits.seven_day.used_percentage')
+effort=$(echo "${input}" | jq -r '.effort.level')
 
-blocks=$(bunx ccusage blocks -O)
-remaining=$(echo "${blocks}" | grep -oP ', \K(.+ remaining)')
-percent=$(echo "${blocks}" | grep -oP 'ACTIVE.+?\K([.\d]+%)')
+out="🤖 ${model}"
 
-if [ -n "$remaining" ]; then
-  echo "🤖 ${model} | 📁 ${dir/${HOME}/\~} | ⏳ ${percent} (${remaining})"
-else
-  echo "🤖 ${model} | 📁 ${dir/${HOME}/\~}"
+if [ "$effort" != null ]; then
+  out="${out} (${effort})"
 fi
+
+out="${out} | 📁 ${dir/${HOME}/\~}"
+
+if [ "$five_hour_percentage" != null ]; then
+  out="${out} | 🕘 5h: ${five_hour_percentage}%"
+fi
+
+if [ "$seven_day_percentage" != null ]; then
+  out="${out} | 🗓  7d: ${seven_day_percentage}%"
+fi
+
+echo "${out}"
 
 # vim:ft=sh

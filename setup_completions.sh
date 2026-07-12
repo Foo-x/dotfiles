@@ -25,7 +25,9 @@ fetch tmux https://raw.githubusercontent.com/Bash-it/bash-it/master/completion/a
 
 create f 'f completion'
 create rustup 'rustup completions bash'
-create cargo 'rustup completions bash cargo'
+if type rustup > /dev/null 2>&1; then
+  create cargo 'rustup completions bash cargo'
+fi
 create gh 'gh completion -s bash'
 create npm 'npm completion'
 create docker 'docker completion bash'
