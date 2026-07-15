@@ -381,6 +381,32 @@ endf
 command! PinAll call s:pin_all()
 cnoreabbr pa PinAll
 
+if !exists('g:claude_commit_message_prompt')
+  let g:claude_commit_message_prompt = 'Look at the recent commit log (e.g. git log or jj log) to figure out the conventions actually used in this repository - tense/mood, prefixes like feat:/fix:, etc. Then inspect the currently staged (or, for jj, current working-copy) changes and write a single-line commit message IN ENGLISH that follows those same conventions, keeping it to at most 50 characters. Output ONLY the commit message text itself.'
+endif
+
+fun! s:claude_commit_message()
+  if !executable('claude')
+    echoerr 'claude command not found in PATH'
+    return
+  endif
+
+  let l:output = system('claude -p ' . shellescape(g:claude_commit_message_prompt) . ' 2>/dev/null')
+
+  if v:shell_error
+    echoerr 'claude command failed: ' . trim(l:output)
+    return
+  endif
+
+  if empty(l:output)
+    echoerr 'Failed to generate commit message'
+    return
+  endif
+
+  call append(0, trim(l:output))
+endf
+command! ClaudeCommitMessage call s:claude_commit_message()
+
 if has('nvim')
   command! SignColumnToggle if &signcolumn =~ '^yes' | set signcolumn=no | else | set signcolumn=yes:2 | endif
 else

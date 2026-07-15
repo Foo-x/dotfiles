@@ -172,7 +172,7 @@
 )
 
 (deflayermap (original-layer)
-  caps XX
+  caps grv
 
   rmet (tap-dance 200 (XX (layer-switch base-layer)))
   rsft (tap-dance 200 (rsft (layer-switch base-layer)))
