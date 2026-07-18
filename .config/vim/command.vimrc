@@ -391,7 +391,18 @@ fun! s:claude_commit_message()
     return
   endif
 
-  let l:output = system('claude -p ' . shellescape(g:claude_commit_message_prompt) . ' 2>/dev/null')
+  " pre-approve read-only commands to skip the permission-check round trip.
+  " avoid --model/--tools/--disable-slash-commands/--setting-sources: they
+  " change the system prompt and bust the shared prompt cache, making this
+  " slower overall (benchmarked)
+  let l:allowed_tools = 'Bash(git status),Bash(git diff *),Bash(git log *),Bash(git show *),Bash(jj status),Bash(jj diff *),Bash(jj interdiff *),Bash(jj log *),Bash(jj show *)'
+
+  let l:cmd = 'claude -p'
+        \ . ' --allowedTools ' . shellescape(l:allowed_tools)
+        \ . ' --no-session-persistence'
+        \ . ' ' . shellescape(g:claude_commit_message_prompt)
+
+  let l:output = system(l:cmd . ' 2>/dev/null')
 
   if v:shell_error
     echoerr 'claude command failed: ' . trim(l:output)

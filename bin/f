@@ -67,7 +67,7 @@ await yargs(process.argv.slice(2))
         const current = await $`git symbolic-ref --short HEAD 2> /dev/null`.nothrow().text() || 'detached HEAD';
 
         const target = Buffer.alloc(300);
-        await $`sed '/^$/d' < ${Buffer.from(branches)} | fzf --no-hscroll --no-multi -n 2 ${query} --header="current: [${{ raw: current.replace('\n', '') }}]" --ansi --preview='git --no-pager log -150 --color --pretty=format:"%s %C(black)%C(bold)%cr%C(reset)" ..{2}' > ${target}`;
+        await $`sed '/^$/d' < ${Buffer.from(branches)} | fzf --no-hscroll --no-multi -n 2 ${{ raw: query }} --header="current: [${{ raw: current.replace('\n', '') }}]" --ansi --preview='git --no-pager log -150 --color --pretty=format:"%s %C(black)%C(bold)%cr%C(reset)" ..{2}' > ${target}`;
 
         const [typ, name] = target.toString().replace(/\0|\n/g, '').split('\t');
         if (typ === 'remote') {
@@ -388,7 +388,7 @@ await yargs(process.argv.slice(2))
         const plugins = await $`mise plugin ls-remote`.text();
         const allPlugins = corePlugins + plugins;
         const target = Buffer.alloc(50);
-        await $`echo ${allPlugins.replaceAll('*', '')} | sort | fzf -1 ${query} > ${target}`;
+        await $`echo ${allPlugins.replaceAll('*', '')} | sort | fzf -1 ${{ raw: query }} > ${target}`;
         if (target) {
           await $`${{ raw: `mise use -g ${target.toString().replace(/\0|\n/g, '')}` }}`.nothrow();
         }
@@ -400,7 +400,7 @@ await yargs(process.argv.slice(2))
         const plugins = await $`mise plugin ls-remote`.text();
         const allPlugins = corePlugins + plugins;
         const target = Buffer.alloc(50);
-        await $`echo ${allPlugins.replaceAll('*', '')} | sort | fzf -1 ${query} > ${target}`;
+        await $`echo ${allPlugins.replaceAll('*', '')} | sort | fzf -1 ${{ raw: query }} > ${target}`;
         if (target) {
           await $`${{ raw: `mise use ${target.toString().replace(/\0|\n/g, '')}` }}`.nothrow();
         }
