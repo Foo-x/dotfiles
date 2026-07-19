@@ -382,7 +382,7 @@ command! PinAll call s:pin_all()
 cnoreabbr pa PinAll
 
 if !exists('g:claude_commit_message_prompt')
-  let g:claude_commit_message_prompt = 'Look at the recent commit log (e.g. git log or jj log) to figure out the conventions actually used in this repository - tense/mood, prefixes like feat:/fix:, etc. Then inspect the currently staged (or, for jj, current working-copy) changes and write a single-line commit message IN ENGLISH that follows those same conventions, keeping it to at most 50 characters. Output ONLY the commit message text itself.'
+  let g:claude_commit_message_prompt = 'Look at the recent commit log (e.g. git log or jj log) to figure out the conventions actually used in this repository - tense/mood, prefixes like feat:/fix:, etc. If most of the recent commits use a type prefix (e.g. feat:/fix:/chore:/refactor:), your message MUST use a matching prefix too - do not omit it just because the change is small or hard to categorize; pick the closest fitting type. Then inspect the currently staged (or, for jj, current working-copy) changes and write a single-line commit message IN ENGLISH that follows those same conventions, keeping it to at most 50 characters. Output ONLY the commit message text itself.'
 endif
 
 fun! s:claude_commit_message()
