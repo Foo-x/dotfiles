@@ -209,6 +209,7 @@ Assistant:
 ### 基礎リファレンス
 - [プログラミング原則](references/principles.md)
 - [コードスメルカタログ](references/code-smells.md)
+- [リファクタリング手法カタログ](references/refactoring-catalog.md)
 - [テストスメルカタログ](references/test-smells.md)
 - [品質メトリクス](references/metrics.md)
 - [出力フォーマット](references/output-format.md)

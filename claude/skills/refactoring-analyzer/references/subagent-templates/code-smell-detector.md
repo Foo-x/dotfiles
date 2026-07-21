@@ -64,22 +64,35 @@
       "refactoring_technique": "Extract Method",
       "suggestion": "共通の日付フォーマット関数を作成してください",
       "improved_code": "function formatDate(year: number, month: number, day: number): string {\n  return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;\n}"
+    },
+    {
+      "smell_name": "Commented-Out Code",
+      "category": "Comments",
+      "severity": "Low",
+      "file": "src/services/OrderService.ts",
+      "line": 78,
+      "description": "旧バージョンの割引計算ロジックがコメントアウトされたまま残っています",
+      "code_snippet": "// const discount = order.total * 0.1;\n// if (order.isMember) discount += order.total * 0.05;\nconst discount = calculateDiscount(order);",
+      "refactoring_technique": "Remove Commented-Out Code",
+      "suggestion": "不要なコメントアウトコードを削除してください。過去の実装はバージョン管理履歴から参照できます",
+      "improved_code": "const discount = calculateDiscount(order);"
     }
   ],
   "summary": {
-    "total_smells": 15,
+    "total_smells": 16,
     "by_severity": {
       "Critical": 0,
       "High": 4,
       "Medium": 8,
-      "Low": 3
+      "Low": 4
     },
     "by_category": {
       "Bloaters": 6,
       "Object-Orientation Abusers": 2,
       "Change Preventers": 3,
       "Dispensables": 3,
-      "Couplers": 1
+      "Couplers": 1,
+      "Comments": 1
     }
   }
 }

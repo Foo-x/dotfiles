@@ -106,6 +106,7 @@ alias ltail='less -n +F --follow-name'
 alias envedit='envtmp=$(mktemp); export -p > $envtmp; $EDITOR $envtmp; . $envtmp; \rm $envtmp; unset envtmp'
 alias cti='rg --files | ctags -R -L -'
 alias svenv='source .venv/bin/activate'
+alias clauda='claude --permission-mode auto'
 
 # openssl
 alias ossl='openssl'
@@ -290,6 +291,14 @@ function rand() {
 
 function findsamefile() {
   find "$(findmnt -o TARGET -cenT "$1")" -mount -samefile "$1"
+}
+
+function ntfy30() {
+  echo "ntfy $1"| at now + 30 minutes
+}
+
+function slt() {
+  ntfy30 'sleep timer'
 }
 
 function out() {

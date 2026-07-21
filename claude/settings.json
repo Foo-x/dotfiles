@@ -26,6 +26,7 @@
       "Bash(stat *)",
       "Bash(diff *)",
       "Bash(ln *)",
+      "Bash(jq *)",
       "Bash(tree *)",
       "Bash(date *)",
       "Bash(xargs *)",
