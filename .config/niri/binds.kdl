@@ -78,6 +78,7 @@ binds {
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
     Mod+Z { focus-workspace-previous; }
+    Mod+X { focus-monitor-previous; }
 
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
