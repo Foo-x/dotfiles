@@ -43,6 +43,11 @@ window-rule {
     open-floating true
 }
 
+window-rule {
+    match app-id="^steam_app_.+$" title="^KovaaK.*$"
+    open-fullscreen true
+}
+
 prefer-no-csd
 
 screenshot-path "~/.local/share/screenshots/%Y%m%d_%H%M%S.png"
