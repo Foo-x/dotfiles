@@ -24,6 +24,7 @@ in
     stateVersion = "24.05";
 
     packages = with pkgs; [
+      alloy6
       awscli2
       bat
       bun
@@ -48,6 +49,7 @@ in
       neovim
       nodejs_26
       nushell
+      quint
       ripgrep
       shellcheck
       shfmt

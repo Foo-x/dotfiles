@@ -198,3 +198,15 @@ augroup BookmarksToArgs
   autocmd!
   autocmd VimEnter * silent! BookmarksToArgs
 augroup END
+
+if has('nvim')
+  " quint
+  autocmd FileType quint lua vim.lsp.start({name = 'quint', cmd = {'quint-language-server', '--stdio'}, root_dir = vim.fs.root(0, {'.git'}) or vim.fn.getcwd()})
+  au BufRead,BufNewFile *.qnt  setfiletype quint
+  au BufNewFile,BufReadPost *.qnt runtime syntax/quint.vim
+
+  " alloy analyzer
+  autocmd FileType alloy lua vim.lsp.start({name = 'alloy', cmd = {'alloy6', 'lsp'}, root_dir = vim.fs.root(0, {'.git'}) or vim.fn.getcwd()})
+  au BufRead,BufNewFile *.als  setfiletype alloy
+  au BufNewFile,BufReadPost *.als runtime syntax/alloy.vim
+endif

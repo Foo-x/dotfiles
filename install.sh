@@ -215,6 +215,13 @@ printf "${vimrc_files}" | xargs -I{} ln -sfT ${DOT_DIR}/.config/vim/{} ${XDG_CON
 mkdir -p ${XDG_CONFIG_HOME}/nvim
 nvim_files=$(cd ${DOT_DIR}/.config/nvim && \ls -1)
 printf "${nvim_files}" | xargs -I{} ln -sfT ${DOT_DIR}/.config/nvim/{} ${XDG_CONFIG_HOME}/nvim/{}
+if [ ! -f "${XDG_CONFIG_HOME}/nvim/syntax/quint.vim" ]; then
+  mkdir -p "${XDG_CONFIG_HOME}/nvim/syntax"
+  curl -fsSL https://raw.githubusercontent.com/quint-co/quint/refs/heads/main/editor-plugins/vim/quint.vim -o "${XDG_CONFIG_HOME}/nvim/syntax/quint.vim"
+fi
+if [ ! -f "${XDG_CONFIG_HOME}/nvim/syntax/alloy.vim" ]; then
+  curl -fsSL https://raw.githubusercontent.com/runoshun/vim-alloy/refs/heads/master/syntax/alloy.vim -o "${XDG_CONFIG_HOME}/nvim/syntax/alloy.vim"
+fi
 
 # setup vsnip
 ln -sfn ${DOT_DIR}/snippets ${HOME}/.vsnip
