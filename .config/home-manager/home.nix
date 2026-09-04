@@ -29,6 +29,7 @@ in
       bat
       bun
       curl
+      dafny
       delta
       deno
       dust
