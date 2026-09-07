@@ -152,6 +152,7 @@
       "Bash(bun publish *)",
       "Bash(npm version *)",
       "Bash(terraform apply *)",
+      "Bash(terraform destroy *)",
       "Read(env)",
       "Read(.env*)",
       "Read(*.pem)",
