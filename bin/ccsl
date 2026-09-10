@@ -7,12 +7,15 @@ dir=$(echo "${input}" | jq -r '.workspace.current_dir')
 five_hour_percentage=$(echo "${input}" | jq -r '.rate_limits.five_hour.used_percentage')
 seven_day_percentage=$(echo "${input}" | jq -r '.rate_limits.seven_day.used_percentage')
 effort=$(echo "${input}" | jq -r '.effort.level')
+output_style=$(echo "${input}" | jq -r '.output_style.name')
 
 out="🤖 ${model}"
 
 if [ "$effort" != null ]; then
   out="${out} (${effort})"
 fi
+
+out="${out} | 💬 ${output_style}"
 
 out="${out} | 📁 ${dir/${HOME}/\~}"
 
