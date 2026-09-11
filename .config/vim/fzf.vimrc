@@ -7,6 +7,7 @@ nnoremap <Plug>(fzf)? :<C-u>GFiles!?<CR>
 nnoremap <Plug>(fzf)g :<C-u>GFiles!<CR>
 nnoremap <Plug>(fzf). <Cmd>call <SID>files_cursor()<CR>
 nnoremap <Plug>(fzf)i :<C-u>FilesNoIgnore<CR>
+nnoremap <Plug>(fzf)t :<C-u>FilesByMtime!<CR>
 nnoremap <Plug>(fzf)h :<C-u>HistoryWS!<CR>
 nnoremap <Plug>(fzf)H :<C-u>History!<CR>
 nnoremap <Plug>(fzf)m :<C-u>BMarks<CR>
@@ -86,6 +87,11 @@ command! -bang GAddArgs call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({
   \ 'options': '--multi --bind ctrl-a:select-all --prompt "GAddArgs> "'
 \ }), v:true)
 command! FilesNoIgnore let _fzf_default_command_tmp=$FZF_DEFAULT_COMMAND | let $FZF_DEFAULT_COMMAND='fd --hidden -E ".git/{objects,refs,logs}" -E "node_modules" -E ".jj" -tf -tl -I' | exe 'Files!' | let $FZF_DEFAULT_COMMAND=_fzf_default_command_tmp
+
+command! -bang FilesByMtime call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \ 'source': 'fd --hidden -E ".git/{objects,refs,logs}" -E "node_modules" -E ".jj" -tf -tl -0 | xargs -0 stat --format "%Y %n" | sort -rn | cut -d" " -f2- | sed "s|^\\./||"',
+  \ 'options': '--prompt "FilesByMtime> " --no-sort'
+\ }), <bang>0))
 
 fun! s:focus_or_files(line)
   " current tab first
