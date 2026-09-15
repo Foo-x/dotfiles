@@ -245,7 +245,6 @@ ln -sf "${DOT_DIR}/.config/jjui/config.toml" "${XDG_CONFIG_HOME}/jjui/config.tom
 # setup mise
 mkdir -p "${XDG_CONFIG_HOME}/mise"
 ln -sf "${DOT_DIR}/.config/mise/config.toml" "${XDG_CONFIG_HOME}/mise/config.toml"
-export MISE_PYTHON_DEFAULT_PACKAGES_FILE="${DOT_DIR}/.config/mise/.python_packages"
 mise install
 
 # setup waybar

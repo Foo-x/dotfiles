@@ -1,9 +1,11 @@
 " normal mode
 "" display lines downward
 nnoremap j gj
+nnoremap gj j
 
 "" display lines upward
 nnoremap k gk
+nnoremap gk k
 
 nnoremap Y y$
 nnoremap U <C-r>
