@@ -48,6 +48,7 @@ disable-model-invocation: true
 - **プロンプトテンプレート**: `references/subagent-templates/metrics-evaluator.md`
 - **参照ドキュメント**: `references/metrics.md`
 - **出力形式**: JSON（メトリクス測定値、閾値超過箇所、改善提案）
+- **品質スコア算出**: `scripts/quality_score.py` に正規化済みサブスコアを渡して算出する（手計算しない）
 
 #### 3.4 テストコード品質（サブエージェント使用）
 - **モデル**: `claude sonnet` or `codex high` or `gemini pro`
