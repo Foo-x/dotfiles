@@ -29,7 +29,6 @@
       "Bash(jq *)",
       "Bash(tree *)",
       "Bash(date *)",
-      "Bash(xargs *)",
       "Bash(git status)",
       "Bash(git diff *)",
       "Bash(git log *)",

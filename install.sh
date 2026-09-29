@@ -260,6 +260,7 @@ fi
 # setup claude
 mkdir -p "${HOME}/.claude/skills"
 claude_skills="
+alloy-spec-verifier
 architecture-md-generator
 asyncapi-spec-generator
 frontend-ux-a11y-reviewer
