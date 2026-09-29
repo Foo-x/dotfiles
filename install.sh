@@ -260,7 +260,7 @@ fi
 # setup claude
 mkdir -p "${HOME}/.claude/skills"
 claude_skills="
-alloy-spec-verifier
+alloy-verify
 learning-roadmap
 programming-best-practices
 rdd
