@@ -263,6 +263,7 @@ claude_skills="
 alloy-verify
 learning-roadmap
 programming-best-practices
+quint-verify
 rdd
 refactoring-analyzer
 requirements-reviewer
