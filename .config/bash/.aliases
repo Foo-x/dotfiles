@@ -106,7 +106,7 @@ alias ltail='less -n +F --follow-name'
 alias envedit='envtmp=$(mktemp); export -p > $envtmp; $EDITOR $envtmp; . $envtmp; \rm $envtmp; unset envtmp'
 alias cti='rg --files | ctags -R -L -'
 alias svenv='source .venv/bin/activate'
-alias clauda='claude --permission-mode auto'
+alias claudeup='claude update && claude'
 
 # openssl
 alias ossl='openssl'
