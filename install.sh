@@ -222,6 +222,9 @@ fi
 if [ ! -f "${XDG_CONFIG_HOME}/nvim/syntax/alloy.vim" ]; then
   curl -fsSL https://raw.githubusercontent.com/runoshun/vim-alloy/refs/heads/master/syntax/alloy.vim -o "${XDG_CONFIG_HOME}/nvim/syntax/alloy.vim"
 fi
+if [ ! -f "${XDG_CONFIG_HOME}/nvim/syntax/dafny.vim" ]; then
+  ln -sf "${DOT_DIR}/.config/vim/syntax/dafny.vim" "${XDG_CONFIG_HOME}/nvim/syntax/dafny.vim"
+fi
 
 # setup vsnip
 ln -sfn ${DOT_DIR}/snippets ${HOME}/.vsnip
