@@ -7,6 +7,8 @@ disable-model-invocation: true
 
 与えた仕様を Alloy でモデル化し、問題がないか検証してください。
 
+alloyコマンドまたはalloy6コマンドが存在しないとき、nixが使える場合は nix shell コマンド、使えない場合は https://github.com/AlloyTools/org.alloytools.alloy/releases から環境に応じたバイナリをインストールしてください。
+
 - 構造・制約・操作・状態遷移の抽出とモデル化
     - モデル化するにあたって曖昧な記述があるときは指摘し、ユーザーに確認する
     - 各要素がどの仕様と対応するか明記する

@@ -7,6 +7,8 @@ disable-model-invocation: true
 
 与えた仕様を Dafny で実装し、`dafny verify` が通るようにしてください。
 
+dafnyコマンドが存在しないとき、nixが使える場合は nix shell コマンド、使えない場合は https://dafny.org/latest/Installation の手順で環境に応じたバイナリをインストールしてください。
+
 - 仕様の形式化
     - 曖昧な記述や未定義の境界条件（空入力、オーバーフロー、重複等）があるときは実装前に指摘し、ユーザーに確認する
     - 各契約がどの仕様と対応するか明記する
