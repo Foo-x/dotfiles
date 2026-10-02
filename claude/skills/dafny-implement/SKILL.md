@@ -3,9 +3,13 @@ name: dafny-implement
 description: >
   仕様を Dafny で実装し、dafny verify で仕様どおりであることを機械的に証明する。
 disable-model-invocation: true
+allowed-tools: Bash(type *)
 ---
 
 与えた仕様を Dafny で実装し、`dafny verify` が通るようにしてください。
+
+dafnyコマンドの有無: !`type dafny || true`
+nixコマンドの有無: !`type nix || true`
 
 dafnyコマンドが存在しないとき、nixが使える場合は nix shell コマンド、使えない場合は https://dafny.org/latest/Installation の手順で環境に応じたバイナリをインストールしてください。
 

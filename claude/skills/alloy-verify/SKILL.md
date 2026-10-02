@@ -3,9 +3,14 @@ name: alloy-verify
 description: >
   仕様を Alloy でモデル化し、問題がないかを機械的に検証する。
 disable-model-invocation: true
+allowed-tools: Bash(type *)
 ---
 
 与えた仕様を Alloy でモデル化し、問題がないか検証してください。
+
+alloyコマンドの有無: !`type alloy || true`
+alloy6コマンドの有無: !`type alloy6 || true`
+nixコマンドの有無: !`type nix || true`
 
 alloyコマンドまたはalloy6コマンドが存在しないとき、nixが使える場合は nix shell コマンド、使えない場合は https://github.com/AlloyTools/org.alloytools.alloy/releases から環境に応じたバイナリをインストールしてください。
 
@@ -18,3 +23,9 @@ alloyコマンドまたはalloy6コマンドが存在しないとき、nixが使
 - 反例の解釈（仕様の欠陥かモデル化ミスかの切り分け）
 - Alloy で表現できなかった/近似した部分の明示
 - 仕様修正案の提示（修正自体は行わない）
+
+結果は以下の条件を満たすHTMLファイルで出力してください。
+
+- 説明はなるべく図解を入れる
+- 仕様や見つかった反例などをIDで示す場合、その内容もわかるようにする
+    - 併記するか、マウスホバーで見れるようにする

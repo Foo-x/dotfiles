@@ -3,9 +3,13 @@ name: quint-verify
 description: >
   仕様を Quint でモデル化し、問題がないかを機械的に検証する。
 disable-model-invocation: true
+allowed-tools: Bash(type *)
 ---
 
 与えた仕様を Quint でモデル化し、問題がないか検証してください。
+
+quintコマンドの有無: !`type quint || true`
+nixコマンドの有無: !`type nix || true`
 
 quintコマンドが存在しないとき、nixが使える場合は nix shell コマンド、使えない場合は https://github.com/quint-co/quint/releases から環境に応じたバイナリをインストールしてください。
 
@@ -21,3 +25,9 @@ quintコマンドが存在しないとき、nixが使える場合は nix shell �
 - 反例の解釈（仕様の欠陥かモデル化ミスかの切り分け）
 - Quint で表現できなかった/近似した部分の明示
 - 仕様修正案の提示（修正自体は行わない）
+
+結果は以下の条件を満たすHTMLファイルで出力してください。
+
+- 説明はなるべく図解を入れる
+- 仕様や見つかった反例などをIDで示す場合、その内容もわかるようにする
+    - 併記するか、マウスホバーで見れるようにする
