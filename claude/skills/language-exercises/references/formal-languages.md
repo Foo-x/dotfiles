@@ -10,7 +10,7 @@
 | Dafny | `dafny` | `dafny verify <file>` | エラー・警告なし | `assume`・`{:axiom}`・`{:verify false}`・`{:extern}`・本体のない function/method を grep で検出。`ensures` を弱めていないか、問題側の仕様ファイルと解答を分けて検証 |
 | Bend 2 | `bend`（公式 `curl -fsSL https://bend-lang.com/install.sh \| sh`。https://github.com/bendlang/bend） | `bend <file>.bend`（定理証明の検証） | エラーなし | `@unsafe`（安全チェック無効化）と `def f?(..)`（終了検証の無効化）を grep で検出 |
 
-Bend 2 は依存型による証明を持つ関数型言語で、`LAWS.bend`（法則: `law add_zero: for x: Nat {Nat.add(x, 0n) == x : Nat}`）と `PROOF.bend`（証明の実装）に分けて書く。コマンドと構文は README 由来で、バージョンによって変わりうる。生成前に `bend guide` で現行の書き方を確認する。
+Bend 2 は依存型による証明を持つ関数型言語で、`LAWS.bend`（法則: `law add_zero: for x: Nat {Nat.add(x, 0n) == x : Nat}`）と `PROOF.bend`（証明の実装）に分けて書く。コマンドと構文は README 由来で、バージョンによって変わりうる。一次資料の取得時に `bend guide` で現行の書き方を確認する。
 
 ## 出題の作り方
 
