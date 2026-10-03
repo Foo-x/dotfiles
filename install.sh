@@ -265,6 +265,7 @@ mkdir -p "${HOME}/.claude/skills"
 claude_skills="
 alloy-verify
 dafny-implement
+language-exercises
 learning-roadmap
 programming-best-practices
 quint-verify
