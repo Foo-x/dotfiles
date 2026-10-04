@@ -176,12 +176,32 @@
   },
   "model": "opusplan",
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tmux set -p -t ${TMUX_PANE} @claude_state '- idle   '"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tmux set -p -t ${TMUX_PANE} @claude_state '> working'"
+          }
+        ]
+      }
+    ],
     "PermissionRequest": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "push_ai ${TMUX_PANE} \"claude permission request ${CLAUDE_PROJECT_DIR}\""
+            "command": "tmux set -p -t ${TMUX_PANE} @claude_state '! blocked'"
           }
         ]
       }
@@ -191,7 +211,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "push_ai ${TMUX_PANE} \"claude stop ${CLAUDE_PROJECT_DIR}\""
+            "command": "tmux set -p -t ${TMUX_PANE} @claude_state '- idle   '"
           }
         ]
       }

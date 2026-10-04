@@ -63,7 +63,6 @@ nvimdirdiff
 vipe
 win_git
 ntfy
-push_ai
 nuc
 ccsl
 "

@@ -89,6 +89,10 @@ local function mason_lspconfig_config(_)
         vim.lsp.buf_detach_client(ev.buf, ev.data.client_id)
         return
       end
+      -- oil の gd 等が上書きされるのを防ぐ
+      if vim.bo[ev.buf].filetype == 'oil' then
+        return
+      end
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf })
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf })
       vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { buffer = ev.buf })
