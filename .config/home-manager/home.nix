@@ -33,6 +33,7 @@ in
       delta
       deno
       dust
+      elan
       fd
       fre
       gh

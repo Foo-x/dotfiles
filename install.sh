@@ -265,6 +265,7 @@ claude_skills="
 alloy-verify
 dafny-implement
 language-exercises
+lean-verify
 learning-roadmap
 programming-best-practices
 quint-verify

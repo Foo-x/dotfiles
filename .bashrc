@@ -48,6 +48,10 @@ function _lazy_complete() {
     . <(jw completion bash)
     return 124
   fi
+  if [[ $1 == 'elan' ]]; then
+    . <(elan completions bash)
+    return 124
+  fi
   if [[ $1 == 'devbox' ]]; then
     . <(devbox completion bash)
     return 124

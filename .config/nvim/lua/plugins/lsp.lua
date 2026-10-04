@@ -265,7 +265,6 @@ local lsp_signature_opts = {
 }
 
 local lean_config = function(_, opts)
-  require('lean').setup(opts)
   vim.cmd([[
   augroup Lean
     autocmd!

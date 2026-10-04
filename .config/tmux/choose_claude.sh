@@ -8,6 +8,7 @@ if [ "${1:-}" = list ]; then
   | awk '
     { s = $1 " " $2; c = "" }
     s == "- idle"    { c = "97" }
+    s == "v done"    { c = "34" }
     s == "> working" { c = "33" }
     s == "! blocked" { c = "31" }
     c != "" { $0 = "\033[" c "m" s "\033[0m" substr($0, length(s) + 1) }

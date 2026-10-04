@@ -201,6 +201,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "tmux set -p -t ${TMUX_PANE} @tmux_notification 1"
+          },
+          {
+            "type": "command",
             "command": "tmux set -p -t ${TMUX_PANE} @claude_state '! blocked'"
           }
         ]
@@ -211,7 +215,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "tmux set -p -t ${TMUX_PANE} @claude_state '- idle   '"
+            "command": "tmux set -p -t ${TMUX_PANE} @tmux_notification 1"
+          },
+          {
+            "type": "command",
+            "command": "tmux set -p -t ${TMUX_PANE} @claude_state 'v done   '"
           }
         ]
       }
@@ -221,7 +229,16 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jj util snapshot &> /dev/null"
+            "command": "jj util snapshot &> /dev/null || true"
+          }
+        ]
+      },
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tmux set -p -t ${TMUX_PANE} @claude_state '> working'"
           }
         ]
       }
