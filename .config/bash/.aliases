@@ -236,7 +236,8 @@ alias nfc='nix flake check'
 alias nfi='nix flake init'
 alias nfig='nix flake init --template templates#utils-generic'
 alias nfs='nix flake show'
-alias ngc='nix store gc'
+alias ngc='nix-collect-garbage --delete-older-than 180d && nix store gc'
+alias nopt='nix store optimise'
 alias npd='nix profile diff-closures'
 
 # devbox
