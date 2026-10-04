@@ -13,9 +13,16 @@ local function comment_config()
   require('ts_context_commentstring').setup({
     enable_autocmd = false,
   })
-  require('Comment').setup({
-    pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+  require('mini.comment').setup({
+    options = {
+      custom_commentstring = function()
+        return require('ts_context_commentstring').calculate_commentstring()
+          or vim.bo.commentstring
+      end,
+    },
   })
+  vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
+  vim.keymap.set('x', '<C-_>', 'gc', { remap = true })
 end
 
 local function surround_config()
@@ -253,14 +260,11 @@ return {
     config = quicker_config,
   },
   {
-    'https://github.com/numToStr/Comment.nvim',
+    'https://github.com/nvim-mini/mini.comment',
     dependencies = {
       'https://github.com/JoosepAlviste/nvim-ts-context-commentstring',
     },
-    keys = {
-      { '<C-_>', '<Plug>(comment_toggle_linewise_current)' },
-      { '<C-_>', '<Plug>(comment_toggle_linewise_visual)', mode = 'v' },
-    },
+    event = 'VeryLazy',
     config = comment_config,
   },
   {

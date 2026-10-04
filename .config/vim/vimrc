@@ -202,16 +202,16 @@ augroup END
 if has('nvim')
   " quint
   autocmd FileType quint lua vim.lsp.start({name = 'quint', cmd = {'quint-language-server', '--stdio'}, root_dir = vim.fs.root(0, {'.git'}) or vim.fn.getcwd()})
-  au BufRead,BufNewFile *.qnt  setfiletype quint
+  au BufRead,BufNewFile *.qnt  setfiletype quint | set commentstring=//%s
   au BufNewFile,BufReadPost *.qnt runtime syntax/quint.vim
 
   " alloy analyzer
   autocmd FileType alloy lua vim.lsp.start({name = 'alloy', cmd = {'alloy6', 'lsp'}, root_dir = vim.fs.root(0, {'.git'}) or vim.fn.getcwd()})
-  au BufRead,BufNewFile *.als  setfiletype alloy | set sw=2
+  au BufRead,BufNewFile *.als  setfiletype alloy | set sw=2 | set commentstring=//%s
   au BufNewFile,BufReadPost *.als runtime syntax/alloy.vim
 
   " dafny
   autocmd FileType dafny lua vim.lsp.start({name = 'dafny', cmd = {'dafny', 'server'}, root_dir = vim.fs.root(0, {'.git'}) or vim.fn.getcwd()})
-  au BufRead,BufNewFile *.dfy  setfiletype dafny
+  au BufRead,BufNewFile *.dfy  setfiletype dafny | set commentstring=//%s
   au BufNewFile,BufReadPost *.dfy runtime syntax/dafny.vim
 endif
