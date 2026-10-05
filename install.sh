@@ -277,6 +277,7 @@ security-review-generator
 terraform-infra-analyzer
 testcase-generator
 unit-testing-best-practices
+z3-verify
 "
 echo "${claude_skills}" | xargs -I{} ln -sfn "${DOT_DIR}/claude/skills/{}" "${HOME}/.claude/skills/{}"
 ln -sf "${DOT_DIR}/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
