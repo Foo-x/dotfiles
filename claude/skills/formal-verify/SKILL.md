@@ -21,14 +21,14 @@ allowed-tools: Bash(type *)
 - uvコマンドの有無: !`type uv || true`
 - nixコマンドの有無: !`type nix || true`
 
-各ツールの検証手順は個別スキルの SKILL.md に定義されている。サブエージェントはこれらのスキルを Skill ツールで呼べないため、パスで参照させる。
+各ツールの検証手順は以下のファイルに定義されている。サブエージェントに読ませる。
 
 | ツール | 手順 | 出力するモデルファイル |
 |---|---|---|
-| lean | `${CLAUDE_SKILL_DIR}/../lean-verify/SKILL.md` | `.lean` |
-| quint | `${CLAUDE_SKILL_DIR}/../quint-verify/SKILL.md` | `.qnt` |
-| alloy | `${CLAUDE_SKILL_DIR}/../alloy-verify/SKILL.md` | `.als` |
-| z3 | `${CLAUDE_SKILL_DIR}/../z3-verify/SKILL.md` | `.py` |
+| lean | `${CLAUDE_SKILL_DIR}/tools/lean.md` | `.lean` |
+| quint | `${CLAUDE_SKILL_DIR}/tools/quint.md` | `.qnt` |
+| alloy | `${CLAUDE_SKILL_DIR}/tools/alloy.md` | `.als` |
+| z3 | `${CLAUDE_SKILL_DIR}/tools/z3.md` | `.py` |
 
 ## 1. 仕様の整理
 
@@ -54,7 +54,7 @@ allowed-tools: Bash(type *)
 選定したツールの数だけ general-purpose サブエージェントを1メッセージで同時に起動する。各プロンプトには以下を含める。
 
 - 仕様の原文、仕様ID表、曖昧点の決定事項、環境確認の結果
-- 上表の該当 SKILL.md を読み、その手順に従う指示
+- 上表の該当ファイルを読み、その手順に従う指示
 - 以下の上書き指示
     - ユーザーへの確認はしない。残った曖昧点は仮定として記録して進める
     - HTML は出力しない。モデルファイルのみカレントディレクトリに出力する
