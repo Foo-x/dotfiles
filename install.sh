@@ -264,6 +264,7 @@ mkdir -p "${HOME}/.claude/skills"
 claude_skills="
 alloy-verify
 dafny-implement
+formal-verify
 japanese-tech-writing
 language-exercises
 lean-verify
