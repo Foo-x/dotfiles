@@ -183,6 +183,10 @@ fi
 mkdir -p ${XDG_CONFIG_HOME}/alacritty
 ln -sf ${DOT_DIR}/.config/alacritty/alacritty.toml ${XDG_CONFIG_HOME}/alacritty/alacritty.toml
 
+# setup hazkey
+mkdir -p ${XDG_CONFIG_HOME}/hazkey/table
+ln -sf ${DOT_DIR}/.config/hazkey/table/tsukiringo.tsv ${XDG_CONFIG_HOME}/hazkey/table/tsukiringo.tsv
+
 # setup spzenhan
 if uname -r | \grep -iq 'microsoft'; then
   if [ ! -x ${HOME}/.local/bin/spzenhan.exe ]; then
