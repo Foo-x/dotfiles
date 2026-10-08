@@ -382,7 +382,7 @@ command! PinAll call s:pin_all()
 cnoreabbr pa PinAll
 
 if !exists('g:claude_commit_message_prompt')
-  let g:claude_commit_message_prompt = 'Look at the recent commit log (e.g. git log or jj log) to figure out the conventions actually used in this repository - tense/mood, prefixes like feat:/fix:, etc. If most of the recent commits use a type prefix (e.g. feat:/fix:/chore:/refactor:), your message MUST use a matching prefix too - do not omit it just because the change is small or hard to categorize; pick the closest fitting type. Then inspect the currently staged (or, for jj, current working-copy) changes and write a single-line commit message IN ENGLISH that follows those same conventions, keeping it to at most 50 characters. Output ONLY the commit message text itself.'
+  let g:claude_commit_message_prompt = 'Create a commit message based on the current changes. Do not output anything other than the commit message.'
 endif
 
 fun! s:claude_commit_message()
@@ -391,15 +391,9 @@ fun! s:claude_commit_message()
     return
   endif
 
-  " pre-approve read-only commands to skip the permission-check round trip.
-  " avoid --model/--tools/--disable-slash-commands/--setting-sources: they
-  " change the system prompt and bust the shared prompt cache, making this
-  " slower overall (benchmarked)
-  let l:allowed_tools = 'Bash(git status),Bash(git diff *),Bash(git log *),Bash(git show *),Bash(jj status),Bash(jj diff *),Bash(jj interdiff *),Bash(jj log *),Bash(jj show *)'
-
   let l:cmd = 'claude -p'
-        \ . ' --allowedTools ' . shellescape(l:allowed_tools)
         \ . ' --no-session-persistence'
+        \ . ' --model haiku'
         \ . ' ' . shellescape(g:claude_commit_message_prompt)
 
   let l:output = system(l:cmd . ' 2>/dev/null')

@@ -28,7 +28,7 @@ case "$event" in
     mkdir -p "$dir/agents"
     set_state '- idle   '
     ;;
-  prompt)
+  working)
     rm -f "$dir/stopped"
     set_state '> working'
     ;;
@@ -38,6 +38,7 @@ case "$event" in
     ;;
   subagent-start)
     [ -n "$agent_id" ] && touch "$dir/agents/$agent_id"
+    rm -f "$dir/stopped"
     set_state '> working'
     ;;
   subagent-stop)

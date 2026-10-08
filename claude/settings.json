@@ -191,7 +191,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.dotfiles/.config/tmux/claude_state.sh prompt"
+            "command": "~/.dotfiles/.config/tmux/claude_state.sh working"
           }
         ]
       }
@@ -226,11 +226,20 @@
         ]
       },
       {
-        "matcher": "ExitPlanMode|AskUserQuestion",
         "hooks": [
           {
             "type": "command",
-            "command": "~/.dotfiles/.config/tmux/claude_state.sh prompt"
+            "command": "~/.dotfiles/.config/tmux/claude_state.sh working"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.dotfiles/.config/tmux/claude_state.sh working"
           }
         ]
       }
