@@ -57,6 +57,7 @@ fi
 mkdir -p ${HOME}/.local/bin
 binfiles="
 bfs
+clc
 f
 jj_desc_template
 nvimdirdiff

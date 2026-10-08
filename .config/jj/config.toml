@@ -58,6 +58,9 @@ cim = ["commit", "--interactive", "--message"]
 C = ["util", "exec", "--", "bash", "-c", """
   jj commit && jj bookmark advance
 """, ""]
+CC = ["util", "exec", "--", "bash", "-c", """
+  jj commit -m "$(clc)" && jj bookmark advance
+""", ""]
 
 # desc
 d = ["describe"]

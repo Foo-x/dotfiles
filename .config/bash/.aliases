@@ -109,9 +109,6 @@ alias svenv='source .venv/bin/activate'
 
 # claude code
 alias claudeup='claude update && claude'
-function clc() {
-  claude --model haiku 'Create a commit.'
-}
 
 # openssl
 alias ossl='openssl'

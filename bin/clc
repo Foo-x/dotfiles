@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+claude -p \
+  --no-session-persistence \
+  --model haiku \
+  'Create a commit message based on the current changes. Do not output anything other than the commit message.'
