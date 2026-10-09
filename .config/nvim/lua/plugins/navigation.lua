@@ -1,4 +1,7 @@
 local aerial_opts = {
+  layout = {
+    default_direction = 'left',
+  },
   keymaps = {
     ['<CR>'] = {
       callback = function()
@@ -6,6 +9,7 @@ local aerial_opts = {
         require('aerial').close()
       end,
     },
+    ['<Space>'] = 'actions.scroll',
   },
   nav = {
     keymaps = {
@@ -13,6 +17,10 @@ local aerial_opts = {
     },
   },
   filter_kind = false,
+  highlight_on_hover = true,
+  on_attach = function()
+    require('aerial').tree_close_all()
+  end,
 }
 
 local other_opts = {
@@ -156,8 +164,9 @@ return {
   {
     'https://github.com/stevearc/aerial.nvim',
     keys = {
-      { '<leader>a', '<Cmd>AerialNavToggle<CR>' },
-      { '<leader>A', '<Cmd>AerialToggle<CR>' },
+      { '<leader>a', '<Cmd>AerialToggle<CR>' },
+      { '<C-a>', '<Cmd>AerialToggle<CR>' },
+      { '<leader>A', '<Cmd>AerialNavToggle<CR>' },
     },
     opts = aerial_opts,
     config = function(_, opts)

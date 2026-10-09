@@ -75,6 +75,11 @@ complete -D -F _lazy_complete -o bashdefault -o default
 
 if type tmux &> /dev/null; then
   if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' ]]; then
-    while ! tmux new -A &> /dev/null; do sleep 0.2; done
+    while ! {
+      (
+        flock 9
+        tmux has-session &> /dev/null || tmux new -d &> /dev/null
+      ) 9> "${XDG_RUNTIME_DIR:-/tmp}/tmux-start.lock" && tmux new -A &> /dev/null
+    }; do sleep 0.2; done
   fi
 fi

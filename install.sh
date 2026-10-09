@@ -268,6 +268,7 @@ fi
 mkdir -p "${HOME}/.claude/skills"
 claude_skills="
 dafny-implement
+domain-purity-refactor
 formal-verify
 japanese-tech-writing
 language-exercises
