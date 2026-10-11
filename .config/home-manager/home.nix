@@ -38,6 +38,7 @@ in
       fre
       gh
       git
+      go_latest
       graphviz
       gron
       hyperfine

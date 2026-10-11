@@ -111,6 +111,10 @@ export FZF_DEFAULT_COMMAND="fd --hidden -E '.git/{objects,refs,subtree-cache}' -
 
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
 
+export JEV_PROVIDER=custom
+export JEV_ENDPOINT='http://localhost:8091/v1/systemone'
+export JEV_API_KEY='dummy'
+
 # exec commands after each commands
 function dispatch_prompt_command() {
   local f
