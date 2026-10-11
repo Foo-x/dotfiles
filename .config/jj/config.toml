@@ -59,7 +59,7 @@ C = ["util", "exec", "--", "bash", "-c", """
   jj commit && jj bookmark advance
 """, ""]
 CC = ["util", "exec", "--", "bash", "-c", """
-  jj commit -m "$(clc)" && jj bookmark advance
+  jj commit --quiet -m "$(clc)" && jj bookmark advance --quiet && jj show --template description --no-patch @-
 """, ""]
 
 # desc
@@ -151,6 +151,7 @@ rs = ["restore"]
 
 # show
 sh = ["show"]
+shd = ["show", "--template", "description", "--no-patch"]
 
 # split
 sp = ["split"]
