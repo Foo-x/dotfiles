@@ -276,7 +276,6 @@ learning-roadmap
 programming-best-practices
 rdd
 refactoring-analyzer
-requirements-reviewer
 security-review-generator
 terraform-infra-analyzer
 testcase-generator

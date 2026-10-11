@@ -108,7 +108,13 @@ alias cti='rg --files | ctags -R -L -'
 alias svenv='source .venv/bin/activate'
 
 # claude code
-alias claudeup='claude update && claude'
+alias clup='claude update && claude'
+function cltmp() {
+  local dir
+  dir=$(mktemp -d)
+  cd "$dir"
+  claude
+}
 
 # openssl
 alias ossl='openssl'
