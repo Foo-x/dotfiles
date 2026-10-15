@@ -36,7 +36,6 @@ in
       elan
       fd
       fre
-      gh
       git
       go_latest
       graphviz
@@ -70,4 +69,27 @@ in
   };
 
   programs.home-manager.enable = true;
+
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "https";
+      aliases = {
+        co = "pr checkout";
+        cl = "repo clone";
+        clp = "repo clone $1 -- --filter=blob:none";
+        clps = "repo clone $1 -- --filter=blob:none --sparse";
+        cr = "repo create";
+        il = "issue list";
+        cod = "pr checkout --detach";
+        al = "alias list";
+        openr = "repo view -w";
+        openi = "issue view -w";
+        openp = "pr view -w";
+        sync = ''!gh repo sync $(git config --get remote.origin.url | \grep -oP "(?<=/)[^/.]+?/[^.]+")'';
+      };
+    };
+    extensions = with pkgs; [
+    ];
+  };
 }

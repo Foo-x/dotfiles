@@ -141,23 +141,6 @@ ln -sf "${DOT_DIR}/.config/ripgrep/ripgreprc" "${XDG_CONFIG_HOME}/ripgrep/ripgre
 mkdir -p "${XDG_CONFIG_HOME}/fd"
 ln -sf "${DOT_DIR}/.config/fd/ignore" "${XDG_CONFIG_HOME}/fd/ignore"
 
-if has gh; then
-  {
-    gh alias set --clobber cl 'repo clone'
-    gh alias set --clobber clp 'repo clone $1 -- --filter=blob:none'
-    gh alias set --clobber clps 'repo clone $1 -- --filter=blob:none --sparse'
-    gh alias set --clobber cr 'repo create'
-    gh alias set --clobber il 'issue list'
-    gh alias set --clobber co 'pr checkout'
-    gh alias set --clobber cod 'pr checkout --detach'
-    gh alias set --clobber al 'alias list'
-    gh alias set --clobber openr 'repo view -w'
-    gh alias set --clobber openi 'issue view -w'
-    gh alias set --clobber openp 'pr view -w'
-    gh alias set --clobber --shell sync 'gh repo sync $(git config --get remote.origin.url | \grep -oP "(?<=/)[^/.]+?/[^.]+")'
-  } > /dev/null 2>&1
-fi
-
 # install yargs
 if ! bun pm ls -g | grep -q yargs; then
   bun install -g yargs

@@ -74,12 +74,9 @@ function _lazy_complete() {
 complete -D -F _lazy_complete -o bashdefault -o default
 
 if type tmux &> /dev/null; then
-  if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' ]]; then
-    while ! {
-      (
-        flock 9
-        tmux has-session &> /dev/null || tmux new -d &> /dev/null
-      ) 9> "${XDG_RUNTIME_DIR:-/tmp}/tmux-start.lock" && tmux new -A &> /dev/null
-    }; do sleep 0.2; done
+  # attach keeps failing without a tty, looping forever
+  if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' && -t 0 && -t 1 ]]; then
+    # -A -s 0 merges concurrent starts into one session
+    while ! { tmux has-session &> /dev/null || tmux new -A -d -s 0 &> /dev/null; tmux attach; }; do sleep 0.2; done
   fi
 fi
