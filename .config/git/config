@@ -140,6 +140,15 @@
     cl = clone
     clp = clone --filter=blob:none
     clps = clone --filter=blob:none --sparse
+    clemp = "!f() { \
+        if [ $# -eq 0 ]; then \
+            echo \"Usage: git clempty <url>\" >&2; \
+            return 1; \
+        fi; \
+        dir=\"$(basename \"$1\" .git)\"; \
+        git init \"$dir\" && \
+        git -C \"$dir\" remote add origin \"$1\"; \
+    }; f"
     fbv = !git fetch && git bv
 
     ## pull and prune
