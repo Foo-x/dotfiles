@@ -251,6 +251,16 @@ local function hunk_config()
   })
 end
 
+vim.api.nvim_create_user_command('OctoSearchPrInvolvesMe', function()
+  vim.cmd('Octo search is:pr involves:@me state:open archived:false sort:updated-desc')
+end, {})
+vim.api.nvim_create_user_command('OctoSearchPrRequestedReview', function()
+  vim.cmd('Octo search is:pr review-requested:@me state:open archived:false sort:updated-desc')
+end, {})
+vim.api.nvim_create_user_command('OctoSearchPrAuthoredByMe', function()
+  vim.cmd('Octo search is:pr author:@me state:open archived:false sort:updated-desc')
+end, {})
+
 return {
   {
     'https://github.com/airblade/vim-gitgutter',
@@ -300,5 +310,23 @@ return {
     },
     cmd = { 'DiffEditor' },
     config = hunk_config,
+  },
+  {
+    'https://github.com/pwntester/octo.nvim',
+    cmd = 'Octo',
+    opts = {
+      picker = 'fzf-lua',
+      enable_builtin = true,
+      search = {
+        completion_overrides = {
+          repo = {},
+        },
+      },
+    },
+    dependencies = {
+      'https://github.com/nvim-lua/plenary.nvim',
+      'https://github.com/ibhagwan/fzf-lua',
+      'https://github.com/nvim-tree/nvim-web-devicons',
+    },
   },
 }

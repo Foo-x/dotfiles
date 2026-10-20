@@ -174,20 +174,6 @@ return {
     end,
   },
   {
-    'https://github.com/rgroli/other.nvim',
-    keys = {
-      { '<leader>oo', ':<C-u>Other<CR>', silent = true },
-      { '<leader>ot', ':<C-u>OtherTabNew<CR>', silent = true },
-      { '<leader>os', ':<C-u>OtherSplit<CR>', silent = true },
-      { '<leader>ov', ':<C-u>OtherVSplit<CR>', silent = true },
-      { '<leader>oc', ':<C-u>OtherClear<CR>', silent = true },
-    },
-    opts = other_opts,
-    config = function(_, opts)
-      require('other-nvim').setup(opts)
-    end,
-  },
-  {
     'https://github.com/folke/flash.nvim',
     event = 'VeryLazy',
     opts = flash_opts,
