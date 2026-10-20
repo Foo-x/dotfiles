@@ -74,9 +74,15 @@ function _lazy_complete() {
 complete -D -F _lazy_complete -o bashdefault -o default
 
 if type tmux &> /dev/null; then
-  # attach keeps failing without a tty, looping forever
+  # Without a tty, attach fails forever and the loop never ends
   if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' && -t 0 && -t 1 ]]; then
-    # -A -s 0 merges concurrent starts into one session
-    while ! { tmux has-session &> /dev/null || tmux new -A -d -s 0 &> /dev/null; tmux attach; }; do sleep 0.2; done
+    # continuum's auto-restore is skipped while other tmux clients are running
+    while ! {
+      if tmux new -d -s 0 &> /dev/null; then
+        restore_script=$(tmux show -gqv @resurrect-restore-script-path)
+        [[ -n ${restore_script} ]] && tmux run-shell -b "${restore_script}"
+      fi
+      tmux attach
+    }; do sleep 0.2; done
   fi
 fi

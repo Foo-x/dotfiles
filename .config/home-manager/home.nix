@@ -79,6 +79,7 @@ in
         cl = "repo clone";
         clp = "repo clone $1 -- --filter=blob:none";
         clps = "repo clone $1 -- --filter=blob:none --sparse";
+        clemp = "!if [ $# -eq 0 ]; then echo \"Usage: gh clemp <user>/<repo>\" >&2; else dir=\"$(basename \"$1\" .git)\"; git init \"$dir\" && git -C \"$dir\" remote add origin \"https://github.com/$1.git\"; fi";
         cr = "repo create";
         il = "issue list";
         cod = "pr checkout --detach";
