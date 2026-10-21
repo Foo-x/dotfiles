@@ -88,6 +88,7 @@ binds {
     Mod+Shift+F { maximize-window-to-edges; }
     Mod+Ctrl+F { expand-column-to-available-width; }
     Mod+F11 { fullscreen-window; }
+    Mod+C { center-column; }
 
     Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }

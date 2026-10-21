@@ -78,7 +78,7 @@ if type tmux &> /dev/null; then
   if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' && -t 0 && -t 1 ]]; then
     # continuum's auto-restore is skipped while other tmux clients are running
     while ! {
-      if tmux new -d -s 0 &> /dev/null; then
+      if ! tmux has-session &> /dev/null && tmux new -d -s 0 &> /dev/null; then
         restore_script=$(tmux show -gqv @resurrect-restore-script-path)
         [[ -n ${restore_script} ]] && tmux run-shell -b "${restore_script}"
       fi
