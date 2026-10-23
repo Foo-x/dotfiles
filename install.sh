@@ -253,6 +253,7 @@ claude_skills="
 dafny-implement
 domain-purity-refactor
 formal-verify
+formal-verify-code
 japanese-tech-writing
 language-exercises
 learning-roadmap
