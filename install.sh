@@ -259,6 +259,7 @@ language-exercises
 learning-roadmap
 programming-best-practices
 rdd
+rdd-visualize
 refactoring-analyzer
 security-review-generator
 terraform-infra-analyzer
