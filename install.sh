@@ -250,6 +250,7 @@ fi
 # setup claude
 mkdir -p "${HOME}/.claude/skills"
 claude_skills="
+code-visualize
 dafny-implement
 domain-purity-refactor
 formal-verify
