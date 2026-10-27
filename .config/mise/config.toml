@@ -1,3 +1,4 @@
 [tools]
+pipx = "latest"
 python = { version = "latest", postinstall = "python -m pip install --upgrade pyyaml pypdf pdfplumber z3-solver" }
 uv = "latest"

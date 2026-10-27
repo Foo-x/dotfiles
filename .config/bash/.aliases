@@ -13,6 +13,7 @@ alias doc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias ws='cd ~/workspace'
 alias dotf='cd ~/.dotfiles'
+alias cdtmp='cd $(mktemp -d)'
 # cd to toplevel of git repo
 function cdg() {
   if jj root &> /dev/null; then
@@ -223,6 +224,7 @@ alias tmn='tmux new'
 alias tmnw='tmux neww'
 alias tmr='tmux rename'
 alias tmrw='tmux renamew'
+alias tmtmp='tmux neww -c $(mktemp -d)'
 alias tmcapture='tmux capture-pane -pS - | view'
 alias tmreload='tmux source-file $XDG_CONFIG_HOME/tmux/tmux.conf'
 
