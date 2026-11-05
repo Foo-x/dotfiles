@@ -1,0 +1,16 @@
+[Unit]
+Description=Start tmux server
+
+[Service]
+Type=forking
+Environment=XDG_CONFIG_HOME=%h/.config
+Environment=PATH=%h/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/env tmux new-session -d -s 0
+# kill-server alone would drop changes since continuum's last periodic save
+ExecStop=%h/.config/tmux/tmux-resurrect/scripts/save.sh
+ExecStop=/usr/bin/env tmux kill-server
+KillMode=control-group
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

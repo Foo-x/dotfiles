@@ -76,13 +76,12 @@ complete -D -F _lazy_complete -o bashdefault -o default
 if type tmux &> /dev/null; then
   # Without a tty, attach fails forever and the loop never ends
   if [[ -z ${TMUX} && ${TERM_PROGRAM} != 'vscode' && -t 0 && -t 1 ]]; then
-    # continuum's auto-restore is skipped while other tmux clients are running
-    while ! {
-      if ! tmux has-session &> /dev/null && tmux new -d -s 0 &> /dev/null; then
-        restore_script=$(tmux show -gqv @resurrect-restore-script-path)
-        [[ -n ${restore_script} ]] && tmux run-shell -b "${restore_script}"
-      fi
-      tmux attach
-    }; do sleep 0.2; done
+    # The server is started by tmux.service; wait until it is up
+    tmux_wait=0
+    while ! tmux attach &> /dev/null; do
+      sleep 0.2
+      ((++tmux_wait % 5 == 0)) && printf '\rWaiting for tmux... %ds' $((tmux_wait / 5))
+    done
+    unset tmux_wait
   fi
 fi
